@@ -28,7 +28,33 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let controller = NotchWindowController(viewModel: viewModel, settings: settings)
         controller.show()
         notchWindow = controller
+
+        #if DEBUG
+        if ProcessInfo.processInfo.environment["NOTCHKIT_STRESS"] != nil {
+            runStressTest()
+        }
+        #endif
     }
+
+    #if DEBUG
+    /// Test de charge : déplie/replie l'encoche 200 fois à intervalles aléatoires, avec des alertes
+    /// et des changements de fenêtre active. Lancer l'app avec la variable d'environnement
+    /// `NOTCHKIT_STRESS=1` ; « STRESS-OK » s'affiche dans la console à la fin si tout s'est bien passé.
+    private func runStressTest() {
+        Task { @MainActor in
+            for i in 0..<200 {
+                try? await Task.sleep(for: .milliseconds(Int.random(in: 150...900)))
+                viewModel.toggle()
+                if i % 7 == 0 { presentTestAlert() }
+                if let panel = NSApp.windows.first(where: { $0 is NotchPanel }) {
+                    if i.isMultiple(of: 2) { panel.makeKey() } else { panel.resignKey() }
+                }
+                FileHandle.standardError.write(Data("stress \(i)\n".utf8))
+            }
+            FileHandle.standardError.write(Data("STRESS-OK\n".utf8))
+        }
+    }
+    #endif
 
     func applicationWillTerminate(_ notification: Notification) {
         moduleManager.stopAll()

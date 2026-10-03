@@ -1,6 +1,120 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "%@ (avec encoche)" : {
+
+    },
+    "%@ (débranché)" : {
+
+    },
+    "À propos" : {
+
+    },
+    "Activer" : {
+
+    },
+    "Activez des modules dans les réglages." : {
+
+    },
+    "Affiche l'heure et la date." : {
+
+    },
+    "Affiche une fausse encoche sur les écrans qui n'en ont pas, pour tester le rendu." : {
+
+    },
+    "Afficher l'encoche sur" : {
+
+    },
+    "Afficher l'heure quand l'encoche est repliée" : {
+
+    },
+    "Afficher une alerte de test" : {
+
+    },
+    "Aucun module actif" : {
+
+    },
+    "Débogage" : {
+
+    },
+    "Délai d'ouverture" : {
+
+    },
+    "Délai de fermeture" : {
+
+    },
+    "Déplier / replier l'encoche" : {
+
+    },
+    "Développement" : {
+
+    },
+    "Écran" : {
+
+    },
+    "Écran principal" : {
+
+    },
+    "Général" : {
+
+    },
+    "Horloge" : {
+
+    },
+    "Lancer Notchkit à l'ouverture de session" : {
+
+    },
+    "Médias" : {
+
+    },
+    "Modules" : {
+
+    },
+    "Notchkit" : {
+
+    },
+    "PRO" : {
+
+    },
+    "Productivité" : {
+
+    },
+    "Quitter Notchkit" : {
+
+    },
+    "Réglages" : {
+
+    },
+    "Réglages de Notchkit" : {
+
+    },
+    "Réglages…" : {
+
+    },
+    "s" : {
+
+    },
+    "Simuler une encoche" : {
+
+    },
+    "Survol" : {
+
+    },
+    "Système" : {
+
+    },
+    "Test" : {
+
+    },
+    "Transformez l'encoche de votre Mac en une zone interactive et modulaire." : {
+
+    },
+    "Version %@" : {
+
+    },
+    "Widgets" : {
+
+    }
   },
   "version" : "1.0"
 }

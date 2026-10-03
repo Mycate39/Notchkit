@@ -22,10 +22,23 @@ final class NotchWindowController {
         let hostingView = NotchHostingView(rootView: NotchContainerView(viewModel: viewModel))
         // La vue SwiftUI ne doit pas imposer sa taille à la fenêtre : c'est nous qui la pilotons.
         hostingView.sizingOptions = []
+        // On ignore la zone de sécurité (barre des menus, encoche) : la forme doit coller au bord.
+        hostingView.safeAreaRegions = []
         hostingView.onHoverChange = { [weak viewModel] isInside in
             viewModel?.hoverChanged(isInside: isInside)
         }
-        panel.contentView = hostingView
+
+        // La vue SwiftUI est placée dans un conteneur AppKit simple (redimensionnement automatique,
+        // sans Auto Layout) plutôt que d'être directement la `contentView`.
+        // Sinon, dans une fenêtre qui contient si peu de vues, les mises à jour de SwiftUI pendant
+        // l'animation déclenchent une boucle de contraintes et AppKit fait planter l'app
+        // (exception « _postWindowNeedsUpdateConstraints »).
+        let container = NSView()
+        hostingView.translatesAutoresizingMaskIntoConstraints = true
+        hostingView.autoresizingMask = [.width, .height]
+        container.addSubview(hostingView)
+        panel.contentView = container
+        hostingView.frame = container.bounds
     }
 
     func show() {

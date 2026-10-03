@@ -6,5 +6,6 @@ enum ModuleRegistry {
     @MainActor
     static let allModules: [any NotchModule.Type] = [
         ClockModule.self,
+        BatteryModule.self,
     ]
 }

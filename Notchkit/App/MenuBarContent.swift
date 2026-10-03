@@ -14,13 +14,28 @@ struct MenuBarContent: View {
         }
         .keyboardShortcut(",")
 
+        #if DEBUG
         Divider()
 
+        // Menu réservé aux versions de développement.
         Menu("Débogage") {
             Button("Afficher une alerte de test") {
                 appDelegate.presentTestAlert()
             }
+
+            Divider()
+
+            Button("Batterie : simuler le branchement") {
+                appDelegate.simulateBattery(.pluggedIn)
+            }
+            Button("Batterie : simuler le débranchement") {
+                appDelegate.simulateBattery(.unplugged)
+            }
+            Button("Batterie : simuler la batterie faible") {
+                appDelegate.simulateBattery(.low(threshold: 10))
+            }
         }
+        #endif
 
         Divider()
 

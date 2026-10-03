@@ -37,6 +37,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     #if DEBUG
+    /// Simule un événement de batterie (le module doit être activé).
+    func simulateBattery(_ event: BatteryEvent) {
+        (moduleManager.module(for: BatteryModule.descriptor.id) as? BatteryModule)?.simulate(event)
+    }
+
     /// Test de charge : déplie/replie l'encoche 200 fois à intervalles aléatoires, avec des alertes
     /// et des changements de fenêtre active. Lancer l'app avec la variable d'environnement
     /// `NOTCHKIT_STRESS=1` ; « STRESS-OK » s'affiche dans la console à la fin si tout s'est bien passé.

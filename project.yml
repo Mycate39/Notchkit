@@ -1,0 +1,72 @@
+# Description du projet pour XcodeGen.
+# Régénérer le projet Xcode après modification : `xcodegen generate`
+name: Notchkit
+
+options:
+  bundleIdPrefix: com.andeolchenaux
+  deploymentTarget:
+    macOS: "14.0"
+  developmentLanguage: fr
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    MACOSX_DEPLOYMENT_TARGET: "14.0"
+    # Signature locale (« Sign to Run Locally ») : pas besoin de compte développeur pour l'instant.
+    CODE_SIGN_IDENTITY: "-"
+    CODE_SIGN_STYLE: Manual
+    DEVELOPMENT_TEAM: ""
+
+targets:
+  Notchkit:
+    type: application
+    platform: macOS
+    sources:
+      - path: Notchkit
+    info:
+      path: Notchkit/Resources/Info.plist
+      properties:
+        CFBundleDisplayName: Notchkit
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
+        # App d'arrière-plan : pas d'icône dans le Dock, uniquement dans la barre des menus.
+        LSUIElement: true
+        LSApplicationCategoryType: public.app-category.utilities
+        NSHumanReadableCopyright: "© 2026 Notchkit"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.andeolchenaux.notchkit
+        MARKETING_VERSION: "0.1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        ENABLE_HARDENED_RUNTIME: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        SWIFT_EMIT_LOC_STRINGS: YES
+        LOCALIZATION_PREFERS_STRING_CATALOGS: YES
+        ENABLE_USER_SCRIPT_SANDBOXING: YES
+
+  NotchkitTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: NotchkitTests
+    dependencies:
+      - target: Notchkit
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.andeolchenaux.notchkit.tests
+        GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  Notchkit:
+    build:
+      targets:
+        Notchkit: all
+        NotchkitTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - NotchkitTests

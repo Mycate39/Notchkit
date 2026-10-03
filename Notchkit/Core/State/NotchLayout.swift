@@ -34,7 +34,7 @@ enum NotchLayout {
     /// Largeur ajoutée de chaque côté de l'encoche pour le contenu compact.
     static let compactSideWidth: CGFloat = 72
     /// Taille de l'encoche dépliée.
-    static let expandedSize = CGSize(width: 520, height: 190)
+    static let expandedSize = CGSize(width: 640, height: 190)
     /// Décalage de la pastille par rapport au haut de l'écran.
     static let pillTopInset: CGFloat = 3
     /// Rayon des coins en mode déplié.

@@ -128,11 +128,19 @@ private struct ExpandedNotchView: View {
                     .foregroundStyle(.white.opacity(0.6))
             }
         } else {
-            HStack(spacing: 12) {
-                ForEach(active) { box in
-                    box.module.expandedView()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+            // Chaque carte reçoit une part de la largeur proportionnelle à son poids.
+            GeometryReader { proxy in
+                let spacing: CGFloat = 12
+                let totalWeight = active.reduce(0) { $0 + $1.weight }
+                let available = proxy.size.width - spacing * CGFloat(active.count - 1)
+
+                HStack(spacing: spacing) {
+                    ForEach(active) { box in
+                        box.module.expandedView()
+                            .frame(width: max(0, available * box.weight / totalWeight))
+                            .frame(maxHeight: .infinity)
+                            .background(.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                    }
                 }
             }
         }
@@ -144,9 +152,11 @@ private struct ExpandedNotchView: View {
 private struct ModuleBox: Identifiable {
     let module: any NotchModule
     let id: String
+    let weight: CGFloat
 
     init(_ module: any NotchModule) {
         self.module = module
         self.id = module.moduleID
+        self.weight = max(0.5, module.expandedWidthWeight)
     }
 }

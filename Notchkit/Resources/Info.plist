@@ -24,6 +24,8 @@
 	<string>public.app-category.utilities</string>
 	<key>LSUIElement</key>
 	<true/>
+	<key>NSAppleEventsUsageDescription</key>
+	<string>Notchkit pilote la lecture (lecture, pause, morceau suivant) de Music et Spotify depuis l'encoche.</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>© 2026 Notchkit</string>
 </dict>

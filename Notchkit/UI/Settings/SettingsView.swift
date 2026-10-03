@@ -211,7 +211,57 @@ private struct AboutSettingsView: View {
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.secondary)
                 .frame(maxWidth: 360)
+
+            Button("Licences des composants tiers") {
+                showsLicenses = true
+            }
+            .buttonStyle(.link)
+            .padding(.top, 8)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .sheet(isPresented: $showsLicenses) {
+            ThirdPartyLicensesView()
+        }
+    }
+
+    @State private var showsLicenses = false
+}
+
+/// Mentions de licence exigées par les composants tiers intégrés à l'app.
+private struct ThirdPartyLicensesView: View {
+    @Environment(\.dismiss) private var dismiss
+
+    private var mediaRemoteLicense: String {
+        guard let url = Bundle.main.url(forResource: "LICENSE", withExtension: "txt"),
+              let text = try? String(contentsOf: url, encoding: .utf8)
+        else { return "" }
+        return text
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Licences des composants tiers")
+                .font(.headline)
+            ScrollView {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("MediaRemoteAdapter")
+                        .font(.subheadline.bold())
+                    Text("https://github.com/ungive/mediaremote-adapter")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    Text(mediaRemoteLicense)
+                        .font(.system(size: 11, design: .monospaced))
+                        .textSelection(.enabled)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            HStack {
+                Spacer()
+                Button("Fermer") { dismiss() }
+                    .keyboardShortcut(.defaultAction)
+            }
+        }
+        .padding(20)
+        .frame(width: 520, height: 380)
     }
 }

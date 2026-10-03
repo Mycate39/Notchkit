@@ -51,6 +51,8 @@ protocol NotchModule: AnyObject, Observable {
     func compactTrailing() -> AnyView?
     /// Contenu affiché quand l'encoche est dépliée.
     func expandedView() -> AnyView
+    /// Largeur relative de la carte dans l'encoche dépliée (1 = normale, 2 = double).
+    var expandedWidthWeight: CGFloat { get }
     /// Réglages propres au module (affichés dans l'onglet « Modules »).
     func settingsView() -> AnyView?
 }
@@ -64,4 +66,5 @@ extension NotchModule {
     func compactLeading() -> AnyView? { nil }
     func compactTrailing() -> AnyView? { nil }
     func settingsView() -> AnyView? { nil }
+    var expandedWidthWeight: CGFloat { 1 }
 }

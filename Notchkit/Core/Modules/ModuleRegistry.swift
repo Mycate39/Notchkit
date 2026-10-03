@@ -5,6 +5,7 @@ import Foundation
 enum ModuleRegistry {
     @MainActor
     static let allModules: [any NotchModule.Type] = [
+        MusicModule.self,
         ClockModule.self,
         BatteryModule.self,
     ]

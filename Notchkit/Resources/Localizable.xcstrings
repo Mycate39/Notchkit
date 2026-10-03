@@ -7,6 +7,12 @@
     "%@ (débranché)" : {
 
     },
+    "%@ restantes" : {
+
+    },
+    "%lld %%" : {
+
+    },
     "À propos" : {
 
     },
@@ -31,7 +37,40 @@
     "Afficher une alerte de test" : {
 
     },
+    "Alerte de batterie faible (20 % et 10 %)" : {
+
+    },
+    "Animation au branchement et au débranchement" : {
+
+    },
     "Aucun module actif" : {
+
+    },
+    "Aucune batterie détectée" : {
+
+    },
+    "Batterie" : {
+
+    },
+    "Batterie : simuler la batterie faible" : {
+
+    },
+    "Batterie : simuler le branchement" : {
+
+    },
+    "Batterie : simuler le débranchement" : {
+
+    },
+    "Branchée, charge en pause" : {
+
+    },
+    "Calcul de l'autonomie…" : {
+
+    },
+    "Calcul du temps de charge…" : {
+
+    },
+    "Chargée" : {
 
     },
     "Débogage" : {
@@ -49,10 +88,16 @@
     "Développement" : {
 
     },
+    "Économie d'énergie" : {
+
+    },
     "Écran" : {
 
     },
     "Écran principal" : {
+
+    },
+    "En charge" : {
 
     },
     "Général" : {
@@ -70,7 +115,13 @@
     "Modules" : {
 
     },
+    "Niveau, état de charge et animation au branchement." : {
+
+    },
     "Notchkit" : {
+
+    },
+    "Pleine dans %@" : {
 
     },
     "PRO" : {
@@ -97,6 +148,9 @@
     "Simuler une encoche" : {
 
     },
+    "Sur batterie" : {
+
+    },
     "Survol" : {
 
     },
@@ -104,6 +158,9 @@
 
     },
     "Test" : {
+
+    },
+    "Toujours afficher le niveau quand l'encoche est repliée" : {
 
     },
     "Transformez l'encoche de votre Mac en une zone interactive et modulaire." : {

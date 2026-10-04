@@ -1,7 +1,7 @@
 import AppKit
 import SwiftUI
 
-/// Petit égaliseur animé (4 barres).
+/// Petit égaliseur animé (7 barres fines).
 ///
 /// Animé avec Core Animation plutôt qu'avec SwiftUI : une fois lancées, les animations
 /// sont exécutées par le serveur d'affichage de macOS, sans réveiller l'app à chaque image.
@@ -30,9 +30,9 @@ struct EqualizerView: NSViewRepresentable {
 }
 
 final class EqualizerNSView: NSView {
-    private let bars: [CALayer] = (0..<4).map { _ in CALayer() }
-    /// Durées différentes pour que les barres ne bougent pas à l'unisson.
-    private let durations: [CFTimeInterval] = [0.46, 0.62, 0.39, 0.54]
+    private let bars: [CALayer] = (0..<SpectrumAnalyzer.defaultBandCount).map { _ in CALayer() }
+    /// Durées différentes pour que les barres ne bougent pas à l'unisson (animation simple).
+    private let durations: [CFTimeInterval] = [0.46, 0.62, 0.39, 0.54, 0.43, 0.58, 0.36]
     private static let restingScale: CGFloat = 0.3
     private static let animationKey = "equalizer"
 
@@ -65,7 +65,7 @@ final class EqualizerNSView: NSView {
     override func layout() {
         super.layout()
         let count = CGFloat(bars.count)
-        let spacing = bounds.width * 0.12
+        let spacing = bounds.width * 0.07
         let width = (bounds.width - spacing * (count - 1)) / count
         CATransaction.begin()
         CATransaction.setDisableActions(true)
@@ -102,9 +102,9 @@ final class EqualizerNSView: NSView {
             isLive = true
             bars.forEach { $0.removeAnimation(forKey: Self.animationKey) }
         }
-        // Courte transition implicite entre deux mises à jour (≈ 30 par seconde).
+        // Très courte transition implicite entre deux mises à jour (≈ 60 par seconde).
         CATransaction.begin()
-        CATransaction.setAnimationDuration(1.0 / 25)
+        CATransaction.setAnimationDuration(1.0 / 60)
         CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: .linear))
         for (index, bar) in bars.enumerated() {
             let level = CGFloat(index < levels.count ? levels[index] : 0)
@@ -133,12 +133,12 @@ final class EqualizerNSView: NSView {
                 let animation = CABasicAnimation(keyPath: "transform.scale.y")
                 animation.fromValue = Self.restingScale
                 animation.toValue = 1.0
-                animation.duration = durations[index]
+                animation.duration = durations[index % durations.count]
                 animation.autoreverses = true
                 animation.repeatCount = .infinity
                 animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
                 // Décalage de phase entre les barres.
-                animation.timeOffset = Double(index) * 0.17
+                animation.timeOffset = Double(index) * 0.11
                 bar.add(animation, forKey: Self.animationKey)
             } else {
                 bar.removeAnimation(forKey: Self.animationKey)

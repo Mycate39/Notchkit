@@ -5,7 +5,7 @@ import Observation
 
 /// Fournit en temps réel les niveaux des bandes de fréquences du son joué par le Mac.
 ///
-/// Les niveaux (≈ 30 par seconde) sont envoyés directement aux abonnés (les barres de
+/// Les niveaux (≈ 60 par seconde) sont envoyés directement aux abonnés (les barres de
 /// l'égaliseur, en Core Animation) sans passer par SwiftUI, pour rester économe.
 /// `nil` signifie « pas de données en direct » : les barres reprennent leur animation simple.
 @MainActor
@@ -105,14 +105,14 @@ final class AudioSpectrumMonitor {
 /// Utilisé uniquement sur la file audio.
 private final class SpectrumProcessor: @unchecked Sendable {
     private let analyzer = SpectrumAnalyzer(fftSize: 1024)
-    private var smoother = SpectrumSmoother(bandCount: SpectrumAnalyzer.bands.count)
+    private var smoother = SpectrumSmoother(bandCount: SpectrumAnalyzer.defaultBandCount)
     private var buffer: [Float] = []
     private var lastPublish: CFAbsoluteTime = 0
     private var silentSince: CFAbsoluteTime?
     private let onLevels: ([Float]?) -> Void
 
-    /// ≈ 30 images par seconde suffisent pour des barres fluides.
-    private static let publishInterval: CFAbsoluteTime = 1.0 / 30
+    /// 60 mises à jour par seconde pour des barres très réactives.
+    private static let publishInterval: CFAbsoluteTime = 1.0 / 60
     /// Au-delà de ce délai de silence total, on considère qu'il n'y a pas de son capté.
     private static let silenceTimeout: CFAbsoluteTime = 6
 

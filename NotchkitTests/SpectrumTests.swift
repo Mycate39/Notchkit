@@ -15,10 +15,21 @@ struct SpectrumAnalyzerTests {
     }
 
     @Test func chaqueFrequenceTombeDansSaBande() {
+        // Bandes : 60–128, 128–273, 273–583, 583–1245, 1245–2658, 2658–5675, 5675–12000 Hz.
         #expect(dominantBand(90) == 0)     // graves
-        #expect(dominantBand(400) == 1)    // bas médiums
-        #expect(dominantBand(1_500) == 2)  // médiums
-        #expect(dominantBand(6_000) == 3)  // aigus
+        #expect(dominantBand(400) == 2)    // bas médiums
+        #expect(dominantBand(1_800) == 4)  // médiums
+        #expect(dominantBand(8_000) == 6)  // aigus
+    }
+
+    @Test func bandesLogarithmiquesContigues() {
+        let bands = SpectrumAnalyzer.logBands(count: 7)
+        #expect(bands.count == 7)
+        #expect(bands.first?.lowerBound == 60)
+        #expect(abs((bands.last?.upperBound ?? 0) - 12_000) < 1)
+        for index in 1..<bands.count {
+            #expect(bands[index].lowerBound == bands[index - 1].upperBound)
+        }
     }
 
     @Test func silenceDonneDesEnergiesNulles() {
@@ -31,7 +42,7 @@ struct SpectrumAnalyzerTests {
         let up = smoother.update(with: [1])[0]
         #expect(up > 0.5)
         let down = smoother.update(with: [0])[0]
-        #expect(down < up && down > up * 0.7, "la descente doit être progressive")
+        #expect(down < up && down > up * 0.5, "la descente doit être progressive, pas instantanée")
         // Gain automatique : le niveau ne dépasse jamais 1.
         #expect(smoother.update(with: [50])[0] <= 1)
     }

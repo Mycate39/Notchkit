@@ -312,7 +312,16 @@ final class ClaudeModule: NotchModule {
             )
         case .awaitingReply:
             guard let deadline = session.replyDeadline else { return nil }
-            return AnyView(ReplyCountdown(deadline: deadline))
+            // Temps restant pour répondre depuis l'encoche (fenêtre de réponse).
+            return AnyView(
+                HStack(spacing: 3) {
+                    Image(systemName: "arrowshape.turn.up.left.fill")
+                        .font(.system(size: 9, weight: .bold))
+                        .foregroundStyle(Color(nsColor: ClaudeSparkView.color))
+                    ReplyCountdown(deadline: deadline)
+                }
+                .help("Temps restant pour répondre à Claude depuis l'encoche")
+            )
         case .finished:
             return nil
         }

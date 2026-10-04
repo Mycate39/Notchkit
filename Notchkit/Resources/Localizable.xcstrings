@@ -73,6 +73,12 @@
     "Alerte quand Claude a terminé" : {
 
     },
+    "Analyse du son active" : {
+
+    },
+    "Analyse le son joué par le Mac pour animer les barres. macOS demande l'autorisation « Enregistrement audio du système » et affiche un indicateur pendant l'écoute. Le son n'est ni enregistré ni envoyé." : {
+
+    },
     "Animation au branchement et au débranchement" : {
 
     },
@@ -92,6 +98,9 @@
 
     },
     "Aucun module actif" : {
+
+    },
+    "Aucun son capté : l'autorisation a peut-être été refusée." : {
 
     },
     "Aucune" : {
@@ -122,6 +131,9 @@
 
     },
     "Averses de neige" : {
+
+    },
+    "Barres réactives au son (temps réel)" : {
 
     },
     "Batterie" : {
@@ -340,6 +352,9 @@
     "L'activité apparaîtra ici dès que Claude Code travaillera." : {
 
     },
+    "L'analyse du son n'a pas pu démarrer : %@" : {
+
+    },
     "L'utilisation est estimée à partir des fichiers de session de Claude Code sur ce Mac (sessions de 5 h). Les conversations sur claude.ai ne sont pas comptées, et la jauge compare à votre plus grosse session observée : Anthropic ne publie pas les plafonds exacts." : {
 
     },
@@ -446,6 +461,9 @@
     "Nécessaire pour Deezer, les navigateurs et la plupart des lecteurs. Utilise une interface non officielle d'Apple qui peut cesser de fonctionner après une mise à jour de macOS ; Music et Spotify restent alors pris en charge." : {
 
     },
+    "Nécessite macOS 14.2 ou plus récent." : {
+
+    },
     "Neige" : {
 
     },
@@ -477,6 +495,9 @@
 
     },
     "Ouvrir l'app qui joue" : {
+
+    },
+    "Ouvrir les réglages de confidentialité" : {
 
     },
     "Ouvrir les Réglages Système" : {

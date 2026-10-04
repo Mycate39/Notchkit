@@ -190,7 +190,7 @@ final class MusicModule: NotchModule {
         guard let nowPlaying else { return nil }
         return AnyView(
             EqualizerView(isAnimating: nowPlaying.isPlaying, monitor: reactiveEqualizer ? spectrum : nil)
-                .frame(width: 18, height: 14)
+                .frame(width: 30, height: 15)
         )
     }
 

@@ -4,17 +4,26 @@ import Foundation
 /// Découpe un signal audio en quelques bandes de fréquences (graves → aigus), avec une FFT
 /// du framework Accelerate. Logique pure, sans Core Audio : facile à tester.
 final class SpectrumAnalyzer {
-    /// Bandes affichées par les barres de l'égaliseur (en Hz).
-    static let bands: [ClosedRange<Float>] = [40...150, 150...600, 600...2_500, 2_500...10_000]
+    /// Nombre de barres de l'égaliseur.
+    static let defaultBandCount = 7
+
+    /// Bandes réparties de façon logarithmique (comme l'oreille) entre 60 Hz et 12 kHz.
+    static func logBands(count: Int, from low: Float = 60, to high: Float = 12_000) -> [ClosedRange<Float>] {
+        let ratio = high / low
+        let edges = (0...count).map { low * pow(ratio, Float($0) / Float(count)) }
+        return (0..<count).map { edges[$0]...edges[$0 + 1] }
+    }
 
     let fftSize: Int
+    let bands: [ClosedRange<Float>]
     private let log2n: vDSP_Length
     private let setup: FFTSetup
     private var window: [Float]
 
-    init(fftSize: Int = 1024) {
+    init(fftSize: Int = 1024, bandCount: Int = SpectrumAnalyzer.defaultBandCount) {
         precondition(fftSize.nonzeroBitCount == 1, "la taille de FFT doit être une puissance de 2")
         self.fftSize = fftSize
+        bands = Self.logBands(count: bandCount)
         log2n = vDSP_Length(log2(Double(fftSize)))
         setup = vDSP_create_fftsetup(log2n, FFTRadix(kFFTRadix2))!
         window = [Float](repeating: 0, count: fftSize)
@@ -50,7 +59,7 @@ final class SpectrumAnalyzer {
         }
 
         let binWidth = sampleRate / Float(fftSize)
-        return Self.bands.map { band in
+        return bands.map { band in
             let low = max(1, Int(band.lowerBound / binWidth))
             let high = min(half - 1, max(low, Int(band.upperBound / binWidth)))
             var mean: Float = 0
@@ -81,12 +90,12 @@ struct SpectrumSmoother {
         for index in energies.indices where index < levels.count {
             let energy = energies[index]
             // Le pic redescend lentement pour s'adapter aux passages plus calmes.
-            peaks[index] = max(energy, peaks[index] * 0.995, Self.minimumPeak)
+            peaks[index] = max(energy, peaks[index] * 0.992, Self.minimumPeak)
             let target = min(1, energy / peaks[index])
             let current = levels[index]
             levels[index] = target > current
-                ? current + (target - current) * 0.6   // montée rapide
-                : current + (target - current) * 0.18  // descente douce
+                ? current + (target - current) * 0.85  // montée quasi immédiate
+                : current + (target - current) * 0.3   // descente rapide mais sans à-coups
         }
         return levels
     }

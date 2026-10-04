@@ -54,8 +54,11 @@ struct ClaudeExpandedView: View {
                 header(session)
                 activity(session)
                 Spacer(minLength: 0)
-                if session != nil { messageField(session!) }
-                usageRow
+                if let session {
+                    messageField(session)
+                } else {
+                    usageRow
+                }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
@@ -72,8 +75,35 @@ struct ClaudeExpandedView: View {
                     .font(.system(size: 10, weight: .medium))
                     .foregroundStyle(.white.opacity(0.45))
             }
+            // Quand une session est affichée, la place manque en bas : l'utilisation passe en badge.
+            if session != nil, let usage = module.usage, let fraction = usage.usedFraction {
+                usageBadge(usage, fraction: fraction)
+            }
         }
         .lineLimit(1)
+    }
+
+    private func usageBadge(_ usage: ClaudeUsageSummary, fraction: Double) -> some View {
+        HStack(spacing: 3) {
+            Image(systemName: "gauge.with.dots.needle.33percent")
+                .font(.system(size: 9, weight: .semibold))
+            Text(fraction, format: .percent.precision(.fractionLength(0)))
+                .font(.system(size: 12, weight: .bold, design: .rounded))
+                .monospacedDigit()
+        }
+        .foregroundStyle(Self.color(for: fraction))
+        .padding(.horizontal, 6)
+        .padding(.vertical, 2)
+        .background(Self.color(for: fraction).opacity(0.15), in: Capsule())
+        .help(usageHelp(usage))
+    }
+
+    private func usageHelp(_ usage: ClaudeUsageSummary) -> String {
+        var text = String(localized: "≈ \(usage.currentTokens.formatted(.number.notation(.compactName))) tokens dans la session de 5 h")
+        if let reset = usage.resetAt {
+            text += " · " + String(localized: "réinitialisation à \(reset.formatted(date: .omitted, time: .shortened))")
+        }
+        return text + ". " + String(localized: "Estimation comparée à votre plus grosse session observée.")
     }
 
     private func title(_ session: ClaudeSession?) -> LocalizedStringKey {

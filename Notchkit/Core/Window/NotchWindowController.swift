@@ -14,12 +14,14 @@ final class NotchWindowController {
     private let viewModel: NotchViewModel
     private let settings: SettingsStore
     private var shrinkTask: Task<Void, Never>?
+    private let hostingView: NotchHostingView<NotchContainerView>
+    private let container = FlippedView()
 
     init(viewModel: NotchViewModel, settings: SettingsStore) {
         self.viewModel = viewModel
         self.settings = settings
 
-        let hostingView = NotchHostingView(rootView: NotchContainerView(viewModel: viewModel))
+        hostingView = NotchHostingView(rootView: NotchContainerView(viewModel: viewModel))
         // La vue SwiftUI ne doit pas imposer sa taille à la fenêtre : c'est nous qui la pilotons.
         hostingView.sizingOptions = []
         // On ignore la zone de sécurité (barre des menus, encoche) : la forme doit coller au bord.
@@ -36,12 +38,17 @@ final class NotchWindowController {
         // Sinon, dans une fenêtre qui contient si peu de vues, les mises à jour de SwiftUI pendant
         // l'animation déclenchent une boucle de contraintes et AppKit fait planter l'app
         // (exception « _postWindowNeedsUpdateConstraints »).
-        let container = NSView()
+        //
+        // La vue SwiftUI garde une taille FIXE (celle de l'encoche dépliée), ancrée en haut au centre :
+        // seule la fenêtre change de taille autour d'elle. Ainsi SwiftUI ne recalcule rien quand la
+        // fenêtre s'agrandit, et le contenu ne « tombe » pas vers le bas pendant une image
+        // (macOS ancre le contenu des fenêtres en bas à gauche lors d'un redimensionnement).
         hostingView.translatesAutoresizingMaskIntoConstraints = true
-        hostingView.autoresizingMask = [.width, .height]
+        // Marges gauche/droite flexibles (reste centrée), marge basse flexible (reste collée en haut,
+        // le conteneur étant « retourné » : son origine est en haut à gauche).
+        hostingView.autoresizingMask = [.minXMargin, .maxXMargin, .maxYMargin]
         container.addSubview(hostingView)
         panel.contentView = container
-        hostingView.frame = container.bounds
     }
 
     func show() {
@@ -98,6 +105,16 @@ final class NotchWindowController {
         setPanelSize(viewModel.panelSize)
     }
 
+    /// Donne à la vue SwiftUI la plus grande taille possible de l'encoche, centrée en haut.
+    private func layoutHostingView() {
+        let geometry = viewModel.geometry
+        let expanded = NotchLayout.panelSize(for: geometry, isExpanded: true, hasCompactContent: true)
+        let compact = NotchLayout.panelSize(for: geometry, isExpanded: false, hasCompactContent: true)
+        let size = CGSize(width: max(expanded.width, compact.width), height: max(expanded.height, compact.height))
+        let bounds = container.bounds
+        hostingView.frame = CGRect(x: (bounds.width - size.width) / 2, y: 0, width: size.width, height: size.height)
+    }
+
     private func applyPanelSize() {
         let target = viewModel.panelSize
         let current = panel.frame.size
@@ -125,6 +142,13 @@ final class NotchWindowController {
             width: size.width,
             height: size.height
         )
-        panel.setFrame(frame, display: true)
+        // Pas d'affichage intermédiaire : on replace d'abord la vue SwiftUI, puis le système redessine.
+        panel.setFrame(frame, display: false)
+        layoutHostingView()
     }
+}
+
+/// Conteneur dont l'origine est en haut à gauche, pour garder la vue SwiftUI collée en haut.
+final class FlippedView: NSView {
+    override var isFlipped: Bool { true }
 }

@@ -40,10 +40,17 @@ enum NotchLayout {
     /// Rayon des coins en mode déplié.
     static let expandedCornerRadius: CGFloat = 24
 
+    /// Facteur de ralentissement des animations (menu Débogage, pour observer un défaut).
+    @MainActor static var animationSlowdown: Double = 1
+
     /// Animation principale (ressort court et peu rebondissant, pour rester fluide).
-    static let spring = Animation.spring(duration: 0.38, bounce: 0.18)
+    @MainActor static var spring: Animation {
+        .spring(duration: 0.38 * animationSlowdown, bounce: 0.18)
+    }
     /// Temps laissé à l'animation de repli avant de réduire la fenêtre.
-    static let shrinkDelay: Duration = .milliseconds(500)
+    @MainActor static var shrinkDelay: Duration {
+        .milliseconds(500) * animationSlowdown
+    }
 
     /// Taille de la forme noire selon l'état.
     static func shapeSize(for geometry: NotchGeometry, isExpanded: Bool, hasCompactContent: Bool) -> CGSize {

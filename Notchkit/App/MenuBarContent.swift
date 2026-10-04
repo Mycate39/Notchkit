@@ -22,6 +22,10 @@ struct MenuBarContent: View {
             Button("Afficher une alerte de test") {
                 appDelegate.presentTestAlert()
             }
+            Toggle("Animations au ralenti (×8)", isOn: Binding(
+                get: { NotchLayout.animationSlowdown > 1 },
+                set: { NotchLayout.animationSlowdown = $0 ? 8 : 1 }
+            ))
 
             Divider()
 

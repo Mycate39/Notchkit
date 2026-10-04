@@ -53,6 +53,10 @@ targets:
         LSUIElement: true
         LSApplicationCategoryType: public.app-category.utilities
         NSHumanReadableCopyright: "© 2026 Notchkit"
+        # Liens notchkit:// : scripts et apps peuvent afficher une progression ou lancer un minuteur.
+        CFBundleURLTypes:
+          - CFBundleURLName: com.andeolchenaux.notchkit
+            CFBundleURLSchemes: [notchkit]
         NSCalendarsFullAccessUsageDescription: "Notchkit affiche vos prochains événements dans l'encoche et vous les rappelle quelques minutes avant."
         NSCalendarsUsageDescription: "Notchkit affiche vos prochains événements dans l'encoche et vous les rappelle quelques minutes avant."
         NSLocationUsageDescription: "Notchkit utilise votre position approximative pour afficher la météo locale."

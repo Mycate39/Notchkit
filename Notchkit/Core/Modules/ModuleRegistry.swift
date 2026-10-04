@@ -13,5 +13,6 @@ enum ModuleRegistry {
         ClaudeModule.self,
         ShelfModule.self,
         AirPodsModule.self,
+        LiveActivitiesModule.self,
     ]
 }

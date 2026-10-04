@@ -85,6 +85,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
     #endif
 
+    /// Liens `notchkit://…` (activités live : progression de tâches, minuteurs).
+    func application(_ application: NSApplication, open urls: [URL]) {
+        guard let activities = moduleManager.module(for: LiveActivitiesModule.descriptor.id) as? LiveActivitiesModule else { return }
+        for url in urls {
+            if let command = LiveActivityCommand(url: url) { activities.handle(command) }
+        }
+    }
+
     func applicationWillTerminate(_ notification: Notification) {
         moduleManager.stopAll()
     }

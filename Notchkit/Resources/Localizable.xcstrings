@@ -55,6 +55,9 @@
     "%lld %%" : {
 
     },
+    "%lld fichiers" : {
+
+    },
     "%lld min" : {
 
     },
@@ -67,7 +70,19 @@
     "0:00" : {
 
     },
+    "5 min" : {
+
+    },
     "À propos" : {
+
+    },
+    "Accès au presse-papiers autorisé" : {
+
+    },
+    "Accès au presse-papiers refusé : autorisez Notchkit dans Réglages Système > Confidentialité et sécurité > Coller depuis d'autres apps." : {
+
+    },
+    "Accès requis" : {
 
     },
     "Activer" : {
@@ -124,6 +139,9 @@
     "AirPods et casques" : {
 
     },
+    "Ajouter cinq minutes" : {
+
+    },
     "Ajouter une minute" : {
 
     },
@@ -151,16 +169,46 @@
     "Animation au branchement et au débranchement" : {
 
     },
+    "Animation Face ID au déverrouillage du Mac" : {
+
+    },
+    "Animation pendant une demande de mot de passe" : {
+
+    },
+    "Animation pendant une demande Touch ID" : {
+
+    },
     "Animations au ralenti (×8)" : {
 
     },
+    "Animations de déverrouillage actives" : {
+
+    },
+    "Animations façon Face ID au déverrouillage, pendant Touch ID et pendant la saisie d'un mot de passe." : {
+
+    },
+    "Animations visuelles uniquement : aucune reconnaissance faciale. macOS n'indique pas comment la session a été déverrouillée et rien ne peut s'afficher sur l'écran verrouillé : l'animation Face ID se joue juste après le déverrouillage." : {
+
+    },
     "Annuler" : {
+
+    },
+    "Aperçu : demande de mot de passe" : {
+
+    },
+    "Aperçu : demande Touch ID" : {
+
+    },
+    "Aperçu : déverrouillage Face ID" : {
 
     },
     "Après chaque réponse de Claude, vous pouvez encore lui écrire depuis l'encoche pendant ce délai : il repart aussitôt. Pendant ce temps, Claude Code l'affiche comme « en cours » (Échap pour arrêter)." : {
 
     },
     "Arrêter" : {
+
+    },
+    "Au travail" : {
 
     },
     "Aucun" : {
@@ -175,6 +223,9 @@
     "Aucun module actif" : {
 
     },
+    "Aucun résultat" : {
+
+    },
     "Aucun son capté : l'autorisation a peut-être été refusée." : {
 
     },
@@ -187,6 +238,9 @@
     "Aucune batterie détectée" : {
 
     },
+    "Aucune lecture" : {
+
+    },
     "Aucune lecture en cours" : {
 
     },
@@ -194,6 +248,9 @@
 
     },
     "Automatique" : {
+
+    },
+    "Autorisation Accessibilité nécessaire" : {
 
     },
     "Autoriser l'accès" : {
@@ -205,7 +262,7 @@
     "Autoriser la localisation…" : {
 
     },
-    "Autre durée" : {
+    "Autoriser…" : {
 
     },
     "Averses" : {
@@ -229,6 +286,15 @@
     "Batterie : simuler le débranchement" : {
 
     },
+    "Batterie et mode d'écoute des AirPods" : {
+
+    },
+    "Boîtier" : {
+
+    },
+    "Branchée" : {
+
+    },
     "Branchée, charge en pause" : {
 
     },
@@ -250,6 +316,9 @@
     "Calendrier" : {
 
     },
+    "Cette sortie audio n'a pas de volume réglable." : {
+
+    },
     "Chargée" : {
 
     },
@@ -257,6 +326,9 @@
 
     },
     "Chicago" : {
+
+    },
+    "Choisir une durée précise" : {
 
     },
     "Choisir une ville…" : {
@@ -283,6 +355,9 @@
     "Claude travaille" : {
 
     },
+    "Cliquer pour copier" : {
+
+    },
     "Cliquez pour changer la taille, glissez pour déplacer" : {
 
     },
@@ -301,10 +376,22 @@
     "Connectez Claude Code" : {
 
     },
+    "Conserver l'historique après le redémarrage de l'app" : {
+
+    },
     "Consulte %@" : {
 
     },
+    "Copié" : {
+
+    },
     "Copier" : {
+
+    },
+    "Copies" : {
+
+    },
+    "Copiez du texte, une image ou des fichiers : ils apparaîtront ici." : {
 
     },
     "Couvert" : {
@@ -331,6 +418,9 @@
     "Demain" : {
 
     },
+    "Démarrer" : {
+
+    },
     "Déplacer à droite" : {
 
     },
@@ -349,6 +439,9 @@
     "Désactivé" : {
 
     },
+    "Désépingler" : {
+
+    },
     "Désinstaller" : {
 
     },
@@ -356,6 +449,12 @@
 
     },
     "Développement" : {
+
+    },
+    "Déverrouillage" : {
+
+    },
+    "Déverrouillé" : {
 
     },
     "Disposition" : {
@@ -385,16 +484,28 @@
     "Écrit %@" : {
 
     },
+    "Effacer l'historique" : {
+
+    },
+    "Effacer l'historique (sauf les éléments épinglés)" : {
+
+    },
     "En charge" : {
 
     },
     "En cours · jusqu'à %@" : {
 
     },
+    "En pause" : {
+
+    },
     "En pause · %@" : {
 
     },
     "Envoyer par AirDrop" : {
+
+    },
+    "Épingler" : {
 
     },
     "Estimation : %@%@. Comparée à votre plus grosse session observée." : {
@@ -414,6 +525,9 @@
 
     },
     "Exécute : %@" : {
+
+    },
+    "Face ID" : {
 
     },
     "Faites glisser des fichiers sur l'encoche : à gauche pour les garder ici, à droite pour les envoyer par AirDrop. Les fichiers ne sont ni copiés ni déplacés, l'étagère garde seulement un lien vers eux." : {
@@ -461,6 +575,9 @@
     "Grand" : {
 
     },
+    "Historique des derniers éléments copiés, à recopier d'un clic." : {
+
+    },
     "Horloge" : {
 
     },
@@ -468,6 +585,9 @@
 
     },
     "https://open-meteo.com" : {
+
+    },
+    "Image" : {
 
     },
     "Installer" : {
@@ -497,6 +617,9 @@
     "Intégration retirée." : {
 
     },
+    "Jour" : {
+
+    },
     "L'accès aux calendriers est refusé." : {
 
     },
@@ -509,7 +632,7 @@
     "L'utilisation réelle (session de 5 h et semaine) est transmise par Claude Code à sa barre d'état, à chaque message. En attendant ces données, Notchkit affiche une estimation calculée à partir des fichiers de session locaux." : {
 
     },
-    "La connexion est détectée quand l'appareil apparaît comme sortie audio. Le mode de réduction du bruit ne peut pas être modifié par une app tierce avec les outils publics d'Apple : le bouton « Réduction du bruit… » ouvre les réglages Bluetooth de macOS." : {
+    "La batterie de chaque écouteur et le choix du mode (désactivé, réduction du bruit, transparence) utilisent une interface non officielle d'Apple et demandent l'autorisation Bluetooth. Si une mise à jour de macOS la modifie, ces commandes disparaissent simplement de la carte." : {
 
     },
     "La recherche a échoué. Vérifiez votre connexion." : {
@@ -524,9 +647,6 @@
     "Le fichier ~/.claude/settings.json n'est pas un JSON valide. Corrigez-le ou supprimez-le, puis réessayez." : {
 
     },
-    "Le mode de réduction du bruit se règle dans les réglages Bluetooth de macOS" : {
-
-    },
     "Le serveur local n'a pas pu démarrer sur le port %@ : %@" : {
       "localizations" : {
         "fr" : {
@@ -537,7 +657,13 @@
         }
       }
     },
+    "Le volume est réglé par une interface publique. La luminosité de l'écran intégré passe par une interface non officielle d'Apple (DisplayServices) : si une mise à jour de macOS la modifie, les touches de luminosité retrouvent simplement leur comportement normal. Les écrans externes et les sorties sans volume réglable gardent l'indicateur de macOS." : {
+
+    },
     "Lecture" : {
+
+    },
+    "Les contenus marqués confidentiels (mots de passe copiés depuis un gestionnaire) ne sont jamais enregistrés. L'historique reste sur ce Mac." : {
 
     },
     "Licences des composants tiers" : {
@@ -556,6 +682,9 @@
 
     },
     "Los Angeles" : {
+
+    },
+    "macOS demandera l'autorisation lors de la prochaine copie." : {
 
     },
     "Masquer ce widget" : {
@@ -586,6 +715,9 @@
 
     },
     "Mettre à jour l'intégration" : {
+
+    },
+    "Mini" : {
 
     },
     "Minuteur" : {
@@ -621,6 +753,9 @@
     "Moscou" : {
 
     },
+    "Mot de passe" : {
+
+    },
     "Moyen" : {
 
     },
@@ -643,6 +778,9 @@
 
     },
     "Niveau, état de charge et animation au branchement." : {
+
+    },
+    "Non connecté" : {
 
     },
     "Notchkit" : {
@@ -732,6 +870,9 @@
     "Position nécessaire pour la météo" : {
 
     },
+    "Presse-papiers" : {
+
+    },
     "PRO" : {
 
     },
@@ -756,13 +897,16 @@
     "Rechercher une ville" : {
 
     },
-    "Réduction du bruit…" : {
+    "Réduction du bruit" : {
 
     },
     "Réessayer" : {
 
     },
     "Réglages" : {
+
+    },
+    "Réglages Bluetooth…" : {
 
     },
     "Réglages de Notchkit" : {
@@ -780,6 +924,15 @@
     "Réinitialiser la disposition" : {
 
     },
+    "Relancer" : {
+
+    },
+    "Remplace l'indicateur de volume et de luminosité de macOS par un affichage dans l'encoche." : {
+
+    },
+    "Remplacer l'indicateur de volume et de luminosité de macOS" : {
+
+    },
     "Répondez pour qu'il continue" : {
 
     },
@@ -790,6 +943,9 @@
 
     },
     "Retirer de l'étagère" : {
+
+    },
+    "Rien de prévu" : {
 
     },
     "s" : {
@@ -805,6 +961,9 @@
 
     },
     "Second fuseau horaire" : {
+
+    },
+    "Secteur" : {
 
     },
     "Semaine" : {
@@ -837,6 +996,9 @@
     "Suivre les téléchargements" : {
 
     },
+    "Supprimer" : {
+
+    },
     "Sur batterie" : {
 
     },
@@ -867,6 +1029,12 @@
     "Tokyo" : {
 
     },
+    "Touch ID" : {
+
+    },
+    "Touches de volume et de luminosité interceptées" : {
+
+    },
     "Toujours afficher le niveau quand l'encoche est repliée" : {
 
     },
@@ -877,6 +1045,9 @@
 
     },
     "Transformez l'encoche de votre Mac en une zone interactive et modulaire." : {
+
+    },
+    "Transparence" : {
 
     },
     "UTC" : {
@@ -894,6 +1065,9 @@
     "Version %@" : {
 
     },
+    "Version de développement : après chaque recompilation, macOS peut demander à nouveau l'autorisation Accessibilité." : {
+
+    },
     "Vider l'étagère" : {
 
     },
@@ -904,6 +1078,15 @@
 
     },
     "Ville choisie" : {
+
+    },
+    "Volume" : {
+
+    },
+    "Volume et luminosité" : {
+
+    },
+    "Votre accord" : {
 
     },
     "Vous avez déjà votre propre barre d'état Claude Code : Notchkit ne la remplace pas, l'utilisation affichée reste donc une estimation." : {

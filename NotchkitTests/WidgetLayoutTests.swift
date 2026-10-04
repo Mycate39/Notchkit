@@ -45,8 +45,18 @@ struct WidgetLayoutEngineTests {
         #expect(WidgetSize(weight: 1) == .small)
         #expect(WidgetSize(weight: 1.2) == .small)
         #expect(WidgetSize.mini.weight == 0.5)
-        // Huit widgets mini tiennent sur une page.
+        // Sans empilement, huit colonnes de largeur 0,5 tiennent sur une page.
         #expect(NotchLayout.paginate(weights: Array(repeating: 0.5, count: 9)) == [Array(0..<8), [8]])
+    }
+
+    @Test func deuxMiniConsecutifsSEmpilent() {
+        #expect(WidgetColumns.make(sizes: [.mini, .mini, .small, .mini]) == [[0, 1], [2], [3]])
+        #expect(WidgetColumns.effectiveWeights(sizes: [.mini, .mini, .mini]) == [0.5, 0, 0.5])
+        // 16 Mini tiennent sur une page (8 colonnes de 2).
+        let pages = WidgetLayoutEngine.pages(activeIDs: (0..<17).map(String.init),
+                                             weights: Dictionary(uniqueKeysWithValues: (0..<17).map { (String($0), CGFloat(0.5)) }),
+                                             layout: nil)
+        #expect(pages.first?.count == 16)
     }
 
     @Test func dispositionConserveeDansLesReglages() throws {

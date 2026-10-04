@@ -84,15 +84,23 @@ private struct PageEditor: View {
             GeometryReader { proxy in
                 let scale = max(0.1, (proxy.size.width - 16) / Self.realWidth)
                 let spacing: CGFloat = 12
-                let totalWeight = max(0.001, ids.reduce(0) { $0 + manager.weight(for: $1) })
-                let available = Self.realWidth - spacing * CGFloat(max(0, ids.count - 1))
+                // Mêmes colonnes que dans l'encoche : deux Mini consécutifs s'empilent.
+                let columns = WidgetColumns.make(sizes: ids.map { manager.size(for: $0) })
+                let columnWeights = columns.map { manager.weight(for: ids[$0[0]]) }
+                let totalWeight = max(0.001, columnWeights.reduce(0, +))
+                let available = Self.realWidth - spacing * CGFloat(max(0, columns.count - 1))
 
                 HStack(spacing: spacing) {
-                    ForEach(Array(ids.enumerated()), id: \.element) { index, id in
-                        if let descriptor = descriptors[id] {
-                            WidgetTile(manager: manager, descriptor: descriptor, pageIndex: pageIndex, index: index)
-                                .frame(width: max(40, available * manager.weight(for: id) / totalWeight), height: Self.realHeight)
+                    ForEach(Array(columns.enumerated()), id: \.offset) { columnIndex, column in
+                        VStack(spacing: 8) {
+                            ForEach(column, id: \.self) { index in
+                                if let descriptor = descriptors[ids[index]] {
+                                    WidgetTile(manager: manager, descriptor: descriptor, pageIndex: pageIndex, index: index)
+                                        .environment(\.miniStacked, column.count == 2)
+                                }
+                            }
                         }
+                        .frame(width: max(40, available * columnWeights[columnIndex] / totalWeight), height: Self.realHeight)
                     }
                 }
                 .frame(width: Self.realWidth, height: Self.realHeight, alignment: .leading)

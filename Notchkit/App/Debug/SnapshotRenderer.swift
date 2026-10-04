@@ -79,6 +79,24 @@ enum SnapshotRenderer {
             .padding(12).background(Color(white: 0.35)).foregroundStyle(.white).environment(\.colorScheme, .dark),
              to: directory.appendingPathComponent("deverrouillage.png"))
 
+        // Mini empilés deux par deux.
+        let stackedModules = Array(manager.activeModules.prefix(6))
+        save(HStack(spacing: 8) {
+                ForEach(0..<(stackedModules.count / 2), id: \.self) { column in
+                    VStack(spacing: 8) {
+                        ForEach(0..<2, id: \.self) { row in
+                            stackedModules[column * 2 + row].miniView()
+                                .environment(\.widgetSize, .mini)
+                                .environment(\.miniStacked, true)
+                                .frame(width: 70, height: 66)
+                                .background(.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 11))
+                        }
+                    }
+                }
+            }
+            .padding(12).background(.black).foregroundStyle(.white).environment(\.colorScheme, .dark),
+             to: directory.appendingPathComponent("widgets-mini-empiles.png"))
+
         // Onglet Disposition des réglages.
         save(LayoutEditorContent(manager: manager)
                 .frame(width: 620, height: 1100)

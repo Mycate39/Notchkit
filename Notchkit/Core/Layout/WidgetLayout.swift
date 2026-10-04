@@ -43,6 +43,37 @@ struct WidgetLayout: Codable, Equatable, Sendable {
     var sizes: [String: WidgetSize] = [:]
 }
 
+/// Colonnes d'une page : deux widgets « Mini » consécutifs s'empilent verticalement.
+enum WidgetColumns {
+    /// Indices regroupés en colonnes (une colonne = 1 widget, ou 2 Mini empilés).
+    static func make(sizes: [WidgetSize]) -> [[Int]] {
+        var columns: [[Int]] = []
+        var index = 0
+        while index < sizes.count {
+            if sizes[index] == .mini, index + 1 < sizes.count, sizes[index + 1] == .mini {
+                columns.append([index, index + 1])
+                index += 2
+            } else {
+                columns.append([index])
+                index += 1
+            }
+        }
+        return columns
+    }
+
+    /// Largeur occupée par chaque widget : le second Mini d'une paire ne prend pas de place en plus.
+    static func effectiveWeights(sizes: [WidgetSize]) -> [CGFloat] {
+        var weights = sizes.map(\.weight)
+        for column in make(sizes: sizes) where column.count == 2 { weights[column[1]] = 0 }
+        return weights
+    }
+
+    /// Taille déduite d'une largeur (0,5 = Mini).
+    static func sizes(fromWeights weights: [CGFloat]) -> [WidgetSize] {
+        weights.map { WidgetSize(weight: $0) }
+    }
+}
+
 /// Règles de disposition (logique pure, testée).
 enum WidgetLayoutEngine {
     /// Pages effectives : la disposition de l'utilisateur, limitée aux modules actifs, puis les modules
@@ -61,7 +92,8 @@ enum WidgetLayoutEngine {
         }
 
         let remaining = activeIDs.filter { !placed.contains($0) }
-        let automatic = NotchLayout.paginate(weights: remaining.map { weights[$0] ?? 1 }, capacity: capacity)
+        let sizes = WidgetColumns.sizes(fromWeights: remaining.map { weights[$0] ?? 1 })
+        let automatic = NotchLayout.paginate(weights: WidgetColumns.effectiveWeights(sizes: sizes), capacity: capacity)
         result += automatic.map { $0.map { remaining[$0] } }
         return result
     }
@@ -112,6 +144,7 @@ enum WidgetLayoutEngine {
 
     /// Largeur occupée sur une page.
     static func usedCapacity(of page: [String], weights: [String: CGFloat]) -> CGFloat {
-        page.reduce(0) { $0 + (weights[$1] ?? 1) }
+        let sizes = WidgetColumns.sizes(fromWeights: page.map { weights[$0] ?? 1 })
+        return WidgetColumns.effectiveWeights(sizes: sizes).reduce(0, +)
     }
 }

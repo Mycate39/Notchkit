@@ -99,7 +99,36 @@ struct MiniWidget<Visual: View>: View {
         self.tint = tint
     }
 
+    @Environment(\.miniStacked) private var stacked
+
     var body: some View {
+        if stacked {
+            // Demi-hauteur : visuel et valeur côte à côte.
+            VStack(spacing: 2) {
+                visual
+                    .frame(height: 20)
+                    .scaleEffect(0.7)
+                if let value {
+                    Text(value)
+                        .font(.system(size: 11, weight: .bold, design: .rounded))
+                        .monospacedDigit()
+                        .foregroundStyle(tint)
+                } else if let caption {
+                    Text(caption)
+                        .font(.system(size: 8, weight: .medium))
+                        .foregroundStyle(.white.opacity(0.55))
+                }
+            }
+            .lineLimit(1)
+            .minimumScaleFactor(0.6)
+            .padding(4)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        } else {
+            fullBody
+        }
+    }
+
+    private var fullBody: some View {
         VStack(spacing: 6) {
             visual
                 .frame(height: 34)

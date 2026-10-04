@@ -262,11 +262,12 @@ private struct SpectrumStatusView: View {
 /// Version mini : pochette et lecture/pause.
 struct MusicMiniView: View {
     let module: MusicModule
+    @Environment(\.miniStacked) private var stacked
 
     var body: some View {
         if let info = module.nowPlaying {
-            VStack(spacing: 8) {
-                ArtworkView(info: info, size: 40, cornerRadius: 8)
+            VStack(spacing: stacked ? 2 : 8) {
+                ArtworkView(info: info, size: stacked ? 26 : 40, cornerRadius: stacked ? 6 : 8)
                 Button { module.send(.togglePlayPause) } label: {
                     Image(systemName: info.isPlaying ? "pause.fill" : "play.fill")
                         .font(.system(size: 16, weight: .semibold))

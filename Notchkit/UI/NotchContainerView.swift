@@ -225,23 +225,34 @@ struct PageView: View {
     var body: some View {
         GeometryReader { proxy in
             let spacing: CGFloat = 12
-            let totalWeight = page.modules.reduce(0) { $0 + $1.size.weight }
-            let available = proxy.size.width - spacing * CGFloat(page.modules.count - 1)
+            let columns = WidgetColumns.make(sizes: page.modules.map(\.size))
+            let columnWeights = columns.map { page.modules[$0[0]].size.weight }
+            let totalWeight = max(0.001, columnWeights.reduce(0, +))
+            let available = proxy.size.width - spacing * CGFloat(max(0, columns.count - 1))
 
             HStack(spacing: spacing) {
-                ForEach(page.modules) { box in
-                    Group {
-                        if box.size == .mini { box.module.miniView() } else { box.module.expandedView() }
+                ForEach(Array(columns.enumerated()), id: \.offset) { index, column in
+                    VStack(spacing: 8) {
+                        ForEach(column, id: \.self) { position in
+                            card(page.modules[position], stacked: column.count == 2)
+                        }
                     }
-                        .environment(\.widgetSize, box.size)
-                        .frame(width: max(0, available * box.size.weight / totalWeight))
-                        .frame(maxHeight: .infinity)
-                        .background(.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
-                        .contentShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
-                        .contextMenu { WidgetContextMenu(box: box, viewModel: viewModel) }
+                    .frame(width: max(0, available * columnWeights[index] / totalWeight))
                 }
             }
         }
+    }
+
+    private func card(_ box: ModuleBox, stacked: Bool) -> some View {
+        Group {
+            if box.size == .mini { box.module.miniView() } else { box.module.expandedView() }
+        }
+        .environment(\.widgetSize, box.size)
+        .environment(\.miniStacked, stacked)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.white.opacity(0.06), in: RoundedRectangle(cornerRadius: stacked ? 11 : 14, style: .continuous))
+        .contentShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .contextMenu { WidgetContextMenu(box: box, viewModel: viewModel) }
     }
 }
 
@@ -336,4 +347,6 @@ struct ModulePage: Identifiable {
 extension EnvironmentValues {
     /// Taille du widget en cours d'affichage : les vues des modules s'y adaptent.
     @Entry var widgetSize: WidgetSize = .medium
+    /// Widget Mini empilé (moitié de la hauteur) : disposition horizontale compacte.
+    @Entry var miniStacked = false
 }

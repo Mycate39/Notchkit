@@ -429,11 +429,12 @@ struct LiveActivitiesSettingsView: View {
 /// Version mini : l'activité la plus importante, ou un lancement rapide de minuteur.
 struct LiveActivitiesMiniView: View {
     let module: LiveActivitiesModule
+    @Environment(\.miniStacked) private var stacked
 
     var body: some View {
         if let activity = module.mostRelevant {
-            VStack(spacing: 6) {
-                ActivityRing(activity: activity, size: 32)
+            VStack(spacing: stacked ? 2 : 6) {
+                ActivityRing(activity: activity, size: stacked ? 20 : 32)
                 ActivityCompactValue(activity: activity, extraCount: 0)
                     .font(.system(size: 13, weight: .bold, design: .rounded))
             }

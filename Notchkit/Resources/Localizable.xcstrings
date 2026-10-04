@@ -10,6 +10,9 @@
     "« %@ »" : {
 
     },
+    "« Réduire les animations » est activé dans macOS : les animations sont désactivées." : {
+
+    },
     "%@ · %@" : {
       "localizations" : {
         "fr" : {
@@ -61,6 +64,12 @@
     "%lld min" : {
 
     },
+    "%lld modèles disponibles" : {
+
+    },
+    "%lld s après un changement d'app" : {
+
+    },
     "+%lld" : {
 
     },
@@ -71,6 +80,9 @@
 
     },
     "5 min" : {
+
+    },
+    "À coller pour signaler un souci (AirPods connectés)." : {
 
     },
     "À propos" : {
@@ -97,6 +109,15 @@
     "Activités live" : {
 
     },
+    "Adaptatif" : {
+
+    },
+    "Adresse de l'API" : {
+
+    },
+    "Adresse du fournisseur invalide." : {
+
+    },
     "Affiche l'heure et la date." : {
 
     },
@@ -104,6 +125,9 @@
 
     },
     "Affiche une fausse encoche sur les écrans qui n'en ont pas, pour tester le rendu." : {
+
+    },
+    "Afficher dans l'encoche repliée" : {
 
     },
     "Afficher dans le Finder" : {
@@ -145,6 +169,9 @@
     "Ajouter une minute" : {
 
     },
+    "Ajoutez votre clé API pour discuter avec l'assistant." : {
+
+    },
     "Alerte de batterie faible (20 % et 10 %)" : {
 
     },
@@ -178,6 +205,9 @@
     "Animation pendant une demande Touch ID" : {
 
     },
+    "Animations" : {
+
+    },
     "Animations au ralenti (×8)" : {
 
     },
@@ -188,6 +218,9 @@
 
     },
     "Animations visuelles uniquement : aucune reconnaissance faciale. macOS n'indique pas comment la session a été déverrouillée et rien ne peut s'afficher sur l'écran verrouillé : l'animation Face ID se joue juste après le déverrouillage." : {
+
+    },
+    "Annulé" : {
 
     },
     "Annuler" : {
@@ -202,10 +235,19 @@
     "Aperçu : déverrouillage Face ID" : {
 
     },
+    "Apparence" : {
+
+    },
     "Après chaque réponse de Claude, vous pouvez encore lui écrire depuis l'encoche pendant ce délai : il repart aussitôt. Pendant ce temps, Claude Code l'affiche comme « en cours » (Échap pour arrêter)." : {
 
     },
     "Arrêter" : {
+
+    },
+    "Assistant" : {
+
+    },
+    "Assistant IA" : {
 
     },
     "Au travail" : {
@@ -218,6 +260,9 @@
 
     },
     "Aucun événement aujourd'hui ni demain" : {
+
+    },
+    "Aucun modèle trouvé" : {
 
     },
     "Aucun module actif" : {
@@ -235,6 +280,9 @@
     "Aucune activité en cours" : {
 
     },
+    "Aucune app" : {
+
+    },
     "Aucune batterie détectée" : {
 
     },
@@ -245,6 +293,12 @@
 
     },
     "Aucune session d'utilisation en cours" : {
+
+    },
+    "Audio (M4A)" : {
+
+    },
+    "Audio (MP3)" : {
 
     },
     "Automatique" : {
@@ -292,6 +346,12 @@
     "Boîtier" : {
 
     },
+    "Bonjour ! Posez-moi une question." : {
+
+    },
+    "Bouton « ◀ App » pour revenir à l'app d'avant, comme sur iPhone." : {
+
+    },
     "Branchée" : {
 
     },
@@ -322,10 +382,19 @@
     "Chargée" : {
 
     },
+    "Chargement…" : {
+
+    },
+    "Charger la liste" : {
+
+    },
     "Cherche sur le web « %@ »" : {
 
     },
     "Chicago" : {
+
+    },
+    "Choisir" : {
 
     },
     "Choisir une durée précise" : {
@@ -335,6 +404,9 @@
 
     },
     "Ciel dégagé" : {
+
+    },
+    "Claude (Anthropic)" : {
 
     },
     "Claude a terminé" : {
@@ -355,10 +427,31 @@
     "Claude travaille" : {
 
     },
+    "Clé API" : {
+
+    },
+    "Clé API manquante : ajoutez-la dans les réglages de l'assistant." : {
+
+    },
     "Cliquer pour copier" : {
 
     },
     "Cliquez pour changer la taille, glissez pour déplacer" : {
+
+    },
+    "Coller la clé" : {
+
+    },
+    "Coller un lien de vidéo" : {
+
+    },
+    "Collez un lien de vidéo puis appuyez sur Entrée." : {
+
+    },
+    "Compacte" : {
+
+    },
+    "Compatible OpenAI" : {
 
     },
     "Conditions actuelles et prévisions des prochaines heures (Open-Meteo)." : {
@@ -388,10 +481,25 @@
     "Copier" : {
 
     },
+    "Copier le diagnostic" : {
+
+    },
     "Copies" : {
 
     },
     "Copiez du texte, une image ou des fichiers : ils apparaîtront ici." : {
+
+    },
+    "Couleur d'accent" : {
+
+    },
+    "Couleur d'accent personnalisée" : {
+
+    },
+    "Couleur du fond" : {
+
+    },
+    "Couleurs" : {
 
     },
     "Couvert" : {
@@ -416,6 +524,9 @@
 
     },
     "Demain" : {
+
+    },
+    "Demander quelque chose…" : {
 
     },
     "Démarrer" : {
@@ -466,7 +577,19 @@
     "Données météo fournies par Open-Meteo.com, sous licence Creative Commons Attribution 4.0 (CC BY 4.0)." : {
 
     },
+    "Dossier de destination" : {
+
+    },
+    "Dossier de destination : %@" : {
+
+    },
+    "Dossier où enregistrer les vidéos téléchargées" : {
+
+    },
     "Dubaï" : {
+
+    },
+    "Échec du téléchargement" : {
 
     },
     "Économie d'énergie" : {
@@ -502,10 +625,32 @@
     "En pause · %@" : {
 
     },
+    "Enregistrée dans le trousseau" : {
+
+    },
+    "Enregistrer" : {
+
+    },
+    "Envoyer" : {
+
+    },
     "Envoyer par AirDrop" : {
 
     },
     "Épingler" : {
+
+    },
+    "Erreur %lld : %@" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Erreur %1$lld : %2$@"
+          }
+        }
+      }
+    },
+    "Erreur inconnue" : {
 
     },
     "Estimation : %@%@. Comparée à votre plus grosse session observée." : {
@@ -527,6 +672,9 @@
     "Exécute : %@" : {
 
     },
+    "Exemples : https://api.openai.com/v1 · https://api.mistral.ai/v1 · http://localhost:11434/v1 (Ollama, sans clé)." : {
+
+    },
     "Face ID" : {
 
     },
@@ -536,7 +684,19 @@
     "Fermer" : {
 
     },
+    "ffmpeg absent (qualité limitée, pas de MP3)" : {
+
+    },
+    "ffmpeg installé" : {
+
+    },
     "Fichier introuvable (déplacé ou supprimé)" : {
+
+    },
+    "Fluide" : {
+
+    },
+    "Fond de l'encoche" : {
 
     },
     "Forte pluie" : {
@@ -546,6 +706,9 @@
 
     },
     "Fortes chutes de neige" : {
+
+    },
+    "Fournisseur" : {
 
     },
     "Garder dans l'étagère" : {
@@ -575,10 +738,19 @@
     "Grand" : {
 
     },
+    "Grande" : {
+
+    },
+    "Graphite" : {
+
+    },
     "Historique des derniers éléments copiés, à recopier d'un clic." : {
 
     },
     "Horloge" : {
+
+    },
+    "https://api.openai.com/v1" : {
 
     },
     "https://github.com/ungive/mediaremote-adapter" : {
@@ -590,13 +762,43 @@
     "Image" : {
 
     },
+    "inconnu (%u)" : {
+
+    },
+    "Installation en cours… (cela peut prendre quelques minutes)" : {
+
+    },
+    "Installation terminée." : {
+
+    },
+    "Installation…" : {
+
+    },
     "Installer" : {
+
+    },
+    "Installer avec Homebrew…" : {
 
     },
     "Installer l'intégration Claude Code ?" : {
 
     },
     "Installer l'intégration…" : {
+
+    },
+    "Installer les outils de téléchargement ?" : {
+
+    },
+    "Installer yt-dlp et ffmpeg" : {
+
+    },
+    "Installer yt-dlp seulement" : {
+
+    },
+    "Installer…" : {
+
+    },
+    "Installez Homebrew (brew.sh), puis dans le Terminal : brew install yt-dlp ffmpeg" : {
 
     },
     "Installez l'intégration pour suivre ce que fait Claude et lui écrire depuis l'encoche." : {
@@ -629,6 +831,12 @@
     "L'analyse du son n'a pas pu démarrer : %@" : {
 
     },
+    "L'installation a échoué. Essayez dans le Terminal : brew install yt-dlp" : {
+
+    },
+    "L'utilisation de l'API est facturée par le fournisseur sur votre compte API (séparément d'un abonnement Claude Pro/Max). La clé reste dans le trousseau de ce Mac. Avec Claude, si une demande est refusée par les filtres de sécurité d'un modèle récent, elle est automatiquement relancée sur un autre modèle Claude (« fallbacks »)." : {
+
+    },
     "L'utilisation réelle (session de 5 h et semaine) est transmise par Claude Code à sa barre d'état, à chaque message. En attendant ces données, Notchkit affiche une estimation calculée à partir des fichiers de session locaux." : {
 
     },
@@ -645,6 +853,9 @@
 
     },
     "Le fichier ~/.claude/settings.json n'est pas un JSON valide. Corrigez-le ou supprimez-le, puis réessayez." : {
+
+    },
+    "Le modèle a refusé de répondre à cette demande." : {
 
     },
     "Le serveur local n'a pas pu démarrer sur le port %@ : %@" : {
@@ -729,6 +940,12 @@
     "Mise à jour de l'intégration nécessaire" : {
 
     },
+    "Mode actuel : %@" : {
+
+    },
+    "Modèle" : {
+
+    },
     "Modifie %@" : {
 
     },
@@ -780,6 +997,9 @@
     "Niveau, état de charge et animation au branchement." : {
 
     },
+    "Noir" : {
+
+    },
     "Non connecté" : {
 
     },
@@ -790,6 +1010,12 @@
 
     },
     "Notchkit va ajouter des hooks et une barre d'état dans ~/.claude/settings.json pour que Claude Code le prévienne de son activité et lui transmette votre utilisation réelle (connexion locale uniquement, protégée par un jeton). Vos réglages existants sont conservés et une copie de sauvegarde est faite. Les nouvelles sessions de Claude Code en tiendront compte." : {
+
+    },
+    "Notchkit va lancer « brew install » pour installer ces logiciels libres sur votre Mac. ffmpeg (plus volumineux) permet la meilleure qualité et la conversion en MP3." : {
+
+    },
+    "Nouvelle conversation" : {
 
     },
     "Nouvelle page" : {
@@ -843,6 +1069,9 @@
     "Pause" : {
 
     },
+    "Personnalisé" : {
+
+    },
     "Petit" : {
 
     },
@@ -864,10 +1093,16 @@
     "Port invalide" : {
 
     },
+    "Posez une question depuis l'encoche (Claude ou API compatible OpenAI), avec un visage animé." : {
+
+    },
     "Position" : {
 
     },
     "Position nécessaire pour la météo" : {
+
+    },
+    "Préparation…" : {
 
     },
     "Presse-papiers" : {
@@ -885,7 +1120,13 @@
     "Quitter Notchkit" : {
 
     },
+    "Rapide" : {
+
+    },
     "Rappel dans l'encoche 10 minutes avant un événement" : {
+
+    },
+    "Rebondissante" : {
 
     },
     "Recherche « %@ »" : {
@@ -904,6 +1145,9 @@
 
     },
     "Réglages" : {
+
+    },
+    "Réglages > Modules > Vidéos" : {
 
     },
     "Réglages Bluetooth…" : {
@@ -936,13 +1180,34 @@
     "Répondez pour qu'il continue" : {
 
     },
+    "Réponse" : {
+
+    },
     "Reprendre" : {
+
+    },
+    "Respectez les droits d'auteur : les conditions d'utilisation de YouTube interdisent de télécharger des vidéos sans autorisation. Réservez ce module à vos propres vidéos, aux contenus sous licence libre ou téléchargés avec l'accord de leurs auteurs." : {
+
+    },
+    "reste" : {
+
+    },
+    "Rétablir l'apparence par défaut" : {
 
     },
     "Retirer" : {
 
     },
     "Retirer de l'étagère" : {
+
+    },
+    "Retirer de la liste" : {
+
+    },
+    "Retour à l'app précédente" : {
+
+    },
+    "Revenir à %@" : {
 
     },
     "Rien de prévu" : {
@@ -993,6 +1258,12 @@
     "Sortie audio active" : {
 
     },
+    "Standard" : {
+
+    },
+    "Style" : {
+
+    },
     "Suivre les téléchargements" : {
 
     },
@@ -1000,6 +1271,9 @@
 
     },
     "Sur batterie" : {
+
+    },
+    "Sur un Mac avec encoche, un fond autre que noir laisse voir la découpe de l'encoche matérielle." : {
 
     },
     "Survol" : {
@@ -1014,7 +1288,16 @@
     "Taille" : {
 
     },
+    "Taille de l'encoche dépliée" : {
+
+    },
     "Téléchargement terminé" : {
+
+    },
+    "Télécharger" : {
+
+    },
+    "Téléchargez une vidéo ou son audio à partir d'un lien (avec yt-dlp)." : {
 
     },
     "Temps restant pour répondre à Claude depuis l'encoche" : {
@@ -1035,6 +1318,9 @@
     "Touches de volume et de luminosité interceptées" : {
 
     },
+    "Toujours" : {
+
+    },
     "Toujours afficher le niveau quand l'encoche est repliée" : {
 
     },
@@ -1050,6 +1336,9 @@
     "Transparence" : {
 
     },
+    "Une encoche plus grande accueille plus de widgets par page (%@ unités de largeur)." : {
+
+    },
     "UTC" : {
 
     },
@@ -1062,10 +1351,25 @@
     "Utiliser ma position" : {
 
     },
+    "Verre" : {
+
+    },
     "Version %@" : {
 
     },
     "Version de développement : après chaque recompilation, macOS peut demander à nouveau l'autorisation Accessibilité." : {
+
+    },
+    "Vidéo (meilleure qualité)" : {
+
+    },
+    "Vidéo 720p" : {
+
+    },
+    "Vidéo 1080p" : {
+
+    },
+    "Vidéos" : {
 
     },
     "Vider l'étagère" : {
@@ -1096,6 +1400,15 @@
 
     },
     "Widgets masqués" : {
+
+    },
+    "yt-dlp installé" : {
+
+    },
+    "yt-dlp n'est pas installé." : {
+
+    },
+    "yt-dlp non installé" : {
 
     }
   },

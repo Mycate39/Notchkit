@@ -102,57 +102,44 @@ struct MiniWidget<Visual: View>: View {
         self.tint = tint
     }
 
-    @Environment(\.miniStacked) private var stacked
-
     var body: some View {
-        if stacked {
-            // Demi-hauteur : visuel et valeur côte à côte.
-            VStack(spacing: 2) {
+        // Le contenu s'adapte à la taille réelle du widget (Mini pleine hauteur ou empilé).
+        GeometryReader { proxy in
+            let width = proxy.size.width
+            let height = proxy.size.height
+            let isShort = height < 100
+            let visualSide = isShort ? min(width * 0.5, height * 0.4) : min(width * 0.62, height * 0.34)
+            let valueSize = isShort ? min(width * 0.24, height * 0.24) : min(width * 0.28, height * 0.15)
+            let captionSize = max(8, min(width * 0.14, height * 0.085))
+
+            VStack(spacing: height * (isShort ? 0.03 : 0.05)) {
+                // Visuel dessiné à une taille de référence puis agrandi pour remplir l'espace.
                 visual
-                    .frame(height: 20)
-                    .scaleEffect(0.7)
+                    .frame(width: Self.baseSide * 1.6, height: Self.baseSide)
+                    .scaleEffect(visualSide / Self.baseSide)
+                    .frame(width: width, height: visualSide)
                 if let value {
                     Text(value)
-                        .font(.system(size: 11, weight: .bold, design: .rounded))
+                        .font(.system(size: valueSize, weight: .bold, design: .rounded))
                         .monospacedDigit()
                         .foregroundStyle(tint)
-                } else if let caption {
+                }
+                if let caption, !isShort || value == nil {
                     Text(caption)
-                        .font(.system(size: 8, weight: .medium))
+                        .font(.system(size: captionSize, weight: .medium))
                         .foregroundStyle(.white.opacity(0.55))
+                        .multilineTextAlignment(.center)
                 }
             }
-            .lineLimit(1)
-            .minimumScaleFactor(0.6)
-            .padding(4)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-        } else {
-            fullBody
+            .lineLimit(isShort ? 1 : 2)
+            .minimumScaleFactor(0.5)
+            .padding(.horizontal, width * 0.06)
+            .frame(width: width, height: height)
         }
     }
 
-    private var fullBody: some View {
-        VStack(spacing: 6) {
-            visual
-                .frame(height: 34)
-            if let value {
-                Text(value)
-                    .font(.system(size: 15, weight: .bold, design: .rounded))
-                    .monospacedDigit()
-                    .foregroundStyle(tint)
-            }
-            if let caption {
-                Text(caption)
-                    .font(.system(size: 9, weight: .medium))
-                    .foregroundStyle(.white.opacity(0.55))
-                    .multilineTextAlignment(.center)
-            }
-        }
-        .lineLimit(2)
-        .minimumScaleFactor(0.6)
-        .padding(6)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
+    /// Taille de référence des visuels (agrandis ensuite selon la place disponible).
+    private static var baseSide: CGFloat { 34 }
 }
 
 extension MiniWidget where Visual == AnyView {

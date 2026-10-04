@@ -262,22 +262,25 @@ private struct SpectrumStatusView: View {
 /// Version mini : pochette et lecture/pause.
 struct MusicMiniView: View {
     let module: MusicModule
-    @Environment(\.miniStacked) private var stacked
 
     var body: some View {
         if let info = module.nowPlaying {
-            VStack(spacing: stacked ? 2 : 8) {
-                ArtworkView(info: info, size: stacked ? 26 : 40, cornerRadius: stacked ? 6 : 8)
-                Button { module.send(.togglePlayPause) } label: {
-                    Image(systemName: info.isPlaying ? "pause.fill" : "play.fill")
-                        .font(.system(size: 16, weight: .semibold))
-                        .frame(width: 30, height: 24)
-                        .contentShape(Rectangle())
-                        .contentTransition(.symbolEffect(.replace))
+            // Pochette et bouton proportionnels à la taille du widget.
+            GeometryReader { proxy in
+                let side = min(proxy.size.width * 0.78, proxy.size.height * 0.55)
+                VStack(spacing: proxy.size.height * 0.05) {
+                    ArtworkView(info: info, size: side, cornerRadius: side * 0.2)
+                    Button { module.send(.togglePlayPause) } label: {
+                        Image(systemName: info.isPlaying ? "pause.fill" : "play.fill")
+                            .font(.system(size: max(10, side * 0.36), weight: .semibold))
+                            .frame(width: side, height: side * 0.5)
+                            .contentShape(Rectangle())
+                            .contentTransition(.symbolEffect(.replace))
+                    }
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
+                .frame(width: proxy.size.width, height: proxy.size.height)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
         } else {
             MiniWidget(symbol: "music.note", value: nil, caption: String(localized: "Aucune lecture"))
         }

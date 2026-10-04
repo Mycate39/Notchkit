@@ -74,19 +74,7 @@ final class ClockModule: NotchModule {
     }
 
     func miniView() -> AnyView {
-        AnyView(
-            TimelineView(.everyMinute) { context in
-                MiniWidget(value: nil, caption: context.date.formatted(.dateTime.weekday(.abbreviated).day())) {
-                    let parts = Calendar.current.dateComponents([.hour, .minute], from: context.date)
-                    VStack(spacing: -4) {
-                        Text(String(format: "%02d", parts.hour ?? 0))
-                        Text(String(format: "%02d", parts.minute ?? 0))
-                    }
-                    .font(.system(size: 26, weight: .bold, design: .rounded))
-                    .monospacedDigit()
-                }
-            }
-        )
+        AnyView(ClockMiniView())
     }
 
     func expandedView() -> AnyView {
@@ -163,6 +151,43 @@ private struct ClockSettingsView: View {
                 ForEach(ClockModule.worldCities, id: \.timeZone) { city in
                     Text(city.name).tag(Optional(city.timeZone))
                 }
+            }
+        }
+    }
+}
+
+/// Heure en version Mini : chiffres aussi grands que le widget le permet.
+private struct ClockMiniView: View {
+    var body: some View {
+        TimelineView(.everyMinute) { context in
+            GeometryReader { proxy in
+                let width = proxy.size.width
+                let height = proxy.size.height
+                let parts = Calendar.current.dateComponents([.hour, .minute], from: context.date)
+                let hour = String(format: "%02d", parts.hour ?? 0)
+                let minute = String(format: "%02d", parts.minute ?? 0)
+
+                Group {
+                    if height < 100 {
+                        // Empilé (demi-hauteur) : une seule ligne.
+                        Text("\(hour):\(minute)")
+                            .font(.system(size: min(width * 0.3, height * 0.4), weight: .bold, design: .rounded))
+                    } else {
+                        VStack(spacing: -height * 0.03) {
+                            Text(hour)
+                            Text(minute)
+                            Text(context.date, format: .dateTime.weekday(.abbreviated).day())
+                                .font(.system(size: max(8, width * 0.14), weight: .medium))
+                                .foregroundStyle(.white.opacity(0.55))
+                                .padding(.top, height * 0.05)
+                        }
+                        .font(.system(size: min(width * 0.46, height * 0.26), weight: .bold, design: .rounded))
+                    }
+                }
+                .monospacedDigit()
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+                .frame(width: width, height: height)
             }
         }
     }

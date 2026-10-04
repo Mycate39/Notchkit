@@ -429,16 +429,20 @@ struct LiveActivitiesSettingsView: View {
 /// Version mini : l'activité la plus importante, ou un lancement rapide de minuteur.
 struct LiveActivitiesMiniView: View {
     let module: LiveActivitiesModule
-    @Environment(\.miniStacked) private var stacked
 
     var body: some View {
         if let activity = module.mostRelevant {
-            VStack(spacing: stacked ? 2 : 6) {
-                ActivityRing(activity: activity, size: stacked ? 20 : 32)
-                ActivityCompactValue(activity: activity, extraCount: 0)
-                    .font(.system(size: 13, weight: .bold, design: .rounded))
+            GeometryReader { proxy in
+                let side = min(proxy.size.width * 0.7, proxy.size.height * 0.5)
+                VStack(spacing: proxy.size.height * 0.05) {
+                    ActivityRing(activity: activity, size: side)
+                    ActivityCompactValue(activity: activity, extraCount: 0)
+                        .font(.system(size: max(9, side * 0.38), weight: .bold, design: .rounded))
+                        .minimumScaleFactor(0.5)
+                        .lineLimit(1)
+                }
+                .frame(width: proxy.size.width, height: proxy.size.height)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
         } else {
             VStack(spacing: 6) {
                 Image(systemName: "timer")

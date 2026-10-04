@@ -54,7 +54,7 @@ struct ActivityCompactValue: View {
             HStack(spacing: 3) {
                 Text(value(at: context.date))
                     .monospacedDigit()
-                    .foregroundStyle(activity.isFinished ? activity.tint : .white)
+                    .foregroundStyle(activity.kind == .timer || activity.isFinished ? activity.tint : .white)
                 if extraCount > 0 {
                     Text("+\(extraCount)")
                         .font(.system(size: 9, weight: .bold))
@@ -89,55 +89,232 @@ enum LiveActivityFormat {
 struct LiveActivitiesExpandedView: View {
     let module: LiveActivitiesModule
     @Environment(\.widgetSize) private var size
-    @State private var customMinutes = 10
+    /// Choix d'une durée précise (molettes heures / minutes / secondes).
+    @State private var isPickingDuration = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            if module.activities.isEmpty {
-                Text("Aucune activité en cours")
-                    .font(.system(size: 11, weight: .medium))
-                    .foregroundStyle(.white.opacity(0.6))
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+        Group {
+            if isPickingDuration {
+                TimerDurationPicker(module: module, isPresented: $isPickingDuration)
+            } else if module.activities.count == 1, let timer = module.activities.first, timer.kind == .timer {
+                // Un seul minuteur : présentation « Dynamic Island » d'iOS.
+                TimerHeroView(module: module, timer: timer, compact: size == .small)
             } else {
-                ScrollView {
-                    VStack(spacing: 6) {
-                        ForEach(module.activities) { activity in
-                            ActivityRow(module: module, activity: activity, compact: size == .small)
+                VStack(alignment: .leading, spacing: 6) {
+                    if module.activities.isEmpty {
+                        Text("Aucune activité en cours")
+                            .font(.system(size: 11, weight: .medium))
+                            .foregroundStyle(.white.opacity(0.6))
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    } else {
+                        ScrollView {
+                            VStack(spacing: 6) {
+                                ForEach(module.activities) { activity in
+                                    ActivityRow(module: module, activity: activity, compact: size == .small)
+                                }
+                            }
                         }
+                        .scrollIndicators(.never)
                     }
+                    timerLauncher
                 }
-                .scrollIndicators(.never)
             }
-            timerLauncher
         }
         .padding(10)
+        .animation(.snappy(duration: 0.25), value: isPickingDuration)
     }
 
-    /// Lancement rapide d'un minuteur.
+    /// Lancement rapide d'un minuteur, ou choix d'une durée précise.
     private var timerLauncher: some View {
         HStack(spacing: 5) {
             Image(systemName: "timer")
                 .font(.system(size: 10, weight: .semibold))
                 .foregroundStyle(.orange)
-            ForEach(size == .small ? [5, 25] : LiveActivitiesModule.presets, id: \.self) { minutes in
+            ForEach(size == .small ? [5] : LiveActivitiesModule.presets, id: \.self) { minutes in
                 Button("\(minutes) min") { module.startTimer(minutes: Double(minutes)) }
                     .buttonStyle(ChipButtonStyle())
             }
-            if size != .small {
-                Menu {
-                    ForEach([2, 3, 10, 20, 30, 45, 60, 90], id: \.self) { minutes in
-                        Button("\(minutes) min") { module.startTimer(minutes: Double(minutes)) }
+            Button { isPickingDuration = true } label: {
+                Image(systemName: "plus")
+                    .font(.system(size: 9, weight: .bold))
+            }
+            .buttonStyle(ChipButtonStyle())
+            .help("Choisir une durée précise")
+        }
+    }
+}
+
+// MARK: - Minuteur façon iOS
+
+/// Minuteur en cours, présenté comme dans la Dynamic Island d'iOS :
+/// boutons ronds à gauche, grand décompte orange à droite.
+private struct TimerHeroView: View {
+    let module: LiveActivitiesModule
+    let timer: LiveActivity
+    let compact: Bool
+
+    var body: some View {
+        HStack(spacing: compact ? 8 : 14) {
+            HStack(spacing: 8) {
+                if timer.isFinished {
+                    RoundButton(symbol: "arrow.counterclockwise", tint: .orange, size: compact ? 30 : 38) {
+                        module.remove(timer.id)
+                        module.startTimer(seconds: timer.duration, title: timer.title)
                     }
-                } label: {
-                    Image(systemName: "plus")
-                        .font(.system(size: 9, weight: .bold))
+                    .help("Relancer")
+                } else {
+                    RoundButton(symbol: timer.isPaused ? "play.fill" : "pause.fill", tint: .orange, size: compact ? 30 : 38) {
+                        module.togglePause(timer.id)
+                    }
+                    .help(timer.isPaused ? "Reprendre" : "Pause")
                 }
-                .menuStyle(.borderlessButton)
-                .menuIndicator(.hidden)
-                .fixedSize()
-                .help("Autre durée")
+                RoundButton(symbol: "xmark", tint: .gray, size: compact ? 30 : 38) {
+                    module.remove(timer.id)
+                }
+                .help("Arrêter")
+            }
+
+            Spacer(minLength: 0)
+
+            VStack(alignment: .trailing, spacing: 0) {
+                Text(timer.isFinished ? "Terminé" : (timer.isPaused ? "En pause" : "Minuteur"))
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(.orange)
+                TimelineView(.periodic(from: .now, by: 1)) { context in
+                    Text(LiveActivityFormat.countdown(timer.remaining(at: context.date) ?? 0))
+                        .font(.system(size: compact ? 28 : 40, weight: .regular, design: .rounded))
+                        .monospacedDigit()
+                        .foregroundStyle(timer.isPaused ? .orange.opacity(0.6) : .orange)
+                        .contentTransition(.numericText(countsDown: true))
+                        .animation(.snappy, value: timer.remaining(at: context.date))
+                }
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .contextMenu {
+            Button("Ajouter une minute") { module.extend(timer.id, by: 60) }
+            Button("Ajouter cinq minutes") { module.extend(timer.id, by: 300) }
+        }
+    }
+}
+
+/// Bouton rond à fond teinté (style iOS).
+private struct RoundButton: View {
+    let symbol: String
+    let tint: Color
+    let size: CGFloat
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Image(systemName: symbol)
+                .font(.system(size: size * 0.38, weight: .bold))
+                .foregroundStyle(tint == .gray ? .white : tint)
+                .frame(width: size, height: size)
+                .background(tint.opacity(tint == .gray ? 0.35 : 0.28), in: Circle())
+                .contentShape(Circle())
+                .contentTransition(.symbolEffect(.replace))
+        }
+        .buttonStyle(.plain)
+    }
+}
+
+/// Choix d'une durée précise avec trois molettes (heures, minutes, secondes), comme l'app Horloge.
+private struct TimerDurationPicker: View {
+    let module: LiveActivitiesModule
+    @Binding var isPresented: Bool
+
+    @AppStorage("module.activities.lastHours") private var hours = 0
+    @AppStorage("module.activities.lastMinutes") private var minutes = 10
+    @AppStorage("module.activities.lastSeconds") private var seconds = 0
+
+    private var total: Int { hours * 3600 + minutes * 60 + seconds }
+
+    var body: some View {
+        VStack(spacing: 8) {
+            HStack(spacing: 4) {
+                WheelPicker(value: $hours, range: 0...23, unit: "h")
+                WheelPicker(value: $minutes, range: 0...59, unit: "min")
+                WheelPicker(value: $seconds, range: 0...59, unit: "s")
+            }
+            HStack {
+                Button("Annuler") { isPresented = false }
+                    .buttonStyle(ChipButtonStyle())
+                Spacer()
+                Button {
+                    module.startTimer(seconds: TimeInterval(total))
+                    isPresented = false
+                } label: {
+                    Label("Démarrer", systemImage: "play.fill")
+                        .font(.system(size: 11, weight: .bold))
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 5)
+                        .background(total > 0 ? Color.orange : Color.gray.opacity(0.4), in: Capsule())
+                        .foregroundStyle(total > 0 ? .black : .white.opacity(0.6))
+                }
+                .buttonStyle(.plain)
+                .disabled(total == 0)
+                .keyboardShortcut(.defaultAction)
+            }
+        }
+    }
+}
+
+/// Molette à défilement : la valeur sélectionnée s'aligne au centre, sur un bandeau gris.
+/// Défilement au trackpad ou à la souris, clic sur une valeur pour la choisir.
+private struct WheelPicker: View {
+    @Binding var value: Int
+    let range: ClosedRange<Int>
+    let unit: String
+
+    private let rowHeight: CGFloat = 24
+
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 7, style: .continuous)
+                .fill(.white.opacity(0.12))
+                .frame(height: rowHeight)
+
+            ScrollView(.vertical) {
+                LazyVStack(spacing: 0) {
+                    ForEach(Array(range), id: \.self) { number in
+                        Text("\(number)")
+                            .font(.system(size: 17, weight: number == value ? .semibold : .regular, design: .rounded))
+                            .monospacedDigit()
+                            .foregroundStyle(number == value ? .white : .white.opacity(0.45))
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .padding(.trailing, 34)
+                            .frame(height: rowHeight)
+                            .contentShape(Rectangle())
+                            .onTapGesture { withAnimation(.snappy) { value = number } }
+                            .id(number)
+                    }
+                }
+                .scrollTargetLayout()
+            }
+            .contentMargins(.vertical, rowHeight, for: .scrollContent)
+            .scrollTargetBehavior(.viewAligned)
+            .scrollPosition(id: Binding(get: { value }, set: { if let new = $0 { value = new } }), anchor: .center)
+            .scrollIndicators(.never)
+            .mask(
+                LinearGradient(stops: [
+                    .init(color: .clear, location: 0),
+                    .init(color: .black, location: 0.3),
+                    .init(color: .black, location: 0.7),
+                    .init(color: .clear, location: 1),
+                ], startPoint: .top, endPoint: .bottom)
+            )
+
+            Text(unit)
+                .font(.system(size: 11, weight: .semibold))
+                .foregroundStyle(.white.opacity(0.8))
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.trailing, 8)
+                .allowsHitTesting(false)
+        }
+        .frame(height: rowHeight * 3)
     }
 }
 

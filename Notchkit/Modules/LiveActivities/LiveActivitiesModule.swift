@@ -250,6 +250,15 @@ final class LiveActivitiesModule: NotchModule {
 
     func compactLeading() -> AnyView? {
         guard let activity = mostRelevant else { return nil }
+        // Minuteur : icône orange, comme dans la Dynamic Island d'iOS.
+        if activity.kind == .timer {
+            return AnyView(
+                Image(systemName: activity.isPaused ? "pause.circle.fill" : "timer")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(.orange)
+                    .contentTransition(.symbolEffect(.replace))
+            )
+        }
         return AnyView(ActivityRing(activity: activity, size: 18))
     }
 

@@ -39,6 +39,25 @@ enum SnapshotRenderer {
             .environment(\.colorScheme, .dark),
              to: directory.appendingPathComponent("widgets-mini.png"))
 
+        // Minuteur façon iOS (un minuteur en cours) et sélecteur de durée.
+        if let activities = manager.module(for: LiveActivitiesModule.descriptor.id) as? LiveActivitiesModule {
+            activities.startTimer(seconds: 272)
+            save(LiveActivitiesExpandedView(module: activities)
+                    .environment(\.widgetSize, .large)
+                    .frame(width: 300, height: 140)
+                    .background(.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 14))
+                    .padding(12).background(.black).foregroundStyle(.white).environment(\.colorScheme, .dark),
+                 to: directory.appendingPathComponent("minuteur-ios.png"))
+            if let compactLeading = activities.compactLeading(), let compactTrailing = activities.compactTrailing() {
+                save(HStack { compactLeading; Spacer(); compactTrailing }
+                        .font(.system(size: 12, weight: .semibold))
+                        .frame(width: 330, height: 30).padding(.horizontal, 10)
+                        .background(.black, in: Capsule()).padding(8).background(Color(white: 0.35)),
+                     to: directory.appendingPathComponent("minuteur-compact.png"))
+            }
+            activities.activities.map(\.id).forEach(activities.remove)
+        }
+
         // Onglet Disposition des réglages.
         save(LayoutEditorContent(manager: manager)
                 .frame(width: 620, height: 1100)

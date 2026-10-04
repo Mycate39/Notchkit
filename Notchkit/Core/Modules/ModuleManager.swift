@@ -14,6 +14,8 @@ final class ModuleManager {
 
     /// Reçoit les alertes émises par les modules (branché sur le `NotchViewModel`).
     @ObservationIgnored var alertHandler: (@MainActor (NotchAlert) -> Void)?
+    /// Ouvre les réglages (branché sur l'AppDelegate).
+    @ObservationIgnored var settingsHandler: (@MainActor () -> Void)?
 
     @ObservationIgnored let availableModules: [any NotchModule.Type]
     @ObservationIgnored private let settings: SettingsStore
@@ -113,8 +115,9 @@ final class ModuleManager {
     }
 
     private func makeContext() -> ModuleContext {
-        ModuleContext(presentAlert: { [weak self] alert in
-            self?.alertHandler?(alert)
-        })
+        ModuleContext(
+            presentAlert: { [weak self] alert in self?.alertHandler?(alert) },
+            openSettings: { [weak self] in self?.settingsHandler?() }
+        )
     }
 }

@@ -40,6 +40,9 @@ targets:
       properties:
         # Nécessaire (avec le Hardened Runtime) pour piloter Music et Spotify par AppleScript.
         com.apple.security.automation.apple-events: true
+        # Nécessaires (avec le Hardened Runtime) pour le calendrier et la localisation (météo).
+        com.apple.security.personal-information.calendars: true
+        com.apple.security.personal-information.location: true
     info:
       path: Notchkit/Resources/Info.plist
       properties:
@@ -50,6 +53,10 @@ targets:
         LSUIElement: true
         LSApplicationCategoryType: public.app-category.utilities
         NSHumanReadableCopyright: "© 2026 Notchkit"
+        NSCalendarsFullAccessUsageDescription: "Notchkit affiche vos prochains événements dans l'encoche et vous les rappelle quelques minutes avant."
+        NSCalendarsUsageDescription: "Notchkit affiche vos prochains événements dans l'encoche et vous les rappelle quelques minutes avant."
+        NSLocationUsageDescription: "Notchkit utilise votre position approximative pour afficher la météo locale."
+        NSLocationWhenInUseUsageDescription: "Notchkit utilise votre position approximative pour afficher la météo locale."
         NSAppleEventsUsageDescription: "Notchkit pilote la lecture (lecture, pause, morceau suivant) de Music et Spotify depuis l'encoche."
     settings:
       base:

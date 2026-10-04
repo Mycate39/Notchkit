@@ -26,7 +26,15 @@
 	<true/>
 	<key>NSAppleEventsUsageDescription</key>
 	<string>Notchkit pilote la lecture (lecture, pause, morceau suivant) de Music et Spotify depuis l'encoche.</string>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>Notchkit affiche vos prochains événements dans l'encoche et vous les rappelle quelques minutes avant.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Notchkit affiche vos prochains événements dans l'encoche et vous les rappelle quelques minutes avant.</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>© 2026 Notchkit</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Notchkit utilise votre position approximative pour afficher la météo locale.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Notchkit utilise votre position approximative pour afficher la météo locale.</string>
 </dict>
 </plist>

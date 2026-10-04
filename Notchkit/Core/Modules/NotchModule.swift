@@ -21,6 +21,8 @@ enum ModulePriority: Int, Comparable, Sendable {
 struct ModuleContext {
     /// Affiche une alerte temporaire dans l'encoche (ex. branchement du chargeur).
     let presentAlert: @MainActor (NotchAlert) -> Void
+    /// Ouvre la fenêtre de réglages de l'app.
+    let openSettings: @MainActor () -> Void
 }
 
 /// Protocole commun à toutes les fonctionnalités de Notchkit.

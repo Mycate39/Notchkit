@@ -252,6 +252,16 @@ private struct ThirdPartyLicensesView: View {
                     Text(mediaRemoteLicense)
                         .font(.system(size: 11, design: .monospaced))
                         .textSelection(.enabled)
+
+                    Divider().padding(.vertical, 6)
+
+                    Text("Open-Meteo")
+                        .font(.subheadline.bold())
+                    Text("https://open-meteo.com")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    Text("Données météo fournies par Open-Meteo.com, sous licence Creative Commons Attribution 4.0 (CC BY 4.0).")
+                        .font(.system(size: 11))
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }

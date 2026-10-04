@@ -87,19 +87,47 @@ private struct ExpandedNotchView: View {
                 .frame(height: max(viewModel.geometry.closedSize.height, 28))
                 .padding(.horizontal, ear + 18)
 
-            modules
+            modules(horizontalPadding: ear + 18)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .padding(.horizontal, ear + 18)
                 .padding(.bottom, 16)
                 .padding(.top, 4)
         }
     }
 
+    private var pages: [ModulePage] {
+        ModulePage.paginate(viewModel.manager.activeModules.map(ModuleBox.init))
+    }
+
     private var header: some View {
-        HStack {
-            Text("Notchkit")
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundStyle(.white.opacity(0.6))
+        let pages = pages
+        return HStack {
+            if pages.count > 1 {
+                // Onglets : un par page, avec les icônes des modules qu'elle contient.
+                HStack(spacing: 6) {
+                    ForEach(pages) { page in
+                        Button {
+                            withAnimation(NotchLayout.spring) { viewModel.selectedPage = page.id }
+                        } label: {
+                            HStack(spacing: 5) {
+                                ForEach(page.modules) { box in
+                                    Image(systemName: box.systemImage)
+                                }
+                            }
+                            .font(.system(size: 10, weight: .semibold))
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(.white.opacity(viewModel.selectedPage == page.id ? 0.18 : 0), in: Capsule())
+                            .foregroundStyle(.white.opacity(viewModel.selectedPage == page.id ? 1 : 0.5))
+                            .contentShape(Capsule())
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+            } else {
+                Text("Notchkit")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(.white.opacity(0.6))
+            }
             Spacer()
             Button {
                 viewModel.openSettings()
@@ -115,9 +143,9 @@ private struct ExpandedNotchView: View {
     }
 
     @ViewBuilder
-    private var modules: some View {
-        let active = viewModel.manager.activeModules.map(ModuleBox.init)
-        if active.isEmpty {
+    private func modules(horizontalPadding: CGFloat) -> some View {
+        let pages = pages
+        if pages.isEmpty {
             VStack(spacing: 6) {
                 Image(systemName: "square.grid.2x2")
                     .font(.system(size: 22))
@@ -128,19 +156,46 @@ private struct ExpandedNotchView: View {
                     .foregroundStyle(.white.opacity(0.6))
             }
         } else {
-            // Chaque carte reçoit une part de la largeur proportionnelle à son poids.
+            // Pages défilantes : balayage horizontal au trackpad, ou clic sur les onglets.
             GeometryReader { proxy in
-                let spacing: CGFloat = 12
-                let totalWeight = active.reduce(0) { $0 + $1.weight }
-                let available = proxy.size.width - spacing * CGFloat(active.count - 1)
-
-                HStack(spacing: spacing) {
-                    ForEach(active) { box in
-                        box.module.expandedView()
-                            .frame(width: max(0, available * box.weight / totalWeight))
-                            .frame(maxHeight: .infinity)
-                            .background(.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                ScrollView(.horizontal) {
+                    HStack(spacing: 0) {
+                        ForEach(pages) { page in
+                            PageView(page: page)
+                                .padding(.horizontal, horizontalPadding)
+                                .frame(width: proxy.size.width, height: proxy.size.height)
+                                .id(page.id)
+                        }
                     }
+                    .scrollTargetLayout()
+                }
+                .scrollIndicators(.never)
+                .scrollTargetBehavior(.paging)
+                .scrollPosition(id: Binding(
+                    get: { min(viewModel.selectedPage, pages.count - 1) },
+                    set: { viewModel.selectedPage = $0 ?? 0 }
+                ))
+            }
+        }
+    }
+}
+
+/// Une page de l'encoche dépliée : ses cartes se partagent la largeur selon leur poids.
+private struct PageView: View {
+    let page: ModulePage
+
+    var body: some View {
+        GeometryReader { proxy in
+            let spacing: CGFloat = 12
+            let totalWeight = page.modules.reduce(0) { $0 + $1.weight }
+            let available = proxy.size.width - spacing * CGFloat(page.modules.count - 1)
+
+            HStack(spacing: spacing) {
+                ForEach(page.modules) { box in
+                    box.module.expandedView()
+                        .frame(width: max(0, available * box.weight / totalWeight))
+                        .frame(maxHeight: .infinity)
+                        .background(.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
                 }
             }
         }
@@ -153,10 +208,25 @@ private struct ModuleBox: Identifiable {
     let module: any NotchModule
     let id: String
     let weight: CGFloat
+    let systemImage: String
 
     init(_ module: any NotchModule) {
         self.module = module
         self.id = module.moduleID
         self.weight = max(0.5, module.expandedWidthWeight)
+        self.systemImage = type(of: module).descriptor.systemImage
+    }
+}
+
+/// Groupe de modules affichés ensemble sur une page.
+@MainActor
+private struct ModulePage: Identifiable {
+    let id: Int
+    let modules: [ModuleBox]
+
+    static func paginate(_ boxes: [ModuleBox]) -> [ModulePage] {
+        NotchLayout.paginate(weights: boxes.map(\.weight)).enumerated().map { index, indices in
+            ModulePage(id: index, modules: indices.map { boxes[$0] })
+        }
     }
 }

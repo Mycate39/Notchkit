@@ -22,6 +22,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         viewModel.openSettingsAction = { [weak self] in
             self?.showSettings()
         }
+        moduleManager.settingsHandler = { [weak self] in
+            self?.viewModel.openSettings()
+        }
 
         moduleManager.reload()
 
@@ -43,7 +46,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     /// Test de charge : déplie/replie l'encoche 200 fois à intervalles aléatoires, avec des alertes
-    /// et des changements de fenêtre active. Lancer l'app avec la variable d'environnement
+    /// des changements de page et de fenêtre active. Lancer l'app avec la variable d'environnement
     /// `NOTCHKIT_STRESS=1` ; « STRESS-OK » s'affiche dans la console à la fin si tout s'est bien passé.
     private func runStressTest() {
         Task { @MainActor in
@@ -51,6 +54,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 try? await Task.sleep(for: .milliseconds(Int.random(in: 150...900)))
                 viewModel.toggle()
                 if i % 7 == 0 { presentTestAlert() }
+                if i % 3 == 0 { viewModel.selectedPage = Int.random(in: 0...1) }
                 if let panel = NSApp.windows.first(where: { $0 is NotchPanel }) {
                     if i.isMultiple(of: 2) { panel.makeKey() } else { panel.resignKey() }
                 }

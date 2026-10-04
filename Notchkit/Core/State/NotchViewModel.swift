@@ -14,6 +14,8 @@ final class NotchViewModel {
     private(set) var state: State = .collapsed
     private(set) var geometry: NotchGeometry = .placeholder
     private(set) var currentAlert: NotchAlert?
+    /// Page affichée dans l'encoche dépliée (conservée d'une ouverture à l'autre).
+    var selectedPage = 0
 
     @ObservationIgnored let manager: ModuleManager
     @ObservationIgnored private let settings: SettingsStore

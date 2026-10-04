@@ -8,5 +8,7 @@ enum ModuleRegistry {
         MusicModule.self,
         ClockModule.self,
         BatteryModule.self,
+        CalendarModule.self,
+        WeatherModule.self,
     ]
 }

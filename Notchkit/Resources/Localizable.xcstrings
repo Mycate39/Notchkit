@@ -34,6 +34,9 @@
     "Afficher l'heure quand l'encoche est repliée" : {
 
     },
+    "Afficher le morceau quand l'encoche est repliée" : {
+
+    },
     "Afficher une alerte de test" : {
 
     },
@@ -47,6 +50,9 @@
 
     },
     "Aucune batterie détectée" : {
+
+    },
+    "Aucune lecture en cours" : {
 
     },
     "Batterie" : {
@@ -85,6 +91,9 @@
     "Déplier / replier l'encoche" : {
 
     },
+    "Détecter toutes les apps (expérimental)" : {
+
+    },
     "Développement" : {
 
     },
@@ -100,13 +109,28 @@
     "En charge" : {
 
     },
+    "Fermer" : {
+
+    },
     "Général" : {
 
     },
     "Horloge" : {
 
     },
+    "https://github.com/ungive/mediaremote-adapter" : {
+
+    },
     "Lancer Notchkit à l'ouverture de session" : {
+
+    },
+    "Lecture" : {
+
+    },
+    "Licences des composants tiers" : {
+
+    },
+    "MediaRemoteAdapter" : {
 
     },
     "Médias" : {
@@ -115,10 +139,31 @@
     "Modules" : {
 
     },
+    "Morceau en cours et commandes de lecture (Deezer, Spotify, Music, navigateurs…)." : {
+
+    },
+    "Morceau précédent" : {
+
+    },
+    "Morceau suivant" : {
+
+    },
+    "Musique" : {
+
+    },
+    "Nécessaire pour Deezer, les navigateurs et la plupart des lecteurs. Utilise une interface non officielle d'Apple qui peut cesser de fonctionner après une mise à jour de macOS ; Music et Spotify restent alors pris en charge." : {
+
+    },
     "Niveau, état de charge et animation au branchement." : {
 
     },
     "Notchkit" : {
+
+    },
+    "Ouvrir l'app qui joue" : {
+
+    },
+    "Pause" : {
 
     },
     "Pleine dans %@" : {

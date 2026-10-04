@@ -69,6 +69,28 @@ enum NotchLayout {
         }
     }
 
+    /// Largeur totale (en poids de cartes) d'une page de l'encoche dépliée.
+    static let pageCapacity: CGFloat = 4
+
+    /// Répartit les cartes en pages, dans l'ordre, sans dépasser `capacity` par page.
+    /// Renvoie les indices des cartes de chaque page. Une carte trop large occupe une page seule.
+    static func paginate(weights: [CGFloat], capacity: CGFloat = pageCapacity) -> [[Int]] {
+        var pages: [[Int]] = []
+        var current: [Int] = []
+        var used: CGFloat = 0
+        for (index, weight) in weights.enumerated() {
+            if !current.isEmpty && used + weight > capacity {
+                pages.append(current)
+                current = []
+                used = 0
+            }
+            current.append(index)
+            used += weight
+        }
+        if !current.isEmpty { pages.append(current) }
+        return pages
+    }
+
     /// Espace entre le haut de l'écran et la forme.
     static func topInset(for style: NotchStyle) -> CGFloat {
         style == .pill ? pillTopInset : 0

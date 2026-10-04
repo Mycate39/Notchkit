@@ -111,6 +111,8 @@ struct ClaudeSession: Identifiable, Equatable, Sendable {
     enum State: Sendable, Equatable {
         case working
         case waitingForPermission
+        /// Claude a terminé mais attend encore une éventuelle réponse depuis l'encoche.
+        case awaitingReply
         case finished
     }
 
@@ -123,6 +125,8 @@ struct ClaudeSession: Identifiable, Equatable, Sendable {
     var recentActions: [ClaudeAction] = []
     /// Message affiché par Claude Code quand il demande une permission.
     var attentionMessage: String?
+    /// Fin de la fenêtre de réponse (état `awaitingReply`).
+    var replyDeadline: Date?
     var lastEventAt: Date
 }
 
@@ -161,6 +165,7 @@ struct ClaudeActivityTracker: Equatable, Sendable {
         switch event.kind {
         case .userPromptSubmit:
             session.state = .working
+            session.replyDeadline = nil
             session.prompt = event.prompt.map { String($0.prefix(300)) }
             session.currentAction = nil
             session.recentActions = []
@@ -182,8 +187,9 @@ struct ClaudeActivityTracker: Equatable, Sendable {
             session.attentionMessage = nil
 
         case .stop:
-            if session.state != .finished { transition = .finished }
+            if session.state != .finished && session.state != .awaitingReply { transition = .finished }
             session.state = .finished
+            session.replyDeadline = nil
             session.currentAction = nil
             session.attentionMessage = nil
 
@@ -202,9 +208,31 @@ struct ClaudeActivityTracker: Equatable, Sendable {
         return transition
     }
 
+    /// Ouvre (avec une date de fin) ou ferme (`nil`) la fenêtre de réponse d'une session terminée.
+    mutating func setReplyDeadline(_ deadline: Date?, for sessionID: String) {
+        guard var session = sessions[sessionID] else { return }
+        if let deadline {
+            session.state = .awaitingReply
+            session.replyDeadline = deadline
+        } else {
+            if session.state == .awaitingReply { session.state = .finished }
+            session.replyDeadline = nil
+        }
+        sessions[sessionID] = session
+    }
+
+    /// Remet une session « au travail » (ex. après qu'un message l'a relancée).
+    mutating func markWorking(_ sessionID: String, at date: Date = Date()) {
+        guard var session = sessions[sessionID] else { return }
+        session.state = .working
+        session.replyDeadline = nil
+        session.lastEventAt = date
+        sessions[sessionID] = session
+    }
+
     /// Passe en « terminée » les sessions sans nouvelles depuis trop longtemps.
     mutating func expireStaleSessions(at date: Date = Date()) {
-        for (id, session) in sessions where session.state != .finished
+        for (id, session) in sessions where (session.state == .working || session.state == .waitingForPermission)
             && date.timeIntervalSince(session.lastEventAt) > Self.staleInterval {
             sessions[id]?.state = .finished
             sessions[id]?.currentAction = nil
@@ -212,6 +240,6 @@ struct ClaudeActivityTracker: Equatable, Sendable {
     }
 
     var hasActiveSession: Bool {
-        sessions.values.contains { $0.state != .finished }
+        sessions.values.contains { $0.state == .working || $0.state == .waitingForPermission }
     }
 }

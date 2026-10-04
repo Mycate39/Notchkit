@@ -24,6 +24,12 @@ enum ClaudeHooksInstaller {
         ("SessionEnd", false),
     ]
 
+    /// Version de notre configuration : à incrémenter quand elle change (une réinstallation est alors proposée).
+    static let version = "2"
+    /// Le hook Stop peut rester ouvert pendant la fenêtre de réponse (au plus 4 min) : délai plus long.
+    static let stopTimeout = 300
+    static let defaultTimeout = 10
+
     static var settingsURL: URL {
         FileManager.default.homeDirectoryForCurrentUser
             .appendingPathComponent(".claude", isDirectory: true)
@@ -39,13 +45,13 @@ enum ClaudeHooksInstaller {
     static func installing(into settings: [String: Any], port: UInt16, token: String) -> [String: Any] {
         var result = removing(from: settings)
         var hooks = result["hooks"] as? [String: Any] ?? [:]
-        let hook: [String: Any] = [
-            "type": "http",
-            "url": hookURL(port: port),
-            "timeout": 10,
-            "headers": ["X-Notchkit-Token": token],
-        ]
         for event in events {
+            let hook: [String: Any] = [
+                "type": "http",
+                "url": hookURL(port: port),
+                "timeout": event.name == "Stop" ? stopTimeout : defaultTimeout,
+                "headers": ["X-Notchkit-Token": token, "X-Notchkit-Version": version],
+            ]
             var groups = hooks[event.name] as? [[String: Any]] ?? []
             var group: [String: Any] = ["hooks": [hook]]
             if event.needsMatcher { group["matcher"] = "*" }
@@ -84,9 +90,21 @@ enum ClaudeHooksInstaller {
             let groups = hooks[event.name] as? [[String: Any]] ?? []
             return groups.contains { group in
                 (group["hooks"] as? [[String: Any]] ?? []).contains { entry in
-                    entry["url"] as? String == hookURL(port: port)
-                        && (entry["headers"] as? [String: Any])?["X-Notchkit-Token"] as? String == token
+                    let headers = entry["headers"] as? [String: Any]
+                    return entry["url"] as? String == hookURL(port: port)
+                        && headers?["X-Notchkit-Token"] as? String == token
+                        && headers?["X-Notchkit-Version"] as? String == version
                 }
+            }
+        }
+    }
+
+    /// Vrai si des hooks de Notchkit sont présents (même anciens ou incomplets).
+    static func hasOurHooks(in settings: [String: Any]) -> Bool {
+        guard let hooks = settings["hooks"] as? [String: Any] else { return false }
+        return hooks.values.contains { value in
+            (value as? [[String: Any]] ?? []).contains { group in
+                (group["hooks"] as? [[String: Any]] ?? []).contains(where: isOurs)
             }
         }
     }
@@ -106,8 +124,17 @@ enum ClaudeHooksInstaller {
         return object
     }
 
-    static func isInstalled(port: UInt16, token: String) -> Bool {
-        (try? readSettings()).map { isInstalled(in: $0, port: port, token: token) } ?? false
+    enum Status: Equatable {
+        case notInstalled
+        /// Nos hooks sont présents mais d'une version précédente : réinstaller pour les mettre à jour.
+        case outdated
+        case installed
+    }
+
+    static func status(port: UInt16, token: String) -> Status {
+        guard let settings = try? readSettings() else { return .notInstalled }
+        if isInstalled(in: settings, port: port, token: token) { return .installed }
+        return hasOurHooks(in: settings) ? .outdated : .notInstalled
     }
 
     /// Installe les hooks. Renvoie l'emplacement de la sauvegarde (s'il y avait un fichier).

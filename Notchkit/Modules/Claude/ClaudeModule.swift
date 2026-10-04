@@ -27,7 +27,8 @@ final class ClaudeModule: NotchModule {
 
     private(set) var tracker = ClaudeActivityTracker()
     private(set) var serverState: ClaudeHookServer.State = .stopped
-    private(set) var hooksInstalled = false
+    private(set) var installStatus: ClaudeHooksInstaller.Status = .notInstalled
+    var hooksInstalled: Bool { installStatus == .installed }
     private(set) var installerMessage: String?
     private(set) var usage: ClaudeUsageSummary?
     /// Messages en attente de remise, par session.
@@ -41,10 +42,17 @@ final class ClaudeModule: NotchModule {
     var alertOnFinish: Bool {
         didSet { UserDefaults.standard.set(alertOnFinish, forKey: Keys.alertOnFinish) }
     }
+    /// Durée (secondes) pendant laquelle on peut encore répondre depuis l'encoche après la fin
+    /// d'une réponse de Claude. 0 = désactivé. Pendant ce délai, Claude Code reste « en cours ».
+    var replyWindow: Int {
+        didSet { UserDefaults.standard.set(replyWindow, forKey: Keys.replyWindow) }
+    }
+    static let replyWindowChoices = [0, 30, 60, 120, 240]
 
     private enum Keys {
         static let showInCompact = "module.claude.showInCompact"
         static let alertOnFinish = "module.claude.alertOnFinish"
+        static let replyWindow = "module.claude.replyWindow"
         static let token = "module.claude.token"
         static let port = "module.claude.port"
         static let personalMax = "module.claude.personalMaxTokens"
@@ -56,12 +64,16 @@ final class ClaudeModule: NotchModule {
     @ObservationIgnored private let server: ClaudeHookServer
     @ObservationIgnored private var maintenanceTask: Task<Void, Never>?
     @ObservationIgnored private var isStarted = false
+    /// Hooks Stop gardés ouverts (fenêtre de réponse), par session.
+    @ObservationIgnored private var heldStops: [String: HookReply] = [:]
+    @ObservationIgnored private var replyTimers: [String: Task<Void, Never>] = [:]
 
     init(context: ModuleContext) {
         self.context = context
         let defaults = UserDefaults.standard
         showInCompact = defaults.object(forKey: Keys.showInCompact) as? Bool ?? true
         alertOnFinish = defaults.object(forKey: Keys.alertOnFinish) as? Bool ?? true
+        replyWindow = defaults.object(forKey: Keys.replyWindow) as? Int ?? 120
 
         // Jeton secret propre à ce Mac, partagé uniquement avec la configuration des hooks.
         if let stored = defaults.string(forKey: Keys.token) {
@@ -83,7 +95,10 @@ final class ClaudeModule: NotchModule {
         isStarted = true
 
         server.onStateChange = { [weak self] state in self?.serverState = state }
-        server.handler = { [weak self] json in self?.handle(json) }
+        server.handler = { [weak self] json, reply in
+            guard let self else { return reply.send(nil) }
+            self.handle(json, reply: reply)
+        }
         server.start(port: port)
         refreshInstallState()
 
@@ -104,14 +119,15 @@ final class ClaudeModule: NotchModule {
         isStarted = false
         maintenanceTask?.cancel()
         maintenanceTask = nil
+        for id in Array(heldStops.keys) { closeReplyWindow(id, respond: true) }
         server.stop()
     }
 
     // MARK: Hooks
 
-    /// Traite un événement reçu et renvoie, si besoin, la réponse destinée à Claude Code.
-    func handle(_ json: [String: Any]) -> [String: Any]? {
-        guard let event = ClaudeHookEvent(json: json) else { return nil }
+    /// Traite un événement reçu et répond à Claude Code (tout de suite, ou plus tard pour Stop).
+    func handle(_ json: [String: Any], reply: HookReply) {
+        guard let event = ClaudeHookEvent(json: json) else { return reply.send(nil) }
         let transition = tracker.apply(event)
 
         switch transition {
@@ -124,35 +140,73 @@ final class ClaudeModule: NotchModule {
             break
         }
 
-        return deliverPendingMessage(for: event)
+        if let response = deliverPendingMessage(for: event) {
+            return reply.send(response)
+        }
+        // Claude vient de terminer : on garde le hook ouvert pour qu'une réponse depuis
+        // l'encoche puisse le relancer.
+        if event.kind == .stop, replyWindow > 0 {
+            return openReplyWindow(event.sessionID, reply: reply)
+        }
+        reply.send(nil)
+    }
+
+    /// Variante synchrone (tests) : renvoie la réponse immédiate éventuelle.
+    func handle(_ json: [String: Any]) -> [String: Any]? {
+        var result: [String: Any]?
+        handle(json, reply: HookReply { result = $0 })
+        return result
     }
 
     /// Remet le message en attente à Claude au moment opportun.
     private func deliverPendingMessage(for event: ClaudeHookEvent) -> [String: Any]? {
-        guard var queue = pendingMessages[event.sessionID], !queue.isEmpty else { return nil }
-        let text = queue.joined(separator: "\n\n")
-        let message = "Message de l'utilisateur, envoyé depuis l'encoche Notchkit : \(text)"
+        guard let queue = pendingMessages[event.sessionID], !queue.isEmpty else { return nil }
+        let message = Self.formatted(queue)
 
         let response: [String: Any]
         switch event.kind {
         case .stop:
             // Claude allait s'arrêter : il continue en tenant compte du message.
             response = ["decision": "block", "reason": message]
-            tracker.apply(Self.syntheticWorkingEvent(sessionID: event.sessionID))
+            tracker.markWorking(event.sessionID)
         case .postToolUse, .userPromptSubmit:
             let name = event.kind == .postToolUse ? "PostToolUse" : "UserPromptSubmit"
             response = ["hookSpecificOutput": ["hookEventName": name, "additionalContext": message]]
         default:
             return nil
         }
-        queue.removeAll()
         pendingMessages[event.sessionID] = nil
         return response
     }
 
-    /// Après un Stop bloqué, la session reprend : on la remet « au travail ».
-    private static func syntheticWorkingEvent(sessionID: String) -> ClaudeHookEvent {
-        ClaudeHookEvent(json: ["hook_event_name": "PostToolUse", "session_id": sessionID])!
+    private static func formatted(_ messages: [String]) -> String {
+        "Message de l'utilisateur, envoyé depuis l'encoche Notchkit : \(messages.joined(separator: "\n\n"))"
+    }
+
+    // MARK: Fenêtre de réponse
+
+    private func openReplyWindow(_ sessionID: String, reply: HookReply) {
+        closeReplyWindow(sessionID, respond: true)
+        let seconds = replyWindow
+        heldStops[sessionID] = reply
+        tracker.setReplyDeadline(Date().addingTimeInterval(TimeInterval(seconds)), for: sessionID)
+
+        // Échap dans Claude Code : la requête est abandonnée, la fenêtre se ferme.
+        reply.onClientClose = { [weak self] in self?.closeReplyWindow(sessionID, respond: false) }
+        replyTimers[sessionID] = Task { [weak self] in
+            try? await Task.sleep(for: .seconds(seconds))
+            guard !Task.isCancelled else { return }
+            self?.closeReplyWindow(sessionID, respond: true)
+        }
+    }
+
+    /// Ferme la fenêtre : Claude Code reçoit une réponse vide et termine normalement.
+    private func closeReplyWindow(_ sessionID: String, respond: Bool) {
+        replyTimers.removeValue(forKey: sessionID)?.cancel()
+        if let reply = heldStops.removeValue(forKey: sessionID), respond {
+            reply.send(nil)
+        }
+        tracker.setReplyDeadline(nil, for: sessionID)
     }
 
     // MARK: Messages
@@ -162,6 +216,14 @@ final class ClaudeModule: NotchModule {
     func send(_ text: String) {
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty, let session = displayedSession else { return }
+
+        // Fenêtre de réponse ouverte : Claude repart immédiatement avec le message.
+        if let reply = heldStops.removeValue(forKey: session.id) {
+            replyTimers.removeValue(forKey: session.id)?.cancel()
+            reply.send(["decision": "block", "reason": Self.formatted([trimmed])])
+            tracker.markWorking(session.id)
+            return
+        }
         pendingMessages[session.id, default: []].append(trimmed)
     }
 
@@ -176,7 +238,7 @@ final class ClaudeModule: NotchModule {
     // MARK: Installation
 
     func refreshInstallState() {
-        hooksInstalled = ClaudeHooksInstaller.isInstalled(port: port, token: token)
+        installStatus = ClaudeHooksInstaller.status(port: port, token: token)
     }
 
     func installHooks() {
@@ -219,7 +281,7 @@ final class ClaudeModule: NotchModule {
         guard showInCompact, let session = displayedSession else { return .none }
         switch session.state {
         case .waitingForPermission: return .high
-        case .working: return .elevated
+        case .working, .awaitingReply: return .elevated
         case .finished: return .none
         }
     }
@@ -248,6 +310,9 @@ final class ClaudeModule: NotchModule {
                     .foregroundStyle(.white.opacity(0.85))
                     .contentTransition(.symbolEffect(.replace))
             )
+        case .awaitingReply:
+            guard let deadline = session.replyDeadline else { return nil }
+            return AnyView(ReplyCountdown(deadline: deadline))
         case .finished:
             return nil
         }

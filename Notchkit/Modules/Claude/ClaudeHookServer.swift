@@ -71,6 +71,33 @@ enum HTTPParser {
     }
 }
 
+/// Réponse à un hook, envoyable plus tard (ex. hook Stop gardé ouvert pendant la fenêtre de réponse).
+/// Une seule réponse est envoyée, même si `send` est appelé plusieurs fois.
+@MainActor
+final class HookReply {
+    private var sender: (@MainActor ([String: Any]?) -> Void)?
+    /// Appelé si Claude Code abandonne la requête avant notre réponse (ex. Échap).
+    var onClientClose: (@MainActor () -> Void)?
+
+    init(sender: @escaping @MainActor ([String: Any]?) -> Void) {
+        self.sender = sender
+    }
+
+    var isSent: Bool { sender == nil }
+
+    func send(_ json: [String: Any]?) {
+        guard let sender else { return }
+        self.sender = nil
+        sender(json)
+    }
+
+    func clientClosed() {
+        guard sender != nil else { return }
+        sender = nil
+        onClientClose?()
+    }
+}
+
 /// Petit serveur HTTP local qui reçoit les hooks de Claude Code.
 ///
 /// - n'écoute que sur 127.0.0.1 (inaccessible depuis le réseau) ;
@@ -91,8 +118,8 @@ final class ClaudeHookServer {
         didSet { onStateChange?(state) }
     }
     var onStateChange: (@MainActor (State) -> Void)?
-    /// Traite un événement et renvoie la réponse JSON éventuelle pour Claude Code.
-    var handler: (@MainActor ([String: Any]) -> [String: Any]?)?
+    /// Traite un événement. La réponse est envoyée via `HookReply`, tout de suite ou plus tard.
+    var handler: (@MainActor ([String: Any], HookReply) -> Void)?
 
     private let token: String
     private var listener: NWListener?
@@ -178,23 +205,44 @@ final class ClaudeHookServer {
                 case .tooLarge:
                     self.reply(on: connection, HTTPParser.response(status: 413))
                 case let .complete(request):
-                    self.reply(on: connection, self.respond(to: request))
+                    self.respond(to: request, on: connection)
                 }
             }
         }
     }
 
-    private func respond(to request: HTTPRequest) -> Data {
+    private func respond(to request: HTTPRequest, on connection: NWConnection) {
         guard request.method == "POST", request.path == Self.path else {
-            return HTTPParser.response(status: 404)
+            return reply(on: connection, HTTPParser.response(status: 404))
         }
         guard request.headers[Self.tokenHeader] == token else {
-            return HTTPParser.response(status: 401)
+            return reply(on: connection, HTTPParser.response(status: 401))
         }
         guard let json = try? JSONSerialization.jsonObject(with: request.body) as? [String: Any] else {
-            return HTTPParser.response(status: 400)
+            return reply(on: connection, HTTPParser.response(status: 400))
         }
-        return HTTPParser.response(status: 200, json: handler?(json))
+
+        let hookReply = HookReply { [weak self] response in
+            self?.reply(on: connection, HTTPParser.response(status: 200, json: response))
+        }
+        guard let handler else { return hookReply.send(nil) }
+        handler(json, hookReply)
+
+        // Réponse différée : on surveille la connexion pour savoir si Claude Code abandonne.
+        if !hookReply.isSent { watchForClose(connection, reply: hookReply) }
+    }
+
+    private func watchForClose(_ connection: NWConnection, reply: HookReply) {
+        connection.receive(minimumIncompleteLength: 1, maximumLength: 1024) { [weak self] _, _, isComplete, error in
+            MainActor.assumeIsolated {
+                if isComplete || error != nil {
+                    reply.clientClosed()
+                    connection.cancel()
+                } else if !reply.isSent {
+                    self?.watchForClose(connection, reply: reply)
+                }
+            }
+        }
     }
 
     private func reply(on connection: NWConnection, _ data: Data) {

@@ -29,7 +29,7 @@ struct ClaudeExpandedView: View {
             ClaudeSparkView(isAnimating: false)
                 .frame(width: 30, height: 30)
             VStack(alignment: .leading, spacing: 6) {
-                Text("Connectez Claude Code")
+                Text(module.installStatus == .outdated ? "Mettez à jour l'intégration" : "Connectez Claude Code")
                     .font(.system(size: 12, weight: .semibold))
                 Text("Installez l'intégration pour suivre ce que fait Claude et lui écrire depuis l'encoche.")
                     .font(.system(size: 10))
@@ -80,7 +80,7 @@ struct ClaudeExpandedView: View {
         switch session?.state {
         case .working: "Claude travaille"
         case .waitingForPermission: "Claude attend votre accord"
-        case .finished: "Claude a terminé"
+        case .awaitingReply, .finished: "Claude a terminé"
         case nil: "Claude Code est inactif"
         }
     }
@@ -119,7 +119,7 @@ struct ClaudeExpandedView: View {
     private func messageField(_ session: ClaudeSession) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             HStack(spacing: 6) {
-                TextField("Écrire à Claude…", text: $draft)
+                TextField(session.state == .finished ? "Claude est à l'arrêt : message remis avec votre prochaine demande" : "Écrire à Claude…", text: $draft)
                     .textFieldStyle(.plain)
                     .font(.system(size: 11))
                     .focused($isTyping)
@@ -137,7 +137,16 @@ struct ClaudeExpandedView: View {
             .padding(.vertical, 4)
             .background(.white.opacity(0.1), in: Capsule())
 
-            if let pending = module.pendingMessages[session.id], !pending.isEmpty {
+            if session.state == .awaitingReply, let deadline = session.replyDeadline {
+                HStack(spacing: 3) {
+                    Text("Répondez pour qu'il continue")
+                    Text("·")
+                    ReplyCountdown(deadline: deadline)
+                }
+                .font(.system(size: 9, weight: .medium))
+                .foregroundStyle(Color(nsColor: ClaudeSparkView.color))
+                .lineLimit(1)
+            } else if let pending = module.pendingMessages[session.id], !pending.isEmpty {
                 Text(session.state == .finished
                      ? "Message en attente : il sera remis avec votre prochaine demande dans Claude Code."
                      : "Message en attente : remis à la prochaine étape de Claude.")
@@ -199,6 +208,19 @@ struct ClaudeSettingsView: View {
         VStack(alignment: .leading, spacing: 8) {
             Toggle("Afficher l'activité quand l'encoche est repliée", isOn: $module.showInCompact)
             Toggle("Alerte quand Claude a terminé", isOn: $module.alertOnFinish)
+            Picker("Délai pour répondre depuis l'encoche", selection: $module.replyWindow) {
+                ForEach(ClaudeModule.replyWindowChoices, id: \.self) { seconds in
+                    if seconds == 0 {
+                        Text("Désactivé").tag(seconds)
+                    } else {
+                        Text(Duration.seconds(seconds).formatted(.units(allowed: [.minutes, .seconds], width: .abbreviated))).tag(seconds)
+                    }
+                }
+            }
+            Text("Après chaque réponse de Claude, vous pouvez encore lui écrire depuis l'encoche pendant ce délai : il repart aussitôt. Pendant ce temps, Claude Code l'affiche comme « en cours » (Échap pour arrêter).")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
 
             Divider()
 
@@ -206,9 +228,12 @@ struct ClaudeSettingsView: View {
                 Label(statusText, systemImage: module.hooksInstalled ? "checkmark.circle.fill" : "circle.dashed")
                     .foregroundStyle(module.hooksInstalled ? .green : .secondary)
                 Spacer()
-                if module.hooksInstalled {
+                switch module.installStatus {
+                case .installed:
                     Button("Désinstaller", action: module.uninstallHooks)
-                } else {
+                case .outdated:
+                    Button("Mettre à jour l'intégration", action: module.installHooks)
+                case .notInstalled:
                     Button("Installer l'intégration…") { confirmInstall = true }
                 }
             }
@@ -239,6 +264,24 @@ struct ClaudeSettingsView: View {
     }
 
     private var statusText: LocalizedStringKey {
-        module.hooksInstalled ? "Intégration Claude Code installée" : "Intégration Claude Code non installée"
+        switch module.installStatus {
+        case .installed: "Intégration Claude Code installée"
+        case .outdated: "Mise à jour de l'intégration nécessaire"
+        case .notInstalled: "Intégration Claude Code non installée"
+        }
+    }
+}
+
+/// Compte à rebours de la fenêtre de réponse, ex. « 1:45 ».
+struct ReplyCountdown: View {
+    let deadline: Date
+
+    var body: some View {
+        TimelineView(.periodic(from: .now, by: 1)) { context in
+            let remaining = max(0, Int(deadline.timeIntervalSince(context.date).rounded(.up)))
+            Text(Duration.seconds(remaining).formatted(.time(pattern: .minuteSecond)))
+                .monospacedDigit()
+                .foregroundStyle(Color(nsColor: ClaudeSparkView.color))
+        }
     }
 }

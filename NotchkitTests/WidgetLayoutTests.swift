@@ -131,3 +131,16 @@ struct AppearanceTests {
         #expect(old.appearance == NotchAppearance())
     }
 }
+
+struct CustomSizeTests {
+    @Test func taillePersonnalisee() {
+        var appearance = NotchAppearance()
+        appearance.size = .custom
+        appearance.customWidth = 800
+        appearance.customHeight = 230
+        #expect(appearance.expandedSize == CGSize(width: 800, height: 230))
+        #expect(appearance.pageCapacity == 5)
+        appearance.customWidth = 480
+        #expect(appearance.pageCapacity == 3)
+    }
+}

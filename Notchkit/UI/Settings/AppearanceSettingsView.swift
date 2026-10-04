@@ -21,7 +21,21 @@ struct AppearanceSettingsView: View {
                     }
                 }
                 .pickerStyle(.segmented)
-                Text("Une encoche plus grande accueille plus de widgets par page (\(settings.settings.appearance.size.pageCapacity.formatted()) unités de largeur).")
+                if settings.settings.appearance.size == .custom {
+                    LabeledContent("Largeur") {
+                        HStack {
+                            Slider(value: $settings.settings.appearance.customWidth, in: NotchAppearance.customWidthRange, step: 10)
+                            Text("\(Int(settings.settings.appearance.customWidth)) pt").monospacedDigit().frame(width: 56, alignment: .trailing)
+                        }
+                    }
+                    LabeledContent("Hauteur") {
+                        HStack {
+                            Slider(value: $settings.settings.appearance.customHeight, in: NotchAppearance.customHeightRange, step: 2)
+                            Text("\(Int(settings.settings.appearance.customHeight)) pt").monospacedDigit().frame(width: 56, alignment: .trailing)
+                        }
+                    }
+                }
+                Text("Une encoche plus grande accueille plus de widgets par page (\(settings.settings.appearance.pageCapacity.formatted()) unités de largeur).")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -90,7 +104,7 @@ private struct AppearancePreview: View {
     @State private var expanded = true
 
     var body: some View {
-        let size = appearance.size.expandedSize
+        let size = appearance.expandedSize
         let scale: CGFloat = 0.62
         let style = appearance.animation.spring
 

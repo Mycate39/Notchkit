@@ -39,7 +39,7 @@ enum NotchLayout {
     /// lue et écrite uniquement sur le thread principal).
     nonisolated(unsafe) static var appearance = NotchAppearance()
 
-    static var expandedSize: CGSize { appearance.size.expandedSize }
+    static var expandedSize: CGSize { appearance.expandedSize }
     /// Décalage de la pastille par rapport au haut de l'écran.
     static let pillTopInset: CGFloat = 3
     /// Rayon des coins en mode déplié.
@@ -90,7 +90,7 @@ enum NotchLayout {
     }
 
     /// Largeur totale (en poids de cartes) d'une page de l'encoche dépliée.
-    static var pageCapacity: CGFloat { appearance.size.pageCapacity }
+    static var pageCapacity: CGFloat { appearance.pageCapacity }
 
     /// Répartit les cartes en pages, dans l'ordre, sans dépasser `capacity` par page.
     /// Renvoie les indices des cartes de chaque page. Une carte trop large occupe une page seule.

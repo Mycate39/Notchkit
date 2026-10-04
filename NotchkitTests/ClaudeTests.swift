@@ -158,7 +158,10 @@ struct ClaudeUsageTests {
         #expect(summary.personalMax == 900)
         #expect(summary.resetAt != nil)
 
+        #expect(summary.usedFraction == 300.0 / 900.0)
+
         let later = ClaudeUsageCalculator.summary(from: entries, storedMax: 0, now: date(20))
+        #expect(later.usedFraction == nil)
         #expect(later.currentTokens == 0)
         #expect(later.resetAt == nil)
     }

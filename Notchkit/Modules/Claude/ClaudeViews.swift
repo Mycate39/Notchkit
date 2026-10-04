@@ -161,33 +161,51 @@ struct ClaudeExpandedView: View {
     @ViewBuilder
     private var usageRow: some View {
         if let usage = module.usage {
-            VStack(alignment: .leading, spacing: 2) {
-                HStack(spacing: 4) {
-                    if let reset = usage.resetAt {
-                        Text("≈ \(usage.currentTokens.formatted(.number.notation(.compactName))) tokens")
-                        Text("·")
-                        Text("réinitialisation \(reset, format: .relative(presentation: .named))")
-                    } else {
-                        Text("Aucune session d'utilisation en cours")
+            if let fraction = usage.usedFraction, let reset = usage.resetAt {
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack(alignment: .lastTextBaseline, spacing: 6) {
+                        // Pourcentage bien visible, coloré selon le niveau.
+                        Text(fraction, format: .percent.precision(.fractionLength(0)))
+                            .font(.system(size: 18, weight: .bold, design: .rounded))
+                            .monospacedDigit()
+                            .foregroundStyle(Self.color(for: fraction))
+                        Text("de la session utilisée")
+                            .font(.system(size: 10, weight: .medium))
+                            .foregroundStyle(.white.opacity(0.7))
+                        Spacer(minLength: 4)
+                        VStack(alignment: .trailing, spacing: 0) {
+                            Text("≈ \(usage.currentTokens.formatted(.number.notation(.compactName))) tokens")
+                            Text("Réinitialisation à \(reset.formatted(date: .omitted, time: .shortened))")
+                        }
+                        .font(.system(size: 9, weight: .medium))
+                        .foregroundStyle(.white.opacity(0.5))
                     }
-                }
-                .font(.system(size: 9, weight: .medium))
-                .foregroundStyle(.white.opacity(0.5))
-                .lineLimit(1)
+                    .lineLimit(1)
 
-                if usage.resetAt != nil, usage.personalMax > 0 {
                     GeometryReader { proxy in
-                        let ratio = min(1, Double(usage.currentTokens) / Double(usage.personalMax))
                         ZStack(alignment: .leading) {
                             Capsule().fill(.white.opacity(0.15))
-                            Capsule().fill(Color(nsColor: ClaudeSparkView.color))
-                                .frame(width: proxy.size.width * ratio)
+                            Capsule().fill(Self.color(for: fraction))
+                                .frame(width: max(4, proxy.size.width * fraction))
                         }
                     }
-                    .frame(height: 3)
-                    .help("Par rapport à votre plus grosse session observée (estimation)")
+                    .frame(height: 5)
                 }
+                .help("Estimation : comparée à votre plus grosse session de 5 h observée (\(usage.personalMax.formatted(.number.notation(.compactName))) tokens). Anthropic ne publie pas les plafonds exacts.")
+            } else {
+                Text("Aucune session d'utilisation en cours")
+                    .font(.system(size: 10, weight: .medium))
+                    .foregroundStyle(.white.opacity(0.5))
             }
+        }
+    }
+
+    /// Orange en temps normal, puis jaune et rouge à l'approche du plafond estimé.
+    private static func color(for fraction: Double) -> Color {
+        switch fraction {
+        case ..<0.7: Color(nsColor: ClaudeSparkView.color)
+        case ..<0.9: .yellow
+        default: .red
         }
     }
 

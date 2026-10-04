@@ -79,6 +79,9 @@
     "Annuler" : {
 
     },
+    "Après chaque réponse de Claude, vous pouvez encore lui écrire depuis l'encoche pendant ce délai : il repart aussitôt. Pendant ce temps, Claude Code l'affiche comme « en cours » (Échap pour arrêter)." : {
+
+    },
     "Aucun" : {
 
     },
@@ -178,6 +181,9 @@
     "Claude Code est inactif" : {
 
     },
+    "Claude est à l'arrêt : message remis avec votre prochaine demande" : {
+
+    },
     "Claude travaille" : {
 
     },
@@ -211,10 +217,16 @@
     "Délai de fermeture" : {
 
     },
+    "Délai pour répondre depuis l'encoche" : {
+
+    },
     "Demain" : {
 
     },
     "Déplier / replier l'encoche" : {
+
+    },
+    "Désactivé" : {
 
     },
     "Désinstaller" : {
@@ -386,6 +398,15 @@
     "Météo indisponible" : {
 
     },
+    "Mettez à jour l'intégration" : {
+
+    },
+    "Mettre à jour l'intégration" : {
+
+    },
+    "Mise à jour de l'intégration nécessaire" : {
+
+    },
     "Modifie %@" : {
 
     },
@@ -525,6 +546,9 @@
 
     },
     "réinitialisation %@" : {
+
+    },
+    "Répondez pour qu'il continue" : {
 
     },
     "s" : {

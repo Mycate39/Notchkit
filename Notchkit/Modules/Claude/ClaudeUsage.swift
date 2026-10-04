@@ -12,6 +12,13 @@ struct ClaudeUsageSummary: Equatable, Sendable {
     let resetAt: Date?
     /// Plus grosse session observée : sert de repère pour la jauge.
     let personalMax: Int
+
+    /// Part de la session utilisée (0…1), par rapport à la plus grosse session observée.
+    /// `nil` s'il n'y a pas de session en cours ou pas encore de repère.
+    var usedFraction: Double? {
+        guard resetAt != nil, personalMax > 0 else { return nil }
+        return min(1, Double(currentTokens) / Double(personalMax))
+    }
 }
 
 struct ClaudeUsageEntry: Equatable, Sendable {

@@ -1,3 +1,4 @@
+import AppKit
 import SwiftUI
 
 /// Apparence de base de la zone interactive.
@@ -34,7 +35,11 @@ enum NotchLayout {
     /// Largeur ajoutée de chaque côté de l'encoche pour le contenu compact.
     static let compactSideWidth: CGFloat = 72
     /// Taille de l'encoche dépliée.
-    static let expandedSize = CGSize(width: 640, height: 190)
+    /// Apparence en vigueur (mise à jour par l'AppDelegate quand les réglages changent ;
+    /// lue et écrite uniquement sur le thread principal).
+    nonisolated(unsafe) static var appearance = NotchAppearance()
+
+    static var expandedSize: CGSize { appearance.size.expandedSize }
     /// Décalage de la pastille par rapport au haut de l'écran.
     static let pillTopInset: CGFloat = 3
     /// Rayon des coins en mode déplié.
@@ -45,7 +50,9 @@ enum NotchLayout {
 
     /// Animation principale (ressort court et peu rebondissant, pour rester fluide).
     @MainActor static var spring: Animation {
-        .spring(duration: 0.38 * animationSlowdown, bounce: 0.18)
+        // « Réduire les animations » (Accessibilité de macOS) est toujours respecté.
+        let style = NSWorkspace.shared.accessibilityDisplayShouldReduceMotion ? .none : appearance.animation
+        return .spring(duration: style.spring.duration * animationSlowdown, bounce: style.spring.bounce)
     }
     /// Temps laissé à l'animation de repli avant de réduire la fenêtre.
     @MainActor static var shrinkDelay: Duration {
@@ -83,7 +90,7 @@ enum NotchLayout {
     }
 
     /// Largeur totale (en poids de cartes) d'une page de l'encoche dépliée.
-    static let pageCapacity: CGFloat = 4
+    static var pageCapacity: CGFloat { appearance.size.pageCapacity }
 
     /// Répartit les cartes en pages, dans l'ordre, sans dépasser `capacity` par page.
     /// Renvoie les indices des cartes de chaque page. Une carte trop large occupe une page seule.

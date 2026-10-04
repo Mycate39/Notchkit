@@ -16,6 +16,14 @@ final class NotchViewModel {
     private(set) var currentAlert: NotchAlert?
     /// Page affichée dans l'encoche dépliée (conservée d'une ouverture à l'autre).
     var selectedPage = 0
+    /// Apparence en vigueur (observée : tailles et couleurs se mettent à jour à chaque changement).
+    private(set) var appearance = NotchAppearance()
+
+    func applyAppearance(_ new: NotchAppearance) {
+        guard new != appearance else { return }
+        NotchLayout.appearance = new
+        withAnimation(NotchLayout.spring) { appearance = new }
+    }
     /// Des fichiers sont glissés au-dessus de l'encoche : elle affiche les zones de dépôt.
     private(set) var isDropMode = false
     /// Zone de dépôt survolée.
@@ -58,12 +66,14 @@ final class NotchViewModel {
     }
 
     var shapeSize: CGSize {
-        NotchLayout.shapeSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent,
+        _ = appearance  // dépend de la taille choisie
+        return NotchLayout.shapeSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent,
                               sideWidth: compactSideWidth, alertSize: currentAlert?.expandedSize)
     }
 
     var panelSize: CGSize {
-        NotchLayout.panelSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent,
+        _ = appearance
+        return NotchLayout.panelSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent,
                               sideWidth: compactSideWidth, alertSize: currentAlert?.expandedSize)
     }
 

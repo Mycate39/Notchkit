@@ -41,6 +41,8 @@ struct AppSettings: Codable, Equatable, Sendable {
     var hoverCloseDelay: Double = 0.35
     /// Disposition des widgets choisie par l'utilisateur (`nil` = automatique).
     var widgetLayout: WidgetLayout?
+    /// Apparence de l'encoche (taille, animations, couleurs).
+    var appearance = NotchAppearance()
 
     init() {}
 
@@ -56,5 +58,6 @@ struct AppSettings: Codable, Equatable, Sendable {
         hoverOpenDelay = try c.decodeIfPresent(Double.self, forKey: .hoverOpenDelay) ?? d.hoverOpenDelay
         hoverCloseDelay = try c.decodeIfPresent(Double.self, forKey: .hoverCloseDelay) ?? d.hoverCloseDelay
         widgetLayout = try? c.decodeIfPresent(WidgetLayout.self, forKey: .widgetLayout)
+        appearance = (try? c.decodeIfPresent(NotchAppearance.self, forKey: .appearance)) ?? d.appearance
     }
 }

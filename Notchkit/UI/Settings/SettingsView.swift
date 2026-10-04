@@ -3,6 +3,7 @@ import SwiftUI
 /// Onglets de la fenêtre de réglages.
 enum SettingsTab: Hashable {
     case general
+    case appearance
     case layout
     case modules
     case about
@@ -26,6 +27,10 @@ struct SettingsView: View {
             GeneralSettingsView(settings: settings)
                 .tabItem { Label("Général", systemImage: "gearshape") }
                 .tag(SettingsTab.general)
+
+            AppearanceSettingsView(settings: settings)
+                .tabItem { Label("Apparence", systemImage: "paintpalette") }
+                .tag(SettingsTab.appearance)
 
             LayoutSettingsView(manager: manager)
                 .tabItem { Label("Disposition", systemImage: "rectangle.3.group") }

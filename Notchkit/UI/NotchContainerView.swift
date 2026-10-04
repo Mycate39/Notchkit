@@ -25,10 +25,11 @@ struct NotchContainerView: View {
             }
         }
         .frame(width: size.width, height: size.height, alignment: .top)
-        .background(.black)
+        .background(NotchBackground(appearance: viewModel.appearance))
         .clipShape(shape)
         .contentShape(shape)
         .foregroundStyle(.white)
+        .tint(viewModel.appearance.accentColor)
         .environment(\.colorScheme, .dark)
         .padding(.top, NotchLayout.topInset(for: geometry.style))
         // La fenêtre peut être plus grande que la forme (pendant le repli) : on reste centré en haut.

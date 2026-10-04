@@ -96,10 +96,11 @@ final class NotchWindowController {
             MainActor.assumeIsolated { self?.refreshGeometry() }
         }
 
-        // Écran choisi ou simulation d'encoche modifiés dans les réglages.
+        // Écran choisi, simulation d'encoche ou apparence modifiés dans les réglages.
         trackChanges(of: { [weak self] in
             _ = self?.settings.settings.screenSelection
             _ = self?.settings.settings.simulateNotch
+            _ = self?.viewModel.appearance
         }, perform: { [weak self] in
             self?.refreshGeometry()
         })

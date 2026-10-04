@@ -107,3 +107,27 @@ struct ModuleManagerLayoutTests {
         #expect(manager.pageIDs == [["mock.a", "mock.b"]])
     }
 }
+
+@MainActor
+struct AppearanceTests {
+    @Test func tailleDeLEncocheEtCapacite() {
+        let saved = NotchLayout.appearance
+        defer { NotchLayout.appearance = saved }
+        var appearance = NotchAppearance()
+        appearance.size = .large
+        NotchLayout.appearance = appearance
+        #expect(NotchLayout.expandedSize.width == 760)
+        #expect(NotchLayout.pageCapacity == 5)
+    }
+
+    @Test func apparenceEnregistreeEtTolerante() throws {
+        var settings = AppSettings()
+        settings.appearance.background = .custom
+        settings.appearance.accent = StoredColor(red: 1, green: 0.5, blue: 0)
+        let decoded = try JSONDecoder().decode(AppSettings.self, from: JSONEncoder().encode(settings))
+        #expect(decoded.appearance == settings.appearance)
+        // Anciens réglages sans apparence : valeurs par défaut.
+        let old = try JSONDecoder().decode(AppSettings.self, from: Data(#"{"simulateNotch": false}"#.utf8))
+        #expect(old.appearance == NotchAppearance())
+    }
+}

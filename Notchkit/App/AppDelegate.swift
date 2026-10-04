@@ -54,6 +54,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         moduleManager.reload()
 
+        // Apparence : appliquée au lancement puis à chaque modification des réglages.
+        viewModel.applyAppearance(settings.settings.appearance)
+        trackChanges(of: { [weak self] in _ = self?.settings.settings.appearance }, perform: { [weak self] in
+            guard let self else { return }
+            self.viewModel.applyAppearance(self.settings.settings.appearance)
+        })
+
         let controller = NotchWindowController(viewModel: viewModel, settings: settings)
         controller.show()
         notchWindow = controller

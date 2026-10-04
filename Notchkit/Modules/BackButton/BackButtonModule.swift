@@ -191,7 +191,7 @@ struct BackLink: View {
                     .lineLimit(1)
                     .truncationMode(.tail)
             }
-            .foregroundStyle(Color.accentColor.opacity(0.95))
+            .foregroundStyle(.tint)
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
@@ -214,7 +214,7 @@ private struct BackMiniView: View {
                         Image(systemName: "chevron.backward").font(.system(size: 9, weight: .bold))
                         Text(previous.name).font(.system(size: 10, weight: .semibold)).lineLimit(1)
                     }
-                    .foregroundStyle(Color.accentColor)
+                    .foregroundStyle(.tint)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .contentShape(Rectangle())

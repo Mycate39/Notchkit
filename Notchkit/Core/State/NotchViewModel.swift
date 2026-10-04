@@ -15,7 +15,9 @@ final class NotchViewModel {
     private(set) var geometry: NotchGeometry = .placeholder
     private(set) var currentAlert: NotchAlert?
     /// Page affichée dans l'encoche dépliée (conservée d'une ouverture à l'autre).
-    var selectedPage = 0
+    var selectedPage = 0 {
+        didSet { if selectedPage != oldValue && isExpanded { Haptics.play(.step) } }
+    }
     /// Apparence en vigueur (observée : tailles et couleurs se mettent à jour à chaque changement).
     private(set) var appearance = NotchAppearance()
 
@@ -114,6 +116,7 @@ final class NotchViewModel {
 
     func expand() {
         guard state != .expanded else { return }
+        Haptics.play(.tap)
         withAnimation(NotchLayout.spring) { state = .expanded }
     }
 
@@ -162,6 +165,7 @@ final class NotchViewModel {
         }
         let zone = DropZone.zone(atNormalizedX: x, shelfAvailable: isShelfAvailable)
         if zone != hoveredDropZone {
+            if hoveredDropZone != nil { Haptics.play(.snap) }
             withAnimation(.snappy(duration: 0.2)) { hoveredDropZone = zone }
         }
     }
@@ -199,6 +203,7 @@ final class NotchViewModel {
         // Même alerte déjà affichée (ex. indicateur de volume) : on prolonge seulement sa durée,
         // son contenu se met à jour de lui-même.
         if currentAlert?.id != alert.id {
+            Haptics.play(.tap)
             withAnimation(NotchLayout.spring) { currentAlert = alert }
         }
         alertTask = Task { [weak self] in

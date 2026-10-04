@@ -43,6 +43,8 @@ struct AppSettings: Codable, Equatable, Sendable {
     var widgetLayout: WidgetLayout?
     /// Apparence de l'encoche (taille, animations, couleurs).
     var appearance = NotchAppearance()
+    /// Retour haptique du trackpad (ouverture, pages, alertes…).
+    var hapticsEnabled = true
 
     init() {}
 
@@ -59,5 +61,6 @@ struct AppSettings: Codable, Equatable, Sendable {
         hoverCloseDelay = try c.decodeIfPresent(Double.self, forKey: .hoverCloseDelay) ?? d.hoverCloseDelay
         widgetLayout = try? c.decodeIfPresent(WidgetLayout.self, forKey: .widgetLayout)
         appearance = (try? c.decodeIfPresent(NotchAppearance.self, forKey: .appearance)) ?? d.appearance
+        hapticsEnabled = try c.decodeIfPresent(Bool.self, forKey: .hapticsEnabled) ?? d.hapticsEnabled
     }
 }

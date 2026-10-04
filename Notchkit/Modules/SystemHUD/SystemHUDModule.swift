@@ -153,6 +153,7 @@ final class SystemHUDModule: NotchModule {
     }
 
     private func show(_ kind: HUDState.Kind, level: Float, muted: Bool) {
+        Haptics.play(.step)
         withAnimation(.snappy(duration: 0.15)) {
             hud.kind = kind
             hud.level = level

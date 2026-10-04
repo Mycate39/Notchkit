@@ -94,6 +94,13 @@ private struct GeneralSettingsView: View {
                 }
             }
 
+            Section("Retour haptique") {
+                Toggle("Retour haptique du trackpad", isOn: $settings.settings.hapticsEnabled)
+                Text("Un léger clic à l'ouverture de l'encoche, au changement de page, aux alertes et à chaque cran de volume (trackpad Force Touch).")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
             Section("Système") {
                 Toggle("Lancer Notchkit à l'ouverture de session", isOn: $launchAtLogin)
                     .onChange(of: launchAtLogin) { _, newValue in

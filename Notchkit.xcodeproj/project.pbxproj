@@ -115,6 +115,7 @@
 		B8634B6DA020098358A78C4C /* env.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F0FA5356B3066E849853ED /* env.m */; };
 		B8AA4FB13AB3DF2D55CDA147 /* MediaRemoteAdapter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7A5B978655390BC3A5CD3350 /* MediaRemoteAdapter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B8B84259DFFD7A16CDDE8249 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A60B8D5B298F953E63F8A098 /* AppKit.framework */; };
+		BB01149799C433BEF7982DD5 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5BEC21D18119A5A2679832 /* Haptics.swift */; };
 		BC9A2E2A9684CB0ACE626DDE /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B080423C926D385B46825A3 /* UniformTypeIdentifiers.framework */; };
 		BE47E01B415B0FAE2933A8D3 /* NotchkitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A6844ED04375186B9067D3 /* NotchkitApp.swift */; };
 		BE4DC2D9085A9375B5060ABA /* NotchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C38E58910B7C41117212E1 /* NotchViewModel.swift */; };
@@ -317,6 +318,7 @@
 		F7DF39D707B871615662FAD5 /* MediaKeyTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaKeyTap.swift; sourceTree = "<group>"; };
 		FA1FA58A222029EF8472F5FC /* ClaudeSparkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeSparkView.swift; sourceTree = "<group>"; };
 		FC306A7DAC40B0ECC5A20A71 /* ModuleManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleManagerTests.swift; sourceTree = "<group>"; };
+		FE5BEC21D18119A5A2679832 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -706,6 +708,7 @@
 			isa = PBXGroup;
 			children = (
 				CD9CBF25534335CB0D5FB2F1 /* AutomatedRun.swift */,
+				FE5BEC21D18119A5A2679832 /* Haptics.swift */,
 				F0BF3D614D5CC62B9E68FF35 /* ObservationTracking.swift */,
 			);
 			path = Utilities;
@@ -1030,6 +1033,7 @@
 				C4FE1995D4A34E59EE65174D /* DropZone.swift in Sources */,
 				53009C2AA2481B9ED10B6FDE /* EntitlementManager.swift in Sources */,
 				36229702DCD121CC52D39711 /* EqualizerView.swift in Sources */,
+				BB01149799C433BEF7982DD5 /* Haptics.swift in Sources */,
 				9F65428EDD48F89CBDB4024D /* Keychain.swift in Sources */,
 				4F396C9C347E18A649275B67 /* LaunchAtLogin.swift in Sources */,
 				0F5ED439E2F5648E15B3C072 /* LayoutSettingsView.swift in Sources */,

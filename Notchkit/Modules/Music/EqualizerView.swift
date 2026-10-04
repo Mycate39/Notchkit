@@ -6,8 +6,12 @@ import SwiftUI
 /// Animé avec Core Animation plutôt qu'avec SwiftUI : une fois lancées, les animations
 /// sont exécutées par le serveur d'affichage de macOS, sans réveiller l'app à chaque image.
 /// C'est nettement plus économe pour une animation qui tourne pendant toute une écoute.
+///
+/// Avec un `monitor`, les barres suivent le son en temps réel ; sans données en direct
+/// (capture arrêtée, silence, autorisation refusée), elles reprennent l'animation simple.
 struct EqualizerView: NSViewRepresentable {
     var isAnimating: Bool
+    var monitor: AudioSpectrumMonitor?
     var color: NSColor = .white
 
     func makeNSView(context: Context) -> EqualizerNSView {
@@ -16,7 +20,12 @@ struct EqualizerView: NSViewRepresentable {
 
     func updateNSView(_ view: EqualizerNSView, context: Context) {
         view.barColor = color
+        view.attach(to: monitor)
         view.setAnimating(isAnimating)
+    }
+
+    static func dismantleNSView(_ view: EqualizerNSView, coordinator: ()) {
+        view.attach(to: nil)
     }
 }
 
@@ -26,6 +35,12 @@ final class EqualizerNSView: NSView {
     private let durations: [CFTimeInterval] = [0.46, 0.62, 0.39, 0.54]
     private static let restingScale: CGFloat = 0.3
     private static let animationKey = "equalizer"
+
+    private weak var monitor: AudioSpectrumMonitor?
+    private var subscription: UUID?
+    private var isAnimating = false
+    /// Vrai tant que des niveaux en direct arrivent.
+    private var isLive = false
 
     var barColor: NSColor = .white {
         didSet { bars.forEach { $0.backgroundColor = barColor.cgColor } }
@@ -62,7 +77,56 @@ final class EqualizerNSView: NSView {
         CATransaction.commit()
     }
 
+    /// S'abonne (ou se désabonne) aux niveaux en direct.
+    func attach(to newMonitor: AudioSpectrumMonitor?) {
+        guard newMonitor !== monitor else { return }
+        if let subscription { monitor?.unsubscribe(subscription) }
+        subscription = nil
+        monitor = newMonitor
+        subscription = newMonitor?.subscribe { [weak self] levels in
+            self?.apply(levels)
+        }
+        if newMonitor == nil { apply(nil) }
+    }
+
+    /// Niveaux en direct (0…1 par barre) ; `nil` = retour à l'animation simple.
+    private func apply(_ levels: [Float]?) {
+        guard let levels, isAnimating else {
+            if isLive {
+                isLive = false
+                startLoopAnimations(isAnimating)
+            }
+            return
+        }
+        if !isLive {
+            isLive = true
+            bars.forEach { $0.removeAnimation(forKey: Self.animationKey) }
+        }
+        // Courte transition implicite entre deux mises à jour (≈ 30 par seconde).
+        CATransaction.begin()
+        CATransaction.setAnimationDuration(1.0 / 25)
+        CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: .linear))
+        for (index, bar) in bars.enumerated() {
+            let level = CGFloat(index < levels.count ? levels[index] : 0)
+            bar.transform = CATransform3DMakeScale(1, Self.restingScale + (1 - Self.restingScale) * level, 1)
+        }
+        CATransaction.commit()
+    }
+
     func setAnimating(_ animating: Bool) {
+        guard animating != isAnimating else { return }
+        isAnimating = animating
+        if !animating {
+            isLive = false
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
+            bars.forEach { $0.transform = CATransform3DMakeScale(1, Self.restingScale, 1) }
+            CATransaction.commit()
+        }
+        if !isLive { startLoopAnimations(animating) }
+    }
+
+    private func startLoopAnimations(_ animating: Bool) {
         for (index, bar) in bars.enumerated() {
             if animating {
                 guard bar.animation(forKey: Self.animationKey) == nil else { continue }

@@ -44,7 +44,19 @@ final class MusicModule: NotchModule {
         didSet { UserDefaults.standard.set(showAppBadge, forKey: Keys.showAppBadge) }
     }
 
+    /// Barres de l'égaliseur qui suivent le son en temps réel (capture du son du système).
+    var reactiveEqualizer: Bool {
+        didSet {
+            UserDefaults.standard.set(reactiveEqualizer, forKey: Keys.reactiveEqualizer)
+            updateSpectrumCapture()
+        }
+    }
+
+    /// Analyse du son pour l'égaliseur en temps réel.
+    let spectrum = AudioSpectrumMonitor()
+
     private enum Keys {
+        static let reactiveEqualizer = "module.music.reactiveEqualizer"
         static let showAppBadge = "module.music.showAppBadge"
         static let showInCompact = "module.music.showInCompact"
         static let useMediaRemote = "module.music.useMediaRemote"
@@ -60,12 +72,14 @@ final class MusicModule: NotchModule {
     @ObservationIgnored private var mediaRemoteInfo: NowPlayingInfo?
     @ObservationIgnored private var publicInfos: [NowPlayingInfo.Origin: NowPlayingInfo] = [:]
     @ObservationIgnored private var isStarted = false
+    @ObservationIgnored private var spectrumStopTask: Task<Void, Never>?
 
     init(context: ModuleContext) {
         let defaults = UserDefaults.standard
         showInCompact = defaults.object(forKey: Keys.showInCompact) as? Bool ?? true
         useMediaRemote = defaults.object(forKey: Keys.useMediaRemote) as? Bool ?? true
         showAppBadge = defaults.object(forKey: Keys.showAppBadge) as? Bool ?? true
+        reactiveEqualizer = defaults.object(forKey: Keys.reactiveEqualizer) as? Bool ?? true
     }
 
     // MARK: Cycle de vie
@@ -97,6 +111,8 @@ final class MusicModule: NotchModule {
         mediaRemoteInfo = nil
         publicInfos.removeAll()
         nowPlaying = nil
+        spectrumStopTask?.cancel()
+        spectrum.stop()
     }
 
     private func updateSelection() {
@@ -104,6 +120,32 @@ final class MusicModule: NotchModule {
             mediaRemote: useMediaRemote ? mediaRemoteInfo : nil,
             publicSources: Array(publicInfos.values)
         )
+        updateSpectrumCapture()
+    }
+
+    /// La capture du son ne tourne que pendant la lecture. Après une pause, on attend
+    /// quelques secondes avant de l'arrêter (changement de morceau, pause brève).
+    private func updateSpectrumCapture() {
+        let shouldRun = isStarted && reactiveEqualizer && nowPlaying?.isPlaying == true
+            && !Self.isStressTest
+        if shouldRun {
+            spectrumStopTask?.cancel()
+            spectrumStopTask = nil
+            spectrum.start()
+        } else if spectrum.isRunning, spectrumStopTask == nil {
+            let delay: Duration = reactiveEqualizer && isStarted ? .seconds(5) : .zero
+            spectrumStopTask = Task { [weak self] in
+                try? await Task.sleep(for: delay)
+                guard !Task.isCancelled, let self else { return }
+                self.spectrumStopTask = nil
+                self.spectrum.stop()
+            }
+        }
+    }
+
+    /// Le test de charge (DEBUG) ne doit pas déclencher de demande d'autorisation audio.
+    private static var isStressTest: Bool {
+        ProcessInfo.processInfo.environment["NOTCHKIT_STRESS"] != nil
     }
 
     // MARK: Commandes
@@ -119,6 +161,7 @@ final class MusicModule: NotchModule {
             nowPlaying?.elapsed = current.elapsed(at: Date())
             nowPlaying?.timestamp = Date()
             nowPlaying?.isPlaying.toggle()
+            updateSpectrumCapture()
         }
     }
 
@@ -146,7 +189,7 @@ final class MusicModule: NotchModule {
     func compactTrailing() -> AnyView? {
         guard let nowPlaying else { return nil }
         return AnyView(
-            EqualizerView(isAnimating: nowPlaying.isPlaying)
+            EqualizerView(isAnimating: nowPlaying.isPlaying, monitor: reactiveEqualizer ? spectrum : nil)
                 .frame(width: 18, height: 14)
         )
     }

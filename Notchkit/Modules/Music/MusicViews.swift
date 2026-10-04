@@ -184,11 +184,55 @@ struct MusicSettingsView: View {
         VStack(alignment: .leading, spacing: 6) {
             Toggle("Afficher le morceau quand l'encoche est repliée", isOn: $module.showInCompact)
             Toggle("Afficher l'icône de l'app sur la pochette", isOn: $module.showAppBadge)
+            Toggle("Barres réactives au son (temps réel)", isOn: $module.reactiveEqualizer)
+            Text("Analyse le son joué par le Mac pour animer les barres. macOS demande l'autorisation « Enregistrement audio du système » et affiche un indicateur pendant l'écoute. Le son n'est ni enregistré ni envoyé.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+            if module.reactiveEqualizer {
+                SpectrumStatusView(monitor: module.spectrum)
+            }
             Toggle("Détecter toutes les apps (expérimental)", isOn: $module.useMediaRemote)
             Text("Nécessaire pour Deezer, les navigateurs et la plupart des lecteurs. Utilise une interface non officielle d'Apple qui peut cesser de fonctionner après une mise à jour de macOS ; Music et Spotify restent alors pris en charge.")
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+}
+
+/// État de l'analyse du son, avec un raccourci vers les réglages de confidentialité en cas de souci.
+private struct SpectrumStatusView: View {
+    let monitor: AudioSpectrumMonitor
+
+    var body: some View {
+        switch monitor.status {
+        case .stopped:
+            EmptyView()
+        case .running:
+            Label("Analyse du son active", systemImage: "waveform")
+                .font(.caption)
+                .foregroundStyle(.green)
+        case .silent:
+            VStack(alignment: .leading, spacing: 4) {
+                Label("Aucun son capté : l'autorisation a peut-être été refusée.", systemImage: "exclamationmark.triangle")
+                    .font(.caption)
+                    .foregroundStyle(.orange)
+                Button("Ouvrir les réglages de confidentialité") {
+                    if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_AudioCapture") {
+                        NSWorkspace.shared.open(url)
+                    }
+                }
+                .controlSize(.small)
+            }
+        case .unsupported:
+            Text("Nécessite macOS 14.2 ou plus récent.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        case let .failed(reason):
+            Text("L'analyse du son n'a pas pu démarrer : \(reason)")
+                .font(.caption)
+                .foregroundStyle(.red)
         }
     }
 }

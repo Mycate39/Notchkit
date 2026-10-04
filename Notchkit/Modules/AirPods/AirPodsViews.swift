@@ -25,103 +25,97 @@ struct ConnectedHeadphonesIcon: View {
     }
 }
 
+/// Texte de l'alerte de connexion : « Connectés », remplacé par la batterie dès qu'elle est connue.
+struct ConnectedBatteryLabel: View {
+    let module: AirPodsModule
+    let device: HeadphoneDevice
+
+    var body: some View {
+        Group {
+            if let level = module.battery(for: device)?.summary {
+                Label("\(level) %", systemImage: BatterySymbol.name(for: level))
+                    .labelStyle(.titleAndIcon)
+                    .monospacedDigit()
+                    .foregroundStyle(level <= 20 ? .red : .green)
+            } else {
+                Text("Connectés").foregroundStyle(.green)
+            }
+        }
+        .minimumScaleFactor(0.8)
+        .animation(.easeInOut(duration: 0.25), value: module.battery(for: device))
+    }
+}
+
+enum BatterySymbol {
+    static func name(for level: Int) -> String {
+        switch level {
+        case ..<13: "battery.0percent"
+        case ..<38: "battery.25percent"
+        case ..<63: "battery.50percent"
+        case ..<88: "battery.75percent"
+        default: "battery.100percent"
+        }
+    }
+}
+
+/// Carte : le logo de l'appareil connecté, son nom et sa batterie, sans aucune commande.
 struct AirPodsExpandedView: View {
     let module: AirPodsModule
     @Environment(\.widgetSize) private var size
 
     var body: some View {
-        Group {
-            if let device = module.devices.first(where: \.isDefaultOutput) ?? module.devices.first {
-                VStack(spacing: 6) {
-                    Image(systemName: device.kind.symbol)
-                        .font(.system(size: size == .small ? 26 : 32))
-                        .symbolRenderingMode(.hierarchical)
-                        .frame(height: 36)
-                    Text(device.name)
-                        .font(.system(size: 11, weight: .semibold))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.8)
-                    if let battery = module.battery {
-                        BatteryLevelsView(battery: battery)
-                    } else if device.isDefaultOutput {
-                        Label("Sortie audio active", systemImage: "speaker.wave.2.fill")
-                            .font(.system(size: 9, weight: .medium))
-                            .foregroundStyle(.green)
-                    }
-                    if !device.isDefaultOutput {
-                        Button("Utiliser comme sortie") { module.makeDefaultOutput(device) }
-                            .controlSize(.mini)
-                    }
-                    if let unknown = module.unknownModeValue {
-                        Text("Mode actuel : \(unknown == 4 ? String(localized: "Adaptatif") : String(localized: "inconnu (\(unknown))"))")
-                            .font(.system(size: 8, weight: .medium))
-                            .foregroundStyle(.white.opacity(0.5))
-                    }
-                    if !module.supportedModes.isEmpty {
-                        // Mode d'écoute (API privée).
-                        HStack(spacing: 4) {
-                            ForEach(module.supportedModes) { mode in
-                                Button { module.setListeningMode(mode) } label: {
-                                    Image(systemName: mode.symbol)
-                                        .font(.system(size: 11, weight: .semibold))
-                                        .frame(width: 30, height: 22)
-                                        .background(module.listeningMode == mode ? Color.white.opacity(0.9) : Color.white.opacity(0.12),
-                                                    in: Capsule())
-                                        .foregroundStyle(module.listeningMode == mode ? .black : .white)
-                                        .contentShape(Capsule())
-                                }
-                                .buttonStyle(.plain)
-                                .help(Text(mode.title))
+        VStack(spacing: 8) {
+            if let device = module.primaryDevice {
+                Image(systemName: device.kind.symbol)
+                    .font(.system(size: size == .small ? 34 : 42))
+                    .symbolRenderingMode(.hierarchical)
+                    .contentTransition(.symbolEffect(.replace))
+                Text(device.name)
+                    .font(.system(size: 11, weight: .semibold))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                if let battery = module.battery(for: device) {
+                    BatteryLevelsView(battery: battery)
+                }
+            } else if module.otherBatteryDevices.isEmpty {
+                Image(systemName: "headphones")
+                    .font(.system(size: 30))
+                    .foregroundStyle(.white.opacity(0.4))
+                Text("Aucun casque connecté")
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundStyle(.white.opacity(0.5))
+                    .multilineTextAlignment(.center)
+            }
+            // Autres appareils Bluetooth avec batterie (souris, clavier…).
+            if !module.otherBatteryDevices.isEmpty {
+                HStack(spacing: 10) {
+                    ForEach(Array(module.otherBatteryDevices.prefix(size == .small ? 2 : 4))) { other in
+                        if let level = other.battery.summary {
+                            HStack(spacing: 3) {
+                                Image(systemName: other.symbol)
+                                Text("\(level) %").foregroundStyle(level <= 20 ? .red : .white)
                             }
+                            .help(other.name)
                         }
-                    } else if size != .small {
-                        Button {
-                            module.openBluetoothSettings()
-                        } label: {
-                            Label("Réglages Bluetooth…", systemImage: "gearshape")
-                                .font(.system(size: 9, weight: .medium))
-                        }
-                        .buttonStyle(.plain)
-                        .foregroundStyle(.white.opacity(0.6))
-                    }
-                    // Plusieurs casques connectés : bascule rapide.
-                    if module.devices.count > 1 {
-                        HStack(spacing: 6) {
-                            ForEach(module.devices.filter { $0.id != device.id }) { other in
-                                Button { module.makeDefaultOutput(other) } label: {
-                                    Image(systemName: other.kind.symbol)
-                                }
-                                .buttonStyle(.plain)
-                                .help("Passer sur \(other.name)")
-                            }
-                        }
-                        .font(.system(size: 12))
                     }
                 }
-            } else {
-                VStack(spacing: 6) {
-                    Image(systemName: "headphones")
-                        .font(.system(size: 22))
-                    Text("Aucun casque Bluetooth connecté")
-                        .font(.system(size: 11, weight: .medium))
-                        .foregroundStyle(.white.opacity(0.6))
-                        .multilineTextAlignment(.center)
-                }
+                .font(.system(size: 9, weight: .semibold).monospacedDigit())
+                .foregroundStyle(.white.opacity(0.75))
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(10)
-        .onAppear { module.refreshBluetoothInfo() }
+        .onAppear { module.refreshBattery() }
     }
 }
 
 /// Batterie de chaque écouteur et du boîtier (« G 80 % · D 82 % · Boîtier 60 % »).
 private struct BatteryLevelsView: View {
-    let battery: AirPodsPrivate.Battery
+    let battery: BluetoothBattery
 
     var body: some View {
         HStack(spacing: 8) {
-            if let single = battery.single { level("", single) }
+            if let main = battery.main, battery.left == nil, battery.right == nil { level("", main) }
             if let left = battery.left { level("G", left) }
             if let right = battery.right { level("D", right) }
             if let caseLevel = battery.caseLevel { level(String(localized: "Boîtier"), caseLevel) }
@@ -144,17 +138,6 @@ struct AirPodsSettingsView: View {
         VStack(alignment: .leading, spacing: 6) {
             Toggle("Animation à la connexion", isOn: $module.alertOnConnect)
             Toggle("Animation à la déconnexion", isOn: $module.alertOnDisconnect)
-            Toggle("Batterie et mode d'écoute des AirPods", isOn: $module.advancedControls)
-            HStack {
-                Button("Copier le diagnostic") { module.copyDiagnostic() }
-                Text("À coller pour signaler un souci (AirPods connectés).")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
-            Text("La batterie de chaque écouteur et le choix du mode (désactivé, réduction du bruit, transparence) utilisent une interface non officielle d'Apple et demandent l'autorisation Bluetooth. Si une mise à jour de macOS la modifie, ces commandes disparaissent simplement de la carte.")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
         }
     }
 }

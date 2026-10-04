@@ -92,7 +92,6 @@
 		98776D4DF39E4E21CDB0167E /* WidgetLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986BDF5C03AFD85D9ABE4BC /* WidgetLayout.swift */; };
 		98D2E19AF44D1F7BEDE8C93B /* stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 46804D5EC7EFC5FEF7FAE1B0 /* stream.m */; };
 		9A90F1FF12025FADD79A74D1 /* BatteryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88A3C1DCE9F2BBAD2E4119B /* BatteryTests.swift */; };
-		9D3139727208B197EB647D2A /* AirPodsPrivate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524551E47E959F8C64BBA1E2 /* AirPodsPrivate.swift */; };
 		9E5F1AAB2D6C98B155086961 /* ClipboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89908AA5686A7DBE051BD6EF /* ClipboardTests.swift */; };
 		9E7A63311A2BAFD715703A99 /* NotchShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8841EA892E202FC4B79550 /* NotchShape.swift */; };
 		9EFC7A08DE1D2D77E0755A84 /* env.h in Headers */ = {isa = PBXBuildFile; fileRef = 28D7F4491917AC873CE7BC74 /* env.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -128,6 +127,7 @@
 		D16F3D025CDBB2EF8193BAC2 /* VideoDownloadModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC76D1C2CA657B593C11E7B /* VideoDownloadModule.swift */; };
 		D394C8AD7B7DDE1543A12AF0 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E67B71BB43A4F2B68A88A78 /* SettingsStore.swift */; };
 		D797CF3F33D0C1121AE88D86 /* CalendarEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B406F238DA99AD867A9D13E3 /* CalendarEvent.swift */; };
+		D7B9915FCDEDA4E93A192926 /* BluetoothBattery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7490954D53A50041640281D /* BluetoothBattery.swift */; };
 		DC2019893B3CE66134BBEBDA /* SnapshotRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B8953EC0C3A1C08A19AF87 /* SnapshotRenderer.swift */; };
 		DCFC8836E83C40FD29897251 /* get.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E7EEFDAB8D951E6917D5D5F /* get.m */; };
 		DD4F43AE5E3C5678D35941B7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B90EDE60261A06FD92A08E /* SettingsView.swift */; };
@@ -225,7 +225,6 @@
 		507E2940CE6F0CA716BF8DBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		51B8953EC0C3A1C08A19AF87 /* SnapshotRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotRenderer.swift; sourceTree = "<group>"; };
 		51C6F4A15A7C1F5EED24D94C /* Notchkit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Notchkit.entitlements; sourceTree = "<group>"; };
-		524551E47E959F8C64BBA1E2 /* AirPodsPrivate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPodsPrivate.swift; sourceTree = "<group>"; };
 		578508F6730303155DAAC666 /* speed.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = speed.m; sourceTree = "<group>"; };
 		57D0955F6A00A94552C448F1 /* globals.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = globals.m; sourceTree = "<group>"; };
 		5D5A7E3E7FF4C76D4277A9D9 /* ClaudeActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeActivity.swift; sourceTree = "<group>"; };
@@ -298,6 +297,7 @@
 		D5F6A4C1A5E799024B51A751 /* NotchPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchPanel.swift; sourceTree = "<group>"; };
 		D66674969F092062C29D4F74 /* UnlockModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockModule.swift; sourceTree = "<group>"; };
 		D715D3CF854070983A1F4337 /* BackButtonModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonModule.swift; sourceTree = "<group>"; };
+		D7490954D53A50041640281D /* BluetoothBattery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothBattery.swift; sourceTree = "<group>"; };
 		D87D32299F6B58A261AA0D12 /* get.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = get.h; sourceTree = "<group>"; };
 		DB25FBA895731ACD6329CB6F /* LayoutPresets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPresets.swift; sourceTree = "<group>"; };
 		DBA8D3B1EA83E4A1C07F1F13 /* NotchkitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotchkitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -430,9 +430,9 @@
 			isa = PBXGroup;
 			children = (
 				3A3B538A66C6B3FB6E49A96A /* AirPodsModule.swift */,
-				524551E47E959F8C64BBA1E2 /* AirPodsPrivate.swift */,
 				3CA09C6155085C6AAB69F4A1 /* AirPodsViews.swift */,
 				D331E9633CBDABB53E93E76A /* AudioDeviceMonitor.swift */,
+				D7490954D53A50041640281D /* BluetoothBattery.swift */,
 			);
 			path = AirPods;
 			sourceTree = "<group>";
@@ -1003,7 +1003,6 @@
 			files = (
 				5B3D1634B477F555CDEEFF2F /* AIProvider.swift in Sources */,
 				1101C84B606905D7ED45F9BC /* AirPodsModule.swift in Sources */,
-				9D3139727208B197EB647D2A /* AirPodsPrivate.swift in Sources */,
 				7217AD1F16C887AB09928542 /* AirPodsViews.swift in Sources */,
 				DD9AE10502A766B798DD4FDC /* AppDelegate.swift in Sources */,
 				5ED07894AE2CE76DB414FD91 /* AppSettings.swift in Sources */,
@@ -1018,6 +1017,7 @@
 				A035E8F6860E327BAD3FEF0D /* BatteryModule.swift in Sources */,
 				F5543C69BD99F610B097FB7C /* BatteryState.swift in Sources */,
 				3F0BBA7E0A0EBA46B97825EB /* BatteryViews.swift in Sources */,
+				D7B9915FCDEDA4E93A192926 /* BluetoothBattery.swift in Sources */,
 				D797CF3F33D0C1121AE88D86 /* CalendarEvent.swift in Sources */,
 				2CE8FE66D01A59F012F198E4 /* CalendarModule.swift in Sources */,
 				52F60B725AB35D8D0408E14F /* CalendarViews.swift in Sources */,

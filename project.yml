@@ -62,7 +62,6 @@ targets:
         NSLocationUsageDescription: "Notchkit utilise votre position approximative pour afficher la météo locale."
         NSLocationWhenInUseUsageDescription: "Notchkit utilise votre position approximative pour afficher la météo locale."
         NSAudioCaptureUsageDescription: "Notchkit analyse le son joué par votre Mac pour animer les barres de l'égaliseur en temps réel. Le son n'est ni enregistré ni envoyé."
-        NSBluetoothAlwaysUsageDescription: "Notchkit lit la batterie de vos AirPods et vous permet de changer leur mode d'écoute depuis l'encoche."
         NSAppleEventsUsageDescription: "Notchkit pilote la lecture (lecture, pause, morceau suivant) de Music et Spotify depuis l'encoche."
     settings:
       base:

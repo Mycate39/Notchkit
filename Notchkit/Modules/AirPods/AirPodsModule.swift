@@ -2,18 +2,17 @@ import AppKit
 import SwiftUI
 import Observation
 
-/// Module AirPods et casques : animation à la connexion et carte de l'appareil connecté.
+/// Module AirPods et casques : animation à la connexion et logo de l'appareil connecté.
 ///
-/// La connexion est détectée via la liste des sorties audio (Core Audio, API publique).
-/// Le mode de réduction de bruit (ANC) n'est pas modifiable par une API publique :
-/// la carte ouvre les réglages Bluetooth de macOS, où il se règle.
+/// La connexion est détectée via la liste des sorties audio (Core Audio, API publique) ;
+/// la batterie des appareils Bluetooth est lue avec `system_profiler` (outil de macOS).
 @MainActor
 @Observable
 final class AirPodsModule: NotchModule {
     static let descriptor = ModuleDescriptor(
         id: "airpods",
         name: "AirPods et casques",
-        summary: "Animation à la connexion de vos AirPods ou d'un casque Bluetooth, sortie audio en un clic.",
+        summary: "Animation à la connexion de vos AirPods ou d'un casque Bluetooth, et appareil connecté en un coup d'œil.",
         systemImage: "airpods.pro",
         category: .system,
         tier: .free,
@@ -21,20 +20,8 @@ final class AirPodsModule: NotchModule {
     )
 
     private(set) var devices: [HeadphoneDevice] = []
-    /// Batterie et mode d'écoute de l'appareil principal (API privée, voir `AirPodsPrivate`).
-    private(set) var battery: AirPodsPrivate.Battery?
-    private(set) var listeningMode: AirPodsPrivate.ListeningMode?
-    private(set) var supportedModes: [AirPodsPrivate.ListeningMode] = []
-    /// Mode actuel non reconnu (valeur brute), ex. le mode « Adaptatif » de certains modèles.
-    private(set) var unknownModeValue: UInt8?
-
-    /// Lire la batterie et piloter le mode d'écoute (demande l'autorisation Bluetooth).
-    var advancedControls: Bool {
-        didSet {
-            UserDefaults.standard.set(advancedControls, forKey: Keys.advancedControls)
-            refreshBluetoothInfo()
-        }
-    }
+    /// Appareils Bluetooth connectés (casques, souris, claviers…) avec leur batterie.
+    private(set) var bluetoothDevices: [BluetoothDeviceInfo] = []
 
     /// Animation dans l'encoche à la connexion.
     var alertOnConnect: Bool {
@@ -48,40 +35,94 @@ final class AirPodsModule: NotchModule {
     private enum Keys {
         static let alertOnConnect = "module.airpods.alertOnConnect"
         static let alertOnDisconnect = "module.airpods.alertOnDisconnect"
-        static let advancedControls = "module.airpods.advancedControls"
     }
 
     @ObservationIgnored private let context: ModuleContext
     @ObservationIgnored private let monitor = AudioDeviceMonitor()
+    @ObservationIgnored private var refreshTask: Task<Void, Never>?
+    @ObservationIgnored private var pollingTask: Task<Void, Never>?
+    @ObservationIgnored private var isRefreshing = false
 
     init(context: ModuleContext) {
         self.context = context
         let defaults = UserDefaults.standard
         alertOnConnect = defaults.object(forKey: Keys.alertOnConnect) as? Bool ?? true
         alertOnDisconnect = defaults.object(forKey: Keys.alertOnDisconnect) as? Bool ?? false
-        advancedControls = defaults.object(forKey: Keys.advancedControls) as? Bool ?? true
     }
 
     func start() {
         monitor.onChange = { [weak self] devices in self?.update(devices) }
         monitor.start()
         devices = monitor.devices  // état initial : pas d'animation au lancement de l'app
+        refreshBattery()
+        // Relecture toutes les 5 minutes (la batterie évolue lentement ; ≈ 1 s de calcul à chaque fois).
+        pollingTask = Task { [weak self] in
+            while !Task.isCancelled {
+                try? await Task.sleep(for: .seconds(300))
+                guard !Task.isCancelled else { return }
+                self?.refreshBattery()
+            }
+        }
     }
 
     func stop() {
         monitor.stop()
         monitor.onChange = nil
+        refreshTask?.cancel()
+        pollingTask?.cancel()
         devices = []
+        bluetoothDevices = []
+    }
+
+    /// Relit la batterie des appareils Bluetooth (sans effet dans les tests automatisés).
+    func refreshBattery() {
+        guard !AutomatedRun.isActive, !isRefreshing else { return }
+        isRefreshing = true
+        Task { [weak self] in
+            let devices = await BluetoothInventory.load()
+            guard let self else { return }
+            self.isRefreshing = false
+            if devices != self.bluetoothDevices { self.bluetoothDevices = devices }
+        }
+    }
+
+    /// Juste après une connexion, la batterie arrive en quelques secondes : plusieurs relectures.
+    private func refreshAfterConnection() {
+        refreshTask?.cancel()
+        refreshTask = Task { [weak self] in
+            for delay in [0.5, 2.5, 6.0] {
+                try? await Task.sleep(for: .seconds(delay))
+                guard !Task.isCancelled else { return }
+                self?.refreshBattery()
+            }
+        }
+    }
+
+    /// Batterie d'un casque (retrouvé par son adresse Bluetooth, sinon par son nom).
+    func battery(for device: HeadphoneDevice) -> BluetoothBattery? {
+        let address = BluetoothDeviceInfo.normalized(device.uid)
+        let match = bluetoothDevices.first { !$0.address.isEmpty && address.contains($0.address) }
+            ?? bluetoothDevices.first { $0.name == device.name }
+        guard let battery = match?.battery, !battery.isEmpty else { return nil }
+        return battery
+    }
+
+    /// Autres appareils Bluetooth connectés ayant une batterie (souris, clavier…).
+    var otherBatteryDevices: [BluetoothDeviceInfo] {
+        let primaryAddress = primaryDevice.map { BluetoothDeviceInfo.normalized($0.uid) } ?? ""
+        return bluetoothDevices.filter { info in
+            !info.battery.isEmpty && info.name != primaryDevice?.name
+                && (info.address.isEmpty || !primaryAddress.contains(info.address))
+        }
     }
 
     private func update(_ newDevices: [HeadphoneDevice]) {
-        for event in HeadphoneEvent.events(from: devices, to: newDevices) {
+        let events = HeadphoneEvent.events(from: devices, to: newDevices)
+        if !events.isEmpty { refreshAfterConnection() }
+        for event in events {
             switch event {
             case let .connected(device) where alertOnConnect:
-                // Batterie lue juste après la connexion (les AirPods la transmettent en quelques secondes).
-                devices = newDevices
-                refreshBluetoothInfo()
-                context.presentAlert(AirPodsAlerts.connected(device, battery: battery))
+                context.presentAlert(AirPodsAlerts.connected(device, module: self))
             case let .disconnected(device) where alertOnDisconnect:
                 context.presentAlert(AirPodsAlerts.disconnected(device))
             default:
@@ -91,77 +132,21 @@ final class AirPodsModule: NotchModule {
         devices = newDevices
     }
 
-    // MARK: Actions
-
     /// Appareil principal : la sortie active, sinon le premier casque connecté.
     var primaryDevice: HeadphoneDevice? {
         devices.first(where: \.isDefaultOutput) ?? devices.first
-    }
-
-    /// Relit batterie et mode d'écoute (à l'ouverture de la carte et après la connexion).
-    func refreshBluetoothInfo() {
-        guard advancedControls, !AutomatedRun.isActive, let primary = primaryDevice,
-              let device = AirPodsPrivate.bluetoothDevice(for: primary)
-        else {
-            battery = nil
-            listeningMode = nil
-            supportedModes = []
-            return
-        }
-        let newBattery = AirPodsPrivate.battery(of: device)
-        battery = newBattery.isEmpty ? nil : newBattery
-        supportedModes = AirPodsPrivate.supportedModes(of: device)
-        listeningMode = AirPodsPrivate.listeningMode(of: device)
-        let raw = AirPodsPrivate.rawListeningMode(of: device)
-        unknownModeValue = listeningMode == nil && raw != nil && raw != 0 ? raw : nil
-    }
-
-    /// Diagnostic à copier (réglages du module).
-    func copyDiagnostic() {
-        let text = AirPodsPrivate.diagnostic(for: devices)
-        NSPasteboard.general.clearContents()
-        NSPasteboard.general.setString(text, forType: .string)
-    }
-
-    func setListeningMode(_ mode: AirPodsPrivate.ListeningMode) {
-        guard let primary = primaryDevice, let device = AirPodsPrivate.bluetoothDevice(for: primary) else { return }
-        AirPodsPrivate.setListeningMode(mode, on: device)
-        listeningMode = mode
-        context.presentAlert(NotchAlert(
-            leading: AnyView(Image(systemName: mode.symbol).foregroundStyle(.white)),
-            trailing: AnyView(Text(mode.title).foregroundStyle(.white).minimumScaleFactor(0.6)),
-            duration: .seconds(1.8),
-            sideWidth: 100
-        ))
-        // Le changement prend un instant : on relit l'état réel.
-        Task { [weak self] in
-            try? await Task.sleep(for: .seconds(1.5))
-            self?.refreshBluetoothInfo()
-        }
-    }
-
-    func makeDefaultOutput(_ device: HeadphoneDevice) {
-        monitor.makeDefaultOutput(device)
-    }
-
-    /// Réglages Bluetooth de macOS (mode de réduction de bruit, détection automatique…).
-    func openBluetoothSettings() {
-        if let url = URL(string: "x-apple.systempreferences:com.apple.BluetoothSettings") {
-            NSWorkspace.shared.open(url)
-        }
     }
 
     // MARK: Affichage
 
     var compactPriority: ModulePriority { .none }
 
-    var expandedWidthWeight: CGFloat { 1.5 }
-
     func miniView() -> AnyView {
-        guard let device = devices.first(where: \.isDefaultOutput) ?? devices.first else {
+        guard let device = primaryDevice else {
             return AnyView(MiniWidget(symbol: "headphones", value: nil, caption: String(localized: "Non connecté")))
         }
-        return AnyView(MiniWidget(symbol: device.kind.symbol, value: nil, caption: device.name))
+        return AnyView(MiniWidget(symbol: device.kind.symbol, value: battery(for: device)?.summary.map { "\($0) %" },
+                                  caption: device.name))
     }
 
     func expandedView() -> AnyView {
@@ -175,23 +160,11 @@ final class AirPodsModule: NotchModule {
 
 enum AirPodsAlerts {
     @MainActor
-    static func connected(_ device: HeadphoneDevice, battery: AirPodsPrivate.Battery? = nil) -> NotchAlert {
+    static func connected(_ device: HeadphoneDevice, module: AirPodsModule) -> NotchAlert {
         NotchAlert(
             leading: AnyView(ConnectedHeadphonesIcon(symbol: device.kind.symbol)),
-            trailing: AnyView(
-                Group {
-                    if let level = battery?.lowestBud {
-                        Label("\(level) %", systemImage: "battery.75percent")
-                            .labelStyle(.titleAndIcon)
-                            .monospacedDigit()
-                    } else {
-                        Text("Connectés")
-                    }
-                }
-                .foregroundStyle(.green)
-                .minimumScaleFactor(0.8)
-            ),
-            duration: .seconds(3)
+            trailing: AnyView(ConnectedBatteryLabel(module: module, device: device)),
+            duration: .seconds(4)
         )
     }
 

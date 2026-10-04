@@ -31,6 +31,9 @@ struct ModuleContext {
     var dismissAlert: @MainActor (UUID) -> Void = { _ in }
 
     func dismiss(_ alertID: UUID) { dismissAlert(alertID) }
+
+    /// Empêche temporairement l'encoche de s'ouvrir au survol (ex. bouton cliquable en mode replié).
+    var blockExpansion: @MainActor (Bool) -> Void = { _ in }
 }
 
 /// Protocole commun à toutes les fonctionnalités de Notchkit.

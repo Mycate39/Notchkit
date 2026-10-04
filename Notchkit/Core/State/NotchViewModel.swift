@@ -76,8 +76,21 @@ final class NotchViewModel {
 
     // MARK: - Survol
 
+    /// Ouverture au survol bloquée (souris sur un bouton cliquable de l'encoche repliée).
+    @ObservationIgnored private var isExpansionBlocked = false
+
+    func setExpansionBlocked(_ blocked: Bool) {
+        isExpansionBlocked = blocked
+        if blocked {
+            if !isExpanded { hoverTask?.cancel() }
+        } else if isMouseInside() && !isExpanded {
+            hoverChanged(isInside: true)
+        }
+    }
+
     func hoverChanged(isInside: Bool) {
         if !isInside && isHeld { return }
+        if isInside && isExpansionBlocked && !isExpanded { return }
         hoverTask?.cancel()
         let delay = isInside ? settings.settings.hoverOpenDelay : settings.settings.hoverCloseDelay
         hoverTask = Task { [weak self] in

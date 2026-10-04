@@ -17,5 +17,6 @@ enum ModuleRegistry {
         ClipboardModule.self,
         SystemHUDModule.self,
         UnlockModule.self,
+        BackButtonModule.self,
     ]
 }

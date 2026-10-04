@@ -32,6 +32,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         moduleManager.dismissAlertHandler = { [weak self] id in
             self?.viewModel.dismissAlert(id: id)
         }
+        moduleManager.blockExpansionHandler = { [weak self] blocked in
+            self?.viewModel.setExpansionBlocked(blocked)
+        }
         // Fichiers glissés sur l'encoche : étagère ou AirDrop.
         viewModel.dropHandlerAvailability = { [weak self] in
             self?.moduleManager.module(for: ShelfModule.descriptor.id) != nil

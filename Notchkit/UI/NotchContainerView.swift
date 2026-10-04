@@ -131,6 +131,13 @@ private struct ExpandedNotchView: View {
     private var header: some View {
         let pages = pages
         return HStack {
+            // « ◀ App précédente », en haut à gauche comme sur iPhone.
+            if let back = viewModel.manager.module(for: BackButtonModule.descriptor.id) as? BackButtonModule,
+               let previous = back.previousApp {
+                BackLink(name: previous.name, action: back.goBack)
+                    .frame(maxWidth: 110, alignment: .leading)
+                    .padding(.trailing, 4)
+            }
             if pages.count > 1 {
                 // Onglets : un par page, avec les icônes des modules qu'elle contient.
                 HStack(spacing: 6) {

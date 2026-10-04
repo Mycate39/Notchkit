@@ -20,6 +20,8 @@ final class ModuleManager {
     @ObservationIgnored var holdHandler: (@MainActor (Bool) -> Void)?
     /// Retire une alerte (branché sur le `NotchViewModel`).
     @ObservationIgnored var dismissAlertHandler: (@MainActor (UUID) -> Void)?
+    /// Bloque l'ouverture au survol (branché sur le `NotchViewModel`).
+    @ObservationIgnored var blockExpansionHandler: (@MainActor (Bool) -> Void)?
 
     @ObservationIgnored let availableModules: [any NotchModule.Type]
     @ObservationIgnored private let settings: SettingsStore
@@ -199,7 +201,8 @@ final class ModuleManager {
             presentAlert: { [weak self] alert in self?.alertHandler?(alert) },
             openSettings: { [weak self] in self?.settingsHandler?() },
             holdExpanded: { [weak self] hold in self?.holdHandler?(hold) },
-            dismissAlert: { [weak self] id in self?.dismissAlertHandler?(id) }
+            dismissAlert: { [weak self] id in self?.dismissAlertHandler?(id) },
+            blockExpansion: { [weak self] blocked in self?.blockExpansionHandler?(blocked) }
         )
     }
 }

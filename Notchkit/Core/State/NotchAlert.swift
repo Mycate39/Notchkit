@@ -7,4 +7,6 @@ struct NotchAlert: Identifiable {
     let leading: AnyView
     let trailing: AnyView
     var duration: Duration = .seconds(2.5)
+    /// Largeur de chaque côté de l'encoche (plus large pour l'indicateur de volume, par exemple).
+    var sideWidth: CGFloat?
 }

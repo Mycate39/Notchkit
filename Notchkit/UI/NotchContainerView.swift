@@ -50,10 +50,10 @@ private struct CompactNotchView: View {
 
         HStack(spacing: 0) {
             leading
-                .frame(width: NotchLayout.compactSideWidth - 12, alignment: .leading)
+                .frame(width: viewModel.compactSideWidth - 12, alignment: .leading)
             Spacer(minLength: 0)
             trailing
-                .frame(width: NotchLayout.compactSideWidth - 12, alignment: .trailing)
+                .frame(width: viewModel.compactSideWidth - 12, alignment: .trailing)
         }
         .padding(.horizontal, ear + 10)
         .frame(height: viewModel.geometry.closedSize.height)

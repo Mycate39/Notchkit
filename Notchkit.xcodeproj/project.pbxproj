@@ -48,8 +48,10 @@
 		52F60B725AB35D8D0408E14F /* CalendarViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E2A367001574FD5301B5C5 /* CalendarViews.swift */; };
 		53009C2AA2481B9ED10B6FDE /* EntitlementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E52C7E24AFAF3440B483068 /* EntitlementManager.swift */; };
 		55CC14C6977CC1D427CE6E04 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D2BA7B06209F7301CBA2C3E /* Foundation.framework */; };
+		5745C9E89B5256A77822D3EF /* SystemHUDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1540EC4F1FC0F674F96EB7CE /* SystemHUDTests.swift */; };
 		5751D6EEFE3077F532F509F3 /* seek.m in Sources */ = {isa = PBXBuildFile; fileRef = 5007E33066DE772A64A4064B /* seek.m */; };
 		59288D8DFAD7AD952E74C61C /* ClaudeActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5A7E3E7FF4C76D4277A9D9 /* ClaudeActivity.swift */; };
+		5C6ED2CBBB8A11A2831FB4C5 /* SystemHUDViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65915A0E0BF3E9D51AE67E3 /* SystemHUDViews.swift */; };
 		5ED07894AE2CE76DB414FD91 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980E81038BC99D26608D1A6B /* AppSettings.swift */; };
 		5FF44B76A97ECAD01249F200 /* globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D0955F6A00A94552C448F1 /* globals.m */; };
 		601D9B8C8D44ED81CC990946 /* ModuleManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC306A7DAC40B0ECC5A20A71 /* ModuleManagerTests.swift */; };
@@ -82,10 +84,13 @@
 		9EFC7A08DE1D2D77E0755A84 /* env.h in Headers */ = {isa = PBXBuildFile; fileRef = 28D7F4491917AC873CE7BC74 /* env.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9F7142925091280DBE0FE836 /* keys.h in Headers */ = {isa = PBXBuildFile; fileRef = D4D167C05CBBAD88AE1F8A4F /* keys.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A035E8F6860E327BAD3FEF0D /* BatteryModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C6F4F37F841F8FF9371E1E /* BatteryModule.swift */; };
+		A174F9940FC069ED71C0C579 /* MediaKeyTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DF39D707B871615662FAD5 /* MediaKeyTap.swift */; };
 		A2ABD358B67E256AF9105886 /* NowPlayingTest.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DF83BF34AFE3B80D8068FFA /* NowPlayingTest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A332BE0B606743A7032D6F14 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 98FB71F04AAECE1E8BD0926A /* Localizable.xcstrings */; };
 		A3FD42D6E7DEB49B02389539 /* NotchAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A73B719641636FD8ABD372 /* NotchAlert.swift */; };
 		A48F76AE210F36AA7349FE22 /* LiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F1ED02F37A1EDCA8B3F577 /* LiveActivity.swift */; };
+		A56A56BB6242B685DE85A1A9 /* SystemHUDModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13612A2C0214BDCDDBF00C6C /* SystemHUDModule.swift */; };
+		A6596D02BBF2A11F995B9CF5 /* SystemControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE7398DD9F8BB31AAAC295D /* SystemControls.swift */; };
 		A7A432CCFD9E85A7069F6DF1 /* OpenMeteoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E812AE3C1D2CCF46FF79A3 /* OpenMeteoClient.swift */; };
 		A82ADE0CE71C07E58C944C16 /* now_playing.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBB0A65EC51EF3F4A67EB2F /* now_playing.m */; };
 		AB56A68BD40C4A5C39C4ED1E /* ClaudeHooksInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F59B743A5CB9C111DD7BEB /* ClaudeHooksInstaller.swift */; };
@@ -165,8 +170,10 @@
 		0C529029D5145492C0C2626F /* ClaudeUsage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeUsage.swift; sourceTree = "<group>"; };
 		0FD9DDAA93FE1736991AE761 /* MediaRemoteSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaRemoteSource.swift; sourceTree = "<group>"; };
 		120F6102605460430CBCDD55 /* ClaudeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeTests.swift; sourceTree = "<group>"; };
+		13612A2C0214BDCDDBF00C6C /* SystemHUDModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemHUDModule.swift; sourceTree = "<group>"; };
 		140868E51134AF3924DFBEF3 /* NotchLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchLayout.swift; sourceTree = "<group>"; };
 		14C15E810C63DBBAA6AD2F11 /* shuffle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = shuffle.m; sourceTree = "<group>"; };
+		1540EC4F1FC0F674F96EB7CE /* SystemHUDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemHUDTests.swift; sourceTree = "<group>"; };
 		1E8841EA892E202FC4B79550 /* NotchShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchShape.swift; sourceTree = "<group>"; };
 		21F3AA5E7B3A040B33B93437 /* ClaudeHookServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeHookServer.swift; sourceTree = "<group>"; };
 		24EE9F8658125C2D9185EA96 /* LaunchAtLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLogin.swift; sourceTree = "<group>"; };
@@ -189,6 +196,7 @@
 		48E812AE3C1D2CCF46FF79A3 /* OpenMeteoClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenMeteoClient.swift; sourceTree = "<group>"; };
 		4AEF7D2C8A909E113A1D6E60 /* BatteryViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryViews.swift; sourceTree = "<group>"; };
 		4B0C124C4C4759A07017DB8D /* ShelfItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfItem.swift; sourceTree = "<group>"; };
+		4FE7398DD9F8BB31AAAC295D /* SystemControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemControls.swift; sourceTree = "<group>"; };
 		5007E33066DE772A64A4064B /* seek.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = seek.m; sourceTree = "<group>"; };
 		507E2940CE6F0CA716BF8DBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		51B8953EC0C3A1C08A19AF87 /* SnapshotRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotRenderer.swift; sourceTree = "<group>"; };
@@ -228,6 +236,7 @@
 		9F21C814CD3DE60B75B2C723 /* now_playing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = now_playing.h; sourceTree = "<group>"; };
 		A097E4F52274645DD920E62C /* ShelfTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfTests.swift; sourceTree = "<group>"; };
 		A60B8D5B298F953E63F8A098 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		A65915A0E0BF3E9D51AE67E3 /* SystemHUDViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemHUDViews.swift; sourceTree = "<group>"; };
 		A71B97392FA1B40CE01E6DD5 /* WeatherModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModels.swift; sourceTree = "<group>"; };
 		A8DD4B3B5A025276532608BF /* ShelfModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfModule.swift; sourceTree = "<group>"; };
 		ACBB0A65EC51EF3F4A67EB2F /* now_playing.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = now_playing.m; sourceTree = "<group>"; };
@@ -269,6 +278,7 @@
 		F0BF3D614D5CC62B9E68FF35 /* ObservationTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationTracking.swift; sourceTree = "<group>"; };
 		F2F0FA5356B3066E849853ED /* env.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = env.m; sourceTree = "<group>"; };
 		F57759630E262CEA88367992 /* ClaudeViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeViews.swift; sourceTree = "<group>"; };
+		F7DF39D707B871615662FAD5 /* MediaKeyTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaKeyTap.swift; sourceTree = "<group>"; };
 		FA1FA58A222029EF8472F5FC /* ClaudeSparkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeSparkView.swift; sourceTree = "<group>"; };
 		FC306A7DAC40B0ECC5A20A71 /* ModuleManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleManagerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -318,6 +328,7 @@
 				DE6111A0CC43713D888AAAB4 /* MusicTests.swift */,
 				A097E4F52274645DD920E62C /* ShelfTests.swift */,
 				82E32A0CD723246EBCF3F295 /* SpectrumTests.swift */,
+				1540EC4F1FC0F674F96EB7CE /* SystemHUDTests.swift */,
 				3E5200FEB865B8DCA4D43E73 /* WidgetLayoutTests.swift */,
 				32D1FCC02B4ACF20842E1E6B /* WidgetsTests.swift */,
 			);
@@ -336,6 +347,7 @@
 				70C8408ECB21451937903973 /* LiveActivities */,
 				519555DDFDCB99F283864CC9 /* Music */,
 				A64F17DD50A084CB2420C8CE /* Shelf */,
+				A1975F559D28B76D7DDB3598 /* SystemHUD */,
 				DCA18EAF062B8C3CD01EEA35 /* Weather */,
 			);
 			path = Modules;
@@ -545,6 +557,17 @@
 				00E2A367001574FD5301B5C5 /* CalendarViews.swift */,
 			);
 			path = Calendar;
+			sourceTree = "<group>";
+		};
+		A1975F559D28B76D7DDB3598 /* SystemHUD */ = {
+			isa = PBXGroup;
+			children = (
+				F7DF39D707B871615662FAD5 /* MediaKeyTap.swift */,
+				4FE7398DD9F8BB31AAAC295D /* SystemControls.swift */,
+				13612A2C0214BDCDDBF00C6C /* SystemHUDModule.swift */,
+				A65915A0E0BF3E9D51AE67E3 /* SystemHUDViews.swift */,
+			);
+			path = SystemHUD;
 			sourceTree = "<group>";
 		};
 		A2C95241F321C6CDA7A89EDB /* ThirdParty */ = {
@@ -920,6 +943,7 @@
 				7DA7D78F529F69DF127E508D /* LiveActivitiesViews.swift in Sources */,
 				A48F76AE210F36AA7349FE22 /* LiveActivity.swift in Sources */,
 				8BCDCE6F6E2F54D141980CF1 /* LocationProvider.swift in Sources */,
+				A174F9940FC069ED71C0C579 /* MediaKeyTap.swift in Sources */,
 				09A63C00ADCB71C6BF4392D4 /* MediaRemoteSource.swift in Sources */,
 				018D9AD0EB2549EDE8225838 /* MenuBarContent.swift in Sources */,
 				E7CB399A1524418E1152DDA6 /* ModuleDescriptor.swift in Sources */,
@@ -952,6 +976,9 @@
 				DC2019893B3CE66134BBEBDA /* SnapshotRenderer.swift in Sources */,
 				4DA7F19EF634F138BD5A42D5 /* SpectrumAnalyzer.swift in Sources */,
 				0DAD6BA93A36E4EC90345619 /* SystemAudioTap.swift in Sources */,
+				A6596D02BBF2A11F995B9CF5 /* SystemControls.swift in Sources */,
+				A56A56BB6242B685DE85A1A9 /* SystemHUDModule.swift in Sources */,
+				5C6ED2CBBB8A11A2831FB4C5 /* SystemHUDViews.swift in Sources */,
 				73D5E9F7641B5F75B4E0B6CB /* WeatherModels.swift in Sources */,
 				12363B3F5D2845B879F69330 /* WeatherModule.swift in Sources */,
 				FE84A29BB41889B5AC1BD36D /* WeatherViews.swift in Sources */,
@@ -972,6 +999,7 @@
 				E954032D743568B2082B51F8 /* MusicTests.swift in Sources */,
 				AC7269EC36E5FC05D7BD7336 /* ShelfTests.swift in Sources */,
 				0CE35712354CA83AF734444A /* SpectrumTests.swift in Sources */,
+				5745C9E89B5256A77822D3EF /* SystemHUDTests.swift in Sources */,
 				2A8FC1478370BC212B9E8F67 /* WidgetLayoutTests.swift in Sources */,
 				1C6A5C7809598012656141D5 /* WidgetsTests.swift in Sources */,
 			);

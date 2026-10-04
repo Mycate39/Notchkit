@@ -52,12 +52,17 @@ final class NotchViewModel {
         currentAlert != nil || manager.compactModule != nil
     }
 
+    /// Largeur de chaque côté de l'encoche repliée (une alerte peut demander plus de place).
+    var compactSideWidth: CGFloat {
+        currentAlert?.sideWidth ?? NotchLayout.compactSideWidth
+    }
+
     var shapeSize: CGSize {
-        NotchLayout.shapeSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent)
+        NotchLayout.shapeSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent, sideWidth: compactSideWidth)
     }
 
     var panelSize: CGSize {
-        NotchLayout.panelSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent)
+        NotchLayout.panelSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent, sideWidth: compactSideWidth)
     }
 
     // MARK: - Géométrie
@@ -159,7 +164,11 @@ final class NotchViewModel {
 
     func present(_ alert: NotchAlert) {
         alertTask?.cancel()
-        withAnimation(NotchLayout.spring) { currentAlert = alert }
+        // Même alerte déjà affichée (ex. indicateur de volume) : on prolonge seulement sa durée,
+        // son contenu se met à jour de lui-même.
+        if currentAlert?.id != alert.id {
+            withAnimation(NotchLayout.spring) { currentAlert = alert }
+        }
         alertTask = Task { [weak self] in
             try? await Task.sleep(for: alert.duration)
             guard !Task.isCancelled, let self, self.currentAlert?.id == alert.id else { return }

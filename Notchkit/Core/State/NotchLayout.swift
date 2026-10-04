@@ -53,7 +53,8 @@ enum NotchLayout {
     }
 
     /// Taille de la forme noire selon l'état.
-    static func shapeSize(for geometry: NotchGeometry, isExpanded: Bool, hasCompactContent: Bool) -> CGSize {
+    static func shapeSize(for geometry: NotchGeometry, isExpanded: Bool, hasCompactContent: Bool,
+                          sideWidth: CGFloat = compactSideWidth) -> CGSize {
         let ears = geometry.style == .notch ? earRadius * 2 : 0
         let closed = geometry.closedSize
 
@@ -69,10 +70,10 @@ enum NotchLayout {
         switch geometry.style {
         case .notch:
             // Le contenu se place de part et d'autre de l'encoche physique.
-            return CGSize(width: closed.width + compactSideWidth * 2 + ears, height: closed.height)
+            return CGSize(width: closed.width + sideWidth * 2 + ears, height: closed.height)
         case .pill:
             // Pas d'encoche physique à contourner : la pastille s'élargit simplement.
-            return CGSize(width: max(closed.width, compactSideWidth * 2 + 8), height: closed.height)
+            return CGSize(width: max(closed.width, sideWidth * 2 + 8), height: closed.height)
         }
     }
 
@@ -104,8 +105,9 @@ enum NotchLayout {
     }
 
     /// Taille de la fenêtre nécessaire pour contenir la forme.
-    static func panelSize(for geometry: NotchGeometry, isExpanded: Bool, hasCompactContent: Bool) -> CGSize {
-        let shape = shapeSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent)
+    static func panelSize(for geometry: NotchGeometry, isExpanded: Bool, hasCompactContent: Bool,
+                          sideWidth: CGFloat = compactSideWidth) -> CGSize {
+        let shape = shapeSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent, sideWidth: sideWidth)
         return CGSize(width: shape.width, height: shape.height + topInset(for: geometry.style))
     }
 

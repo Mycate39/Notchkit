@@ -25,6 +25,9 @@
     "≈ %@ tokens" : {
 
     },
+    "≈ %@ tokens dans la session de 5 h" : {
+
+    },
     "À propos" : {
 
     },
@@ -287,6 +290,9 @@
 
     },
     "Estimation : comparée à votre plus grosse session de 5 h observée (%@ tokens). Anthropic ne publie pas les plafonds exacts." : {
+
+    },
+    "Estimation comparée à votre plus grosse session observée." : {
 
     },
     "Exécute : %@" : {
@@ -572,6 +578,9 @@
     "Réglages…" : {
 
     },
+    "réinitialisation à %@" : {
+
+    },
     "Réinitialisation à %@" : {
 
     },
@@ -609,6 +618,9 @@
 
     },
     "Système" : {
+
+    },
+    "Temps restant pour répondre à Claude depuis l'encoche" : {
 
     },
     "Terminé" : {

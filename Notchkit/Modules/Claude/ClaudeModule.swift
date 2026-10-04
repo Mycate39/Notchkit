@@ -31,6 +31,10 @@ final class ClaudeModule: NotchModule {
     var hooksInstalled: Bool { installStatus == .installed }
     private(set) var installerMessage: String?
     private(set) var usage: ClaudeUsageSummary?
+    /// Utilisation réelle transmise par la barre d'état de Claude Code (prioritaire sur l'estimation).
+    private(set) var rateLimits: ClaudeRateLimits?
+    /// L'utilisateur a sa propre barre d'état : l'utilisation réelle n'est pas transmise.
+    private(set) var hasCustomStatusLine = false
     /// Messages en attente de remise, par session.
     private(set) var pendingMessages: [String: [String]] = [:]
 
@@ -56,6 +60,7 @@ final class ClaudeModule: NotchModule {
         static let token = "module.claude.token"
         static let port = "module.claude.port"
         static let personalMax = "module.claude.personalMaxTokens"
+        static let rateLimits = "module.claude.rateLimits"
     }
 
     let port: UInt16
@@ -86,6 +91,10 @@ final class ClaudeModule: NotchModule {
         let storedPort = defaults.integer(forKey: Keys.port)
         port = (1024...65535).contains(storedPort) ? UInt16(storedPort) : Self.defaultPort
         server = ClaudeHookServer(token: token)
+        // Dernière utilisation réelle connue (affichée dès le lancement).
+        rateLimits = defaults.data(forKey: Keys.rateLimits)
+            .flatMap { try? JSONDecoder().decode(ClaudeRateLimits.self, from: $0) }
+            .map { $0.merged(with: nil) }
     }
 
     // MARK: Cycle de vie
@@ -99,6 +108,7 @@ final class ClaudeModule: NotchModule {
             guard let self else { return reply.send(nil) }
             self.handle(json, reply: reply)
         }
+        server.statusHandler = { [weak self] json in self?.handleStatus(json) ?? "" }
         server.start(port: port)
         refreshInstallState()
 
@@ -149,6 +159,18 @@ final class ClaudeModule: NotchModule {
             return openReplyWindow(event.sessionID, reply: reply)
         }
         reply.send(nil)
+    }
+
+    /// Données de la barre d'état : on en extrait l'utilisation réelle et on renvoie la ligne à afficher.
+    func handleStatus(_ json: [String: Any]) -> String {
+        if let limits = ClaudeRateLimits(statusJSON: json) {
+            let merged = limits.merged(with: rateLimits)
+            if merged != rateLimits {
+                rateLimits = merged
+                UserDefaults.standard.set(try? JSONEncoder().encode(merged), forKey: Keys.rateLimits)
+            }
+        }
+        return rateLimits?.statusLineText() ?? "Notchkit"
     }
 
     /// Variante synchrone (tests) : renvoie la réponse immédiate éventuelle.
@@ -239,6 +261,7 @@ final class ClaudeModule: NotchModule {
 
     func refreshInstallState() {
         installStatus = ClaudeHooksInstaller.status(port: port, token: token)
+        hasCustomStatusLine = ClaudeHooksInstaller.hasCustomStatusLine()
     }
 
     func installHooks() {

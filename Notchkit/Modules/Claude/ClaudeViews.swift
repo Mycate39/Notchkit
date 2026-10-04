@@ -76,34 +76,26 @@ struct ClaudeExpandedView: View {
                     .foregroundStyle(.white.opacity(0.45))
             }
             // Quand une session est affichée, la place manque en bas : l'utilisation passe en badge.
-            if session != nil, let usage = module.usage, let fraction = usage.usedFraction {
-                usageBadge(usage, fraction: fraction)
+            if session != nil, let line = usageLines.first {
+                usageBadge(line)
             }
         }
         .lineLimit(1)
     }
 
-    private func usageBadge(_ usage: ClaudeUsageSummary, fraction: Double) -> some View {
+    private func usageBadge(_ line: UsageLine) -> some View {
         HStack(spacing: 3) {
             Image(systemName: "gauge.with.dots.needle.33percent")
                 .font(.system(size: 9, weight: .semibold))
-            Text(fraction, format: .percent.precision(.fractionLength(0)))
+            Text(verbatim: (line.isEstimate ? "≈ " : "") + line.fraction.formatted(.percent.precision(.fractionLength(0))))
                 .font(.system(size: 12, weight: .bold, design: .rounded))
                 .monospacedDigit()
         }
-        .foregroundStyle(Self.color(for: fraction))
+        .foregroundStyle(Self.color(for: line.fraction))
         .padding(.horizontal, 6)
         .padding(.vertical, 2)
-        .background(Self.color(for: fraction).opacity(0.15), in: Capsule())
-        .help(usageHelp(usage))
-    }
-
-    private func usageHelp(_ usage: ClaudeUsageSummary) -> String {
-        var text = String(localized: "≈ \(usage.currentTokens.formatted(.number.notation(.compactName))) tokens dans la session de 5 h")
-        if let reset = usage.resetAt {
-            text += " · " + String(localized: "réinitialisation à \(reset.formatted(date: .omitted, time: .shortened))")
-        }
-        return text + ". " + String(localized: "Estimation comparée à votre plus grosse session observée.")
+        .background(Self.color(for: line.fraction).opacity(0.15), in: Capsule())
+        .help(usageLines.map(\.helpText).joined(separator: "\n"))
     }
 
     private func title(_ session: ClaudeSession?) -> LocalizedStringKey {
@@ -188,46 +180,82 @@ struct ClaudeExpandedView: View {
         }
     }
 
+    /// Lignes d'utilisation : réelles (barre d'état de Claude Code) si disponibles, sinon estimées.
+    private var usageLines: [UsageLine] {
+        let now = Date()
+        if let limits = module.rateLimits {
+            var lines: [UsageLine] = []
+            if let window = limits.fiveHour {
+                lines.append(UsageLine(label: "Session", fraction: window.fraction(at: now), resetAt: window.resetsAt > now ? window.resetsAt : nil, isEstimate: false))
+            }
+            if let window = limits.sevenDay {
+                lines.append(UsageLine(label: "Semaine", fraction: window.fraction(at: now), resetAt: window.resetsAt > now ? window.resetsAt : nil, isEstimate: false))
+            }
+            if !lines.isEmpty { return lines }
+        }
+        if let usage = module.usage, let fraction = usage.usedFraction {
+            return [UsageLine(label: "Session", fraction: fraction, resetAt: usage.resetAt, isEstimate: true)]
+        }
+        return []
+    }
+
     @ViewBuilder
     private var usageRow: some View {
-        if let usage = module.usage {
-            if let fraction = usage.usedFraction, let reset = usage.resetAt {
-                VStack(alignment: .leading, spacing: 4) {
-                    HStack(alignment: .lastTextBaseline, spacing: 6) {
-                        // Pourcentage bien visible, coloré selon le niveau.
-                        Text(fraction, format: .percent.precision(.fractionLength(0)))
-                            .font(.system(size: 18, weight: .bold, design: .rounded))
-                            .monospacedDigit()
-                            .foregroundStyle(Self.color(for: fraction))
-                        Text("de la session utilisée")
-                            .font(.system(size: 10, weight: .medium))
-                            .foregroundStyle(.white.opacity(0.7))
-                        Spacer(minLength: 4)
-                        VStack(alignment: .trailing, spacing: 0) {
-                            Text("≈ \(usage.currentTokens.formatted(.number.notation(.compactName))) tokens")
-                            Text("Réinitialisation à \(reset.formatted(date: .omitted, time: .shortened))")
+        let lines = usageLines
+        if lines.isEmpty {
+            Text("Aucune session d'utilisation en cours")
+                .font(.system(size: 10, weight: .medium))
+                .foregroundStyle(.white.opacity(0.5))
+        } else {
+            VStack(alignment: .leading, spacing: 5) {
+                ForEach(lines) { line in
+                    HStack(spacing: 8) {
+                        VStack(alignment: .leading, spacing: 0) {
+                            Text(line.label)
+                                .font(.system(size: 10, weight: .semibold))
+                            if let reset = line.resetAt {
+                                Text(Self.resetText(reset))
+                                    .font(.system(size: 8, weight: .medium))
+                                    .foregroundStyle(.white.opacity(0.5))
+                            }
                         }
-                        .font(.system(size: 9, weight: .medium))
-                        .foregroundStyle(.white.opacity(0.5))
+                        .frame(width: 112, alignment: .leading)
+
+                        GeometryReader { proxy in
+                            ZStack(alignment: .leading) {
+                                Capsule().fill(.white.opacity(0.15))
+                                Capsule().fill(Self.color(for: line.fraction))
+                                    .frame(width: max(4, proxy.size.width * line.fraction))
+                            }
+                        }
+                        .frame(height: 5)
+
+                        Text(verbatim: (line.isEstimate ? "≈ " : "") + line.fraction.formatted(.percent.precision(.fractionLength(0))))
+                            .font(.system(size: 13, weight: .bold, design: .rounded))
+                            .monospacedDigit()
+                            .foregroundStyle(Self.color(for: line.fraction))
+                            .frame(width: 46, alignment: .trailing)
                     }
                     .lineLimit(1)
-
-                    GeometryReader { proxy in
-                        ZStack(alignment: .leading) {
-                            Capsule().fill(.white.opacity(0.15))
-                            Capsule().fill(Self.color(for: fraction))
-                                .frame(width: max(4, proxy.size.width * fraction))
-                        }
-                    }
-                    .frame(height: 5)
+                    .help(line.helpText)
                 }
-                .help("Estimation : comparée à votre plus grosse session de 5 h observée (\(usage.personalMax.formatted(.number.notation(.compactName))) tokens). Anthropic ne publie pas les plafonds exacts.")
-            } else {
-                Text("Aucune session d'utilisation en cours")
-                    .font(.system(size: 10, weight: .medium))
-                    .foregroundStyle(.white.opacity(0.5))
+                if lines.contains(where: \.isEstimate) {
+                    Text("Estimation locale : installez l'intégration (barre d'état) pour les chiffres réels.")
+                        .font(.system(size: 8))
+                        .foregroundStyle(.white.opacity(0.4))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                }
             }
         }
+    }
+
+    /// Ex. « Réinitialisation à 15:00 » ou « Réinit. vendredi 03:00 ».
+    nonisolated static func resetText(_ date: Date) -> String {
+        if Calendar.current.isDateInToday(date) {
+            return String(localized: "Réinitialisation à \(date.formatted(date: .omitted, time: .shortened))")
+        }
+        return String(localized: "Réinit. \(date.formatted(.dateTime.weekday(.wide).hour().minute()))")
     }
 
     /// Orange en temps normal, puis jaune et rouge à l'approche du plafond estimé.
@@ -286,6 +314,12 @@ struct ClaudeSettingsView: View {
                 }
             }
 
+            if module.hasCustomStatusLine {
+                Text("Vous avez déjà votre propre barre d'état Claude Code : Notchkit ne la remplace pas, l'utilisation affichée reste donc une estimation.")
+                    .font(.caption)
+                    .foregroundStyle(.orange)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
             if case let .failed(reason) = module.serverState {
                 Text("Le serveur local n'a pas pu démarrer sur le port \(String(module.port)) : \(reason)")
                     .font(.caption)
@@ -297,7 +331,7 @@ struct ClaudeSettingsView: View {
                     .foregroundStyle(.secondary)
             }
 
-            Text("L'utilisation est estimée à partir des fichiers de session de Claude Code sur ce Mac (sessions de 5 h). Les conversations sur claude.ai ne sont pas comptées, et la jauge compare à votre plus grosse session observée : Anthropic ne publie pas les plafonds exacts.")
+            Text("L'utilisation réelle (session de 5 h et semaine) est transmise par Claude Code à sa barre d'état, à chaque message. En attendant ces données, Notchkit affiche une estimation calculée à partir des fichiers de session locaux.")
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -306,7 +340,7 @@ struct ClaudeSettingsView: View {
             Button("Installer", action: module.installHooks)
             Button("Annuler", role: .cancel) {}
         } message: {
-            Text("Notchkit va ajouter des hooks dans ~/.claude/settings.json pour que Claude Code le prévienne de son activité (connexion locale uniquement, protégée par un jeton). Vos réglages existants sont conservés et une copie de sauvegarde est faite. Les nouvelles sessions de Claude Code en tiendront compte.")
+            Text("Notchkit va ajouter des hooks et une barre d'état dans ~/.claude/settings.json pour que Claude Code le prévienne de son activité et lui transmette votre utilisation réelle (connexion locale uniquement, protégée par un jeton). Vos réglages existants sont conservés et une copie de sauvegarde est faite. Les nouvelles sessions de Claude Code en tiendront compte.")
         }
         .onAppear { module.refreshInstallState() }
     }
@@ -317,6 +351,25 @@ struct ClaudeSettingsView: View {
         case .outdated: "Mise à jour de l'intégration nécessaire"
         case .notInstalled: "Intégration Claude Code non installée"
         }
+    }
+}
+
+/// Une ligne d'utilisation (session de 5 h ou semaine).
+struct UsageLine: Identifiable {
+    let label: LocalizedStringKey
+    let fraction: Double
+    let resetAt: Date?
+    /// Vrai pour l'estimation locale (faute de données réelles).
+    let isEstimate: Bool
+
+    var id: String { "\(label)" }
+
+    var helpText: String {
+        let percent = fraction.formatted(.percent.precision(.fractionLength(0)))
+        let reset = resetAt.map { " · " + ClaudeExpandedView.resetText($0) } ?? ""
+        return isEstimate
+            ? String(localized: "Estimation : \(percent)\(reset). Comparée à votre plus grosse session observée.")
+            : String(localized: "\(percent) utilisés\(reset) (chiffres transmis par Claude Code).")
     }
 }
 

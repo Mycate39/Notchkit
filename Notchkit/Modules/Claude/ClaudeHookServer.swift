@@ -56,6 +56,15 @@ enum HTTPParser {
     }
 
     static func response(status: Int, json: [String: Any]? = nil) -> Data {
+        let body = json.flatMap { try? JSONSerialization.data(withJSONObject: $0) } ?? Data()
+        return response(status: status, body: body, contentType: body.isEmpty ? nil : "application/json")
+    }
+
+    static func response(status: Int, text: String) -> Data {
+        response(status: status, body: Data(text.utf8), contentType: "text/plain; charset=utf-8")
+    }
+
+    private static func response(status: Int, body: Data, contentType: String?) -> Data {
         let reason = switch status {
         case 200: "OK"
         case 401: "Unauthorized"
@@ -63,9 +72,8 @@ enum HTTPParser {
         case 413: "Payload Too Large"
         default: "Bad Request"
         }
-        let body = json.flatMap { try? JSONSerialization.data(withJSONObject: $0) } ?? Data()
         var head = "HTTP/1.1 \(status) \(reason)\r\nContent-Length: \(body.count)\r\nConnection: close\r\n"
-        if !body.isEmpty { head += "Content-Type: application/json\r\n" }
+        if let contentType { head += "Content-Type: \(contentType)\r\n" }
         head += "\r\n"
         return Data(head.utf8) + body
     }
@@ -112,6 +120,8 @@ final class ClaudeHookServer {
     }
 
     nonisolated static let path = "/notchkit/claude/hook"
+    /// Données de la barre d'état de Claude Code (utilisation réelle des abonnements).
+    nonisolated static let statusPath = "/notchkit/claude/status"
     nonisolated static let tokenHeader = "x-notchkit-token"
 
     private(set) var state: State = .stopped {
@@ -120,6 +130,8 @@ final class ClaudeHookServer {
     var onStateChange: (@MainActor (State) -> Void)?
     /// Traite un événement. La réponse est envoyée via `HookReply`, tout de suite ou plus tard.
     var handler: (@MainActor ([String: Any], HookReply) -> Void)?
+    /// Reçoit les données de la barre d'état et renvoie le texte qu'elle doit afficher.
+    var statusHandler: (@MainActor ([String: Any]) -> String)?
 
     private let token: String
     private var listener: NWListener?
@@ -212,7 +224,7 @@ final class ClaudeHookServer {
     }
 
     private func respond(to request: HTTPRequest, on connection: NWConnection) {
-        guard request.method == "POST", request.path == Self.path else {
+        guard request.method == "POST", request.path == Self.path || request.path == Self.statusPath else {
             return reply(on: connection, HTTPParser.response(status: 404))
         }
         guard request.headers[Self.tokenHeader] == token else {
@@ -220,6 +232,11 @@ final class ClaudeHookServer {
         }
         guard let json = try? JSONSerialization.jsonObject(with: request.body) as? [String: Any] else {
             return reply(on: connection, HTTPParser.response(status: 400))
+        }
+
+        if request.path == Self.statusPath {
+            let text = statusHandler?(json) ?? ""
+            return reply(on: connection, HTTPParser.response(status: 200, text: text))
         }
 
         let hookReply = HookReply { [weak self] response in

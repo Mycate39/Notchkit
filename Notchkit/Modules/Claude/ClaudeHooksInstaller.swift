@@ -25,7 +25,7 @@ enum ClaudeHooksInstaller {
     ]
 
     /// Version de notre configuration : à incrémenter quand elle change (une réinstallation est alors proposée).
-    static let version = "2"
+    static let version = "3"
     /// Le hook Stop peut rester ouvert pendant la fenêtre de réponse (au plus 4 min) : délai plus long.
     static let stopTimeout = 300
     static let defaultTimeout = 10
@@ -36,14 +36,39 @@ enum ClaudeHooksInstaller {
             .appendingPathComponent("settings.json")
     }
 
+    /// Script de barre d'état : transmet à Notchkit les données envoyées par Claude Code
+    /// (dont l'utilisation réelle de l'abonnement) et affiche la ligne renvoyée par Notchkit.
+    static var statusLineScriptURL: URL {
+        FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("Notchkit", isDirectory: true)
+            .appendingPathComponent("claude-statusline.sh")
+    }
+
+    static func statusLineScript(port: UInt16, token: String) -> String {
+        """
+        #!/bin/sh
+        # Généré par Notchkit. Transmet les données de la barre d'état de Claude Code à Notchkit
+        # (connexion locale uniquement) et affiche la ligne qu'il renvoie. Sans Notchkit : rien.
+        exec /usr/bin/curl -s -m 1 -X POST \\
+          -H 'X-Notchkit-Token: \(token)' -H 'Content-Type: application/json' \\
+          --data-binary @- 'http://127.0.0.1:\(port)\(ClaudeHookServer.statusPath)' 2>/dev/null
+
+        """
+    }
+
     static func hookURL(port: UInt16) -> String {
         "http://127.0.0.1:\(port)\(ClaudeHookServer.path)"
     }
 
     // MARK: - Transformations (pures, testées)
 
-    static func installing(into settings: [String: Any], port: UInt16, token: String) -> [String: Any] {
+    static func installing(into settings: [String: Any], port: UInt16, token: String,
+                           statusLineCommand: String? = nil) -> [String: Any] {
         var result = removing(from: settings)
+        // Barre d'état : seulement si l'utilisateur n'en a pas déjà une à lui.
+        if let statusLineCommand, result["statusLine"] == nil {
+            result["statusLine"] = ["type": "command", "command": statusLineCommand]
+        }
         var hooks = result["hooks"] as? [String: Any] ?? [:]
         for event in events {
             let hook: [String: Any] = [
@@ -64,6 +89,7 @@ enum ClaudeHooksInstaller {
 
     static func removing(from settings: [String: Any]) -> [String: Any] {
         var result = settings
+        if hasOurStatusLine(in: settings) { result["statusLine"] = nil }
         guard var hooks = settings["hooks"] as? [String: Any] else { return result }
 
         for (event, value) in hooks {
@@ -86,6 +112,8 @@ enum ClaudeHooksInstaller {
     /// Vrai si nos hooks sont présents pour tous les événements, avec le bon port et le bon jeton.
     static func isInstalled(in settings: [String: Any], port: UInt16, token: String) -> Bool {
         guard let hooks = settings["hooks"] as? [String: Any] else { return false }
+        // Barre d'état : la nôtre, ou une barre personnelle que l'on a laissée en place.
+        guard settings["statusLine"] != nil else { return false }
         return events.allSatisfy { event in
             let groups = hooks[event.name] as? [[String: Any]] ?? []
             return groups.contains { group in
@@ -97,6 +125,16 @@ enum ClaudeHooksInstaller {
                 }
             }
         }
+    }
+
+    /// Vrai si la barre d'état configurée est celle de Notchkit.
+    static func hasOurStatusLine(in settings: [String: Any]) -> Bool {
+        ((settings["statusLine"] as? [String: Any])?["command"] as? String)?.contains("claude-statusline.sh") == true
+    }
+
+    /// Vrai si l'utilisateur a sa propre barre d'état (on ne la remplace pas).
+    static func hasCustomStatusLine(in settings: [String: Any]) -> Bool {
+        settings["statusLine"] != nil && !hasOurStatusLine(in: settings)
     }
 
     /// Vrai si des hooks de Notchkit sont présents (même anciens ou incomplets).
@@ -133,7 +171,10 @@ enum ClaudeHooksInstaller {
 
     static func status(port: UInt16, token: String) -> Status {
         guard let settings = try? readSettings() else { return .notInstalled }
-        if isInstalled(in: settings, port: port, token: token) { return .installed }
+        if isInstalled(in: settings, port: port, token: token),
+           !hasOurStatusLine(in: settings) || FileManager.default.fileExists(atPath: statusLineScriptURL.path) {
+            return .installed
+        }
         return hasOurHooks(in: settings) ? .outdated : .notInstalled
     }
 
@@ -141,13 +182,27 @@ enum ClaudeHooksInstaller {
     @discardableResult
     static func install(port: UInt16, token: String) throws -> URL? {
         let settings = try readSettings()
-        return try write(installing(into: settings, port: port, token: token))
+        // Script de barre d'état, lisible uniquement par l'utilisateur (il contient le jeton).
+        let script = statusLineScriptURL
+        try FileManager.default.createDirectory(at: script.deletingLastPathComponent(), withIntermediateDirectories: true)
+        try Data(statusLineScript(port: port, token: token).utf8).write(to: script, options: .atomic)
+        try FileManager.default.setAttributes([.posixPermissions: 0o700], ofItemAtPath: script.path)
+        // Chemin entre guillemets : « Application Support » contient une espace.
+        let command = "'\(script.path)'"
+        return try write(installing(into: settings, port: port, token: token, statusLineCommand: command))
+    }
+
+    /// Vrai si l'utilisateur a sa propre barre d'état (l'utilisation réelle n'est alors pas disponible).
+    static func hasCustomStatusLine() -> Bool {
+        (try? readSettings()).map { hasCustomStatusLine(in: $0) } ?? false
     }
 
     @discardableResult
     static func uninstall() throws -> URL? {
         let settings = try readSettings()
-        return try write(removing(from: settings))
+        let backup = try write(removing(from: settings))
+        try? FileManager.default.removeItem(at: statusLineScriptURL)
+        return backup
     }
 
     private static func write(_ settings: [String: Any]) throws -> URL? {

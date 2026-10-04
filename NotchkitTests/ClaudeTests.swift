@@ -41,8 +41,9 @@ struct ClaudeHooksInstallerTests {
     ]
 
     @Test func installationConserveLesReglagesExistants() throws {
-        let installed = ClaudeHooksInstaller.installing(into: existing, port: 52731, token: "t")
+        let installed = ClaudeHooksInstaller.installing(into: existing, port: 52731, token: "t", statusLineCommand: "'/x/claude-statusline.sh'")
         #expect(installed["model"] as? String == "opus")
+        #expect((installed["statusLine"] as? [String: Any])?["command"] as? String == "'/x/claude-statusline.sh'")
         let hooks = try #require(installed["hooks"] as? [String: Any])
         let pre = try #require(hooks["PreToolUse"] as? [[String: Any]])
         #expect(pre.count == 2, "le hook personnel doit être conservé")
@@ -64,7 +65,8 @@ struct ClaudeHooksInstallerTests {
     }
 
     @Test func desinstallationRetrouveLEtatInitial() throws {
-        let removed = ClaudeHooksInstaller.removing(from: ClaudeHooksInstaller.installing(into: existing, port: 52731, token: "t"))
+        let removed = ClaudeHooksInstaller.removing(from: ClaudeHooksInstaller.installing(into: existing, port: 52731, token: "t", statusLineCommand: "'/x/claude-statusline.sh'"))
+        #expect(removed["statusLine"] == nil)
         let hooks = try #require(removed["hooks"] as? [String: Any])
         #expect(hooks.keys.sorted() == ["PreToolUse"])
         #expect(removed["model"] as? String == "opus")
@@ -72,6 +74,52 @@ struct ClaudeHooksInstallerTests {
         // Sans hooks personnels, la clé « hooks » disparaît complètement.
         let clean = ClaudeHooksInstaller.removing(from: ClaudeHooksInstaller.installing(into: [:], port: 52731, token: "t"))
         #expect(clean["hooks"] == nil)
+    }
+}
+
+struct ClaudeStatusLineTests {
+    @Test func barreDEtatPersonnelleConservee() throws {
+        let custom: [String: Any] = ["statusLine": ["type": "command", "command": "~/ma-barre.sh"]]
+        let installed = ClaudeHooksInstaller.installing(into: custom, port: 52731, token: "t", statusLineCommand: "'/x/claude-statusline.sh'")
+        #expect((installed["statusLine"] as? [String: Any])?["command"] as? String == "~/ma-barre.sh")
+        #expect(ClaudeHooksInstaller.hasCustomStatusLine(in: installed))
+        // La désinstallation ne retire pas la barre de l'utilisateur.
+        #expect(ClaudeHooksInstaller.removing(from: installed)["statusLine"] != nil)
+    }
+
+    @Test func scriptTransmetAuServeurLocal() {
+        let script = ClaudeHooksInstaller.statusLineScript(port: 52731, token: "secret")
+        #expect(script.hasPrefix("#!/bin/sh"))
+        #expect(script.contains("X-Notchkit-Token: secret"))
+        #expect(script.contains("http://127.0.0.1:52731/notchkit/claude/status"))
+    }
+
+    @Test func lectureDesLimitesReelles() throws {
+        let now = Date(timeIntervalSince1970: 1_000_000)
+        let json: [String: Any] = ["rate_limits": [
+            "five_hour": ["used_percentage": 35, "resets_at": 1_010_000],
+            "seven_day": ["used_percentage": 23.4, "resets_at": 1_500_000],
+        ]]
+        let limits = try #require(ClaudeRateLimits(statusJSON: json, at: now))
+        #expect(limits.fiveHour?.fraction(at: now) == 0.35)
+        #expect(limits.statusLineText(at: now) == "Session 35 % · Semaine 23 %")
+
+        // Après la réinitialisation de la session, elle repart de zéro.
+        #expect(limits.fiveHour?.fraction(at: Date(timeIntervalSince1970: 1_020_000)) == 0)
+        #expect(ClaudeRateLimits(statusJSON: ["model": ["id": "x"]], at: now) == nil)
+    }
+
+    @Test func fenetreAbsenteReprendLaPrecedente() throws {
+        let now = Date(timeIntervalSince1970: 1_000_000)
+        let previous = try #require(ClaudeRateLimits(statusJSON: ["rate_limits": [
+            "seven_day": ["used_percentage": 23, "resets_at": 1_500_000],
+        ]], at: now))
+        let update = try #require(ClaudeRateLimits(statusJSON: ["rate_limits": [
+            "five_hour": ["used_percentage": 40, "resets_at": 1_010_000],
+        ]], at: now))
+        let merged = update.merged(with: previous, at: now)
+        #expect(merged.fiveHour?.usedPercentage == 40)
+        #expect(merged.sevenDay?.usedPercentage == 23)
     }
 }
 

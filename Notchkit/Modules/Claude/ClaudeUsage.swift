@@ -127,3 +127,59 @@ enum ClaudeUsageLoader {
         }.value
     }
 }
+
+// MARK: - Utilisation réelle (barre d'état de Claude Code)
+
+/// Utilisation réelle de l'abonnement, transmise par Claude Code à sa barre d'état
+/// (champs officiels `rate_limits.five_hour` et `rate_limits.seven_day`, abonnements Pro/Max).
+struct ClaudeRateLimits: Codable, Equatable, Sendable {
+    struct Window: Codable, Equatable, Sendable {
+        /// Pourcentage utilisé, de 0 à 100.
+        let usedPercentage: Double
+        let resetsAt: Date
+
+        /// Part utilisée (0…1). Après la réinitialisation, la fenêtre repart de zéro.
+        func fraction(at date: Date = Date()) -> Double {
+            resetsAt <= date ? 0 : min(1, max(0, usedPercentage / 100))
+        }
+    }
+
+    var fiveHour: Window?
+    var sevenDay: Window?
+    var receivedAt: Date
+
+    /// Lit les données JSON de la barre d'état. `nil` si elles ne contiennent aucune limite.
+    init?(statusJSON json: [String: Any], at date: Date = Date()) {
+        guard let limits = json["rate_limits"] as? [String: Any] else { return nil }
+
+        func window(_ key: String) -> Window? {
+            guard let object = limits[key] as? [String: Any],
+                  let used = (object["used_percentage"] as? NSNumber)?.doubleValue,
+                  let reset = (object["resets_at"] as? NSNumber)?.doubleValue
+            else { return nil }
+            return Window(usedPercentage: used, resetsAt: Date(timeIntervalSince1970: reset))
+        }
+
+        fiveHour = window("five_hour")
+        sevenDay = window("seven_day")
+        receivedAt = date
+        if fiveHour == nil && sevenDay == nil { return nil }
+    }
+
+    /// Combine avec les données précédentes : une fenêtre absente des nouvelles données
+    /// (Claude Code la retire après sa réinitialisation) reprend l'ancienne si elle court encore.
+    func merged(with previous: ClaudeRateLimits?, at date: Date = Date()) -> ClaudeRateLimits {
+        var result = self
+        if result.fiveHour == nil, let old = previous?.fiveHour, old.resetsAt > date { result.fiveHour = old }
+        if result.sevenDay == nil, let old = previous?.sevenDay, old.resetsAt > date { result.sevenDay = old }
+        return result
+    }
+
+    /// Ligne affichée par la barre d'état de Claude Code, ex. « Session 35 % · Semaine 23 % ».
+    func statusLineText(at date: Date = Date()) -> String {
+        var parts: [String] = []
+        if let fiveHour { parts.append(String(localized: "Session \(Int((fiveHour.fraction(at: date) * 100).rounded())) %")) }
+        if let sevenDay { parts.append(String(localized: "Semaine \(Int((sevenDay.fraction(at: date) * 100).rounded())) %")) }
+        return parts.joined(separator: " · ")
+    }
+}

@@ -25,6 +25,8 @@ final class AirPodsModule: NotchModule {
     private(set) var battery: AirPodsPrivate.Battery?
     private(set) var listeningMode: AirPodsPrivate.ListeningMode?
     private(set) var supportedModes: [AirPodsPrivate.ListeningMode] = []
+    /// Mode actuel non reconnu (valeur brute), ex. le mode « Adaptatif » de certains modèles.
+    private(set) var unknownModeValue: UInt8?
 
     /// Lire la batterie et piloter le mode d'écoute (demande l'autorisation Bluetooth).
     var advancedControls: Bool {
@@ -110,6 +112,15 @@ final class AirPodsModule: NotchModule {
         battery = newBattery.isEmpty ? nil : newBattery
         supportedModes = AirPodsPrivate.supportedModes(of: device)
         listeningMode = AirPodsPrivate.listeningMode(of: device)
+        let raw = AirPodsPrivate.rawListeningMode(of: device)
+        unknownModeValue = listeningMode == nil && raw != nil && raw != 0 ? raw : nil
+    }
+
+    /// Diagnostic à copier (réglages du module).
+    func copyDiagnostic() {
+        let text = AirPodsPrivate.diagnostic(for: devices)
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(text, forType: .string)
     }
 
     func setListeningMode(_ mode: AirPodsPrivate.ListeningMode) {

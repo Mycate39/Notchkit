@@ -1,3 +1,4 @@
+import CoreBluetooth
 import Foundation
 import IOBluetooth
 
@@ -67,12 +68,58 @@ enum AirPodsPrivate {
 
     // MARK: - Mode d'écoute
 
+    /// Identifiants produit connus de casques Apple avec réduction de bruit (AirPods Pro, Pro 2,
+    /// Max, AirPods 4 avec réduction de bruit…). Liste indicative : macOS ne signale pas toujours
+    /// correctement l'ANC des modèles récents.
+    static let knownNoiseCancellingProductIDs: Set<UInt16> = [0x200E, 0x2014, 0x2024, 0x200A, 0x201F, 0x201B, 0x2027]
+
     static func supportedModes(of device: IOBluetoothDevice) -> [ListeningMode] {
         guard device.responds(to: NSSelectorFromString("setListeningMode:")) else { return [] }
-        var modes: [ListeningMode] = [.off]
-        if bool(device, "isANCSupported") { modes.append(.noiseCancellation) }
-        if bool(device, "isTransparencySupported") { modes.append(.transparency) }
-        return modes.count > 1 ? modes : []
+        let name = (device.name ?? "").lowercased()
+        let productID = uint16(device, "productID") ?? 0
+        // Plusieurs indices, car l'indicateur officieux est parfois faux pour les modèles récents.
+        let hasANC = bool(device, "isANCSupported")
+            || uint32(device, "listeningModeConfigs").map { $0 != 0 } == true
+            || knownNoiseCancellingProductIDs.contains(productID)
+            || name.contains("pro") || name.contains("max")
+        guard hasANC else { return [] }
+        return [.off, .noiseCancellation, .transparency]
+    }
+
+    /// Valeur brute du mode actuel (pour afficher un mode inconnu, ex. « Adaptatif »).
+    static func rawListeningMode(of device: IOBluetoothDevice) -> UInt8? {
+        uint8(device, "listeningMode")
+    }
+
+    /// Texte de diagnostic (à copier pour signaler un problème).
+    static func diagnostic(for headphones: [HeadphoneDevice]) -> String {
+        var lines: [String] = []
+        let authorization: String = switch CBManager.authorization {
+        case .allowedAlways: "autorisée"
+        case .denied: "REFUSÉE"
+        case .restricted: "restreinte"
+        case .notDetermined: "pas encore demandée"
+        @unknown default: "inconnue"
+        }
+        lines.append("Autorisation Bluetooth : \(authorization)")
+        lines.append("Sorties audio Bluetooth : " + (headphones.isEmpty ? "aucune" : headphones.map { "\($0.name) [\($0.uid)]" }.joined(separator: ", ")))
+        let paired = (IOBluetoothDevice.pairedDevices() as? [IOBluetoothDevice]) ?? []
+        lines.append("Appareils appairés lisibles : \(paired.count)")
+        for headphone in headphones {
+            guard let device = bluetoothDevice(for: headphone) else {
+                lines.append("• \(headphone.name) : appareil Bluetooth NON trouvé")
+                continue
+            }
+            let selectors = ["listeningMode", "setListeningMode:", "isANCSupported", "isTransparencySupported", "listeningModeConfigs", "productID"]
+                .map { "\($0)=\(device.responds(to: NSSelectorFromString($0)) ? "oui" : "non")" }
+            lines.append("• \(device.name ?? "?") (\(device.addressString ?? "?"), connecté : \(device.isConnected()))")
+            lines.append("  méthodes : " + selectors.joined(separator: " "))
+            lines.append("  produit : 0x\(String(uint16(device, "productID") ?? 0, radix: 16, uppercase: true)), mode actuel : \(uint8(device, "listeningMode").map(String.init) ?? "?"), configs : \(uint32(device, "listeningModeConfigs").map { String($0, radix: 2) } ?? "?")")
+            lines.append("  ANC signalé : \(bool(device, "isANCSupported")), transparence signalée : \(bool(device, "isTransparencySupported"))")
+            let battery = battery(of: device)
+            lines.append("  batterie : G \(battery.left.map(String.init) ?? "-") D \(battery.right.map(String.init) ?? "-") boîtier \(battery.caseLevel.map(String.init) ?? "-") unique \(battery.single.map(String.init) ?? "-")")
+        }
+        return lines.joined(separator: "\n")
     }
 
     static func listeningMode(of device: IOBluetoothDevice) -> ListeningMode? {
@@ -107,6 +154,20 @@ enum AirPodsPrivate {
         let selector = NSSelectorFromString(name)
         guard object.responds(to: selector) else { return nil }
         typealias Getter = @convention(c) (AnyObject, Selector) -> UInt8
+        return unsafeBitCast(object.method(for: selector), to: Getter.self)(object, selector)
+    }
+
+    private static func uint16(_ object: NSObject, _ name: String) -> UInt16? {
+        let selector = NSSelectorFromString(name)
+        guard object.responds(to: selector) else { return nil }
+        typealias Getter = @convention(c) (AnyObject, Selector) -> UInt16
+        return unsafeBitCast(object.method(for: selector), to: Getter.self)(object, selector)
+    }
+
+    private static func uint32(_ object: NSObject, _ name: String) -> UInt32? {
+        let selector = NSSelectorFromString(name)
+        guard object.responds(to: selector) else { return nil }
+        typealias Getter = @convention(c) (AnyObject, Selector) -> UInt32
         return unsafeBitCast(object.method(for: selector), to: Getter.self)(object, selector)
     }
 

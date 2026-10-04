@@ -52,6 +52,11 @@ struct AirPodsExpandedView: View {
                         Button("Utiliser comme sortie") { module.makeDefaultOutput(device) }
                             .controlSize(.mini)
                     }
+                    if let unknown = module.unknownModeValue {
+                        Text("Mode actuel : \(unknown == 4 ? String(localized: "Adaptatif") : String(localized: "inconnu (\(unknown))"))")
+                            .font(.system(size: 8, weight: .medium))
+                            .foregroundStyle(.white.opacity(0.5))
+                    }
                     if !module.supportedModes.isEmpty {
                         // Mode d'écoute (API privée).
                         HStack(spacing: 4) {
@@ -140,6 +145,12 @@ struct AirPodsSettingsView: View {
             Toggle("Animation à la connexion", isOn: $module.alertOnConnect)
             Toggle("Animation à la déconnexion", isOn: $module.alertOnDisconnect)
             Toggle("Batterie et mode d'écoute des AirPods", isOn: $module.advancedControls)
+            HStack {
+                Button("Copier le diagnostic") { module.copyDiagnostic() }
+                Text("À coller pour signaler un souci (AirPods connectés).")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
             Text("La batterie de chaque écouteur et le choix du mode (désactivé, réduction du bruit, transparence) utilisent une interface non officielle d'Apple et demandent l'autorisation Bluetooth. Si une mise à jour de macOS la modifie, ces commandes disparaissent simplement de la carte.")
                 .font(.caption)
                 .foregroundStyle(.secondary)

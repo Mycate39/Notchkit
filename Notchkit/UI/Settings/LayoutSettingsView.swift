@@ -24,7 +24,9 @@ struct LayoutEditorContent: View {
 
     var body: some View {
         let pages = manager.pageIDs
-        let hidden = manager.orderedDescriptors.filter { !manager.isEnabled($0.id) && manager.isUnlocked($0) }
+        let hidden = manager.orderedDescriptors.filter {
+            $0.providesWidget && !manager.isEnabled($0.id) && manager.isUnlocked($0)
+        }
 
             VStack(alignment: .leading, spacing: 18) {
                 Text("Glissez les widgets pour les réordonner ou les changer de page. Cliquez sur un widget pour changer sa taille. Astuce : un clic droit sur un widget dans l'encoche offre les mêmes options.")

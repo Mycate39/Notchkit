@@ -35,7 +35,8 @@ final class UnlockModule: NotchModule {
         systemImage: "faceid",
         category: .system,
         tier: .free,
-        defaultEnabled: true
+        defaultEnabled: true,
+        providesWidget: false
     )
 
     var animateUnlock: Bool {

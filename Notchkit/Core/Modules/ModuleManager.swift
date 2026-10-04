@@ -85,14 +85,19 @@ final class ModuleManager {
         1.5
     }
 
+    /// Modules actifs qui ont une carte dans l'encoche dépliée.
+    private var widgetModules: [any NotchModule] {
+        activeModules.filter { type(of: $0).descriptor.providesWidget }
+    }
+
     private var activeWeights: [String: CGFloat] {
-        Dictionary(uniqueKeysWithValues: activeModules.map { ($0.moduleID, weight(for: $0.moduleID)) })
+        Dictionary(uniqueKeysWithValues: widgetModules.map { ($0.moduleID, weight(for: $0.moduleID)) })
     }
 
     /// Pages affichées dans l'encoche dépliée (identifiants des modules actifs).
     var pageIDs: [[String]] {
         WidgetLayoutEngine.pages(
-            activeIDs: activeModules.map(\.moduleID),
+            activeIDs: widgetModules.map(\.moduleID),
             weights: activeWeights,
             layout: settings.settings.widgetLayout
         )
@@ -101,7 +106,7 @@ final class ModuleManager {
     /// Disposition affichée, figée pour être modifiée.
     private var editableLayout: WidgetLayout {
         WidgetLayoutEngine.materialize(
-            activeIDs: activeModules.map(\.moduleID),
+            activeIDs: widgetModules.map(\.moduleID),
             weights: activeWeights,
             layout: settings.settings.widgetLayout
         )

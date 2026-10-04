@@ -40,4 +40,7 @@ struct ModuleDescriptor: Identifiable, Sendable {
     let tier: ModuleTier
     /// État par défaut lors du premier lancement.
     let defaultEnabled: Bool
+    /// Faux pour un module qui fonctionne en arrière-plan sans carte dans l'encoche dépliée
+    /// (ex. animations de déverrouillage) : il n'apparaît ni dans les pages ni dans l'éditeur.
+    var providesWidget = true
 }

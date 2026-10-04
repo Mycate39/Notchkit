@@ -180,16 +180,21 @@ final class MusicModule: NotchModule {
 
     var expandedWidthWeight: CGFloat { 2 }
 
+    /// Affichage replié façon Dynamic Island : pochette à gauche, barres teintées à droite.
+    var compactIsland: Bool { true }
+
     func compactLeading() -> AnyView? {
         guard let nowPlaying else { return nil }
-        return AnyView(ArtworkView(info: nowPlaying, size: 20, cornerRadius: 5))
+        return AnyView(IslandArtworkView(info: nowPlaying))
     }
 
     func compactTrailing() -> AnyView? {
         guard let nowPlaying else { return nil }
         return AnyView(
-            EqualizerView(isAnimating: nowPlaying.isPlaying, monitor: reactiveEqualizer ? spectrum : nil)
-                .frame(width: 30, height: 15)
+            EqualizerView(isAnimating: nowPlaying.isPlaying, monitor: reactiveEqualizer ? spectrum : nil,
+                          color: ArtworkTint.color(for: nowPlaying), spacingRatio: 1, bellShaped: true)
+                .frame(width: 26)
+                .padding(.vertical, 1)
         )
     }
 

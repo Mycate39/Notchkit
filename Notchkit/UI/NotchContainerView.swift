@@ -8,7 +8,9 @@ struct NotchContainerView: View {
     var body: some View {
         let geometry = viewModel.geometry
         let size = viewModel.shapeSize
-        let radii = NotchLayout.cornerRadii(for: geometry.style, isExpanded: viewModel.isExpanded, height: size.height)
+        let island = viewModel.isIsland
+        let radii = NotchLayout.cornerRadii(for: geometry.style, isExpanded: viewModel.isExpanded, height: size.height,
+                                            island: island)
         let shape = NotchShape(
             earRadius: geometry.style == .notch ? NotchLayout.earRadius : 0,
             topCornerRadius: radii.top,
@@ -26,6 +28,10 @@ struct NotchContainerView: View {
         }
         .frame(width: size.width, height: size.height, alignment: .top)
         .background(NotchBackground(appearance: viewModel.appearance))
+        // Île : fin contour gris, comme la Dynamic Island (pas en mode encoche, collé au bord de l'écran).
+        .overlay {
+            shape.stroke(.white.opacity(island && geometry.style == .pill ? 0.2 : 0), lineWidth: 2)
+        }
         .clipShape(shape)
         .contentShape(shape)
         .foregroundStyle(.white)
@@ -36,6 +42,7 @@ struct NotchContainerView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         // Les modules changent de priorité sans passer par le view model : on anime ces changements ici.
         .animation(NotchLayout.spring, value: viewModel.hasCompactContent)
+        .animation(NotchLayout.spring, value: island)
     }
 }
 
@@ -57,9 +64,26 @@ private struct CompactNotchView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .transition(.opacity.combined(with: .scale(scale: 0.9, anchor: .top)))
+        } else if viewModel.isIsland {
+            islandRow(leading: leading, trailing: trailing)
         } else {
             compactRow(ear: ear, leading: leading, trailing: trailing)
         }
+    }
+
+    /// Île : contenu à hauteur fixe (≈ 60 % de la capsule), marges égales sur les côtés.
+    private func islandRow(leading: AnyView?, trailing: AnyView?) -> some View {
+        let height = viewModel.shapeSize.height
+        let content = (height * 0.6).rounded()
+        return HStack(spacing: 0) {
+            leading
+                .frame(height: content)
+            Spacer(minLength: 0)
+            trailing
+                .frame(height: content)
+        }
+        .padding(.horizontal, (height - content) / 2 + 3)
+        .frame(height: height)
     }
 
     private func compactRow(ear: CGFloat, leading: AnyView?, trailing: AnyView?) -> some View {

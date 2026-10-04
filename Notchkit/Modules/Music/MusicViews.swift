@@ -35,6 +35,55 @@ struct ArtworkView: View {
     }
 }
 
+/// Pochette de l'île : carré arrondi qui occupe toute la hauteur disponible.
+struct IslandArtworkView: View {
+    let info: NowPlayingInfo
+
+    var body: some View {
+        GeometryReader { proxy in
+            let side = min(proxy.size.width, proxy.size.height)
+            ArtworkView(info: info, size: side, cornerRadius: side * 0.24)
+        }
+        .aspectRatio(1, contentMode: .fit)
+    }
+}
+
+/// Couleur des barres de l'île, tirée de la pochette (moyenne éclaircie), mise en cache par pochette.
+@MainActor
+enum ArtworkTint {
+    private static var cache: [Int: NSColor] = [:]
+
+    static func color(for info: NowPlayingInfo) -> NSColor {
+        guard let artwork = info.artwork, let hash = info.artworkHash else { return .white }
+        if let cached = cache[hash] { return cached }
+        let color = tint(from: artwork) ?? .white
+        if cache.count > 32 { cache.removeAll() }
+        cache[hash] = color
+        return color
+    }
+
+    /// Moyenne de l'image (réduite à 1 × 1 pixel), puis éclaircie et légèrement désaturée
+    /// pour rester lisible sur fond noir.
+    static func tint(from image: NSImage) -> NSColor? {
+        guard let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil) else { return nil }
+        var pixel = [UInt8](repeating: 0, count: 4)
+        let drawn = pixel.withUnsafeMutableBytes { buffer -> Bool in
+            guard let context = CGContext(data: buffer.baseAddress, width: 1, height: 1, bitsPerComponent: 8,
+                                          bytesPerRow: 4, space: CGColorSpaceCreateDeviceRGB(),
+                                          bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) else { return false }
+            context.interpolationQuality = .medium
+            context.draw(cgImage, in: CGRect(x: 0, y: 0, width: 1, height: 1))
+            return true
+        }
+        guard drawn else { return nil }
+        let average = NSColor(srgbRed: CGFloat(pixel[0]) / 255, green: CGFloat(pixel[1]) / 255,
+                              blue: CGFloat(pixel[2]) / 255, alpha: 1)
+        var hue: CGFloat = 0, saturation: CGFloat = 0, brightness: CGFloat = 0, alpha: CGFloat = 0
+        average.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+        return NSColor(hue: hue, saturation: min(saturation, 0.45), brightness: max(brightness, 0.82), alpha: 1)
+    }
+}
+
 /// Icônes d'apps, mises en cache (la recherche sur disque n'est faite qu'une fois par app).
 @MainActor
 enum AppIconCache {

@@ -39,8 +39,6 @@
 	<string>Notchkit pilote la lecture (lecture, pause, morceau suivant) de Music et Spotify depuis l'encoche.</string>
 	<key>NSAudioCaptureUsageDescription</key>
 	<string>Notchkit analyse le son joué par votre Mac pour animer les barres de l'égaliseur en temps réel. Le son n'est ni enregistré ni envoyé.</string>
-	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>Notchkit lit la batterie de vos AirPods et vous permet de changer leur mode d'écoute depuis l'encoche.</string>
 	<key>NSCalendarsFullAccessUsageDescription</key>
 	<string>Notchkit affiche vos prochains événements dans l'encoche et vous les rappelle quelques minutes avant.</string>
 	<key>NSCalendarsUsageDescription</key>

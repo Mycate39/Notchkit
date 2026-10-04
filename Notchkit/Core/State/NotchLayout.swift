@@ -42,6 +42,10 @@ enum NotchLayout {
     static var expandedSize: CGSize { appearance.expandedSize }
     /// Décalage de la pastille par rapport au haut de l'écran.
     static let pillTopInset: CGFloat = 3
+    /// Hauteur ajoutée à la pastille en affichage « île » (lecture de musique).
+    static let islandExtraHeight: CGFloat = 6
+    /// Proportions de l'île (largeur / hauteur), comme la Dynamic Island pendant la lecture.
+    static let islandAspectRatio: CGFloat = 4.8
     /// Rayon des coins en mode déplié.
     static let expandedCornerRadius: CGFloat = 24
 
@@ -61,7 +65,8 @@ enum NotchLayout {
 
     /// Taille de la forme noire selon l'état.
     static func shapeSize(for geometry: NotchGeometry, isExpanded: Bool, hasCompactContent: Bool,
-                          sideWidth: CGFloat = compactSideWidth, alertSize: CGSize? = nil) -> CGSize {
+                          sideWidth: CGFloat = compactSideWidth, alertSize: CGSize? = nil,
+                          island: Bool = false) -> CGSize {
         let ears = geometry.style == .notch ? earRadius * 2 : 0
         let closed = geometry.closedSize
 
@@ -77,6 +82,12 @@ enum NotchLayout {
 
         guard hasCompactContent else {
             return CGSize(width: closed.width + ears, height: closed.height)
+        }
+
+        if island && geometry.style == .pill {
+            // Île : un peu plus haute que la pastille, aux proportions de la Dynamic Island.
+            let height = closed.height + islandExtraHeight
+            return CGSize(width: max(closed.width, (height * islandAspectRatio).rounded()), height: height)
         }
 
         switch geometry.style {
@@ -118,16 +129,19 @@ enum NotchLayout {
 
     /// Taille de la fenêtre nécessaire pour contenir la forme.
     static func panelSize(for geometry: NotchGeometry, isExpanded: Bool, hasCompactContent: Bool,
-                          sideWidth: CGFloat = compactSideWidth, alertSize: CGSize? = nil) -> CGSize {
+                          sideWidth: CGFloat = compactSideWidth, alertSize: CGSize? = nil,
+                          island: Bool = false) -> CGSize {
         let shape = shapeSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent,
-                              sideWidth: sideWidth, alertSize: alertSize)
+                              sideWidth: sideWidth, alertSize: alertSize, island: island)
         return CGSize(width: shape.width, height: shape.height + topInset(for: geometry.style))
     }
 
     /// Rayons des coins (haut, bas) de la forme.
-    static func cornerRadii(for style: NotchStyle, isExpanded: Bool, height: CGFloat) -> (top: CGFloat, bottom: CGFloat) {
+    static func cornerRadii(for style: NotchStyle, isExpanded: Bool, height: CGFloat,
+                            island: Bool = false) -> (top: CGFloat, bottom: CGFloat) {
         switch style {
         case .notch:
+            if island && !isExpanded { return (0, height / 2) }
             return (0, isExpanded ? expandedCornerRadius : min(10, height / 3))
         case .pill:
             let radius = isExpanded ? expandedCornerRadius : height / 2

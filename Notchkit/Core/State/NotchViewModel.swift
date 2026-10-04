@@ -62,6 +62,11 @@ final class NotchViewModel {
         currentAlert != nil || manager.compactModule != nil
     }
 
+    /// Affichage replié façon « Dynamic Island » (module compact qui le demande, sans alerte).
+    var isIsland: Bool {
+        !isExpanded && currentAlert == nil && manager.compactModule?.compactIsland == true
+    }
+
     /// Largeur de chaque côté de l'encoche repliée (une alerte peut demander plus de place).
     var compactSideWidth: CGFloat {
         currentAlert?.sideWidth ?? NotchLayout.compactSideWidth
@@ -70,13 +75,15 @@ final class NotchViewModel {
     var shapeSize: CGSize {
         _ = appearance  // dépend de la taille choisie
         return NotchLayout.shapeSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent,
-                              sideWidth: compactSideWidth, alertSize: currentAlert?.expandedSize)
+                              sideWidth: compactSideWidth, alertSize: currentAlert?.expandedSize,
+                              island: isIsland)
     }
 
     var panelSize: CGSize {
         _ = appearance
         return NotchLayout.panelSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent,
-                              sideWidth: compactSideWidth, alertSize: currentAlert?.expandedSize)
+                              sideWidth: compactSideWidth, alertSize: currentAlert?.expandedSize,
+                              island: isIsland)
     }
 
     // MARK: - Géométrie

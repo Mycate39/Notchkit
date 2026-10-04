@@ -140,25 +140,37 @@ private struct ExpandedNotchView: View {
                     .padding(.trailing, 4)
             }
             if pages.count > 1 {
-                // Onglets : un par page, avec les icônes des modules qu'elle contient.
-                HStack(spacing: 6) {
+                // Indicateur de pages : la page affichée en pastille avec ses icônes,
+                // les autres en petits points cliquables (reste compact même avec beaucoup de pages).
+                HStack(spacing: 5) {
                     ForEach(pages) { page in
+                        let isSelected = viewModel.selectedPage == page.id
                         Button {
                             withAnimation(NotchLayout.spring) { viewModel.selectedPage = page.id }
                         } label: {
-                            HStack(spacing: 5) {
-                                ForEach(page.modules) { box in
-                                    Image(systemName: box.systemImage)
+                            Group {
+                                if isSelected {
+                                    HStack(spacing: 6) {
+                                        ForEach(page.modules.prefix(5)) { box in
+                                            Image(systemName: box.systemImage)
+                                        }
+                                    }
+                                    .font(.system(size: 10, weight: .semibold))
+                                    .padding(.horizontal, 9)
+                                    .padding(.vertical, 4)
+                                    .background(.white.opacity(0.16), in: Capsule())
+                                    .foregroundStyle(.white)
+                                } else {
+                                    Circle()
+                                        .fill(.white.opacity(0.35))
+                                        .frame(width: 6, height: 6)
+                                        .padding(5)
                                 }
                             }
-                            .font(.system(size: 10, weight: .semibold))
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 4)
-                            .background(.white.opacity(viewModel.selectedPage == page.id ? 0.18 : 0), in: Capsule())
-                            .foregroundStyle(.white.opacity(viewModel.selectedPage == page.id ? 1 : 0.5))
                             .contentShape(Capsule())
                         }
                         .buttonStyle(.plain)
+                        .help(Text(page.modules.map { String(localized: type(of: $0.module).descriptor.name) }.joined(separator: ", ")))
                     }
                 }
             } else {
@@ -232,7 +244,7 @@ struct PageView: View {
 
     var body: some View {
         GeometryReader { proxy in
-            let spacing: CGFloat = 12
+            let spacing: CGFloat = 10
             let columns = WidgetColumns.make(sizes: page.modules.map(\.size))
             let columnWeights = columns.map { page.modules[$0[0]].size.weight }
             let totalWeight = max(0.001, columnWeights.reduce(0, +))
@@ -258,8 +270,13 @@ struct PageView: View {
         .environment(\.widgetSize, box.size)
         .environment(\.miniStacked, stacked)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.white.opacity(0.06), in: RoundedRectangle(cornerRadius: stacked ? 11 : 14, style: .continuous))
-        .contentShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        // Carte : fond léger et fin liseré.
+        .background(.white.opacity(0.07), in: RoundedRectangle(cornerRadius: stacked ? 12 : 16, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: stacked ? 12 : 16, style: .continuous)
+                .strokeBorder(.white.opacity(0.07), lineWidth: 0.5)
+        }
+        .contentShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
         .contextMenu { WidgetContextMenu(box: box, viewModel: viewModel) }
     }
 }

@@ -10,5 +10,6 @@ enum ModuleRegistry {
         BatteryModule.self,
         CalendarModule.self,
         WeatherModule.self,
+        ClaudeModule.self,
     ]
 }

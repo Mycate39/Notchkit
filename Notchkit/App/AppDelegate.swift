@@ -25,6 +25,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         moduleManager.settingsHandler = { [weak self] in
             self?.viewModel.openSettings()
         }
+        moduleManager.holdHandler = { [weak self] hold in
+            self?.viewModel.setHold(hold)
+        }
 
         moduleManager.reload()
 

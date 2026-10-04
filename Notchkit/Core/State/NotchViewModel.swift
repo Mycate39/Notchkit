@@ -23,6 +23,10 @@ final class NotchViewModel {
     @ObservationIgnored private var alertTask: Task<Void, Never>?
     /// Ouvre la fenêtre de réglages (fourni par l'AppDelegate).
     @ObservationIgnored var openSettingsAction: @MainActor () -> Void = {}
+    /// Indique si la souris est au-dessus du panneau (fourni par le contrôleur de fenêtre).
+    @ObservationIgnored var isMouseInside: @MainActor () -> Bool = { false }
+    /// Encoche maintenue dépliée (saisie en cours) : la sortie de la souris ne la replie pas.
+    @ObservationIgnored private var isHeld = false
 
     init(manager: ModuleManager, settings: SettingsStore) {
         self.manager = manager
@@ -55,6 +59,7 @@ final class NotchViewModel {
     // MARK: - Survol
 
     func hoverChanged(isInside: Bool) {
+        if !isInside && isHeld { return }
         hoverTask?.cancel()
         let delay = isInside ? settings.settings.hoverOpenDelay : settings.settings.hoverCloseDelay
         hoverTask = Task { [weak self] in
@@ -74,6 +79,18 @@ final class NotchViewModel {
     func collapse() {
         guard state != .collapsed else { return }
         withAnimation(NotchLayout.spring) { state = .collapsed }
+    }
+
+    /// Maintient (ou relâche) l'encoche dépliée. Au relâchement, elle se replie si la souris est ailleurs.
+    func setHold(_ hold: Bool) {
+        guard hold != isHeld else { return }
+        isHeld = hold
+        if hold {
+            hoverTask?.cancel()
+            expand()
+        } else if !isMouseInside() {
+            hoverChanged(isInside: false)
+        }
     }
 
     func toggle() {

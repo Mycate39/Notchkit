@@ -10,6 +10,8 @@ enum ModulePriority: Int, Comparable, Sendable {
     case low = 10
     /// Activité en cours (ex. musique en lecture).
     case normal = 50
+    /// Activité en cours plus importante (ex. Claude Code qui travaille).
+    case elevated = 75
     /// Information urgente (ex. minuteur qui se termine).
     case high = 100
 
@@ -23,6 +25,8 @@ struct ModuleContext {
     let presentAlert: @MainActor (NotchAlert) -> Void
     /// Ouvre la fenêtre de réglages de l'app.
     let openSettings: @MainActor () -> Void
+    /// Garde l'encoche dépliée (ex. pendant la saisie d'un message), même si la souris s'éloigne.
+    let holdExpanded: @MainActor (Bool) -> Void
 }
 
 /// Protocole commun à toutes les fonctionnalités de Notchkit.

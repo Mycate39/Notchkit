@@ -39,7 +39,13 @@ final class MusicModule: NotchModule {
         }
     }
 
+    /// Affiche la petite icône de l'app qui joue (ex. Brave) sur la pochette.
+    var showAppBadge: Bool {
+        didSet { UserDefaults.standard.set(showAppBadge, forKey: Keys.showAppBadge) }
+    }
+
     private enum Keys {
+        static let showAppBadge = "module.music.showAppBadge"
         static let showInCompact = "module.music.showInCompact"
         static let useMediaRemote = "module.music.useMediaRemote"
     }
@@ -59,6 +65,7 @@ final class MusicModule: NotchModule {
         let defaults = UserDefaults.standard
         showInCompact = defaults.object(forKey: Keys.showInCompact) as? Bool ?? true
         useMediaRemote = defaults.object(forKey: Keys.useMediaRemote) as? Bool ?? true
+        showAppBadge = defaults.object(forKey: Keys.showAppBadge) as? Bool ?? true
     }
 
     // MARK: Cycle de vie

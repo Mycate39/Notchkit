@@ -92,6 +92,13 @@ private struct ExpandedNotchView: View {
                 .padding(.bottom, 16)
                 .padding(.top, 4)
         }
+        .onAppear {
+            // On ouvre directement la page du module qui était affiché dans l'encoche repliée.
+            if let id = viewModel.manager.compactModule?.moduleID,
+               let page = pages.first(where: { $0.modules.contains { $0.id == id } }) {
+                viewModel.selectedPage = page.id
+            }
+        }
     }
 
     private var pages: [ModulePage] {

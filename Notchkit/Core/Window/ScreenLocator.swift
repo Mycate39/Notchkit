@@ -3,8 +3,9 @@ import AppKit
 /// Trouve l'écran cible et calcule la géométrie de l'encoche (API publiques uniquement).
 @MainActor
 enum ScreenLocator {
-    /// Taille de la fausse encoche en mode simulation (proche d'un MacBook Pro 14").
-    static let simulatedNotchSize = CGSize(width: 185, height: 32)
+    /// Largeur de la fausse encoche en mode simulation (proche d'un MacBook Pro 14").
+    /// Sa hauteur est celle de la barre des menus, pour ne pas déborder en dessous.
+    static let simulatedNotchWidth: CGFloat = 185
     /// Largeur de la pastille au repos (Mac sans encoche).
     static let pillWidth: CGFloat = 96
 
@@ -35,18 +36,20 @@ enum ScreenLocator {
             )
         }
 
+        // Hauteur de la barre des menus (24 pt par défaut si elle est masquée).
+        let menuBarHeight = frame.maxY - screen.visibleFrame.maxY
+        let barHeight = menuBarHeight > 0 ? menuBarHeight : 24
+
         if simulateNotch {
             return NotchGeometry(
                 style: .notch,
-                closedSize: simulatedNotchSize,
+                closedSize: CGSize(width: simulatedNotchWidth, height: barHeight),
                 screenFrame: frame,
                 centerX: frame.midX
             )
         }
 
         // Pas d'encoche : pastille flottante, dimensionnée d'après la barre des menus.
-        let menuBarHeight = frame.maxY - screen.visibleFrame.maxY
-        let barHeight = menuBarHeight > 0 ? menuBarHeight : 24
         return NotchGeometry(
             style: .pill,
             closedSize: CGSize(width: pillWidth, height: max(barHeight - NotchLayout.pillTopInset - 1, 20)),

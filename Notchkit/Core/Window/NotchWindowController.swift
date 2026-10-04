@@ -27,6 +27,9 @@ final class NotchWindowController {
         hostingView.onHoverChange = { [weak viewModel] isInside in
             viewModel?.hoverChanged(isInside: isInside)
         }
+        viewModel.isMouseInside = { [weak panel] in
+            panel.map { $0.frame.contains(NSEvent.mouseLocation) } ?? false
+        }
 
         // La vue SwiftUI est placée dans un conteneur AppKit simple (redimensionnement automatique,
         // sans Auto Layout) plutôt que d'être directement la `contentView`.
@@ -51,6 +54,15 @@ final class NotchWindowController {
     // MARK: - Observation
 
     private func startObserving() {
+        // Clic en dehors de l'encoche pendant une saisie : on relâche le maintien.
+        NotificationCenter.default.addObserver(
+            forName: NSWindow.didResignKeyNotification,
+            object: panel,
+            queue: .main
+        ) { [weak self] _ in
+            MainActor.assumeIsolated { self?.viewModel.setHold(false) }
+        }
+
         // Changement d'écran (branchement, résolution, disposition).
         NotificationCenter.default.addObserver(
             forName: NSApplication.didChangeScreenParametersNotification,

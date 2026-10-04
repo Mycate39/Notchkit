@@ -64,7 +64,7 @@ struct MusicExpandedView: View {
                     ArtworkView(info: info, size: 72, cornerRadius: 12)
                         .overlay(alignment: .bottomTrailing) {
                             // Petite icône de l'app qui joue, sauf si elle est déjà affichée en grand.
-                            if info.artwork != nil, let icon = AppIconCache.icon(for: info.bundleIdentifier) {
+                            if module.showAppBadge, info.artwork != nil, let icon = AppIconCache.icon(for: info.bundleIdentifier) {
                                 Image(nsImage: icon)
                                     .resizable()
                                     .frame(width: 20, height: 20)
@@ -183,6 +183,7 @@ struct MusicSettingsView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             Toggle("Afficher le morceau quand l'encoche est repliée", isOn: $module.showInCompact)
+            Toggle("Afficher l'icône de l'app sur la pochette", isOn: $module.showAppBadge)
             Toggle("Détecter toutes les apps (expérimental)", isOn: $module.useMediaRemote)
             Text("Nécessaire pour Deezer, les navigateurs et la plupart des lecteurs. Utilise une interface non officielle d'Apple qui peut cesser de fonctionner après une mise à jour de macOS ; Music et Spotify restent alors pris en charge.")
                 .font(.caption)

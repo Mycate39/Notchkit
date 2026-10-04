@@ -145,10 +145,7 @@ final class MusicModule: NotchModule {
 
     /// Les lancements automatisés (test de charge, captures d'écran) ne doivent pas déclencher
     /// de demande d'autorisation audio.
-    private static var isStressTest: Bool {
-        let environment = ProcessInfo.processInfo.environment
-        return environment["NOTCHKIT_STRESS"] != nil || environment["NOTCHKIT_SNAPSHOT"] != nil
-    }
+    private static var isStressTest: Bool { AutomatedRun.isActive }
 
     // MARK: Commandes
 

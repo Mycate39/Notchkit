@@ -14,5 +14,6 @@ enum ModuleRegistry {
         ShelfModule.self,
         AirPodsModule.self,
         LiveActivitiesModule.self,
+        ClipboardModule.self,
     ]
 }

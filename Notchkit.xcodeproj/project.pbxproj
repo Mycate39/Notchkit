@@ -19,10 +19,12 @@
 		12363B3F5D2845B879F69330 /* WeatherModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938B1E14A3EA48C00556D332 /* WeatherModule.swift */; };
 		13B5219E73F9A1045A0D23F9 /* ClaudeHookServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F3AA5E7B3A040B33B93437 /* ClaudeHookServer.swift */; };
 		142311648FCB68B6377E815E /* shuffle.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C15E810C63DBBAA6AD2F11 /* shuffle.m */; };
+		14B1C0436FB41EA321F96C8F /* ClipboardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2781BAED0868E8CA890510 /* ClipboardItem.swift */; };
 		18F87A8929EA0A928A08E08D /* ClockModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12CD8AFBB2574643418518B /* ClockModule.swift */; };
 		1C6A5C7809598012656141D5 /* WidgetsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D1FCC02B4ACF20842E1E6B /* WidgetsTests.swift */; };
 		1CDA13E5F9845A313287E1B8 /* AudioSpectrumMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8919AB6ED390FDA70C4B9EA7 /* AudioSpectrumMonitor.swift */; };
 		1F165902D58592E6CFEAE8BB /* keys.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3572EC44002A80A034CBF1 /* keys.m */; };
+		26C391455DD8C384ED74BC3A /* AutomatedRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9CBF25534335CB0D5FB2F1 /* AutomatedRun.swift */; };
 		2A8FC1478370BC212B9E8F67 /* WidgetLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5200FEB865B8DCA4D43E73 /* WidgetLayoutTests.swift */; };
 		2CE8FE66D01A59F012F198E4 /* CalendarModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B0FE375C12A1424391655D /* CalendarModule.swift */; };
 		310A73D8AF9079086CAAACF4 /* NotchPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F6A4C1A5E799024B51A751 /* NotchPanel.swift */; };
@@ -54,6 +56,7 @@
 		61AB31664D0EDAFB64934E37 /* helpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 82317F3A93FC9B78D9981F5A /* helpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		66322E21FA223080C743AF7D /* ClaudeSparkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1FA58A222029EF8472F5FC /* ClaudeSparkView.swift */; };
 		6CE519CFAF12847A733CA497 /* MediaRemote.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B938216BE691DF97D65B80A /* MediaRemote.m */; };
+		6FFBD307CE76CBCCCE9EBBFA /* ClipboardModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F4553ED4B6A1EE1B08F5C3 /* ClipboardModule.swift */; };
 		710BC8174F35E464FBB8D163 /* MediaRemote.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C8C037FC30E0BB58579AC35 /* MediaRemote.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7217AD1F16C887AB09928542 /* AirPodsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA09C6155085C6AAB69F4A1 /* AirPodsViews.swift */; };
 		73D5E9F7641B5F75B4E0B6CB /* WeatherModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71B97392FA1B40CE01E6DD5 /* WeatherModels.swift */; };
@@ -69,10 +72,12 @@
 		8C0ED9AB5ED77DD0A591BF76 /* Debounce.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E6A11EA97C90A4B6372215A /* Debounce.m */; };
 		8F0C77F6838C6EE29F25E86F /* ShelfViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B612155636B3FD4BB9FD1797 /* ShelfViews.swift */; };
 		8FC318594A37D67BB477BCA4 /* NotchHostingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C474C3B54576120030842F /* NotchHostingView.swift */; };
+		94BF7B6108A44400EABE42EE /* ClipboardViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA785DE3AC695C0AF583A476 /* ClipboardViews.swift */; };
 		9534909608C6D366FB3BCE9F /* mediaremote-adapter.pl in Resources */ = {isa = PBXBuildFile; fileRef = E343FA5573A1C385029263CF /* mediaremote-adapter.pl */; };
 		98776D4DF39E4E21CDB0167E /* WidgetLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986BDF5C03AFD85D9ABE4BC /* WidgetLayout.swift */; };
 		98D2E19AF44D1F7BEDE8C93B /* stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 46804D5EC7EFC5FEF7FAE1B0 /* stream.m */; };
 		9A90F1FF12025FADD79A74D1 /* BatteryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88A3C1DCE9F2BBAD2E4119B /* BatteryTests.swift */; };
+		9E5F1AAB2D6C98B155086961 /* ClipboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89908AA5686A7DBE051BD6EF /* ClipboardTests.swift */; };
 		9E7A63311A2BAFD715703A99 /* NotchShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8841EA892E202FC4B79550 /* NotchShape.swift */; };
 		9EFC7A08DE1D2D77E0755A84 /* env.h in Headers */ = {isa = PBXBuildFile; fileRef = 28D7F4491917AC873CE7BC74 /* env.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9F7142925091280DBE0FE836 /* keys.h in Headers */ = {isa = PBXBuildFile; fileRef = D4D167C05CBBAD88AE1F8A4F /* keys.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -151,9 +156,11 @@
 /* Begin PBXFileReference section */
 		00E2A367001574FD5301B5C5 /* CalendarViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViews.swift; sourceTree = "<group>"; };
 		01F59B743A5CB9C111DD7BEB /* ClaudeHooksInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeHooksInstaller.swift; sourceTree = "<group>"; };
+		09F4553ED4B6A1EE1B08F5C3 /* ClipboardModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardModule.swift; sourceTree = "<group>"; };
 		0B080423C926D385B46825A3 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
 		0B7C1CB75F1F1F6747AF33C3 /* NotchModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchModule.swift; sourceTree = "<group>"; };
 		0B938216BE691DF97D65B80A /* MediaRemote.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MediaRemote.m; sourceTree = "<group>"; };
+		0C2781BAED0868E8CA890510 /* ClipboardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardItem.swift; sourceTree = "<group>"; };
 		0C4865DD8D0267CAE95D06A9 /* send.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = send.m; sourceTree = "<group>"; };
 		0C529029D5145492C0C2626F /* ClaudeUsage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeUsage.swift; sourceTree = "<group>"; };
 		0FD9DDAA93FE1736991AE761 /* MediaRemoteSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaRemoteSource.swift; sourceTree = "<group>"; };
@@ -207,6 +214,7 @@
 		865FBBD206E6548CD19B74CE /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		873CE6E9E837CC7493E679DD /* DownloadsMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsMonitor.swift; sourceTree = "<group>"; };
 		8919AB6ED390FDA70C4B9EA7 /* AudioSpectrumMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSpectrumMonitor.swift; sourceTree = "<group>"; };
+		89908AA5686A7DBE051BD6EF /* ClipboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardTests.swift; sourceTree = "<group>"; };
 		8A426D361B19F11D7BD531E6 /* AirPodsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPodsTests.swift; sourceTree = "<group>"; };
 		8C3C0CDEA4B993CA2ECA8EEA /* test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = test.m; sourceTree = "<group>"; };
 		8C55985EC0A527176A3FFFB3 /* Notchkit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notchkit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -236,6 +244,7 @@
 		C82EEAC4225615991537D76A /* Debounce.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Debounce.h; sourceTree = "<group>"; };
 		C9C6E3D4B63F646C8C9E6420 /* repeat.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = repeat.m; sourceTree = "<group>"; };
 		CBD303760BD8B274346EBC38 /* NotchContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchContainerView.swift; sourceTree = "<group>"; };
+		CD9CBF25534335CB0D5FB2F1 /* AutomatedRun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomatedRun.swift; sourceTree = "<group>"; };
 		CE9868E6BCDAB5B7301961AC /* EqualizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualizerView.swift; sourceTree = "<group>"; };
 		D01102B35009A7B86C3E3F66 /* DropZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropZone.swift; sourceTree = "<group>"; };
 		D0F33792FD3837BD07B60F6A /* MusicViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViews.swift; sourceTree = "<group>"; };
@@ -253,6 +262,7 @@
 		E343FA5573A1C385029263CF /* mediaremote-adapter.pl */ = {isa = PBXFileReference; lastKnownFileType = text.script.perl; path = "mediaremote-adapter.pl"; sourceTree = "<group>"; };
 		E88A3C1DCE9F2BBAD2E4119B /* BatteryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryTests.swift; sourceTree = "<group>"; };
 		E9F9740079B75CA6BAFEB2B7 /* MusicModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicModule.swift; sourceTree = "<group>"; };
+		EA785DE3AC695C0AF583A476 /* ClipboardViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardViews.swift; sourceTree = "<group>"; };
 		EAED0DCFD7BDF1DF1BDCDFFB /* WeatherViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViews.swift; sourceTree = "<group>"; };
 		EE9D3F695623AF356C363ADE /* LayoutSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutSettingsView.swift; sourceTree = "<group>"; };
 		EED212AC944BD64489CD960D /* MenuBarContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarContent.swift; sourceTree = "<group>"; };
@@ -302,6 +312,7 @@
 				8A426D361B19F11D7BD531E6 /* AirPodsTests.swift */,
 				E88A3C1DCE9F2BBAD2E4119B /* BatteryTests.swift */,
 				120F6102605460430CBCDD55 /* ClaudeTests.swift */,
+				89908AA5686A7DBE051BD6EF /* ClipboardTests.swift */,
 				B974952A590C9D987A413C84 /* LiveActivitiesTests.swift */,
 				FC306A7DAC40B0ECC5A20A71 /* ModuleManagerTests.swift */,
 				DE6111A0CC43713D888AAAB4 /* MusicTests.swift */,
@@ -320,6 +331,7 @@
 				A3F6B8D8397F337CCC1FA7A4 /* Battery */,
 				99BB9112389B45C7BA7E5294 /* Calendar */,
 				18ECCE2688342A89073C7E5F /* Claude */,
+				573AEA7B2B869983C2BB4DE8 /* Clipboard */,
 				61A436182527CE595E0012B7 /* Clock */,
 				70C8408ECB21451937903973 /* LiveActivities */,
 				519555DDFDCB99F283864CC9 /* Music */,
@@ -384,6 +396,16 @@
 				3C274412C7BED95CC0F006FD /* Spectrum */,
 			);
 			path = Music;
+			sourceTree = "<group>";
+		};
+		573AEA7B2B869983C2BB4DE8 /* Clipboard */ = {
+			isa = PBXGroup;
+			children = (
+				0C2781BAED0868E8CA890510 /* ClipboardItem.swift */,
+				09F4553ED4B6A1EE1B08F5C3 /* ClipboardModule.swift */,
+				EA785DE3AC695C0AF583A476 /* ClipboardViews.swift */,
+			);
+			path = Clipboard;
 			sourceTree = "<group>";
 		};
 		61A436182527CE595E0012B7 /* Clock */ = {
@@ -586,6 +608,7 @@
 		B5E768E5B6D8CE6930ADF8A3 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				CD9CBF25534335CB0D5FB2F1 /* AutomatedRun.swift */,
 				F0BF3D614D5CC62B9E68FF35 /* ObservationTracking.swift */,
 			);
 			path = Utilities;
@@ -869,6 +892,7 @@
 				5ED07894AE2CE76DB414FD91 /* AppSettings.swift in Sources */,
 				D040BA8C10C9E1E29B0C74D7 /* AudioDeviceMonitor.swift in Sources */,
 				1CDA13E5F9845A313287E1B8 /* AudioSpectrumMonitor.swift in Sources */,
+				26C391455DD8C384ED74BC3A /* AutomatedRun.swift in Sources */,
 				A035E8F6860E327BAD3FEF0D /* BatteryModule.swift in Sources */,
 				F5543C69BD99F610B097FB7C /* BatteryState.swift in Sources */,
 				3F0BBA7E0A0EBA46B97825EB /* BatteryViews.swift in Sources */,
@@ -882,6 +906,9 @@
 				66322E21FA223080C743AF7D /* ClaudeSparkView.swift in Sources */,
 				F49705A9A1C38568C414F8F7 /* ClaudeUsage.swift in Sources */,
 				7B2CB280D4CE260CA0BD52ED /* ClaudeViews.swift in Sources */,
+				14B1C0436FB41EA321F96C8F /* ClipboardItem.swift in Sources */,
+				6FFBD307CE76CBCCCE9EBBFA /* ClipboardModule.swift in Sources */,
+				94BF7B6108A44400EABE42EE /* ClipboardViews.swift in Sources */,
 				18F87A8929EA0A928A08E08D /* ClockModule.swift in Sources */,
 				470A42B4488C58ECA73F9216 /* DownloadsMonitor.swift in Sources */,
 				C4FE1995D4A34E59EE65174D /* DropZone.swift in Sources */,
@@ -939,6 +966,7 @@
 				ED5BE3842572CB8E3454C102 /* AirPodsTests.swift in Sources */,
 				9A90F1FF12025FADD79A74D1 /* BatteryTests.swift in Sources */,
 				FF84C0815AB07A9F26919E9F /* ClaudeTests.swift in Sources */,
+				9E5F1AAB2D6C98B155086961 /* ClipboardTests.swift in Sources */,
 				057BC6EE471679C2A814157C /* LiveActivitiesTests.swift in Sources */,
 				601D9B8C8D44ED81CC990946 /* ModuleManagerTests.swift in Sources */,
 				E954032D743568B2082B51F8 /* MusicTests.swift in Sources */,

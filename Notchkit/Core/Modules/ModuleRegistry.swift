@@ -18,5 +18,6 @@ enum ModuleRegistry {
         SystemHUDModule.self,
         UnlockModule.self,
         BackButtonModule.self,
+        VideoDownloadModule.self,
     ]
 }

@@ -7,13 +7,13 @@ struct WidgetLayoutEngineTests {
     let active = ["music", "clock", "battery", "calendar", "weather"]
 
     @Test func sansDispositionRepartitionAutomatique() {
-        let pages = WidgetLayoutEngine.pages(activeIDs: active, weights: weights, layout: nil)
+        let pages = WidgetLayoutEngine.pages(activeIDs: active, weights: weights, layout: nil, capacity: 4)
         #expect(pages == [["music", "clock", "battery"], ["calendar", "weather"]])
     }
 
     @Test func dispositionUtilisateurRespecteeEtNouveauxModulesAjoutes() {
         let layout = WidgetLayout(pages: [["weather", "clock"], ["music"]])
-        let pages = WidgetLayoutEngine.pages(activeIDs: active, weights: weights, layout: layout)
+        let pages = WidgetLayoutEngine.pages(activeIDs: active, weights: weights, layout: layout, capacity: 4)
         // Les modules non placés (battery, calendar) sont répartis à la fin.
         #expect(pages == [["weather", "clock"], ["music"], ["battery", "calendar"]])
     }
@@ -46,7 +46,7 @@ struct WidgetLayoutEngineTests {
         #expect(WidgetSize(weight: 1.2) == .small)
         #expect(WidgetSize.mini.weight == 0.5)
         // Sans empilement, huit colonnes de largeur 0,5 tiennent sur une page.
-        #expect(NotchLayout.paginate(weights: Array(repeating: 0.5, count: 9)) == [Array(0..<8), [8]])
+        #expect(NotchLayout.paginate(weights: Array(repeating: 0.5, count: 9), capacity: 4) == [Array(0..<8), [8]])
     }
 
     @Test func deuxMiniConsecutifsSEmpilent() {
@@ -55,7 +55,7 @@ struct WidgetLayoutEngineTests {
         // 16 Mini tiennent sur une page (8 colonnes de 2).
         let pages = WidgetLayoutEngine.pages(activeIDs: (0..<17).map(String.init),
                                              weights: Dictionary(uniqueKeysWithValues: (0..<17).map { (String($0), CGFloat(0.5)) }),
-                                             layout: nil)
+                                             layout: nil, capacity: 4)
         #expect(pages.first?.count == 16)
     }
 

@@ -29,6 +29,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         moduleManager.holdHandler = { [weak self] hold in
             self?.viewModel.setHold(hold)
         }
+        // Fichiers glissés sur l'encoche : étagère ou AirDrop.
+        viewModel.dropHandlerAvailability = { [weak self] in
+            self?.moduleManager.module(for: ShelfModule.descriptor.id) != nil
+        }
+        viewModel.dropHandler = { [weak self] urls, zone in
+            guard let self else { return }
+            switch zone {
+            case .shelf:
+                if let shelf = self.moduleManager.module(for: ShelfModule.descriptor.id) as? ShelfModule {
+                    let added = shelf.add(urls)
+                    if added > 0 { self.viewModel.present(ShelfAlerts.added(added)) }
+                }
+            case .airDrop:
+                AirDrop.send(urls)
+            }
+        }
 
         moduleManager.reload()
 

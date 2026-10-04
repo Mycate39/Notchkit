@@ -87,7 +87,15 @@ private struct ExpandedNotchView: View {
                 .frame(height: max(viewModel.geometry.closedSize.height, 28))
                 .padding(.horizontal, ear + 18)
 
-            modules(horizontalPadding: ear + 18)
+            Group {
+                if viewModel.isDropMode {
+                    DropZonesView(hovered: viewModel.hoveredDropZone, shelfAvailable: viewModel.isShelfAvailable)
+                        .padding(.horizontal, ear + 18)
+                        .transition(.opacity.combined(with: .scale(scale: 0.97)))
+                } else {
+                    modules(horizontalPadding: ear + 18)
+                }
+            }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding(.bottom, 16)
                 .padding(.top, 4)

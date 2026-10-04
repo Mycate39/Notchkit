@@ -29,6 +29,12 @@ final class NotchWindowController {
         hostingView.onHoverChange = { [weak viewModel] isInside in
             viewModel?.hoverChanged(isInside: isInside)
         }
+        hostingView.onFileDrag = { [weak viewModel] x in
+            if let x { viewModel?.fileDragMoved(normalizedX: x) } else { viewModel?.fileDragEnded() }
+        }
+        hostingView.onFileDrop = { [weak viewModel] urls, x in
+            viewModel?.dropFiles(urls, normalizedX: x)
+        }
         viewModel.isMouseInside = { [weak panel] in
             panel.map { $0.frame.contains(NSEvent.mouseLocation) } ?? false
         }

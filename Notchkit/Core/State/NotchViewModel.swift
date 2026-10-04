@@ -16,6 +16,15 @@ final class NotchViewModel {
     private(set) var currentAlert: NotchAlert?
     /// Page affichée dans l'encoche dépliée (conservée d'une ouverture à l'autre).
     var selectedPage = 0
+    /// Des fichiers sont glissés au-dessus de l'encoche : elle affiche les zones de dépôt.
+    private(set) var isDropMode = false
+    /// Zone de dépôt survolée.
+    private(set) var hoveredDropZone: DropZone?
+    /// L'étagère est-elle disponible (module activé) ? Sinon, seule la zone AirDrop est proposée.
+    var isShelfAvailable: Bool { dropHandlerAvailability() }
+    /// Traite les fichiers déposés (fourni par l'AppDelegate).
+    @ObservationIgnored var dropHandler: @MainActor ([URL], DropZone) -> Void = { _, _ in }
+    @ObservationIgnored var dropHandlerAvailability: @MainActor () -> Bool = { false }
 
     @ObservationIgnored let manager: ModuleManager
     @ObservationIgnored private let settings: SettingsStore
@@ -111,6 +120,39 @@ final class NotchViewModel {
         holdReasons.removeAll()
         collapse()
         openSettingsAction(tab)
+    }
+
+    // MARK: - Glisser-déposer de fichiers
+
+    func fileDragMoved(normalizedX x: CGFloat) {
+        hoverTask?.cancel()
+        if !isDropMode {
+            withAnimation(NotchLayout.spring) { isDropMode = true }
+            expand()
+        }
+        let zone = DropZone.zone(atNormalizedX: x, shelfAvailable: isShelfAvailable)
+        if zone != hoveredDropZone {
+            withAnimation(.snappy(duration: 0.2)) { hoveredDropZone = zone }
+        }
+    }
+
+    func fileDragEnded() {
+        guard isDropMode else { return }
+        withAnimation(NotchLayout.spring) {
+            isDropMode = false
+            hoveredDropZone = nil
+        }
+        if !isMouseInside() { hoverChanged(isInside: false) }
+    }
+
+    func dropFiles(_ urls: [URL], normalizedX x: CGFloat) {
+        let zone = DropZone.zone(atNormalizedX: x, shelfAvailable: isShelfAvailable)
+        withAnimation(NotchLayout.spring) {
+            isDropMode = false
+            hoveredDropZone = nil
+        }
+        dropHandler(urls, zone)
+        collapse()
     }
 
     // MARK: - Alertes

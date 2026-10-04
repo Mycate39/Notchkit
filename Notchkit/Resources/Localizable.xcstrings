@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "" : {
+
+    },
     "·" : {
 
     },
@@ -13,19 +16,33 @@
     "%@ (débranché)" : {
 
     },
+    "%@ / %lld de largeur" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ / %2$lld de largeur"
+          }
+        }
+      }
+    },
     "%@ restantes" : {
 
+    },
+    "%@ utilisés%@ (chiffres transmis par Claude Code)." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ utilisés%2$@ (chiffres transmis par Claude Code)."
+          }
+        }
+      }
     },
     "%lld %%" : {
 
     },
     "%lld min" : {
-
-    },
-    "≈ %@ tokens" : {
-
-    },
-    "≈ %@ tokens dans la session de 5 h" : {
 
     },
     "À propos" : {
@@ -205,6 +222,9 @@
     "Claude travaille" : {
 
     },
+    "Cliquez pour changer la taille, glissez pour déplacer" : {
+
+    },
     "Conditions actuelles et prévisions des prochaines heures (Open-Meteo)." : {
 
     },
@@ -221,9 +241,6 @@
 
     },
     "Couvert" : {
-
-    },
-    "de la session utilisée" : {
 
     },
     "Débogage" : {
@@ -244,7 +261,16 @@
     "Demain" : {
 
     },
+    "Déplacer à droite" : {
+
+    },
+    "Déplacer à gauche" : {
+
+    },
     "Déplier / replier l'encoche" : {
+
+    },
+    "Déposez un widget ici pour créer une nouvelle page" : {
 
     },
     "Désactivé" : {
@@ -257,6 +283,9 @@
 
     },
     "Développement" : {
+
+    },
+    "Disposition" : {
 
     },
     "Données météo : Open-Meteo.com (licence CC BY 4.0)." : {
@@ -289,10 +318,17 @@
     "En cours · jusqu'à %@" : {
 
     },
-    "Estimation : comparée à votre plus grosse session de 5 h observée (%@ tokens). Anthropic ne publie pas les plafonds exacts." : {
-
+    "Estimation : %@%@. Comparée à votre plus grosse session observée." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Estimation : %1$@%2$@. Comparée à votre plus grosse session observée."
+          }
+        }
+      }
     },
-    "Estimation comparée à votre plus grosse session observée." : {
+    "Estimation locale : installez l'intégration (barre d'état) pour les chiffres réels." : {
 
     },
     "Exécute : %@" : {
@@ -313,7 +349,19 @@
     "Général" : {
 
     },
+    "Glissez dans une page pour l'afficher" : {
+
+    },
+    "Glissez les widgets pour les réordonner ou les changer de page. Cliquez sur un widget pour changer sa taille. Astuce : un clic droit sur un widget dans l'encoche offre les mêmes options." : {
+
+    },
+    "Glissez un widget ici pour le masquer." : {
+
+    },
     "Grains de neige" : {
+
+    },
+    "Grand" : {
 
     },
     "Horloge" : {
@@ -361,7 +409,7 @@
     "L'analyse du son n'a pas pu démarrer : %@" : {
 
     },
-    "L'utilisation est estimée à partir des fichiers de session de Claude Code sur ce Mac (sessions de 5 h). Les conversations sur claude.ai ne sont pas comptées, et la jauge compare à votre plus grosse session observée : Anthropic ne publie pas les plafonds exacts." : {
+    "L'utilisation réelle (session de 5 h et semaine) est transmise par Claude Code à sa barre d'état, à chaque message. En attendant ces données, Notchkit affiche une estimation calculée à partir des fichiers de session locaux." : {
 
     },
     "La recherche a échoué. Vérifiez votre connexion." : {
@@ -407,6 +455,9 @@
     "Los Angeles" : {
 
     },
+    "Masquer ce widget" : {
+
+    },
     "MediaRemoteAdapter" : {
 
     },
@@ -440,6 +491,9 @@
     "Modifie %@" : {
 
     },
+    "Modifier la disposition…" : {
+
+    },
     "Modules" : {
 
     },
@@ -456,6 +510,9 @@
 
     },
     "Moscou" : {
+
+    },
+    "Moyen" : {
 
     },
     "Mumbai" : {
@@ -485,7 +542,10 @@
     "Notchkit a besoin d'accéder à vos calendriers pour afficher vos événements." : {
 
     },
-    "Notchkit va ajouter des hooks dans ~/.claude/settings.json pour que Claude Code le prévienne de son activité (connexion locale uniquement, protégée par un jeton). Vos réglages existants sont conservés et une copie de sauvegarde est faite. Les nouvelles sessions de Claude Code en tiendront compte." : {
+    "Notchkit va ajouter des hooks et une barre d'état dans ~/.claude/settings.json pour que Claude Code le prévienne de son activité et lui transmette votre utilisation réelle (connexion locale uniquement, protégée par un jeton). Vos réglages existants sont conservés et une copie de sauvegarde est faite. Les nouvelles sessions de Claude Code en tiendront compte." : {
+
+    },
+    "Nouvelle page" : {
 
     },
     "Open-Meteo" : {
@@ -509,6 +569,18 @@
     "Ouvrir les Réglages Système" : {
 
     },
+    "Page %lld" : {
+
+    },
+    "Page précédente" : {
+
+    },
+    "Page suivante" : {
+
+    },
+    "Page trop chargée : les widgets seront rétrécis. Réduisez une taille ou déplacez un widget." : {
+
+    },
     "Paris" : {
 
     },
@@ -516,6 +588,9 @@
 
     },
     "Pause" : {
+
+    },
+    "Petit" : {
 
     },
     "Peu nuageux" : {
@@ -578,10 +653,13 @@
     "Réglages…" : {
 
     },
-    "réinitialisation à %@" : {
+    "Réinit. %@" : {
 
     },
     "Réinitialisation à %@" : {
+
+    },
+    "Réinitialiser la disposition" : {
 
     },
     "Répondez pour qu'il continue" : {
@@ -597,6 +675,18 @@
 
     },
     "Second fuseau horaire" : {
+
+    },
+    "Semaine" : {
+
+    },
+    "Semaine %lld %%" : {
+
+    },
+    "Session" : {
+
+    },
+    "Session %lld %%" : {
 
     },
     "Shanghai" : {
@@ -618,6 +708,9 @@
 
     },
     "Système" : {
+
+    },
+    "Taille" : {
 
     },
     "Temps restant pour répondre à Claude depuis l'encoche" : {
@@ -659,7 +752,13 @@
     "Ville choisie" : {
 
     },
+    "Vous avez déjà votre propre barre d'état Claude Code : Notchkit ne la remplace pas, l'utilisation affichée reste donc une estimation." : {
+
+    },
     "Widgets" : {
+
+    },
+    "Widgets masqués" : {
 
     }
   },

@@ -1,50 +1,201 @@
 import SwiftUI
 
-/// Onglets de la fenêtre de réglages.
+/// Pages de la fenêtre de réglages.
 enum SettingsTab: Hashable {
     case general
     case appearance
     case layout
-    case modules
+    /// Page d'un module (identifiant du module).
+    case module(String)
     case about
 }
 
-/// Onglet affiché : permet d'ouvrir les réglages directement sur un onglet précis.
+/// Page affichée : permet d'ouvrir les réglages directement sur une page précise.
 @MainActor
 @Observable
 final class SettingsRouter {
     var tab: SettingsTab = .general
 }
 
-/// Écran de réglages, enrichi au fil des étapes.
+/// Fenêtre de réglages façon Réglages Système : barre latérale à gauche, contenu à droite.
 struct SettingsView: View {
     let settings: SettingsStore
     let manager: ModuleManager
     @Bindable var router: SettingsRouter
 
     var body: some View {
-        TabView(selection: $router.tab) {
-            GeneralSettingsView(settings: settings)
-                .tabItem { Label("Général", systemImage: "gearshape") }
-                .tag(SettingsTab.general)
-
-            AppearanceSettingsView(settings: settings)
-                .tabItem { Label("Apparence", systemImage: "paintpalette") }
-                .tag(SettingsTab.appearance)
-
-            LayoutSettingsView(manager: manager)
-                .tabItem { Label("Disposition", systemImage: "rectangle.3.group") }
-                .tag(SettingsTab.layout)
-
-            ModulesSettingsView(manager: manager)
-                .tabItem { Label("Modules", systemImage: "square.grid.2x2") }
-                .tag(SettingsTab.modules)
-
-            AboutSettingsView()
-                .tabItem { Label("À propos", systemImage: "info.circle") }
-                .tag(SettingsTab.about)
+        NavigationSplitView {
+            List(selection: Binding<SettingsTab?>(get: { router.tab }, set: { if let tab = $0 { router.tab = tab } })) {
+                Section {
+                    sidebarRow("Général", symbol: "gearshape.fill", color: .gray).tag(SettingsTab.general)
+                    sidebarRow("Apparence", symbol: "paintpalette.fill", color: .pink).tag(SettingsTab.appearance)
+                    sidebarRow("Disposition", symbol: "rectangle.3.group.fill", color: .blue).tag(SettingsTab.layout)
+                }
+                Section("Modules") {
+                    ForEach(manager.orderedDescriptors) { descriptor in
+                        ModuleSidebarRow(descriptor: descriptor, isEnabled: manager.isEnabled(descriptor.id))
+                            .tag(SettingsTab.module(descriptor.id))
+                    }
+                }
+                Section {
+                    sidebarRow("À propos", symbol: "info.circle.fill", color: .secondary).tag(SettingsTab.about)
+                }
+            }
+            .navigationSplitViewColumnWidth(min: 200, ideal: 220, max: 280)
+        } detail: {
+            detail
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .frame(width: 620, height: 500)
+        .frame(minWidth: 780, minHeight: 540)
+    }
+
+    @ViewBuilder
+    private var detail: some View {
+        switch router.tab {
+        case .general: GeneralSettingsView(settings: settings).navigationTitle("Général")
+        case .appearance: AppearanceSettingsView(settings: settings).navigationTitle("Apparence")
+        case .layout: LayoutSettingsView(manager: manager).navigationTitle("Disposition")
+        case let .module(id):
+            if let descriptor = manager.orderedDescriptors.first(where: { $0.id == id }) {
+                ModuleDetailView(descriptor: descriptor, manager: manager).navigationTitle(Text(descriptor.name))
+            }
+        case .about: AboutSettingsView().navigationTitle("À propos")
+        }
+    }
+
+    private func sidebarRow(_ title: LocalizedStringKey, symbol: String, color: Color) -> some View {
+        Label {
+            Text(title)
+        } icon: {
+            SidebarIcon(symbol: symbol, color: color)
+        }
+    }
+}
+
+/// Icône carrée colorée, comme dans les Réglages Système.
+private struct SidebarIcon: View {
+    let symbol: String
+    let color: Color
+    var size: CGFloat = 20
+
+    var body: some View {
+        Image(systemName: symbol)
+            .font(.system(size: size * 0.55, weight: .semibold))
+            .foregroundStyle(.white)
+            .frame(width: size, height: size)
+            .background(color.gradient, in: RoundedRectangle(cornerRadius: size * 0.25, style: .continuous))
+    }
+}
+
+private struct ModuleSidebarRow: View {
+    let descriptor: ModuleDescriptor
+    let isEnabled: Bool
+
+    var body: some View {
+        Label {
+            HStack {
+                Text(descriptor.name)
+                Spacer()
+                if isEnabled {
+                    Circle().fill(.green).frame(width: 6, height: 6)
+                        .help("Activé")
+                }
+            }
+        } icon: {
+            SidebarIcon(symbol: descriptor.systemImage, color: ModuleStyle.color(for: descriptor.category))
+        }
+    }
+}
+
+/// Couleur associée à chaque catégorie de modules.
+enum ModuleStyle {
+    static func color(for category: ModuleCategory) -> Color {
+        switch category {
+        case .media: .red
+        case .system: .indigo
+        case .widgets: .orange
+        case .productivity: .teal
+        }
+    }
+}
+
+/// Page d'un module : en-tête (icône, description, interrupteur) puis ses réglages.
+private struct ModuleDetailView: View {
+    let descriptor: ModuleDescriptor
+    let manager: ModuleManager
+
+    var body: some View {
+        Form {
+            Section {
+                HStack(spacing: 14) {
+                    SidebarIcon(symbol: descriptor.systemImage, color: ModuleStyle.color(for: descriptor.category), size: 52)
+                    VStack(alignment: .leading, spacing: 3) {
+                        HStack(spacing: 6) {
+                            Text(descriptor.name).font(.title2.bold())
+                            if descriptor.tier == .pro {
+                                Text("PRO")
+                                    .font(.system(size: 9, weight: .bold))
+                                    .padding(.horizontal, 5).padding(.vertical, 1)
+                                    .background(.tint, in: Capsule())
+                                    .foregroundStyle(.white)
+                            }
+                        }
+                        Text(descriptor.summary)
+                            .font(.callout)
+                            .foregroundStyle(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    Spacer()
+                    Toggle("Activer", isOn: Binding(
+                        get: { manager.isEnabled(descriptor.id) },
+                        set: { manager.setEnabled($0, for: descriptor.id) }
+                    ))
+                    .labelsHidden()
+                    .toggleStyle(.switch)
+                    .disabled(!manager.isUnlocked(descriptor))
+                }
+                .padding(.vertical, 4)
+            }
+
+            if let module = manager.module(for: descriptor.id) {
+                if let options = module.settingsView() {
+                    Section("Réglages") {
+                        options
+                    }
+                }
+                if descriptor.providesWidget {
+                    Section("Dans l'encoche") {
+                        LabeledContent("Taille du widget") {
+                            Picker("Taille", selection: Binding(
+                                get: { manager.size(for: descriptor.id) },
+                                set: { manager.setSize($0, for: descriptor.id) }
+                            )) {
+                                ForEach(WidgetSize.allCases) { size in
+                                    Text(size.title).tag(size)
+                                }
+                            }
+                            .labelsHidden()
+                            .pickerStyle(.segmented)
+                            .frame(maxWidth: 300)
+                        }
+                        if let position = manager.position(of: descriptor.id) {
+                            LabeledContent("Emplacement", value: String(localized: "Page \(position.page + 1), position \(position.index + 1)"))
+                        }
+                    }
+                } else {
+                    Section {
+                        Text("Ce module fonctionne en arrière-plan, sans carte dans l'encoche.")
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            } else {
+                Section {
+                    Text("Activez le module pour afficher ses réglages.")
+                        .foregroundStyle(.secondary)
+                }
+            }
+        }
+        .formStyle(.grouped)
     }
 }
 
@@ -144,82 +295,6 @@ private struct ScreenOption: Identifiable {
             guard let id = screen.notchkitID else { return nil }
             return ScreenOption(id: id, name: screen.localizedName, hasNotch: screen.hasNotch)
         }
-    }
-}
-
-// MARK: - Modules
-
-private struct ModulesSettingsView: View {
-    let manager: ModuleManager
-
-    var body: some View {
-        Form {
-            ForEach(ModuleCategory.allCases) { category in
-                let descriptors = manager.orderedDescriptors.filter { $0.category == category }
-                if !descriptors.isEmpty {
-                    Section {
-                        ForEach(descriptors) { descriptor in
-                            ModuleRow(descriptor: descriptor, manager: manager)
-                        }
-                    } header: {
-                        Text(category.title)
-                    }
-                }
-            }
-        }
-        .formStyle(.grouped)
-    }
-}
-
-private struct ModuleRow: View {
-    let descriptor: ModuleDescriptor
-    let manager: ModuleManager
-
-    var body: some View {
-        let unlocked = manager.isUnlocked(descriptor)
-
-        VStack(alignment: .leading, spacing: 10) {
-            HStack(spacing: 12) {
-                Image(systemName: descriptor.systemImage)
-                    .font(.system(size: 16))
-                    .frame(width: 28, height: 28)
-                    .background(.quaternary, in: RoundedRectangle(cornerRadius: 7, style: .continuous))
-
-                VStack(alignment: .leading, spacing: 2) {
-                    HStack(spacing: 6) {
-                        Text(descriptor.name)
-                        if descriptor.tier == .pro {
-                            Text("PRO")
-                                .font(.system(size: 9, weight: .bold))
-                                .padding(.horizontal, 5)
-                                .padding(.vertical, 1)
-                                .background(.tint, in: Capsule())
-                                .foregroundStyle(.white)
-                        }
-                    }
-                    Text(descriptor.summary)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-
-                Spacer()
-
-                Toggle("Activer", isOn: Binding(
-                    get: { manager.isEnabled(descriptor.id) },
-                    set: { manager.setEnabled($0, for: descriptor.id) }
-                ))
-                .labelsHidden()
-                .toggleStyle(.switch)
-                .disabled(!unlocked)
-            }
-
-            // Réglages propres au module, visibles seulement s'il est activé.
-            if let module = manager.module(for: descriptor.id), let options = module.settingsView() {
-                options
-                    .padding(.leading, 40)
-            }
-        }
-        .padding(.vertical, 2)
     }
 }
 

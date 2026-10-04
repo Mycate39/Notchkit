@@ -15,7 +15,7 @@ final class ModuleManager {
     /// Reçoit les alertes émises par les modules (branché sur le `NotchViewModel`).
     @ObservationIgnored var alertHandler: (@MainActor (NotchAlert) -> Void)?
     /// Ouvre les réglages (branché sur l'AppDelegate).
-    @ObservationIgnored var settingsHandler: (@MainActor () -> Void)?
+    @ObservationIgnored var settingsHandler: (@MainActor (String?) -> Void)?
     /// Garde l'encoche dépliée (branché sur le `NotchViewModel`).
     @ObservationIgnored var holdHandler: (@MainActor (Bool) -> Void)?
     /// Retire une alerte (branché sur le `NotchViewModel`).
@@ -195,7 +195,7 @@ final class ModuleManager {
                 if let existing = instances[descriptor.id] {
                     loaded.append(existing)
                 } else {
-                    let module = type.init(context: makeContext())
+                    let module = type.init(context: makeContext(for: descriptor.id))
                     instances[descriptor.id] = module
                     module.start()
                     loaded.append(module)
@@ -227,10 +227,10 @@ final class ModuleManager {
         }.map(\.element)
     }
 
-    private func makeContext() -> ModuleContext {
+    private func makeContext(for moduleID: String) -> ModuleContext {
         ModuleContext(
             presentAlert: { [weak self] alert in self?.alertHandler?(alert) },
-            openSettings: { [weak self] in self?.settingsHandler?() },
+            openSettings: { [weak self] in self?.settingsHandler?(moduleID) },
             holdExpanded: { [weak self] hold in self?.holdHandler?(hold) },
             dismissAlert: { [weak self] id in self?.dismissAlertHandler?(id) },
             blockExpansion: { [weak self] blocked in self?.blockExpansionHandler?(blocked) }

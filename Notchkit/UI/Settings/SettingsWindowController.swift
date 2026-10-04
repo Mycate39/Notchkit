@@ -17,7 +17,9 @@ final class SettingsWindowController {
             let controller = NSHostingController(rootView: makeContent())
             let window = NSWindow(contentViewController: controller)
             window.title = String(localized: "Réglages de Notchkit")
-            window.styleMask = [.titled, .closable, .miniaturizable]
+            window.styleMask = [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView]
+            window.toolbarStyle = .unified
+            window.setContentSize(NSSize(width: 860, height: 600))
             window.isReleasedWhenClosed = false
             window.center()
             self.window = window

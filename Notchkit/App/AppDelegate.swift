@@ -23,8 +23,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         viewModel.openSettingsAction = { [weak self] tab in
             self?.showSettings(tab: tab)
         }
-        moduleManager.settingsHandler = { [weak self] in
-            self?.viewModel.openSettings()
+        // « Configurer… » depuis un widget : ouvre directement la page du module.
+        moduleManager.settingsHandler = { [weak self] moduleID in
+            self?.viewModel.openSettings(tab: moduleID.map(SettingsTab.module))
         }
         moduleManager.holdHandler = { [weak self] hold in
             self?.viewModel.setHold(hold)

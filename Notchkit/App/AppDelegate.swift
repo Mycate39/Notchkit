@@ -29,6 +29,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         moduleManager.holdHandler = { [weak self] hold in
             self?.viewModel.setHold(hold)
         }
+        moduleManager.dismissAlertHandler = { [weak self] id in
+            self?.viewModel.dismissAlert(id: id)
+        }
         // Fichiers glissés sur l'encoche : étagère ou AirDrop.
         viewModel.dropHandlerAvailability = { [weak self] in
             self?.moduleManager.module(for: ShelfModule.descriptor.id) != nil
@@ -69,6 +72,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     #if DEBUG
+    /// Aperçu des animations de déverrouillage (le module doit être activé).
+    func previewUnlock(_ kind: String) {
+        (moduleManager.module(for: UnlockModule.descriptor.id) as? UnlockModule)?.preview(kind)
+    }
+
     /// Simule un événement de batterie (le module doit être activé).
     func simulateBattery(_ event: BatteryEvent) {
         (moduleManager.module(for: BatteryModule.descriptor.id) as? BatteryModule)?.simulate(event)

@@ -30,6 +30,7 @@
 		310A73D8AF9079086CAAACF4 /* NotchPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F6A4C1A5E799024B51A751 /* NotchPanel.swift */; };
 		3163ECEB928B70EC366B035F /* Debounce.h in Headers */ = {isa = PBXBuildFile; fileRef = C82EEAC4225615991537D76A /* Debounce.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		321C1FDDCAA432ED1667A806 /* MusicModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9740079B75CA6BAFEB2B7 /* MusicModule.swift */; };
+		340499E5E2C58AE3801AC31E /* UnlockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635422DB9C95886A509BD9D8 /* UnlockTests.swift */; };
 		36229702DCD121CC52D39711 /* EqualizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9868E6BCDAB5B7301961AC /* EqualizerView.swift */; };
 		36D461934D0D51DA37BA4592 /* NotchWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9E3D7C9C763F9153C29C4C /* NotchWindowController.swift */; };
 		3B0444E0AA274FEE6FC3A91C /* ShelfItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0C124C4C4759A07017DB8D /* ShelfItem.swift */; };
@@ -64,6 +65,7 @@
 		73D5E9F7641B5F75B4E0B6CB /* WeatherModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71B97392FA1B40CE01E6DD5 /* WeatherModels.swift */; };
 		78F19EC00241A52E7E494A0E /* get.h in Headers */ = {isa = PBXBuildFile; fileRef = D87D32299F6B58A261AA0D12 /* get.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		79537FE908D19E626C018946 /* ModuleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69908874CE7985E60953470 /* ModuleManager.swift */; };
+		7A1810C408E52729D11E4964 /* UnlockAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FEAFA82740815C08DAF101F /* UnlockAnimations.swift */; };
 		7B2CB280D4CE260CA0BD52ED /* ClaudeViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57759630E262CEA88367992 /* ClaudeViews.swift */; };
 		7D7E9B2D620F4A6D188804A6 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE100D153781049292573AA /* SettingsWindowController.swift */; };
 		7D94E8681B4FF20CD811DF9F /* ObservationTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BF3D614D5CC62B9E68FF35 /* ObservationTracking.swift */; };
@@ -117,6 +119,7 @@
 		DD9AE10502A766B798DD4FDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFEE1C6D62E39350CD0D7FE /* AppDelegate.swift */; };
 		DF4B09A9C2F36E969721F9CF /* now_playing.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F21C814CD3DE60B75B2C723 /* now_playing.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E0FAD540630F9E4B2FAA2E44 /* test.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C0CDEA4B993CA2ECA8EEA /* test.m */; };
+		E184F5836F541C7C7D2573E7 /* UnlockModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66674969F092062C29D4F74 /* UnlockModule.swift */; };
 		E7CB399A1524418E1152DDA6 /* ModuleDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD4A44AFAF64E2BE5E745B3 /* ModuleDescriptor.swift */; };
 		E954032D743568B2082B51F8 /* MusicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6111A0CC43713D888AAAB4 /* MusicTests.swift */; };
 		ED5BE3842572CB8E3454C102 /* AirPodsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A426D361B19F11D7BD531E6 /* AirPodsTests.swift */; };
@@ -206,6 +209,7 @@
 		578508F6730303155DAAC666 /* speed.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = speed.m; sourceTree = "<group>"; };
 		57D0955F6A00A94552C448F1 /* globals.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = globals.m; sourceTree = "<group>"; };
 		5D5A7E3E7FF4C76D4277A9D9 /* ClaudeActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeActivity.swift; sourceTree = "<group>"; };
+		635422DB9C95886A509BD9D8 /* UnlockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockTests.swift; sourceTree = "<group>"; };
 		6704D0B10B983BEF736F0E06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6CE100D153781049292573AA /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
 		6D79AFE5C1AEE52840020061 /* ScriptablePlayerSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptablePlayerSource.swift; sourceTree = "<group>"; };
@@ -219,6 +223,7 @@
 		7D2BA7B06209F7301CBA2C3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7E7EEFDAB8D951E6917D5D5F /* get.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = get.m; sourceTree = "<group>"; };
 		7EE518DE63D2C25D9F6E87F4 /* ClaudeModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeModule.swift; sourceTree = "<group>"; };
+		7FEAFA82740815C08DAF101F /* UnlockAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockAnimations.swift; sourceTree = "<group>"; };
 		82317F3A93FC9B78D9981F5A /* helpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = helpers.h; sourceTree = "<group>"; };
 		82E32A0CD723246EBCF3F295 /* SpectrumTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumTests.swift; sourceTree = "<group>"; };
 		865FBBD206E6548CD19B74CE /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
@@ -263,6 +268,7 @@
 		D331E9633CBDABB53E93E76A /* AudioDeviceMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDeviceMonitor.swift; sourceTree = "<group>"; };
 		D4D167C05CBBAD88AE1F8A4F /* keys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = keys.h; sourceTree = "<group>"; };
 		D5F6A4C1A5E799024B51A751 /* NotchPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchPanel.swift; sourceTree = "<group>"; };
+		D66674969F092062C29D4F74 /* UnlockModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockModule.swift; sourceTree = "<group>"; };
 		D87D32299F6B58A261AA0D12 /* get.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = get.h; sourceTree = "<group>"; };
 		DBA8D3B1EA83E4A1C07F1F13 /* NotchkitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotchkitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCD4A44AFAF64E2BE5E745B3 /* ModuleDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleDescriptor.swift; sourceTree = "<group>"; };
@@ -331,6 +337,7 @@
 				A097E4F52274645DD920E62C /* ShelfTests.swift */,
 				82E32A0CD723246EBCF3F295 /* SpectrumTests.swift */,
 				1540EC4F1FC0F674F96EB7CE /* SystemHUDTests.swift */,
+				635422DB9C95886A509BD9D8 /* UnlockTests.swift */,
 				3E5200FEB865B8DCA4D43E73 /* WidgetLayoutTests.swift */,
 				32D1FCC02B4ACF20842E1E6B /* WidgetsTests.swift */,
 			);
@@ -350,6 +357,7 @@
 				519555DDFDCB99F283864CC9 /* Music */,
 				A64F17DD50A084CB2420C8CE /* Shelf */,
 				A1975F559D28B76D7DDB3598 /* SystemHUD */,
+				3FA596B71B3FA62F693D5259 /* Unlock */,
 				DCA18EAF062B8C3CD01EEA35 /* Weather */,
 			);
 			path = Modules;
@@ -398,6 +406,15 @@
 				7C7777E6515F511E3753C72A /* SystemAudioTap.swift */,
 			);
 			path = Spectrum;
+			sourceTree = "<group>";
+		};
+		3FA596B71B3FA62F693D5259 /* Unlock */ = {
+			isa = PBXGroup;
+			children = (
+				7FEAFA82740815C08DAF101F /* UnlockAnimations.swift */,
+				D66674969F092062C29D4F74 /* UnlockModule.swift */,
+			);
+			path = Unlock;
 			sourceTree = "<group>";
 		};
 		519555DDFDCB99F283864CC9 /* Music */ = {
@@ -983,6 +1000,8 @@
 				A6596D02BBF2A11F995B9CF5 /* SystemControls.swift in Sources */,
 				A56A56BB6242B685DE85A1A9 /* SystemHUDModule.swift in Sources */,
 				5C6ED2CBBB8A11A2831FB4C5 /* SystemHUDViews.swift in Sources */,
+				7A1810C408E52729D11E4964 /* UnlockAnimations.swift in Sources */,
+				E184F5836F541C7C7D2573E7 /* UnlockModule.swift in Sources */,
 				73D5E9F7641B5F75B4E0B6CB /* WeatherModels.swift in Sources */,
 				12363B3F5D2845B879F69330 /* WeatherModule.swift in Sources */,
 				FE84A29BB41889B5AC1BD36D /* WeatherViews.swift in Sources */,
@@ -1004,6 +1023,7 @@
 				AC7269EC36E5FC05D7BD7336 /* ShelfTests.swift in Sources */,
 				0CE35712354CA83AF734444A /* SpectrumTests.swift in Sources */,
 				5745C9E89B5256A77822D3EF /* SystemHUDTests.swift in Sources */,
+				340499E5E2C58AE3801AC31E /* UnlockTests.swift in Sources */,
 				2A8FC1478370BC212B9E8F67 /* WidgetLayoutTests.swift in Sources */,
 				1C6A5C7809598012656141D5 /* WidgetsTests.swift in Sources */,
 			);

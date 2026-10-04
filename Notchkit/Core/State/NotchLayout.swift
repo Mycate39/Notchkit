@@ -54,9 +54,14 @@ enum NotchLayout {
 
     /// Taille de la forme noire selon l'état.
     static func shapeSize(for geometry: NotchGeometry, isExpanded: Bool, hasCompactContent: Bool,
-                          sideWidth: CGFloat = compactSideWidth) -> CGSize {
+                          sideWidth: CGFloat = compactSideWidth, alertSize: CGSize? = nil) -> CGSize {
         let ears = geometry.style == .notch ? earRadius * 2 : 0
         let closed = geometry.closedSize
+
+        // Alerte agrandie (ex. animation de déverrouillage).
+        if !isExpanded, let alertSize {
+            return CGSize(width: max(alertSize.width, closed.width) + ears, height: max(alertSize.height, closed.height))
+        }
 
         if isExpanded {
             let width = max(expandedSize.width, closed.width + compactSideWidth * 2)
@@ -106,8 +111,9 @@ enum NotchLayout {
 
     /// Taille de la fenêtre nécessaire pour contenir la forme.
     static func panelSize(for geometry: NotchGeometry, isExpanded: Bool, hasCompactContent: Bool,
-                          sideWidth: CGFloat = compactSideWidth) -> CGSize {
-        let shape = shapeSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent, sideWidth: sideWidth)
+                          sideWidth: CGFloat = compactSideWidth, alertSize: CGSize? = nil) -> CGSize {
+        let shape = shapeSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent,
+                              sideWidth: sideWidth, alertSize: alertSize)
         return CGSize(width: shape.width, height: shape.height + topInset(for: geometry.style))
     }
 

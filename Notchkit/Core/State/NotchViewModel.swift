@@ -58,11 +58,13 @@ final class NotchViewModel {
     }
 
     var shapeSize: CGSize {
-        NotchLayout.shapeSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent, sideWidth: compactSideWidth)
+        NotchLayout.shapeSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent,
+                              sideWidth: compactSideWidth, alertSize: currentAlert?.expandedSize)
     }
 
     var panelSize: CGSize {
-        NotchLayout.panelSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent, sideWidth: compactSideWidth)
+        NotchLayout.panelSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent,
+                              sideWidth: compactSideWidth, alertSize: currentAlert?.expandedSize)
     }
 
     // MARK: - Géométrie
@@ -161,6 +163,13 @@ final class NotchViewModel {
     }
 
     // MARK: - Alertes
+
+    /// Retire une alerte avant la fin de sa durée (ex. la demande Touch ID est terminée).
+    func dismissAlert(id: UUID) {
+        guard currentAlert?.id == id else { return }
+        alertTask?.cancel()
+        withAnimation(NotchLayout.spring) { currentAlert = nil }
+    }
 
     func present(_ alert: NotchAlert) {
         alertTask?.cancel()

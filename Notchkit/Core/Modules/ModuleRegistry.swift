@@ -16,5 +16,6 @@ enum ModuleRegistry {
         LiveActivitiesModule.self,
         ClipboardModule.self,
         SystemHUDModule.self,
+        UnlockModule.self,
     ]
 }

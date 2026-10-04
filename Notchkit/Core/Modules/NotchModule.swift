@@ -27,6 +27,10 @@ struct ModuleContext {
     let openSettings: @MainActor () -> Void
     /// Garde l'encoche dépliée (ex. pendant la saisie d'un message), même si la souris s'éloigne.
     let holdExpanded: @MainActor (Bool) -> Void
+    /// Retire une alerte avant la fin de sa durée.
+    var dismissAlert: @MainActor (UUID) -> Void = { _ in }
+
+    func dismiss(_ alertID: UUID) { dismissAlert(alertID) }
 }
 
 /// Protocole commun à toutes les fonctionnalités de Notchkit.

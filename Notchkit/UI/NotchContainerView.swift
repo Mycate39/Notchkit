@@ -48,6 +48,20 @@ private struct CompactNotchView: View {
         let ear = viewModel.geometry.style == .notch ? NotchLayout.earRadius : 0
         let (leading, trailing) = content
 
+        if let expanded = viewModel.currentAlert?.expandedContent {
+            // Alerte agrandie : contenu centré sous la hauteur de l'encoche.
+            VStack(spacing: 0) {
+                Color.clear.frame(height: viewModel.geometry.closedSize.height)
+                expanded
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+            .transition(.opacity.combined(with: .scale(scale: 0.9, anchor: .top)))
+        } else {
+            compactRow(ear: ear, leading: leading, trailing: trailing)
+        }
+    }
+
+    private func compactRow(ear: CGFloat, leading: AnyView?, trailing: AnyView?) -> some View {
         HStack(spacing: 0) {
             leading
                 .frame(width: viewModel.compactSideWidth - 12, alignment: .leading)

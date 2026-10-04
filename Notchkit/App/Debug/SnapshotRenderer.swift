@@ -58,6 +58,27 @@ enum SnapshotRenderer {
             activities.activities.map(\.id).forEach(activities.remove)
         }
 
+        // Animations de déverrouillage (première image de chacune).
+        save(HStack(spacing: 16) {
+                ForEach(0..<3) { index in
+                    VStack(spacing: 0) {
+                        Color.clear.frame(height: 30)
+                        Group {
+                            switch index {
+                            case 0: FaceIDUnlockView()
+                            case 1: TouchIDPromptView()
+                            default: PasswordPromptView()
+                            }
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    }
+                    .frame(width: UnlockAnimations.size.width, height: UnlockAnimations.size.height)
+                    .background(.black, in: UnevenRoundedRectangle(bottomLeadingRadius: 24, bottomTrailingRadius: 24))
+                }
+            }
+            .padding(12).background(Color(white: 0.35)).foregroundStyle(.white).environment(\.colorScheme, .dark),
+             to: directory.appendingPathComponent("deverrouillage.png"))
+
         // Onglet Disposition des réglages.
         save(LayoutEditorContent(manager: manager)
                 .frame(width: 620, height: 1100)

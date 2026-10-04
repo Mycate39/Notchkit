@@ -131,31 +131,31 @@ struct BatteryExpandedView: View {
 
     var body: some View {
         if let state = module.state {
-            HStack(spacing: 14) {
-                BatteryGlyph(state: state, isLowPowerMode: module.isLowPowerMode, size: CGSize(width: 54, height: 26))
-
-                VStack(alignment: .leading, spacing: 3) {
-                    Text("\(state.level) %")
-                        .font(.system(size: 26, weight: .semibold, design: .rounded))
-                        .monospacedDigit()
-                        .foregroundStyle(BatteryStyle.textColor(for: state, isLowPowerMode: module.isLowPowerMode))
-                    Text(statusText(state))
-                        .font(.system(size: 12, weight: .medium))
-                    if let detail = detailText(state) {
-                        Text(detail)
-                            .font(.system(size: 11))
-                            .foregroundStyle(.white.opacity(0.6))
-                    }
-                    if module.isLowPowerMode {
-                        Label("Économie d'énergie", systemImage: "leaf.fill")
-                            .font(.system(size: 10, weight: .medium))
-                            .foregroundStyle(.yellow)
-                    }
+            // Disposition verticale : la carte est étroite (une part de largeur).
+            VStack(spacing: 4) {
+                BatteryGlyph(state: state, isLowPowerMode: module.isLowPowerMode, size: CGSize(width: 46, height: 22))
+                    .padding(.bottom, 2)
+                Text("\(state.level) %")
+                    .font(.system(size: 22, weight: .semibold, design: .rounded))
+                    .monospacedDigit()
+                    .foregroundStyle(BatteryStyle.textColor(for: state, isLowPowerMode: module.isLowPowerMode))
+                Text(statusText(state))
+                    .font(.system(size: 11, weight: .medium))
+                if let detail = detailText(state) {
+                    Text(detail)
+                        .font(.system(size: 10))
+                        .foregroundStyle(.white.opacity(0.6))
                 }
-                .lineLimit(1)
-                .minimumScaleFactor(0.8)
+                if module.isLowPowerMode {
+                    Label("Économie d'énergie", systemImage: "leaf.fill")
+                        .font(.system(size: 9, weight: .medium))
+                        .foregroundStyle(.yellow)
+                }
             }
-            .padding(12)
+            .lineLimit(1)
+            .minimumScaleFactor(0.75)
+            .multilineTextAlignment(.center)
+            .padding(10)
         } else {
             VStack(spacing: 6) {
                 Image(systemName: "powerplug.fill")

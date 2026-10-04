@@ -93,9 +93,10 @@ private struct ExpandedNotchView: View {
                 .padding(.top, 4)
         }
         .onAppear {
-            // On ouvre directement la page du module qui était affiché dans l'encoche repliée.
-            if let id = viewModel.manager.compactModule?.moduleID,
-               let page = pages.first(where: { $0.modules.contains { $0.id == id } }) {
+            // On reste sur la page où l'on était, sauf si un module réclame l'attention
+            // (Claude au travail, rendez-vous imminent…) : on ouvre alors directement sa page.
+            if let module = viewModel.manager.compactModule, module.compactPriority >= .elevated,
+               let page = pages.first(where: { $0.modules.contains { $0.id == module.moduleID } }) {
                 viewModel.selectedPage = page.id
             }
         }
@@ -165,23 +166,30 @@ private struct ExpandedNotchView: View {
         } else {
             // Pages défilantes : balayage horizontal au trackpad, ou clic sur les onglets.
             GeometryReader { proxy in
-                ScrollView(.horizontal) {
-                    HStack(spacing: 0) {
-                        ForEach(pages) { page in
-                            PageView(page: page)
-                                .padding(.horizontal, horizontalPadding)
-                                .frame(width: proxy.size.width, height: proxy.size.height)
-                                .id(page.id)
+                ScrollViewReader { reader in
+                    ScrollView(.horizontal) {
+                        HStack(spacing: 0) {
+                            ForEach(pages) { page in
+                                PageView(page: page)
+                                    .padding(.horizontal, horizontalPadding)
+                                    .frame(width: proxy.size.width, height: proxy.size.height)
+                                    .id(page.id)
+                            }
                         }
+                        .scrollTargetLayout()
                     }
-                    .scrollTargetLayout()
+                    .scrollIndicators(.never)
+                    .scrollTargetBehavior(.paging)
+                    .scrollPosition(id: Binding(
+                        get: { min(viewModel.selectedPage, pages.count - 1) },
+                        set: { if let page = $0 { viewModel.selectedPage = page } }
+                    ))
+                    .onAppear {
+                        // La vue est recréée à chaque ouverture : on replace explicitement le défilement
+                        // sur la page mémorisée (la position initiale n'est pas toujours appliquée).
+                        reader.scrollTo(min(viewModel.selectedPage, pages.count - 1), anchor: .leading)
+                    }
                 }
-                .scrollIndicators(.never)
-                .scrollTargetBehavior(.paging)
-                .scrollPosition(id: Binding(
-                    get: { min(viewModel.selectedPage, pages.count - 1) },
-                    set: { viewModel.selectedPage = $0 ?? 0 }
-                ))
             }
         }
     }

@@ -1,6 +1,12 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "·" : {
+
+    },
+    "« %@ »" : {
+
+    },
     "%@ (avec encoche)" : {
 
     },
@@ -13,6 +19,12 @@
     "%lld %%" : {
 
     },
+    "%lld min" : {
+
+    },
+    "≈ %@ tokens" : {
+
+    },
     "À propos" : {
 
     },
@@ -22,10 +34,16 @@
     "Activez des modules dans les réglages." : {
 
     },
+    "Activité de Claude Code en direct, messages depuis l'encoche et utilisation estimée." : {
+
+    },
     "Affiche l'heure et la date." : {
 
     },
     "Affiche une fausse encoche sur les écrans qui n'en ont pas, pour tester le rendu." : {
+
+    },
+    "Afficher l'activité quand l'encoche est repliée" : {
 
     },
     "Afficher l'encoche sur" : {
@@ -34,7 +52,16 @@
     "Afficher l'heure quand l'encoche est repliée" : {
 
     },
+    "Afficher l'icône de l'app sur la pochette" : {
+
+    },
+    "Afficher la température quand l'encoche est repliée" : {
+
+    },
     "Afficher le morceau quand l'encoche est repliée" : {
+
+    },
+    "Afficher les événements « journée entière »" : {
 
     },
     "Afficher une alerte de test" : {
@@ -43,16 +70,52 @@
     "Alerte de batterie faible (20 % et 10 %)" : {
 
     },
+    "Alerte quand Claude a terminé" : {
+
+    },
     "Animation au branchement et au débranchement" : {
 
     },
+    "Annuler" : {
+
+    },
+    "Aucun" : {
+
+    },
+    "Aucun événement aujourd'hui ni demain" : {
+
+    },
     "Aucun module actif" : {
+
+    },
+    "Aucune" : {
 
     },
     "Aucune batterie détectée" : {
 
     },
     "Aucune lecture en cours" : {
+
+    },
+    "Aucune session d'utilisation en cours" : {
+
+    },
+    "Automatique" : {
+
+    },
+    "Autoriser l'accès" : {
+
+    },
+    "Autoriser l'accès aux calendriers…" : {
+
+    },
+    "Autoriser la localisation…" : {
+
+    },
+    "Averses" : {
+
+    },
+    "Averses de neige" : {
 
     },
     "Batterie" : {
@@ -70,16 +133,76 @@
     "Branchée, charge en pause" : {
 
     },
+    "Brouillard" : {
+
+    },
+    "Bruine" : {
+
+    },
+    "Bruine verglaçante" : {
+
+    },
     "Calcul de l'autonomie…" : {
 
     },
     "Calcul du temps de charge…" : {
 
     },
+    "Calendrier" : {
+
+    },
     "Chargée" : {
 
     },
+    "Cherche sur le web « %@ »" : {
+
+    },
+    "Chicago" : {
+
+    },
+    "Choisir une ville…" : {
+
+    },
+    "Ciel dégagé" : {
+
+    },
+    "Claude a terminé" : {
+
+    },
+    "Claude attend votre accord" : {
+
+    },
+    "Claude Code" : {
+
+    },
+    "Claude Code est inactif" : {
+
+    },
+    "Claude travaille" : {
+
+    },
+    "Conditions actuelles et prévisions des prochaines heures (Open-Meteo)." : {
+
+    },
+    "Conditions inconnues" : {
+
+    },
+    "Configurer…" : {
+
+    },
+    "Connectez Claude Code" : {
+
+    },
+    "Consulte %@" : {
+
+    },
+    "Couvert" : {
+
+    },
     "Débogage" : {
+
+    },
+    "Début" : {
 
     },
     "Délai d'ouverture" : {
@@ -88,13 +211,28 @@
     "Délai de fermeture" : {
 
     },
+    "Demain" : {
+
+    },
     "Déplier / replier l'encoche" : {
+
+    },
+    "Désinstaller" : {
 
     },
     "Détecter toutes les apps (expérimental)" : {
 
     },
     "Développement" : {
+
+    },
+    "Données météo : Open-Meteo.com (licence CC BY 4.0)." : {
+
+    },
+    "Données météo fournies par Open-Meteo.com, sous licence Creative Commons Attribution 4.0 (CC BY 4.0)." : {
+
+    },
+    "Dubaï" : {
 
     },
     "Économie d'énergie" : {
@@ -106,13 +244,37 @@
     "Écran principal" : {
 
     },
+    "Écrire à Claude…" : {
+
+    },
+    "Écrit %@" : {
+
+    },
     "En charge" : {
+
+    },
+    "En cours · jusqu'à %@" : {
+
+    },
+    "Exécute : %@" : {
 
     },
     "Fermer" : {
 
     },
+    "Forte pluie" : {
+
+    },
+    "Fortes averses" : {
+
+    },
+    "Fortes chutes de neige" : {
+
+    },
     "Général" : {
+
+    },
+    "Grains de neige" : {
 
     },
     "Horloge" : {
@@ -121,13 +283,86 @@
     "https://github.com/ungive/mediaremote-adapter" : {
 
     },
+    "https://open-meteo.com" : {
+
+    },
+    "Installer" : {
+
+    },
+    "Installer l'intégration Claude Code ?" : {
+
+    },
+    "Installer l'intégration…" : {
+
+    },
+    "Installez l'intégration pour suivre ce que fait Claude et lui écrire depuis l'encoche." : {
+
+    },
+    "Intégration Claude Code installée" : {
+
+    },
+    "Intégration Claude Code non installée" : {
+
+    },
+    "Intégration installée." : {
+
+    },
+    "Intégration installée. Sauvegarde de vos réglages : %@" : {
+
+    },
+    "Intégration retirée." : {
+
+    },
+    "L'accès aux calendriers est refusé." : {
+
+    },
+    "L'activité apparaîtra ici dès que Claude Code travaillera." : {
+
+    },
+    "L'utilisation est estimée à partir des fichiers de session de Claude Code sur ce Mac (sessions de 5 h). Les conversations sur claude.ai ne sont pas comptées, et la jauge compare à votre plus grosse session observée : Anthropic ne publie pas les plafonds exacts." : {
+
+    },
+    "La recherche a échoué. Vérifiez votre connexion." : {
+
+    },
+    "Lance un agent" : {
+
+    },
     "Lancer Notchkit à l'ouverture de session" : {
 
+    },
+    "Le fichier ~/.claude/settings.json n'est pas un JSON valide. Corrigez-le ou supprimez-le, puis réessayez." : {
+
+    },
+    "Le serveur local n'a pas pu démarrer sur le port %@ : %@" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Le serveur local n'a pas pu démarrer sur le port %1$@ : %2$@"
+          }
+        }
+      }
     },
     "Lecture" : {
 
     },
     "Licences des composants tiers" : {
+
+    },
+    "Lit %@" : {
+
+    },
+    "Localisation autorisée" : {
+
+    },
+    "Localisation refusée : la ville choisie ci-dessous est utilisée. Vous pouvez l'autoriser dans Réglages Système > Confidentialité et sécurité > Service de localisation." : {
+
+    },
+    "Londres" : {
+
+    },
+    "Los Angeles" : {
 
     },
     "MediaRemoteAdapter" : {
@@ -136,7 +371,28 @@
     "Médias" : {
 
     },
+    "Message en attente : il sera remis avec votre prochaine demande dans Claude Code." : {
+
+    },
+    "Message en attente : remis à la prochaine étape de Claude." : {
+
+    },
+    "Met à jour sa liste de tâches" : {
+
+    },
+    "Météo" : {
+
+    },
+    "Météo indisponible" : {
+
+    },
+    "Modifie %@" : {
+
+    },
     "Modules" : {
+
+    },
+    "Montréal" : {
 
     },
     "Morceau en cours et commandes de lecture (Deezer, Spotify, Music, navigateurs…)." : {
@@ -148,10 +404,22 @@
     "Morceau suivant" : {
 
     },
+    "Moscou" : {
+
+    },
+    "Mumbai" : {
+
+    },
     "Musique" : {
 
     },
     "Nécessaire pour Deezer, les navigateurs et la plupart des lecteurs. Utilise une interface non officielle d'Apple qui peut cesser de fonctionner après une mise à jour de macOS ; Music et Spotify restent alors pris en charge." : {
+
+    },
+    "Neige" : {
+
+    },
+    "New York" : {
 
     },
     "Niveau, état de charge et animation au branchement." : {
@@ -160,22 +428,91 @@
     "Notchkit" : {
 
     },
+    "Notchkit a besoin d'accéder à vos calendriers pour afficher vos événements." : {
+
+    },
+    "Notchkit va ajouter des hooks dans ~/.claude/settings.json pour que Claude Code le prévienne de son activité (connexion locale uniquement, protégée par un jeton). Vos réglages existants sont conservés et une copie de sauvegarde est faite. Les nouvelles sessions de Claude Code en tiendront compte." : {
+
+    },
+    "Open-Meteo" : {
+
+    },
+    "Orage" : {
+
+    },
+    "Orage avec grêle" : {
+
+    },
+    "Ouvrir Calendrier" : {
+
+    },
     "Ouvrir l'app qui joue" : {
+
+    },
+    "Ouvrir les Réglages Système" : {
+
+    },
+    "Par rapport à votre plus grosse session observée (estimation)" : {
+
+    },
+    "Paris" : {
+
+    },
+    "Partiellement nuageux" : {
 
     },
     "Pause" : {
 
     },
+    "Peu nuageux" : {
+
+    },
     "Pleine dans %@" : {
 
     },
+    "Pluie" : {
+
+    },
+    "Pluie faible" : {
+
+    },
+    "Pluie verglaçante" : {
+
+    },
+    "Port invalide" : {
+
+    },
+    "Position" : {
+
+    },
+    "Position nécessaire pour la météo" : {
+
+    },
     "PRO" : {
+
+    },
+    "Prochains événements et rappel avant un rendez-vous." : {
 
     },
     "Productivité" : {
 
     },
     "Quitter Notchkit" : {
+
+    },
+    "Rappel dans l'encoche 10 minutes avant un événement" : {
+
+    },
+    "Recherche « %@ »" : {
+
+    },
+    "Rechercher" : {
+
+    },
+    "Rechercher une ville" : {
+
+    },
+    "Réessayer" : {
 
     },
     "Réglages" : {
@@ -187,10 +524,28 @@
     "Réglages…" : {
 
     },
+    "réinitialisation %@" : {
+
+    },
     "s" : {
 
     },
+    "Sans titre" : {
+
+    },
+    "São Paulo" : {
+
+    },
+    "Second fuseau horaire" : {
+
+    },
+    "Shanghai" : {
+
+    },
     "Simuler une encoche" : {
+
+    },
+    "Singapour" : {
 
     },
     "Sur batterie" : {
@@ -199,19 +554,46 @@
     "Survol" : {
 
     },
+    "Sydney" : {
+
+    },
     "Système" : {
+
+    },
+    "Terminé" : {
 
     },
     "Test" : {
 
     },
+    "Tokyo" : {
+
+    },
     "Toujours afficher le niveau quand l'encoche est repliée" : {
+
+    },
+    "Toute la journée" : {
 
     },
     "Transformez l'encoche de votre Mac en une zone interactive et modulaire." : {
 
     },
+    "UTC" : {
+
+    },
+    "Utilise %@" : {
+
+    },
+    "Utiliser ma position" : {
+
+    },
     "Version %@" : {
+
+    },
+    "Ville" : {
+
+    },
+    "Ville choisie" : {
 
     },
     "Widgets" : {

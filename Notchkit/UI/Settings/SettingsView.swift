@@ -1,22 +1,45 @@
 import SwiftUI
 
-/// Écran de réglages (version de base de l'étape 1, enrichie au fil des étapes).
+/// Onglets de la fenêtre de réglages.
+enum SettingsTab: Hashable {
+    case general
+    case layout
+    case modules
+    case about
+}
+
+/// Onglet affiché : permet d'ouvrir les réglages directement sur un onglet précis.
+@MainActor
+@Observable
+final class SettingsRouter {
+    var tab: SettingsTab = .general
+}
+
+/// Écran de réglages, enrichi au fil des étapes.
 struct SettingsView: View {
     let settings: SettingsStore
     let manager: ModuleManager
+    @Bindable var router: SettingsRouter
 
     var body: some View {
-        TabView {
+        TabView(selection: $router.tab) {
             GeneralSettingsView(settings: settings)
                 .tabItem { Label("Général", systemImage: "gearshape") }
+                .tag(SettingsTab.general)
+
+            LayoutSettingsView(manager: manager)
+                .tabItem { Label("Disposition", systemImage: "rectangle.3.group") }
+                .tag(SettingsTab.layout)
 
             ModulesSettingsView(manager: manager)
                 .tabItem { Label("Modules", systemImage: "square.grid.2x2") }
+                .tag(SettingsTab.modules)
 
             AboutSettingsView()
                 .tabItem { Label("À propos", systemImage: "info.circle") }
+                .tag(SettingsTab.about)
         }
-        .frame(width: 560, height: 440)
+        .frame(width: 620, height: 500)
     }
 }
 

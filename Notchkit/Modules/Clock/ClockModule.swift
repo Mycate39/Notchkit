@@ -97,12 +97,13 @@ private struct ClockCompactText: View {
 /// Heure avec secondes, date complète et éventuel second fuseau horaire.
 private struct ClockExpandedView: View {
     let secondaryTimeZoneID: String?
+    @Environment(\.widgetSize) private var size
 
     var body: some View {
         TimelineView(.periodic(from: .now, by: 1)) { context in
             VStack(spacing: 4) {
                 Text(context.date, format: .dateTime.hour().minute().second())
-                    .font(.system(size: 34, weight: .semibold, design: .rounded))
+                    .font(.system(size: size == .large ? 42 : 34, weight: .semibold, design: .rounded))
                     .monospacedDigit()
                 Text(context.date, format: .dateTime.weekday(.wide).day().month(.wide))
                     .font(.system(size: 12, weight: .medium))

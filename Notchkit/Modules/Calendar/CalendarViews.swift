@@ -23,6 +23,7 @@ struct CalendarCountdown: View {
 
 struct CalendarExpandedView: View {
     let module: CalendarModule
+    @Environment(\.widgetSize) private var size
 
     var body: some View {
         Group {
@@ -61,7 +62,7 @@ struct CalendarExpandedView: View {
         } else {
             TimelineView(.everyMinute) { context in
                 VStack(alignment: .leading, spacing: 8) {
-                    ForEach(module.events) { event in
+                    ForEach(module.events.prefix(size == .small ? 2 : CalendarModule.maxEvents)) { event in
                         EventRow(event: event, now: context.date)
                     }
                     Spacer(minLength: 0)

@@ -4,6 +4,7 @@ import SwiftUI
 
 struct ClaudeExpandedView: View {
     let module: ClaudeModule
+    @Environment(\.widgetSize) private var size
 
     @State private var draft = ""
     @FocusState private var isTyping: Bool
@@ -54,9 +55,9 @@ struct ClaudeExpandedView: View {
                 header(session)
                 activity(session)
                 Spacer(minLength: 0)
-                if let session {
+                if let session, size != .small {
                     messageField(session)
-                } else {
+                } else if session == nil {
                     usageRow
                 }
             }

@@ -22,11 +22,13 @@ final class NotchViewModel {
     @ObservationIgnored private var hoverTask: Task<Void, Never>?
     @ObservationIgnored private var alertTask: Task<Void, Never>?
     /// Ouvre la fenêtre de réglages (fourni par l'AppDelegate).
-    @ObservationIgnored var openSettingsAction: @MainActor () -> Void = {}
+    @ObservationIgnored var openSettingsAction: @MainActor (SettingsTab?) -> Void = { _ in }
     /// Indique si la souris est au-dessus du panneau (fourni par le contrôleur de fenêtre).
     @ObservationIgnored var isMouseInside: @MainActor () -> Bool = { false }
-    /// Encoche maintenue dépliée (saisie en cours) : la sortie de la souris ne la replie pas.
-    @ObservationIgnored private var isHeld = false
+    /// Raisons de garder l'encoche dépliée (saisie en cours, menu ouvert…) : tant qu'il y en a,
+    /// la sortie de la souris ne la replie pas.
+    @ObservationIgnored private var holdReasons: Set<String> = []
+    private var isHeld: Bool { !holdReasons.isEmpty }
 
     init(manager: ModuleManager, settings: SettingsStore) {
         self.manager = manager
@@ -82,15 +84,22 @@ final class NotchViewModel {
     }
 
     /// Maintient (ou relâche) l'encoche dépliée. Au relâchement, elle se replie si la souris est ailleurs.
-    func setHold(_ hold: Bool) {
-        guard hold != isHeld else { return }
-        isHeld = hold
+    func setHold(_ hold: Bool, reason: String = "saisie") {
+        let wasHeld = isHeld
+        if hold { holdReasons.insert(reason) } else { holdReasons.remove(reason) }
         if hold {
             hoverTask?.cancel()
             expand()
-        } else if !isMouseInside() {
+        } else if wasHeld && !isHeld && !isMouseInside() {
             hoverChanged(isInside: false)
         }
+    }
+
+    /// Relâche tous les maintiens (ex. clic en dehors de l'encoche).
+    func releaseAllHolds() {
+        guard isHeld else { return }
+        holdReasons.removeAll()
+        if !isMouseInside() { hoverChanged(isInside: false) }
     }
 
     func toggle() {
@@ -98,9 +107,10 @@ final class NotchViewModel {
         isExpanded ? collapse() : expand()
     }
 
-    func openSettings() {
+    func openSettings(tab: SettingsTab? = nil) {
+        holdReasons.removeAll()
         collapse()
-        openSettingsAction()
+        openSettingsAction(tab)
     }
 
     // MARK: - Alertes

@@ -12,6 +12,7 @@
 		0CE35712354CA83AF734444A /* SpectrumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E32A0CD723246EBCF3F295 /* SpectrumTests.swift */; };
 		0DAD6BA93A36E4EC90345619 /* SystemAudioTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7777E6515F511E3753C72A /* SystemAudioTap.swift */; };
 		0DE3A6F31820693836DDC753 /* globals.h in Headers */ = {isa = PBXBuildFile; fileRef = 3497CA2593D7F55A480C1EC3 /* globals.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0F5ED439E2F5648E15B3C072 /* LayoutSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9D3F695623AF356C363ADE /* LayoutSettingsView.swift */; };
 		104E80908062F310B5609902 /* ScriptablePlayerSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D79AFE5C1AEE52840020061 /* ScriptablePlayerSource.swift */; };
 		12363B3F5D2845B879F69330 /* WeatherModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938B1E14A3EA48C00556D332 /* WeatherModule.swift */; };
 		13B5219E73F9A1045A0D23F9 /* ClaudeHookServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F3AA5E7B3A040B33B93437 /* ClaudeHookServer.swift */; };
@@ -20,6 +21,7 @@
 		1C6A5C7809598012656141D5 /* WidgetsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D1FCC02B4ACF20842E1E6B /* WidgetsTests.swift */; };
 		1CDA13E5F9845A313287E1B8 /* AudioSpectrumMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8919AB6ED390FDA70C4B9EA7 /* AudioSpectrumMonitor.swift */; };
 		1F165902D58592E6CFEAE8BB /* keys.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3572EC44002A80A034CBF1 /* keys.m */; };
+		2A8FC1478370BC212B9E8F67 /* WidgetLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5200FEB865B8DCA4D43E73 /* WidgetLayoutTests.swift */; };
 		2CE8FE66D01A59F012F198E4 /* CalendarModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B0FE375C12A1424391655D /* CalendarModule.swift */; };
 		310A73D8AF9079086CAAACF4 /* NotchPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F6A4C1A5E799024B51A751 /* NotchPanel.swift */; };
 		3163ECEB928B70EC366B035F /* Debounce.h in Headers */ = {isa = PBXBuildFile; fileRef = C82EEAC4225615991537D76A /* Debounce.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -60,6 +62,7 @@
 		8C0ED9AB5ED77DD0A591BF76 /* Debounce.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E6A11EA97C90A4B6372215A /* Debounce.m */; };
 		8FC318594A37D67BB477BCA4 /* NotchHostingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C474C3B54576120030842F /* NotchHostingView.swift */; };
 		9534909608C6D366FB3BCE9F /* mediaremote-adapter.pl in Resources */ = {isa = PBXBuildFile; fileRef = E343FA5573A1C385029263CF /* mediaremote-adapter.pl */; };
+		98776D4DF39E4E21CDB0167E /* WidgetLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986BDF5C03AFD85D9ABE4BC /* WidgetLayout.swift */; };
 		98D2E19AF44D1F7BEDE8C93B /* stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 46804D5EC7EFC5FEF7FAE1B0 /* stream.m */; };
 		9A90F1FF12025FADD79A74D1 /* BatteryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88A3C1DCE9F2BBAD2E4119B /* BatteryTests.swift */; };
 		9E7A63311A2BAFD715703A99 /* NotchShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8841EA892E202FC4B79550 /* NotchShape.swift */; };
@@ -154,6 +157,7 @@
 		39D9454F2B90F4202312E9B9 /* SpectrumAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumAnalyzer.swift; sourceTree = "<group>"; };
 		3CF7506AC056617E590D6805 /* helpers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = helpers.m; sourceTree = "<group>"; };
 		3DF83BF34AFE3B80D8068FFA /* NowPlayingTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NowPlayingTest.h; sourceTree = "<group>"; };
+		3E5200FEB865B8DCA4D43E73 /* WidgetLayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetLayoutTests.swift; sourceTree = "<group>"; };
 		3F9E3D7C9C763F9153C29C4C /* NotchWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchWindowController.swift; sourceTree = "<group>"; };
 		41C3050DD5E00E81450E55B9 /* BatteryState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryState.swift; sourceTree = "<group>"; };
 		46804D5EC7EFC5FEF7FAE1B0 /* stream.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = stream.m; sourceTree = "<group>"; };
@@ -170,6 +174,7 @@
 		6D79AFE5C1AEE52840020061 /* ScriptablePlayerSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptablePlayerSource.swift; sourceTree = "<group>"; };
 		6E67B71BB43A4F2B68A88A78 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
 		77C38E58910B7C41117212E1 /* NotchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchViewModel.swift; sourceTree = "<group>"; };
+		7986BDF5C03AFD85D9ABE4BC /* WidgetLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetLayout.swift; sourceTree = "<group>"; };
 		7A5B978655390BC3A5CD3350 /* MediaRemoteAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MediaRemoteAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BFEE1C6D62E39350CD0D7FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C7777E6515F511E3753C72A /* SystemAudioTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemAudioTap.swift; sourceTree = "<group>"; };
@@ -219,6 +224,7 @@
 		E88A3C1DCE9F2BBAD2E4119B /* BatteryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryTests.swift; sourceTree = "<group>"; };
 		E9F9740079B75CA6BAFEB2B7 /* MusicModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicModule.swift; sourceTree = "<group>"; };
 		EAED0DCFD7BDF1DF1BDCDFFB /* WeatherViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViews.swift; sourceTree = "<group>"; };
+		EE9D3F695623AF356C363ADE /* LayoutSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutSettingsView.swift; sourceTree = "<group>"; };
 		EED212AC944BD64489CD960D /* MenuBarContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarContent.swift; sourceTree = "<group>"; };
 		F0BF3D614D5CC62B9E68FF35 /* ObservationTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationTracking.swift; sourceTree = "<group>"; };
 		F2F0FA5356B3066E849853ED /* env.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = env.m; sourceTree = "<group>"; };
@@ -260,6 +266,7 @@
 				FC306A7DAC40B0ECC5A20A71 /* ModuleManagerTests.swift */,
 				DE6111A0CC43713D888AAAB4 /* MusicTests.swift */,
 				82E32A0CD723246EBCF3F295 /* SpectrumTests.swift */,
+				3E5200FEB865B8DCA4D43E73 /* WidgetLayoutTests.swift */,
 				32D1FCC02B4ACF20842E1E6B /* WidgetsTests.swift */,
 			);
 			path = NotchkitTests;
@@ -295,6 +302,7 @@
 		21AD8E9157C11F575BF67215 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				EE9D3F695623AF356C363ADE /* LayoutSettingsView.swift */,
 				C4B90EDE60261A06FD92A08E /* SettingsView.swift */,
 				6CE100D153781049292573AA /* SettingsWindowController.swift */,
 			);
@@ -433,6 +441,14 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		96B4B76E71C0F50640CAFAA0 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				7986BDF5C03AFD85D9ABE4BC /* WidgetLayout.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
 		99BB9112389B45C7BA7E5294 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
@@ -521,6 +537,7 @@
 		D96A0EC12FE710271EA40961 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				96B4B76E71C0F50640CAFAA0 /* Layout */,
 				B8796CCD9B4BF844F90B33D6 /* Licensing */,
 				B380B3D4930B5A176B1AA7DD /* Modules */,
 				9469C7A29AF49541033E5D3C /* Settings */,
@@ -781,6 +798,7 @@
 				53009C2AA2481B9ED10B6FDE /* EntitlementManager.swift in Sources */,
 				36229702DCD121CC52D39711 /* EqualizerView.swift in Sources */,
 				4F396C9C347E18A649275B67 /* LaunchAtLogin.swift in Sources */,
+				0F5ED439E2F5648E15B3C072 /* LayoutSettingsView.swift in Sources */,
 				8BCDCE6F6E2F54D141980CF1 /* LocationProvider.swift in Sources */,
 				09A63C00ADCB71C6BF4392D4 /* MediaRemoteSource.swift in Sources */,
 				018D9AD0EB2549EDE8225838 /* MenuBarContent.swift in Sources */,
@@ -813,6 +831,7 @@
 				73D5E9F7641B5F75B4E0B6CB /* WeatherModels.swift in Sources */,
 				12363B3F5D2845B879F69330 /* WeatherModule.swift in Sources */,
 				FE84A29BB41889B5AC1BD36D /* WeatherViews.swift in Sources */,
+				98776D4DF39E4E21CDB0167E /* WidgetLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -825,6 +844,7 @@
 				601D9B8C8D44ED81CC990946 /* ModuleManagerTests.swift in Sources */,
 				E954032D743568B2082B51F8 /* MusicTests.swift in Sources */,
 				0CE35712354CA83AF734444A /* SpectrumTests.swift in Sources */,
+				2A8FC1478370BC212B9E8F67 /* WidgetLayoutTests.swift in Sources */,
 				1C6A5C7809598012656141D5 /* WidgetsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

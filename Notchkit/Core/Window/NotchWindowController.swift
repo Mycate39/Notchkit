@@ -67,7 +67,18 @@ final class NotchWindowController {
             object: panel,
             queue: .main
         ) { [weak self] _ in
-            MainActor.assumeIsolated { self?.viewModel.setHold(false) }
+            MainActor.assumeIsolated { self?.viewModel.releaseAllHolds() }
+        }
+
+        // Menu (clic droit sur un widget) ouvert depuis l'encoche dépliée : elle reste ouverte.
+        NotificationCenter.default.addObserver(forName: NSMenu.didBeginTrackingNotification, object: nil, queue: .main) { [weak self] _ in
+            MainActor.assumeIsolated {
+                guard let self, self.viewModel.isExpanded else { return }
+                self.viewModel.setHold(true, reason: "menu")
+            }
+        }
+        NotificationCenter.default.addObserver(forName: NSMenu.didEndTrackingNotification, object: nil, queue: .main) { [weak self] _ in
+            MainActor.assumeIsolated { self?.viewModel.setHold(false, reason: "menu") }
         }
 
         // Changement d'écran (branchement, résolution, disposition).

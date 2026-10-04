@@ -39,6 +39,8 @@ struct AppSettings: Codable, Equatable, Sendable {
     var hoverOpenDelay: Double = 0.12
     /// Délai avant de replier l'encoche quand la souris s'éloigne (secondes).
     var hoverCloseDelay: Double = 0.35
+    /// Disposition des widgets choisie par l'utilisateur (`nil` = automatique).
+    var widgetLayout: WidgetLayout?
 
     init() {}
 
@@ -53,5 +55,6 @@ struct AppSettings: Codable, Equatable, Sendable {
         simulateNotch = try c.decodeIfPresent(Bool.self, forKey: .simulateNotch) ?? d.simulateNotch
         hoverOpenDelay = try c.decodeIfPresent(Double.self, forKey: .hoverOpenDelay) ?? d.hoverOpenDelay
         hoverCloseDelay = try c.decodeIfPresent(Double.self, forKey: .hoverCloseDelay) ?? d.hoverCloseDelay
+        widgetLayout = try? c.decodeIfPresent(WidgetLayout.self, forKey: .widgetLayout)
     }
 }

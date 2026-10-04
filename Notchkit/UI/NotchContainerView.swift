@@ -103,7 +103,7 @@ private struct ExpandedNotchView: View {
     }
 
     private var pages: [ModulePage] {
-        ModulePage.paginate(viewModel.manager.activeModules.map(ModuleBox.init))
+        ModulePage.pages(from: viewModel.manager)
     }
 
     private var header: some View {
@@ -170,7 +170,7 @@ private struct ExpandedNotchView: View {
                     ScrollView(.horizontal) {
                         HStack(spacing: 0) {
                             ForEach(pages) { page in
-                                PageView(page: page)
+                                PageView(page: page, viewModel: viewModel)
                                     .padding(.horizontal, horizontalPadding)
                                     .frame(width: proxy.size.width, height: proxy.size.height)
                                     .id(page.id)
@@ -195,24 +195,86 @@ private struct ExpandedNotchView: View {
     }
 }
 
-/// Une page de l'encoche dépliée : ses cartes se partagent la largeur selon leur poids.
+/// Une page de l'encoche dépliée : ses cartes se partagent la largeur selon leur taille.
 private struct PageView: View {
     let page: ModulePage
+    let viewModel: NotchViewModel
 
     var body: some View {
         GeometryReader { proxy in
             let spacing: CGFloat = 12
-            let totalWeight = page.modules.reduce(0) { $0 + $1.weight }
+            let totalWeight = page.modules.reduce(0) { $0 + $1.size.weight }
             let available = proxy.size.width - spacing * CGFloat(page.modules.count - 1)
 
             HStack(spacing: spacing) {
                 ForEach(page.modules) { box in
                     box.module.expandedView()
-                        .frame(width: max(0, available * box.weight / totalWeight))
+                        .environment(\.widgetSize, box.size)
+                        .frame(width: max(0, available * box.size.weight / totalWeight))
                         .frame(maxHeight: .infinity)
                         .background(.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                        .contentShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                        .contextMenu { WidgetContextMenu(box: box, viewModel: viewModel) }
                 }
             }
+        }
+    }
+}
+
+/// Menu du clic droit sur un widget : taille, déplacement, masquage.
+private struct WidgetContextMenu: View {
+    let box: ModuleBox
+    let viewModel: NotchViewModel
+
+    private var manager: ModuleManager { viewModel.manager }
+
+    var body: some View {
+        let position = manager.position(of: box.id)
+        let pages = manager.pageIDs
+
+        Picker("Taille", selection: Binding(
+            get: { box.size },
+            set: { manager.setSize($0, for: box.id) }
+        )) {
+            ForEach(WidgetSize.allCases) { size in
+                Text(size.title).tag(size)
+            }
+        }
+
+        Divider()
+
+        if let position {
+            Button("Déplacer à gauche") {
+                manager.move(box.id, toPage: position.page, index: position.index - 1)
+            }
+            .disabled(position.index == 0)
+
+            Button("Déplacer à droite") {
+                manager.move(box.id, toPage: position.page, index: position.index + 2)
+            }
+            .disabled(position.index >= pages[position.page].count - 1)
+
+            Button("Page précédente") {
+                manager.move(box.id, toPage: position.page - 1, index: .max)
+                viewModel.selectedPage = max(0, position.page - 1)
+            }
+            .disabled(position.page == 0)
+
+            let isLastPage = position.page >= pages.count - 1
+            Button(isLastPage ? "Nouvelle page" : "Page suivante") {
+                manager.move(box.id, toPage: position.page + 1, index: .max)
+                viewModel.selectedPage = position.page + 1
+            }
+            .disabled(isLastPage && pages[position.page].count == 1)
+        }
+
+        Divider()
+
+        Button("Masquer ce widget") {
+            manager.setEnabled(false, for: box.id)
+        }
+        Button("Modifier la disposition…") {
+            viewModel.openSettings(tab: .layout)
         }
     }
 }
@@ -222,15 +284,8 @@ private struct PageView: View {
 private struct ModuleBox: Identifiable {
     let module: any NotchModule
     let id: String
-    let weight: CGFloat
+    let size: WidgetSize
     let systemImage: String
-
-    init(_ module: any NotchModule) {
-        self.module = module
-        self.id = module.moduleID
-        self.weight = max(0.5, module.expandedWidthWeight)
-        self.systemImage = type(of: module).descriptor.systemImage
-    }
 }
 
 /// Groupe de modules affichés ensemble sur une page.
@@ -239,9 +294,22 @@ private struct ModulePage: Identifiable {
     let id: Int
     let modules: [ModuleBox]
 
-    static func paginate(_ boxes: [ModuleBox]) -> [ModulePage] {
-        NotchLayout.paginate(weights: boxes.map(\.weight)).enumerated().map { index, indices in
-            ModulePage(id: index, modules: indices.map { boxes[$0] })
+    static func pages(from manager: ModuleManager) -> [ModulePage] {
+        let modules = Dictionary(uniqueKeysWithValues: manager.activeModules.map { ($0.moduleID, $0) })
+        return manager.pageIDs.enumerated().map { index, ids in
+            ModulePage(id: index, modules: ids.compactMap { id in
+                modules[id].map { module in
+                    ModuleBox(module: module, id: id, size: manager.size(for: id),
+                              systemImage: type(of: module).descriptor.systemImage)
+                }
+            })
         }
     }
+}
+
+// MARK: - Taille du widget dans l'environnement SwiftUI
+
+extension EnvironmentValues {
+    /// Taille du widget en cours d'affichage : les vues des modules s'y adaptent.
+    @Entry var widgetSize: WidgetSize = .medium
 }

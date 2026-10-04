@@ -10,8 +10,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     lazy var viewModel = NotchViewModel(manager: moduleManager, settings: settings)
 
     private var notchWindow: NotchWindowController?
+    private let settingsRouter = SettingsRouter()
     private lazy var settingsWindow = SettingsWindowController { [unowned self] in
-        AnyView(SettingsView(settings: settings, manager: moduleManager))
+        AnyView(SettingsView(settings: settings, manager: moduleManager, router: settingsRouter))
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -19,8 +20,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         moduleManager.alertHandler = { [weak self] alert in
             self?.viewModel.present(alert)
         }
-        viewModel.openSettingsAction = { [weak self] in
-            self?.showSettings()
+        viewModel.openSettingsAction = { [weak self] tab in
+            self?.showSettings(tab: tab)
         }
         moduleManager.settingsHandler = { [weak self] in
             self?.viewModel.openSettings()
@@ -74,7 +75,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     // MARK: - Actions du menu
 
-    func showSettings() {
+    func showSettings(tab: SettingsTab? = nil) {
+        if let tab { settingsRouter.tab = tab }
         settingsWindow.show()
     }
 

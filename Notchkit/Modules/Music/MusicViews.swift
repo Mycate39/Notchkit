@@ -54,14 +54,35 @@ enum AppIconCache {
 
 struct MusicExpandedView: View {
     let module: MusicModule
+    @Environment(\.widgetSize) private var size
 
     var body: some View {
-        if let info = module.nowPlaying {
+        if let info = module.nowPlaying, size == .small {
+            // Petit widget : pochette, titre et commandes empilés.
+            VStack(spacing: 6) {
+                Button { module.openPlayerApp() } label: {
+                    ArtworkView(info: info, size: 52, cornerRadius: 10)
+                }
+                .buttonStyle(.plain)
+                VStack(spacing: 0) {
+                    Text(info.title)
+                        .font(.system(size: 11, weight: .semibold))
+                    if let artist = info.artist {
+                        Text(artist)
+                            .font(.system(size: 9))
+                            .foregroundStyle(.white.opacity(0.6))
+                    }
+                }
+                .lineLimit(1)
+                PlaybackControls(module: module, isPlaying: info.isPlaying, compact: true)
+            }
+            .padding(8)
+        } else if let info = module.nowPlaying {
             HStack(spacing: 12) {
                 Button {
                     module.openPlayerApp()
                 } label: {
-                    ArtworkView(info: info, size: 72, cornerRadius: 12)
+                    ArtworkView(info: info, size: size == .large ? 72 : 56, cornerRadius: 12)
                         .overlay(alignment: .bottomTrailing) {
                             // Petite icône de l'app qui joue, sauf si elle est déjà affichée en grand.
                             if module.showAppBadge, info.artwork != nil, let icon = AppIconCache.icon(for: info.bundleIdentifier) {
@@ -150,14 +171,15 @@ private struct PlaybackProgressView: View {
 private struct PlaybackControls: View {
     let module: MusicModule
     let isPlaying: Bool
+    var compact = false
 
     var body: some View {
-        HStack(spacing: 22) {
-            control("backward.fill", size: 14, help: "Morceau précédent") { module.send(.previousTrack) }
-            control(isPlaying ? "pause.fill" : "play.fill", size: 20, help: isPlaying ? "Pause" : "Lecture") {
+        HStack(spacing: compact ? 6 : 22) {
+            control("backward.fill", size: compact ? 11 : 14, help: "Morceau précédent") { module.send(.previousTrack) }
+            control(isPlaying ? "pause.fill" : "play.fill", size: compact ? 16 : 20, help: isPlaying ? "Pause" : "Lecture") {
                 module.send(.togglePlayPause)
             }
-            control("forward.fill", size: 14, help: "Morceau suivant") { module.send(.nextTrack) }
+            control("forward.fill", size: compact ? 11 : 14, help: "Morceau suivant") { module.send(.nextTrack) }
         }
         .frame(maxWidth: .infinity)
     }

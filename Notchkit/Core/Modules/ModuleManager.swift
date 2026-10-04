@@ -65,11 +65,87 @@ final class ModuleManager {
         return best
     }
 
+    // MARK: - Disposition des widgets
+
+    /// Taille d'un widget : celle choisie par l'utilisateur, sinon celle du module.
+    func size(for id: String) -> WidgetSize {
+        if let chosen = settings.settings.widgetLayout?.sizes[id] { return chosen }
+        let module = activeModules.first { $0.moduleID == id }
+        return WidgetSize(weight: module?.expandedWidthWeight ?? defaultWeight(for: id))
+    }
+
+    func weight(for id: String) -> CGFloat { size(for: id).weight }
+
+    private func defaultWeight(for id: String) -> CGFloat {
+        // Module inactif : taille par défaut inconnue sans l'instancier, on prend « moyen ».
+        1.5
+    }
+
+    private var activeWeights: [String: CGFloat] {
+        Dictionary(uniqueKeysWithValues: activeModules.map { ($0.moduleID, weight(for: $0.moduleID)) })
+    }
+
+    /// Pages affichées dans l'encoche dépliée (identifiants des modules actifs).
+    var pageIDs: [[String]] {
+        WidgetLayoutEngine.pages(
+            activeIDs: activeModules.map(\.moduleID),
+            weights: activeWeights,
+            layout: settings.settings.widgetLayout
+        )
+    }
+
+    /// Disposition affichée, figée pour être modifiée.
+    private var editableLayout: WidgetLayout {
+        WidgetLayoutEngine.materialize(
+            activeIDs: activeModules.map(\.moduleID),
+            weights: activeWeights,
+            layout: settings.settings.widgetLayout
+        )
+    }
+
+    func setSize(_ size: WidgetSize, for id: String) {
+        var layout = editableLayout
+        layout.sizes[id] = size
+        settings.settings.widgetLayout = layout
+    }
+
+    func move(_ id: String, toPage page: Int, index: Int) {
+        settings.settings.widgetLayout = WidgetLayoutEngine.move(id, toPage: page, index: index, in: editableLayout)
+    }
+
+    /// Position actuelle d'un widget (page, rang).
+    func position(of id: String) -> (page: Int, index: Int)? {
+        for (page, ids) in pageIDs.enumerated() {
+            if let index = ids.firstIndex(of: id) { return (page, index) }
+        }
+        return nil
+    }
+
+    func usedCapacity(ofPage page: [String]) -> CGFloat {
+        WidgetLayoutEngine.usedCapacity(of: page, weights: activeWeights)
+    }
+
+    /// Revient à la disposition automatique et aux tailles par défaut.
+    func resetLayout() {
+        settings.settings.widgetLayout = nil
+    }
+
     // MARK: - Modification
 
     func setEnabled(_ enabled: Bool, for id: String) {
         settings.settings.moduleEnabled[id] = enabled
+        if !enabled, let layout = settings.settings.widgetLayout {
+            settings.settings.widgetLayout = WidgetLayoutEngine.remove(id, from: layout)
+        }
         reload()
+    }
+
+    /// Active un module et le place à une position donnée (glisser depuis « Widgets masqués »).
+    func enable(_ id: String, atPage page: Int, index: Int) {
+        let layout = editableLayout
+        settings.settings.moduleEnabled[id] = true
+        reload()
+        settings.settings.widgetLayout = WidgetLayoutEngine.move(id, toPage: page, index: index, in: layout)
     }
 
     /// Synchronise les modules chargés avec les réglages : démarre ceux qui

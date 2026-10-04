@@ -3,6 +3,7 @@ import SwiftUI
 
 struct WeatherExpandedView: View {
     let module: WeatherModule
+    @Environment(\.widgetSize) private var size
 
     var body: some View {
         Group {
@@ -38,8 +39,9 @@ struct WeatherExpandedView: View {
                 .foregroundStyle(.white.opacity(0.55))
                 .lineLimit(1)
 
+            if size != .small {
             HStack(spacing: 0) {
-                ForEach(snapshot.hours.prefix(5)) { hour in
+                ForEach(snapshot.hours.prefix(size == .large ? 6 : 5)) { hour in
                     VStack(spacing: 3) {
                         Text(hour.date, format: .dateTime.hour())
                             .font(.system(size: 9, weight: .medium))
@@ -53,6 +55,7 @@ struct WeatherExpandedView: View {
                     }
                     .frame(maxWidth: .infinity)
                 }
+            }
             }
             Spacer(minLength: 0)
         }

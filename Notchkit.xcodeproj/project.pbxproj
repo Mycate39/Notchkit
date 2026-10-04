@@ -87,6 +87,7 @@
 		8C0ED9AB5ED77DD0A591BF76 /* Debounce.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E6A11EA97C90A4B6372215A /* Debounce.m */; };
 		8F0C77F6838C6EE29F25E86F /* ShelfViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B612155636B3FD4BB9FD1797 /* ShelfViews.swift */; };
 		8FC318594A37D67BB477BCA4 /* NotchHostingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C474C3B54576120030842F /* NotchHostingView.swift */; };
+		90DF0E4039BA56420C4DCA10 /* Glyphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECF3DDA8BA52758E6E1EC5B /* Glyphs.swift */; };
 		94BF7B6108A44400EABE42EE /* ClipboardViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA785DE3AC695C0AF583A476 /* ClipboardViews.swift */; };
 		9534909608C6D366FB3BCE9F /* mediaremote-adapter.pl in Resources */ = {isa = PBXBuildFile; fileRef = E343FA5573A1C385029263CF /* mediaremote-adapter.pl */; };
 		98776D4DF39E4E21CDB0167E /* WidgetLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986BDF5C03AFD85D9ABE4BC /* WidgetLayout.swift */; };
@@ -220,6 +221,7 @@
 		48E812AE3C1D2CCF46FF79A3 /* OpenMeteoClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenMeteoClient.swift; sourceTree = "<group>"; };
 		4AEF7D2C8A909E113A1D6E60 /* BatteryViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryViews.swift; sourceTree = "<group>"; };
 		4B0C124C4C4759A07017DB8D /* ShelfItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfItem.swift; sourceTree = "<group>"; };
+		4ECF3DDA8BA52758E6E1EC5B /* Glyphs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Glyphs.swift; sourceTree = "<group>"; };
 		4FE7398DD9F8BB31AAAC295D /* SystemControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemControls.swift; sourceTree = "<group>"; };
 		5007E33066DE772A64A4064B /* seek.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = seek.m; sourceTree = "<group>"; };
 		507E2940CE6F0CA716BF8DBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -774,6 +776,7 @@
 		D9ECD655DD44E43284918905 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				4ECF3DDA8BA52758E6E1EC5B /* Glyphs.swift */,
 				CBD303760BD8B274346EBC38 /* NotchContainerView.swift */,
 				1E8841EA892E202FC4B79550 /* NotchShape.swift */,
 				21AD8E9157C11F575BF67215 /* Settings */,
@@ -1036,6 +1039,7 @@
 				C4FE1995D4A34E59EE65174D /* DropZone.swift in Sources */,
 				53009C2AA2481B9ED10B6FDE /* EntitlementManager.swift in Sources */,
 				36229702DCD121CC52D39711 /* EqualizerView.swift in Sources */,
+				90DF0E4039BA56420C4DCA10 /* Glyphs.swift in Sources */,
 				BB01149799C433BEF7982DD5 /* Haptics.swift in Sources */,
 				9F65428EDD48F89CBDB4024D /* Keychain.swift in Sources */,
 				4F396C9C347E18A649275B67 /* LaunchAtLogin.swift in Sources */,

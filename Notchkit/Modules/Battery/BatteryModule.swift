@@ -152,7 +152,11 @@ final class BatteryModule: NotchModule {
     }
 
     func miniView() -> AnyView {
-        guard let state else { return AnyView(MiniWidget(symbol: "powerplug.fill", value: nil, caption: String(localized: "Secteur"))) }
+        guard let state else {
+            return AnyView(MiniWidget(value: nil, caption: String(localized: "Secteur")) {
+                LineGlyph(shape: PlugShape())
+            })
+        }
         return AnyView(
             MiniWidget(value: "\(state.level) %", caption: state.isPluggedIn ? String(localized: "Branchée") : nil,
                        tint: BatteryStyle.textColor(for: state, isLowPowerMode: isLowPowerMode)) {

@@ -22,10 +22,7 @@ struct ArtworkView: View {
                     .padding(size * 0.12)
                     .background(.white.opacity(0.08))
             } else {
-                Image(systemName: "music.note")
-                    .font(.system(size: size * 0.45, weight: .semibold))
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(.white.opacity(0.12))
+                DefaultArtwork()
             }
         }
         .frame(width: size, height: size)
@@ -168,8 +165,8 @@ struct MusicExpandedView: View {
             .padding(12)
         } else {
             VStack(spacing: 6) {
-                Image(systemName: "music.note")
-                    .font(.system(size: 22))
+                LineGlyph(shape: MusicNoteShape())
+                    .frame(width: 26, height: 26)
                 Text("Aucune lecture en cours")
                     .font(.system(size: 12, weight: .medium))
                     .foregroundStyle(.white.opacity(0.7))
@@ -331,7 +328,9 @@ struct MusicMiniView: View {
                 .frame(width: proxy.size.width, height: proxy.size.height)
             }
         } else {
-            MiniWidget(symbol: "music.note", value: nil, caption: String(localized: "Aucune lecture"))
+            MiniWidget(value: nil, caption: String(localized: "Aucune lecture")) {
+                LineGlyph(shape: MusicNoteShape())
+            }
         }
     }
 }

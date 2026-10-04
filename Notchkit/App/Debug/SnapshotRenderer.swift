@@ -107,6 +107,17 @@ enum SnapshotRenderer {
             .padding(16).background(.black),
              to: directory.appendingPathComponent("assistant-visage.png"))
 
+        // Icônes au trait et jauge de batterie en charge.
+        save(HStack(spacing: 18) {
+                LineGlyph(shape: BoltShape()).frame(width: 40, height: 40)
+                LineGlyph(shape: PlugShape()).frame(width: 40, height: 40)
+                LineGlyph(shape: MusicNoteShape()).frame(width: 40, height: 40)
+                DefaultArtwork().frame(width: 40, height: 40).clipShape(RoundedRectangle(cornerRadius: 10))
+                BatteryGlyph(level: 0.6, color: .green, showsBolt: true, size: CGSize(width: 54, height: 26))
+            }
+            .padding(16).background(.black).foregroundStyle(.white),
+             to: directory.appendingPathComponent("icones.png"))
+
         // Onglet Disposition des réglages.
         save(LayoutEditorContent(manager: manager)
                 .frame(width: 620, height: 1100)

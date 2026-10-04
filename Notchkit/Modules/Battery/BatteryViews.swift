@@ -59,10 +59,12 @@ struct BatteryGlyph: View {
             .frame(width: size.width, height: size.height)
             .overlay {
                 if showsBolt {
-                    Image(systemName: "bolt.fill")
-                        .font(.system(size: size.height * 0.85, weight: .bold))
-                        .foregroundStyle(.white)
-                        .shadow(color: .black.opacity(0.6), radius: 1)
+                    // Éclair au trait, cerné de noir pour rester lisible sur la jauge.
+                    ZStack {
+                        LineGlyph(shape: BoltShape(), weight: 0.22).foregroundStyle(.black.opacity(0.55))
+                        LineGlyph(shape: BoltShape(), weight: 0.11).foregroundStyle(.white)
+                    }
+                    .frame(width: size.height * 1.05, height: size.height * 1.05)
                         .transition(.scale.combined(with: .opacity))
                 }
             }
@@ -185,8 +187,8 @@ struct BatteryExpandedView: View {
             .padding(10)
         } else {
             VStack(spacing: 6) {
-                Image(systemName: "powerplug.fill")
-                    .font(.system(size: 22))
+                LineGlyph(shape: PlugShape())
+                    .frame(width: 26, height: 26)
                 Text("Aucune batterie détectée")
                     .font(.system(size: 12, weight: .medium))
                     .foregroundStyle(.white.opacity(0.7))

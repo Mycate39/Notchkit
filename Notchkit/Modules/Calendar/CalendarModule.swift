@@ -196,6 +196,17 @@ final class CalendarModule: NotchModule {
         return AnyView(CalendarCountdown(event: event))
     }
 
+    func miniView() -> AnyView {
+        guard authorization == .fullAccess else {
+            return AnyView(MiniWidget(symbol: "calendar", value: nil, caption: String(localized: "Accès requis")))
+        }
+        guard let next = events.first(where: { !$0.isAllDay }) ?? events.first else {
+            return AnyView(MiniWidget(symbol: "calendar.badge.checkmark", value: nil, caption: String(localized: "Rien de prévu")))
+        }
+        let value = next.isAllDay ? String(localized: "Jour") : next.start.formatted(date: .omitted, time: .shortened)
+        return AnyView(MiniWidget(symbol: "calendar", value: value, caption: next.title, tint: next.color))
+    }
+
     func expandedView() -> AnyView {
         AnyView(CalendarExpandedView(module: self))
     }

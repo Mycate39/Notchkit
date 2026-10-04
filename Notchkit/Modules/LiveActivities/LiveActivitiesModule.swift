@@ -258,6 +258,10 @@ final class LiveActivitiesModule: NotchModule {
         return AnyView(ActivityCompactValue(activity: activity, extraCount: activities.filter { !$0.isFinished }.count - 1))
     }
 
+    func miniView() -> AnyView {
+        AnyView(LiveActivitiesMiniView(module: self))
+    }
+
     func expandedView() -> AnyView {
         AnyView(LiveActivitiesExpandedView(module: self))
     }

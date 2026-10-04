@@ -91,6 +91,13 @@ final class AirPodsModule: NotchModule {
 
     var expandedWidthWeight: CGFloat { 1.5 }
 
+    func miniView() -> AnyView {
+        guard let device = devices.first(where: \.isDefaultOutput) ?? devices.first else {
+            return AnyView(MiniWidget(symbol: "headphones", value: nil, caption: String(localized: "Non connecté")))
+        }
+        return AnyView(MiniWidget(symbol: device.kind.symbol, value: nil, caption: device.name))
+    }
+
     func expandedView() -> AnyView {
         AnyView(AirPodsExpandedView(module: self))
     }

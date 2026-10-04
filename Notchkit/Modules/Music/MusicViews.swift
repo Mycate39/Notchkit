@@ -258,3 +258,27 @@ private struct SpectrumStatusView: View {
         }
     }
 }
+
+/// Version mini : pochette et lecture/pause.
+struct MusicMiniView: View {
+    let module: MusicModule
+
+    var body: some View {
+        if let info = module.nowPlaying {
+            VStack(spacing: 8) {
+                ArtworkView(info: info, size: 40, cornerRadius: 8)
+                Button { module.send(.togglePlayPause) } label: {
+                    Image(systemName: info.isPlaying ? "pause.fill" : "play.fill")
+                        .font(.system(size: 16, weight: .semibold))
+                        .frame(width: 30, height: 24)
+                        .contentShape(Rectangle())
+                        .contentTransition(.symbolEffect(.replace))
+                }
+                .buttonStyle(.plain)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        } else {
+            MiniWidget(symbol: "music.note", value: nil, caption: String(localized: "Aucune lecture"))
+        }
+    }
+}

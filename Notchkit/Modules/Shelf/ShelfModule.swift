@@ -117,6 +117,11 @@ final class ShelfModule: NotchModule {
         return AnyView(Text("\(items.count)").monospacedDigit())
     }
 
+    func miniView() -> AnyView {
+        AnyView(MiniWidget(symbol: items.isEmpty ? "tray" : "tray.full.fill", value: "\(items.count)",
+                           caption: String(localized: "Étagère")))
+    }
+
     func expandedView() -> AnyView {
         AnyView(ShelfExpandedView(module: self))
     }

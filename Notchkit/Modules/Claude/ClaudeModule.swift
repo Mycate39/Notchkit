@@ -350,6 +350,23 @@ final class ClaudeModule: NotchModule {
         }
     }
 
+    func miniView() -> AnyView {
+        let session = displayedSession
+        let percent: String? = (rateLimits?.fiveHour?.fraction()).map { $0.formatted(.percent.precision(.fractionLength(0))) }
+            ?? usage?.usedFraction.map { "≈ " + $0.formatted(.percent.precision(.fractionLength(0))) }
+        let caption: String = switch session?.state {
+        case .working: String(localized: "Au travail")
+        case .waitingForPermission: String(localized: "Votre accord")
+        case .awaitingReply: String(localized: "Terminé")
+        default: String(localized: "Session")
+        }
+        return AnyView(
+            MiniWidget(value: percent, caption: caption) {
+                ClaudeSparkView(isAnimating: session?.state == .working).frame(width: 30, height: 30)
+            }
+        )
+    }
+
     func expandedView() -> AnyView {
         AnyView(ClaudeExpandedView(module: self))
     }

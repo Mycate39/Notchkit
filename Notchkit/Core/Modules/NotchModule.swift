@@ -59,6 +59,8 @@ protocol NotchModule: AnyObject, Observable {
     func expandedView() -> AnyView
     /// Largeur relative de la carte dans l'encoche dépliée (1 = normale, 2 = double).
     var expandedWidthWeight: CGFloat { get }
+    /// Version miniature (taille « Mini ») : l'information essentielle en un coup d'œil.
+    func miniView() -> AnyView
     /// Réglages propres au module (affichés dans l'onglet « Modules »).
     func settingsView() -> AnyView?
 }
@@ -73,4 +75,54 @@ extension NotchModule {
     func compactTrailing() -> AnyView? { nil }
     func settingsView() -> AnyView? { nil }
     var expandedWidthWeight: CGFloat { 1 }
+
+    func miniView() -> AnyView {
+        AnyView(MiniWidget(symbol: Self.descriptor.systemImage, value: nil, caption: String(localized: Self.descriptor.name)))
+    }
+}
+
+/// Mise en page commune des widgets « Mini » : un visuel, une valeur, une légende.
+struct MiniWidget<Visual: View>: View {
+    let visual: Visual
+    let value: String?
+    let caption: String?
+    var tint: Color = .white
+
+    init(value: String?, caption: String? = nil, tint: Color = .white, @ViewBuilder visual: () -> Visual) {
+        self.visual = visual()
+        self.value = value
+        self.caption = caption
+        self.tint = tint
+    }
+
+    var body: some View {
+        VStack(spacing: 6) {
+            visual
+                .frame(height: 34)
+            if let value {
+                Text(value)
+                    .font(.system(size: 15, weight: .bold, design: .rounded))
+                    .monospacedDigit()
+                    .foregroundStyle(tint)
+            }
+            if let caption {
+                Text(caption)
+                    .font(.system(size: 9, weight: .medium))
+                    .foregroundStyle(.white.opacity(0.55))
+                    .multilineTextAlignment(.center)
+            }
+        }
+        .lineLimit(2)
+        .minimumScaleFactor(0.6)
+        .padding(6)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
+
+extension MiniWidget where Visual == AnyView {
+    init(symbol: String, value: String?, caption: String? = nil, tint: Color = .white) {
+        self.init(value: value, caption: caption, tint: tint) {
+            AnyView(Image(systemName: symbol).font(.system(size: 22)).foregroundStyle(tint))
+        }
+    }
 }

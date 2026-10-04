@@ -7,6 +7,17 @@ import SwiftUI
 struct LayoutSettingsView: View {
     let manager: ModuleManager
 
+    var body: some View {
+        ScrollView {
+            LayoutEditorContent(manager: manager)
+        }
+    }
+}
+
+/// Contenu de l'éditeur (séparé de la zone défilante, pour pouvoir le dessiner seul).
+struct LayoutEditorContent: View {
+    let manager: ModuleManager
+
     private var descriptors: [String: ModuleDescriptor] {
         Dictionary(uniqueKeysWithValues: manager.orderedDescriptors.map { ($0.id, $0) })
     }
@@ -15,7 +26,6 @@ struct LayoutSettingsView: View {
         let pages = manager.pageIDs
         let hidden = manager.orderedDescriptors.filter { !manager.isEnabled($0.id) && manager.isUnlocked($0) }
 
-        ScrollView {
             VStack(alignment: .leading, spacing: 18) {
                 Text("Glissez les widgets pour les réordonner ou les changer de page. Cliquez sur un widget pour changer sa taille. Astuce : un clic droit sur un widget dans l'encoche offre les mêmes options.")
                     .font(.callout)
@@ -38,7 +48,6 @@ struct LayoutSettingsView: View {
                 }
             }
             .padding(20)
-        }
     }
 }
 
@@ -135,7 +144,9 @@ private struct WidgetTile: View {
         Group {
             if let module = manager.module(for: descriptor.id) {
                 // Le vrai widget, en direct, non interactif (les clics servent à l'éditeur).
-                module.expandedView()
+                Group {
+                    if size == .mini { module.miniView() } else { module.expandedView() }
+                }
                     .environment(\.widgetSize, size)
                     .allowsHitTesting(false)
             } else {

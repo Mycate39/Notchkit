@@ -44,6 +44,9 @@ struct WidgetLayoutEngineTests {
         #expect(WidgetSize(weight: 1.5) == .medium)
         #expect(WidgetSize(weight: 1) == .small)
         #expect(WidgetSize(weight: 1.2) == .small)
+        #expect(WidgetSize.mini.weight == 0.5)
+        // Huit widgets mini tiennent sur une page.
+        #expect(NotchLayout.paginate(weights: Array(repeating: 0.5, count: 9)) == [Array(0..<8), [8]])
     }
 
     @Test func dispositionConserveeDansLesReglages() throws {

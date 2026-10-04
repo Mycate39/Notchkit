@@ -73,6 +73,22 @@ final class ClockModule: NotchModule {
         AnyView(ClockCompactText())
     }
 
+    func miniView() -> AnyView {
+        AnyView(
+            TimelineView(.everyMinute) { context in
+                MiniWidget(value: nil, caption: context.date.formatted(.dateTime.weekday(.abbreviated).day())) {
+                    let parts = Calendar.current.dateComponents([.hour, .minute], from: context.date)
+                    VStack(spacing: -4) {
+                        Text(String(format: "%02d", parts.hour ?? 0))
+                        Text(String(format: "%02d", parts.minute ?? 0))
+                    }
+                    .font(.system(size: 26, weight: .bold, design: .rounded))
+                    .monospacedDigit()
+                }
+            }
+        )
+    }
+
     func expandedView() -> AnyView {
         AnyView(ClockExpandedView(secondaryTimeZoneID: secondaryTimeZoneID))
     }

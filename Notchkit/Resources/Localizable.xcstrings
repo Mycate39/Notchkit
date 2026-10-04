@@ -10,6 +10,16 @@
     "« %@ »" : {
 
     },
+    "%@ · %@" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ · %2$@"
+          }
+        }
+      }
+    },
     "%@ (avec encoche)" : {
 
     },
@@ -39,10 +49,22 @@
         }
       }
     },
+    "%lld" : {
+
+    },
     "%lld %%" : {
 
     },
     "%lld min" : {
+
+    },
+    "+%lld" : {
+
+    },
+    "+1" : {
+
+    },
+    "0:00" : {
 
     },
     "À propos" : {
@@ -57,10 +79,19 @@
     "Activité de Claude Code en direct, messages depuis l'encoche et utilisation estimée." : {
 
     },
+    "Activités live" : {
+
+    },
     "Affiche l'heure et la date." : {
 
     },
+    "Affiche la progression des téléchargements de Brave, Chrome, Safari et Firefox. macOS demande l'accès au dossier Téléchargements la première fois." : {
+
+    },
     "Affiche une fausse encoche sur les écrans qui n'en ont pas, pour tester le rendu." : {
+
+    },
+    "Afficher dans le Finder" : {
 
     },
     "Afficher l'activité quand l'encoche est repliée" : {
@@ -81,10 +112,19 @@
     "Afficher le morceau quand l'encoche est repliée" : {
 
     },
+    "Afficher le nombre de fichiers quand l'encoche est repliée" : {
+
+    },
     "Afficher les événements « journée entière »" : {
 
     },
     "Afficher une alerte de test" : {
+
+    },
+    "AirPods et casques" : {
+
+    },
+    "Ajouter une minute" : {
 
     },
     "Alerte de batterie faible (20 % et 10 %)" : {
@@ -99,6 +139,15 @@
     "Analyse le son joué par le Mac pour animer les barres. macOS demande l'autorisation « Enregistrement audio du système » et affiche un indicateur pendant l'écoute. Le son n'est ni enregistré ni envoyé." : {
 
     },
+    "Animation à la connexion" : {
+
+    },
+    "Animation à la connexion de vos AirPods ou d'un casque Bluetooth, sortie audio en un clic." : {
+
+    },
+    "Animation à la déconnexion" : {
+
+    },
     "Animation au branchement et au débranchement" : {
 
     },
@@ -111,7 +160,13 @@
     "Après chaque réponse de Claude, vous pouvez encore lui écrire depuis l'encoche pendant ce délai : il repart aussitôt. Pendant ce temps, Claude Code l'affiche comme « en cours » (Échap pour arrêter)." : {
 
     },
+    "Arrêter" : {
+
+    },
     "Aucun" : {
+
+    },
+    "Aucun casque Bluetooth connecté" : {
 
     },
     "Aucun événement aujourd'hui ni demain" : {
@@ -124,6 +179,9 @@
 
     },
     "Aucune" : {
+
+    },
+    "Aucune activité en cours" : {
 
     },
     "Aucune batterie détectée" : {
@@ -145,6 +203,9 @@
 
     },
     "Autoriser la localisation…" : {
+
+    },
+    "Autre durée" : {
 
     },
     "Averses" : {
@@ -234,10 +295,16 @@
     "Configurer…" : {
 
     },
+    "Connectés" : {
+
+    },
     "Connectez Claude Code" : {
 
     },
     "Consulte %@" : {
+
+    },
+    "Copier" : {
 
     },
     "Couvert" : {
@@ -247,6 +314,9 @@
 
     },
     "Début" : {
+
+    },
+    "Déconnectés" : {
 
     },
     "Délai d'ouverture" : {
@@ -268,6 +338,9 @@
 
     },
     "Déplier / replier l'encoche" : {
+
+    },
+    "Déposez des fichiers sur l'encoche pour les garder à portée de main ou les envoyer par AirDrop." : {
 
     },
     "Déposez un widget ici pour créer une nouvelle page" : {
@@ -318,6 +391,12 @@
     "En cours · jusqu'à %@" : {
 
     },
+    "En pause · %@" : {
+
+    },
+    "Envoyer par AirDrop" : {
+
+    },
     "Estimation : %@%@. Comparée à votre plus grosse session observée." : {
       "localizations" : {
         "fr" : {
@@ -331,10 +410,19 @@
     "Estimation locale : installez l'intégration (barre d'état) pour les chiffres réels." : {
 
     },
+    "Étagère" : {
+
+    },
     "Exécute : %@" : {
 
     },
+    "Faites glisser des fichiers sur l'encoche : à gauche pour les garder ici, à droite pour les envoyer par AirDrop. Les fichiers ne sont ni copiés ni déplacés, l'étagère garde seulement un lien vers eux." : {
+
+    },
     "Fermer" : {
+
+    },
+    "Fichier introuvable (déplacé ou supprimé)" : {
 
     },
     "Forte pluie" : {
@@ -346,13 +434,22 @@
     "Fortes chutes de neige" : {
 
     },
+    "Garder dans l'étagère" : {
+
+    },
     "Général" : {
 
     },
     "Glissez dans une page pour l'afficher" : {
 
     },
+    "Glissez des fichiers sur l'encoche pour les garder ici." : {
+
+    },
     "Glissez les widgets pour les réordonner ou les changer de page. Cliquez sur un widget pour changer sa taille. Astuce : un clic droit sur un widget dans l'encoche offre les mêmes options." : {
+
+    },
+    "Glissez pour récupérer le fichier · double-clic pour l'ouvrir" : {
 
     },
     "Glissez un widget ici pour le masquer." : {
@@ -412,6 +509,9 @@
     "L'utilisation réelle (session de 5 h et semaine) est transmise par Claude Code à sa barre d'état, à chaque message. En attendant ces données, Notchkit affiche une estimation calculée à partir des fichiers de session locaux." : {
 
     },
+    "La connexion est détectée quand l'appareil apparaît comme sortie audio. Le mode de réduction du bruit ne peut pas être modifié par une app tierce avec les outils publics d'Apple : le bouton « Réduction du bruit… » ouvre les réglages Bluetooth de macOS." : {
+
+    },
     "La recherche a échoué. Vérifiez votre connexion." : {
 
     },
@@ -422,6 +522,9 @@
 
     },
     "Le fichier ~/.claude/settings.json n'est pas un JSON valide. Corrigez-le ou supprimez-le, puis réessayez." : {
+
+    },
+    "Le mode de réduction du bruit se règle dans les réglages Bluetooth de macOS" : {
 
     },
     "Le serveur local n'a pas pu démarrer sur le port %@ : %@" : {
@@ -483,6 +586,12 @@
 
     },
     "Mettre à jour l'intégration" : {
+
+    },
+    "Minuteur" : {
+
+    },
+    "Minuteurs, téléchargements en cours et progression de tâches, plusieurs à la fois." : {
 
     },
     "Mise à jour de l'intégration nécessaire" : {
@@ -557,6 +666,9 @@
     "Orage avec grêle" : {
 
     },
+    "Ouvrir" : {
+
+    },
     "Ouvrir Calendrier" : {
 
     },
@@ -585,6 +697,9 @@
 
     },
     "Partiellement nuageux" : {
+
+    },
+    "Passer sur %@" : {
 
     },
     "Pause" : {
@@ -641,6 +756,9 @@
     "Rechercher une ville" : {
 
     },
+    "Réduction du bruit…" : {
+
+    },
     "Réessayer" : {
 
     },
@@ -665,6 +783,15 @@
     "Répondez pour qu'il continue" : {
 
     },
+    "Reprendre" : {
+
+    },
+    "Retirer" : {
+
+    },
+    "Retirer de l'étagère" : {
+
+    },
     "s" : {
 
     },
@@ -672,6 +799,9 @@
 
     },
     "São Paulo" : {
+
+    },
+    "Scripts et apps peuvent afficher une progression avec un lien, par exemple :\nopen \"notchkit://activity/update?id=build&title=Compilation&progress=40\"\nopen \"notchkit://activity/end?id=build\"\nopen \"notchkit://timer/start?minutes=5&title=Thé\"" : {
 
     },
     "Second fuseau horaire" : {
@@ -698,6 +828,15 @@
     "Singapour" : {
 
     },
+    "Son à la fin d'un minuteur" : {
+
+    },
+    "Sortie audio active" : {
+
+    },
+    "Suivre les téléchargements" : {
+
+    },
     "Sur batterie" : {
 
     },
@@ -711,6 +850,9 @@
 
     },
     "Taille" : {
+
+    },
+    "Téléchargement terminé" : {
 
     },
     "Temps restant pour répondre à Claude depuis l'encoche" : {
@@ -728,6 +870,9 @@
     "Toujours afficher le niveau quand l'encoche est repliée" : {
 
     },
+    "Tout envoyer par AirDrop" : {
+
+    },
     "Toute la journée" : {
 
     },
@@ -740,10 +885,19 @@
     "Utilise %@" : {
 
     },
+    "Utiliser comme sortie" : {
+
+    },
     "Utiliser ma position" : {
 
     },
     "Version %@" : {
+
+    },
+    "Vider l'étagère" : {
+
+    },
+    "Vider l'étagère (%lld)" : {
 
     },
     "Ville" : {

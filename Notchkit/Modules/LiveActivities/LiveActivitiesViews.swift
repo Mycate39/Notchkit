@@ -248,3 +248,32 @@ struct LiveActivitiesSettingsView: View {
         }
     }
 }
+
+/// Version mini : l'activité la plus importante, ou un lancement rapide de minuteur.
+struct LiveActivitiesMiniView: View {
+    let module: LiveActivitiesModule
+
+    var body: some View {
+        if let activity = module.mostRelevant {
+            VStack(spacing: 6) {
+                ActivityRing(activity: activity, size: 32)
+                ActivityCompactValue(activity: activity, extraCount: 0)
+                    .font(.system(size: 13, weight: .bold, design: .rounded))
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        } else {
+            VStack(spacing: 6) {
+                Image(systemName: "timer")
+                    .font(.system(size: 22))
+                    .foregroundStyle(.orange)
+                Button("5 min") { module.startTimer(minutes: 5) }
+                    .font(.system(size: 9, weight: .semibold))
+                    .buttonStyle(.plain)
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 3)
+                    .background(.white.opacity(0.12), in: Capsule())
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+    }
+}

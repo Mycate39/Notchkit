@@ -204,7 +204,7 @@ private struct ExpandedNotchView: View {
 }
 
 /// Une page de l'encoche dépliée : ses cartes se partagent la largeur selon leur taille.
-private struct PageView: View {
+struct PageView: View {
     let page: ModulePage
     let viewModel: NotchViewModel
 
@@ -216,7 +216,9 @@ private struct PageView: View {
 
             HStack(spacing: spacing) {
                 ForEach(page.modules) { box in
-                    box.module.expandedView()
+                    Group {
+                        if box.size == .mini { box.module.miniView() } else { box.module.expandedView() }
+                    }
                         .environment(\.widgetSize, box.size)
                         .frame(width: max(0, available * box.size.weight / totalWeight))
                         .frame(maxHeight: .infinity)
@@ -289,7 +291,7 @@ private struct WidgetContextMenu: View {
 
 /// Enveloppe identifiable pour itérer sur des modules hétérogènes dans un `ForEach`.
 @MainActor
-private struct ModuleBox: Identifiable {
+struct ModuleBox: Identifiable {
     let module: any NotchModule
     let id: String
     let size: WidgetSize
@@ -298,7 +300,7 @@ private struct ModuleBox: Identifiable {
 
 /// Groupe de modules affichés ensemble sur une page.
 @MainActor
-private struct ModulePage: Identifiable {
+struct ModulePage: Identifiable {
     let id: Int
     let modules: [ModuleBox]
 

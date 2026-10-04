@@ -2,6 +2,8 @@ import SwiftUI
 
 /// Taille d'un widget dans l'encoche dépliée (part de la largeur d'une page).
 enum WidgetSize: String, Codable, CaseIterable, Identifiable, Sendable {
+    /// Version miniature : l'essentiel en un coup d'œil (jusqu'à 8 par page).
+    case mini
     case small
     case medium
     case large
@@ -11,6 +13,7 @@ enum WidgetSize: String, Codable, CaseIterable, Identifiable, Sendable {
     /// Largeur relative : une page contient au plus `NotchLayout.pageCapacity` (4) unités.
     var weight: CGFloat {
         switch self {
+        case .mini: 0.5
         case .small: 1
         case .medium: 1.5
         case .large: 2
@@ -19,6 +22,7 @@ enum WidgetSize: String, Codable, CaseIterable, Identifiable, Sendable {
 
     var title: LocalizedStringResource {
         switch self {
+        case .mini: "Mini"
         case .small: "Petit"
         case .medium: "Moyen"
         case .large: "Grand"

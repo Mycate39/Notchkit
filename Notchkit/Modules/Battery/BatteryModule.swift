@@ -151,6 +151,16 @@ final class BatteryModule: NotchModule {
         )
     }
 
+    func miniView() -> AnyView {
+        guard let state else { return AnyView(MiniWidget(symbol: "powerplug.fill", value: nil, caption: String(localized: "Secteur"))) }
+        return AnyView(
+            MiniWidget(value: "\(state.level) %", caption: state.isPluggedIn ? String(localized: "Branchée") : nil,
+                       tint: BatteryStyle.textColor(for: state, isLowPowerMode: isLowPowerMode)) {
+                BatteryGlyph(state: state, isLowPowerMode: isLowPowerMode, size: CGSize(width: 36, height: 17))
+            }
+        )
+    }
+
     func expandedView() -> AnyView {
         AnyView(BatteryExpandedView(module: self))
     }

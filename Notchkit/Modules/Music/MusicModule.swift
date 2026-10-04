@@ -143,9 +143,11 @@ final class MusicModule: NotchModule {
         }
     }
 
-    /// Le test de charge (DEBUG) ne doit pas déclencher de demande d'autorisation audio.
+    /// Les lancements automatisés (test de charge, captures d'écran) ne doivent pas déclencher
+    /// de demande d'autorisation audio.
     private static var isStressTest: Bool {
-        ProcessInfo.processInfo.environment["NOTCHKIT_STRESS"] != nil
+        let environment = ProcessInfo.processInfo.environment
+        return environment["NOTCHKIT_STRESS"] != nil || environment["NOTCHKIT_SNAPSHOT"] != nil
     }
 
     // MARK: Commandes
@@ -196,6 +198,10 @@ final class MusicModule: NotchModule {
 
     func expandedView() -> AnyView {
         AnyView(MusicExpandedView(module: self))
+    }
+
+    func miniView() -> AnyView {
+        AnyView(MusicMiniView(module: self))
     }
 
     func settingsView() -> AnyView? {

@@ -195,6 +195,17 @@ final class WeatherModule: NotchModule {
         return AnyView(Text(TemperatureFormat.string(snapshot.temperature)).monospacedDigit())
     }
 
+    func miniView() -> AnyView {
+        guard let snapshot else { return AnyView(MiniWidget(symbol: "cloud.sun", value: "–", caption: nil)) }
+        return AnyView(
+            MiniWidget(value: TemperatureFormat.string(snapshot.temperature), caption: snapshot.locationName) {
+                Image(systemName: WeatherCondition.symbol(code: snapshot.code, isDay: snapshot.isDay))
+                    .symbolRenderingMode(.multicolor)
+                    .font(.system(size: 24))
+            }
+        )
+    }
+
     func expandedView() -> AnyView {
         AnyView(WeatherExpandedView(module: self))
     }

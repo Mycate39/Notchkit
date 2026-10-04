@@ -56,6 +56,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         if ProcessInfo.processInfo.environment["NOTCHKIT_STRESS"] != nil {
             runStressTest()
         }
+        if let directory = ProcessInfo.processInfo.environment["NOTCHKIT_SNAPSHOT"] {
+            Task { @MainActor in
+                // Laisse le temps aux modules de charger leurs données (météo, calendrier…).
+                try? await Task.sleep(for: .seconds(4))
+                SnapshotRenderer.renderAll(to: URL(fileURLWithPath: directory), viewModel: viewModel,
+                                           settings: settings, manager: moduleManager)
+                NSApp.terminate(nil)
+            }
+        }
         #endif
     }
 

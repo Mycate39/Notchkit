@@ -15,6 +15,16 @@ struct AirPodsTests {
         #expect(HeadphoneDevice.Kind(name: "WH-1000XM5") == .other)
     }
 
+    @Test func adresseNormaliseePourRetrouverLAppareil() {
+        #expect(AirPodsPrivate.normalized("AC-90-85-1A-2B-3C:output") .contains(AirPodsPrivate.normalized("ac-90-85-1a-2b-3c")))
+    }
+
+    @Test func batterieLaPlusBasseDesEcouteurs() {
+        let battery = AirPodsPrivate.Battery(left: 80, right: 42, caseLevel: 10, single: nil)
+        #expect(battery.lowestBud == 42)
+        #expect(AirPodsPrivate.Battery().isEmpty)
+    }
+
     @Test func connexionsEtDeconnexions() {
         let pro = device("a", "AirPods Pro")
         let sony = device("b", "WH-1000XM5")

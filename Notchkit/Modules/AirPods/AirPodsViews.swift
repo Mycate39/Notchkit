@@ -41,24 +41,43 @@ struct AirPodsExpandedView: View {
                         .font(.system(size: 11, weight: .semibold))
                         .lineLimit(1)
                         .minimumScaleFactor(0.8)
-                    if device.isDefaultOutput {
+                    if let battery = module.battery {
+                        BatteryLevelsView(battery: battery)
+                    } else if device.isDefaultOutput {
                         Label("Sortie audio active", systemImage: "speaker.wave.2.fill")
                             .font(.system(size: 9, weight: .medium))
                             .foregroundStyle(.green)
-                    } else {
+                    }
+                    if !device.isDefaultOutput {
                         Button("Utiliser comme sortie") { module.makeDefaultOutput(device) }
                             .controlSize(.mini)
                     }
-                    if size != .small {
+                    if !module.supportedModes.isEmpty {
+                        // Mode d'écoute (API privée).
+                        HStack(spacing: 4) {
+                            ForEach(module.supportedModes) { mode in
+                                Button { module.setListeningMode(mode) } label: {
+                                    Image(systemName: mode.symbol)
+                                        .font(.system(size: 11, weight: .semibold))
+                                        .frame(width: 30, height: 22)
+                                        .background(module.listeningMode == mode ? Color.white.opacity(0.9) : Color.white.opacity(0.12),
+                                                    in: Capsule())
+                                        .foregroundStyle(module.listeningMode == mode ? .black : .white)
+                                        .contentShape(Capsule())
+                                }
+                                .buttonStyle(.plain)
+                                .help(Text(mode.title))
+                            }
+                        }
+                    } else if size != .small {
                         Button {
                             module.openBluetoothSettings()
                         } label: {
-                            Label("Réduction du bruit…", systemImage: "ear.and.waveform")
+                            Label("Réglages Bluetooth…", systemImage: "gearshape")
                                 .font(.system(size: 9, weight: .medium))
                         }
                         .buttonStyle(.plain)
                         .foregroundStyle(.white.opacity(0.6))
-                        .help("Le mode de réduction du bruit se règle dans les réglages Bluetooth de macOS")
                     }
                     // Plusieurs casques connectés : bascule rapide.
                     if module.devices.count > 1 {
@@ -87,6 +106,29 @@ struct AirPodsExpandedView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(10)
+        .onAppear { module.refreshBluetoothInfo() }
+    }
+}
+
+/// Batterie de chaque écouteur et du boîtier (« G 80 % · D 82 % · Boîtier 60 % »).
+private struct BatteryLevelsView: View {
+    let battery: AirPodsPrivate.Battery
+
+    var body: some View {
+        HStack(spacing: 8) {
+            if let single = battery.single { level("", single) }
+            if let left = battery.left { level("G", left) }
+            if let right = battery.right { level("D", right) }
+            if let caseLevel = battery.caseLevel { level(String(localized: "Boîtier"), caseLevel) }
+        }
+        .font(.system(size: 9, weight: .semibold).monospacedDigit())
+    }
+
+    private func level(_ label: String, _ value: Int) -> some View {
+        HStack(spacing: 2) {
+            if !label.isEmpty { Text(label).foregroundStyle(.white.opacity(0.5)) }
+            Text("\(value) %").foregroundStyle(value <= 20 ? .red : .white)
+        }
     }
 }
 
@@ -97,7 +139,8 @@ struct AirPodsSettingsView: View {
         VStack(alignment: .leading, spacing: 6) {
             Toggle("Animation à la connexion", isOn: $module.alertOnConnect)
             Toggle("Animation à la déconnexion", isOn: $module.alertOnDisconnect)
-            Text("La connexion est détectée quand l'appareil apparaît comme sortie audio. Le mode de réduction du bruit ne peut pas être modifié par une app tierce avec les outils publics d'Apple : le bouton « Réduction du bruit… » ouvre les réglages Bluetooth de macOS.")
+            Toggle("Batterie et mode d'écoute des AirPods", isOn: $module.advancedControls)
+            Text("La batterie de chaque écouteur et le choix du mode (désactivé, réduction du bruit, transparence) utilisent une interface non officielle d'Apple et demandent l'autorisation Bluetooth. Si une mise à jour de macOS la modifie, ces commandes disparaissent simplement de la carte.")
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)

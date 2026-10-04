@@ -97,6 +97,16 @@ enum SnapshotRenderer {
             .padding(12).background(.black).foregroundStyle(.white).environment(\.colorScheme, .dark),
              to: directory.appendingPathComponent("widgets-mini-empiles.png"))
 
+        // Visage de l'assistant, dans ses quatre humeurs.
+        save(HStack(spacing: 18) {
+                AssistantFace(mood: .idle, size: 80)
+                AssistantFace(mood: .thinking, size: 80)
+                AssistantFace(mood: .speaking, size: 80)
+                AssistantFace(mood: .error, size: 80)
+            }
+            .padding(16).background(.black),
+             to: directory.appendingPathComponent("assistant-visage.png"))
+
         // Onglet Disposition des réglages.
         save(LayoutEditorContent(manager: manager)
                 .frame(width: 620, height: 1100)

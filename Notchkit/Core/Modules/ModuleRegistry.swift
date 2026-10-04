@@ -19,5 +19,6 @@ enum ModuleRegistry {
         UnlockModule.self,
         BackButtonModule.self,
         VideoDownloadModule.self,
+        AssistantModule.self,
     ]
 }

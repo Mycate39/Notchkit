@@ -11,6 +11,7 @@
 		057BC6EE471679C2A814157C /* LiveActivitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B974952A590C9D987A413C84 /* LiveActivitiesTests.swift */; };
 		09A63C00ADCB71C6BF4392D4 /* MediaRemoteSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD9DDAA93FE1736991AE761 /* MediaRemoteSource.swift */; };
 		0CE35712354CA83AF734444A /* SpectrumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E32A0CD723246EBCF3F295 /* SpectrumTests.swift */; };
+		0D3C50C099B5A2963DBD093F /* AssistantModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7FA6BA5FFA9983A5E8344 /* AssistantModule.swift */; };
 		0DAD6BA93A36E4EC90345619 /* SystemAudioTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7777E6515F511E3753C72A /* SystemAudioTap.swift */; };
 		0DE3A6F31820693836DDC753 /* globals.h in Headers */ = {isa = PBXBuildFile; fileRef = 3497CA2593D7F55A480C1EC3 /* globals.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0F5ED439E2F5648E15B3C072 /* LayoutSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9D3F695623AF356C363ADE /* LayoutSettingsView.swift */; };
@@ -27,6 +28,8 @@
 		20F19EFE650862129A9C102F /* YTDLP.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D1CFB6785689A3BDA60C1C /* YTDLP.swift */; };
 		26C391455DD8C384ED74BC3A /* AutomatedRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9CBF25534335CB0D5FB2F1 /* AutomatedRun.swift */; };
 		2A8FC1478370BC212B9E8F67 /* WidgetLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5200FEB865B8DCA4D43E73 /* WidgetLayoutTests.swift */; };
+		2A955B133EF6F4751FDA6DE2 /* AssistantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B67A15546467B5317CE1366 /* AssistantTests.swift */; };
+		2C3D4787E9AB5D151FCF7BAF /* AssistantViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0AFE5D48FC6891C6DAB0A4 /* AssistantViews.swift */; };
 		2CE8FE66D01A59F012F198E4 /* CalendarModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B0FE375C12A1424391655D /* CalendarModule.swift */; };
 		310A73D8AF9079086CAAACF4 /* NotchPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F6A4C1A5E799024B51A751 /* NotchPanel.swift */; };
 		3163ECEB928B70EC366B035F /* Debounce.h in Headers */ = {isa = PBXBuildFile; fileRef = C82EEAC4225615991537D76A /* Debounce.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -56,6 +59,7 @@
 		5745C9E89B5256A77822D3EF /* SystemHUDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1540EC4F1FC0F674F96EB7CE /* SystemHUDTests.swift */; };
 		5751D6EEFE3077F532F509F3 /* seek.m in Sources */ = {isa = PBXBuildFile; fileRef = 5007E33066DE772A64A4064B /* seek.m */; };
 		59288D8DFAD7AD952E74C61C /* ClaudeActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5A7E3E7FF4C76D4277A9D9 /* ClaudeActivity.swift */; };
+		5B3D1634B477F555CDEEFF2F /* AIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D50B8CBFEAF7AF299025B3 /* AIProvider.swift */; };
 		5C6ED2CBBB8A11A2831FB4C5 /* SystemHUDViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65915A0E0BF3E9D51AE67E3 /* SystemHUDViews.swift */; };
 		5ED07894AE2CE76DB414FD91 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980E81038BC99D26608D1A6B /* AppSettings.swift */; };
 		5FF44B76A97ECAD01249F200 /* globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D0955F6A00A94552C448F1 /* globals.m */; };
@@ -68,6 +72,7 @@
 		71F9B975B44D7BEC0A59AD3A /* AppearanceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D264AF1EE80180C7CCB9778 /* AppearanceSettingsView.swift */; };
 		7217AD1F16C887AB09928542 /* AirPodsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA09C6155085C6AAB69F4A1 /* AirPodsViews.swift */; };
 		73D5E9F7641B5F75B4E0B6CB /* WeatherModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71B97392FA1B40CE01E6DD5 /* WeatherModels.swift */; };
+		7605FF09B1B6548E2F21D2A4 /* AssistantFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6362B40DDA569D43BB37B057 /* AssistantFace.swift */; };
 		78F19EC00241A52E7E494A0E /* get.h in Headers */ = {isa = PBXBuildFile; fileRef = D87D32299F6B58A261AA0D12 /* get.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		79537FE908D19E626C018946 /* ModuleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69908874CE7985E60953470 /* ModuleManager.swift */; };
 		7A1810C408E52729D11E4964 /* UnlockAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FEAFA82740815C08DAF101F /* UnlockAnimations.swift */; };
@@ -90,6 +95,7 @@
 		9E5F1AAB2D6C98B155086961 /* ClipboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89908AA5686A7DBE051BD6EF /* ClipboardTests.swift */; };
 		9E7A63311A2BAFD715703A99 /* NotchShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8841EA892E202FC4B79550 /* NotchShape.swift */; };
 		9EFC7A08DE1D2D77E0755A84 /* env.h in Headers */ = {isa = PBXBuildFile; fileRef = 28D7F4491917AC873CE7BC74 /* env.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9F65428EDD48F89CBDB4024D /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7676B52E8B648F97985269 /* Keychain.swift */; };
 		9F7142925091280DBE0FE836 /* keys.h in Headers */ = {isa = PBXBuildFile; fileRef = D4D167C05CBBAD88AE1F8A4F /* keys.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A035E8F6860E327BAD3FEF0D /* BatteryModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C6F4F37F841F8FF9371E1E /* BatteryModule.swift */; };
 		A174F9940FC069ED71C0C579 /* MediaKeyTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DF39D707B871615662FAD5 /* MediaKeyTap.swift */; };
@@ -196,9 +202,11 @@
 		3381C5D65450BE4DF9D533F2 /* LiveActivitiesViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivitiesViews.swift; sourceTree = "<group>"; };
 		3497CA2593D7F55A480C1EC3 /* globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = globals.h; sourceTree = "<group>"; };
 		37C474C3B54576120030842F /* NotchHostingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchHostingView.swift; sourceTree = "<group>"; };
+		37E7FA6BA5FFA9983A5E8344 /* AssistantModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantModule.swift; sourceTree = "<group>"; };
 		38A70194D570981FFAA6853D /* ModuleRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleRegistry.swift; sourceTree = "<group>"; };
 		39D9454F2B90F4202312E9B9 /* SpectrumAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumAnalyzer.swift; sourceTree = "<group>"; };
 		3A3B538A66C6B3FB6E49A96A /* AirPodsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPodsModule.swift; sourceTree = "<group>"; };
+		3C7676B52E8B648F97985269 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		3CA09C6155085C6AAB69F4A1 /* AirPodsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPodsViews.swift; sourceTree = "<group>"; };
 		3CF7506AC056617E590D6805 /* helpers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = helpers.m; sourceTree = "<group>"; };
 		3D264AF1EE80180C7CCB9778 /* AppearanceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSettingsView.swift; sourceTree = "<group>"; };
@@ -220,6 +228,7 @@
 		57D0955F6A00A94552C448F1 /* globals.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = globals.m; sourceTree = "<group>"; };
 		5D5A7E3E7FF4C76D4277A9D9 /* ClaudeActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeActivity.swift; sourceTree = "<group>"; };
 		635422DB9C95886A509BD9D8 /* UnlockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockTests.swift; sourceTree = "<group>"; };
+		6362B40DDA569D43BB37B057 /* AssistantFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantFace.swift; sourceTree = "<group>"; };
 		6704D0B10B983BEF736F0E06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6CE100D153781049292573AA /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
 		6D79AFE5C1AEE52840020061 /* ScriptablePlayerSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptablePlayerSource.swift; sourceTree = "<group>"; };
@@ -228,6 +237,7 @@
 		7986BDF5C03AFD85D9ABE4BC /* WidgetLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetLayout.swift; sourceTree = "<group>"; };
 		79F1ED02F37A1EDCA8B3F577 /* LiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivity.swift; sourceTree = "<group>"; };
 		7A5B978655390BC3A5CD3350 /* MediaRemoteAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MediaRemoteAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B67A15546467B5317CE1366 /* AssistantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantTests.swift; sourceTree = "<group>"; };
 		7BFEE1C6D62E39350CD0D7FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C7777E6515F511E3753C72A /* SystemAudioTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemAudioTap.swift; sourceTree = "<group>"; };
 		7D2BA7B06209F7301CBA2C3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -273,6 +283,7 @@
 		C82EEAC4225615991537D76A /* Debounce.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Debounce.h; sourceTree = "<group>"; };
 		C9C6E3D4B63F646C8C9E6420 /* repeat.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = repeat.m; sourceTree = "<group>"; };
 		CBD303760BD8B274346EBC38 /* NotchContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchContainerView.swift; sourceTree = "<group>"; };
+		CC0AFE5D48FC6891C6DAB0A4 /* AssistantViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantViews.swift; sourceTree = "<group>"; };
 		CCB3060B718647EFCAAA46CA /* NotchAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchAppearance.swift; sourceTree = "<group>"; };
 		CD9CBF25534335CB0D5FB2F1 /* AutomatedRun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomatedRun.swift; sourceTree = "<group>"; };
 		CE9868E6BCDAB5B7301961AC /* EqualizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualizerView.swift; sourceTree = "<group>"; };
@@ -280,6 +291,7 @@
 		D0F33792FD3837BD07B60F6A /* MusicViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViews.swift; sourceTree = "<group>"; };
 		D2E0D029C5A9A33532D79DA9 /* NowPlayingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingInfo.swift; sourceTree = "<group>"; };
 		D331E9633CBDABB53E93E76A /* AudioDeviceMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDeviceMonitor.swift; sourceTree = "<group>"; };
+		D3D50B8CBFEAF7AF299025B3 /* AIProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIProvider.swift; sourceTree = "<group>"; };
 		D4D167C05CBBAD88AE1F8A4F /* keys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = keys.h; sourceTree = "<group>"; };
 		D5F6A4C1A5E799024B51A751 /* NotchPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchPanel.swift; sourceTree = "<group>"; };
 		D66674969F092062C29D4F74 /* UnlockModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockModule.swift; sourceTree = "<group>"; };
@@ -344,6 +356,7 @@
 			isa = PBXGroup;
 			children = (
 				8A426D361B19F11D7BD531E6 /* AirPodsTests.swift */,
+				7B67A15546467B5317CE1366 /* AssistantTests.swift */,
 				BD55833B75BD3E2E81D83E45 /* BackButtonTests.swift */,
 				E88A3C1DCE9F2BBAD2E4119B /* BatteryTests.swift */,
 				120F6102605460430CBCDD55 /* ClaudeTests.swift */,
@@ -366,6 +379,7 @@
 			isa = PBXGroup;
 			children = (
 				3023F9D8C6E8C325E63EE40A /* AirPods */,
+				CC56EAF045B4116273357046 /* Assistant */,
 				AD015B80A17F0CE774AA085E /* BackButton */,
 				A3F6B8D8397F337CCC1FA7A4 /* Battery */,
 				99BB9112389B45C7BA7E5294 /* Calendar */,
@@ -724,6 +738,18 @@
 			path = MediaRemoteAdapter;
 			sourceTree = "<group>";
 		};
+		CC56EAF045B4116273357046 /* Assistant */ = {
+			isa = PBXGroup;
+			children = (
+				D3D50B8CBFEAF7AF299025B3 /* AIProvider.swift */,
+				6362B40DDA569D43BB37B057 /* AssistantFace.swift */,
+				37E7FA6BA5FFA9983A5E8344 /* AssistantModule.swift */,
+				CC0AFE5D48FC6891C6DAB0A4 /* AssistantViews.swift */,
+				3C7676B52E8B648F97985269 /* Keychain.swift */,
+			);
+			path = Assistant;
+			sourceTree = "<group>";
+		};
 		D96A0EC12FE710271EA40961 /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -969,12 +995,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B3D1634B477F555CDEEFF2F /* AIProvider.swift in Sources */,
 				1101C84B606905D7ED45F9BC /* AirPodsModule.swift in Sources */,
 				9D3139727208B197EB647D2A /* AirPodsPrivate.swift in Sources */,
 				7217AD1F16C887AB09928542 /* AirPodsViews.swift in Sources */,
 				DD9AE10502A766B798DD4FDC /* AppDelegate.swift in Sources */,
 				5ED07894AE2CE76DB414FD91 /* AppSettings.swift in Sources */,
 				71F9B975B44D7BEC0A59AD3A /* AppearanceSettingsView.swift in Sources */,
+				7605FF09B1B6548E2F21D2A4 /* AssistantFace.swift in Sources */,
+				0D3C50C099B5A2963DBD093F /* AssistantModule.swift in Sources */,
+				2C3D4787E9AB5D151FCF7BAF /* AssistantViews.swift in Sources */,
 				D040BA8C10C9E1E29B0C74D7 /* AudioDeviceMonitor.swift in Sources */,
 				1CDA13E5F9845A313287E1B8 /* AudioSpectrumMonitor.swift in Sources */,
 				26C391455DD8C384ED74BC3A /* AutomatedRun.swift in Sources */,
@@ -1000,6 +1030,7 @@
 				C4FE1995D4A34E59EE65174D /* DropZone.swift in Sources */,
 				53009C2AA2481B9ED10B6FDE /* EntitlementManager.swift in Sources */,
 				36229702DCD121CC52D39711 /* EqualizerView.swift in Sources */,
+				9F65428EDD48F89CBDB4024D /* Keychain.swift in Sources */,
 				4F396C9C347E18A649275B67 /* LaunchAtLogin.swift in Sources */,
 				0F5ED439E2F5648E15B3C072 /* LayoutSettingsView.swift in Sources */,
 				48C9A5EF686BB463FAF39CE4 /* LiveActivitiesModule.swift in Sources */,
@@ -1060,6 +1091,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED5BE3842572CB8E3454C102 /* AirPodsTests.swift in Sources */,
+				2A955B133EF6F4751FDA6DE2 /* AssistantTests.swift in Sources */,
 				4BD40E39A1993DCDED3AB7BB /* BackButtonTests.swift in Sources */,
 				9A90F1FF12025FADD79A74D1 /* BatteryTests.swift in Sources */,
 				FF84C0815AB07A9F26919E9F /* ClaudeTests.swift in Sources */,

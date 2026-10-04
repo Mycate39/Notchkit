@@ -144,3 +144,35 @@ struct CustomSizeTests {
         #expect(appearance.pageCapacity == 3)
     }
 }
+
+struct LayoutPresetTests {
+    @Test func dispositionsCoherentes() {
+        let known: Set<String> = ["music", "clock", "battery", "calendar", "weather", "claude", "shelf", "airpods",
+                                  "activities", "clipboard", "systemhud", "back", "videodownload", "assistant"]
+        for preset in LayoutPreset.all {
+            #expect(preset.enabledIDs.isSubset(of: known), "module inconnu dans \(preset.id)")
+            #expect(Set(preset.sizes.keys) == preset.enabledIDs, "tailles incomplètes dans \(preset.id)")
+            // Chaque page tient dans la largeur standard (4), empilement des Mini compris.
+            for page in preset.pages {
+                let used = WidgetColumns.effectiveWeights(sizes: page.map { preset.sizes[$0] ?? .small }).reduce(0, +)
+                #expect(used <= 4, "page trop large dans \(preset.id)")
+            }
+        }
+    }
+}
+
+@MainActor
+struct PresetApplyTests {
+    @Test func appliquerPuisAnnuler() {
+        let settings = SettingsStore(defaults: UserDefaults(suiteName: "notchkit.tests.\(UUID().uuidString)")!)
+        let manager = ModuleManager(settings: settings, entitlements: EntitlementManager(),
+                                    availableModules: [MockModuleA.self, MockModuleB.self])
+        manager.reload()
+        let preset = LayoutPreset(id: "t", name: "T", summary: "", symbol: "a", pages: [["mock.b"]], sizes: ["mock.b": .large])
+        manager.apply(preset)
+        #expect(manager.pageIDs == [["mock.b"]])
+        #expect(manager.size(for: "mock.b") == .large)
+        manager.undoPreset()
+        #expect(manager.pageIDs == [["mock.a"]])
+    }
+}

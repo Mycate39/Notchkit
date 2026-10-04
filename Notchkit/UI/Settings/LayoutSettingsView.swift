@@ -29,6 +29,8 @@ struct LayoutEditorContent: View {
         }
 
             VStack(alignment: .leading, spacing: 18) {
+                PresetGallery(manager: manager)
+
                 Text("Glissez les widgets pour les réordonner ou les changer de page. Cliquez sur un widget pour changer sa taille. Astuce : un clic droit sur un widget dans l'encoche offre les mêmes options.")
                     .font(.callout)
                     .foregroundStyle(.secondary)
@@ -322,5 +324,85 @@ private struct HiddenWidgetsSection: View {
                 return true
             } isTargeted: { isTargeted = $0 }
         }
+    }
+}
+
+// MARK: - Dispositions prêtes à l'emploi
+
+private struct PresetGallery: View {
+    let manager: ModuleManager
+    @State private var pending: LayoutPreset?
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Text("Dispositions prêtes à l'emploi")
+                    .font(.headline)
+                Spacer()
+                if manager.settingsBeforePreset != nil {
+                    Button("Annuler la dernière disposition") { withAnimation(.snappy) { manager.undoPreset() } }
+                        .buttonStyle(.link)
+                }
+            }
+            ScrollView(.horizontal) {
+                HStack(spacing: 10) {
+                    ForEach(LayoutPreset.all) { preset in
+                        Button { pending = preset } label: {
+                            PresetCard(preset: preset)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                .padding(.vertical, 2)
+            }
+            .scrollIndicators(.never)
+        }
+        .confirmationDialog(
+            pending.map { String(localized: "Appliquer la disposition « \(String(localized: $0.name)) » ?") } ?? "",
+            isPresented: Binding(get: { pending != nil }, set: { if !$0 { pending = nil } })
+        ) {
+            Button("Appliquer") {
+                if let preset = pending { withAnimation(.snappy) { manager.apply(preset) } }
+                pending = nil
+            }
+            Button("Annuler", role: .cancel) { pending = nil }
+        } message: {
+            Text("Les modules affichés, leurs pages et leurs tailles seront remplacés. Vous pourrez revenir en arrière.")
+        }
+    }
+}
+
+/// Carte d'une disposition : schéma des pages (rectangles proportionnels aux tailles) et nom.
+private struct PresetCard: View {
+    let preset: LayoutPreset
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            VStack(spacing: 3) {
+                ForEach(Array(preset.pages.prefix(3).enumerated()), id: \.offset) { _, page in
+                    HStack(spacing: 2) {
+                        ForEach(page, id: \.self) { id in
+                            RoundedRectangle(cornerRadius: 2)
+                                .fill(.white.opacity(0.35))
+                                .frame(width: 26 * (preset.sizes[id] ?? .small).weight, height: 10)
+                        }
+                        Spacer(minLength: 0)
+                    }
+                }
+            }
+            .padding(6)
+            .frame(width: 150, height: 52, alignment: .topLeading)
+            .background(.black, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+
+            Label(String(localized: preset.name), systemImage: preset.symbol)
+                .font(.system(size: 12, weight: .semibold))
+            Text(preset.summary)
+                .font(.system(size: 10))
+                .foregroundStyle(.secondary)
+                .lineLimit(2)
+                .frame(width: 150, alignment: .leading)
+        }
+        .padding(8)
+        .background(.quaternary.opacity(0.5), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
 }

@@ -134,6 +134,32 @@ final class ModuleManager {
         WidgetLayoutEngine.usedCapacity(of: page, weights: activeWeights)
     }
 
+    /// Réglages avant la dernière disposition prête à l'emploi (pour pouvoir annuler).
+    private(set) var settingsBeforePreset: AppSettings?
+
+    /// Applique une disposition prête à l'emploi (modules avec carte, pages, tailles).
+    func apply(_ preset: LayoutPreset) {
+        settingsBeforePreset = settings.settings
+        let known = Set(availableModules.map { $0.descriptor.id })
+        for type in availableModules where type.descriptor.providesWidget {
+            settings.settings.moduleEnabled[type.descriptor.id] = preset.enabledIDs.contains(type.descriptor.id)
+        }
+        settings.settings.widgetLayout = WidgetLayout(
+            pages: preset.pages.map { $0.filter(known.contains) }.filter { !$0.isEmpty },
+            sizes: preset.sizes
+        )
+        reload()
+    }
+
+    /// Revient aux réglages d'avant la dernière disposition appliquée.
+    func undoPreset() {
+        guard let previous = settingsBeforePreset else { return }
+        settings.settings.moduleEnabled = previous.moduleEnabled
+        settings.settings.widgetLayout = previous.widgetLayout
+        settingsBeforePreset = nil
+        reload()
+    }
+
     /// Revient à la disposition automatique et aux tailles par défaut.
     func resetLayout() {
         settings.settings.widgetLayout = nil

@@ -1,21 +1,21 @@
-# MediaRemoteAdapter (code tiers)
+# MediaRemoteAdapter (third-party code)
 
-- Origine : https://github.com/ungive/mediaremote-adapter
-- Commit : 29718252613a5b0e210bdc64de0bd944ab379706 (30 septembre 2026)
-- Licence : BSD 3 clauses (voir `LICENSE.txt`), compatible avec un usage commercial.
-- Contenu repris : `bin/mediaremote-adapter.pl`, `include/`, `src/` (dans `src/test`, seul `NowPlayingTest.h` est gardé car `test.m` l'inclut). Aucune modification.
+- Source: https://github.com/ungive/mediaremote-adapter
+- Commit: 29718252613a5b0e210bdc64de0bd944ab379706 (September 30, 2026)
+- License: BSD 3-Clause (see `LICENSE.txt`), compatible with commercial use.
+- Included: `bin/mediaremote-adapter.pl`, `include/`, `src/` (in `src/test`, only `NowPlayingTest.h` is kept because `test.m` includes it). No modifications.
 
-## Rôle
+## Purpose
 
-Permet de lire le morceau en cours (« À l'écoute » de macOS) et de piloter la lecture,
-quelle que soit l'app (Deezer, navigateurs…), via le framework privé MediaRemote.
-Depuis macOS 15.4, seul un binaire système autorisé (`/usr/bin/perl`) peut l'utiliser :
-le script charge ce framework dans Perl et écrit les mises à jour en JSON sur sa sortie.
+Reads the current track (macOS "Now Playing") and controls playback in any app
+(Deezer, browsers…) through the private MediaRemote framework.
+Since macOS 15.4, only an entitled system binary (`/usr/bin/perl`) can use it:
+the script loads the framework into Perl and writes updates as JSON to its output.
 
-⚠️ API privée : Apple peut casser ce mécanisme à toute mise à jour de macOS.
-Notchkit se replie alors automatiquement sur Music et Spotify (API publiques).
+⚠️ Private API: Apple may break this mechanism with any macOS update.
+Notchkit then automatically falls back to Music and Spotify (public APIs).
 
-## Mise à jour
+## Updating
 
-Remplacer `bin/`, `include/` et `src/` par la nouvelle version (dans `src/test`, ne garder que `NowPlayingTest.h`),
-mettre à jour le commit ci-dessus, puis `xcodegen generate`.
+Replace `bin/`, `include/`, and `src/` with the new version (in `src/test`, keep only `NowPlayingTest.h`),
+update the commit above, then run `xcodegen generate`.

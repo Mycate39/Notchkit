@@ -1,26 +1,16 @@
-Copyright (c) 2026 Andéol Chenaux. Tous droits réservés.
-
-Le code source de Notchkit est publié pour consultation uniquement.
-
-Aucune licence n'est accordée : sans autorisation écrite préalable de l'auteur, il est
-interdit de copier, modifier, fusionner, publier, distribuer, sous-licencier ou vendre
-tout ou partie de ce code, ou de s'en servir pour créer une œuvre dérivée.
-
-Vous pouvez télécharger et utiliser gratuitement les versions publiées de l'application
-(page « Releases ») pour votre usage personnel.
-
-L'application est fournie « en l'état », sans garantie d'aucune sorte. L'auteur ne pourra
-être tenu responsable d'aucun dommage découlant de son utilisation.
-
-Composants tiers : le dossier ThirdParty/ contient du code soumis à sa propre licence
-(MediaRemoteAdapter, licence BSD 3 clauses : voir ThirdParty/MediaRemoteAdapter/LICENSE.txt).
-
----
-
 Copyright (c) 2026 Andéol Chenaux. All rights reserved.
 
-The Notchkit source code is published for viewing only. No license is granted: you may
-not copy, modify, distribute, sublicense, sell, or create derivative works from any part
-of it without the author's prior written permission. Released builds may be downloaded
-and used free of charge for personal use. Provided "as is", without warranty of any kind.
-Third-party code in ThirdParty/ is covered by its own license.
+The Notchkit source code is published for viewing only.
+
+No license is granted: without the author's prior written permission, you may not copy,
+modify, merge, publish, distribute, sublicense, or sell all or any part of this code, or
+use it to create derivative works.
+
+You may download and use the released builds of the application (the "Releases" page)
+free of charge for your personal use.
+
+The application is provided "as is", without warranty of any kind. In no event shall the
+author be liable for any damages arising from its use.
+
+Third-party components: the ThirdParty/ folder contains code covered by its own license
+(MediaRemoteAdapter, BSD 3-Clause License: see ThirdParty/MediaRemoteAdapter/LICENSE.txt).

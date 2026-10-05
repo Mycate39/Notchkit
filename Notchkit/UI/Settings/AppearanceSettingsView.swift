@@ -6,10 +6,22 @@ struct AppearanceSettingsView: View {
 
     private var appearance: Binding<NotchAppearance> { $settings.settings.appearance }
 
+    /// Apparence de l'aperçu : fond noir en mode encoche, comme dans la réalité.
+    private var previewAppearance: NotchAppearance {
+        var appearance = settings.settings.appearance
+        if isNotchMode { appearance.background = .black }
+        return appearance
+    }
+
+    /// Mode encoche (encoche simulée, ou écran avec encoche) : le fond y reste toujours noir.
+    private var isNotchMode: Bool {
+        settings.settings.simulateNotch || NSScreen.screens.contains { $0.safeAreaInsets.top > 0 }
+    }
+
     var body: some View {
         Form {
             Section {
-                AppearancePreview(appearance: settings.settings.appearance)
+                AppearancePreview(appearance: previewAppearance)
                     .frame(maxWidth: .infinity)
                     .listRowBackground(Color.clear)
             }
@@ -59,18 +71,29 @@ struct AppearanceSettingsView: View {
             }
 
             Section("Couleurs") {
-                Picker("Fond de l'encoche", selection: appearance.background) {
-                    ForEach(NotchAppearance.Background.allCases) { background in
-                        Text(background.title).tag(background)
+                Group {
+                    Picker("Fond de l'encoche", selection: appearance.background) {
+                        ForEach(NotchAppearance.Background.allCases) { background in
+                            Text(background.title).tag(background)
+                        }
+                    }
+                    if settings.settings.appearance.background == .custom {
+                        ColorPicker("Couleur du fond", selection: Binding(
+                            get: { settings.settings.appearance.customBackground.color },
+                            set: { settings.settings.appearance.customBackground = StoredColor($0) }
+                        ), supportsOpacity: false)
                     }
                 }
-                if settings.settings.appearance.background == .custom {
-                    ColorPicker("Couleur du fond", selection: Binding(
-                        get: { settings.settings.appearance.customBackground.color },
-                        set: { settings.settings.appearance.customBackground = StoredColor($0) }
-                    ), supportsOpacity: false)
-                }
-                if settings.settings.appearance.background != .black {
+                .disabled(isNotchMode)
+                if isNotchMode {
+                    Label(settings.settings.simulateNotch
+                          ? "En mode encoche, le fond reste noir pour se fondre avec la barre des menus, comme une vraie encoche. Le fond choisi s'applique à la pastille flottante : désactivez « Simuler une encoche » dans Général pour l'utiliser."
+                          : "Votre écran a une encoche : le fond reste noir pour se fondre avec la découpe de l'écran (sinon elle resterait visible). Le fond choisi s'applique à la pastille affichée sur les autres écrans.",
+                          systemImage: "info.circle")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                } else if settings.settings.appearance.background != .black {
                     Text("En mode encoche (réelle ou simulée), le fond reste toujours noir pour se fondre avec la découpe de l'écran : ce choix s'applique à la pastille flottante. « Verre » utilise le Liquid Glass de macOS 26.")
                         .font(.caption)
                         .foregroundStyle(.secondary)

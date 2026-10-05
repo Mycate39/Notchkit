@@ -64,8 +64,10 @@ private struct ClipboardRow: View {
 
     var body: some View {
         HStack(spacing: 7) {
+            // Vignette carrée : une image est recadrée au centre, comme les icônes des autres lignes.
             thumbnail
                 .frame(width: 22, height: 22)
+                .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
             VStack(alignment: .leading, spacing: 0) {
                 Text(item.preview)
                     .font(.system(size: 10, weight: .medium))

@@ -52,6 +52,16 @@
         }
       }
     },
+    "%@:%@" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@:%2$@"
+          }
+        }
+      }
+    },
     "%lld" : {
 
     },
@@ -65,6 +75,9 @@
 
     },
     "%lld modèles disponibles" : {
+
+    },
+    "%lld pt" : {
 
     },
     "%lld s après un changement d'app" : {
@@ -82,9 +95,6 @@
     "5 min" : {
 
     },
-    "À coller pour signaler un souci (AirPods connectés)." : {
-
-    },
     "À propos" : {
 
     },
@@ -97,19 +107,22 @@
     "Accès requis" : {
 
     },
+    "Activé" : {
+
+    },
     "Activer" : {
 
     },
     "Activez des modules dans les réglages." : {
 
     },
+    "Activez le module pour afficher ses réglages." : {
+
+    },
     "Activité de Claude Code en direct, messages depuis l'encoche et utilisation estimée." : {
 
     },
     "Activités live" : {
-
-    },
-    "Adaptatif" : {
 
     },
     "Adresse de l'API" : {
@@ -160,6 +173,9 @@
     "Afficher une alerte de test" : {
 
     },
+    "Agenda, minuteurs, presse-papiers et étagère." : {
+
+    },
     "AirPods et casques" : {
 
     },
@@ -187,7 +203,7 @@
     "Animation à la connexion" : {
 
     },
-    "Animation à la connexion de vos AirPods ou d'un casque Bluetooth, sortie audio en un clic." : {
+    "Animation à la connexion de vos AirPods ou d'un casque Bluetooth, et appareil connecté en un coup d'œil." : {
 
     },
     "Animation à la déconnexion" : {
@@ -226,6 +242,9 @@
     "Annuler" : {
 
     },
+    "Annuler la dernière disposition" : {
+
+    },
     "Aperçu : demande de mot de passe" : {
 
     },
@@ -236,6 +255,12 @@
 
     },
     "Apparence" : {
+
+    },
+    "Appliquer" : {
+
+    },
+    "Appliquer la disposition « %@ » ?" : {
 
     },
     "Après chaque réponse de Claude, vous pouvez encore lui écrire depuis l'encoche pendant ce délai : il repart aussitôt. Pendant ce temps, Claude Code l'affiche comme « en cours » (Échap pour arrêter)." : {
@@ -256,7 +281,7 @@
     "Aucun" : {
 
     },
-    "Aucun casque Bluetooth connecté" : {
+    "Aucun casque connecté" : {
 
     },
     "Aucun événement aujourd'hui ni demain" : {
@@ -340,9 +365,6 @@
     "Batterie : simuler le débranchement" : {
 
     },
-    "Batterie et mode d'écoute des AirPods" : {
-
-    },
     "Boîtier" : {
 
     },
@@ -374,6 +396,9 @@
 
     },
     "Calendrier" : {
+
+    },
+    "Ce module fonctionne en arrière-plan, sans carte dans l'encoche." : {
 
     },
     "Cette sortie audio n'a pas de volume réglable." : {
@@ -419,6 +444,9 @@
 
     },
     "Claude Code est inactif" : {
+
+    },
+    "Claude Code, activités, presse-papiers et étagère." : {
 
     },
     "Claude est à l'arrêt : message remis avec votre prochaine demande" : {
@@ -481,9 +509,6 @@
     "Copier" : {
 
     },
-    "Copier le diagnostic" : {
-
-    },
     "Copies" : {
 
     },
@@ -493,16 +518,19 @@
     "Couleur d'accent" : {
 
     },
-    "Couleur d'accent personnalisée" : {
+    "Couleur du fond" : {
 
     },
-    "Couleur du fond" : {
+    "Couleur personnalisée (onglets, barres de progression)" : {
 
     },
     "Couleurs" : {
 
     },
     "Couvert" : {
+
+    },
+    "Dans l'encoche" : {
 
     },
     "Débogage" : {
@@ -562,6 +590,9 @@
     "Développement" : {
 
     },
+    "Développeur" : {
+
+    },
     "Déverrouillage" : {
 
     },
@@ -569,6 +600,9 @@
 
     },
     "Disposition" : {
+
+    },
+    "Dispositions prêtes à l'emploi" : {
 
     },
     "Données météo : Open-Meteo.com (licence CC BY 4.0)." : {
@@ -613,10 +647,22 @@
     "Effacer l'historique (sauf les éléments épinglés)" : {
 
     },
+    "Emplacement" : {
+
+    },
+    "Empreinte de vérification introuvable." : {
+
+    },
     "En charge" : {
 
     },
     "En cours · jusqu'à %@" : {
+
+    },
+    "En mode encoche (réelle ou simulée), le fond reste toujours noir pour se fondre avec la découpe de l'écran : ce choix s'applique à la pastille flottante. « Verre » utilise le Liquid Glass de macOS 26." : {
+
+    },
+    "En mode encoche, le fond reste noir pour se fondre avec la barre des menus, comme une vraie encoche. Le fond choisi s'applique à la pastille flottante : désactivez « Simuler une encoche » dans Général pour l'utiliser." : {
 
     },
     "En pause" : {
@@ -653,6 +699,9 @@
     "Erreur inconnue" : {
 
     },
+    "Essentiel" : {
+
+    },
     "Estimation : %@%@. Comparée à votre plus grosse session observée." : {
       "localizations" : {
         "fr" : {
@@ -682,6 +731,9 @@
 
     },
     "Fermer" : {
+
+    },
+    "ffmpeg (facultatif : meilleure qualité, MP3) s'installe dans le Terminal avec « brew install ffmpeg ». Sur un Mac Intel, Homebrew peut devoir le compiler, ce qui est long." : {
 
     },
     "ffmpeg absent (qualité limitée, pas de MP3)" : {
@@ -744,6 +796,9 @@
     "Graphite" : {
 
     },
+    "Hauteur" : {
+
+    },
     "Historique des derniers éléments copiés, à recopier d'un clic." : {
 
     },
@@ -762,22 +817,10 @@
     "Image" : {
 
     },
-    "inconnu (%u)" : {
-
-    },
-    "Installation en cours… (cela peut prendre quelques minutes)" : {
-
-    },
-    "Installation terminée." : {
-
-    },
     "Installation…" : {
 
     },
     "Installer" : {
-
-    },
-    "Installer avec Homebrew…" : {
 
     },
     "Installer l'intégration Claude Code ?" : {
@@ -786,19 +829,13 @@
     "Installer l'intégration…" : {
 
     },
-    "Installer les outils de téléchargement ?" : {
+    "Installer yt-dlp ?" : {
 
     },
-    "Installer yt-dlp et ffmpeg" : {
-
-    },
-    "Installer yt-dlp seulement" : {
+    "Installer yt-dlp…" : {
 
     },
     "Installer…" : {
-
-    },
-    "Installez Homebrew (brew.sh), puis dans le Terminal : brew install yt-dlp ffmpeg" : {
 
     },
     "Installez l'intégration pour suivre ce que fait Claude et lui écrire depuis l'encoche." : {
@@ -819,6 +856,9 @@
     "Intégration retirée." : {
 
     },
+    "Intégré (clé API)" : {
+
+    },
     "Jour" : {
 
     },
@@ -831,16 +871,13 @@
     "L'analyse du son n'a pas pu démarrer : %@" : {
 
     },
-    "L'installation a échoué. Essayez dans le Terminal : brew install yt-dlp" : {
+    "L'installation a échoué : %@" : {
 
     },
     "L'utilisation de l'API est facturée par le fournisseur sur votre compte API (séparément d'un abonnement Claude Pro/Max). La clé reste dans le trousseau de ce Mac. Avec Claude, si une demande est refusée par les filtres de sécurité d'un modèle récent, elle est automatiquement relancée sur un autre modèle Claude (« fallbacks »)." : {
 
     },
     "L'utilisation réelle (session de 5 h et semaine) est transmise par Claude Code à sa barre d'état, à chaque message. En attendant ces données, Notchkit affiche une estimation calculée à partir des fichiers de session locaux." : {
-
-    },
-    "La batterie de chaque écouteur et le choix du mode (désactivé, réduction du bruit, transparence) utilisent une interface non officielle d'Apple et demandent l'autorisation Bluetooth. Si une mise à jour de macOS la modifie, ces commandes disparaissent simplement de la carte." : {
 
     },
     "La recherche a échoué. Vérifiez votre connexion." : {
@@ -852,7 +889,13 @@
     "Lancer Notchkit à l'ouverture de session" : {
 
     },
+    "Largeur" : {
+
+    },
     "Le fichier ~/.claude/settings.json n'est pas un JSON valide. Corrigez-le ou supprimez-le, puis réessayez." : {
+
+    },
+    "Le fichier téléchargé est corrompu (empreinte différente). Réessayez." : {
 
     },
     "Le modèle a refusé de répondre à cette demande." : {
@@ -868,13 +911,22 @@
         }
       }
     },
+    "Le site officiel s'ouvre dans une fenêtre sous l'encoche : connectez-vous une fois avec votre compte, la session est conservée. Votre abonnement (ChatGPT Plus, Gemini Advanced, SuperGrok…) s'applique normalement." : {
+
+    },
     "Le volume est réglé par une interface publique. La luminosité de l'écran intégré passe par une interface non officielle d'Apple (DisplayServices) : si une mise à jour de macOS la modifie, les touches de luminosité retrouvent simplement leur comportement normal. Les écrans externes et les sorties sans volume réglable gardent l'indicateur de macOS." : {
 
     },
     "Lecture" : {
 
     },
+    "Lecture en grand, casque et volume à portée de main." : {
+
+    },
     "Les contenus marqués confidentiels (mots de passe copiés depuis un gestionnaire) ne sont jamais enregistrés. L'historique reste sur ce Mac." : {
+
+    },
+    "Les modules affichés, leurs pages et leurs tailles seront remplacés. Vous pourrez revenir en arrière." : {
 
     },
     "Licences des composants tiers" : {
@@ -940,7 +992,7 @@
     "Mise à jour de l'intégration nécessaire" : {
 
     },
-    "Mode actuel : %@" : {
+    "Mode" : {
 
     },
     "Modèle" : {
@@ -982,6 +1034,9 @@
     "Musique" : {
 
     },
+    "Musique, heure et batterie, rien de plus." : {
+
+    },
     "Nécessaire pour Deezer, les navigateurs et la plupart des lecteurs. Utilise une interface non officielle d'Apple qui peut cesser de fonctionner après une mise à jour de macOS ; Music et Spotify restent alors pris en charge." : {
 
     },
@@ -1012,7 +1067,7 @@
     "Notchkit va ajouter des hooks et une barre d'état dans ~/.claude/settings.json pour que Claude Code le prévienne de son activité et lui transmette votre utilisation réelle (connexion locale uniquement, protégée par un jeton). Vos réglages existants sont conservés et une copie de sauvegarde est faite. Les nouvelles sessions de Claude Code en tiendront compte." : {
 
     },
-    "Notchkit va lancer « brew install » pour installer ces logiciels libres sur votre Mac. ffmpeg (plus volumineux) permet la meilleure qualité et la conversion en MP3." : {
+    "Notchkit va télécharger le programme officiel yt-dlp pour macOS depuis GitHub (logiciel libre, environ 35 Mo), vérifier son empreinte, puis l'installer dans son dossier. Rien n'est modifié ailleurs sur votre Mac." : {
 
     },
     "Nouvelle conversation" : {
@@ -1033,7 +1088,16 @@
     "Ouvrir" : {
 
     },
+    "Ouvrir %@" : {
+
+    },
+    "Ouvrir avec mon compte" : {
+
+    },
     "Ouvrir Calendrier" : {
+
+    },
+    "Ouvrir dans le navigateur" : {
 
     },
     "Ouvrir l'app qui joue" : {
@@ -1047,6 +1111,16 @@
     },
     "Page %lld" : {
 
+    },
+    "Page %lld, position %lld" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Page %1$lld, position %2$lld"
+          }
+        }
+      }
     },
     "Page précédente" : {
 
@@ -1063,13 +1137,13 @@
     "Partiellement nuageux" : {
 
     },
-    "Passer sur %@" : {
-
-    },
     "Pause" : {
 
     },
     "Personnalisé" : {
+
+    },
+    "Personnalisée" : {
 
     },
     "Petit" : {
@@ -1093,7 +1167,7 @@
     "Port invalide" : {
 
     },
-    "Posez une question depuis l'encoche (Claude ou API compatible OpenAI), avec un visage animé." : {
+    "Posez une question depuis l'encoche (clé API), ou ouvrez ChatGPT, Gemini ou Grok avec votre compte." : {
 
     },
     "Position" : {
@@ -1129,6 +1203,9 @@
     "Rebondissante" : {
 
     },
+    "Recharger" : {
+
+    },
     "Recherche « %@ »" : {
 
     },
@@ -1138,9 +1215,6 @@
     "Rechercher une ville" : {
 
     },
-    "Réduction du bruit" : {
-
-    },
     "Réessayer" : {
 
     },
@@ -1148,9 +1222,6 @@
 
     },
     "Réglages > Modules > Vidéos" : {
-
-    },
-    "Réglages Bluetooth…" : {
 
     },
     "Réglages de Notchkit" : {
@@ -1207,6 +1278,12 @@
     "Retour à l'app précédente" : {
 
     },
+    "Retour haptique" : {
+
+    },
+    "Retour haptique du trackpad" : {
+
+    },
     "Revenir à %@" : {
 
     },
@@ -1237,6 +1314,9 @@
     "Semaine %lld %%" : {
 
     },
+    "Service" : {
+
+    },
     "Session" : {
 
     },
@@ -1252,10 +1332,10 @@
     "Singapour" : {
 
     },
-    "Son à la fin d'un minuteur" : {
+    "Site officiel (compte)" : {
 
     },
-    "Sortie audio active" : {
+    "Son à la fin d'un minuteur" : {
 
     },
     "Standard" : {
@@ -1273,9 +1353,6 @@
     "Sur batterie" : {
 
     },
-    "Sur un Mac avec encoche, un fond autre que noir laisse voir la découpe de l'encoche matérielle." : {
-
-    },
     "Survol" : {
 
     },
@@ -1291,10 +1368,19 @@
     "Taille de l'encoche dépliée" : {
 
     },
+    "Taille du widget" : {
+
+    },
+    "Téléchargement de yt-dlp… (environ 35 Mo)" : {
+
+    },
     "Téléchargement terminé" : {
 
     },
     "Télécharger" : {
+
+    },
+    "Télécharger et installer" : {
 
     },
     "Téléchargez une vidéo ou son audio à partir d'un lien (avec yt-dlp)." : {
@@ -1324,7 +1410,13 @@
     "Toujours afficher le niveau quand l'encoche est repliée" : {
 
     },
+    "Tous les modules, en version Mini quand c'est possible." : {
+
+    },
     "Tout envoyer par AirDrop" : {
+
+    },
+    "Tout-en-un" : {
 
     },
     "Toute la journée" : {
@@ -1333,7 +1425,7 @@
     "Transformez l'encoche de votre Mac en une zone interactive et modulaire." : {
 
     },
-    "Transparence" : {
+    "Un léger clic à l'ouverture de l'encoche, au changement de page, aux alertes et à chaque cran de volume (trackpad Force Touch)." : {
 
     },
     "Une encoche plus grande accueille plus de widgets par page (%@ unités de largeur)." : {
@@ -1343,9 +1435,6 @@
 
     },
     "Utilise %@" : {
-
-    },
-    "Utiliser comme sortie" : {
 
     },
     "Utiliser ma position" : {
@@ -1393,6 +1482,9 @@
     "Votre accord" : {
 
     },
+    "Votre écran a une encoche : le fond reste noir pour se fondre avec la découpe de l'écran (sinon elle resterait visible). Le fond choisi s'applique à la pastille affichée sur les autres écrans." : {
+
+    },
     "Vous avez déjà votre propre barre d'état Claude Code : Notchkit ne la remplace pas, l'utilisation affichée reste donc une estimation." : {
 
     },
@@ -1400,6 +1492,9 @@
 
     },
     "Widgets masqués" : {
+
+    },
+    "yt-dlp est installé." : {
 
     },
     "yt-dlp installé" : {

@@ -49,6 +49,7 @@
 		47D04EE53E7EB27F24B5C255 /* send.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4865DD8D0267CAE95D06A9 /* send.m */; };
 		48B09963CD8A874CEC291C6F /* speed.m in Sources */ = {isa = PBXBuildFile; fileRef = 578508F6730303155DAAC666 /* speed.m */; };
 		48C9A5EF686BB463FAF39CE4 /* LiveActivitiesModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB45AC94D29F371CA2C5934 /* LiveActivitiesModule.swift */; };
+		4938BC53B652E7BF0D8F67F8 /* ModuleIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A392BB245F4CD1284FD823DD /* ModuleIcon.swift */; };
 		4BD40E39A1993DCDED3AB7BB /* BackButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD55833B75BD3E2E81D83E45 /* BackButtonTests.swift */; };
 		4DA7F19EF634F138BD5A42D5 /* SpectrumAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D9454F2B90F4202312E9B9 /* SpectrumAnalyzer.swift */; };
 		4F396C9C347E18A649275B67 /* LaunchAtLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE9F8658125C2D9185EA96 /* LaunchAtLogin.swift */; };
@@ -136,6 +137,7 @@
 		DD9AE10502A766B798DD4FDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFEE1C6D62E39350CD0D7FE /* AppDelegate.swift */; };
 		DF4B09A9C2F36E969721F9CF /* now_playing.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F21C814CD3DE60B75B2C723 /* now_playing.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E0FAD540630F9E4B2FAA2E44 /* test.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C0CDEA4B993CA2ECA8EEA /* test.m */; };
+		E115414832E52C24B6FC8B5F /* ClaudeTranscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59B0346E804B7D7CA6AC049 /* ClaudeTranscript.swift */; };
 		E184F5836F541C7C7D2573E7 /* UnlockModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66674969F092062C29D4F74 /* UnlockModule.swift */; };
 		E7CB399A1524418E1152DDA6 /* ModuleDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD4A44AFAF64E2BE5E745B3 /* ModuleDescriptor.swift */; };
 		E954032D743568B2082B51F8 /* MusicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6111A0CC43713D888AAAB4 /* MusicTests.swift */; };
@@ -269,6 +271,7 @@
 		9E6A11EA97C90A4B6372215A /* Debounce.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Debounce.m; sourceTree = "<group>"; };
 		9F21C814CD3DE60B75B2C723 /* now_playing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = now_playing.h; sourceTree = "<group>"; };
 		A097E4F52274645DD920E62C /* ShelfTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfTests.swift; sourceTree = "<group>"; };
+		A392BB245F4CD1284FD823DD /* ModuleIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleIcon.swift; sourceTree = "<group>"; };
 		A60B8D5B298F953E63F8A098 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		A65915A0E0BF3E9D51AE67E3 /* SystemHUDViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemHUDViews.swift; sourceTree = "<group>"; };
 		A71B97392FA1B40CE01E6DD5 /* WeatherModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModels.swift; sourceTree = "<group>"; };
@@ -284,6 +287,7 @@
 		BFC76D1C2CA657B593C11E7B /* VideoDownloadModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloadModule.swift; sourceTree = "<group>"; };
 		C12CD8AFBB2574643418518B /* ClockModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockModule.swift; sourceTree = "<group>"; };
 		C4B90EDE60261A06FD92A08E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		C59B0346E804B7D7CA6AC049 /* ClaudeTranscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeTranscript.swift; sourceTree = "<group>"; };
 		C5C6F4F37F841F8FF9371E1E /* BatteryModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryModule.swift; sourceTree = "<group>"; };
 		C69908874CE7985E60953470 /* ModuleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleManager.swift; sourceTree = "<group>"; };
 		C6D110312DA9149C3CEA954F /* VideoDownloadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloadViews.swift; sourceTree = "<group>"; };
@@ -415,6 +419,7 @@
 				01F59B743A5CB9C111DD7BEB /* ClaudeHooksInstaller.swift */,
 				7EE518DE63D2C25D9F6E87F4 /* ClaudeModule.swift */,
 				FA1FA58A222029EF8472F5FC /* ClaudeSparkView.swift */,
+				C59B0346E804B7D7CA6AC049 /* ClaudeTranscript.swift */,
 				0C529029D5145492C0C2626F /* ClaudeUsage.swift */,
 				F57759630E262CEA88367992 /* ClaudeViews.swift */,
 			);
@@ -782,6 +787,7 @@
 			isa = PBXGroup;
 			children = (
 				4ECF3DDA8BA52758E6E1EC5B /* Glyphs.swift */,
+				A392BB245F4CD1284FD823DD /* ModuleIcon.swift */,
 				CBD303760BD8B274346EBC38 /* NotchContainerView.swift */,
 				1E8841EA892E202FC4B79550 /* NotchShape.swift */,
 				5264B9579D2D1E49A90E0070 /* NotchStyle.swift */,
@@ -1035,6 +1041,7 @@
 				AB56A68BD40C4A5C39C4ED1E /* ClaudeHooksInstaller.swift in Sources */,
 				7ED5BEDDC88EC58CE6592830 /* ClaudeModule.swift in Sources */,
 				66322E21FA223080C743AF7D /* ClaudeSparkView.swift in Sources */,
+				E115414832E52C24B6FC8B5F /* ClaudeTranscript.swift in Sources */,
 				F49705A9A1C38568C414F8F7 /* ClaudeUsage.swift in Sources */,
 				7B2CB280D4CE260CA0BD52ED /* ClaudeViews.swift in Sources */,
 				14B1C0436FB41EA321F96C8F /* ClipboardItem.swift in Sources */,
@@ -1059,6 +1066,7 @@
 				09A63C00ADCB71C6BF4392D4 /* MediaRemoteSource.swift in Sources */,
 				018D9AD0EB2549EDE8225838 /* MenuBarContent.swift in Sources */,
 				E7CB399A1524418E1152DDA6 /* ModuleDescriptor.swift in Sources */,
+				4938BC53B652E7BF0D8F67F8 /* ModuleIcon.swift in Sources */,
 				79537FE908D19E626C018946 /* ModuleManager.swift in Sources */,
 				52B8567D96E53EBF58A2FBA1 /* ModuleRegistry.swift in Sources */,
 				321C1FDDCAA432ED1667A806 /* MusicModule.swift in Sources */,

@@ -71,12 +71,12 @@ struct AppearanceSettingsView: View {
                     ), supportsOpacity: false)
                 }
                 if settings.settings.appearance.background != .black {
-                    Text("Sur un Mac avec encoche, un fond autre que noir laisse voir la découpe de l'encoche matérielle.")
+                    Text("En mode encoche (réelle ou simulée), le fond reste toujours noir pour se fondre avec la découpe de l'écran : ce choix s'applique à la pastille flottante. « Verre » utilise le Liquid Glass de macOS 26.")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
 
-                Toggle("Couleur d'accent personnalisée", isOn: Binding(
+                Toggle("Couleur personnalisée (onglets, barres de progression)", isOn: Binding(
                     get: { settings.settings.appearance.accent != nil },
                     set: { settings.settings.appearance.accent = $0 ? StoredColor(.orange) : nil }
                 ))

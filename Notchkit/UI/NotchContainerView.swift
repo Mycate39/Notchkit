@@ -33,7 +33,7 @@ struct NotchContainerView: View {
             }
         }
         .frame(width: size.width, height: size.height, alignment: .top)
-        .background(NotchBackground(appearance: viewModel.appearance))
+        .notchBackground(viewModel.appearance, style: geometry.style, shape: shape)
         // Île : fin contour gris, comme la Dynamic Island (pas en mode encoche, collé au bord de l'écran).
         .overlay {
             shape.stroke(.white.opacity(island && geometry.style == .pill ? 0.2 : 0), lineWidth: 2)
@@ -189,7 +189,8 @@ private struct ExpandedNotchView: View {
                                 if isSelected {
                                     HStack(spacing: 6) {
                                         ForEach(page.modules.prefix(5)) { box in
-                                            Image(systemName: box.systemImage)
+                                            ModuleIcon(symbol: box.systemImage)
+                                                .frame(height: 11)
                                         }
                                     }
                                     .font(.system(size: 10, weight: .semibold))
@@ -197,7 +198,7 @@ private struct ExpandedNotchView: View {
                                     .padding(.vertical, 4)
                                     .background {
                                         Capsule()
-                                            .fill(.white.opacity(0.16))
+                                            .fill(.tint)
                                             .matchedGeometryEffect(id: "pastille", in: pageIndicator)
                                     }
                                     .foregroundStyle(.white)

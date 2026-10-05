@@ -144,6 +144,26 @@ struct NotchAppearance: Codable, Equatable, Sendable {
     var accentColor: Color { accent?.color ?? .accentColor }
 }
 
+extension View {
+    /// Fond de l'encoche. En mode encoche (réelle ou simulée), il reste noir quoi qu'il arrive,
+    /// pour se fondre avec la découpe de l'écran. « Verre » utilise le Liquid Glass de macOS 26.
+    @ViewBuilder
+    func notchBackground(_ appearance: NotchAppearance, style: NotchStyle, shape: some Shape) -> some View {
+        if style == .notch {
+            background(Color.black)
+        } else if appearance.background == .glass, !NotchAccessibility.reduceTransparency {
+            if #available(macOS 26.0, *) {
+                // Verre liquide : réfraction et reflets sur les bords, légèrement teinté pour la lisibilité.
+                glassEffect(.regular.tint(.black.opacity(0.35)), in: shape)
+            } else {
+                background(NotchBackground(appearance: appearance))
+            }
+        } else {
+            background(NotchBackground(appearance: appearance))
+        }
+    }
+}
+
 /// Fond de l'encoche selon l'apparence.
 struct NotchBackground: View {
     let appearance: NotchAppearance

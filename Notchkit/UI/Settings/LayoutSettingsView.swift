@@ -163,8 +163,9 @@ private struct WidgetTile: View {
                     .allowsHitTesting(false)
             } else {
                 VStack(spacing: 4) {
-                    Image(systemName: descriptor.systemImage)
+                    ModuleIcon(symbol: descriptor.systemImage)
                         .font(.system(size: 22))
+                        .frame(height: 24)
                     Text(descriptor.name)
                         .font(.system(size: 12, weight: .semibold))
                 }
@@ -201,7 +202,7 @@ private struct WidgetTile: View {
         .onTapGesture { showsOptions = true }
         .help("Cliquez pour changer la taille, glissez pour déplacer")
         .draggable(descriptor.id) {
-            Label(descriptor.name, systemImage: descriptor.systemImage)
+            Label { Text(descriptor.name) } icon: { ModuleIcon(symbol: descriptor.systemImage) }
                 .padding(8)
                 .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
         }
@@ -224,7 +225,7 @@ private struct WidgetTile: View {
         .background(GeometryReader { proxy in Color.clear.onAppear { tileWidth = proxy.size.width } })
         .popover(isPresented: $showsOptions, arrowEdge: .bottom) {
             VStack(alignment: .leading, spacing: 10) {
-                Label(descriptor.name, systemImage: descriptor.systemImage)
+                Label { Text(descriptor.name) } icon: { ModuleIcon(symbol: descriptor.systemImage) }
                     .font(.headline)
                 Picker("Taille", selection: Binding(
                     get: { manager.size(for: descriptor.id) },
@@ -299,7 +300,7 @@ private struct HiddenWidgetsSection: View {
                         .frame(maxWidth: .infinity)
                 } else {
                     ForEach(hidden) { descriptor in
-                        Label(descriptor.name, systemImage: descriptor.systemImage)
+                        Label { Text(descriptor.name) } icon: { ModuleIcon(symbol: descriptor.systemImage) }
                             .font(.system(size: 11, weight: .medium))
                             .padding(.horizontal, 10)
                             .padding(.vertical, 6)

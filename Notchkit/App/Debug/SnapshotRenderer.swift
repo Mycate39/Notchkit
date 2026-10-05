@@ -114,6 +114,8 @@ enum SnapshotRenderer {
                 LineGlyph(shape: MusicNoteShape()).frame(width: 40, height: 40)
                 DefaultArtwork().frame(width: 40, height: 40).clipShape(RoundedRectangle(cornerRadius: 10))
                 BatteryGlyph(level: 0.6, color: .green, showsBolt: true, size: CGSize(width: 54, height: 26))
+                ClaudeMarkShape().fill(ClaudeMark.color).frame(width: 40, height: 40)
+                    .padding(6).background(ClaudeMark.background, in: RoundedRectangle(cornerRadius: 11))
             }
             .padding(16).background(.black).foregroundStyle(.white),
              to: directory.appendingPathComponent("icones.png"))

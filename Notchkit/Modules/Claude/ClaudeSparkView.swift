@@ -3,7 +3,8 @@ import SwiftUI
 
 /// Étoile animée représentant Claude dans l'encoche (création originale, pas le logo officiel).
 ///
-/// Des rayons arrondis qui pulsent l'un après l'autre et tournent lentement quand Claude travaille.
+/// Même dessin que `ClaudeMarkShape` (rayons effilés, longueurs irrégulières) ;
+/// des rayons qui pulsent l'un après l'autre et tournent lentement quand Claude travaille.
 /// Animée avec Core Animation : l'animation tourne dans le serveur d'affichage, sans réveiller l'app.
 struct ClaudeSparkView: NSViewRepresentable {
     var isAnimating: Bool
@@ -21,10 +22,12 @@ struct ClaudeSparkView: NSViewRepresentable {
 }
 
 final class ClaudeSparkNSView: NSView {
-    private static let rayCount = 10
+    private static let rayCount = 12
+    /// Longueurs relatives des rayons (identiques à `ClaudeMarkShape`).
+    private static let lengths: [CGFloat] = [1, 0.8, 0.94, 0.76, 0.98, 0.84, 0.92, 0.74, 1, 0.82, 0.9, 0.78]
     private let container = CALayer()
     /// Chaque rayon est dans un support tourné, pour animer son échelle indépendamment de son angle.
-    private var rays: [CALayer] = []
+    private var rays: [CAShapeLayer] = []
     private var isAnimating = false
 
     override init(frame frameRect: NSRect) {
@@ -34,8 +37,8 @@ final class ClaudeSparkNSView: NSView {
 
         for index in 0..<Self.rayCount {
             let holder = CALayer()
-            let ray = CALayer()
-            ray.backgroundColor = ClaudeSparkView.color.cgColor
+            let ray = CAShapeLayer()
+            ray.fillColor = ClaudeSparkView.color.cgColor
             ray.anchorPoint = CGPoint(x: 0.5, y: 0)
             holder.addSublayer(ray)
             holder.setAffineTransform(CGAffineTransform(rotationAngle: CGFloat(index) / CGFloat(Self.rayCount) * 2 * .pi))
@@ -59,12 +62,18 @@ final class ClaudeSparkNSView: NSView {
             guard let holder = ray.superlayer else { continue }
             holder.bounds = bounds
             holder.position = center
-            // Rayons alternativement longs et courts.
-            let length = side * (index.isMultiple(of: 2) ? 0.5 : 0.38)
-            let width = side * 0.13
-            ray.bounds = CGRect(x: 0, y: 0, width: width, height: length)
+            // Rayon effilé : large au centre, arrondi et fin à la pointe.
+            let length = side * 0.5 * Self.lengths[index]
+            let base = side * 0.062, tip = side * 0.036
+            ray.bounds = CGRect(x: 0, y: 0, width: base * 2, height: length)
             ray.position = CGPoint(x: bounds.midX, y: bounds.midY)
-            ray.cornerRadius = width / 2
+            let path = CGMutablePath()
+            path.move(to: CGPoint(x: 0, y: 0))
+            path.addLine(to: CGPoint(x: base - tip, y: length - tip))
+            path.addArc(center: CGPoint(x: base, y: length - tip), radius: tip, startAngle: .pi, endAngle: 0, clockwise: true)
+            path.addLine(to: CGPoint(x: base * 2, y: 0))
+            path.closeSubpath()
+            ray.path = path
         }
         CATransaction.commit()
     }

@@ -23,7 +23,7 @@ struct HUDLevelBar: View {
             GeometryReader { proxy in
                 ZStack(alignment: .leading) {
                     Capsule().fill(.white.opacity(0.22))
-                    Capsule().fill(.white)
+                    Capsule().fill(.tint)
                         .frame(width: max(level > 0 ? 6 : 0, proxy.size.width * level))
                 }
             }

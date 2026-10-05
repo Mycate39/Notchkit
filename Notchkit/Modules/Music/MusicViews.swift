@@ -191,7 +191,7 @@ private struct PlaybackProgressView: View {
                     let progress = duration > 0 ? (elapsed ?? 0) / duration : 0
                     ZStack(alignment: .leading) {
                         Capsule().fill(.white.opacity(0.2))
-                        Capsule().fill(.white)
+                        Capsule().fill(.tint)
                             .frame(width: proxy.size.width * min(max(progress, 0), 1))
                     }
                 }

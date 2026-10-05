@@ -87,7 +87,9 @@ extension NotchModule {
     var expandedWidthWeight: CGFloat { 1 }
 
     func miniView() -> AnyView {
-        AnyView(MiniWidget(symbol: Self.descriptor.systemImage, value: nil, caption: String(localized: Self.descriptor.name)))
+        AnyView(MiniWidget(value: nil, caption: String(localized: Self.descriptor.name)) {
+            ModuleIcon(symbol: Self.descriptor.systemImage)
+        })
     }
 }
 

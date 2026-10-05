@@ -79,11 +79,20 @@ private struct SidebarIcon: View {
     var size: CGFloat = 20
 
     var body: some View {
-        Image(systemName: symbol)
-            .font(.system(size: size * 0.55, weight: .semibold))
-            .foregroundStyle(.white)
-            .frame(width: size, height: size)
-            .background(color.gradient, in: RoundedRectangle(cornerRadius: size * 0.25, style: .continuous))
+        if symbol == ClaudeMark.symbolName {
+            // Étoile de Claude en terre cuite sur fond crème.
+            ClaudeMarkShape()
+                .fill(ClaudeMark.color)
+                .padding(size * 0.16)
+                .frame(width: size, height: size)
+                .background(ClaudeMark.background, in: RoundedRectangle(cornerRadius: size * 0.25, style: .continuous))
+        } else {
+            Image(systemName: symbol)
+                .font(.system(size: size * 0.55, weight: .semibold))
+                .foregroundStyle(.white)
+                .frame(width: size, height: size)
+                .background(color.gradient, in: RoundedRectangle(cornerRadius: size * 0.25, style: .continuous))
+        }
     }
 }
 

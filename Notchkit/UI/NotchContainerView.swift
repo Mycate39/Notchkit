@@ -34,6 +34,8 @@ struct NotchContainerView: View {
         }
         .clipShape(shape)
         .contentShape(shape)
+        // Petite ombre au survol, avant l'ouverture.
+        .shadow(color: .black.opacity(viewModel.showsHoverShadow ? 0.45 : 0), radius: 5, y: 2)
         .foregroundStyle(.white)
         .tint(viewModel.appearance.accentColor)
         .environment(\.colorScheme, .dark)

@@ -46,6 +46,8 @@ enum NotchLayout {
     static let islandExtraHeight: CGFloat = 6
     /// Proportions de l'île (largeur / hauteur), comme la Dynamic Island pendant la lecture.
     static let islandAspectRatio: CGFloat = 4.8
+    /// Marge de fenêtre réservée à l'ombre de survol (sur les côtés et en bas).
+    static let hoverShadowMargin: CGFloat = 12
     /// Rayon des coins en mode déplié.
     static let expandedCornerRadius: CGFloat = 24
 

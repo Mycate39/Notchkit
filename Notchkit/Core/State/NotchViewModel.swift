@@ -26,6 +26,12 @@ final class NotchViewModel {
         NotchLayout.appearance = new
         withAnimation(NotchLayout.spring) { appearance = new }
     }
+    /// Souris au-dessus de l'encoche (pour l'ombre de survol, avant l'ouverture).
+    private(set) var isHovering = false
+
+    /// Petite ombre sous l'encoche repliée quand la souris la survole.
+    var showsHoverShadow: Bool { isHovering && !isExpanded }
+
     /// Des fichiers sont glissés au-dessus de l'encoche : elle affiche les zones de dépôt.
     private(set) var isDropMode = false
     /// Zone de dépôt survolée.
@@ -81,9 +87,13 @@ final class NotchViewModel {
 
     var panelSize: CGSize {
         _ = appearance
-        return NotchLayout.panelSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent,
+        let size = NotchLayout.panelSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent,
                               sideWidth: compactSideWidth, alertSize: currentAlert?.expandedSize,
                               island: isIsland)
+        // Place autour de la forme pour que l'ombre de survol ne soit pas coupée par la fenêtre.
+        guard showsHoverShadow else { return size }
+        let margin = NotchLayout.hoverShadowMargin
+        return CGSize(width: size.width + margin * 2, height: size.height + margin)
     }
 
     // MARK: - Géométrie
@@ -108,6 +118,9 @@ final class NotchViewModel {
     }
 
     func hoverChanged(isInside: Bool) {
+        if isInside != isHovering {
+            withAnimation(.easeOut(duration: 0.18)) { isHovering = isInside }
+        }
         if !isInside && isHeld { return }
         if isInside && isExpansionBlocked && !isExpanded { return }
         hoverTask?.cancel()

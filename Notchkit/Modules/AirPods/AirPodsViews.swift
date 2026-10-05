@@ -116,8 +116,8 @@ private struct BatteryLevelsView: View {
     var body: some View {
         HStack(spacing: 8) {
             if let main = battery.main, battery.left == nil, battery.right == nil { level("", main) }
-            if let left = battery.left { level("G", left) }
-            if let right = battery.right { level("D", right) }
+            if let left = battery.left { level(String(localized: "G", comment: "Écouteur gauche (Left)"), left) }
+            if let right = battery.right { level(String(localized: "D", comment: "Écouteur droit (Right)"), right) }
             if let caseLevel = battery.caseLevel { level(String(localized: "Boîtier"), caseLevel) }
         }
         .font(.system(size: 9, weight: .semibold).monospacedDigit())

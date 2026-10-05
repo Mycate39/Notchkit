@@ -102,7 +102,10 @@ struct ClaudeStatusLineTests {
         ]]
         let limits = try #require(ClaudeRateLimits(statusJSON: json, at: now))
         #expect(limits.fiveHour?.fraction(at: now) == 0.35)
-        #expect(limits.statusLineText(at: now) == "Session 35 % · Semaine 23 %")
+        // Texte traduit selon la langue du système : on vérifie les chiffres et la séparation.
+        let line = limits.statusLineText(at: now)
+        #expect(line.hasPrefix("Session 35"))
+        #expect(line.contains(" · ") && line.contains("23"))
 
         // Après la réinitialisation de la session, elle repart de zéro.
         #expect(limits.fiveHour?.fraction(at: Date(timeIntervalSince1970: 1_020_000)) == 0)

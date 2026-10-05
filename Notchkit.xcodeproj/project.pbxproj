@@ -22,6 +22,7 @@
 		142311648FCB68B6377E815E /* shuffle.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C15E810C63DBBAA6AD2F11 /* shuffle.m */; };
 		14B1C0436FB41EA321F96C8F /* ClipboardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2781BAED0868E8CA890510 /* ClipboardItem.swift */; };
 		18F87A8929EA0A928A08E08D /* ClockModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12CD8AFBB2574643418518B /* ClockModule.swift */; };
+		193A99D444FE4A6B2A2FCBB7 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 39CD37F30EF339C02ECF8FDC /* InfoPlist.xcstrings */; };
 		1C6A5C7809598012656141D5 /* WidgetsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D1FCC02B4ACF20842E1E6B /* WidgetsTests.swift */; };
 		1CDA13E5F9845A313287E1B8 /* AudioSpectrumMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8919AB6ED390FDA70C4B9EA7 /* AudioSpectrumMonitor.swift */; };
 		1F165902D58592E6CFEAE8BB /* keys.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3572EC44002A80A034CBF1 /* keys.m */; };
@@ -212,6 +213,7 @@
 		37C474C3B54576120030842F /* NotchHostingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchHostingView.swift; sourceTree = "<group>"; };
 		37E7FA6BA5FFA9983A5E8344 /* AssistantModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantModule.swift; sourceTree = "<group>"; };
 		38A70194D570981FFAA6853D /* ModuleRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleRegistry.swift; sourceTree = "<group>"; };
+		39CD37F30EF339C02ECF8FDC /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		39D9454F2B90F4202312E9B9 /* SpectrumAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumAnalyzer.swift; sourceTree = "<group>"; };
 		3A3B538A66C6B3FB6E49A96A /* AirPodsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPodsModule.swift; sourceTree = "<group>"; };
 		3C7676B52E8B648F97985269 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
@@ -352,6 +354,7 @@
 			children = (
 				6704D0B10B983BEF736F0E06 /* Assets.xcassets */,
 				507E2940CE6F0CA716BF8DBB /* Info.plist */,
+				39CD37F30EF339C02ECF8FDC /* InfoPlist.xcstrings */,
 				98FB71F04AAECE1E8BD0926A /* Localizable.xcstrings */,
 				51C6F4A15A7C1F5EED24D94C /* Notchkit.entitlements */,
 			);
@@ -956,10 +959,11 @@
 			};
 			buildConfigurationList = 2ADDA800559FC8A56C396D43 /* Build configuration list for PBXProject "Notchkit" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = fr;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				Base,
+				en,
 				fr,
 			);
 			mainGroup = E28A4F5695DDE5DDE25C6F7B;
@@ -981,6 +985,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				51B5BB1B342B747110C0A0C0 /* Assets.xcassets in Resources */,
+				193A99D444FE4A6B2A2FCBB7 /* InfoPlist.xcstrings in Resources */,
 				89645F2C235F1A1C71CD6FAE /* LICENSE.txt in Resources */,
 				A332BE0B606743A7032D6F14 /* Localizable.xcstrings in Resources */,
 				9534909608C6D366FB3BCE9F /* mediaremote-adapter.pl in Resources */,

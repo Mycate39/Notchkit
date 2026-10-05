@@ -1,36 +1,35 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
-    "" : {
-
-    },
-    "·" : {
-
-    },
-    "« %@ »" : {
-
-    },
-    "« Réduire les animations » est activé dans macOS : les animations sont désactivées." : {
-
-    },
-    "%@ · %@" : {
+    "" : {},
+    "%@ (avec encoche)" : {
       "localizations" : {
-        "fr" : {
+        "en" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ · %2$@"
+            "state" : "translated",
+            "value" : "%@ (with notch)"
           }
         }
       }
     },
-    "%@ (avec encoche)" : {
-
-    },
     "%@ (débranché)" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ (unplugged)"
+          }
+        }
+      }
     },
     "%@ / %lld de largeur" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ / %lld wide"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "new",
@@ -40,10 +39,23 @@
       }
     },
     "%@ restantes" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ remaining"
+          }
+        }
+      }
     },
     "%@ utilisés%@ (chiffres transmis par Claude Code)." : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ used%@ (figures reported by Claude Code)."
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "new",
@@ -52,8 +64,30 @@
         }
       }
     },
+    "%@ · %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ · %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ · %2$@"
+          }
+        }
+      }
+    },
     "%@:%@" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@:%@"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "new",
@@ -63,631 +97,2024 @@
       }
     },
     "%lld" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        }
+      }
     },
     "%lld %%" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld%%"
+          }
+        }
+      }
     },
     "%lld fichiers" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld files"
+          }
+        }
+      }
     },
     "%lld min" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min"
+          }
+        }
+      }
     },
     "%lld modèles disponibles" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld models available"
+          }
+        }
+      }
     },
     "%lld pt" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld pt"
+          }
+        }
+      }
     },
     "%lld s après un changement d'app" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld s after an app switch"
+          }
+        }
+      }
     },
     "+%lld" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "+%lld"
+          }
+        }
+      }
     },
     "+1" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "+1"
+          }
+        }
+      }
     },
     "0:00" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "0:00"
+          }
+        }
+      }
     },
     "5 min" : {
-
-    },
-    "À propos" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5 min"
+          }
+        }
+      }
     },
     "Accès au presse-papiers autorisé" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clipboard access allowed"
+          }
+        }
+      }
     },
     "Accès au presse-papiers refusé : autorisez Notchkit dans Réglages Système > Confidentialité et sécurité > Coller depuis d'autres apps." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clipboard access denied: allow Notchkit in System Settings > Privacy & Security > Paste from Other Apps."
+          }
+        }
+      }
     },
     "Accès requis" : {
-
-    },
-    "Activé" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Access required"
+          }
+        }
+      }
     },
     "Activer" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn On"
+          }
+        }
+      }
     },
     "Activez des modules dans les réglages." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn on modules in Settings."
+          }
+        }
+      }
     },
     "Activez le module pour afficher ses réglages." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn on the module to see its settings."
+          }
+        }
+      }
     },
     "Activité de Claude Code en direct, messages depuis l'encoche et utilisation estimée." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live Claude Code activity, messages from the notch, and estimated usage."
+          }
+        }
+      }
     },
     "Activités live" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live Activities"
+          }
+        }
+      }
+    },
+    "Activé" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On"
+          }
+        }
+      }
     },
     "Adresse de l'API" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "API address"
+          }
+        }
+      }
     },
     "Adresse du fournisseur invalide." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid provider address."
+          }
+        }
+      }
     },
     "Affiche l'heure et la date." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shows the time and date."
+          }
+        }
+      }
     },
     "Affiche la progression des téléchargements de Brave, Chrome, Safari et Firefox. macOS demande l'accès au dossier Téléchargements la première fois." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shows download progress from Brave, Chrome, Safari, and Firefox. macOS asks for access to the Downloads folder the first time."
+          }
+        }
+      }
     },
     "Affiche une fausse encoche sur les écrans qui n'en ont pas, pour tester le rendu." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shows a fake notch on displays without one, to preview the look."
+          }
+        }
+      }
     },
     "Afficher dans l'encoche repliée" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show in the collapsed notch"
+          }
+        }
+      }
     },
     "Afficher dans le Finder" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show in Finder"
+          }
+        }
+      }
     },
     "Afficher l'activité quand l'encoche est repliée" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show activity when the notch is collapsed"
+          }
+        }
+      }
     },
     "Afficher l'encoche sur" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show the notch on"
+          }
+        }
+      }
     },
     "Afficher l'heure quand l'encoche est repliée" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show the time when the notch is collapsed"
+          }
+        }
+      }
     },
     "Afficher l'icône de l'app sur la pochette" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show the app icon on the artwork"
+          }
+        }
+      }
     },
     "Afficher la température quand l'encoche est repliée" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show the temperature when the notch is collapsed"
+          }
+        }
+      }
     },
     "Afficher le morceau quand l'encoche est repliée" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show the track when the notch is collapsed"
+          }
+        }
+      }
     },
     "Afficher le nombre de fichiers quand l'encoche est repliée" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show the file count when the notch is collapsed"
+          }
+        }
+      }
     },
     "Afficher les événements « journée entière »" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show all-day events"
+          }
+        }
+      }
     },
     "Afficher une alerte de test" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show a test alert"
+          }
+        }
+      }
     },
     "Agenda, minuteurs, presse-papiers et étagère." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calendar, timers, clipboard, and shelf."
+          }
+        }
+      }
     },
     "AirPods et casques" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AirPods & Headphones"
+          }
+        }
+      }
     },
     "Ajouter cinq minutes" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add five minutes"
+          }
+        }
+      }
     },
     "Ajouter une minute" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add one minute"
+          }
+        }
+      }
     },
     "Ajoutez votre clé API pour discuter avec l'assistant." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add your API key to chat with the assistant."
+          }
+        }
+      }
     },
     "Alerte de batterie faible (20 % et 10 %)" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Low battery alert (20% and 10%)"
+          }
+        }
+      }
     },
     "Alerte quand Claude a terminé" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alert when Claude is done"
+          }
+        }
+      }
     },
     "Analyse du son active" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sound analysis active"
+          }
+        }
+      }
     },
     "Analyse le son joué par le Mac pour animer les barres. macOS demande l'autorisation « Enregistrement audio du système » et affiche un indicateur pendant l'écoute. Le son n'est ni enregistré ni envoyé." : {
-
-    },
-    "Animation à la connexion" : {
-
-    },
-    "Animation à la connexion de vos AirPods ou d'un casque Bluetooth, et appareil connecté en un coup d'œil." : {
-
-    },
-    "Animation à la déconnexion" : {
-
-    },
-    "Animation au branchement et au débranchement" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Analyzes the sound playing on your Mac to animate the bars. macOS asks for “System Audio Recording” permission and shows an indicator while listening. Audio is never recorded or sent anywhere."
+          }
+        }
+      }
     },
     "Animation Face ID au déverrouillage du Mac" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Face ID animation when unlocking the Mac"
+          }
+        }
+      }
     },
-    "Animation pendant une demande de mot de passe" : {
-
+    "Animation au branchement et au débranchement" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animation when plugging in and unplugging"
+          }
+        }
+      }
     },
     "Animation pendant une demande Touch ID" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animation during a Touch ID prompt"
+          }
+        }
+      }
+    },
+    "Animation pendant une demande de mot de passe" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animation during a password prompt"
+          }
+        }
+      }
+    },
+    "Animation à la connexion" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animation on connect"
+          }
+        }
+      }
+    },
+    "Animation à la connexion de vos AirPods ou d'un casque Bluetooth, et appareil connecté en un coup d'œil." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An animation when your AirPods or Bluetooth headphones connect, and the connected device at a glance."
+          }
+        }
+      }
+    },
+    "Animation à la déconnexion" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animation on disconnect"
+          }
+        }
+      }
     },
     "Animations" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animations"
+          }
+        }
+      }
     },
     "Animations au ralenti (×8)" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Slow-motion animations (×8)"
+          }
+        }
+      }
     },
     "Animations de déverrouillage actives" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlock animations active"
+          }
+        }
+      }
     },
     "Animations façon Face ID au déverrouillage, pendant Touch ID et pendant la saisie d'un mot de passe." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Face ID–style animations when unlocking, during Touch ID, and while typing a password."
+          }
+        }
+      }
     },
     "Animations visuelles uniquement : aucune reconnaissance faciale. macOS n'indique pas comment la session a été déverrouillée et rien ne peut s'afficher sur l'écran verrouillé : l'animation Face ID se joue juste après le déverrouillage." : {
-
-    },
-    "Annulé" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visual animations only: no face recognition. macOS doesn't say how the session was unlocked and nothing can appear on the lock screen, so the Face ID animation plays right after unlocking."
+          }
+        }
+      }
     },
     "Annuler" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
     },
     "Annuler la dernière disposition" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Undo last layout"
+          }
+        }
+      }
     },
-    "Aperçu : demande de mot de passe" : {
-
+    "Annulé" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Canceled"
+          }
+        }
+      }
     },
     "Aperçu : demande Touch ID" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preview: Touch ID prompt"
+          }
+        }
+      }
+    },
+    "Aperçu : demande de mot de passe" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preview: password prompt"
+          }
+        }
+      }
     },
     "Aperçu : déverrouillage Face ID" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preview: Face ID unlock"
+          }
+        }
+      }
     },
     "Apparence" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appearance"
+          }
+        }
+      }
     },
     "Appliquer" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apply"
+          }
+        }
+      }
     },
     "Appliquer la disposition « %@ » ?" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apply the “%@” layout?"
+          }
+        }
+      }
     },
     "Après chaque réponse de Claude, vous pouvez encore lui écrire depuis l'encoche pendant ce délai : il repart aussitôt. Pendant ce temps, Claude Code l'affiche comme « en cours » (Échap pour arrêter)." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After each reply from Claude, you can still write to it from the notch during this time and it picks right back up. Meanwhile, Claude Code shows it as “running” (press Esc to stop)."
+          }
+        }
+      }
     },
     "Arrêter" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stop"
+          }
+        }
+      }
     },
     "Assistant" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Assistant"
+          }
+        }
+      }
     },
     "Assistant IA" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI Assistant"
+          }
+        }
+      }
     },
     "Au travail" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Working"
+          }
+        }
+      }
     },
     "Aucun" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None"
+          }
+        }
+      }
     },
     "Aucun casque connecté" : {
-
-    },
-    "Aucun événement aujourd'hui ni demain" : {
-
-    },
-    "Aucun modèle trouvé" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No headphones connected"
+          }
+        }
+      }
     },
     "Aucun module actif" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No active modules"
+          }
+        }
+      }
+    },
+    "Aucun modèle trouvé" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No models found"
+          }
+        }
+      }
     },
     "Aucun résultat" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No results"
+          }
+        }
+      }
     },
     "Aucun son capté : l'autorisation a peut-être été refusée." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No sound captured: permission may have been denied."
+          }
+        }
+      }
+    },
+    "Aucun événement aujourd'hui ni demain" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No events today or tomorrow"
+          }
+        }
+      }
     },
     "Aucune" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None"
+          }
+        }
+      }
     },
     "Aucune activité en cours" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No activity in progress"
+          }
+        }
+      }
     },
     "Aucune app" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No app"
+          }
+        }
+      }
     },
     "Aucune batterie détectée" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No battery detected"
+          }
+        }
+      }
     },
     "Aucune lecture" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing playing"
+          }
+        }
+      }
     },
     "Aucune lecture en cours" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing playing"
+          }
+        }
+      }
     },
     "Aucune session d'utilisation en cours" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No usage session in progress"
+          }
+        }
+      }
     },
     "Audio (M4A)" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Audio (M4A)"
+          }
+        }
+      }
     },
     "Audio (MP3)" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Audio (MP3)"
+          }
+        }
+      }
     },
     "Automatique" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatic"
+          }
+        }
+      }
     },
     "Autorisation Accessibilité nécessaire" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accessibility permission required"
+          }
+        }
+      }
     },
     "Autoriser l'accès" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow Access"
+          }
+        }
+      }
     },
     "Autoriser l'accès aux calendriers…" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow Calendar Access…"
+          }
+        }
+      }
     },
     "Autoriser la localisation…" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow Location…"
+          }
+        }
+      }
     },
     "Autoriser…" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow…"
+          }
+        }
+      }
     },
     "Averses" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Showers"
+          }
+        }
+      }
     },
     "Averses de neige" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Snow showers"
+          }
+        }
+      }
     },
     "Barres réactives au son (temps réel)" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sound-reactive bars (real time)"
+          }
+        }
+      }
     },
     "Batterie" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery"
+          }
+        }
+      }
     },
     "Batterie : simuler la batterie faible" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery: simulate low battery"
+          }
+        }
+      }
     },
     "Batterie : simuler le branchement" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery: simulate plugging in"
+          }
+        }
+      }
     },
     "Batterie : simuler le débranchement" : {
-
-    },
-    "Boîtier" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery: simulate unplugging"
+          }
+        }
+      }
     },
     "Bonjour ! Posez-moi une question." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hi! Ask me anything."
+          }
+        }
+      }
     },
     "Bouton « ◀ App » pour revenir à l'app d'avant, comme sur iPhone." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A “◀ App” button to go back to the previous app, like on iPhone."
+          }
+        }
+      }
+    },
+    "Boîtier" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Case"
+          }
+        }
+      }
     },
     "Branchée" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plugged in"
+          }
+        }
+      }
     },
     "Branchée, charge en pause" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plugged in, charging paused"
+          }
+        }
+      }
     },
     "Brouillard" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fog"
+          }
+        }
+      }
     },
     "Bruine" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drizzle"
+          }
+        }
+      }
     },
     "Bruine verglaçante" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Freezing drizzle"
+          }
+        }
+      }
     },
     "Calcul de l'autonomie…" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estimating battery life…"
+          }
+        }
+      }
     },
     "Calcul du temps de charge…" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estimating charge time…"
+          }
+        }
+      }
     },
     "Calendrier" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calendar"
+          }
+        }
+      }
     },
     "Ce module fonctionne en arrière-plan, sans carte dans l'encoche." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This module runs in the background, without a card in the notch."
+          }
+        }
+      }
     },
     "Cette sortie audio n'a pas de volume réglable." : {
-
-    },
-    "Chargée" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This audio output has no adjustable volume."
+          }
+        }
+      }
     },
     "Chargement…" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading…"
+          }
+        }
+      }
     },
     "Charger la liste" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Load List"
+          }
+        }
+      }
+    },
+    "Chargée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Charged"
+          }
+        }
+      }
     },
     "Cherche sur le web « %@ »" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Searches the web for “%@”"
+          }
+        }
+      }
     },
     "Chicago" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chicago"
+          }
+        }
+      }
     },
     "Choisir" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose"
+          }
+        }
+      }
     },
     "Choisir une durée précise" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose an exact duration"
+          }
+        }
+      }
     },
     "Choisir une ville…" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose a city…"
+          }
+        }
+      }
     },
     "Ciel dégagé" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear sky"
+          }
+        }
+      }
     },
     "Claude (Anthropic)" : {
-
-    },
-    "Claude a terminé" : {
-
-    },
-    "Claude attend votre accord" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude (Anthropic)"
+          }
+        }
+      }
     },
     "Claude Code" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code"
+          }
+        }
+      }
     },
     "Claude Code est inactif" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code is idle"
+          }
+        }
+      }
     },
     "Claude Code, activités, presse-papiers et étagère." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code, activities, clipboard, and shelf."
+          }
+        }
+      }
+    },
+    "Claude a terminé" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude is done"
+          }
+        }
+      }
+    },
+    "Claude attend votre accord" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude is waiting for your approval"
+          }
+        }
+      }
     },
     "Claude est à l'arrêt : message remis avec votre prochaine demande" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude has stopped: message delivered with your next request"
+          }
+        }
+      }
     },
     "Claude travaille" : {
-
-    },
-    "Clé API" : {
-
-    },
-    "Clé API manquante : ajoutez-la dans les réglages de l'assistant." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude is working"
+          }
+        }
+      }
     },
     "Cliquer pour copier" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Click to copy"
+          }
+        }
+      }
     },
     "Cliquez pour changer la taille, glissez pour déplacer" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Click to change the size, drag to move"
+          }
+        }
+      }
+    },
+    "Clé API" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "API Key"
+          }
+        }
+      }
+    },
+    "Clé API manquante : ajoutez-la dans les réglages de l'assistant." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Missing API key: add it in the assistant's settings."
+          }
+        }
+      }
     },
     "Coller la clé" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paste the key"
+          }
+        }
+      }
     },
     "Coller un lien de vidéo" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paste a video link"
+          }
+        }
+      }
     },
     "Collez un lien de vidéo puis appuyez sur Entrée." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paste a video link, then press Return."
+          }
+        }
+      }
     },
     "Compacte" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compact"
+          }
+        }
+      }
     },
     "Compatible OpenAI" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OpenAI-compatible"
+          }
+        }
+      }
     },
     "Conditions actuelles et prévisions des prochaines heures (Open-Meteo)." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current conditions and forecast for the next few hours (Open-Meteo)."
+          }
+        }
+      }
     },
     "Conditions inconnues" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown conditions"
+          }
+        }
+      }
     },
     "Configurer…" : {
-
-    },
-    "Connectés" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Set Up…"
+          }
+        }
+      }
     },
     "Connectez Claude Code" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connect Claude Code"
+          }
+        }
+      }
+    },
+    "Connectés" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connected"
+          }
+        }
+      }
     },
     "Conserver l'historique après le redémarrage de l'app" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keep history after the app restarts"
+          }
+        }
+      }
     },
     "Consulte %@" : {
-
-    },
-    "Copié" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visits %@"
+          }
+        }
+      }
     },
     "Copier" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy"
+          }
+        }
+      }
     },
     "Copies" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copies"
+          }
+        }
+      }
     },
     "Copiez du texte, une image ou des fichiers : ils apparaîtront ici." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy text, an image, or files: they'll show up here."
+          }
+        }
+      }
+    },
+    "Copié" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copied"
+          }
+        }
+      }
     },
     "Couleur d'accent" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accent color"
+          }
+        }
+      }
     },
     "Couleur du fond" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Background color"
+          }
+        }
+      }
     },
     "Couleur personnalisée (onglets, barres de progression)" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Custom color (tabs, progress bars)"
+          }
+        }
+      }
     },
     "Couleurs" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Colors"
+          }
+        }
+      }
     },
     "Couvert" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Overcast"
+          }
+        }
+      }
+    },
+    "D" : {
+      "comment" : "Écouteur droit (Right)",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "R"
+          }
+        }
+      }
     },
     "Dans l'encoche" : {
-
-    },
-    "Débogage" : {
-
-    },
-    "Début" : {
-
-    },
-    "Déconnectés" : {
-
-    },
-    "Délai d'ouverture" : {
-
-    },
-    "Délai de fermeture" : {
-
-    },
-    "Délai pour répondre depuis l'encoche" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In the notch"
+          }
+        }
+      }
     },
     "Demain" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tomorrow"
+          }
+        }
+      }
     },
     "Demander quelque chose…" : {
-
-    },
-    "Démarrer" : {
-
-    },
-    "Déplacer à droite" : {
-
-    },
-    "Déplacer à gauche" : {
-
-    },
-    "Déplier / replier l'encoche" : {
-
-    },
-    "Déposez des fichiers sur l'encoche pour les garder à portée de main ou les envoyer par AirDrop." : {
-
-    },
-    "Déposez un widget ici pour créer une nouvelle page" : {
-
-    },
-    "Désactivé" : {
-
-    },
-    "Désépingler" : {
-
-    },
-    "Désinstaller" : {
-
-    },
-    "Détecter toutes les apps (expérimental)" : {
-
-    },
-    "Développement" : {
-
-    },
-    "Développeur" : {
-
-    },
-    "Déverrouillage" : {
-
-    },
-    "Déverrouillé" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ask anything…"
+          }
+        }
+      }
     },
     "Disposition" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Layout"
+          }
+        }
+      }
     },
     "Dispositions prêtes à l'emploi" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ready-made layouts"
+          }
+        }
+      }
     },
     "Données météo : Open-Meteo.com (licence CC BY 4.0)." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weather data: Open-Meteo.com (CC BY 4.0 license)."
+          }
+        }
+      }
     },
     "Données météo fournies par Open-Meteo.com, sous licence Creative Commons Attribution 4.0 (CC BY 4.0)." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weather data provided by Open-Meteo.com, under the Creative Commons Attribution 4.0 license (CC BY 4.0)."
+          }
+        }
+      }
     },
     "Dossier de destination" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Destination folder"
+          }
+        }
+      }
     },
     "Dossier de destination : %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Destination folder: %@"
+          }
+        }
+      }
     },
     "Dossier où enregistrer les vidéos téléchargées" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folder for downloaded videos"
+          }
+        }
+      }
     },
     "Dubaï" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dubai"
+          }
+        }
+      }
     },
-    "Échec du téléchargement" : {
-
+    "Débogage" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Debug"
+          }
+        }
+      }
     },
-    "Économie d'énergie" : {
-
+    "Début" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
+          }
+        }
+      }
     },
-    "Écran" : {
-
+    "Déconnectés" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disconnected"
+          }
+        }
+      }
     },
-    "Écran principal" : {
-
+    "Délai d'ouverture" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open delay"
+          }
+        }
+      }
     },
-    "Écrire à Claude…" : {
-
+    "Délai de fermeture" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close delay"
+          }
+        }
+      }
     },
-    "Écrit %@" : {
-
+    "Délai pour répondre depuis l'encoche" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time to reply from the notch"
+          }
+        }
+      }
+    },
+    "Démarrer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
+          }
+        }
+      }
+    },
+    "Déplacer à droite" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Move Right"
+          }
+        }
+      }
+    },
+    "Déplacer à gauche" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Move Left"
+          }
+        }
+      }
+    },
+    "Déplier / replier l'encoche" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expand / collapse the notch"
+          }
+        }
+      }
+    },
+    "Déposez des fichiers sur l'encoche pour les garder à portée de main ou les envoyer par AirDrop." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drop files on the notch to keep them handy or send them with AirDrop."
+          }
+        }
+      }
+    },
+    "Déposez un widget ici pour créer une nouvelle page" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drop a widget here to create a new page"
+          }
+        }
+      }
+    },
+    "Désactivé" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Off"
+          }
+        }
+      }
+    },
+    "Désinstaller" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uninstall"
+          }
+        }
+      }
+    },
+    "Désépingler" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unpin"
+          }
+        }
+      }
+    },
+    "Détecter toutes les apps (expérimental)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detect all apps (experimental)"
+          }
+        }
+      }
+    },
+    "Développement" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Development"
+          }
+        }
+      }
+    },
+    "Développeur" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Developer"
+          }
+        }
+      }
+    },
+    "Déverrouillage" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlock"
+          }
+        }
+      }
+    },
+    "Déverrouillé" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlocked"
+          }
+        }
+      }
     },
     "Effacer l'historique" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear History"
+          }
+        }
+      }
     },
     "Effacer l'historique (sauf les éléments épinglés)" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear history (except pinned items)"
+          }
+        }
+      }
     },
     "Emplacement" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location"
+          }
+        }
+      }
     },
     "Empreinte de vérification introuvable." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verification checksum not found."
+          }
+        }
+      }
     },
     "En charge" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Charging"
+          }
+        }
+      }
     },
     "En cours · jusqu'à %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In progress · until %@"
+          }
+        }
+      }
     },
     "En mode encoche (réelle ou simulée), le fond reste toujours noir pour se fondre avec la découpe de l'écran : ce choix s'applique à la pastille flottante. « Verre » utilise le Liquid Glass de macOS 26." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In notch mode (real or simulated), the background always stays black to blend with the screen cutout: this choice applies to the floating pill. “Glass” uses macOS 26 Liquid Glass."
+          }
+        }
+      }
     },
     "En mode encoche, le fond reste noir pour se fondre avec la barre des menus, comme une vraie encoche. Le fond choisi s'applique à la pastille flottante : désactivez « Simuler une encoche » dans Général pour l'utiliser." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In notch mode, the background stays black to blend with the menu bar, like a real notch. The chosen background applies to the floating pill: turn off “Simulate a notch” in General to use it."
+          }
+        }
+      }
     },
     "En pause" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paused"
+          }
+        }
+      }
     },
     "En pause · %@" : {
-
-    },
-    "Enregistrée dans le trousseau" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paused · %@"
+          }
+        }
+      }
     },
     "Enregistrer" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
+          }
+        }
+      }
+    },
+    "Enregistrée dans le trousseau" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saved in the keychain"
+          }
+        }
+      }
     },
     "Envoyer" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send"
+          }
+        }
+      }
     },
     "Envoyer par AirDrop" : {
-
-    },
-    "Épingler" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send with AirDrop"
+          }
+        }
+      }
     },
     "Erreur %lld : %@" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error %lld: %@"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "new",
@@ -697,13 +2124,33 @@
       }
     },
     "Erreur inconnue" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown error"
+          }
+        }
+      }
     },
     "Essentiel" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Essentials"
+          }
+        }
+      }
     },
     "Estimation : %@%@. Comparée à votre plus grosse session observée." : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estimate: %@%@. Compared with your largest session so far."
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "new",
@@ -713,196 +2160,584 @@
       }
     },
     "Estimation locale : installez l'intégration (barre d'état) pour les chiffres réels." : {
-
-    },
-    "Étagère" : {
-
-    },
-    "Exécute : %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Local estimate: install the integration (status line) for the real figures."
+          }
+        }
+      }
     },
     "Exemples : https://api.openai.com/v1 · https://api.mistral.ai/v1 · http://localhost:11434/v1 (Ollama, sans clé)." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Examples: https://api.openai.com/v1 · https://api.mistral.ai/v1 · http://localhost:11434/v1 (Ollama, no key)."
+          }
+        }
+      }
+    },
+    "Exécute : %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Runs: %@"
+          }
+        }
+      }
     },
     "Face ID" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Face ID"
+          }
+        }
+      }
     },
     "Faites glisser des fichiers sur l'encoche : à gauche pour les garder ici, à droite pour les envoyer par AirDrop. Les fichiers ne sont ni copiés ni déplacés, l'étagère garde seulement un lien vers eux." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag files onto the notch: to the left to keep them here, to the right to send them with AirDrop. Files are neither copied nor moved; the shelf only keeps a link to them."
+          }
+        }
+      }
     },
     "Fermer" : {
-
-    },
-    "ffmpeg (facultatif : meilleure qualité, MP3) s'installe dans le Terminal avec « brew install ffmpeg ». Sur un Mac Intel, Homebrew peut devoir le compiler, ce qui est long." : {
-
-    },
-    "ffmpeg absent (qualité limitée, pas de MP3)" : {
-
-    },
-    "ffmpeg installé" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close"
+          }
+        }
+      }
     },
     "Fichier introuvable (déplacé ou supprimé)" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "File not found (moved or deleted)"
+          }
+        }
+      }
     },
     "Fluide" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Smooth"
+          }
+        }
+      }
     },
     "Fond de l'encoche" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notch background"
+          }
+        }
+      }
     },
     "Forte pluie" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heavy rain"
+          }
+        }
+      }
     },
     "Fortes averses" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heavy showers"
+          }
+        }
+      }
     },
     "Fortes chutes de neige" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heavy snowfall"
+          }
+        }
+      }
     },
     "Fournisseur" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Provider"
+          }
+        }
+      }
+    },
+    "G" : {
+      "comment" : "Écouteur gauche (Left)",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L"
+          }
+        }
+      }
     },
     "Garder dans l'étagère" : {
-
-    },
-    "Général" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keep on the Shelf"
+          }
+        }
+      }
     },
     "Glissez dans une page pour l'afficher" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag into a page to show it"
+          }
+        }
+      }
     },
     "Glissez des fichiers sur l'encoche pour les garder ici." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag files onto the notch to keep them here."
+          }
+        }
+      }
     },
     "Glissez les widgets pour les réordonner ou les changer de page. Cliquez sur un widget pour changer sa taille. Astuce : un clic droit sur un widget dans l'encoche offre les mêmes options." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag widgets to reorder them or move them to another page. Click a widget to change its size. Tip: right-clicking a widget in the notch offers the same options."
+          }
+        }
+      }
     },
     "Glissez pour récupérer le fichier · double-clic pour l'ouvrir" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag to take the file · double-click to open it"
+          }
+        }
+      }
     },
     "Glissez un widget ici pour le masquer." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag a widget here to hide it."
+          }
+        }
+      }
     },
     "Grains de neige" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Snow grains"
+          }
+        }
+      }
     },
     "Grand" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Large"
+          }
+        }
+      }
     },
     "Grande" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Large"
+          }
+        }
+      }
     },
     "Graphite" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Graphite"
+          }
+        }
+      }
+    },
+    "Général" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "General"
+          }
+        }
+      }
     },
     "Hauteur" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Height"
+          }
+        }
+      }
     },
     "Historique des derniers éléments copiés, à recopier d'un clic." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "History of recently copied items, ready to copy again with a click."
+          }
+        }
+      }
     },
     "Horloge" : {
-
-    },
-    "https://api.openai.com/v1" : {
-
-    },
-    "https://github.com/ungive/mediaremote-adapter" : {
-
-    },
-    "https://open-meteo.com" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clock"
+          }
+        }
+      }
     },
     "Image" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Image"
+          }
+        }
+      }
     },
     "Installation…" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Installing…"
+          }
+        }
+      }
     },
     "Installer" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Install"
+          }
+        }
+      }
     },
     "Installer l'intégration Claude Code ?" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Install the Claude Code integration?"
+          }
+        }
+      }
     },
     "Installer l'intégration…" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Install the Integration…"
+          }
+        }
+      }
     },
     "Installer yt-dlp ?" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Install yt-dlp?"
+          }
+        }
+      }
     },
     "Installer yt-dlp…" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Install yt-dlp…"
+          }
+        }
+      }
     },
     "Installer…" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Install…"
+          }
+        }
+      }
     },
     "Installez l'intégration pour suivre ce que fait Claude et lui écrire depuis l'encoche." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Install the integration to follow what Claude is doing and write to it from the notch."
+          }
+        }
+      }
     },
     "Intégration Claude Code installée" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code integration installed"
+          }
+        }
+      }
     },
     "Intégration Claude Code non installée" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code integration not installed"
+          }
+        }
+      }
     },
     "Intégration installée." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Integration installed."
+          }
+        }
+      }
     },
     "Intégration installée. Sauvegarde de vos réglages : %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Integration installed. Backup of your settings: %@"
+          }
+        }
+      }
     },
     "Intégration retirée." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Integration removed."
+          }
+        }
+      }
     },
     "Intégré (clé API)" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Built-in (API key)"
+          }
+        }
+      }
     },
     "Jour" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Day"
+          }
+        }
+      }
     },
     "L'accès aux calendriers est refusé." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calendar access was denied."
+          }
+        }
+      }
     },
     "L'activité apparaîtra ici dès que Claude Code travaillera." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activity will show up here as soon as Claude Code is working."
+          }
+        }
+      }
     },
     "L'analyse du son n'a pas pu démarrer : %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sound analysis couldn't start: %@"
+          }
+        }
+      }
     },
     "L'installation a échoué : %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Installation failed: %@"
+          }
+        }
+      }
     },
     "L'utilisation de l'API est facturée par le fournisseur sur votre compte API (séparément d'un abonnement Claude Pro/Max). La clé reste dans le trousseau de ce Mac. Avec Claude, si une demande est refusée par les filtres de sécurité d'un modèle récent, elle est automatiquement relancée sur un autre modèle Claude (« fallbacks »)." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "API usage is billed by the provider to your API account (separately from a Claude Pro/Max subscription). The key stays in this Mac's keychain. With Claude, if a recent model's safety filters decline a request, it's automatically retried on another Claude model (“fallbacks”)."
+          }
+        }
+      }
     },
     "L'utilisation réelle (session de 5 h et semaine) est transmise par Claude Code à sa barre d'état, à chaque message. En attendant ces données, Notchkit affiche une estimation calculée à partir des fichiers de session locaux." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Real usage (5-hour session and week) is sent by Claude Code to its status line with every message. Until that data arrives, Notchkit shows an estimate based on local session files."
+          }
+        }
+      }
     },
     "La recherche a échoué. Vérifiez votre connexion." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search failed. Check your connection."
+          }
+        }
+      }
     },
     "Lance un agent" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Launches an agent"
+          }
+        }
+      }
     },
     "Lancer Notchkit à l'ouverture de session" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Notchkit at login"
+          }
+        }
+      }
     },
     "Largeur" : {
-
-    },
-    "Le fichier ~/.claude/settings.json n'est pas un JSON valide. Corrigez-le ou supprimez-le, puis réessayez." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Width"
+          }
+        }
+      }
     },
     "Le fichier téléchargé est corrompu (empreinte différente). Réessayez." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The downloaded file is corrupted (checksum mismatch). Try again."
+          }
+        }
+      }
+    },
+    "Le fichier ~/.claude/settings.json n'est pas un JSON valide. Corrigez-le ou supprimez-le, puis réessayez." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The file ~/.claude/settings.json isn't valid JSON. Fix or delete it, then try again."
+          }
+        }
+      }
     },
     "Le modèle a refusé de répondre à cette demande." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The model declined to answer this request."
+          }
+        }
+      }
     },
     "Le serveur local n'a pas pu démarrer sur le port %@ : %@" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The local server couldn't start on port %@: %@"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "new",
@@ -912,208 +2747,683 @@
       }
     },
     "Le site officiel s'ouvre dans une fenêtre sous l'encoche : connectez-vous une fois avec votre compte, la session est conservée. Votre abonnement (ChatGPT Plus, Gemini Advanced, SuperGrok…) s'applique normalement." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The official website opens in a window below the notch: sign in once with your account and the session is kept. Your subscription (ChatGPT Plus, Gemini Advanced, SuperGrok…) applies as usual."
+          }
+        }
+      }
     },
     "Le volume est réglé par une interface publique. La luminosité de l'écran intégré passe par une interface non officielle d'Apple (DisplayServices) : si une mise à jour de macOS la modifie, les touches de luminosité retrouvent simplement leur comportement normal. Les écrans externes et les sorties sans volume réglable gardent l'indicateur de macOS." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volume uses a public interface. Built-in display brightness goes through an unofficial Apple interface (DisplayServices): if a macOS update changes it, the brightness keys simply go back to their normal behavior. External displays and outputs without adjustable volume keep the macOS indicator."
+          }
+        }
+      }
     },
     "Lecture" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Play"
+          }
+        }
+      }
     },
     "Lecture en grand, casque et volume à portée de main." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Big playback, headphones and volume close at hand."
+          }
+        }
+      }
     },
     "Les contenus marqués confidentiels (mots de passe copiés depuis un gestionnaire) ne sont jamais enregistrés. L'historique reste sur ce Mac." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Content marked as confidential (passwords copied from a password manager) is never saved. History stays on this Mac."
+          }
+        }
+      }
     },
     "Les modules affichés, leurs pages et leurs tailles seront remplacés. Vous pourrez revenir en arrière." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The displayed modules, their pages, and their sizes will be replaced. You can undo this."
+          }
+        }
+      }
     },
     "Licences des composants tiers" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Third-party licenses"
+          }
+        }
+      }
     },
     "Lit %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reads %@"
+          }
+        }
+      }
     },
     "Localisation autorisée" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location allowed"
+          }
+        }
+      }
     },
     "Localisation refusée : la ville choisie ci-dessous est utilisée. Vous pouvez l'autoriser dans Réglages Système > Confidentialité et sécurité > Service de localisation." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location denied: the city chosen below is used. You can allow it in System Settings > Privacy & Security > Location Services."
+          }
+        }
+      }
     },
     "Londres" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "London"
+          }
+        }
+      }
     },
     "Los Angeles" : {
-
-    },
-    "macOS demandera l'autorisation lors de la prochaine copie." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los Angeles"
+          }
+        }
+      }
     },
     "Masquer ce widget" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide This Widget"
+          }
+        }
+      }
     },
     "MediaRemoteAdapter" : {
-
-    },
-    "Médias" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MediaRemoteAdapter"
+          }
+        }
+      }
     },
     "Message en attente : il sera remis avec votre prochaine demande dans Claude Code." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Message pending: it will be delivered with your next request in Claude Code."
+          }
+        }
+      }
     },
     "Message en attente : remis à la prochaine étape de Claude." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Message pending: delivered at Claude's next step."
+          }
+        }
+      }
     },
     "Met à jour sa liste de tâches" : {
-
-    },
-    "Météo" : {
-
-    },
-    "Météo indisponible" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updates its to-do list"
+          }
+        }
+      }
     },
     "Mettez à jour l'intégration" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update the integration"
+          }
+        }
+      }
     },
     "Mettre à jour l'intégration" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update Integration"
+          }
+        }
+      }
     },
     "Mini" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mini"
+          }
+        }
+      }
     },
     "Minuteur" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Timer"
+          }
+        }
+      }
     },
     "Minuteurs, téléchargements en cours et progression de tâches, plusieurs à la fois." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Timers, downloads in progress, and task progress, several at once."
+          }
+        }
+      }
     },
     "Mise à jour de l'intégration nécessaire" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Integration update required"
+          }
+        }
+      }
     },
     "Mode" : {
-
-    },
-    "Modèle" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mode"
+          }
+        }
+      }
     },
     "Modifie %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edits %@"
+          }
+        }
+      }
     },
     "Modifier la disposition…" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Layout…"
+          }
+        }
+      }
     },
     "Modules" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modules"
+          }
+        }
+      }
+    },
+    "Modèle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Model"
+          }
+        }
+      }
     },
     "Montréal" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Montreal"
+          }
+        }
+      }
     },
     "Morceau en cours et commandes de lecture (Deezer, Spotify, Music, navigateurs…)." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current track and playback controls (Deezer, Spotify, Music, browsers…)."
+          }
+        }
+      }
     },
     "Morceau précédent" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previous Track"
+          }
+        }
+      }
     },
     "Morceau suivant" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next Track"
+          }
+        }
+      }
     },
     "Moscou" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moscow"
+          }
+        }
+      }
     },
     "Mot de passe" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password"
+          }
+        }
+      }
     },
     "Moyen" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medium"
+          }
+        }
+      }
     },
     "Mumbai" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mumbai"
+          }
+        }
+      }
     },
     "Musique" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Music"
+          }
+        }
+      }
     },
     "Musique, heure et batterie, rien de plus." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Music, time, and battery, nothing more."
+          }
+        }
+      }
     },
-    "Nécessaire pour Deezer, les navigateurs et la plupart des lecteurs. Utilise une interface non officielle d'Apple qui peut cesser de fonctionner après une mise à jour de macOS ; Music et Spotify restent alors pris en charge." : {
-
+    "Médias" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Media"
+          }
+        }
+      }
     },
-    "Nécessite macOS 14.2 ou plus récent." : {
-
+    "Météo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weather"
+          }
+        }
+      }
+    },
+    "Météo indisponible" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weather unavailable"
+          }
+        }
+      }
     },
     "Neige" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Snow"
+          }
+        }
+      }
     },
     "New York" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New York"
+          }
+        }
+      }
     },
     "Niveau, état de charge et animation au branchement." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Level, charging status, and an animation when plugging in."
+          }
+        }
+      }
     },
     "Noir" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Black"
+          }
+        }
+      }
     },
     "Non connecté" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not connected"
+          }
+        }
+      }
     },
     "Notchkit" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit"
+          }
+        }
+      }
     },
     "Notchkit a besoin d'accéder à vos calendriers pour afficher vos événements." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit needs access to your calendars to show your events."
+          }
+        }
+      }
     },
     "Notchkit va ajouter des hooks et une barre d'état dans ~/.claude/settings.json pour que Claude Code le prévienne de son activité et lui transmette votre utilisation réelle (connexion locale uniquement, protégée par un jeton). Vos réglages existants sont conservés et une copie de sauvegarde est faite. Les nouvelles sessions de Claude Code en tiendront compte." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit will add hooks and a status line to ~/.claude/settings.json so Claude Code notifies it of its activity and sends your real usage (local connection only, protected by a token). Your existing settings are kept and a backup copy is made. New Claude Code sessions will pick this up."
+          }
+        }
+      }
     },
     "Notchkit va télécharger le programme officiel yt-dlp pour macOS depuis GitHub (logiciel libre, environ 35 Mo), vérifier son empreinte, puis l'installer dans son dossier. Rien n'est modifié ailleurs sur votre Mac." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit will download the official yt-dlp program for macOS from GitHub (free software, about 35 MB), verify its checksum, and install it in its own folder. Nothing else on your Mac is changed."
+          }
+        }
+      }
     },
     "Nouvelle conversation" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Conversation"
+          }
+        }
+      }
     },
     "Nouvelle page" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Page"
+          }
+        }
+      }
+    },
+    "Nécessaire pour Deezer, les navigateurs et la plupart des lecteurs. Utilise une interface non officielle d'Apple qui peut cesser de fonctionner après une mise à jour de macOS ; Music et Spotify restent alors pris en charge." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Required for Deezer, browsers, and most players. Uses an unofficial Apple interface that may stop working after a macOS update; Music and Spotify remain supported."
+          }
+        }
+      }
+    },
+    "Nécessite macOS 14.2 ou plus récent." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Requires macOS 14.2 or later."
+          }
+        }
+      }
     },
     "Open-Meteo" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open-Meteo"
+          }
+        }
+      }
     },
     "Orage" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thunderstorm"
+          }
+        }
+      }
     },
     "Orage avec grêle" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thunderstorm with hail"
+          }
+        }
+      }
     },
     "Ouvrir" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open"
+          }
+        }
+      }
     },
     "Ouvrir %@" : {
-
-    },
-    "Ouvrir avec mon compte" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open %@"
+          }
+        }
+      }
     },
     "Ouvrir Calendrier" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Calendar"
+          }
+        }
+      }
+    },
+    "Ouvrir avec mon compte" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open with my account"
+          }
+        }
+      }
     },
     "Ouvrir dans le navigateur" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open in Browser"
+          }
+        }
+      }
     },
     "Ouvrir l'app qui joue" : {
-
-    },
-    "Ouvrir les réglages de confidentialité" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open the app that's playing"
+          }
+        }
+      }
     },
     "Ouvrir les Réglages Système" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open System Settings"
+          }
+        }
+      }
+    },
+    "Ouvrir les réglages de confidentialité" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Privacy Settings"
+          }
+        }
+      }
+    },
+    "PRO" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PRO"
+          }
+        }
+      }
     },
     "Page %lld" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Page %lld"
+          }
+        }
+      }
     },
     "Page %lld, position %lld" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Page %lld, position %lld"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "new",
@@ -1123,388 +3433,1464 @@
       }
     },
     "Page précédente" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previous Page"
+          }
+        }
+      }
     },
     "Page suivante" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next Page"
+          }
+        }
+      }
     },
     "Page trop chargée : les widgets seront rétrécis. Réduisez une taille ou déplacez un widget." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Page too full: widgets will be shrunk. Reduce a size or move a widget."
+          }
+        }
+      }
     },
     "Paris" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paris"
+          }
+        }
+      }
     },
     "Partiellement nuageux" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Partly cloudy"
+          }
+        }
+      }
     },
     "Pause" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pause"
+          }
+        }
+      }
     },
     "Personnalisé" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Custom"
+          }
+        }
+      }
     },
     "Personnalisée" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Custom"
+          }
+        }
+      }
     },
     "Petit" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Small"
+          }
+        }
+      }
     },
     "Peu nuageux" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostly clear"
+          }
+        }
+      }
     },
     "Pleine dans %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Full in %@"
+          }
+        }
+      }
     },
     "Pluie" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rain"
+          }
+        }
+      }
     },
     "Pluie faible" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Light rain"
+          }
+        }
+      }
     },
     "Pluie verglaçante" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Freezing rain"
+          }
+        }
+      }
     },
     "Port invalide" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid port"
+          }
+        }
+      }
     },
     "Posez une question depuis l'encoche (clé API), ou ouvrez ChatGPT, Gemini ou Grok avec votre compte." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ask a question from the notch (API key), or open ChatGPT, Gemini, or Grok with your account."
+          }
+        }
+      }
     },
     "Position" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Position"
+          }
+        }
+      }
     },
     "Position nécessaire pour la météo" : {
-
-    },
-    "Préparation…" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location needed for the weather"
+          }
+        }
+      }
     },
     "Presse-papiers" : {
-
-    },
-    "PRO" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clipboard"
+          }
+        }
+      }
     },
     "Prochains événements et rappel avant un rendez-vous." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upcoming events and a reminder before a meeting."
+          }
+        }
+      }
     },
     "Productivité" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Productivity"
+          }
+        }
+      }
+    },
+    "Préparation…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preparing…"
+          }
+        }
+      }
     },
     "Quitter Notchkit" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quit Notchkit"
+          }
+        }
+      }
     },
     "Rapide" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quick"
+          }
+        }
+      }
     },
     "Rappel dans l'encoche 10 minutes avant un événement" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reminder in the notch 10 minutes before an event"
+          }
+        }
+      }
     },
     "Rebondissante" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bouncy"
+          }
+        }
+      }
     },
     "Recharger" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reload"
+          }
+        }
+      }
     },
     "Recherche « %@ »" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Searches for “%@”"
+          }
+        }
+      }
     },
     "Rechercher" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search"
+          }
+        }
+      }
     },
     "Rechercher une ville" : {
-
-    },
-    "Réessayer" : {
-
-    },
-    "Réglages" : {
-
-    },
-    "Réglages > Modules > Vidéos" : {
-
-    },
-    "Réglages de Notchkit" : {
-
-    },
-    "Réglages…" : {
-
-    },
-    "Réinit. %@" : {
-
-    },
-    "Réinitialisation à %@" : {
-
-    },
-    "Réinitialiser la disposition" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search for a city"
+          }
+        }
+      }
     },
     "Relancer" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restart"
+          }
+        }
+      }
     },
     "Remplace l'indicateur de volume et de luminosité de macOS par un affichage dans l'encoche." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Replaces the macOS volume and brightness indicator with one in the notch."
+          }
+        }
+      }
     },
     "Remplacer l'indicateur de volume et de luminosité de macOS" : {
-
-    },
-    "Répondez pour qu'il continue" : {
-
-    },
-    "Réponse" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Replace the macOS volume and brightness indicator"
+          }
+        }
+      }
     },
     "Reprendre" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resume"
+          }
+        }
+      }
     },
     "Respectez les droits d'auteur : les conditions d'utilisation de YouTube interdisent de télécharger des vidéos sans autorisation. Réservez ce module à vos propres vidéos, aux contenus sous licence libre ou téléchargés avec l'accord de leurs auteurs." : {
-
-    },
-    "reste" : {
-
-    },
-    "Rétablir l'apparence par défaut" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Respect copyright: YouTube's terms of service forbid downloading videos without permission. Use this module only for your own videos, freely licensed content, or content downloaded with its creators' consent."
+          }
+        }
+      }
     },
     "Retirer" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove"
+          }
+        }
+      }
     },
     "Retirer de l'étagère" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove from Shelf"
+          }
+        }
+      }
     },
     "Retirer de la liste" : {
-
-    },
-    "Retour à l'app précédente" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove from List"
+          }
+        }
+      }
     },
     "Retour haptique" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haptic feedback"
+          }
+        }
+      }
     },
     "Retour haptique du trackpad" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trackpad haptic feedback"
+          }
+        }
+      }
+    },
+    "Retour à l'app précédente" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Back to the previous app"
+          }
+        }
+      }
     },
     "Revenir à %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Back to %@"
+          }
+        }
+      }
     },
     "Rien de prévu" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing scheduled"
+          }
+        }
+      }
     },
-    "s" : {
-
+    "Réessayer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try Again"
+          }
+        }
+      }
+    },
+    "Réglages" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        }
+      }
+    },
+    "Réglages > Modules > Vidéos" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings > Modules > Videos"
+          }
+        }
+      }
+    },
+    "Réglages de Notchkit" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit Settings"
+          }
+        }
+      }
+    },
+    "Réglages…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings…"
+          }
+        }
+      }
+    },
+    "Réinit. %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resets %@"
+          }
+        }
+      }
+    },
+    "Réinitialisation à %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resets at %@"
+          }
+        }
+      }
+    },
+    "Réinitialiser la disposition" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reset Layout"
+          }
+        }
+      }
+    },
+    "Répondez pour qu'il continue" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reply so it keeps going"
+          }
+        }
+      }
+    },
+    "Réponse" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reply"
+          }
+        }
+      }
+    },
+    "Rétablir l'apparence par défaut" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restore Default Appearance"
+          }
+        }
+      }
     },
     "Sans titre" : {
-
-    },
-    "São Paulo" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Untitled"
+          }
+        }
+      }
     },
     "Scripts et apps peuvent afficher une progression avec un lien, par exemple :\nopen \"notchkit://activity/update?id=build&title=Compilation&progress=40\"\nopen \"notchkit://activity/end?id=build\"\nopen \"notchkit://timer/start?minutes=5&title=Thé\"" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scripts and apps can show progress with a link, for example:\nopen \"notchkit://activity/update?id=build&title=Build&progress=40\"\nopen \"notchkit://activity/end?id=build\"\nopen \"notchkit://timer/start?minutes=5&title=Tea\""
+          }
+        }
+      }
     },
     "Second fuseau horaire" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Second time zone"
+          }
+        }
+      }
     },
     "Secteur" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Power adapter"
+          }
+        }
+      }
     },
     "Semaine" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Week"
+          }
+        }
+      }
     },
     "Semaine %lld %%" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Week %lld%%"
+          }
+        }
+      }
     },
     "Service" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Service"
+          }
+        }
+      }
     },
     "Session" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Session"
+          }
+        }
+      }
     },
     "Session %lld %%" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Session %lld%%"
+          }
+        }
+      }
     },
     "Shanghai" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shanghai"
+          }
+        }
+      }
     },
     "Simuler une encoche" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Simulate a notch"
+          }
+        }
+      }
     },
     "Singapour" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Singapore"
+          }
+        }
+      }
     },
     "Site officiel (compte)" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Official website (account)"
+          }
+        }
+      }
     },
     "Son à la fin d'un minuteur" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sound when a timer ends"
+          }
+        }
+      }
     },
     "Standard" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard"
+          }
+        }
+      }
     },
     "Style" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Style"
+          }
+        }
+      }
     },
     "Suivre les téléchargements" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Track downloads"
+          }
+        }
+      }
     },
     "Supprimer" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        }
+      }
     },
     "Sur batterie" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On battery"
+          }
+        }
+      }
     },
     "Survol" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hover"
+          }
+        }
+      }
     },
     "Sydney" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sydney"
+          }
+        }
+      }
     },
     "Système" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System"
+          }
+        }
+      }
+    },
+    "São Paulo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "São Paulo"
+          }
+        }
+      }
     },
     "Taille" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Size"
+          }
+        }
+      }
     },
     "Taille de l'encoche dépliée" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expanded notch size"
+          }
+        }
+      }
     },
     "Taille du widget" : {
-
-    },
-    "Téléchargement de yt-dlp… (environ 35 Mo)" : {
-
-    },
-    "Téléchargement terminé" : {
-
-    },
-    "Télécharger" : {
-
-    },
-    "Télécharger et installer" : {
-
-    },
-    "Téléchargez une vidéo ou son audio à partir d'un lien (avec yt-dlp)." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widget size"
+          }
+        }
+      }
     },
     "Temps restant pour répondre à Claude depuis l'encoche" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time left to reply to Claude from the notch"
+          }
+        }
+      }
     },
     "Terminé" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        }
+      }
     },
     "Test" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Test"
+          }
+        }
+      }
     },
     "Tokyo" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tokyo"
+          }
+        }
+      }
     },
     "Touch ID" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Touch ID"
+          }
+        }
+      }
     },
     "Touches de volume et de luminosité interceptées" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volume and brightness keys intercepted"
+          }
+        }
+      }
     },
     "Toujours" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Always"
+          }
+        }
+      }
     },
     "Toujours afficher le niveau quand l'encoche est repliée" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Always show the level when the notch is collapsed"
+          }
+        }
+      }
     },
     "Tous les modules, en version Mini quand c'est possible." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All modules, in Mini size when possible."
+          }
+        }
+      }
     },
     "Tout envoyer par AirDrop" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send All with AirDrop"
+          }
+        }
+      }
     },
     "Tout-en-un" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All-in-one"
+          }
+        }
+      }
     },
     "Toute la journée" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All day"
+          }
+        }
+      }
     },
     "Transformez l'encoche de votre Mac en une zone interactive et modulaire." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn your Mac's notch into an interactive, modular space."
+          }
+        }
+      }
     },
-    "Un léger clic à l'ouverture de l'encoche, au changement de page, aux alertes et à chaque cran de volume (trackpad Force Touch)." : {
-
+    "Téléchargement de yt-dlp… (environ 35 Mo)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Downloading yt-dlp… (about 35 MB)"
+          }
+        }
+      }
     },
-    "Une encoche plus grande accueille plus de widgets par page (%@ unités de largeur)." : {
-
+    "Téléchargement terminé" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download complete"
+          }
+        }
+      }
+    },
+    "Télécharger" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download"
+          }
+        }
+      }
+    },
+    "Télécharger et installer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download and Install"
+          }
+        }
+      }
+    },
+    "Téléchargez une vidéo ou son audio à partir d'un lien (avec yt-dlp)." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download a video or its audio from a link (with yt-dlp)."
+          }
+        }
+      }
     },
     "UTC" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UTC"
+          }
+        }
+      }
+    },
+    "Un léger clic à l'ouverture de l'encoche, au changement de page, aux alertes et à chaque cran de volume (trackpad Force Touch)." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A light click when the notch opens, when changing pages, on alerts, and at each volume step (Force Touch trackpad)."
+          }
+        }
+      }
+    },
+    "Une encoche plus grande accueille plus de widgets par page (%@ unités de largeur)." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A larger notch fits more widgets per page (%@ width units)."
+          }
+        }
+      }
     },
     "Utilise %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uses %@"
+          }
+        }
+      }
     },
     "Utiliser ma position" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use My Location"
+          }
+        }
+      }
     },
     "Verre" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Glass"
+          }
+        }
+      }
     },
     "Version %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version %@"
+          }
+        }
+      }
     },
     "Version de développement : après chaque recompilation, macOS peut demander à nouveau l'autorisation Accessibilité." : {
-
-    },
-    "Vidéo (meilleure qualité)" : {
-
-    },
-    "Vidéo 720p" : {
-
-    },
-    "Vidéo 1080p" : {
-
-    },
-    "Vidéos" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Development build: after each rebuild, macOS may ask for Accessibility permission again."
+          }
+        }
+      }
     },
     "Vider l'étagère" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empty the Shelf"
+          }
+        }
+      }
     },
     "Vider l'étagère (%lld)" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empty the Shelf (%lld)"
+          }
+        }
+      }
+    },
+    "Vidéo (meilleure qualité)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video (best quality)"
+          }
+        }
+      }
+    },
+    "Vidéo 1080p" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video 1080p"
+          }
+        }
+      }
+    },
+    "Vidéo 720p" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video 720p"
+          }
+        }
+      }
+    },
+    "Vidéos" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Videos"
+          }
+        }
+      }
     },
     "Ville" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "City"
+          }
+        }
+      }
     },
     "Ville choisie" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chosen city"
+          }
+        }
+      }
     },
     "Volume" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volume"
+          }
+        }
+      }
     },
     "Volume et luminosité" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volume & Brightness"
+          }
+        }
+      }
     },
     "Votre accord" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your approval"
+          }
+        }
+      }
     },
     "Votre écran a une encoche : le fond reste noir pour se fondre avec la découpe de l'écran (sinon elle resterait visible). Le fond choisi s'applique à la pastille affichée sur les autres écrans." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your display has a notch: the background stays black to blend with the screen cutout (otherwise it would show). The chosen background applies to the pill shown on other displays."
+          }
+        }
+      }
     },
     "Vous avez déjà votre propre barre d'état Claude Code : Notchkit ne la remplace pas, l'utilisation affichée reste donc une estimation." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You already have your own Claude Code status line: Notchkit doesn't replace it, so the usage shown remains an estimate."
+          }
+        }
+      }
     },
     "Widgets" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widgets"
+          }
+        }
+      }
     },
     "Widgets masqués" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hidden widgets"
+          }
+        }
+      }
+    },
+    "ffmpeg (facultatif : meilleure qualité, MP3) s'installe dans le Terminal avec « brew install ffmpeg ». Sur un Mac Intel, Homebrew peut devoir le compiler, ce qui est long." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ffmpeg (optional: better quality, MP3) is installed in Terminal with “brew install ffmpeg”. On an Intel Mac, Homebrew may have to compile it, which takes a long time."
+          }
+        }
+      }
+    },
+    "ffmpeg absent (qualité limitée, pas de MP3)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ffmpeg missing (limited quality, no MP3)"
+          }
+        }
+      }
+    },
+    "ffmpeg installé" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ffmpeg installed"
+          }
+        }
+      }
+    },
+    "https://api.openai.com/v1" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://api.openai.com/v1"
+          }
+        }
+      }
+    },
+    "https://github.com/ungive/mediaremote-adapter" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/ungive/mediaremote-adapter"
+          }
+        }
+      }
+    },
+    "https://open-meteo.com" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://open-meteo.com"
+          }
+        }
+      }
+    },
+    "macOS demandera l'autorisation lors de la prochaine copie." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS will ask for permission the next time you copy something."
+          }
+        }
+      }
+    },
+    "reste" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "left"
+          }
+        }
+      }
+    },
+    "s" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "s"
+          }
+        }
+      }
     },
     "yt-dlp est installé." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "yt-dlp is installed."
+          }
+        }
+      }
     },
     "yt-dlp installé" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "yt-dlp installed"
+          }
+        }
+      }
     },
     "yt-dlp n'est pas installé." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "yt-dlp isn't installed."
+          }
+        }
+      }
     },
     "yt-dlp non installé" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "yt-dlp not installed"
+          }
+        }
+      }
+    },
+    "« %@ »" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“%@”"
+          }
+        }
+      }
+    },
+    "« Réduire les animations » est activé dans macOS : les animations sont désactivées." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“Reduce motion” is turned on in macOS: animations are disabled."
+          }
+        }
+      }
+    },
+    "·" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "·"
+          }
+        }
+      }
+    },
+    "À propos" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About"
+          }
+        }
+      }
+    },
+    "Échec du téléchargement" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download failed"
+          }
+        }
+      }
+    },
+    "Économie d'énergie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Low Power Mode"
+          }
+        }
+      }
+    },
+    "Écran" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Display"
+          }
+        }
+      }
+    },
+    "Écran principal" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Main display"
+          }
+        }
+      }
+    },
+    "Écrire à Claude…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Write to Claude…"
+          }
+        }
+      }
+    },
+    "Écrit %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Writes %@"
+          }
+        }
+      }
+    },
+    "Épingler" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pin"
+          }
+        }
+      }
+    },
+    "Étagère" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shelf"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

@@ -36,18 +36,18 @@
 	<key>LSUIElement</key>
 	<true/>
 	<key>NSAppleEventsUsageDescription</key>
-	<string>Notchkit pilote la lecture (lecture, pause, morceau suivant) de Music et Spotify depuis l'encoche.</string>
+	<string>Notchkit controls playback (play, pause, next track) in Music and Spotify from the notch.</string>
 	<key>NSAudioCaptureUsageDescription</key>
-	<string>Notchkit analyse le son joué par votre Mac pour animer les barres de l'égaliseur en temps réel. Le son n'est ni enregistré ni envoyé.</string>
+	<string>Notchkit analyzes the sound playing on your Mac to animate the equalizer bars in real time. Audio is never recorded or sent anywhere.</string>
 	<key>NSCalendarsFullAccessUsageDescription</key>
-	<string>Notchkit affiche vos prochains événements dans l'encoche et vous les rappelle quelques minutes avant.</string>
+	<string>Notchkit shows your upcoming events in the notch and reminds you a few minutes before they start.</string>
 	<key>NSCalendarsUsageDescription</key>
-	<string>Notchkit affiche vos prochains événements dans l'encoche et vous les rappelle quelques minutes avant.</string>
+	<string>Notchkit shows your upcoming events in the notch and reminds you a few minutes before they start.</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>© 2026 Notchkit</string>
 	<key>NSLocationUsageDescription</key>
-	<string>Notchkit utilise votre position approximative pour afficher la météo locale.</string>
+	<string>Notchkit uses your approximate location to show the local weather.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Notchkit utilise votre position approximative pour afficher la météo locale.</string>
+	<string>Notchkit uses your approximate location to show the local weather.</string>
 </dict>
 </plist>

@@ -247,7 +247,7 @@ final class ClaudeModule: NotchModule {
     }
 
     private static func formatted(_ messages: [String]) -> String {
-        "Message de l'utilisateur, envoyé depuis l'encoche Notchkit : \(messages.joined(separator: "\n\n"))"
+        "Message from the user, sent from the Notchkit notch: \(messages.joined(separator: "\n\n"))"
     }
 
     // MARK: Fenêtre de réponse

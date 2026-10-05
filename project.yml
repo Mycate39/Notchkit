@@ -6,7 +6,8 @@ options:
   bundleIdPrefix: com.andeolchenaux
   deploymentTarget:
     macOS: "14.0"
-  developmentLanguage: fr
+  # Anglais par défaut (traduction française dans les catalogues .xcstrings).
+  developmentLanguage: en
   createIntermediateGroups: true
 
 settings:
@@ -57,12 +58,12 @@ targets:
         CFBundleURLTypes:
           - CFBundleURLName: com.andeolchenaux.notchkit
             CFBundleURLSchemes: [notchkit]
-        NSCalendarsFullAccessUsageDescription: "Notchkit affiche vos prochains événements dans l'encoche et vous les rappelle quelques minutes avant."
-        NSCalendarsUsageDescription: "Notchkit affiche vos prochains événements dans l'encoche et vous les rappelle quelques minutes avant."
-        NSLocationUsageDescription: "Notchkit utilise votre position approximative pour afficher la météo locale."
-        NSLocationWhenInUseUsageDescription: "Notchkit utilise votre position approximative pour afficher la météo locale."
-        NSAudioCaptureUsageDescription: "Notchkit analyse le son joué par votre Mac pour animer les barres de l'égaliseur en temps réel. Le son n'est ni enregistré ni envoyé."
-        NSAppleEventsUsageDescription: "Notchkit pilote la lecture (lecture, pause, morceau suivant) de Music et Spotify depuis l'encoche."
+        NSCalendarsFullAccessUsageDescription: "Notchkit shows your upcoming events in the notch and reminds you a few minutes before they start."
+        NSCalendarsUsageDescription: "Notchkit shows your upcoming events in the notch and reminds you a few minutes before they start."
+        NSLocationUsageDescription: "Notchkit uses your approximate location to show the local weather."
+        NSLocationWhenInUseUsageDescription: "Notchkit uses your approximate location to show the local weather."
+        NSAudioCaptureUsageDescription: "Notchkit analyzes the sound playing on your Mac to animate the equalizer bars in real time. Audio is never recorded or sent anywhere."
+        NSAppleEventsUsageDescription: "Notchkit controls playback (play, pause, next track) in Music and Spotify from the notch."
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.andeolchenaux.notchkit

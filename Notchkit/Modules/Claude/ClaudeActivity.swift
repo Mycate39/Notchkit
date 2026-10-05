@@ -21,6 +21,8 @@ struct ClaudeHookEvent: Sendable {
     let prompt: String?
     let notificationType: String?
     let message: String?
+    /// Transcription de la session (fichier JSONL), d'où sont lus les messages texte.
+    let transcriptPath: String?
 
     /// Lit le JSON reçu sur l'entrée du hook. Renvoie `nil` s'il manque l'essentiel.
     init?(json: [String: Any]) {
@@ -43,6 +45,7 @@ struct ClaudeHookEvent: Sendable {
         prompt = json["prompt"] as? String
         notificationType = json["notification_type"] as? String
         message = json["message"] as? String
+        transcriptPath = json["transcript_path"] as? String
 
         // On ne garde que de courts extraits : jamais le contenu complet des fichiers écrits.
         var summary: [String: String] = [:]
@@ -125,6 +128,9 @@ struct ClaudeSession: Identifiable, Equatable, Sendable {
     var recentActions: [ClaudeAction] = []
     /// Message affiché par Claude Code quand il demande une permission.
     var attentionMessage: String?
+    /// Messages texte échangés (demandes et réponses de Claude), du plus ancien au plus récent.
+    var conversation: [ClaudeChatEntry] = []
+    var transcriptPath: String?
     /// Fin de la fenêtre de réponse (état `awaitingReply`).
     var replyDeadline: Date?
     var lastEventAt: Date
@@ -159,6 +165,7 @@ struct ClaudeActivityTracker: Equatable, Sendable {
 
         var session = sessions[event.sessionID] ?? ClaudeSession(id: event.sessionID, state: .finished, lastEventAt: date)
         if let cwd = event.cwd { session.projectName = URL(fileURLWithPath: cwd).lastPathComponent }
+        if let path = event.transcriptPath { session.transcriptPath = path }
         session.lastEventAt = date
         var transition: ClaudeTransition?
 
@@ -206,6 +213,19 @@ struct ClaudeActivityTracker: Equatable, Sendable {
 
         sessions[event.sessionID] = session
         return transition
+    }
+
+    /// Nombre maximal de messages gardés par session (historique de l'encoche).
+    static let maxConversation = 200
+
+    /// Ajoute des messages lus dans la transcription (sans doublons).
+    mutating func appendConversation(_ entries: [ClaudeChatEntry], to sessionID: String) {
+        guard !entries.isEmpty, var session = sessions[sessionID] else { return }
+        let known = Set(session.conversation.map(\.id))
+        let fresh = entries.filter { !known.contains($0.id) }
+        guard !fresh.isEmpty else { return }
+        session.conversation = Array((session.conversation + fresh).suffix(Self.maxConversation))
+        sessions[sessionID] = session
     }
 
     /// Ouvre (avec une date de fin) ou ferme (`nil`) la fenêtre de réponse d'une session terminée.

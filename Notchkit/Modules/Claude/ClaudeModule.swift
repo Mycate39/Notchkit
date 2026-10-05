@@ -17,7 +17,7 @@ final class ClaudeModule: NotchModule {
         id: "claude",
         name: "Claude Code",
         summary: "Activité de Claude Code en direct, messages depuis l'encoche et utilisation estimée.",
-        systemImage: "sparkle",
+        systemImage: ClaudeMark.symbolName,
         category: .productivity,
         tier: .free,
         defaultEnabled: true
@@ -68,6 +68,9 @@ final class ClaudeModule: NotchModule {
     @ObservationIgnored private let context: ModuleContext
     @ObservationIgnored private let server: ClaudeHookServer
     @ObservationIgnored private var maintenanceTask: Task<Void, Never>?
+    /// Relecture régulière de la transcription tant que Claude travaille (messages en direct).
+    @ObservationIgnored private var transcriptTask: Task<Void, Never>?
+    @ObservationIgnored private let transcriptReader = ClaudeTranscriptReader()
     @ObservationIgnored private var isStarted = false
     /// Hooks Stop gardés ouverts (fenêtre de réponse), par session.
     @ObservationIgnored private var heldStops: [String: HookReply] = [:]
@@ -129,6 +132,8 @@ final class ClaudeModule: NotchModule {
         isStarted = false
         maintenanceTask?.cancel()
         maintenanceTask = nil
+        transcriptTask?.cancel()
+        transcriptTask = nil
         for id in Array(heldStops.keys) { closeReplyWindow(id, respond: true) }
         server.stop()
     }
@@ -139,6 +144,8 @@ final class ClaudeModule: NotchModule {
     func handle(_ json: [String: Any], reply: HookReply) {
         guard let event = ClaudeHookEvent(json: json) else { return reply.send(nil) }
         let transition = tracker.apply(event)
+        readTranscript(of: event.sessionID)
+        updateTranscriptPolling()
 
         switch transition {
         case .finished:
@@ -159,6 +166,44 @@ final class ClaudeModule: NotchModule {
             return openReplyWindow(event.sessionID, reply: reply)
         }
         reply.send(nil)
+    }
+
+    // MARK: Messages en direct
+
+    /// Lit les nouveaux messages de la transcription d'une session.
+    private func readTranscript(of sessionID: String) {
+        guard !AutomatedRun.isActive, let path = tracker.sessions[sessionID]?.transcriptPath else { return }
+        let reader = transcriptReader
+        Task { [weak self] in
+            let entries = await reader.newEntries(at: path)
+            self?.tracker.appendConversation(entries, to: sessionID)
+        }
+    }
+
+    /// Tant qu'une session travaille, relit sa transcription toutes les 1,5 s : le texte de Claude
+    /// apparaît sans attendre le prochain hook. S'arrête dès qu'il n'y a plus d'activité.
+    private func updateTranscriptPolling() {
+        guard tracker.hasActiveSession else {
+            transcriptTask?.cancel()
+            transcriptTask = nil
+            return
+        }
+        guard transcriptTask == nil else { return }
+        transcriptTask = Task { [weak self] in
+            while !Task.isCancelled {
+                try? await Task.sleep(for: .seconds(1.5))
+                guard let self, !Task.isCancelled else { return }
+                for session in self.tracker.sessions.values where session.state == .working || session.state == .waitingForPermission {
+                    self.readTranscript(of: session.id)
+                }
+                if !self.tracker.hasActiveSession {
+                    // Dernière lecture (réponse finale), puis arrêt.
+                    self.tracker.sessions.keys.forEach(self.readTranscript(of:))
+                    self.transcriptTask = nil
+                    return
+                }
+            }
+        }
     }
 
     /// Données de la barre d'état : on en extrait l'utilisation réelle et on renvoie la ligne à afficher.

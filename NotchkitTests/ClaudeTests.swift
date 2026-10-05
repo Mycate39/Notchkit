@@ -313,3 +313,58 @@ struct ClaudeReplyWindowTests {
         }
     }
 }
+
+struct ClaudeTranscriptTests {
+    @Test func messagesTexteSeulement() {
+        let lines: [Substring] = [
+            #"{"type":"user","uuid":"u1","message":{"role":"user","content":[{"type":"text","text":"Ajoute un bouton"}]}}"#,
+            #"{"type":"assistant","uuid":"a0","message":{"content":[{"type":"thinking","thinking":"…"}]}}"#,
+            #"{"type":"assistant","uuid":"a1","message":{"content":[{"type":"text","text":"Je regarde le **code**."}]}}"#,
+            #"{"type":"assistant","uuid":"a2","message":{"content":[{"type":"tool_use","name":"Read","input":{}}]}}"#,
+            #"{"type":"user","uuid":"u2","message":{"content":[{"type":"tool_result","content":"text"}]}}"#,
+            #"{"type":"user","uuid":"u3","isMeta":true,"message":{"content":[{"type":"text","text":"interne"}]}}"#,
+            #"{"type":"user","uuid":"u4","message":{"content":[{"type":"text","text":"<system-reminder>contexte</system-reminder>"}]}}"#,
+            #"{"type":"assistant","uuid":"a3","isSidechain":true,"message":{"content":[{"type":"text","text":"sous-agent"}]}}"#,
+            "ligne invalide",
+        ]
+        let entries = ClaudeTranscriptParser.entries(from: lines)
+        #expect(entries.map(\.id) == ["u1", "a1"])
+        #expect(entries[0].role == .user)
+        #expect(entries[1].role == .claude)
+        #expect(entries[1].text == "Je regarde le **code**.")
+    }
+
+    @Test func historiqueSansDoublonsEtLimite() throws {
+        var tracker = ClaudeActivityTracker()
+        let json: [String: Any] = ["hook_event_name": "UserPromptSubmit", "session_id": "s", "transcript_path": "/tmp/t.jsonl"]
+        tracker.apply(try #require(ClaudeHookEvent(json: json)))
+        #expect(tracker.sessions["s"]?.transcriptPath == "/tmp/t.jsonl")
+        let entry = ClaudeChatEntry(id: "a", role: .claude, text: "Bonjour")
+        tracker.appendConversation([entry], to: "s")
+        tracker.appendConversation([entry], to: "s")
+        #expect(tracker.sessions["s"]?.conversation.count == 1)
+        let many = (0..<300).map { ClaudeChatEntry(id: "m\($0)", role: .claude, text: "\($0)") }
+        tracker.appendConversation(many, to: "s")
+        #expect(tracker.sessions["s"]?.conversation.count == ClaudeActivityTracker.maxConversation)
+        #expect(tracker.sessions["s"]?.conversation.last?.id == "m299")
+    }
+
+    @Test func lectureIncrementale() async throws {
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent("transcript-\(UUID().uuidString).jsonl")
+        defer { try? FileManager.default.removeItem(at: url) }
+        let first = #"{"type":"assistant","uuid":"a1","message":{"content":[{"type":"text","text":"Un"}]}}"# + "\n"
+        try Data(first.utf8).write(to: url)
+        let reader = ClaudeTranscriptReader()
+        #expect(await reader.newEntries(at: url.path).map(\.id) == ["a1"])
+        #expect(await reader.newEntries(at: url.path).isEmpty)
+
+        // Ligne en cours d'écriture : ignorée jusqu'à ce qu'elle soit complète.
+        let handle = try FileHandle(forWritingTo: url)
+        try handle.seekToEnd()
+        try handle.write(contentsOf: Data(#"{"type":"assistant","uuid":"a2","message":{"content":[{"type":"text","text":"Deux"}]}}"#.utf8))
+        #expect(await reader.newEntries(at: url.path).isEmpty)
+        try handle.write(contentsOf: Data("\n".utf8))
+        try handle.close()
+        #expect(await reader.newEntries(at: url.path).map(\.id) == ["a2"])
+    }
+}

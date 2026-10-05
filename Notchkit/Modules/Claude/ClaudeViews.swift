@@ -53,8 +53,14 @@ struct ClaudeExpandedView: View {
 
             VStack(alignment: .leading, spacing: 4) {
                 header(session)
-                activity(session)
-                Spacer(minLength: 0)
+                if let session, !session.conversation.isEmpty, size != .small {
+                    // Messages en direct, avec l'historique qui défile verticalement.
+                    ClaudeConversationView(session: session)
+                        .frame(maxHeight: .infinity)
+                } else {
+                    activity(session)
+                    Spacer(minLength: 0)
+                }
                 if let session, size != .small {
                     messageField(session)
                 } else if session == nil {
@@ -387,3 +393,81 @@ struct ReplyCountdown: View {
         }
     }
 }
+
+// MARK: - Conversation
+
+/// Historique des messages (demandes et réponses de Claude), défilant verticalement.
+/// Suit automatiquement le dernier message ; la barre de défilement reste visible.
+struct ClaudeConversationView: View {
+    let session: ClaudeSession
+
+    var body: some View {
+        ScrollViewReader { reader in
+            ScrollView(.vertical) {
+                LazyVStack(alignment: .leading, spacing: 6) {
+                    ForEach(session.conversation) { entry in
+                        ClaudeChatBubble(entry: entry)
+                            .id(entry.id)
+                    }
+                    // Ce que Claude fait en ce moment, sous le dernier message.
+                    if session.state == .working, let action = session.currentAction {
+                        Label(action.text, systemImage: action.symbol)
+                            .font(.system(size: 9.5))
+                            .foregroundStyle(.white.opacity(0.45))
+                            .lineLimit(1)
+                            .id("action")
+                    } else if session.state == .waitingForPermission, let message = session.attentionMessage {
+                        Label(message, systemImage: "hand.raised")
+                            .font(.system(size: 10, weight: .medium))
+                            .foregroundStyle(Color(nsColor: ClaudeSparkView.color))
+                            .lineLimit(2)
+                            .id("action")
+                    }
+                    Color.clear.frame(height: 1).id("fin")
+                }
+                .padding(.trailing, 10)  // place pour la barre de défilement
+            }
+            .scrollIndicators(.visible)
+            .onAppear { reader.scrollTo("fin", anchor: .bottom) }
+            .onChange(of: session.conversation.last?.id) {
+                withAnimation(.spring(duration: 0.35, bounce: 0)) { reader.scrollTo("fin", anchor: .bottom) }
+            }
+            .onChange(of: session.currentAction?.id) {
+                reader.scrollTo("fin", anchor: .bottom)
+            }
+        }
+    }
+}
+
+/// Un message : réponse de Claude à gauche (texte clair), demande de l'utilisateur à droite (bulle discrète).
+private struct ClaudeChatBubble: View {
+    let entry: ClaudeChatEntry
+
+    var body: some View {
+        switch entry.role {
+        case .claude:
+            Text(Self.markdown(entry.text))
+                .font(.system(size: 11))
+                .foregroundStyle(.white)
+                .textSelection(.enabled)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        case .user:
+            Text(entry.text)
+                .font(.system(size: 10, weight: .medium))
+                .foregroundStyle(.white.opacity(0.75))
+                .lineLimit(3)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background(.white.opacity(0.1), in: RoundedRectangle(cornerRadius: 9, style: .continuous))
+                .frame(maxWidth: .infinity, alignment: .trailing)
+        }
+    }
+
+    /// Gras, italique, code et liens (le reste du Markdown est affiché tel quel).
+    static func markdown(_ text: String) -> AttributedString {
+        let options = AttributedString.MarkdownParsingOptions(interpretedSyntax: .inlineOnlyPreservingWhitespace)
+        return (try? AttributedString(markdown: text, options: options)) ?? AttributedString(text)
+    }
+}
+

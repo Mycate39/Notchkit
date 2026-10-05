@@ -13,7 +13,7 @@ final class AssistantModule: NotchModule {
     static let descriptor = ModuleDescriptor(
         id: "assistant",
         name: "Assistant IA",
-        summary: "Posez une question depuis l'encoche (Claude ou API compatible OpenAI), avec un visage animé.",
+        summary: "Posez une question depuis l'encoche (clé API), ou ouvrez ChatGPT, Gemini ou Grok avec votre compte.",
         systemImage: "face.smiling",
         category: .productivity,
         tier: .free,
@@ -31,6 +31,30 @@ final class AssistantModule: NotchModule {
     private(set) var modelsStatus: String?
 
     // MARK: Réglages
+
+    /// Façon d'utiliser l'assistant.
+    enum Mode: String, CaseIterable, Identifiable, Sendable {
+        /// Assistant intégré, avec une clé API.
+        case api
+        /// Site officiel (ChatGPT, Gemini, Grok) dans une fenêtre, connecté avec son compte.
+        case web
+        var id: String { rawValue }
+
+        var title: LocalizedStringResource {
+            switch self {
+            case .api: "Intégré (clé API)"
+            case .web: "Site officiel (compte)"
+            }
+        }
+    }
+
+    var mode: Mode {
+        didSet { UserDefaults.standard.set(mode.rawValue, forKey: Keys.mode) }
+    }
+    /// Dernier site utilisé.
+    var webService: WebAssistantService {
+        didSet { UserDefaults.standard.set(webService.rawValue, forKey: Keys.webService) }
+    }
 
     var provider: AIProviderKind {
         didSet {
@@ -53,6 +77,8 @@ final class AssistantModule: NotchModule {
 
     private enum Keys {
         static let provider = "module.assistant.provider"
+        static let mode = "module.assistant.mode"
+        static let webService = "module.assistant.webService"
         static let baseURL = "module.assistant.baseURL"
         static func model(_ provider: AIProviderKind) -> String { "module.assistant.model.\(provider.rawValue)" }
     }
@@ -68,6 +94,14 @@ final class AssistantModule: NotchModule {
         model = defaults.string(forKey: Keys.model(provider)) ?? provider.defaultModel
         baseURL = defaults.string(forKey: Keys.baseURL) ?? "https://api.openai.com/v1"
         hasKey = Keychain.read(provider.keychainAccount)?.isEmpty == false
+        mode = defaults.string(forKey: Keys.mode).flatMap(Mode.init(rawValue:)) ?? .api
+        webService = defaults.string(forKey: Keys.webService).flatMap(WebAssistantService.init(rawValue:)) ?? .chatGPT
+    }
+
+    /// Ouvre (ou referme) la fenêtre du site officiel.
+    func openWeb(_ service: WebAssistantService) {
+        webService = service
+        WebAssistantWindowController.shared.toggle(service)
     }
 
     func stop() {

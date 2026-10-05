@@ -143,6 +143,7 @@
 		F49705A9A1C38568C414F8F7 /* ClaudeUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C529029D5145492C0C2626F /* ClaudeUsage.swift */; };
 		F5543C69BD99F610B097FB7C /* BatteryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3050DD5E00E81450E55B9 /* BatteryState.swift */; };
 		F5B442D4B8F92CE48A597EE0 /* VideoDownloadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D110312DA9149C3CEA954F /* VideoDownloadViews.swift */; };
+		FE1DCA399CB2B0AD60F96FB4 /* WebAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC44BD9A37D42A775568EA /* WebAssistant.swift */; };
 		FE84A29BB41889B5AC1BD36D /* WeatherViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAED0DCFD7BDF1DF1BDCDFFB /* WeatherViews.swift */; };
 		FF50D327E1B1D9C0E32DD427 /* NowPlayingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E0D029C5A9A33532D79DA9 /* NowPlayingInfo.swift */; };
 		FF84C0815AB07A9F26919E9F /* ClaudeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120F6102605460430CBCDD55 /* ClaudeTests.swift */; };
@@ -182,6 +183,7 @@
 /* Begin PBXFileReference section */
 		00E2A367001574FD5301B5C5 /* CalendarViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViews.swift; sourceTree = "<group>"; };
 		01F59B743A5CB9C111DD7BEB /* ClaudeHooksInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeHooksInstaller.swift; sourceTree = "<group>"; };
+		09BC44BD9A37D42A775568EA /* WebAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAssistant.swift; sourceTree = "<group>"; };
 		09F4553ED4B6A1EE1B08F5C3 /* ClipboardModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardModule.swift; sourceTree = "<group>"; };
 		0B080423C926D385B46825A3 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
 		0B7C1CB75F1F1F6747AF33C3 /* NotchModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchModule.swift; sourceTree = "<group>"; };
@@ -754,6 +756,7 @@
 				37E7FA6BA5FFA9983A5E8344 /* AssistantModule.swift */,
 				CC0AFE5D48FC6891C6DAB0A4 /* AssistantViews.swift */,
 				3C7676B52E8B648F97985269 /* Keychain.swift */,
+				09BC44BD9A37D42A775568EA /* WebAssistant.swift */,
 			);
 			path = Assistant;
 			sourceTree = "<group>";
@@ -1093,6 +1096,7 @@
 				73D5E9F7641B5F75B4E0B6CB /* WeatherModels.swift in Sources */,
 				12363B3F5D2845B879F69330 /* WeatherModule.swift in Sources */,
 				FE84A29BB41889B5AC1BD36D /* WeatherViews.swift in Sources */,
+				FE1DCA399CB2B0AD60F96FB4 /* WebAssistant.swift in Sources */,
 				98776D4DF39E4E21CDB0167E /* WidgetLayout.swift in Sources */,
 				20F19EFE650862129A9C102F /* YTDLP.swift in Sources */,
 			);

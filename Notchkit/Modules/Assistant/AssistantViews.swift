@@ -7,6 +7,51 @@ struct AssistantExpandedView: View {
     @FocusState private var isTyping: Bool
 
     var body: some View {
+        if module.mode == .web {
+            webBody
+        } else {
+            apiBody
+        }
+    }
+
+    /// Mode « site officiel » : visage et un bouton par service.
+    private var webBody: some View {
+        HStack(spacing: 12) {
+            if size != .small {
+                AssistantFace(mood: .idle, size: 56)
+            }
+            VStack(alignment: .leading, spacing: 6) {
+                Text("Ouvrir avec mon compte")
+                    .font(.system(size: 10, weight: .medium))
+                    .foregroundStyle(.white.opacity(0.6))
+                HStack(spacing: 6) {
+                    ForEach(WebAssistantService.allCases) { service in
+                        Button { module.openWeb(service) } label: {
+                            VStack(spacing: 3) {
+                                Image(systemName: service.symbol)
+                                    .font(.system(size: 14, weight: .semibold))
+                                Text(service.title)
+                                    .font(.system(size: 9, weight: .semibold))
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.7)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 7)
+                            .background(.white.opacity(service == module.webService ? 0.18 : 0.08),
+                                        in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                            .contentShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                        }
+                        .buttonStyle(.plain)
+                        .help("Ouvrir \(service.title)")
+                    }
+                }
+            }
+        }
+        .padding(10)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private var apiBody: some View {
         HStack(alignment: .top, spacing: 10) {
             if size != .small {
                 VStack(spacing: 4) {
@@ -116,6 +161,35 @@ struct AssistantSettingsView: View {
     @State private var keyDraft = ""
 
     var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Picker("Mode", selection: $module.mode) {
+                ForEach(AssistantModule.Mode.allCases) { mode in
+                    Text(mode.title).tag(mode)
+                }
+            }
+            if module.mode == .web {
+                webSettings
+            } else {
+                apiSettings
+            }
+        }
+    }
+
+    private var webSettings: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack {
+                ForEach(WebAssistantService.allCases) { service in
+                    Button("Ouvrir \(service.title)") { module.openWeb(service) }
+                }
+            }
+            Text("Le site officiel s'ouvre dans une fenêtre sous l'encoche : connectez-vous une fois avec votre compte, la session est conservée. Votre abonnement (ChatGPT Plus, Gemini Advanced, SuperGrok…) s'applique normalement.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+
+    private var apiSettings: some View {
         VStack(alignment: .leading, spacing: 8) {
             Picker("Fournisseur", selection: $module.provider) {
                 ForEach(AIProviderKind.allCases) { provider in

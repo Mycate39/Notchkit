@@ -217,7 +217,7 @@ private struct RoundButton: View {
                 .contentShape(Circle())
                 .contentTransition(.symbolEffect(.replace))
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.notch)
     }
 }
 
@@ -254,7 +254,7 @@ private struct TimerDurationPicker: View {
                         .background(total > 0 ? Color.orange : Color.gray.opacity(0.4), in: Capsule())
                         .foregroundStyle(total > 0 ? .black : .white.opacity(0.6))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.notch)
                 .disabled(total == 0)
                 .keyboardShortcut(.defaultAction)
             }
@@ -382,7 +382,7 @@ private struct ActivityRow: View {
                 .help(activity.isFinished ? "Retirer" : "Arrêter")
             }
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.notch)
         .font(.system(size: 10, weight: .semibold))
         .foregroundStyle(.white.opacity(0.75))
     }
@@ -450,7 +450,7 @@ struct LiveActivitiesMiniView: View {
                     .foregroundStyle(.orange)
                 Button("5 min") { module.startTimer(minutes: 5) }
                     .font(.system(size: 9, weight: .semibold))
-                    .buttonStyle(.plain)
+                    .buttonStyle(.notch)
                     .padding(.horizontal, 6)
                     .padding(.vertical, 3)
                     .background(.white.opacity(0.12), in: Capsule())

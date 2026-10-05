@@ -90,9 +90,9 @@ final class NotchViewModel {
         let size = NotchLayout.panelSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent,
                               sideWidth: compactSideWidth, alertSize: currentAlert?.expandedSize,
                               island: isIsland)
-        // Place autour de la forme pour que l'ombre de survol ne soit pas coupée par la fenêtre.
-        guard showsHoverShadow else { return size }
-        let margin = NotchLayout.hoverShadowMargin
+        // Place autour de la forme pour que l'ombre (survol ou encoche dépliée) ne soit pas coupée.
+        let margin = isExpanded ? NotchLayout.expandedShadowMargin : (showsHoverShadow ? NotchLayout.hoverShadowMargin : 0)
+        guard margin > 0 else { return size }
         return CGSize(width: size.width + margin * 2, height: size.height + margin)
     }
 

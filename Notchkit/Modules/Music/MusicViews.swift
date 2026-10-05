@@ -109,7 +109,7 @@ struct MusicExpandedView: View {
                 Button { module.openPlayerApp() } label: {
                     ArtworkView(info: info, size: 52, cornerRadius: 10)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.notch)
                 VStack(spacing: 0) {
                     Text(info.title)
                         .font(.system(size: 11, weight: .semibold))
@@ -139,7 +139,7 @@ struct MusicExpandedView: View {
                             }
                         }
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.notch)
                 .help("Ouvrir l'app qui joue")
 
                 VStack(alignment: .leading, spacing: 6) {
@@ -238,7 +238,7 @@ private struct PlaybackControls: View {
                 .contentShape(Rectangle())
                 .contentTransition(.symbolEffect(.replace))
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.notch)
         .help(help)
     }
 }
@@ -323,7 +323,7 @@ struct MusicMiniView: View {
                             .contentShape(Rectangle())
                             .contentTransition(.symbolEffect(.replace))
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.notch)
                 }
                 .frame(width: proxy.size.width, height: proxy.size.height)
             }

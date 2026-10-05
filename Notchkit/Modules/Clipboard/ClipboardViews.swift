@@ -24,7 +24,7 @@ struct ClipboardExpandedView: View {
                     .focused($isSearching)
                 if !module.items.isEmpty {
                     Button { module.clearUnpinned() } label: { Image(systemName: "trash") }
-                        .buttonStyle(.plain)
+                        .buttonStyle(.notch)
                         .font(.system(size: 9))
                         .foregroundStyle(.white.opacity(0.6))
                         .help("Effacer l'historique (sauf les éléments épinglés)")
@@ -80,7 +80,7 @@ private struct ClipboardRow: View {
                 Button { module.togglePin(item) } label: {
                     Image(systemName: item.isPinned ? "pin.fill" : "pin")
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.notch)
                 .font(.system(size: 9))
                 .foregroundStyle(item.isPinned ? .orange : .white.opacity(0.6))
                 .help(item.isPinned ? "Désépingler" : "Épingler")

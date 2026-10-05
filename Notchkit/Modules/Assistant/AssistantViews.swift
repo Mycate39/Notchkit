@@ -41,7 +41,7 @@ struct AssistantExpandedView: View {
                                         in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                             .contentShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(.notch)
                         .help("Ouvrir \(service.title)")
                     }
                 }
@@ -140,7 +140,7 @@ struct AssistantExpandedView: View {
                     .help("Nouvelle conversation")
             }
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.notch)
         .font(.system(size: 14))
         .foregroundStyle(.tint)
         .padding(.horizontal, 8)

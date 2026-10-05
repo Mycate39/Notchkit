@@ -81,8 +81,10 @@ struct NotchAppearance: Codable, Equatable, Sendable {
         /// Durée et rebond du ressort.
         var spring: (duration: Double, bounce: Double) {
             switch self {
-            case .fluid: (0.38, 0.18)
-            case .quick: (0.24, 0.04)
+            // Sans rebond : l'ouverture au survol n'a pas d'élan à prolonger (principes d'Apple :
+            // amortissement critique par défaut, rebond réservé aux gestes lancés).
+            case .fluid: (0.36, 0)
+            case .quick: (0.24, 0)
             case .bouncy: (0.5, 0.38)
             case .none: (0.01, 0)
             }
@@ -150,7 +152,13 @@ struct NotchBackground: View {
         switch appearance.background {
         case .black: Color.black
         case .graphite: Color(white: 0.13)
-        case .glass: Rectangle().fill(.ultraThinMaterial).environment(\.colorScheme, .dark)
+        case .glass:
+            if NotchAccessibility.reduceTransparency {
+                // « Réduire la transparence » : verre remplacé par une surface opaque.
+                Color(white: 0.12)
+            } else {
+                Rectangle().fill(.ultraThinMaterial).environment(\.colorScheme, .dark)
+            }
         case .custom: appearance.customBackground.color
         }
     }

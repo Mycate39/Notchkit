@@ -81,7 +81,7 @@ struct SystemHUDExpandedView: View {
                     .font(.system(size: 12, weight: .semibold))
                     .frame(width: 20)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.notch)
             Slider(value: Binding(get: { value.wrappedValue }, set: { value.wrappedValue = $0; onChange($0) }), in: 0...1)
                 .controlSize(.small)
                 .tint(.white)

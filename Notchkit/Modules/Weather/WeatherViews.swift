@@ -164,7 +164,7 @@ struct WeatherSettingsView: View {
                     Label(place.fullName, systemImage: "mappin.and.ellipse")
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.notch)
             }
 
             Text("Données météo : Open-Meteo.com (licence CC BY 4.0).")

@@ -128,7 +128,10 @@ final class NotchWindowController {
         let geometry = viewModel.geometry
         let expanded = NotchLayout.panelSize(for: geometry, isExpanded: true, hasCompactContent: true)
         let compact = NotchLayout.panelSize(for: geometry, isExpanded: false, hasCompactContent: true)
-        let size = CGSize(width: max(expanded.width, compact.width), height: max(expanded.height, compact.height))
+        // Plus la marge réservée à l'ombre de l'encoche dépliée.
+        let margin = NotchLayout.expandedShadowMargin
+        let size = CGSize(width: max(expanded.width, compact.width) + margin * 2,
+                          height: max(expanded.height, compact.height) + margin)
         let bounds = container.bounds
         hostingView.frame = CGRect(x: (bounds.width - size.width) / 2, y: 0, width: size.width, height: size.height)
     }

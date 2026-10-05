@@ -60,7 +60,7 @@ struct VideoDownloadExpandedView: View {
                     .font(.system(size: 15))
                     .foregroundStyle(YTDLP.isValidLink(link) ? .red : .white.opacity(0.3))
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.notch)
             .disabled(!YTDLP.isValidLink(link))
             .help("Télécharger")
         }
@@ -94,7 +94,7 @@ struct VideoDownloadExpandedView: View {
                     .font(.system(size: 9, weight: .semibold))
                     .lineLimit(1)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.notch)
             .foregroundStyle(.white.opacity(0.75))
             .help("Dossier de destination : \(module.directory.path)")
         }
@@ -146,7 +146,7 @@ private struct DownloadRow: View {
                     .help("Retirer de la liste")
             }
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.notch)
         .font(.system(size: 10, weight: .semibold))
         .foregroundStyle(.white.opacity(0.8))
     }

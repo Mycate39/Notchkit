@@ -48,6 +48,8 @@ enum NotchLayout {
     static let islandAspectRatio: CGFloat = 4.8
     /// Marge de fenêtre réservée à l'ombre de survol (sur les côtés et en bas).
     static let hoverShadowMargin: CGFloat = 12
+    /// Marge de fenêtre réservée à l'ombre de l'encoche dépliée.
+    static let expandedShadowMargin: CGFloat = 22
     /// Rayon des coins en mode déplié.
     static let expandedCornerRadius: CGFloat = 24
 
@@ -57,7 +59,9 @@ enum NotchLayout {
     /// Animation principale (ressort court et peu rebondissant, pour rester fluide).
     @MainActor static var spring: Animation {
         // « Réduire les animations » (Accessibilité de macOS) est toujours respecté.
-        let style = NSWorkspace.shared.accessibilityDisplayShouldReduceMotion ? .none : appearance.animation
+        // « Réduire les animations » : courte transition douce, sans ressort ni dépassement.
+        if NSWorkspace.shared.accessibilityDisplayShouldReduceMotion { return .easeOut(duration: 0.18 * animationSlowdown) }
+        let style = appearance.animation
         return .spring(duration: style.spring.duration * animationSlowdown, bounce: style.spring.bounce)
     }
     /// Temps laissé à l'animation de repli avant de réduire la fenêtre.

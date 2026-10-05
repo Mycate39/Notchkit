@@ -5,6 +5,12 @@ import SwiftUI
 struct NotchContainerView: View {
     let viewModel: NotchViewModel
 
+    private var shadow: (opacity: Double, radius: CGFloat, y: CGFloat) {
+        if viewModel.isExpanded { return (0.5, 16, 6) }
+        if viewModel.showsHoverShadow { return (0.45, 5, 2) }
+        return (0, 0, 0)
+    }
+
     var body: some View {
         let geometry = viewModel.geometry
         let size = viewModel.shapeSize
@@ -20,7 +26,7 @@ struct NotchContainerView: View {
         ZStack(alignment: .top) {
             if viewModel.isExpanded {
                 ExpandedNotchView(viewModel: viewModel)
-                    .transition(.opacity.combined(with: .scale(scale: 0.94, anchor: .top)))
+                    .transition(.materialize)
             } else {
                 CompactNotchView(viewModel: viewModel)
                     .transition(.opacity)
@@ -34,8 +40,11 @@ struct NotchContainerView: View {
         }
         .clipShape(shape)
         .contentShape(shape)
-        // Petite ombre au survol, avant l'ouverture.
-        .shadow(color: .black.opacity(viewModel.showsHoverShadow ? 0.45 : 0), radius: 5, y: 2)
+        // Profondeur : petite ombre au survol, ombre plus large une fois ouverte
+        // (une grande surface paraît plus épaisse qu'une petite).
+        .shadow(color: .black.opacity(shadow.opacity), radius: shadow.radius, y: shadow.y)
+        // Indice au survol : l'encoche gonfle légèrement, depuis le haut, avant de s'ouvrir.
+        .scaleEffect(viewModel.showsHoverShadow ? 1.03 : 1, anchor: .top)
         .foregroundStyle(.white)
         .tint(viewModel.appearance.accentColor)
         .environment(\.colorScheme, .dark)
@@ -119,6 +128,8 @@ private struct CompactNotchView: View {
 /// Contenu de l'encoche dépliée : barre d'en-tête puis les vues étendues des modules actifs.
 private struct ExpandedNotchView: View {
     let viewModel: NotchViewModel
+    /// La pastille de la page affichée glisse d'un point à l'autre.
+    @Namespace private var pageIndicator
 
     var body: some View {
         let ear = viewModel.geometry.style == .notch ? NotchLayout.earRadius : 0
@@ -184,7 +195,11 @@ private struct ExpandedNotchView: View {
                                     .font(.system(size: 10, weight: .semibold))
                                     .padding(.horizontal, 9)
                                     .padding(.vertical, 4)
-                                    .background(.white.opacity(0.16), in: Capsule())
+                                    .background {
+                                        Capsule()
+                                            .fill(.white.opacity(0.16))
+                                            .matchedGeometryEffect(id: "pastille", in: pageIndicator)
+                                    }
                                     .foregroundStyle(.white)
                                 } else {
                                     Circle()
@@ -195,7 +210,7 @@ private struct ExpandedNotchView: View {
                             }
                             .contentShape(Capsule())
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(.notch)
                         .help(Text(page.modules.map { String(localized: type(of: $0.module).descriptor.name) }.joined(separator: ", ")))
                     }
                 }
@@ -213,7 +228,7 @@ private struct ExpandedNotchView: View {
                     .foregroundStyle(.white.opacity(0.7))
                     .contentShape(Rectangle())
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.notch)
             .help("Réglages")
         }
     }
@@ -296,12 +311,8 @@ struct PageView: View {
         .environment(\.widgetSize, box.size)
         .environment(\.miniStacked, stacked)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        // Carte : fond léger et fin liseré.
-        .background(.white.opacity(0.07), in: RoundedRectangle(cornerRadius: stacked ? 12 : 16, style: .continuous))
-        .overlay {
-            RoundedRectangle(cornerRadius: stacked ? 12 : 16, style: .continuous)
-                .strokeBorder(.white.opacity(0.07), lineWidth: 0.5)
-        }
+        // Carte : fond discret, liseré éclairé par le haut.
+        .notchCard(cornerRadius: stacked ? 12 : 16)
         .contentShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
         .contextMenu { WidgetContextMenu(box: box, viewModel: viewModel) }
     }

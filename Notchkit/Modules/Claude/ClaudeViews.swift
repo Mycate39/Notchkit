@@ -153,7 +153,7 @@ struct ClaudeExpandedView: View {
                         .font(.system(size: 15))
                         .foregroundStyle(Color(nsColor: ClaudeSparkView.color))
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.notch)
                 .disabled(draft.trimmingCharacters(in: .whitespaces).isEmpty)
             }
             .padding(.horizontal, 8)

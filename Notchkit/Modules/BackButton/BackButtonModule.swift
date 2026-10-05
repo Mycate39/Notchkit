@@ -194,7 +194,7 @@ struct BackLink: View {
             .foregroundStyle(.tint)
             .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.notch)
         .onHover(perform: onHover)
         .help("Revenir à \(name)")
     }
@@ -219,7 +219,7 @@ private struct BackMiniView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .contentShape(Rectangle())
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.notch)
         } else {
             MiniWidget(symbol: "chevron.backward.circle", value: nil, caption: String(localized: "Aucune app"))
         }

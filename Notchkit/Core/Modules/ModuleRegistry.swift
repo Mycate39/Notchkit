@@ -19,6 +19,7 @@ enum ModuleRegistry {
         UnlockModule.self,
         BackButtonModule.self,
         VideoDownloadModule.self,
-        AssistantModule.self,
+        // Assistant IA mis de côté pour l'instant (le code reste dans Modules/Assistant) :
+        // remettre `AssistantModule.self` ici pour le réactiver.
     ]
 }

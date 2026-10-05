@@ -194,15 +194,16 @@ struct VideoDownloadSettingsView: View {
             }
             .font(.caption)
 
-            if !module.isToolInstalled || !module.hasFFmpeg {
-                if YTDLP.brew != nil {
-                    Button(module.isInstalling ? "Installation…" : "Installer avec Homebrew…") { confirmInstall = true }
-                        .disabled(module.isInstalling)
-                } else {
-                    Text("Installez Homebrew (brew.sh), puis dans le Terminal : brew install yt-dlp ffmpeg")
-                        .font(.caption)
-                        .textSelection(.enabled)
-                }
+            if !module.isToolInstalled {
+                Button(module.isInstalling ? "Installation…" : "Installer yt-dlp…") { confirmInstall = true }
+                    .disabled(module.isInstalling)
+            }
+            if !module.hasFFmpeg {
+                Text("ffmpeg (facultatif : meilleure qualité, MP3) s'installe dans le Terminal avec « brew install ffmpeg ». Sur un Mac Intel, Homebrew peut devoir le compiler, ce qui est long.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .textSelection(.enabled)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             if let log = module.installLog {
                 Text(log).font(.caption).foregroundStyle(.secondary)
@@ -220,12 +221,11 @@ struct VideoDownloadSettingsView: View {
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
         }
-        .confirmationDialog("Installer les outils de téléchargement ?", isPresented: $confirmInstall) {
-            Button("Installer yt-dlp et ffmpeg") { module.installTools(includeFFmpeg: true) }
-            Button("Installer yt-dlp seulement") { module.installTools(includeFFmpeg: false) }
+        .confirmationDialog("Installer yt-dlp ?", isPresented: $confirmInstall) {
+            Button("Télécharger et installer") { module.installTool() }
             Button("Annuler", role: .cancel) {}
         } message: {
-            Text("Notchkit va lancer « brew install » pour installer ces logiciels libres sur votre Mac. ffmpeg (plus volumineux) permet la meilleure qualité et la conversion en MP3.")
+            Text("Notchkit va télécharger le programme officiel yt-dlp pour macOS depuis GitHub (logiciel libre, environ 35 Mo), vérifier son empreinte, puis l'installer dans son dossier. Rien n'est modifié ailleurs sur votre Mac.")
         }
         .onAppear { module.refreshToolStatus() }
     }

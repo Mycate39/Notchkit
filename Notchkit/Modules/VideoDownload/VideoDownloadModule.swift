@@ -210,34 +210,20 @@ final class VideoDownloadModule: NotchModule {
 
     // MARK: Installation de l'outil
 
-    /// Installe yt-dlp (et ffmpeg si demandé) avec Homebrew.
-    func installTools(includeFFmpeg: Bool) {
-        guard let brew = YTDLP.brew, !isInstalling else { return }
+    /// Installe yt-dlp en téléchargeant le programme officiel (empreinte vérifiée).
+    func installTool() {
+        guard !isInstalling else { return }
         isInstalling = true
-        installLog = String(localized: "Installation en cours… (cela peut prendre quelques minutes)")
-        let process = Process()
-        process.executableURL = brew
-        process.arguments = ["install", "yt-dlp"] + (includeFFmpeg ? ["ffmpeg"] : [])
-        var environment = ProcessInfo.processInfo.environment
-        environment["HOMEBREW_NO_AUTO_UPDATE"] = "1"
-        process.environment = environment
-        process.standardOutput = FileHandle.nullDevice
-        process.standardError = FileHandle.nullDevice
-        process.terminationHandler = { [weak self] finished in
-            let status = finished.terminationStatus
-            DispatchQueue.main.async {
-                MainActor.assumeIsolated {
-                    self?.isInstalling = false
-                    self?.refreshToolStatus()
-                    self?.installLog = status == 0
-                        ? String(localized: "Installation terminée.")
-                        : String(localized: "L'installation a échoué. Essayez dans le Terminal : brew install yt-dlp")
-                }
+        installLog = String(localized: "Téléchargement de yt-dlp… (environ 35 Mo)")
+        Task { [weak self] in
+            do {
+                try await YTDLPInstaller.install()
+                self?.installLog = String(localized: "yt-dlp est installé.")
+            } catch {
+                self?.installLog = String(localized: "L'installation a échoué : \(error.localizedDescription)")
             }
-        }
-        do { try process.run() } catch {
-            isInstalling = false
-            installLog = error.localizedDescription
+            self?.isInstalling = false
+            self?.refreshToolStatus()
         }
     }
 

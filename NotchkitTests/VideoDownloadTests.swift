@@ -41,3 +41,18 @@ struct YTDLPTests {
         #expect(!YTDLP.isValidLink("file:///etc/passwd"))
     }
 }
+
+struct YTDLPInstallerTests {
+    @Test func empreinteTrouveeDansLaListe() {
+        let sums = """
+        0f192b7ec147ab6288885d6351d9ab67367640029b4377576ef46dd79cf7b202  yt-dlp_macos
+        07e54b0865303c864006925913bce2604f8ee8cc6f18699bac9c309f9328a6d8  yt-dlp_macos.zip
+        """
+        #expect(YTDLPInstaller.expectedHash(for: "yt-dlp_macos", in: sums) == "0f192b7ec147ab6288885d6351d9ab67367640029b4377576ef46dd79cf7b202")
+        #expect(YTDLPInstaller.expectedHash(for: "yt-dlp_linux", in: sums) == nil)
+    }
+
+    @Test func empreinteSHA256() {
+        #expect(YTDLPInstaller.sha256(of: Data("abc".utf8)) == "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad")
+    }
+}

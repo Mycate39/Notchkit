@@ -1,9 +1,19 @@
 import Foundation
 
-/// Outil yt-dlp (logiciel libre, domaine public), installé séparément avec Homebrew.
-/// Notchkit ne l'intègre pas : il l'utilise s'il est présent.
+import CryptoKit
+
+/// Outil yt-dlp (logiciel libre, domaine public), installé séparément.
+/// Notchkit ne l'intègre pas : il l'utilise s'il est présent, ou le télécharge à la demande
+/// depuis les publications officielles du projet (dans le dossier de Notchkit).
 enum YTDLP {
-    static let searchPaths = ["/opt/homebrew/bin", "/usr/local/bin", "/usr/bin"]
+    /// Dossier où Notchkit installe yt-dlp lui-même (~/Library/Application Support/Notchkit/bin).
+    static var managedDirectory: URL {
+        URL.applicationSupportDirectory.appendingPathComponent("Notchkit/bin", isDirectory: true)
+    }
+
+    static var searchPaths: [String] {
+        [managedDirectory.path, "/opt/homebrew/bin", "/usr/local/bin", "/usr/bin"]
+    }
 
     static func locate(_ tool: String) -> URL? {
         searchPaths.map { URL(fileURLWithPath: $0).appendingPathComponent(tool) }
@@ -101,5 +111,60 @@ enum YTDLP {
               let scheme = url.scheme?.lowercased(), scheme == "http" || scheme == "https", url.host() != nil
         else { return false }
         return true
+    }
+}
+
+// MARK: - Installation directe
+
+/// Télécharge le programme officiel `yt-dlp_macos` (universel : Intel et Apple Silicon)
+/// depuis GitHub et vérifie son empreinte SHA-256 avant de l'installer.
+///
+/// Évite Homebrew, qui ne fournit plus de versions précompilées pour les Mac Intel
+/// (il faudrait compiler LLVM et Rust : des heures, souvent en échec).
+enum YTDLPInstaller {
+    static let releaseBase = URL(string: "https://github.com/yt-dlp/yt-dlp/releases/latest/download/")!
+    static let assetName = "yt-dlp_macos"
+
+    enum InstallError: LocalizedError {
+        case missingChecksum
+        case checksumMismatch
+
+        var errorDescription: String? {
+            switch self {
+            case .missingChecksum: String(localized: "Empreinte de vérification introuvable.")
+            case .checksumMismatch: String(localized: "Le fichier téléchargé est corrompu (empreinte différente). Réessayez.")
+            }
+        }
+    }
+
+    /// Empreinte attendue pour `name` dans un fichier SHA2-256SUMS (« empreinte  nom » par ligne).
+    static func expectedHash(for name: String, in sums: String) -> String? {
+        for line in sums.split(whereSeparator: \.isNewline) {
+            let parts = line.split(separator: " ", omittingEmptySubsequences: true)
+            if parts.count == 2, parts[1] == name { return parts[0].lowercased() }
+        }
+        return nil
+    }
+
+    static func sha256(of data: Data) -> String {
+        SHA256.hash(data: data).map { String(format: "%02x", $0) }.joined()
+    }
+
+    /// Télécharge, vérifie et installe yt-dlp. Renvoie l'emplacement de l'exécutable.
+    @discardableResult
+    static func install(session: URLSession = .shared) async throws -> URL {
+        let (sumsData, _) = try await session.data(from: releaseBase.appendingPathComponent("SHA2-256SUMS"))
+        guard let expected = expectedHash(for: assetName, in: String(decoding: sumsData, as: UTF8.self)) else {
+            throw InstallError.missingChecksum
+        }
+        let (binary, _) = try await session.data(from: releaseBase.appendingPathComponent(assetName))
+        guard sha256(of: binary) == expected else { throw InstallError.checksumMismatch }
+
+        let directory = YTDLP.managedDirectory
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        let destination = directory.appendingPathComponent("yt-dlp")
+        try binary.write(to: destination, options: .atomic)
+        try FileManager.default.setAttributes([.posixPermissions: 0o755], ofItemAtPath: destination.path)
+        return destination
     }
 }

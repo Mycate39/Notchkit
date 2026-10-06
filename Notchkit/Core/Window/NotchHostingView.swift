@@ -86,7 +86,6 @@ final class NotchHostingView<Content: View>: NSHostingView<Content> {
 
     override func mouseEntered(with event: NSEvent) {
         super.mouseEntered(with: event)
-        onHoverChange?(true)
         reportPointer(event)
     }
 

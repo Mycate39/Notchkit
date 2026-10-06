@@ -81,12 +81,9 @@ final class NotchViewModel {
         return manager.secondaryCompactModules
     }
 
-    /// Sur le bureau (Finder au premier plan, sans fenêtre) : mis à jour par le contrôleur de fenêtre.
-    var isOnDesktop = false
-
-    /// Fin contour autour de l'encoche et des bulles, comme la Dynamic Island : toujours, sauf sur
-    /// le bureau, où l'encoche se détache déjà sur le fond d'écran.
-    var showsOutline: Bool { !isOnDesktop }
+    /// Fin contour autour de l'encoche et des bulles, comme la Dynamic Island : seulement quand une
+    /// activité est en cours (musique, minuteur, alerte…). Au repos, l'encoche reste une simple découpe noire.
+    var showsOutline: Bool { hasCompactContent }
 
     /// Au moins deux activités secondaires : rangées dans une pile qui se déroule au survol.
     var showsBubbleStack: Bool { bubbleModules.count >= 2 }

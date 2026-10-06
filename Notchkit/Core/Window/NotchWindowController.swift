@@ -32,13 +32,8 @@ final class NotchWindowController {
         // On ignore la zone de sécurité (barre des menus, encoche) : la forme doit coller au bord.
         hostingView.safeAreaRegions = []
         // Entrée : décidée par la position (grande encoche ou bulles). Sortie : toujours transmise.
-        hostingView.onHoverChange = { [weak self, weak viewModel] isInside in
-            if isInside {
-                // Une fenêtre du Finder a pu s'ouvrir ou se fermer depuis : on revérifie.
-                self?.refreshDesktopFocus()
-            } else {
-                viewModel?.pointerExited()
-            }
+        hostingView.onHoverChange = { [weak viewModel] isInside in
+            if !isInside { viewModel?.pointerExited() }
         }
         hostingView.onPointerMove = { [weak viewModel] dx, fromTop in
             viewModel?.pointerMoved(dx: dx, fromTop: fromTop)
@@ -128,10 +123,7 @@ final class NotchWindowController {
             object: nil,
             queue: .main
         ) { [weak self] _ in
-            MainActor.assumeIsolated {
-                self?.scheduleMenuAvoidance()
-                self?.refreshDesktopFocus()
-            }
+            MainActor.assumeIsolated { self?.scheduleMenuAvoidance() }
         }
 
         // Écran choisi, simulation d'encoche ou apparence modifiés dans les réglages.
@@ -151,13 +143,6 @@ final class NotchWindowController {
         }, perform: { [weak self] in
             self?.applyPanelSize()
         })
-    }
-
-    /// Sur le bureau ou dans une app : le contour de l'encoche n'apparaît que hors du bureau.
-    private func refreshDesktopFocus() {
-        let onDesktop = DesktopFocus.isOnDesktop()
-        guard onDesktop != viewModel.isOnDesktop else { return }
-        withAnimation(.easeOut(duration: 0.25)) { viewModel.isOnDesktop = onDesktop }
     }
 
     /// Remet l'encoche à sa place sur le bureau qui vient de s'afficher.
@@ -210,7 +195,6 @@ final class NotchWindowController {
     private func refreshGeometry() {
         guard let screen = ScreenLocator.screen(for: settings.settings.screenSelection) else { return }
         viewModel.updateGeometry(ScreenLocator.geometry(for: screen, simulateNotch: settings.settings.simulateNotch))
-        refreshDesktopFocus()
         // Changement d'écran : on repositionne immédiatement, sans attendre d'animation.
         shrinkTask?.cancel()
         setPanelSize(viewModel.panelSize)

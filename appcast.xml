@@ -3,6 +3,15 @@
   <channel>
     <title>Notchkit</title>
     <item>
+      <title>Notchkit 0.1.6</title>
+      <pubDate>Tue, 06 Oct 2026 18:28:15 GMT</pubDate>
+      <sparkle:version>7</sparkle:version>
+      <sparkle:shortVersionString>0.1.6</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[<h3>What&#x27;s new</h3><ul><li><b>Removed the &quot;Back to the previous app&quot; feature:</b> the link at the top of the expanded notch and its widget are gone.</li><li><b>Under the hood:</b> project documentation and build cleanups.</li></ul><h3>Installation</h3><p>If you already have Notchkit 0.1.5, it offers this update by itself (or use <b>Check for Updates…</b> in its menu).</p><p>Otherwise, download <code>Notchkit-0.1.6.dmg</code>, open it, and drag <b>Notchkit.app</b> onto the <b>Applications</b> shortcut. Notchkit isn&#x27;t notarized yet: the first time, right-click the app &gt; <b>Open</b>.</p><p>Requires macOS 14 or later, on Apple silicon or Intel.</p>]]></description>
+      <enclosure url="https://github.com/Mycate39/Notchkit/releases/download/v0.1.6/Notchkit-0.1.6.dmg" sparkle:edSignature="Q/v+QcImBSzxbqH2Sw29fgAmuxgpwM3s/K8isEAeCEP5Mv1yha6GoEMhfkHQ3KLVKcWpt+rJ+03E7rpSf74QBw==" length="7063318" type="application/octet-stream"/>
+    </item>
+    <item>
       <title>Notchkit 0.1.5</title>
       <pubDate>Tue, 06 Oct 2026 17:56:15 GMT</pubDate>
       <sparkle:version>6</sparkle:version>

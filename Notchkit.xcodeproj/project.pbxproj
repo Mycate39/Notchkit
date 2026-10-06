@@ -44,7 +44,6 @@
 		3B0444E0AA274FEE6FC3A91C /* ShelfItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0C124C4C4759A07017DB8D /* ShelfItem.swift */; };
 		3D65E40B050BAAC408A95957 /* repeat.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C6E3D4B63F646C8C9E6420 /* repeat.m */; };
 		3F0BBA7E0A0EBA46B97825EB /* BatteryViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEF7D2C8A909E113A1D6E60 /* BatteryViews.swift */; };
-		3F43F722189AF6A1E2E3436E /* BackButtonModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D715D3CF854070983A1F4337 /* BackButtonModule.swift */; };
 		40725F139A191DFF6204EE6F /* ScreenLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8B0A0F7B0BB08616DAE1C /* ScreenLocator.swift */; };
 		470A42B4488C58ECA73F9216 /* DownloadsMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873CE6E9E837CC7493E679DD /* DownloadsMonitor.swift */; };
 		474F1521AEEB244A5D70EA5E /* MusicViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F33792FD3837BD07B60F6A /* MusicViews.swift */; };
@@ -52,7 +51,6 @@
 		48B09963CD8A874CEC291C6F /* speed.m in Sources */ = {isa = PBXBuildFile; fileRef = 578508F6730303155DAAC666 /* speed.m */; };
 		48C9A5EF686BB463FAF39CE4 /* LiveActivitiesModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB45AC94D29F371CA2C5934 /* LiveActivitiesModule.swift */; };
 		4938BC53B652E7BF0D8F67F8 /* ModuleIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A392BB245F4CD1284FD823DD /* ModuleIcon.swift */; };
-		4BD40E39A1993DCDED3AB7BB /* BackButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD55833B75BD3E2E81D83E45 /* BackButtonTests.swift */; };
 		4DA7F19EF634F138BD5A42D5 /* SpectrumAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D9454F2B90F4202312E9B9 /* SpectrumAnalyzer.swift */; };
 		4F396C9C347E18A649275B67 /* LaunchAtLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE9F8658125C2D9185EA96 /* LaunchAtLogin.swift */; };
 		51B5BB1B342B747110C0A0C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6704D0B10B983BEF736F0E06 /* Assets.xcassets */; };
@@ -290,7 +288,6 @@
 		B612155636B3FD4BB9FD1797 /* ShelfViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfViews.swift; sourceTree = "<group>"; };
 		B974952A590C9D987A413C84 /* LiveActivitiesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivitiesTests.swift; sourceTree = "<group>"; };
 		BD3572EC44002A80A034CBF1 /* keys.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = keys.m; sourceTree = "<group>"; };
-		BD55833B75BD3E2E81D83E45 /* BackButtonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonTests.swift; sourceTree = "<group>"; };
 		BEB45AC94D29F371CA2C5934 /* LiveActivitiesModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivitiesModule.swift; sourceTree = "<group>"; };
 		BFC76D1C2CA657B593C11E7B /* VideoDownloadModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloadModule.swift; sourceTree = "<group>"; };
 		C12CD8AFBB2574643418518B /* ClockModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockModule.swift; sourceTree = "<group>"; };
@@ -314,7 +311,6 @@
 		D4D167C05CBBAD88AE1F8A4F /* keys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = keys.h; sourceTree = "<group>"; };
 		D5F6A4C1A5E799024B51A751 /* NotchPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchPanel.swift; sourceTree = "<group>"; };
 		D66674969F092062C29D4F74 /* UnlockModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockModule.swift; sourceTree = "<group>"; };
-		D715D3CF854070983A1F4337 /* BackButtonModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonModule.swift; sourceTree = "<group>"; };
 		D7490954D53A50041640281D /* BluetoothBattery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothBattery.swift; sourceTree = "<group>"; };
 		D87D32299F6B58A261AA0D12 /* get.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = get.h; sourceTree = "<group>"; };
 		DB25FBA895731ACD6329CB6F /* LayoutPresets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPresets.swift; sourceTree = "<group>"; };
@@ -389,7 +385,6 @@
 			children = (
 				8A426D361B19F11D7BD531E6 /* AirPodsTests.swift */,
 				7B67A15546467B5317CE1366 /* AssistantTests.swift */,
-				BD55833B75BD3E2E81D83E45 /* BackButtonTests.swift */,
 				E88A3C1DCE9F2BBAD2E4119B /* BatteryTests.swift */,
 				120F6102605460430CBCDD55 /* ClaudeTests.swift */,
 				89908AA5686A7DBE051BD6EF /* ClipboardTests.swift */,
@@ -413,7 +408,6 @@
 			children = (
 				3023F9D8C6E8C325E63EE40A /* AirPods */,
 				CC56EAF045B4116273357046 /* Assistant */,
-				AD015B80A17F0CE774AA085E /* BackButton */,
 				A3F6B8D8397F337CCC1FA7A4 /* Battery */,
 				99BB9112389B45C7BA7E5294 /* Calendar */,
 				18ECCE2688342A89073C7E5F /* Claude */,
@@ -718,14 +712,6 @@
 				B612155636B3FD4BB9FD1797 /* ShelfViews.swift */,
 			);
 			path = Shelf;
-			sourceTree = "<group>";
-		};
-		AD015B80A17F0CE774AA085E /* BackButton */ = {
-			isa = PBXGroup;
-			children = (
-				D715D3CF854070983A1F4337 /* BackButtonModule.swift */,
-			);
-			path = BackButton;
 			sourceTree = "<group>";
 		};
 		B380B3D4930B5A176B1AA7DD /* Modules */ = {
@@ -1056,7 +1042,6 @@
 				D040BA8C10C9E1E29B0C74D7 /* AudioDeviceMonitor.swift in Sources */,
 				1CDA13E5F9845A313287E1B8 /* AudioSpectrumMonitor.swift in Sources */,
 				26C391455DD8C384ED74BC3A /* AutomatedRun.swift in Sources */,
-				3F43F722189AF6A1E2E3436E /* BackButtonModule.swift in Sources */,
 				A035E8F6860E327BAD3FEF0D /* BatteryModule.swift in Sources */,
 				F5543C69BD99F610B097FB7C /* BatteryState.swift in Sources */,
 				3F0BBA7E0A0EBA46B97825EB /* BatteryViews.swift in Sources */,
@@ -1150,7 +1135,6 @@
 			files = (
 				ED5BE3842572CB8E3454C102 /* AirPodsTests.swift in Sources */,
 				2A955B133EF6F4751FDA6DE2 /* AssistantTests.swift in Sources */,
-				4BD40E39A1993DCDED3AB7BB /* BackButtonTests.swift in Sources */,
 				9A90F1FF12025FADD79A74D1 /* BatteryTests.swift in Sources */,
 				FF84C0815AB07A9F26919E9F /* ClaudeTests.swift in Sources */,
 				9E5F1AAB2D6C98B155086961 /* ClipboardTests.swift in Sources */,

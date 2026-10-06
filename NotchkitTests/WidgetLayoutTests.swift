@@ -148,7 +148,7 @@ struct CustomSizeTests {
 struct LayoutPresetTests {
     @Test func dispositionsCoherentes() {
         let known: Set<String> = ["music", "clock", "battery", "calendar", "weather", "claude", "shelf", "airpods",
-                                  "activities", "clipboard", "systemhud", "back", "videodownload"]
+                                  "activities", "clipboard", "systemhud", "videodownload"]
         for preset in LayoutPreset.all {
             #expect(preset.enabledIDs.isSubset(of: known), "module inconnu dans \(preset.id)")
             #expect(Set(preset.sizes.keys) == preset.enabledIDs, "tailles incomplètes dans \(preset.id)")

@@ -47,11 +47,11 @@ struct LayoutPreset: Identifiable, Sendable {
                 ["music", "clock", "battery", "weather", "calendar"],
                 ["claude"],
                 ["activities", "shelf"],
-                ["clipboard", "airpods", "systemhud", "videodownload", "back"],
+                ["clipboard", "airpods", "systemhud", "videodownload"],
             ],
             sizes: ["music": .large, "clock": .mini, "battery": .mini, "weather": .mini, "calendar": .mini,
                     "claude": .large, "activities": .large, "shelf": .large,
-                    "clipboard": .medium, "airpods": .mini, "systemhud": .mini, "videodownload": .mini, "back": .mini]
+                    "clipboard": .medium, "airpods": .mini, "systemhud": .mini, "videodownload": .mini]
         ),
     ]
 }

@@ -8,7 +8,7 @@ DMG="$1"
 APP="$2"
 NOTES="$3"
 APPCAST="${4:-appcast.xml}"
-SPARKLE_BIN="build/DerivedData/SourcePackages/artifacts/sparkle/Sparkle/bin"
+SPARKLE_BIN="build.noindex/DerivedData/SourcePackages/artifacts/sparkle/Sparkle/bin"
 
 INFO="$(cd "$(dirname "$APP")" && pwd)/$(basename "$APP")/Contents/Info"
 VERSION=$(defaults read "$INFO" CFBundleShortVersionString)

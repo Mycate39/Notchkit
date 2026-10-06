@@ -19,7 +19,7 @@ Notchkit shows a floating pill instead, or simulates a notch.
 - **Claude Code**: what Claude is doing and saying, live, remaining usage, and the ability
   to write to Claude from the notch.
 - **Video downloads** (with yt-dlp, installed on demand).
-- **Back to the previous app**, unlock animations, trackpad haptic feedback.
+- **Unlock animations** and trackpad haptic feedback.
 - **Customization**: widgets in several sizes, pages, ready-made layouts, notch size,
   animations, colors, and background (including Liquid Glass on macOS 26).
 

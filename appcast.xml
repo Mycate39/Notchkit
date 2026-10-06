@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
+  <channel>
+    <title>Notchkit</title>
+    <item>
+      <title>Notchkit 0.1.5</title>
+      <pubDate>Tue, 06 Oct 2026 17:56:15 GMT</pubDate>
+      <sparkle:version>6</sparkle:version>
+      <sparkle:shortVersionString>0.1.5</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[<h3>What&#x27;s new</h3><ul><li><b>Automatic updates:</b> Notchkit now checks for a new version once a day and installs it with your approval. You can also use <b>Check for Updates…</b> in its menu, or turn automatic checks off in Settings &gt; General. This is the last version you need to download by hand.</li><li><b>New app icon:</b> a Mac screen with a vivid wallpaper and the notch.</li></ul><h3>Installation</h3><p>Download <code>Notchkit-0.1.5.dmg</code>, open it, and drag <b>Notchkit.app</b> onto the <b>Applications</b> shortcut. Notchkit isn&#x27;t notarized yet: the first time, right-click the app &gt; <b>Open</b>.</p><p>Requires macOS 14 or later, on Apple silicon or Intel.</p>]]></description>
+      <enclosure url="https://github.com/Mycate39/Notchkit/releases/download/v0.1.5/Notchkit-0.1.5.dmg" sparkle:edSignature="P+cdyq3/cuH03CMPMUJVZ+6s84ZbJJlYCcac0HyW5y7gb2UmymHgI2wvng+vJJ2PwMobuyG3ViJT5uQEODdkAQ==" length="7115380" type="application/octet-stream"/>
+    </item>
+  </channel>
+</rss>

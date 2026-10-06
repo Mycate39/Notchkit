@@ -81,7 +81,7 @@ final class ClaudeModule: NotchModule {
         let defaults = UserDefaults.standard
         showInCompact = defaults.object(forKey: Keys.showInCompact) as? Bool ?? true
         alertOnFinish = defaults.object(forKey: Keys.alertOnFinish) as? Bool ?? true
-        replyWindow = defaults.object(forKey: Keys.replyWindow) as? Int ?? 120
+        replyWindow = defaults.object(forKey: Keys.replyWindow) as? Int ?? 0
 
         // Jeton secret propre à ce Mac, partagé uniquement avec la configuration des hooks.
         if let stored = defaults.string(forKey: Keys.token) {

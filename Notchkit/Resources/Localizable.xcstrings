@@ -1,7 +1,55 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
-    "" : {},
+    "" : {
+
+    },
+    "·" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "·"
+          }
+        }
+      }
+    },
+    "« %@ »" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“%@”"
+          }
+        }
+      }
+    },
+    "« Réduire les animations » est activé dans macOS : les animations sont désactivées." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“Reduce motion” is turned on in macOS: animations are disabled."
+          }
+        }
+      }
+    },
+    "%@ · %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ · %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ · %2$@"
+          }
+        }
+      }
+    },
     "%@ (avec encoche)" : {
       "localizations" : {
         "en" : {
@@ -60,22 +108,6 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@ utilisés%2$@ (chiffres transmis par Claude Code)."
-          }
-        }
-      }
-    },
-    "%@ · %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ · %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ · %2$@"
           }
         }
       }
@@ -206,6 +238,19 @@
         }
       }
     },
+    "10 min" : {
+
+    },
+    "À propos" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About"
+          }
+        }
+      }
+    },
     "Accès au presse-papiers autorisé" : {
       "localizations" : {
         "en" : {
@@ -232,6 +277,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Access required"
+          }
+        }
+      }
+    },
+    "Activé" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On"
           }
         }
       }
@@ -282,16 +337,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Live Activities"
-          }
-        }
-      }
-    },
-    "Activé" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "On"
           }
         }
       }
@@ -546,46 +591,6 @@
         }
       }
     },
-    "Animation Face ID au déverrouillage du Mac" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Face ID animation when unlocking the Mac"
-          }
-        }
-      }
-    },
-    "Animation au branchement et au débranchement" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Animation when plugging in and unplugging"
-          }
-        }
-      }
-    },
-    "Animation pendant une demande Touch ID" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Animation during a Touch ID prompt"
-          }
-        }
-      }
-    },
-    "Animation pendant une demande de mot de passe" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Animation during a password prompt"
-          }
-        }
-      }
-    },
     "Animation à la connexion" : {
       "localizations" : {
         "en" : {
@@ -612,6 +617,46 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Animation on disconnect"
+          }
+        }
+      }
+    },
+    "Animation au branchement et au débranchement" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animation when plugging in and unplugging"
+          }
+        }
+      }
+    },
+    "Animation Face ID au déverrouillage du Mac" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Face ID animation when unlocking the Mac"
+          }
+        }
+      }
+    },
+    "Animation pendant une demande de mot de passe" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animation during a password prompt"
+          }
+        }
+      }
+    },
+    "Animation pendant une demande Touch ID" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animation during a Touch ID prompt"
           }
         }
       }
@@ -666,6 +711,16 @@
         }
       }
     },
+    "Annulé" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Canceled"
+          }
+        }
+      }
+    },
     "Annuler" : {
       "localizations" : {
         "en" : {
@@ -686,12 +741,12 @@
         }
       }
     },
-    "Annulé" : {
+    "Aperçu : demande de mot de passe" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Canceled"
+            "value" : "Preview: password prompt"
           }
         }
       }
@@ -702,16 +757,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Preview: Touch ID prompt"
-          }
-        }
-      }
-    },
-    "Aperçu : demande de mot de passe" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preview: password prompt"
           }
         }
       }
@@ -826,12 +871,12 @@
         }
       }
     },
-    "Aucun module actif" : {
+    "Aucun événement aujourd'hui ni demain" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No active modules"
+            "value" : "No events today or tomorrow"
           }
         }
       }
@@ -842,6 +887,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No models found"
+          }
+        }
+      }
+    },
+    "Aucun module actif" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No active modules"
           }
         }
       }
@@ -862,16 +917,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No sound captured: permission may have been denied."
-          }
-        }
-      }
-    },
-    "Aucun événement aujourd'hui ni demain" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No events today or tomorrow"
           }
         }
       }
@@ -1096,6 +1141,16 @@
         }
       }
     },
+    "Boîtier" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Case"
+          }
+        }
+      }
+    },
     "Bonjour ! Posez-moi une question." : {
       "localizations" : {
         "en" : {
@@ -1112,16 +1167,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "A “◀ App” button to go back to the previous app, like on iPhone."
-          }
-        }
-      }
-    },
-    "Boîtier" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Case"
           }
         }
       }
@@ -1226,6 +1271,16 @@
         }
       }
     },
+    "Chargée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Charged"
+          }
+        }
+      }
+    },
     "Chargement…" : {
       "localizations" : {
         "en" : {
@@ -1242,16 +1297,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Load List"
-          }
-        }
-      }
-    },
-    "Chargée" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Charged"
           }
         }
       }
@@ -1326,6 +1371,26 @@
         }
       }
     },
+    "Claude a terminé" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude is done"
+          }
+        }
+      }
+    },
+    "Claude attend votre accord" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude is waiting for your approval"
+          }
+        }
+      }
+    },
     "Claude Code" : {
       "localizations" : {
         "en" : {
@@ -1356,26 +1421,6 @@
         }
       }
     },
-    "Claude a terminé" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Claude is done"
-          }
-        }
-      }
-    },
-    "Claude attend votre accord" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Claude is waiting for your approval"
-          }
-        }
-      }
-    },
     "Claude est à l'arrêt : message remis avec votre prochaine demande" : {
       "localizations" : {
         "en" : {
@@ -1396,26 +1441,6 @@
         }
       }
     },
-    "Cliquer pour copier" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Click to copy"
-          }
-        }
-      }
-    },
-    "Cliquez pour changer la taille, glissez pour déplacer" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Click to change the size, drag to move"
-          }
-        }
-      }
-    },
     "Clé API" : {
       "localizations" : {
         "en" : {
@@ -1432,6 +1457,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Missing API key: add it in the assistant's settings."
+          }
+        }
+      }
+    },
+    "Cliquer pour copier" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Click to copy"
+          }
+        }
+      }
+    },
+    "Cliquez pour changer la taille, glissez pour déplacer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Click to change the size, drag to move"
           }
         }
       }
@@ -1516,22 +1561,22 @@
         }
       }
     },
-    "Connectez Claude Code" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connect Claude Code"
-          }
-        }
-      }
-    },
     "Connectés" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Connected"
+          }
+        }
+      }
+    },
+    "Connectez Claude Code" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connect Claude Code"
           }
         }
       }
@@ -1552,6 +1597,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Visits %@"
+          }
+        }
+      }
+    },
+    "Copié" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copied"
           }
         }
       }
@@ -1582,16 +1637,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Copy text, an image, or files: they'll show up here."
-          }
-        }
-      }
-    },
-    "Copié" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copied"
           }
         }
       }
@@ -1667,6 +1712,66 @@
         }
       }
     },
+    "Débogage" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Debug"
+          }
+        }
+      }
+    },
+    "Début" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
+          }
+        }
+      }
+    },
+    "Déconnectés" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disconnected"
+          }
+        }
+      }
+    },
+    "Délai d'ouverture" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open delay"
+          }
+        }
+      }
+    },
+    "Délai de fermeture" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close delay"
+          }
+        }
+      }
+    },
+    "Délai pour répondre depuis l'encoche" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time to reply from the notch"
+          }
+        }
+      }
+    },
     "Demain" : {
       "localizations" : {
         "en" : {
@@ -1683,6 +1788,146 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ask anything…"
+          }
+        }
+      }
+    },
+    "Démarrer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
+          }
+        }
+      }
+    },
+    "Déplacer à droite" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Move Right"
+          }
+        }
+      }
+    },
+    "Déplacer à gauche" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Move Left"
+          }
+        }
+      }
+    },
+    "Déplier / replier l'encoche" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expand / collapse the notch"
+          }
+        }
+      }
+    },
+    "Déposez des fichiers sur l'encoche pour les garder à portée de main ou les envoyer par AirDrop." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drop files on the notch to keep them handy or send them with AirDrop."
+          }
+        }
+      }
+    },
+    "Déposez un widget ici pour créer une nouvelle page" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drop a widget here to create a new page"
+          }
+        }
+      }
+    },
+    "Désactivé" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Off"
+          }
+        }
+      }
+    },
+    "Désépingler" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unpin"
+          }
+        }
+      }
+    },
+    "Désinstaller" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uninstall"
+          }
+        }
+      }
+    },
+    "Détecter toutes les apps (expérimental)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detect all apps (experimental)"
+          }
+        }
+      }
+    },
+    "Développement" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Development"
+          }
+        }
+      }
+    },
+    "Développeur" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Developer"
+          }
+        }
+      }
+    },
+    "Déverrouillage" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlock"
+          }
+        }
+      }
+    },
+    "Déverrouillé" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlocked"
           }
         }
       }
@@ -1767,202 +2012,62 @@
         }
       }
     },
-    "Débogage" : {
+    "Échec du téléchargement" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Debug"
+            "value" : "Download failed"
           }
         }
       }
     },
-    "Début" : {
+    "Économie d'énergie" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start"
+            "value" : "Low Power Mode"
           }
         }
       }
     },
-    "Déconnectés" : {
+    "Écran" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Disconnected"
+            "value" : "Display"
           }
         }
       }
     },
-    "Délai d'ouverture" : {
+    "Écran principal" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Open delay"
+            "value" : "Main display"
           }
         }
       }
     },
-    "Délai de fermeture" : {
+    "Écrire à Claude…" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Close delay"
+            "value" : "Write to Claude…"
           }
         }
       }
     },
-    "Délai pour répondre depuis l'encoche" : {
+    "Écrit %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Time to reply from the notch"
-          }
-        }
-      }
-    },
-    "Démarrer" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Start"
-          }
-        }
-      }
-    },
-    "Déplacer à droite" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Move Right"
-          }
-        }
-      }
-    },
-    "Déplacer à gauche" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Move Left"
-          }
-        }
-      }
-    },
-    "Déplier / replier l'encoche" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Expand / collapse the notch"
-          }
-        }
-      }
-    },
-    "Déposez des fichiers sur l'encoche pour les garder à portée de main ou les envoyer par AirDrop." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Drop files on the notch to keep them handy or send them with AirDrop."
-          }
-        }
-      }
-    },
-    "Déposez un widget ici pour créer une nouvelle page" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Drop a widget here to create a new page"
-          }
-        }
-      }
-    },
-    "Désactivé" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Off"
-          }
-        }
-      }
-    },
-    "Désinstaller" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uninstall"
-          }
-        }
-      }
-    },
-    "Désépingler" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unpin"
-          }
-        }
-      }
-    },
-    "Détecter toutes les apps (expérimental)" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Detect all apps (experimental)"
-          }
-        }
-      }
-    },
-    "Développement" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Development"
-          }
-        }
-      }
-    },
-    "Développeur" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Developer"
-          }
-        }
-      }
-    },
-    "Déverrouillage" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unlock"
-          }
-        }
-      }
-    },
-    "Déverrouillé" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unlocked"
+            "value" : "Writes %@"
           }
         }
       }
@@ -2067,22 +2172,22 @@
         }
       }
     },
-    "Enregistrer" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Save"
-          }
-        }
-      }
-    },
     "Enregistrée dans le trousseau" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Saved in the keychain"
+          }
+        }
+      }
+    },
+    "Enregistrer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
           }
         }
       }
@@ -2103,6 +2208,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Send with AirDrop"
+          }
+        }
+      }
+    },
+    "Épingler" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pin"
           }
         }
       }
@@ -2169,12 +2284,12 @@
         }
       }
     },
-    "Exemples : https://api.openai.com/v1 · https://api.mistral.ai/v1 · http://localhost:11434/v1 (Ollama, sans clé)." : {
+    "Étagère" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Examples: https://api.openai.com/v1 · https://api.mistral.ai/v1 · http://localhost:11434/v1 (Ollama, no key)."
+            "value" : "Shelf"
           }
         }
       }
@@ -2185,6 +2300,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Runs: %@"
+          }
+        }
+      }
+    },
+    "Exemples : https://api.openai.com/v1 · https://api.mistral.ai/v1 · http://localhost:11434/v1 (Ollama, sans clé)." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Examples: https://api.openai.com/v1 · https://api.mistral.ai/v1 · http://localhost:11434/v1 (Ollama, no key)."
           }
         }
       }
@@ -2215,6 +2340,36 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Close"
+          }
+        }
+      }
+    },
+    "ffmpeg (facultatif : meilleure qualité, MP3) s'installe dans le Terminal avec « brew install ffmpeg ». Sur un Mac Intel, Homebrew peut devoir le compiler, ce qui est long." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ffmpeg (optional: better quality, MP3) is installed in Terminal with “brew install ffmpeg”. On an Intel Mac, Homebrew may have to compile it, which takes a long time."
+          }
+        }
+      }
+    },
+    "ffmpeg absent (qualité limitée, pas de MP3)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ffmpeg missing (limited quality, no MP3)"
+          }
+        }
+      }
+    },
+    "ffmpeg installé" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ffmpeg installed"
           }
         }
       }
@@ -2310,6 +2465,16 @@
         }
       }
     },
+    "Général" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "General"
+          }
+        }
+      }
+    },
     "Glissez dans une page pour l'afficher" : {
       "localizations" : {
         "en" : {
@@ -2400,16 +2565,6 @@
         }
       }
     },
-    "Général" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "General"
-          }
-        }
-      }
-    },
     "Hauteur" : {
       "localizations" : {
         "en" : {
@@ -2436,6 +2591,36 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Clock"
+          }
+        }
+      }
+    },
+    "https://api.openai.com/v1" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://api.openai.com/v1"
+          }
+        }
+      }
+    },
+    "https://github.com/ungive/mediaremote-adapter" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://github.com/ungive/mediaremote-adapter"
+          }
+        }
+      }
+    },
+    "https://open-meteo.com" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://open-meteo.com"
           }
         }
       }
@@ -2700,22 +2885,22 @@
         }
       }
     },
-    "Le fichier téléchargé est corrompu (empreinte différente). Réessayez." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The downloaded file is corrupted (checksum mismatch). Try again."
-          }
-        }
-      }
-    },
     "Le fichier ~/.claude/settings.json n'est pas un JSON valide. Corrigez-le ou supprimez-le, puis réessayez." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "The file ~/.claude/settings.json isn't valid JSON. Fix or delete it, then try again."
+          }
+        }
+      }
+    },
+    "Le fichier téléchargé est corrompu (empreinte différente). Réessayez." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The downloaded file is corrupted (checksum mismatch). Try again."
           }
         }
       }
@@ -2866,6 +3051,16 @@
         }
       }
     },
+    "macOS demandera l'autorisation lors de la prochaine copie." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS will ask for permission the next time you copy something."
+          }
+        }
+      }
+    },
     "Masquer ce widget" : {
       "localizations" : {
         "en" : {
@@ -2882,6 +3077,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "MediaRemoteAdapter"
+          }
+        }
+      }
+    },
+    "Médias" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Media"
           }
         }
       }
@@ -2912,6 +3117,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Updates its to-do list"
+          }
+        }
+      }
+    },
+    "Météo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weather"
+          }
+        }
+      }
+    },
+    "Météo indisponible" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weather unavailable"
           }
         }
       }
@@ -2986,6 +3211,16 @@
         }
       }
     },
+    "Modèle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Model"
+          }
+        }
+      }
+    },
     "Modifie %@" : {
       "localizations" : {
         "en" : {
@@ -3012,16 +3247,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Modules"
-          }
-        }
-      }
-    },
-    "Modèle" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Model"
           }
         }
       }
@@ -3126,42 +3351,32 @@
         }
       }
     },
-    "Médias" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Media"
-          }
-        }
-      }
-    },
-    "Météo" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Weather"
-          }
-        }
-      }
-    },
-    "Météo indisponible" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Weather unavailable"
-          }
-        }
-      }
-    },
     "Ne pas cacher les menus de l'app active" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Don't cover the active app's menus"
+          }
+        }
+      }
+    },
+    "Nécessaire pour Deezer, les navigateurs et la plupart des lecteurs. Utilise une interface non officielle d'Apple qui peut cesser de fonctionner après une mise à jour de macOS ; Music et Spotify restent alors pris en charge." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Required for Deezer, browsers, and most players. Uses an unofficial Apple interface that may stop working after a macOS update; Music and Spotify remain supported."
+          }
+        }
+      }
+    },
+    "Nécessite macOS 14.2 ou plus récent." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Requires macOS 14.2 or later."
           }
         }
       }
@@ -3276,26 +3491,6 @@
         }
       }
     },
-    "Nécessaire pour Deezer, les navigateurs et la plupart des lecteurs. Utilise une interface non officielle d'Apple qui peut cesser de fonctionner après une mise à jour de macOS ; Music et Spotify restent alors pris en charge." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Required for Deezer, browsers, and most players. Uses an unofficial Apple interface that may stop working after a macOS update; Music and Spotify remain supported."
-          }
-        }
-      }
-    },
-    "Nécessite macOS 14.2 ou plus récent." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Requires macOS 14.2 or later."
-          }
-        }
-      }
-    },
     "Open-Meteo" : {
       "localizations" : {
         "en" : {
@@ -3346,22 +3541,22 @@
         }
       }
     },
-    "Ouvrir Calendrier" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Calendar"
-          }
-        }
-      }
-    },
     "Ouvrir avec mon compte" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Open with my account"
+          }
+        }
+      }
+    },
+    "Ouvrir Calendrier" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Calendar"
           }
         }
       }
@@ -3386,16 +3581,6 @@
         }
       }
     },
-    "Ouvrir les Réglages Système" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open System Settings"
-          }
-        }
-      }
-    },
     "Ouvrir les réglages de confidentialité" : {
       "localizations" : {
         "en" : {
@@ -3406,12 +3591,12 @@
         }
       }
     },
-    "PRO" : {
+    "Ouvrir les Réglages Système" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "PRO"
+            "value" : "Open System Settings"
           }
         }
       }
@@ -3632,12 +3817,32 @@
         }
       }
     },
+    "Préparation…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preparing…"
+          }
+        }
+      }
+    },
     "Presse-papiers" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Clipboard"
+          }
+        }
+      }
+    },
+    "PRO" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PRO"
           }
         }
       }
@@ -3658,16 +3863,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Productivity"
-          }
-        }
-      }
-    },
-    "Préparation…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preparing…"
           }
         }
       }
@@ -3752,136 +3947,6 @@
         }
       }
     },
-    "Relancer" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restart"
-          }
-        }
-      }
-    },
-    "Remplace l'indicateur de volume et de luminosité de macOS par un affichage dans l'encoche." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Replaces the macOS volume and brightness indicator with one in the notch."
-          }
-        }
-      }
-    },
-    "Remplacer l'indicateur de volume et de luminosité de macOS" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Replace the macOS volume and brightness indicator"
-          }
-        }
-      }
-    },
-    "Reprendre" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Resume"
-          }
-        }
-      }
-    },
-    "Respectez les droits d'auteur : les conditions d'utilisation de YouTube interdisent de télécharger des vidéos sans autorisation. Réservez ce module à vos propres vidéos, aux contenus sous licence libre ou téléchargés avec l'accord de leurs auteurs." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Respect copyright: YouTube's terms of service forbid downloading videos without permission. Use this module only for your own videos, freely licensed content, or content downloaded with its creators' consent."
-          }
-        }
-      }
-    },
-    "Retirer" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remove"
-          }
-        }
-      }
-    },
-    "Retirer de l'étagère" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remove from Shelf"
-          }
-        }
-      }
-    },
-    "Retirer de la liste" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remove from List"
-          }
-        }
-      }
-    },
-    "Retour haptique" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Haptic feedback"
-          }
-        }
-      }
-    },
-    "Retour haptique du trackpad" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trackpad haptic feedback"
-          }
-        }
-      }
-    },
-    "Retour à l'app précédente" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Back to the previous app"
-          }
-        }
-      }
-    },
-    "Revenir à %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Back to %@"
-          }
-        }
-      }
-    },
-    "Rien de prévu" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nothing scheduled"
-          }
-        }
-      }
-    },
     "Réessayer" : {
       "localizations" : {
         "en" : {
@@ -3962,6 +4027,36 @@
         }
       }
     },
+    "Relancer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restart"
+          }
+        }
+      }
+    },
+    "Remplace l'indicateur de volume et de luminosité de macOS par un affichage dans l'encoche." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Replaces the macOS volume and brightness indicator with one in the notch."
+          }
+        }
+      }
+    },
+    "Remplacer l'indicateur de volume et de luminosité de macOS" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Replace the macOS volume and brightness indicator"
+          }
+        }
+      }
+    },
     "Répondez pour qu'il continue" : {
       "localizations" : {
         "en" : {
@@ -3982,6 +4077,36 @@
         }
       }
     },
+    "Reprendre" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resume"
+          }
+        }
+      }
+    },
+    "Respectez les droits d'auteur : les conditions d'utilisation de YouTube interdisent de télécharger des vidéos sans autorisation. Réservez ce module à vos propres vidéos, aux contenus sous licence libre ou téléchargés avec l'accord de leurs auteurs." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Respect copyright: YouTube's terms of service forbid downloading videos without permission. Use this module only for your own videos, freely licensed content, or content downloaded with its creators' consent."
+          }
+        }
+      }
+    },
+    "reste" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "left"
+          }
+        }
+      }
+    },
     "Rétablir l'apparence par défaut" : {
       "localizations" : {
         "en" : {
@@ -3992,12 +4117,112 @@
         }
       }
     },
+    "Retirer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove"
+          }
+        }
+      }
+    },
+    "Retirer de l'étagère" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove from Shelf"
+          }
+        }
+      }
+    },
+    "Retirer de la liste" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove from List"
+          }
+        }
+      }
+    },
+    "Retour à l'app précédente" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Back to the previous app"
+          }
+        }
+      }
+    },
+    "Retour haptique" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haptic feedback"
+          }
+        }
+      }
+    },
+    "Retour haptique du trackpad" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trackpad haptic feedback"
+          }
+        }
+      }
+    },
+    "Revenir à %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Back to %@"
+          }
+        }
+      }
+    },
+    "Rien de prévu" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing scheduled"
+          }
+        }
+      }
+    },
+    "s" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "s"
+          }
+        }
+      }
+    },
     "Sans titre" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Untitled"
+          }
+        }
+      }
+    },
+    "São Paulo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "São Paulo"
           }
         }
       }
@@ -4232,16 +4457,6 @@
         }
       }
     },
-    "São Paulo" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "São Paulo"
-          }
-        }
-      }
-    },
     "Taille" : {
       "localizations" : {
         "en" : {
@@ -4268,6 +4483,56 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Widget size"
+          }
+        }
+      }
+    },
+    "Téléchargement de yt-dlp… (environ 35 Mo)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Downloading yt-dlp… (about 35 MB)"
+          }
+        }
+      }
+    },
+    "Téléchargement terminé" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download complete"
+          }
+        }
+      }
+    },
+    "Télécharger" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download"
+          }
+        }
+      }
+    },
+    "Télécharger et installer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download and Install"
+          }
+        }
+      }
+    },
+    "Téléchargez une vidéo ou son audio à partir d'un lien (avec yt-dlp)." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download a video or its audio from a link (with yt-dlp)."
           }
         }
       }
@@ -4402,66 +4667,6 @@
         }
       }
     },
-    "Téléchargement de yt-dlp… (environ 35 Mo)" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Downloading yt-dlp… (about 35 MB)"
-          }
-        }
-      }
-    },
-    "Téléchargement terminé" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Download complete"
-          }
-        }
-      }
-    },
-    "Télécharger" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Download"
-          }
-        }
-      }
-    },
-    "Télécharger et installer" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Download and Install"
-          }
-        }
-      }
-    },
-    "Téléchargez une vidéo ou son audio à partir d'un lien (avec yt-dlp)." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Download a video or its audio from a link (with yt-dlp)."
-          }
-        }
-      }
-    },
-    "UTC" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "UTC"
-          }
-        }
-      }
-    },
     "Un léger clic à l'ouverture de l'encoche, au changement de page, aux alertes et à chaque cran de volume (trackpad Force Touch)." : {
       "localizations" : {
         "en" : {
@@ -4478,6 +4683,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "A larger notch fits more widgets per page (%@ width units)."
+          }
+        }
+      }
+    },
+    "UTC" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UTC"
           }
         }
       }
@@ -4532,6 +4747,46 @@
         }
       }
     },
+    "Vidéo (meilleure qualité)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video (best quality)"
+          }
+        }
+      }
+    },
+    "Vidéo 720p" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video 720p"
+          }
+        }
+      }
+    },
+    "Vidéo 1080p" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video 1080p"
+          }
+        }
+      }
+    },
+    "Vidéos" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Videos"
+          }
+        }
+      }
+    },
     "Vider l'étagère" : {
       "localizations" : {
         "en" : {
@@ -4548,46 +4803,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Empty the Shelf (%lld)"
-          }
-        }
-      }
-    },
-    "Vidéo (meilleure qualité)" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Video (best quality)"
-          }
-        }
-      }
-    },
-    "Vidéo 1080p" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Video 1080p"
-          }
-        }
-      }
-    },
-    "Vidéo 720p" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Video 720p"
-          }
-        }
-      }
-    },
-    "Vidéos" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Videos"
           }
         }
       }
@@ -4682,96 +4897,6 @@
         }
       }
     },
-    "ffmpeg (facultatif : meilleure qualité, MP3) s'installe dans le Terminal avec « brew install ffmpeg ». Sur un Mac Intel, Homebrew peut devoir le compiler, ce qui est long." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ffmpeg (optional: better quality, MP3) is installed in Terminal with “brew install ffmpeg”. On an Intel Mac, Homebrew may have to compile it, which takes a long time."
-          }
-        }
-      }
-    },
-    "ffmpeg absent (qualité limitée, pas de MP3)" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ffmpeg missing (limited quality, no MP3)"
-          }
-        }
-      }
-    },
-    "ffmpeg installé" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ffmpeg installed"
-          }
-        }
-      }
-    },
-    "https://api.openai.com/v1" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "https://api.openai.com/v1"
-          }
-        }
-      }
-    },
-    "https://github.com/ungive/mediaremote-adapter" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "https://github.com/ungive/mediaremote-adapter"
-          }
-        }
-      }
-    },
-    "https://open-meteo.com" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "https://open-meteo.com"
-          }
-        }
-      }
-    },
-    "macOS demandera l'autorisation lors de la prochaine copie." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "macOS will ask for permission the next time you copy something."
-          }
-        }
-      }
-    },
-    "reste" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "left"
-          }
-        }
-      }
-    },
-    "s" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "s"
-          }
-        }
-      }
-    },
     "yt-dlp est installé." : {
       "localizations" : {
         "en" : {
@@ -4808,126 +4933,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "yt-dlp not installed"
-          }
-        }
-      }
-    },
-    "« %@ »" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "“%@”"
-          }
-        }
-      }
-    },
-    "« Réduire les animations » est activé dans macOS : les animations sont désactivées." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "“Reduce motion” is turned on in macOS: animations are disabled."
-          }
-        }
-      }
-    },
-    "·" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "·"
-          }
-        }
-      }
-    },
-    "À propos" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "About"
-          }
-        }
-      }
-    },
-    "Échec du téléchargement" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Download failed"
-          }
-        }
-      }
-    },
-    "Économie d'énergie" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Low Power Mode"
-          }
-        }
-      }
-    },
-    "Écran" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Display"
-          }
-        }
-      }
-    },
-    "Écran principal" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Main display"
-          }
-        }
-      }
-    },
-    "Écrire à Claude…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Write to Claude…"
-          }
-        }
-      }
-    },
-    "Écrit %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Writes %@"
-          }
-        }
-      }
-    },
-    "Épingler" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pin"
-          }
-        }
-      }
-    },
-    "Étagère" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Shelf"
           }
         }
       }

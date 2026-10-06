@@ -174,8 +174,11 @@ struct MusicExpandedView: View {
                     PlaybackControls(module: module, isPlaying: info.isPlaying)
                     HStack {
                         Spacer()
+                        // Même cercle sombre que les boutons précédent et suivant (style StandBy).
                         AirPlayButton()
-                            .frame(width: 22, height: 22)
+                            .frame(width: 18, height: 18)
+                            .frame(width: 30, height: 30)
+                            .background(StandBy.surface, in: Circle())
                             .help("Sortie audio")
                     }
                 }
@@ -261,6 +264,10 @@ private struct AirPlayButton: NSViewRepresentable {
         picker.isRoutePickerButtonBordered = false
         picker.setRoutePickerButtonColor(.white.withAlphaComponent(0.75), for: .normal)
         picker.setRoutePickerButtonColor(.white, for: .normalHighlighted)
+        // Sortie AirPlay en cours : symbole ambre, comme les autres états actifs.
+        let amber = NSColor(StandBy.amber)
+        picker.setRoutePickerButtonColor(amber, for: .active)
+        picker.setRoutePickerButtonColor(amber.withAlphaComponent(0.8), for: .activeHighlighted)
         return picker
     }
 

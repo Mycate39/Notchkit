@@ -30,8 +30,9 @@ extension ButtonStyle where Self == NotchPressStyle {
 enum StandBy {
     /// Ambre par défaut des états actifs (remplaçable par la couleur d'accent des réglages).
     static let amber = Color(red: 1.0, green: 0.62, blue: 0.16)
-    /// Pilule au repos : gris très sombre, à peine détaché du noir.
-    static let surface = Color(white: 0.15)
+    /// Pilule au repos : gris très sombre sur le noir. Blanc translucide plutôt qu'un gris opaque :
+    /// identique sur fond noir, mais il laisse transparaître le Liquid Glass au lieu de faire tache.
+    static let surface = Color.white.opacity(0.15)
     /// Texte et symboles posés sur l'ambre : noir chaud, lisible sans éblouir.
     static let onAccent = Color(red: 0.12, green: 0.07, blue: 0.0)
 }
@@ -182,6 +183,9 @@ struct StandBySlider: View {
 
     private func set(_ newValue: Double) {
         let clamped = min(max(newValue, 0), 1)
+        guard clamped != value else { return }
+        // Butée : petit « clic » du trackpad en atteignant le minimum ou le maximum.
+        if clamped == 0 || clamped == 1 { Haptics.play(.snap) }
         value = clamped
         onChange(clamped)
     }

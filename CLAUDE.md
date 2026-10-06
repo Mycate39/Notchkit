@@ -96,7 +96,7 @@ NOTCHKIT_SNAPSHOT=/path/to/folder build.noindex/DerivedData/Build/Products/Debug
 5. `git push`, `git tag -a vx.y.z`, push the tag, `gh release create vx.y.z <dmg> --prerelease --notes-file <notes.md>`.
    The feed URL is `https://raw.githubusercontent.com/Mycate39/Notchkit/main/appcast.xml`.
 
-## Status (October 2026, version 0.1.5)
+## Status (October 2026, version 0.1.6)
 
 ### Working
 - Notch window on any screen: real notch, simulated notch, or floating pill; stays put across Spaces; shifts right so it never covers the active app's menus (needs Accessibility permission).

@@ -33,6 +33,8 @@ Notchkit is available in English and French, following your Mac's language.
    **Right-click the app > Open**, or go to **System Settings > Privacy & Security** and
    click **Open Anyway**.
 
+Notchkit updates itself: it checks for a new version once a day and installs it with your approval (you can also use **Check for Updates…** in its menu).
+
 Notchkit lives in the menu bar (no Dock icon). Open the settings from its menu bar icon or
 from the gear in the notch.
 

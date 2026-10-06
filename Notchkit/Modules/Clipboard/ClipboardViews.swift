@@ -30,9 +30,9 @@ struct ClipboardExpandedView: View {
                         .help("Effacer l'historique (sauf les éléments épinglés)")
                 }
             }
-            .padding(.horizontal, 7)
-            .padding(.vertical, 3)
-            .background(.white.opacity(0.08), in: Capsule())
+            .padding(.horizontal, 9)
+            .padding(.vertical, 5)
+            .background(StandBy.surface, in: Capsule())
 
             if filtered.isEmpty {
                 Text(module.items.isEmpty ? "Copiez du texte, une image ou des fichiers : ils apparaîtront ici." : "Aucun résultat")
@@ -84,7 +84,7 @@ private struct ClipboardRow: View {
                 }
                 .buttonStyle(.notch)
                 .font(.system(size: 9))
-                .foregroundStyle(item.isPinned ? .orange : .white.opacity(0.6))
+                .foregroundStyle(item.isPinned ? AnyShapeStyle(.tint) : AnyShapeStyle(.white.opacity(0.6)))
                 .help(item.isPinned ? "Désépingler" : "Épingler")
             }
         }

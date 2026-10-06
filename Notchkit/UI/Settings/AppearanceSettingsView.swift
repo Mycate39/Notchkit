@@ -103,6 +103,9 @@ struct AppearanceSettingsView: View {
                     get: { settings.settings.appearance.accent != nil },
                     set: { settings.settings.appearance.accent = $0 ? StoredColor(.orange) : nil }
                 ))
+                Text("Par défaut : ambre, comme le mode Nuit de StandBy sur iPhone.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
                 if settings.settings.appearance.accent != nil {
                     ColorPicker("Couleur d'accent", selection: Binding(
                         get: { settings.settings.appearance.accentColor },

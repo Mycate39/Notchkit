@@ -3472,6 +3472,16 @@
         }
       }
     },
+    "Par défaut : ambre, comme le mode Nuit de StandBy sur iPhone." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Default: amber, like StandBy's Night Mode on iPhone."
+          }
+        }
+      }
+    },
     "Paris" : {
       "localizations" : {
         "en" : {

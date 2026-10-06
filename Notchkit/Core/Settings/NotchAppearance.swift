@@ -111,7 +111,7 @@ struct NotchAppearance: Codable, Equatable, Sendable {
     var animation: AnimationStyle = .fluid
     var background: Background = .black
     var customBackground = StoredColor(red: 0.1, green: 0.1, blue: 0.18)
-    /// Couleur d'accent (onglets, liens, curseurs) ; `nil` = couleur du système.
+    /// Couleur d'accent (onglets, liens, curseurs) ; `nil` = ambre du style StandBy.
     var accent: StoredColor?
 
     init() {}
@@ -141,7 +141,7 @@ struct NotchAppearance: Codable, Equatable, Sendable {
     }
 
     /// Couleur d'accent effective.
-    var accentColor: Color { accent?.color ?? .accentColor }
+    var accentColor: Color { accent?.color ?? StandBy.amber }
 }
 
 extension View {

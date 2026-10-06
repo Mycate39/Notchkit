@@ -208,16 +208,8 @@ private struct PlaybackProgressView: View {
             HStack(spacing: 8) {
                 Text(elapsed.map(Self.format) ?? "–:––")
                     .frame(minWidth: 30, alignment: .leading)
-                GeometryReader { proxy in
-                    let progress = duration > 0 ? (elapsed ?? 0) / duration : 0
-                    ZStack(alignment: .leading) {
-                        Capsule().fill(.white.opacity(0.2))
-                        Capsule().fill(.tint)
-                            .frame(width: proxy.size.width * min(max(progress, 0), 1))
-                    }
-                }
-                .frame(height: 5)
-                .opacity(elapsed == nil ? 0.4 : 1)
+                StandByBar(value: duration > 0 ? (elapsed ?? 0) / duration : 0, height: 6)
+                    .opacity(elapsed == nil ? 0.4 : 1)
                 Text(elapsed.map { "-" + Self.format(max(0, duration - $0)) } ?? Self.format(duration))
                     .frame(minWidth: 34, alignment: .trailing)
             }
@@ -236,26 +228,28 @@ private struct PlaybackControls: View {
     let isPlaying: Bool
     var compact = false
 
+    // Style StandBy : lecture/pause en grand cercle ambre, morceaux précédent/suivant en cercles sombres.
     var body: some View {
-        HStack(spacing: compact ? 6 : 30) {
-            control("backward.fill", size: compact ? 11 : 18, help: "Morceau précédent") { module.send(.previousTrack) }
-            control(isPlaying ? "pause.fill" : "play.fill", size: compact ? 16 : 24, help: isPlaying ? "Pause" : "Lecture") {
+        HStack(spacing: compact ? 6 : 18) {
+            control("backward.fill", style: .standBy(compact ? .small : .regular, circle: true),
+                    help: "Morceau précédent") { module.send(.previousTrack) }
+            control(isPlaying ? "pause.fill" : "play.fill", style: .standBy(compact ? .regular : .large, active: true, circle: true),
+                    help: isPlaying ? "Pause" : "Lecture") {
                 module.send(.togglePlayPause)
             }
-            control("forward.fill", size: compact ? 11 : 18, help: "Morceau suivant") { module.send(.nextTrack) }
+            control("forward.fill", style: .standBy(compact ? .small : .regular, circle: true),
+                    help: "Morceau suivant") { module.send(.nextTrack) }
         }
         .frame(maxWidth: .infinity)
     }
 
-    private func control(_ symbol: String, size: CGFloat, help: LocalizedStringKey, action: @escaping () -> Void) -> some View {
+    private func control(_ symbol: String, style: StandByButtonStyle, help: LocalizedStringKey,
+                         action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Image(systemName: symbol)
-                .font(.system(size: size, weight: .semibold))
-                .frame(width: compact ? 24 : 34, height: compact ? 22 : 28)
-                .contentShape(Rectangle())
                 .contentTransition(.symbolEffect(.replace))
         }
-        .buttonStyle(.notch)
+        .buttonStyle(style)
         .help(help)
     }
 }
@@ -348,12 +342,9 @@ struct MusicMiniView: View {
                     ArtworkView(info: info, size: side, cornerRadius: side * 0.2)
                     Button { module.send(.togglePlayPause) } label: {
                         Image(systemName: info.isPlaying ? "pause.fill" : "play.fill")
-                            .font(.system(size: max(10, side * 0.36), weight: .semibold))
-                            .frame(width: side, height: side * 0.5)
-                            .contentShape(Rectangle())
                             .contentTransition(.symbolEffect(.replace))
                     }
-                    .buttonStyle(.notch)
+                    .buttonStyle(.standBy(side > 60 ? .regular : .small, active: true, circle: true))
                 }
                 .frame(width: proxy.size.width, height: proxy.size.height)
             }

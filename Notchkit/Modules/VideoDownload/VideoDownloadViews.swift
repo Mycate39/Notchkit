@@ -64,9 +64,9 @@ struct VideoDownloadExpandedView: View {
             .disabled(!YTDLP.isValidLink(link))
             .help("Télécharger")
         }
-        .padding(.horizontal, 8)
-        .padding(.vertical, 4)
-        .background(.white.opacity(0.1), in: Capsule())
+        .padding(.horizontal, 10)
+        .padding(.vertical, 6)
+        .background(StandBy.surface, in: Capsule())
     }
 
     private var formatRow: some View {
@@ -91,11 +91,8 @@ struct VideoDownloadExpandedView: View {
 
             Button { module.chooseDirectory() } label: {
                 Label(module.directory.lastPathComponent, systemImage: "folder")
-                    .font(.system(size: 9, weight: .semibold))
-                    .lineLimit(1)
             }
-            .buttonStyle(.notch)
-            .foregroundStyle(.white.opacity(0.75))
+            .buttonStyle(.standBy(.small))
             .help("Dossier de destination : \(module.directory.path)")
         }
     }
@@ -146,9 +143,7 @@ private struct DownloadRow: View {
                     .help("Retirer de la liste")
             }
         }
-        .buttonStyle(.notch)
-        .font(.system(size: 10, weight: .semibold))
-        .foregroundStyle(.white.opacity(0.8))
+        .buttonStyle(.standBy(.small, circle: true))
     }
 
     private var tint: Color {

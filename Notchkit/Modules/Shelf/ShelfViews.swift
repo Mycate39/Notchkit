@@ -56,9 +56,7 @@ struct ShelfExpandedView: View {
                 .help("Vider l'étagère")
             }
         }
-        .buttonStyle(.notch)
-        .font(.system(size: 11, weight: .medium))
-        .foregroundStyle(.white.opacity(0.75))
+        .buttonStyle(.standBy(.small, circle: true))
     }
 }
 

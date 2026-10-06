@@ -20,14 +20,7 @@ struct HUDLevelBar: View {
     var body: some View {
         let level = CGFloat(state.isMuted ? 0 : state.level)
         HStack(spacing: 6) {
-            GeometryReader { proxy in
-                ZStack(alignment: .leading) {
-                    Capsule().fill(.white.opacity(0.22))
-                    Capsule().fill(.tint)
-                        .frame(width: max(level > 0 ? 6 : 0, proxy.size.width * level))
-                }
-            }
-            .frame(height: 6)
+            StandByBar(value: level, height: 6)
             Text("\(Int((level * 100).rounded()))")
                 .font(.system(size: 10, weight: .semibold).monospacedDigit())
                 .foregroundStyle(.white.opacity(0.7))
@@ -75,17 +68,17 @@ struct SystemHUDExpandedView: View {
 
     private func row(symbol: String, value: Binding<Float>, enabled: Bool,
                      onChange: @escaping (Float) -> Void, onSymbolTap: @escaping () -> Void) -> some View {
+        // Style StandBy : symbole dans un cercle sombre, curseur en pilule épaisse ambre.
         HStack(spacing: 8) {
             Button(action: onSymbolTap) {
                 Image(systemName: symbol)
-                    .font(.system(size: 12, weight: .semibold))
-                    .frame(width: 20)
+                    .contentTransition(.symbolEffect(.replace))
             }
-            .buttonStyle(.notch)
-            Slider(value: Binding(get: { value.wrappedValue }, set: { value.wrappedValue = $0; onChange($0) }), in: 0...1)
-                .controlSize(.small)
-                .tint(.white)
-                .disabled(!enabled)
+            .buttonStyle(.standBy(.regular, circle: true))
+            StandBySlider(value: Binding(get: { Double(value.wrappedValue) }, set: { value.wrappedValue = Float($0) })) {
+                onChange(Float($0))
+            }
+            .disabled(!enabled)
         }
     }
 }

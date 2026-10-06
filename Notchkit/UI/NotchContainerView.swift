@@ -256,14 +256,15 @@ private struct ExpandedNotchView: View {
                                         }
                                     }
                                     .font(.system(size: 10, weight: .semibold))
-                                    .padding(.horizontal, 9)
-                                    .padding(.vertical, 4)
+                                    .padding(.horizontal, 11)
+                                    .padding(.vertical, 5)
                                     .background {
+                                        // Onglet choisi : pilule ambre, icônes en noir chaud (style StandBy).
                                         Capsule()
                                             .fill(.tint)
                                             .matchedGeometryEffect(id: "pastille", in: pageIndicator)
                                     }
-                                    .foregroundStyle(.white)
+                                    .foregroundStyle(StandBy.onAccent)
                                 } else {
                                     Circle()
                                         .fill(.white.opacity(0.35))
@@ -287,11 +288,8 @@ private struct ExpandedNotchView: View {
                 viewModel.openSettings()
             } label: {
                 Image(systemName: "gearshape.fill")
-                    .font(.system(size: 13))
-                    .foregroundStyle(.white.opacity(0.7))
-                    .contentShape(Rectangle())
             }
-            .buttonStyle(.notch)
+            .buttonStyle(.standBy(.small, circle: true))
             .help("Réglages")
         }
     }

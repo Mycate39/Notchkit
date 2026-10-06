@@ -128,17 +128,16 @@ struct LiveActivitiesExpandedView: View {
     private var timerLauncher: some View {
         HStack(spacing: 5) {
             Image(systemName: "timer")
-                .font(.system(size: 10, weight: .semibold))
-                .foregroundStyle(.orange)
+                .font(.system(size: 11, weight: .semibold))
+                .foregroundStyle(.tint)
             ForEach(size == .small ? [5] : LiveActivitiesModule.presets, id: \.self) { minutes in
                 Button("\(minutes) min") { module.startTimer(minutes: Double(minutes)) }
-                    .buttonStyle(ChipButtonStyle())
+                    .buttonStyle(.standBy(.small))
             }
             Button { isPickingDuration = true } label: {
                 Image(systemName: "plus")
-                    .font(.system(size: 9, weight: .bold))
             }
-            .buttonStyle(ChipButtonStyle())
+            .buttonStyle(.standBy(.small, circle: true))
             .help("Choisir une durée précise")
         }
     }
@@ -147,7 +146,7 @@ struct LiveActivitiesExpandedView: View {
 // MARK: - Minuteur façon iOS
 
 /// Minuteur en cours, présenté comme dans la Dynamic Island d'iOS :
-/// boutons ronds à gauche, grand décompte orange à droite.
+/// boutons ronds à gauche, grand décompte ambre à droite.
 private struct TimerHeroView: View {
     let module: LiveActivitiesModule
     let timer: LiveActivity
@@ -157,18 +156,18 @@ private struct TimerHeroView: View {
         HStack(spacing: compact ? 8 : 14) {
             HStack(spacing: 8) {
                 if timer.isFinished {
-                    RoundButton(symbol: "arrow.counterclockwise", tint: .orange, size: compact ? 30 : 38) {
+                    RoundButton(symbol: "arrow.counterclockwise", isActive: true, compact: compact) {
                         module.remove(timer.id)
                         module.startTimer(seconds: timer.duration, title: timer.title)
                     }
                     .help("Relancer")
                 } else {
-                    RoundButton(symbol: timer.isPaused ? "play.fill" : "pause.fill", tint: .orange, size: compact ? 30 : 38) {
+                    RoundButton(symbol: timer.isPaused ? "play.fill" : "pause.fill", isActive: true, compact: compact) {
                         module.togglePause(timer.id)
                     }
                     .help(timer.isPaused ? "Reprendre" : "Pause")
                 }
-                RoundButton(symbol: "xmark", tint: .gray, size: compact ? 30 : 38) {
+                RoundButton(symbol: "xmark", isActive: false, compact: compact) {
                     module.remove(timer.id)
                 }
                 .help("Arrêter")
@@ -179,12 +178,12 @@ private struct TimerHeroView: View {
             VStack(alignment: .trailing, spacing: 0) {
                 Text(timer.isFinished ? "Terminé" : (timer.isPaused ? "En pause" : "Minuteur"))
                     .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(.orange)
+                    .foregroundStyle(.tint)
                 TimelineView(.periodic(from: .now, by: 1)) { context in
                     Text(LiveActivityFormat.countdown(timer.remaining(at: context.date) ?? 0))
                         .font(.system(size: compact ? 28 : 40, weight: .regular, design: .rounded))
                         .monospacedDigit()
-                        .foregroundStyle(timer.isPaused ? .orange.opacity(0.6) : .orange)
+                        .foregroundStyle(.tint.opacity(timer.isPaused ? 0.6 : 1))
                         .contentTransition(.numericText(countsDown: true))
                         .animation(.snappy, value: timer.remaining(at: context.date))
                 }
@@ -200,24 +199,20 @@ private struct TimerHeroView: View {
     }
 }
 
-/// Bouton rond à fond teinté (style iOS).
+/// Bouton rond StandBy : ambre pour l'action principale, gris sombre pour arrêter.
 private struct RoundButton: View {
     let symbol: String
-    let tint: Color
-    let size: CGFloat
+    let isActive: Bool
+    let compact: Bool
     let action: () -> Void
 
     var body: some View {
         Button(action: action) {
             Image(systemName: symbol)
-                .font(.system(size: size * 0.38, weight: .bold))
-                .foregroundStyle(tint == .gray ? .white : tint)
-                .frame(width: size, height: size)
-                .background(tint.opacity(tint == .gray ? 0.35 : 0.28), in: Circle())
-                .contentShape(Circle())
+                .fontWeight(.bold)
                 .contentTransition(.symbolEffect(.replace))
         }
-        .buttonStyle(.notch)
+        .buttonStyle(.standBy(compact ? .regular : .large, active: isActive, circle: true))
     }
 }
 
@@ -241,20 +236,15 @@ private struct TimerDurationPicker: View {
             }
             HStack {
                 Button("Annuler") { isPresented = false }
-                    .buttonStyle(ChipButtonStyle())
+                    .buttonStyle(.standBy(.small))
                 Spacer()
                 Button {
                     module.startTimer(seconds: TimeInterval(total))
                     isPresented = false
                 } label: {
                     Label("Démarrer", systemImage: "play.fill")
-                        .font(.system(size: 11, weight: .bold))
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 5)
-                        .background(total > 0 ? Color.orange : Color.gray.opacity(0.4), in: Capsule())
-                        .foregroundStyle(total > 0 ? .black : .white.opacity(0.6))
                 }
-                .buttonStyle(.notch)
+                .buttonStyle(.standBy(.small, active: true))
                 .disabled(total == 0)
                 .keyboardShortcut(.defaultAction)
             }
@@ -318,17 +308,6 @@ private struct WheelPicker: View {
     }
 }
 
-private struct ChipButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .font(.system(size: 9, weight: .semibold))
-            .padding(.horizontal, 7)
-            .padding(.vertical, 3)
-            .background(.white.opacity(configuration.isPressed ? 0.25 : 0.12), in: Capsule())
-            .foregroundStyle(.white)
-    }
-}
-
 private struct ActivityRow: View {
     let module: LiveActivitiesModule
     let activity: LiveActivity
@@ -362,10 +341,10 @@ private struct ActivityRow: View {
 
     @ViewBuilder
     private var controls: some View {
-        HStack(spacing: 8) {
+        HStack(spacing: 6) {
             if activity.kind == .timer {
                 Button { module.extend(activity.id, by: 60) } label: {
-                    Text("+1").font(.system(size: 9, weight: .bold))
+                    Text("+1")
                 }
                 .help("Ajouter une minute")
                 if !activity.isFinished {
@@ -382,9 +361,7 @@ private struct ActivityRow: View {
                 .help(activity.isFinished ? "Retirer" : "Arrêter")
             }
         }
-        .buttonStyle(.notch)
-        .font(.system(size: 10, weight: .semibold))
-        .foregroundStyle(.white.opacity(0.75))
+        .buttonStyle(.standBy(.small, circle: true))
     }
 
     private func subtitle(at date: Date) -> String {
@@ -447,13 +424,9 @@ struct LiveActivitiesMiniView: View {
             VStack(spacing: 6) {
                 Image(systemName: "timer")
                     .font(.system(size: 22))
-                    .foregroundStyle(.orange)
+                    .foregroundStyle(.tint)
                 Button("5 min") { module.startTimer(minutes: 5) }
-                    .font(.system(size: 9, weight: .semibold))
-                    .buttonStyle(.notch)
-                    .padding(.horizontal, 6)
-                    .padding(.vertical, 3)
-                    .background(.white.opacity(0.12), in: Capsule())
+                    .buttonStyle(.standBy(.small, active: true))
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }

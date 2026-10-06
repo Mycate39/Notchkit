@@ -162,9 +162,9 @@ struct ClaudeExpandedView: View {
                 .buttonStyle(.notch)
                 .disabled(draft.trimmingCharacters(in: .whitespaces).isEmpty)
             }
-            .padding(.horizontal, 8)
-            .padding(.vertical, 4)
-            .background(.white.opacity(0.1), in: Capsule())
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
+            .background(StandBy.surface, in: Capsule())
 
             if session.state == .awaitingReply, let deadline = session.replyDeadline {
                 HStack(spacing: 3) {

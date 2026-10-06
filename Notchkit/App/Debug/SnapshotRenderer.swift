@@ -124,10 +124,34 @@ enum SnapshotRenderer {
                     .environment(\.widgetSize, .large)
                     .frame(width: 420, height: 142)
                     .notchCard()
-                    .padding(14).background(.black).foregroundStyle(.white).environment(\.colorScheme, .dark),
+                    .padding(14).background(.black).foregroundStyle(.white).environment(\.colorScheme, .dark)
+                    .tint(StandBy.amber),
                  to: directory.appendingPathComponent("musique-grande.png"))
             music.debugSetNowPlaying(nil)
         }
+
+        // Contrôles du style StandBy (pilules, cercles, barre et curseur).
+        save(VStack(alignment: .leading, spacing: 12) {
+                HStack(spacing: 8) {
+                    Button("5 min") {}.buttonStyle(.standBy(.small))
+                    Button("10 min") {}.buttonStyle(.standBy(.small))
+                    Button {} label: { Image(systemName: "plus") }.buttonStyle(.standBy(.small, circle: true))
+                    Button {} label: { Label("Démarrer", systemImage: "play.fill") }.buttonStyle(.standBy(.small, active: true))
+                }
+                HStack(spacing: 10) {
+                    Button {} label: { Image(systemName: "pause.fill") }.buttonStyle(.standBy(.large, active: true, circle: true))
+                    Button {} label: { Image(systemName: "xmark").fontWeight(.bold) }.buttonStyle(.standBy(.large, circle: true))
+                    Button {} label: { Image(systemName: "gearshape.fill") }.buttonStyle(.standBy(.small, circle: true))
+                }
+                StandByBar(value: 0.62, height: 6).frame(width: 260)
+                HStack(spacing: 8) {
+                    Button {} label: { Image(systemName: "speaker.wave.2.fill") }.buttonStyle(.standBy(.regular, circle: true))
+                    StandBySlider(value: .constant(0.45)).frame(width: 222)
+                }
+            }
+            .padding(16).background(.black).foregroundStyle(.white).environment(\.colorScheme, .dark)
+            .tint(StandBy.amber),
+             to: directory.appendingPathComponent("standby-controles.png"))
 
         // Icônes au trait et jauge de batterie en charge.
         save(HStack(spacing: 18) {

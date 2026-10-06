@@ -88,23 +88,49 @@ final class NotchViewModel {
     private var bubbleMenuRequested = false
     var isBubbleMenuOpen: Bool { bubbleMenuRequested && showsBubbleStack }
 
-    /// Ouvre ou ferme le menu des bulles. Tant qu'il est ouvert, survoler la pile ne déplie pas
-    /// l'encoche : seule une bulle survolée l'ouvre, sur la page de son activité.
+    /// Ouvre ou ferme le menu des bulles (souris sur la pile).
     func setBubbleMenuOpen(_ open: Bool) {
         guard open != bubbleMenuRequested else { return }
         withAnimation(NotchLayout.spring) { bubbleMenuRequested = open }
-        setExpansionBlocked(open)
     }
 
-    /// Souris sur une bulle du menu : l'encoche s'ouvrira sur la page de cette activité.
-    func hoverMenuBubble(_ moduleID: String, inside: Bool) {
+    /// Les bulles sont une zone à part : les survoler n'active pas la grande encoche.
+    /// Une bulle survolée assez longtemps ouvre l'encoche sur la page de son activité.
+    @ObservationIgnored private var bubbleHoverTask: Task<Void, Never>?
+
+    func hoverBubble(_ moduleID: String, inside: Bool) {
+        bubbleHoverTask?.cancel()
         if inside {
             requestedModuleID = moduleID
-            setExpansionBlocked(false)
-        } else if !isExpanded {
-            if requestedModuleID == moduleID { requestedModuleID = nil }
-            if isBubbleMenuOpen { setExpansionBlocked(true) }
+            let delay = settings.settings.hoverOpenDelay
+            bubbleHoverTask = Task { [weak self] in
+                try? await Task.sleep(for: .seconds(delay))
+                guard !Task.isCancelled else { return }
+                self?.expand()
+            }
+        } else if !isExpanded, requestedModuleID == moduleID {
+            requestedModuleID = nil
         }
+    }
+
+    // MARK: - Zones de la fenêtre
+
+    /// Souris au-dessus de la grande encoche (et non des bulles, dans la même fenêtre).
+    @ObservationIgnored private(set) var isPointerOverNotch = false
+
+    /// La grande encoche occupe le centre de la fenêtre ; les bulles sont à droite.
+    /// Encoche dépliée : toute la fenêtre lui appartient (les bulles sont masquées).
+    func pointerMoved(dx: CGFloat, fromTop: CGFloat) {
+        let inside = isExpanded || bubbleModules.isEmpty
+            || NotchLayout.isOverNotch(dx: dx, fromTop: fromTop, shapeSize: shapeSize, style: geometry.style)
+        guard inside != isPointerOverNotch else { return }
+        isPointerOverNotch = inside
+        hoverChanged(isInside: inside)
+    }
+
+    func pointerExited() {
+        isPointerOverNotch = false
+        hoverChanged(isInside: false)
     }
 
     /// Module à montrer à l'ouverture (bulle cliquée).
@@ -163,7 +189,7 @@ final class NotchViewModel {
         isExpansionBlocked = blocked
         if blocked {
             if !isExpanded { hoverTask?.cancel() }
-        } else if isMouseInside() && !isExpanded {
+        } else if isPointerOverNotch && !isExpanded {
             hoverChanged(isInside: true)
         }
     }
@@ -189,7 +215,7 @@ final class NotchViewModel {
         guard state != .expanded else { return }
         // Le menu des bulles se referme : l'encoche dépliée prend le relais.
         bubbleMenuRequested = false
-        isExpansionBlocked = false
+        bubbleHoverTask?.cancel()
         Haptics.play(.tap)
         withAnimation(NotchLayout.spring) { state = .expanded }
     }

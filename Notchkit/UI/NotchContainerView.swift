@@ -92,13 +92,7 @@ private struct CompactBubbles: View {
                 stack(ids, diameter: diameter, width: width, resting: resting)
             } else if let id = ids.first {
                 bubble(id, diameter: diameter, width: width, shape: resting)
-                    .onHover { inside in
-                        if inside {
-                            viewModel.requestedModuleID = id
-                        } else if viewModel.requestedModuleID == id, !viewModel.isExpanded {
-                            viewModel.requestedModuleID = nil
-                        }
-                    }
+                    .onHover { viewModel.hoverBubble(id, inside: $0) }
                     .transition(.scale(scale: 0.4).combined(with: .opacity))
             }
         }
@@ -118,7 +112,7 @@ private struct CompactBubbles: View {
                     bubble(id, diameter: diameter, width: diameter, shape: AnyShape(Circle()))
                         // La première bulle naît de la pile (même emplacement, la forme s'arrondit).
                         .matchedGeometryEffect(id: index == 0 ? "pile" : id, in: namespace)
-                        .onHover { viewModel.hoverMenuBubble(id, inside: $0) }
+                        .onHover { viewModel.hoverBubble(id, inside: $0) }
                         // Les suivantes tombent l'une après l'autre, avec un léger décalage.
                         .transition(index == 0 ? .opacity : .asymmetric(
                             insertion: .scale(scale: 0.5, anchor: .top)

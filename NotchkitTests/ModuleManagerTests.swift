@@ -169,6 +169,18 @@ struct NotchLayoutTests {
         #expect(NotchLayout.bubblesWidth(count: 1, geometry: notch) == NotchLayout.bubbleWidth(for: notch) + NotchLayout.bubbleGap)
     }
 
+    @Test func bullesZoneSepareeDeLEncoche() {
+        let shape = CGSize(width: 300, height: 32)
+        // Sur la grande encoche, y compris au ras du bord.
+        #expect(NotchLayout.isOverNotch(dx: 0, fromTop: 10, shapeSize: shape, style: .notch))
+        #expect(NotchLayout.isOverNotch(dx: 150, fromTop: 10, shapeSize: shape, style: .notch))
+        // Sur la mini-encoche à droite (au-delà de l'espacement) : zone à part.
+        let bubbleX = shape.width / 2 + NotchLayout.bubbleGap + 10
+        #expect(!NotchLayout.isOverNotch(dx: bubbleX, fromTop: 10, shapeSize: shape, style: .notch))
+        // Sous l'encoche (menu des bulles déroulé) : zone à part.
+        #expect(!NotchLayout.isOverNotch(dx: 0, fromTop: 80, shapeSize: shape, style: .notch))
+    }
+
     @Test func ileSeulementPourLaPastille() {
         // En mode encoche, l'affichage façon île ne change pas la forme (contenu hors des arrondis).
         let normal = NotchLayout.shapeSize(for: notch, isExpanded: false, hasCompactContent: true)

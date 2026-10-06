@@ -75,6 +75,16 @@ enum NotchLayout {
         count > 0 ? bubbleWidth(for: geometry, island: island) + bubbleGap : 0
     }
 
+    /// Souris au-dessus de la grande encoche plutôt que des bulles (même fenêtre) ?
+    /// - Parameters:
+    ///   - dx: écart horizontal au centre de la fenêtre ;
+    ///   - fromTop: distance au bord haut de l'écran.
+    static func isOverNotch(dx: CGFloat, fromTop: CGFloat, shapeSize: CGSize, style: NotchStyle) -> Bool {
+        let tolerance: CGFloat = 4
+        return abs(dx) <= shapeSize.width / 2 + tolerance
+            && fromTop <= topInset(for: style) + shapeSize.height + tolerance
+    }
+
     /// Hauteur du menu déroulé : `count` bulles rondes empilées (décalage du haut compris).
     static func bubbleMenuHeight(count: Int, geometry: NotchGeometry, island: Bool = false) -> CGFloat {
         let count = min(max(0, count), maxBubbles)

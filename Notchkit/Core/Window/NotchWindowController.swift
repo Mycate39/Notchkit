@@ -31,8 +31,12 @@ final class NotchWindowController {
         hostingView.sizingOptions = []
         // On ignore la zone de sécurité (barre des menus, encoche) : la forme doit coller au bord.
         hostingView.safeAreaRegions = []
+        // Entrée : décidée par la position (grande encoche ou bulles). Sortie : toujours transmise.
         hostingView.onHoverChange = { [weak viewModel] isInside in
-            viewModel?.hoverChanged(isInside: isInside)
+            if !isInside { viewModel?.pointerExited() }
+        }
+        hostingView.onPointerMove = { [weak viewModel] dx, fromTop in
+            viewModel?.pointerMoved(dx: dx, fromTop: fromTop)
         }
         hostingView.onFileDrag = { [weak viewModel] x in
             if let x { viewModel?.fileDragMoved(normalizedX: x) } else { viewModel?.fileDragEnded() }

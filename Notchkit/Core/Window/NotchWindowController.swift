@@ -13,6 +13,8 @@ final class NotchWindowController {
     private let panel = NotchPanel()
     private let viewModel: NotchViewModel
     private let settings: SettingsStore
+    /// Seconde remise au premier plan après un changement de bureau.
+    private var spaceTask: Task<Void, Never>?
     private var shrinkTask: Task<Void, Never>?
     private let hostingView: NotchHostingView<NotchContainerView>
     private let container = FlippedView()
@@ -96,6 +98,17 @@ final class NotchWindowController {
             MainActor.assumeIsolated { self?.refreshGeometry() }
         }
 
+        // Changement de bureau (Spaces) : en quittant une app en plein écran, macOS peut retirer
+        // le panneau pendant la transition. On le remet au premier plan aussitôt, puis une fois
+        // l'animation de macOS terminée (position recalculée : la barre des menus peut différer).
+        NSWorkspace.shared.notificationCenter.addObserver(
+            forName: NSWorkspace.activeSpaceDidChangeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            MainActor.assumeIsolated { self?.reassertOnActiveSpace() }
+        }
+
         // Écran choisi, simulation d'encoche ou apparence modifiés dans les réglages.
         trackChanges(of: { [weak self] in
             _ = self?.settings.settings.screenSelection
@@ -111,6 +124,18 @@ final class NotchWindowController {
         }, perform: { [weak self] in
             self?.applyPanelSize()
         })
+    }
+
+    /// Remet l'encoche à sa place sur le bureau qui vient de s'afficher.
+    private func reassertOnActiveSpace() {
+        panel.orderFrontRegardless()
+        spaceTask?.cancel()
+        spaceTask = Task { [weak self] in
+            try? await Task.sleep(for: .milliseconds(450))
+            guard !Task.isCancelled, let self else { return }
+            self.refreshGeometry()
+            self.panel.orderFrontRegardless()
+        }
     }
 
     // MARK: - Géométrie

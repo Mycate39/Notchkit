@@ -81,9 +81,10 @@ final class NotchViewModel {
         return manager.secondaryCompactModules
     }
 
-    /// Fin contour autour de l'encoche et des bulles, comme la Dynamic Island : seulement quand une
-    /// activité est en cours (musique, minuteur, alerte…). Au repos, l'encoche reste une simple découpe noire.
-    var showsOutline: Bool { hasCompactContent }
+    /// Fin contour autour de l'encoche et des bulles, comme la Dynamic Island : quand une activité est
+    /// en cours (musique, minuteur, alerte…) et quand l'encoche est dépliée. Au repos, l'encoche
+    /// repliée reste une simple découpe noire.
+    var showsOutline: Bool { hasCompactContent || isExpanded }
 
     /// Au moins deux activités secondaires : rangées dans une pile qui se déroule au survol.
     var showsBubbleStack: Bool { bubbleModules.count >= 2 }

@@ -69,6 +69,16 @@ final class ModuleManager {
         return best
     }
 
+    /// Autres activités en cours (priorité normale ou plus), affichées en bulles à droite de
+    /// l'encoche repliée, de la plus importante à la moins importante.
+    var secondaryCompactModules: [any NotchModule] {
+        guard let primary = compactModule else { return [] }
+        let others = activeModules.filter {
+            $0.moduleID != primary.moduleID && $0.compactPriority >= .normal && $0.compactLeading() != nil
+        }
+        return Array(others.sorted { $0.compactPriority > $1.compactPriority }.prefix(NotchLayout.maxBubbles))
+    }
+
     // MARK: - Disposition des widgets
 
     /// Taille d'un widget : celle choisie par l'utilisateur, sinon celle du module.

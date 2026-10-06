@@ -75,6 +75,21 @@ final class NotchViewModel {
         geometry.style == .pill && !isExpanded && currentAlert == nil && manager.compactModule?.compactIsland == true
     }
 
+    /// Activités secondaires affichées en bulles (encoche repliée, sans alerte agrandie).
+    var bubbleModules: [any NotchModule] {
+        guard !isExpanded, currentAlert?.expandedContent == nil else { return [] }
+        return manager.secondaryCompactModules
+    }
+
+    /// Module à montrer à l'ouverture (bulle cliquée).
+    @ObservationIgnored var requestedModuleID: String?
+
+    /// Ouvre l'encoche sur la page d'un module (clic sur une bulle).
+    func expand(showing moduleID: String) {
+        requestedModuleID = moduleID
+        expand()
+    }
+
     /// Largeur de chaque côté de l'encoche repliée (une alerte peut demander plus de place).
     var compactSideWidth: CGFloat {
         currentAlert?.sideWidth ?? NotchLayout.compactSideWidth
@@ -93,9 +108,11 @@ final class NotchViewModel {
                               sideWidth: compactSideWidth, alertSize: currentAlert?.expandedSize,
                               island: isIsland)
         // Place autour de la forme pour que l'ombre (survol ou encoche dépliée) ne soit pas coupée.
+        // Bulles à droite : la fenêtre s'élargit des deux côtés pour garder l'encoche centrée.
+        let bubbles = NotchLayout.bubblesWidth(count: bubbleModules.count, geometry: geometry)
         let margin = isExpanded ? NotchLayout.expandedShadowMargin : (showsHoverShadow ? NotchLayout.hoverShadowMargin : 0)
-        guard margin > 0 else { return size }
-        return CGSize(width: size.width + margin * 2, height: size.height + margin)
+        guard margin > 0 || bubbles > 0 else { return size }
+        return CGSize(width: size.width + (margin + bubbles) * 2, height: size.height + margin)
     }
 
     // MARK: - Géométrie

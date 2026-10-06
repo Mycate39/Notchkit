@@ -45,6 +45,11 @@ struct NotchContainerView: View {
         .shadow(color: .black.opacity(shadow.opacity), radius: shadow.radius, y: shadow.y)
         // Indice au survol : l'encoche gonfle légèrement, depuis le haut, avant de s'ouvrir.
         .scaleEffect(viewModel.showsHoverShadow ? 1.03 : 1, anchor: .top)
+        // Autres activités en cours : petites bulles à droite, comme sur iPhone.
+        .overlay(alignment: .topTrailing) {
+            CompactBubbles(viewModel: viewModel)
+                .offset(x: NotchLayout.bubblesWidth(count: viewModel.bubbleModules.count, geometry: geometry))
+        }
         .foregroundStyle(.white)
         .tint(viewModel.appearance.accentColor)
         .environment(\.colorScheme, .dark)
@@ -54,10 +59,46 @@ struct NotchContainerView: View {
         // Les modules changent de priorité sans passer par le view model : on anime ces changements ici.
         .animation(NotchLayout.spring, value: viewModel.hasCompactContent)
         .animation(NotchLayout.spring, value: island)
+        .animation(NotchLayout.spring, value: viewModel.bubbleModules.map(\.moduleID))
     }
 }
 
 // MARK: - Mode compact
+
+/// Bulles des activités secondaires, à droite de l'encoche repliée (comme sur iPhone).
+/// Un clic ouvre l'encoche sur la page de l'activité.
+private struct CompactBubbles: View {
+    let viewModel: NotchViewModel
+
+    var body: some View {
+        let geometry = viewModel.geometry
+        let diameter = NotchLayout.bubbleDiameter(for: geometry)
+        HStack(spacing: NotchLayout.bubbleGap) {
+            ForEach(viewModel.bubbleModules.map(\.moduleID), id: \.self) { id in
+                if let module = viewModel.manager.module(for: id), let content = module.compactLeading() {
+                    content
+                        .frame(width: diameter * 0.62, height: diameter * 0.62)
+                        .frame(width: diameter, height: diameter)
+                        .notchBackground(viewModel.appearance, style: geometry.style, shape: Circle())
+                        .clipShape(Circle())
+                        .overlay {
+                            // Même fin contour que l'île, sur la pastille flottante.
+                            if geometry.style == .pill {
+                                Circle().strokeBorder(.white.opacity(0.2), lineWidth: 1)
+                            }
+                        }
+                        .contentShape(Circle())
+                        .onTapGesture { viewModel.expand(showing: id) }
+                        .help(Text(type(of: module).descriptor.name))
+                        .transition(.scale(scale: 0.4).combined(with: .opacity))
+                }
+            }
+        }
+        .padding(.leading, NotchLayout.bubbleGap)
+        .foregroundStyle(.white)
+        .font(.system(size: 11, weight: .semibold))
+    }
+}
 
 /// Contenu de l'encoche repliée : deux zones de part et d'autre de l'encoche physique.
 private struct CompactNotchView: View {
@@ -158,6 +199,14 @@ private struct ExpandedNotchView: View {
                 .padding(.top, 4)
         }
         .onAppear {
+            // Bulle cliquée : on ouvre la page de son module.
+            if let requested = viewModel.requestedModuleID {
+                viewModel.requestedModuleID = nil
+                if let page = pages.first(where: { $0.modules.contains { $0.id == requested } }) {
+                    viewModel.selectedPage = page.id
+                    return
+                }
+            }
             // On reste sur la page où l'on était, sauf si un module réclame l'attention
             // (Claude au travail, rendez-vous imminent…) : on ouvre alors directement sa page.
             if let module = viewModel.manager.compactModule, module.compactPriority >= .elevated,

@@ -231,6 +231,11 @@ private struct GeneralSettingsView: View {
                         Text("\(name) (débranché)").tag(settings.settings.screenSelection)
                     }
                 }
+                Toggle("Ne pas cacher les menus de l'app active", isOn: $settings.settings.avoidAppMenus)
+                Text("Sur un écran sans encoche, l'encoche se décale vers la droite si elle couvre les menus de l'app au premier plan. Nécessite l'autorisation Accessibilité (Réglages Système > Confidentialité et sécurité > Accessibilité).")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
             }
 
             Section("Survol") {

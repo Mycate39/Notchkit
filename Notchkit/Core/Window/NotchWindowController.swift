@@ -13,6 +13,9 @@ final class NotchWindowController {
     private let panel = NotchPanel()
     private let viewModel: NotchViewModel
     private let settings: SettingsStore
+    /// Décalage horizontal pour ne pas cacher les menus de l'app active (voir `MenuBarAvoidance`).
+    private var menuOffset: CGFloat = 0
+    private var menuAvoidanceTask: Task<Void, Never>?
     /// Seconde remise au premier plan après un changement de bureau.
     private var spaceTask: Task<Void, Never>?
     private var shrinkTask: Task<Void, Never>?
@@ -64,6 +67,7 @@ final class NotchWindowController {
         setPanelSize(viewModel.panelSize)
         panel.orderFrontRegardless()
         startObserving()
+        scheduleMenuAvoidance()
     }
 
     // MARK: - Observation
@@ -109,13 +113,24 @@ final class NotchWindowController {
             MainActor.assumeIsolated { self?.reassertOnActiveSpace() }
         }
 
+        // App au premier plan changée : ses menus n'ont pas la même largeur.
+        NSWorkspace.shared.notificationCenter.addObserver(
+            forName: NSWorkspace.didActivateApplicationNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            MainActor.assumeIsolated { self?.scheduleMenuAvoidance() }
+        }
+
         // Écran choisi, simulation d'encoche ou apparence modifiés dans les réglages.
         trackChanges(of: { [weak self] in
             _ = self?.settings.settings.screenSelection
             _ = self?.settings.settings.simulateNotch
             _ = self?.viewModel.appearance
+            _ = self?.settings.settings.avoidAppMenus
         }, perform: { [weak self] in
             self?.refreshGeometry()
+            self?.scheduleMenuAvoidance()
         })
 
         // Taille de la forme modifiée (survol, alerte, module compact…).
@@ -135,7 +150,40 @@ final class NotchWindowController {
             guard !Task.isCancelled, let self else { return }
             self.refreshGeometry()
             self.panel.orderFrontRegardless()
+            self.updateMenuAvoidance()
         }
+    }
+
+    // MARK: - Menus de l'app active
+
+    /// Les menus d'une app qui vient de s'activer sont posés un instant plus tard : on attend un peu.
+    private func scheduleMenuAvoidance() {
+        menuAvoidanceTask?.cancel()
+        menuAvoidanceTask = Task { [weak self] in
+            try? await Task.sleep(for: .milliseconds(250))
+            guard !Task.isCancelled else { return }
+            self?.updateMenuAvoidance()
+        }
+    }
+
+    private func updateMenuAvoidance() {
+        let geometry = viewModel.geometry
+        let screen = ScreenLocator.screen(for: settings.settings.screenSelection)
+        // Encoche réelle : macOS place déjà les menus de part et d'autre.
+        let hasRealNotch = (screen?.safeAreaInsets.top ?? 0) > 0
+        var offset: CGFloat = 0
+        if settings.settings.avoidAppMenus, !hasRealNotch, !AutomatedRun.isActive {
+            let normal = NotchLayout.shapeSize(for: geometry, isExpanded: false, hasCompactContent: true)
+            let island = NotchLayout.shapeSize(for: geometry, isExpanded: false, hasCompactContent: true, island: true)
+            offset = MenuBarAvoidance.offset(
+                menusRightEdge: MenuBarAvoidance.frontmostMenusRightEdge(),
+                centerX: geometry.centerX - geometry.screenFrame.minX,
+                halfWidth: max(normal.width, island.width) / 2  // les bulles sont à droite : sans effet sur les menus
+            )
+        }
+        guard offset != menuOffset else { return }
+        menuOffset = offset
+        setPanelSize(panel.frame.size, animated: true)
     }
 
     // MARK: - Géométrie
@@ -180,14 +228,23 @@ final class NotchWindowController {
     }
 
     /// Place la fenêtre collée en haut de l'écran, centrée sur l'encoche.
-    private func setPanelSize(_ size: CGSize) {
+    private func setPanelSize(_ size: CGSize, animated: Bool = false) {
         let geometry = viewModel.geometry
         let frame = NSRect(
-            x: geometry.centerX - size.width / 2,
+            x: geometry.centerX + menuOffset - size.width / 2,
             y: geometry.screenFrame.maxY - size.height,
             width: size.width,
             height: size.height
         )
+        if animated {
+            // Glissement doux quand l'encoche s'écarte des menus.
+            NSAnimationContext.runAnimationGroup { context in
+                context.duration = 0.25
+                context.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+                panel.animator().setFrame(frame, display: true)
+            }
+            return
+        }
         // Pas d'affichage intermédiaire : on replace d'abord la vue SwiftUI, puis le système redessine.
         panel.setFrame(frame, display: false)
         layoutHostingView()

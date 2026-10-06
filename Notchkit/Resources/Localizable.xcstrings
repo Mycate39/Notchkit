@@ -3156,6 +3156,16 @@
         }
       }
     },
+    "Ne pas cacher les menus de l'app active" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Don't cover the active app's menus"
+          }
+        }
+      }
+    },
     "Neige" : {
       "localizations" : {
         "en" : {
@@ -4158,6 +4168,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "On battery"
+          }
+        }
+      }
+    },
+    "Sur un écran sans encoche, l'encoche se décale vers la droite si elle couvre les menus de l'app au premier plan. Nécessite l'autorisation Accessibilité (Réglages Système > Confidentialité et sécurité > Accessibilité)." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On a display without a notch, the notch shifts to the right if it covers the frontmost app's menus. Requires Accessibility permission (System Settings > Privacy & Security > Accessibility)."
           }
         }
       }

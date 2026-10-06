@@ -93,6 +93,7 @@
 		90DF0E4039BA56420C4DCA10 /* Glyphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECF3DDA8BA52758E6E1EC5B /* Glyphs.swift */; };
 		94BF7B6108A44400EABE42EE /* ClipboardViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA785DE3AC695C0AF583A476 /* ClipboardViews.swift */; };
 		9534909608C6D366FB3BCE9F /* mediaremote-adapter.pl in Resources */ = {isa = PBXBuildFile; fileRef = E343FA5573A1C385029263CF /* mediaremote-adapter.pl */; };
+		980B366CCDFB9D04BCACFB5C /* MenuBarAvoidance.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF22AF6E1341357C1F0E58 /* MenuBarAvoidance.swift */; };
 		98776D4DF39E4E21CDB0167E /* WidgetLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986BDF5C03AFD85D9ABE4BC /* WidgetLayout.swift */; };
 		98D2E19AF44D1F7BEDE8C93B /* stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 46804D5EC7EFC5FEF7FAE1B0 /* stream.m */; };
 		9A90F1FF12025FADD79A74D1 /* BatteryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88A3C1DCE9F2BBAD2E4119B /* BatteryTests.swift */; };
@@ -332,6 +333,7 @@
 		F7DF39D707B871615662FAD5 /* MediaKeyTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaKeyTap.swift; sourceTree = "<group>"; };
 		FA1FA58A222029EF8472F5FC /* ClaudeSparkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeSparkView.swift; sourceTree = "<group>"; };
 		FC306A7DAC40B0ECC5A20A71 /* ModuleManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleManagerTests.swift; sourceTree = "<group>"; };
+		FCEF22AF6E1341357C1F0E58 /* MenuBarAvoidance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarAvoidance.swift; sourceTree = "<group>"; };
 		FE5BEC21D18119A5A2679832 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -588,6 +590,7 @@
 		71EE45A0F273961B8F32A6FB /* Window */ = {
 			isa = PBXGroup;
 			children = (
+				FCEF22AF6E1341357C1F0E58 /* MenuBarAvoidance.swift */,
 				37C474C3B54576120030842F /* NotchHostingView.swift */,
 				D5F6A4C1A5E799024B51A751 /* NotchPanel.swift */,
 				3F9E3D7C9C763F9153C29C4C /* NotchWindowController.swift */,
@@ -1069,6 +1072,7 @@
 				8BCDCE6F6E2F54D141980CF1 /* LocationProvider.swift in Sources */,
 				A174F9940FC069ED71C0C579 /* MediaKeyTap.swift in Sources */,
 				09A63C00ADCB71C6BF4392D4 /* MediaRemoteSource.swift in Sources */,
+				980B366CCDFB9D04BCACFB5C /* MenuBarAvoidance.swift in Sources */,
 				018D9AD0EB2549EDE8225838 /* MenuBarContent.swift in Sources */,
 				E7CB399A1524418E1152DDA6 /* ModuleDescriptor.swift in Sources */,
 				4938BC53B652E7BF0D8F67F8 /* ModuleIcon.swift in Sources */,

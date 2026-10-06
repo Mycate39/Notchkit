@@ -137,6 +137,25 @@ struct NotchLayoutTests {
         #expect(size.width == 185 + NotchLayout.compactSideWidth * 2 + NotchLayout.earRadius * 2)
     }
 
+    @Test func decalagePourLibererLesMenus() {
+        // Menus jusqu'à 672 pt, encoche centrée à 840 pt de 330 pt de large : bord gauche à 675.
+        #expect(MenuBarAvoidance.offset(menusRightEdge: 672, centerX: 840, halfWidth: 165) == 7)
+        // Menus courts : pas de décalage.
+        #expect(MenuBarAvoidance.offset(menusRightEdge: 400, centerX: 840, halfWidth: 165) == 0)
+        // Autorisation absente ou menus illisibles : pas de décalage.
+        #expect(MenuBarAvoidance.offset(menusRightEdge: nil, centerX: 840, halfWidth: 165) == 0)
+        // Décalage plafonné.
+        #expect(MenuBarAvoidance.offset(menusRightEdge: 1600, centerX: 840, halfWidth: 165) == MenuBarAvoidance.maxOffset)
+    }
+
+    @Test func largeurDesBulles() {
+        let d = NotchLayout.bubbleDiameter(for: pill)
+        #expect(NotchLayout.bubblesWidth(count: 0, geometry: pill) == 0)
+        #expect(NotchLayout.bubblesWidth(count: 1, geometry: pill) == d + NotchLayout.bubbleGap)
+        // Au plus deux bulles.
+        #expect(NotchLayout.bubblesWidth(count: 5, geometry: pill) == 2 * (d + NotchLayout.bubbleGap))
+    }
+
     @Test func ileSeulementPourLaPastille() {
         // En mode encoche, l'affichage façon île ne change pas la forme (contenu hors des arrondis).
         let normal = NotchLayout.shapeSize(for: notch, isExpanded: false, hasCompactContent: true)

@@ -45,6 +45,8 @@ struct AppSettings: Codable, Equatable, Sendable {
     var appearance = NotchAppearance()
     /// Retour haptique du trackpad (ouverture, pages, alertes…).
     var hapticsEnabled = true
+    /// Décale l'encoche (simulée ou pastille) pour ne pas cacher les menus de l'app active.
+    var avoidAppMenus = true
 
     init() {}
 
@@ -62,5 +64,6 @@ struct AppSettings: Codable, Equatable, Sendable {
         widgetLayout = try? c.decodeIfPresent(WidgetLayout.self, forKey: .widgetLayout)
         appearance = (try? c.decodeIfPresent(NotchAppearance.self, forKey: .appearance)) ?? d.appearance
         hapticsEnabled = try c.decodeIfPresent(Bool.self, forKey: .hapticsEnabled) ?? d.hapticsEnabled
+        avoidAppMenus = try c.decodeIfPresent(Bool.self, forKey: .avoidAppMenus) ?? d.avoidAppMenus
     }
 }

@@ -50,6 +50,21 @@ enum NotchLayout {
     static let hoverShadowMargin: CGFloat = 12
     /// Marge de fenêtre réservée à l'ombre de l'encoche dépliée.
     static let expandedShadowMargin: CGFloat = 22
+    /// Bulles des activités secondaires (comme sur iPhone) : nombre maximal et espacement.
+    static let maxBubbles = 2
+    static let bubbleGap: CGFloat = 6
+
+    /// Diamètre d'une bulle : la hauteur de l'encoche repliée.
+    static func bubbleDiameter(for geometry: NotchGeometry) -> CGFloat {
+        geometry.closedSize.height
+    }
+
+    /// Largeur occupée par `count` bulles à droite de l'encoche (espacements compris).
+    static func bubblesWidth(count: Int, geometry: NotchGeometry) -> CGFloat {
+        let count = min(max(0, count), maxBubbles)
+        return CGFloat(count) * (bubbleDiameter(for: geometry) + bubbleGap)
+    }
+
     /// Rayon des coins en mode déplié.
     static let expandedCornerRadius: CGFloat = 24
 

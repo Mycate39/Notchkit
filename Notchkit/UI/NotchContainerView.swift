@@ -34,9 +34,14 @@ struct NotchContainerView: View {
         }
         .frame(width: size.width, height: size.height, alignment: .top)
         .notchBackground(viewModel.appearance, style: geometry.style, shape: shape)
-        // Île : fin contour gris, comme la Dynamic Island (pas en mode encoche, collé au bord de l'écran).
+        // Fin contour gris, comme la Dynamic Island : pour l'île, et quand la barre des menus est
+        // sombre (l'encoche noire s'y confondrait). Collée au bord de l'écran, pas de trait en haut.
         .overlay {
-            shape.stroke(.white.opacity(island && geometry.style == .pill ? 0.2 : 0), lineWidth: 2)
+            shape.stroke(.white.opacity((island && geometry.style == .pill) || viewModel.showsOutline ? 0.22 : 0),
+                         lineWidth: 2)
+                .mask(alignment: .top) {
+                    Rectangle().padding(.top, geometry.style == .notch ? 2 : 0)
+                }
         }
         .clipShape(shape)
         .contentShape(shape)
@@ -175,9 +180,13 @@ private struct CompactBubbles: View {
                     .notchBackground(viewModel.appearance, style: viewModel.geometry.style, shape: shape)
                     .clipShape(shape)
                     .overlay {
-                        // Même fin contour que l'île, sur la pastille flottante et dans le menu.
-                        if viewModel.geometry.style == .pill || viewModel.isBubbleMenuOpen {
-                            shape.stroke(.white.opacity(0.2), lineWidth: 1)
+                        // Même fin contour que l'île : pastille flottante, menu déroulé, barre sombre.
+                        if viewModel.geometry.style == .pill || viewModel.isBubbleMenuOpen || viewModel.showsOutline {
+                            shape.stroke(.white.opacity(0.22), lineWidth: 2)
+                                .mask(alignment: .top) {
+                                    Rectangle().padding(.top, viewModel.geometry.style == .notch
+                                                        && !viewModel.isBubbleMenuOpen ? 2 : 0)
+                                }
                         }
                     }
                     .contentShape(shape)

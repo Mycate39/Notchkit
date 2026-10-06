@@ -19,6 +19,7 @@ final class NotchWindowController {
     /// Seconde remise au premier plan après un changement de bureau.
     private var spaceTask: Task<Void, Never>?
     private var shrinkTask: Task<Void, Never>?
+    private var toneTask: Task<Void, Never>?
     private let hostingView: NotchHostingView<NotchContainerView>
     private let container = FlippedView()
 
@@ -117,6 +118,15 @@ final class NotchWindowController {
             MainActor.assumeIsolated { self?.reassertOnActiveSpace() }
         }
 
+        // Mode clair / sombre changé : la barre des menus change de teinte.
+        DistributedNotificationCenter.default().addObserver(
+            forName: Notification.Name("AppleInterfaceThemeChangedNotification"),
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            MainActor.assumeIsolated { self?.refreshGeometry() }
+        }
+
         // App au premier plan changée : ses menus n'ont pas la même largeur.
         NSWorkspace.shared.notificationCenter.addObserver(
             forName: NSWorkspace.didActivateApplicationNotification,
@@ -143,6 +153,19 @@ final class NotchWindowController {
         }, perform: { [weak self] in
             self?.applyPanelSize()
         })
+    }
+
+    /// Barre des menus sombre ou claire : d'après le fond d'écran de cet écran (chaque bureau
+    /// peut avoir le sien), sinon d'après le mode sombre de macOS.
+    private func refreshMenuBarTone(on screen: NSScreen) {
+        let url = NSWorkspace.shared.desktopImageURL(for: screen)
+        let systemIsDark = NSApp.effectiveAppearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
+        toneTask?.cancel()
+        toneTask = Task { [weak self] in
+            let isDark = await MenuBarTone.isDark(wallpaper: url, systemIsDark: systemIsDark)
+            guard !Task.isCancelled, let self, self.viewModel.menuBarIsDark != isDark else { return }
+            withAnimation(.easeOut(duration: 0.25)) { self.viewModel.menuBarIsDark = isDark }
+        }
     }
 
     /// Remet l'encoche à sa place sur le bureau qui vient de s'afficher.
@@ -195,6 +218,7 @@ final class NotchWindowController {
     private func refreshGeometry() {
         guard let screen = ScreenLocator.screen(for: settings.settings.screenSelection) else { return }
         viewModel.updateGeometry(ScreenLocator.geometry(for: screen, simulateNotch: settings.settings.simulateNotch))
+        refreshMenuBarTone(on: screen)
         // Changement d'écran : on repositionne immédiatement, sans attendre d'animation.
         shrinkTask?.cancel()
         setPanelSize(viewModel.panelSize)

@@ -2482,6 +2482,22 @@
         }
       }
     },
+    "Contour de l'encoche" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notch Outline"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contour de l'encoche"
+          }
+        }
+      }
+    },
     "Copier" : {
       "localizations" : {
         "en" : {
@@ -4112,6 +4128,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Intégré (clé API)"
+          }
+        }
+      }
+    },
+    "Jamais" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Never"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jamais"
           }
         }
       }
@@ -7120,6 +7152,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "UTC"
+          }
+        }
+      }
+    },
+    "Un fin contour gris, comme la Dynamic Island, détache l'encoche d'une barre des menus sombre. « Automatique » l'affiche quand le haut de votre fond d'écran est sombre." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A thin gray outline, like the Dynamic Island, sets the notch apart from a dark menu bar. “Automatic” shows it when the top of your wallpaper is dark."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un fin contour gris, comme la Dynamic Island, détache l'encoche d'une barre des menus sombre. « Automatique » l'affiche quand le haut de votre fond d'écran est sombre."
           }
         }
       }

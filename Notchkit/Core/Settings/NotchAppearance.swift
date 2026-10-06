@@ -105,6 +105,21 @@ struct NotchAppearance: Codable, Equatable, Sendable {
         }
     }
 
+    /// Fin contour autour de l'encoche, comme la Dynamic Island, pour la détacher d'une barre sombre.
+    enum Outline: String, Codable, CaseIterable, Identifiable, Sendable {
+        /// Seulement quand la barre des menus est sombre (l'encoche noire s'y confondrait).
+        case automatic, always, never
+        var id: String { rawValue }
+
+        var title: LocalizedStringResource {
+            switch self {
+            case .automatic: "Automatique"
+            case .always: "Toujours"
+            case .never: "Jamais"
+            }
+        }
+    }
+
     var size: Size = .standard
     var customWidth: Double = 680
     var customHeight: Double = 200
@@ -113,6 +128,7 @@ struct NotchAppearance: Codable, Equatable, Sendable {
     var customBackground = StoredColor(red: 0.1, green: 0.1, blue: 0.18)
     /// Couleur d'accent (onglets, liens, curseurs) ; `nil` = ambre du style StandBy.
     var accent: StoredColor?
+    var outline: Outline = .automatic
 
     init() {}
 
@@ -127,6 +143,7 @@ struct NotchAppearance: Codable, Equatable, Sendable {
         background = (try? c.decodeIfPresent(Background.self, forKey: .background)) ?? d.background
         customBackground = (try? c.decodeIfPresent(StoredColor.self, forKey: .customBackground)) ?? d.customBackground
         accent = try? c.decodeIfPresent(StoredColor.self, forKey: .accent)
+        outline = (try? c.decodeIfPresent(Outline.self, forKey: .outline)) ?? d.outline
     }
 
     /// Taille effective de l'encoche dépliée.

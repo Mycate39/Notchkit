@@ -27,8 +27,8 @@ Notchkit is available in English and French, following your Mac's language.
 
 ## Installation
 
-1. Download `Notchkit-x.y.z.zip` from the [Releases](../../releases) page and unzip it.
-2. Drag **Notchkit.app** into your **Applications** folder.
+1. Download `Notchkit-x.y.z.dmg` from the [Releases](../../releases) page and open it.
+2. Drag **Notchkit.app** onto the **Applications** shortcut.
 3. First launch: Notchkit isn't notarized by Apple yet, so macOS blocks it once.
    **Right-click the app > Open**, or go to **System Settings > Privacy & Security** and
    click **Open Anyway**.

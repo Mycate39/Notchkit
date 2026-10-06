@@ -81,17 +81,12 @@ final class NotchViewModel {
         return manager.secondaryCompactModules
     }
 
-    /// Barre des menus sombre sur l'écran de l'encoche (mise à jour par le contrôleur de fenêtre).
-    var menuBarIsDark = false
+    /// Sur le bureau (Finder au premier plan, sans fenêtre) : mis à jour par le contrôleur de fenêtre.
+    var isOnDesktop = false
 
-    /// Fin contour autour de l'encoche et des bulles, comme la Dynamic Island.
-    var showsOutline: Bool {
-        switch appearance.outline {
-        case .automatic: menuBarIsDark
-        case .always: true
-        case .never: false
-        }
-    }
+    /// Fin contour autour de l'encoche et des bulles, comme la Dynamic Island : toujours, sauf sur
+    /// le bureau, où l'encoche se détache déjà sur le fond d'écran.
+    var showsOutline: Bool { !isOnDesktop }
 
     /// Au moins deux activités secondaires : rangées dans une pile qui se déroule au survol.
     var showsBubbleStack: Bool { bubbleModules.count >= 2 }

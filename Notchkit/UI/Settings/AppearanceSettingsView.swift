@@ -99,16 +99,6 @@ struct AppearanceSettingsView: View {
                         .foregroundStyle(.secondary)
                 }
 
-                Picker("Contour de l'encoche", selection: appearance.outline) {
-                    ForEach(NotchAppearance.Outline.allCases) { outline in
-                        Text(outline.title).tag(outline)
-                    }
-                }
-                Text("Un fin contour gris, comme la Dynamic Island, détache l'encoche d'une barre des menus sombre. « Automatique » l'affiche quand le haut de votre fond d'écran est sombre.")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .fixedSize(horizontal: false, vertical: true)
-
                 Toggle("Couleur personnalisée (onglets, barres de progression)", isOn: Binding(
                     get: { settings.settings.appearance.accent != nil },
                     set: { settings.settings.appearance.accent = $0 ? StoredColor(.orange) : nil }

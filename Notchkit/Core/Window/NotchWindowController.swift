@@ -19,6 +19,8 @@ final class NotchWindowController {
     /// Seconde remise au premier plan après un changement de bureau.
     private var spaceTask: Task<Void, Never>?
     private var shrinkTask: Task<Void, Never>?
+    /// Affichage sur l'écran de verrouillage (API privée SkyLight, `nil` si indisponible).
+    private lazy var lockScreenSpace: LockScreenSpace? = AutomatedRun.isActive ? nil : LockScreenSpace()
     private let hostingView: NotchHostingView<NotchContainerView>
     private let container = FlippedView()
 
@@ -117,6 +119,15 @@ final class NotchWindowController {
             MainActor.assumeIsolated { self?.reassertOnActiveSpace() }
         }
 
+        // Écran verrouillé / déverrouillé : l'encoche reste visible par-dessus le verrouillage.
+        let distributed = DistributedNotificationCenter.default()
+        distributed.addObserver(forName: Notification.Name("com.apple.screenIsLocked"), object: nil, queue: .main) { [weak self] _ in
+            MainActor.assumeIsolated { self?.screenLockChanged(locked: true) }
+        }
+        distributed.addObserver(forName: Notification.Name("com.apple.screenIsUnlocked"), object: nil, queue: .main) { [weak self] _ in
+            MainActor.assumeIsolated { self?.screenLockChanged(locked: false) }
+        }
+
         // App au premier plan changée : ses menus n'ont pas la même largeur.
         NSWorkspace.shared.notificationCenter.addObserver(
             forName: NSWorkspace.didActivateApplicationNotification,
@@ -143,6 +154,17 @@ final class NotchWindowController {
         }, perform: { [weak self] in
             self?.applyPanelSize()
         })
+    }
+
+    private func screenLockChanged(locked: Bool) {
+        viewModel.setScreenLocked(locked)
+        if locked {
+            lockScreenSpace?.moveToLockScreen(panel)
+            panel.orderFrontRegardless()
+        } else {
+            lockScreenSpace?.moveBack(panel)
+            reassertOnActiveSpace()
+        }
     }
 
     /// Remet l'encoche à sa place sur le bureau qui vient de s'afficher.

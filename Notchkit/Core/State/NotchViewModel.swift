@@ -81,6 +81,21 @@ final class NotchViewModel {
         return manager.secondaryCompactModules
     }
 
+    /// Écran verrouillé : l'encoche reste affichée (activités en cours) mais ne s'ouvre plus.
+    private(set) var isScreenLocked = false
+
+    func setScreenLocked(_ locked: Bool) {
+        guard locked != isScreenLocked else { return }
+        isScreenLocked = locked
+        if locked {
+            hoverTask?.cancel()
+            bubbleHoverTask?.cancel()
+            holdReasons.removeAll()
+            bubbleMenuRequested = false
+            collapse()
+        }
+    }
+
     /// Fin contour autour de l'encoche et des bulles, comme la Dynamic Island : quand une activité est
     /// en cours (musique, minuteur, alerte…) et quand l'encoche est dépliée. Au repos, l'encoche
     /// repliée reste une simple découpe noire.
@@ -217,7 +232,8 @@ final class NotchViewModel {
     // MARK: - Déplier / replier
 
     func expand() {
-        guard state != .expanded else { return }
+        // Écran verrouillé : seules les activités repliées sont visibles, rien ne se déplie.
+        guard state != .expanded, !isScreenLocked else { return }
         // Le menu des bulles se referme : l'encoche dépliée prend le relais.
         bubbleMenuRequested = false
         bubbleHoverTask?.cancel()

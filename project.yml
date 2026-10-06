@@ -67,8 +67,8 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.andeolchenaux.notchkit
-        MARKETING_VERSION: "0.1.2"
-        CURRENT_PROJECT_VERSION: "3"
+        MARKETING_VERSION: "0.1.3"
+        CURRENT_PROJECT_VERSION: "4"
         ENABLE_HARDENED_RUNTIME: YES
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor

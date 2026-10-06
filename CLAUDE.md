@@ -1,118 +1,121 @@
 # Notchkit
 
-Native macOS app that turns the notch (or a floating pill on Macs without one) into a live area:
-music, timers, battery, weather, calendar, clipboard, file shelf, Claude Code activity, video downloads.
-Menu bar app (`LSUIElement`), distributed outside the Mac App Store, not sandboxed.
+**Langue : réponds toujours en français** (messages, explications, résumés, questions), quelle que soit la langue du code ou des outils.
+Seul ce qui part sur GitHub reste en anglais (voir les règles ci-dessous).
 
-## Tech stack
+App macOS native qui transforme l'encoche (ou une pilule flottante sur les Mac qui n'en ont pas) en zone vivante :
+musique, minuteurs, batterie, météo, calendrier, presse-papiers, étagère de fichiers, activité de Claude Code, téléchargements vidéo.
+App de barre des menus (`LSUIElement`), distribuée hors Mac App Store, non sandboxée.
 
-| Item | Version |
+## Stack technique
+
+| Élément | Version |
 |---|---|
-| Swift | 6.0 language mode (`SWIFT_VERSION: "6.0"`), compiler 6.2.4 |
-| Xcode | 26.3 (17C528) — set `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer` (`xcode-select` points to the Command Line Tools) |
+| Swift | Mode de langage 6.0 (`SWIFT_VERSION: "6.0"`), compilateur 6.2.4 |
+| Xcode | 26.3 (17C528) — définir `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer` (`xcode-select` pointe vers les Command Line Tools) |
 | UI | SwiftUI + AppKit (`NSPanel`, `NSHostingView`), Observation (`@Observable`) |
-| Minimum macOS | 14.0 (Liquid Glass background only on macOS 26) |
-| Project generation | XcodeGen 2.44.1 — `project.yml` is the source of truth, never edit `Notchkit.xcodeproj` by hand |
+| macOS minimum | 14.0 (fond Liquid Glass uniquement sur macOS 26) |
+| Génération du projet | XcodeGen 2.44.1 — `project.yml` fait foi, ne jamais modifier `Notchkit.xcodeproj` à la main |
 | Tests | Swift Testing (`import Testing`, `@Test`, `#expect`, `#require`) |
-| Dependencies | Sparkle 2.10.0 (SPM, MIT) for automatic updates; MediaRemoteAdapter (vendored in `ThirdParty/`, BSD 3-Clause) |
-| Architectures | Universal (x86_64 + arm64); dev machine is an Intel MacBook Pro 2017 without a notch |
-| Signing | Ad hoc (`CODE_SIGN_IDENTITY: "-"`) with Hardened Runtime; not notarized |
+| Dépendances | Sparkle 2.10.0 (SPM, MIT) pour les mises à jour automatiques ; MediaRemoteAdapter (copié dans `ThirdParty/`, BSD 3-Clause) |
+| Architectures | Universelle (x86_64 + arm64) ; la machine de dev est un MacBook Pro Intel 2017 sans encoche |
+| Signature | Ad hoc (`CODE_SIGN_IDENTITY: "-"`) avec Hardened Runtime ; non notarisée |
 
-## Hard rules
+## Règles impératives
 
-- **No GPL code** (e.g. Boring Notch, FaceMac): inspiration only, never copy.
-- **Public APIs only**, except the private APIs already accepted: MediaRemote (via MediaRemoteAdapter) and DisplayServices (built-in display brightness). Ask before adding any other private API.
-- **HomeKit is out** (`HMHomeManager` is unavailable on native macOS). Home control, if ever, goes through the Shortcuts app (`shortcuts run`).
-- **Never kill every Notchkit process** (`pkill -x Notchkit`): the owner runs an instance from Xcode. Only stop test instances under `build.noindex/DerivedData/Build/Products`.
-- Test instances share the real `UserDefaults` domain (`com.andeolchenaux.notchkit`): clean up any key a test writes.
-- Commit only after the build, the tests **and** the stress test pass. Commit messages in English; the repository owner is the sole author (no co-author trailers).
-- Everything on GitHub is in English (README, release notes, commits). Code comments are in French.
+- **Pas de code GPL** (ex. Boring Notch, FaceMac) : inspiration uniquement, jamais de copie.
+- **API publiques uniquement**, sauf les API privées déjà acceptées : MediaRemote (via MediaRemoteAdapter) et DisplayServices (luminosité de l'écran intégré). Demander avant d'ajouter toute autre API privée.
+- **Pas de HomeKit** (`HMHomeManager` n'est pas disponible sur macOS natif). La domotique, si un jour, passe par l'app Raccourcis (`shortcuts run`).
+- **Ne jamais tuer tous les processus Notchkit** (`pkill -x Notchkit`) : le propriétaire fait tourner une instance depuis Xcode. N'arrêter que les instances de test sous `build.noindex/DerivedData/Build/Products`.
+- Les instances de test partagent le vrai domaine `UserDefaults` (`com.andeolchenaux.notchkit`) : nettoyer toute clé écrite par un test.
+- Ne committer qu'après réussite du build, des tests **et** du stress test. Messages de commit en anglais ; le propriétaire du dépôt est le seul auteur (pas de ligne co-auteur).
+- Tout ce qui est sur GitHub est en anglais (README, notes de version, commits). Les commentaires du code sont en français.
 
-## Folder architecture
+## Architecture des dossiers
 
 ```
 Notchkit/
-  App/            Entry point, AppDelegate, menu bar menu, Updater (Sparkle), Debug/ (snapshot renderer)
+  App/            Point d'entrée, AppDelegate, menu de la barre des menus, Updater (Sparkle), Debug/ (rendu de captures)
   Core/
-    Modules/      NotchModule protocol, ModuleDescriptor, ModuleManager, ModuleRegistry (list of modules)
-    State/        NotchViewModel (expand/collapse, hover, bubbles), NotchLayout (all sizes and springs), NotchAlert
-    Window/       NotchPanel, NotchWindowController, NotchHostingView (hover zones), ScreenLocator, MenuBarAvoidance
-    Layout/       WidgetLayout (pages, sizes), LayoutPresets
-    Settings/     AppSettings, NotchAppearance, SettingsStore (tolerant decoding), LaunchAtLogin
+    Modules/      Protocole NotchModule, ModuleDescriptor, ModuleManager, ModuleRegistry (liste des modules)
+    State/        NotchViewModel (dépliage/repliage, survol, bulles), NotchLayout (toutes les tailles et ressorts), NotchAlert
+    Window/       NotchPanel, NotchWindowController, NotchHostingView (zones de survol), ScreenLocator, MenuBarAvoidance
+    Layout/       WidgetLayout (pages, tailles), LayoutPresets
+    Settings/     AppSettings, NotchAppearance, SettingsStore (décodage tolérant), LaunchAtLogin
     Drop/ Licensing/ Utilities/ (AutomatedRun, Haptics, ObservationTracking)
-  Modules/<Name>/ One folder per module: <Name>Module.swift (+ <Name>Views.swift, helpers)
-  UI/             NotchContainerView, NotchShape, NotchStyle (StandBy buttons, bars, slider, cards),
-                  Glyphs, ModuleIcon, Settings/ (settings window and tabs)
+  Modules/<Nom>/  Un dossier par module : <Nom>Module.swift (+ <Nom>Views.swift, utilitaires)
+  UI/             NotchContainerView, NotchShape, NotchStyle (boutons StandBy, barres, curseur, cartes),
+                  Glyphs, ModuleIcon, Settings/ (fenêtre et onglets des réglages)
   Resources/      Localizable.xcstrings, InfoPlist.xcstrings, Assets.xcassets (AppIcon), entitlements,
-                  Info.plist (generated from project.yml)
-NotchkitTests/    Swift Testing suites, one file per area
-ThirdParty/       MediaRemoteAdapter (see PROVENANCE.md)
-scripts/          AppIcon.swift (draws the icon), make-dmg.sh, add-to-appcast.sh
-appcast.xml       Sparkle update feed (read by the app from the main branch)
-build.noindex/    Build output, git-ignored; ".noindex" keeps Spotlight from listing the Debug app
+                  Info.plist (généré depuis project.yml)
+NotchkitTests/    Suites Swift Testing, un fichier par domaine
+ThirdParty/       MediaRemoteAdapter (voir PROVENANCE.md)
+scripts/          AppIcon.swift (dessine l'icône), make-dmg.sh, add-to-appcast.sh
+appcast.xml       Flux de mises à jour Sparkle (lu par l'app depuis la branche main)
+build.noindex/    Sortie de build, ignorée par git ; « .noindex » empêche Spotlight de lister l'app Debug
 ```
 
-## Code conventions
+## Conventions de code
 
-- **Modules**: a class `<Name>Module` conforming to `NotchModule`, with a static `descriptor` (lowercase `id` such as `"music"`, `"activities"`), `compactPriority`, `compactLeading()/compactTrailing()`, `expandedView()`, `miniView()`, `settingsView()`. Register it in `ModuleRegistry.allModules`. Views are named `<Name>ExpandedView`, `<Name>MiniView`, `<Name>SettingsView`. A background-only module sets `descriptor.providesWidget = false`.
-- **Widget sizes**: `WidgetSize` is `.mini`, `.small`, `.medium`, `.large` (weights 0.5 / 1 / 1.5 / 2), read with `@Environment(\.widgetSize)`. Views must fit every size and every notch size (`NotchAppearance.Size`); prefer `ViewThatFits` to fixed frames.
-- **Layout constants and springs** live in `NotchLayout` as pure, tested static functions. Do not scatter magic numbers in views.
-- **Style**: StandBy look — `.buttonStyle(.standBy(size, active:, circle:))`, `StandByBar`, `StandBySlider`, `StandBy.surface/amber/onAccent`, `.notchCard()`. The accent color (default amber) comes from `.tint`.
-- **Localization**: source strings are French (`sourceLanguage: fr`), English is the development language. Command-line builds do **not** sync the catalog: add every new key to `Localizable.xcstrings` by hand with **both** `en` and `fr` (`state: translated`). `LocalizationTests` fails if the two tables differ.
-- **Automated runs**: anything that could prompt the user (audio capture, clipboard, updates) is skipped when `AutomatedRun.isActive`.
-- **Tests**: Swift Testing structs; test names are French camelCase sentences (`bullesZoneSepareeDeLEncoche`). Extract logic into pure functions so it can be tested without UI.
-- **Settings**: new settings get a default and tolerant decoding (`decodeIfPresent` + fallback) so older settings files keep loading.
+- **Modules** : une classe `<Nom>Module` conforme à `NotchModule`, avec un `descriptor` statique (`id` en minuscules comme `"music"`, `"activities"`), `compactPriority`, `compactLeading()/compactTrailing()`, `expandedView()`, `miniView()`, `settingsView()`. L'enregistrer dans `ModuleRegistry.allModules`. Les vues s'appellent `<Nom>ExpandedView`, `<Nom>MiniView`, `<Nom>SettingsView`. Un module sans widget (arrière-plan seulement) met `descriptor.providesWidget = false`.
+- **Tailles de widget** : `WidgetSize` vaut `.mini`, `.small`, `.medium`, `.large` (poids 0,5 / 1 / 1,5 / 2), lu avec `@Environment(\.widgetSize)`. Les vues doivent tenir dans toutes les tailles et toutes les tailles d'encoche (`NotchAppearance.Size`) ; préférer `ViewThatFits` aux cadres fixes.
+- **Constantes de mise en page et ressorts** : dans `NotchLayout`, sous forme de fonctions statiques pures et testées. Pas de nombres magiques éparpillés dans les vues.
+- **Style** : look StandBy — `.buttonStyle(.standBy(size, active:, circle:))`, `StandByBar`, `StandBySlider`, `StandBy.surface/amber/onAccent`, `.notchCard()`. La couleur d'accent (ambre par défaut) vient de `.tint`.
+- **Localisation** : les chaînes sources sont en français (`sourceLanguage: fr`), l'anglais est la langue de développement. Les builds en ligne de commande ne synchronisent **pas** le catalogue : ajouter chaque nouvelle clé à la main dans `Localizable.xcstrings` avec **à la fois** `en` et `fr` (`state: translated`). `LocalizationTests` échoue si les deux tables diffèrent.
+- **Exécutions automatisées** : tout ce qui pourrait solliciter l'utilisateur (capture audio, presse-papiers, mises à jour) est ignoré quand `AutomatedRun.isActive`.
+- **Tests** : structs Swift Testing ; les noms de test sont des phrases françaises en camelCase (`bullesZoneSepareeDeLEncoche`). Extraire la logique dans des fonctions pures pour la tester sans UI.
+- **Réglages** : tout nouveau réglage a une valeur par défaut et un décodage tolérant (`decodeIfPresent` + valeur de repli) pour que les anciens fichiers de réglages se chargent toujours.
 
-## Frequent commands
+## Commandes fréquentes
 
-Run from the repository root with `export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer`.
+À lancer depuis la racine du dépôt avec `export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer`.
 
 ```sh
-xcodegen generate                                   # after any change to project.yml or new/removed files
+xcodegen generate                                   # après toute modification de project.yml ou ajout/suppression de fichiers
 
 xcodebuild build -project Notchkit.xcodeproj -scheme Notchkit \
   -derivedDataPath build.noindex/DerivedData -destination 'platform=macOS'
 
 xcodebuild test -project Notchkit.xcodeproj -scheme Notchkit \
-  -derivedDataPath build.noindex/DerivedData -destination 'platform=macOS'   # look for "TEST SUCCEEDED"
+  -derivedDataPath build.noindex/DerivedData -destination 'platform=macOS'   # chercher « TEST SUCCEEDED »
 
-# Stress test (Debug only): 200 expand/collapse cycles, prints STRESS-OK in the log
+# Stress test (Debug uniquement) : 200 cycles dépliage/repliage, affiche STRESS-OK dans le journal
 NOTCHKIT_STRESS=1 build.noindex/DerivedData/Build/Products/Debug/Notchkit.app/Contents/MacOS/Notchkit \
   -module.claude.port 52799
 
-# Snapshots (Debug only): renders the UI to PNG files, then quits
-NOTCHKIT_SNAPSHOT=/path/to/folder build.noindex/DerivedData/Build/Products/Debug/Notchkit.app/Contents/MacOS/Notchkit
+# Captures (Debug uniquement) : rend l'UI en fichiers PNG, puis quitte
+NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/Debug/Notchkit.app/Contents/MacOS/Notchkit
 
-# Force a language: append  -AppleLanguages "(en)"
+# Forcer une langue : ajouter  -AppleLanguages "(en)"
 ```
 
-### Release
+### Publication
 
-1. Bump `MARKETING_VERSION` and `CURRENT_PROJECT_VERSION` in `project.yml`, run `xcodegen generate`, test, commit `Version x.y.z`.
-2. Universal build:
+1. Augmenter `MARKETING_VERSION` et `CURRENT_PROJECT_VERSION` dans `project.yml`, lancer `xcodegen generate`, tester, committer `Version x.y.z`.
+2. Build universel :
    `xcodebuild -project Notchkit.xcodeproj -scheme Notchkit -configuration Release -derivedDataPath build.noindex/Release -destination 'generic/platform=macOS' ONLY_ACTIVE_ARCH=NO build`
-3. `scripts/make-dmg.sh build.noindex/Release/Build/Products/Release/Notchkit.app <out-dir>`
-4. `scripts/add-to-appcast.sh <out-dir>/Notchkit-x.y.z.dmg <app> <notes.md>` — signs the DMG with the EdDSA private key stored in the login Keychain ("Private key for signing Sparkle updates"; never delete it) and prepends the item to `appcast.xml`. Commit `appcast.xml`.
-5. `git push`, `git tag -a vx.y.z`, push the tag, `gh release create vx.y.z <dmg> --prerelease --notes-file <notes.md>`.
-   The feed URL is `https://raw.githubusercontent.com/Mycate39/Notchkit/main/appcast.xml`.
+3. `scripts/make-dmg.sh build.noindex/Release/Build/Products/Release/Notchkit.app <dossier-sortie>`
+4. `scripts/add-to-appcast.sh <dossier-sortie>/Notchkit-x.y.z.dmg <app> <notes.md>` — signe le DMG avec la clé privée EdDSA stockée dans le trousseau de session (« Private key for signing Sparkle updates » ; ne jamais la supprimer) et ajoute l'entrée en tête de `appcast.xml`. Committer `appcast.xml`.
+5. `git push`, `git tag -a vx.y.z`, pousser le tag, `gh release create vx.y.z <dmg> --prerelease --notes-file <notes.md>`.
+   L'URL du flux est `https://raw.githubusercontent.com/Mycate39/Notchkit/main/appcast.xml`.
 
-## Status (October 2026, version 0.1.6)
+## État (octobre 2026, version 0.1.6)
 
-### Working
-- Notch window on any screen: real notch, simulated notch, or floating pill; stays put across Spaces; shifts right so it never covers the active app's menus (needs Accessibility permission).
-- Compact activities (Dynamic Island style for the pill), mini notches for other activities, stacked menu that unfolds on hover, separate hover zones, Dynamic Island–style outline while an activity is shown or the notch is expanded.
-- Expanded notch with pages and widgets in four sizes, layout editor, ready-made layouts, custom notch size, StandBy-style controls, accent color, Liquid Glass background (macOS 26).
-- Modules: Music (MediaRemote + Music/Spotify fallback, reactive equalizer, AirPlay), Clock, Battery, Calendar, Weather (Open-Meteo), Claude Code (live activity, messages, usage, reply from the notch), Shelf + AirDrop, AirPods/Bluetooth battery, Live Activities (timers, downloads, tasks, `notchkit://` URLs), Clipboard, Volume/Brightness HUD, Unlock animations, Video downloads (yt-dlp installed on demand).
-- English and French, following the Mac's language.
-- Automatic updates with Sparkle, DMG distribution, app icon.
+### Fonctionne
+- Fenêtre d'encoche sur n'importe quel écran : vraie encoche, encoche simulée ou pilule flottante ; reste en place à travers les Spaces ; se décale à droite pour ne jamais masquer les menus de l'app active (nécessite l'autorisation Accessibilité).
+- Activités compactes (style Dynamic Island pour la pilule), mini-encoches pour les autres activités, menu empilé qui se déploie au survol, zones de survol séparées, contour style Dynamic Island quand une activité est affichée ou que l'encoche est dépliée.
+- Encoche dépliée avec pages et widgets en quatre tailles, éditeur de disposition, dispositions prêtes à l'emploi, taille d'encoche personnalisée, contrôles style StandBy, couleur d'accent, fond Liquid Glass (macOS 26).
+- Modules : Musique (MediaRemote + repli Musique/Spotify, égaliseur réactif, AirPlay), Horloge, Batterie, Calendrier, Météo (Open-Meteo), Claude Code (activité en direct, messages, utilisation, réponse depuis l'encoche — délai désactivé par défaut), Étagère + AirDrop, batterie AirPods/Bluetooth, Activités en direct (minuteurs, téléchargements, tâches, URL `notchkit://`), Presse-papiers, HUD volume/luminosité, animations de déverrouillage, Téléchargements vidéo (yt-dlp installé à la demande).
+- Anglais et français, selon la langue du Mac.
+- Mises à jour automatiques avec Sparkle, distribution en DMG, icône d'app.
 
-### Not verified yet / known limits
-- First real Sparkle update (0.1.5 → next version) has not happened yet.
-- Real AX menu reading, Liquid Glass rendering and some animations were only checked through snapshots, not on a real notch.
-- App is not notarized (users must right-click > Open the first time).
-- The AI assistant module is hidden (code kept in `Modules/Assistant`, re-enable in `ModuleRegistry`).
+### Pas encore vérifié / limites connues
+- La première vraie mise à jour Sparkle (0.1.5 → version suivante) n'a pas encore eu lieu.
+- La lecture réelle des menus par AX, le rendu Liquid Glass et certaines animations n'ont été vérifiés que par captures, pas sur une vraie encoche.
+- L'app n'est pas notarisée (les utilisateurs doivent faire clic droit > Ouvrir la première fois).
+- Le module assistant IA est masqué (code conservé dans `Modules/Assistant`, à réactiver dans `ModuleRegistry`).
 
-### Roadmap (v0.2, proposed order)
-1. Performance: signposts around expand/collapse, Instruments (SwiftUI, Animation Hitches, Energy); suspects are the materialize blur, the shadow during resizing, and window resizing during the spring.
-2. Third-party widgets: declarative `widget.json` + script folder in Application Support, rendered with the StandBy components (no dynamic Swift code loading).
-3. Home control through the Shortcuts app.
+### Feuille de route (v0.2, ordre proposé)
+1. Performance : signposts autour du dépliage/repliage, Instruments (SwiftUI, Animation Hitches, Energy) ; suspects : le flou de matérialisation, l'ombre pendant le redimensionnement et le redimensionnement de la fenêtre pendant le ressort.
+2. Widgets tiers : `widget.json` déclaratif + dossier de scripts dans Application Support, rendus avec les composants StandBy (pas de chargement dynamique de code Swift).
+3. Domotique via l'app Raccourcis.

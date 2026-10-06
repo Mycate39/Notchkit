@@ -2,6 +2,7 @@ import SwiftUI
 
 struct VideoDownloadExpandedView: View {
     let module: VideoDownloadModule
+    @Environment(\.widgetSize) private var size
     @State private var link = ""
     @FocusState private var isTyping: Bool
 
@@ -47,10 +48,13 @@ struct VideoDownloadExpandedView: View {
 
     private var linkField: some View {
         HStack(spacing: 6) {
-            Image(systemName: "link")
-                .font(.system(size: 9, weight: .semibold))
-                .foregroundStyle(.white.opacity(0.5))
-            TextField("Coller un lien de vidéo", text: $link)
+            // Petit widget : pas d'icône, toute la place pour le texte.
+            if size != .small {
+                Image(systemName: "link")
+                    .font(.system(size: 9, weight: .semibold))
+                    .foregroundStyle(.white.opacity(0.5))
+            }
+            TextField(size == .small ? "Lien de vidéo" : "Coller un lien de vidéo", text: $link)
                 .textFieldStyle(.plain)
                 .font(.system(size: 11))
                 .focused($isTyping)
@@ -70,6 +74,15 @@ struct VideoDownloadExpandedView: View {
     }
 
     private var formatRow: some View {
+        // Du plus détaillé au plus court, selon la largeur de la carte.
+        ViewThatFits(in: .horizontal) {
+            formatRow(fullTitle: true, folderName: true)
+            formatRow(fullTitle: false, folderName: true)
+            formatRow(fullTitle: false, folderName: false)
+        }
+    }
+
+    private func formatRow(fullTitle: Bool, folderName: Bool) -> some View {
         HStack(spacing: 6) {
             Menu {
                 ForEach(YTDLP.Format.allCases) { format in
@@ -81,18 +94,31 @@ struct VideoDownloadExpandedView: View {
                     .disabled(format.requiresFFmpeg && !module.hasFFmpeg)
                 }
             } label: {
-                Label(String(localized: module.format.title), systemImage: module.format.isAudio ? "music.note" : "film")
-                    .font(.system(size: 9, weight: .semibold))
+                HStack(spacing: 4) {
+                    Image(systemName: module.format.isAudio ? "music.note" : "film")
+                    Text(fullTitle ? String(localized: module.format.title) : module.format.shortTitle)
+                    Image(systemName: "chevron.down")
+                        .font(.system(size: 8, weight: .bold))
+                }
             }
-            .menuStyle(.borderlessButton)
+            .menuStyle(.button)
+            .menuIndicator(.hidden)
+            .buttonStyle(.standBy(.small))
             .fixedSize()
 
-            Spacer()
+            Spacer(minLength: 6)
 
+            // Dossier de destination : son nom si la place le permet, sinon l'icône seule
+            // (le chemin complet reste dans l'infobulle).
             Button { module.chooseDirectory() } label: {
-                Label(module.directory.lastPathComponent, systemImage: "folder")
+                if folderName {
+                    Label(module.directory.lastPathComponent, systemImage: "folder")
+                } else {
+                    Image(systemName: "folder")
+                }
             }
-            .buttonStyle(.standBy(.small))
+            .buttonStyle(.standBy(.small, circle: !folderName))
+            .fixedSize()
             .help("Dossier de destination : \(module.directory.path)")
         }
     }

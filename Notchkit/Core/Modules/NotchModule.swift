@@ -128,6 +128,8 @@ struct MiniWidget<Visual: View>: View {
                         .font(.system(size: valueSize, weight: .bold, design: .rounded))
                         .monospacedDigit()
                         .foregroundStyle(tint)
+                        // Valeur toujours sur une ligne (« ≈ 49 % » ne doit pas se couper en deux).
+                        .lineLimit(1)
                 }
                 if let caption, !isShort || value == nil {
                     Text(caption)

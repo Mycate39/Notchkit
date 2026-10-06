@@ -179,6 +179,8 @@ private struct TimerHeroView: View {
                 Text(timer.isFinished ? "Terminé" : (timer.isPaused ? "En pause" : "Minuteur"))
                     .font(.system(size: 11, weight: .semibold))
                     .foregroundStyle(.tint)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
                 TimelineView(.periodic(from: .now, by: 1)) { context in
                     Text(LiveActivityFormat.countdown(timer.remaining(at: context.date) ?? 0))
                         .font(.system(size: compact ? 28 : 40, weight: .regular, design: .rounded))

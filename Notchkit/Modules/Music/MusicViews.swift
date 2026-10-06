@@ -105,86 +105,23 @@ struct MusicExpandedView: View {
 
     var body: some View {
         if let info = module.nowPlaying, size == .small {
-            // Petit widget : pochette, titre et commandes empilés.
-            VStack(spacing: 6) {
-                Button { module.openPlayerApp() } label: {
-                    ArtworkView(info: info, size: 52, cornerRadius: 10)
-                }
-                .buttonStyle(.notch)
-                VStack(spacing: 0) {
-                    Text(info.title)
-                        .font(.system(size: 11, weight: .semibold))
-                    if let artist = info.artist {
-                        Text(artist)
-                            .font(.system(size: 9))
-                            .foregroundStyle(.white.opacity(0.6))
-                    }
-                }
-                .lineLimit(1)
-                PlaybackControls(module: module, isPlaying: info.isPlaying, compact: true)
+            // Petit widget : pochette, titre et commandes empilés. Du plus complet au plus serré,
+            // selon la hauteur de la carte (taille de l'encoche).
+            ViewThatFits(in: .vertical) {
+                smallLayout(info, artworkSize: 52)
+                smallLayout(info, artworkSize: 36)
+                smallLayout(info, artworkSize: nil)
             }
             .padding(8)
         } else if let info = module.nowPlaying {
-            // Moyen et grand : présentation façon Dynamic Island de l'iPhone.
-            VStack(spacing: 10) {
-                HStack(spacing: 12) {
-                    Button {
-                        module.openPlayerApp()
-                    } label: {
-                        ArtworkView(info: info, size: size == .large ? 56 : 48, cornerRadius: 12)
-                            .overlay(alignment: .bottomTrailing) {
-                                // Petite icône de l'app qui joue (désactivable dans les réglages).
-                                if module.showAppBadge, info.artwork != nil, let icon = AppIconCache.icon(for: info.bundleIdentifier) {
-                                    Image(nsImage: icon)
-                                        .resizable()
-                                        .frame(width: 18, height: 18)
-                                        .offset(x: 4, y: 4)
-                                }
-                            }
-                    }
-                    .buttonStyle(.notch)
-                    .help("Ouvrir l'app qui joue")
-
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(info.title)
-                            .font(.system(size: 15, weight: .semibold))
-                        if let artist = info.artist {
-                            Text(artist)
-                                .font(.system(size: 13))
-                                .foregroundStyle(.white.opacity(0.55))
-                        }
-                    }
-                    .lineLimit(1)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-
-                    // Barres colorées d'après la pochette, en haut à droite.
-                    EqualizerView(isAnimating: info.isPlaying, monitor: module.reactiveEqualizer ? module.spectrum : nil,
-                                  color: ArtworkTint.color(for: info), spacingRatio: 1, bellShaped: true)
-                        .frame(width: 24, height: 18)
-                        .frame(maxHeight: .infinity, alignment: .top)
-                        .padding(.top, 4)
-                }
-                .fixedSize(horizontal: false, vertical: true)
-
-                if info.duration != nil {
-                    PlaybackProgressView(info: info)
-                }
-
-                ZStack {
-                    PlaybackControls(module: module, isPlaying: info.isPlaying)
-                    HStack {
-                        Spacer()
-                        // Même cercle sombre que les boutons précédent et suivant (style StandBy).
-                        AirPlayButton()
-                            .frame(width: 18, height: 18)
-                            .frame(width: 30, height: 30)
-                            .background(StandBy.surface, in: Circle())
-                            .help("Sortie audio")
-                    }
-                }
+            // Moyen et grand : présentation façon Dynamic Island de l'iPhone, resserrée si la carte est basse.
+            ViewThatFits(in: .vertical) {
+                islandLayout(info, artworkSize: size == .large ? 50 : 46, showsProgress: true, largeControls: true)
+                islandLayout(info, artworkSize: 40, showsProgress: true, largeControls: false)
+                islandLayout(info, artworkSize: 36, showsProgress: false, largeControls: false)
             }
             .padding(.horizontal, 16)
-            .padding(.vertical, 12)
+            .padding(.vertical, 10)
         } else {
             VStack(spacing: 6) {
                 LineGlyph(shape: MusicNoteShape())
@@ -194,6 +131,92 @@ struct MusicExpandedView: View {
                     .foregroundStyle(.white.opacity(0.7))
             }
             .padding(12)
+        }
+    }
+
+    private func smallLayout(_ info: NowPlayingInfo, artworkSize: CGFloat?) -> some View {
+        VStack(spacing: 6) {
+            if let artworkSize {
+                Button { module.openPlayerApp() } label: {
+                    ArtworkView(info: info, size: artworkSize, cornerRadius: artworkSize * 0.2)
+                }
+                .buttonStyle(.notch)
+            }
+            VStack(spacing: 0) {
+                Text(info.title)
+                    .font(.system(size: 11, weight: .semibold))
+                if let artist = info.artist {
+                    Text(artist)
+                        .font(.system(size: 9))
+                        .foregroundStyle(.white.opacity(0.6))
+                }
+            }
+            .lineLimit(1)
+            PlaybackControls(module: module, isPlaying: info.isPlaying, compact: true)
+        }
+    }
+
+    private func islandLayout(_ info: NowPlayingInfo, artworkSize: CGFloat, showsProgress: Bool,
+                              largeControls: Bool) -> some View {
+        VStack(spacing: 8) {
+            HStack(spacing: 12) {
+                Button {
+                    module.openPlayerApp()
+                } label: {
+                    ArtworkView(info: info, size: artworkSize, cornerRadius: artworkSize * 0.24)
+                        .overlay(alignment: .bottomTrailing) {
+                            // Petite icône de l'app qui joue (désactivable dans les réglages).
+                            if module.showAppBadge, info.artwork != nil, let icon = AppIconCache.icon(for: info.bundleIdentifier) {
+                                Image(nsImage: icon)
+                                    .resizable()
+                                    .frame(width: 18, height: 18)
+                                    .offset(x: 4, y: 4)
+                            }
+                        }
+                }
+                .buttonStyle(.notch)
+                .help("Ouvrir l'app qui joue")
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(info.title)
+                        .font(.system(size: 15, weight: .semibold))
+                    if let artist = info.artist {
+                        Text(artist)
+                            .font(.system(size: 13))
+                            .foregroundStyle(.white.opacity(0.55))
+                    }
+                }
+                .lineLimit(1)
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+                // Barres colorées d'après la pochette, en haut à droite.
+                EqualizerView(isAnimating: info.isPlaying, monitor: module.reactiveEqualizer ? module.spectrum : nil,
+                              color: ArtworkTint.color(for: info), spacingRatio: 1, bellShaped: true)
+                    .frame(width: 24, height: 18)
+                    .frame(maxHeight: .infinity, alignment: .top)
+                    .padding(.top, 4)
+            }
+            .frame(height: artworkSize)
+
+            if showsProgress, info.duration != nil {
+                PlaybackProgressView(info: info)
+            }
+
+            // Commandes centrées, AirPlay à droite : un emplacement vide de même largeur à gauche
+            // garde les commandes au centre sans jamais chevaucher le bouton AirPlay.
+            HStack(spacing: 0) {
+                Color.clear.frame(width: 30, height: 1)
+                Spacer(minLength: 4)
+                PlaybackControls(module: module, isPlaying: info.isPlaying, large: largeControls,
+                                 spacing: size == .large ? 18 : 12)
+                Spacer(minLength: 4)
+                // Même cercle sombre que les boutons précédent et suivant (style StandBy).
+                AirPlayButton()
+                    .frame(width: 18, height: 18)
+                    .frame(width: 30, height: 30)
+                    .background(StandBy.surface, in: Circle())
+                    .help("Sortie audio")
+            }
         }
     }
 }
@@ -229,21 +252,26 @@ private struct PlaybackProgressView: View {
 private struct PlaybackControls: View {
     let module: MusicModule
     let isPlaying: Bool
+    /// Petit widget : boutons serrés.
     var compact = false
+    /// Grand bouton lecture/pause (sinon taille intermédiaire, pour les cartes basses).
+    var large = true
+    var spacing: CGFloat = 18
 
     // Style StandBy : lecture/pause en grand cercle ambre, morceaux précédent/suivant en cercles sombres.
     var body: some View {
-        HStack(spacing: compact ? 6 : 18) {
-            control("backward.fill", style: .standBy(compact ? .small : .regular, circle: true),
+        let side: StandByButtonStyle.Size = compact || !large ? .small : .regular
+        let main: StandByButtonStyle.Size = compact || !large ? .regular : .large
+        HStack(spacing: compact ? 6 : spacing) {
+            control("backward.fill", style: .standBy(side, circle: true),
                     help: "Morceau précédent") { module.send(.previousTrack) }
-            control(isPlaying ? "pause.fill" : "play.fill", style: .standBy(compact ? .regular : .large, active: true, circle: true),
+            control(isPlaying ? "pause.fill" : "play.fill", style: .standBy(main, active: true, circle: true),
                     help: isPlaying ? "Pause" : "Lecture") {
                 module.send(.togglePlayPause)
             }
-            control("forward.fill", style: .standBy(compact ? .small : .regular, circle: true),
+            control("forward.fill", style: .standBy(side, circle: true),
                     help: "Morceau suivant") { module.send(.nextTrack) }
         }
-        .frame(maxWidth: .infinity)
     }
 
     private func control(_ symbol: String, style: StandByButtonStyle, help: LocalizedStringKey,
@@ -344,14 +372,17 @@ struct MusicMiniView: View {
         if let info = module.nowPlaying {
             // Pochette et bouton proportionnels à la taille du widget.
             GeometryReader { proxy in
-                let side = min(proxy.size.width * 0.78, proxy.size.height * 0.55)
-                VStack(spacing: proxy.size.height * 0.05) {
+                // Le bouton a une taille fixe : la pochette prend la hauteur restante.
+                let button: StandByButtonStyle.Size = proxy.size.height > 90 ? .regular : .small
+                let spacing = proxy.size.height * 0.05
+                let side = max(0, min(proxy.size.width * 0.78, proxy.size.height - button.height - spacing - 8))
+                VStack(spacing: spacing) {
                     ArtworkView(info: info, size: side, cornerRadius: side * 0.2)
                     Button { module.send(.togglePlayPause) } label: {
                         Image(systemName: info.isPlaying ? "pause.fill" : "play.fill")
                             .contentTransition(.symbolEffect(.replace))
                     }
-                    .buttonStyle(.standBy(side > 60 ? .regular : .small, active: true, circle: true))
+                    .buttonStyle(.standBy(button, active: true, circle: true))
                 }
                 .frame(width: proxy.size.width, height: proxy.size.height)
             }

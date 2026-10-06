@@ -142,6 +142,7 @@ struct ClaudeExpandedView: View {
             Text("L'activité apparaîtra ici dès que Claude Code travaillera.")
                 .font(.system(size: 11))
                 .foregroundStyle(.white.opacity(0.6))
+                .lineLimit(3)
         }
     }
 
@@ -226,16 +227,20 @@ struct ClaudeExpandedView: View {
                                     .foregroundStyle(.white.opacity(0.5))
                             }
                         }
-                        .frame(width: 112, alignment: .leading)
+                        // Petit widget : pas de largeur fixe ni de jauge, sinon la ligne élargit la carte.
+                        .frame(width: size == .small ? nil : 112, alignment: .leading)
+                        .frame(maxWidth: size == .small ? .infinity : nil, alignment: .leading)
 
-                        GeometryReader { proxy in
-                            ZStack(alignment: .leading) {
-                                Capsule().fill(.white.opacity(0.15))
-                                Capsule().fill(Self.color(for: line.fraction))
-                                    .frame(width: max(4, proxy.size.width * line.fraction))
+                        if size != .small {
+                            GeometryReader { proxy in
+                                ZStack(alignment: .leading) {
+                                    Capsule().fill(.white.opacity(0.15))
+                                    Capsule().fill(Self.color(for: line.fraction))
+                                        .frame(width: max(4, proxy.size.width * line.fraction))
+                                }
                             }
+                            .frame(height: 5)
                         }
-                        .frame(height: 5)
 
                         Text(verbatim: (line.isEstimate ? "≈ " : "") + line.fraction.formatted(.percent.precision(.fractionLength(0))))
                             .font(.system(size: 13, weight: .bold, design: .rounded))

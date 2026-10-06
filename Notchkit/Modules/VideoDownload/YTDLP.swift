@@ -39,6 +39,17 @@ enum YTDLP {
             }
         }
 
+        /// Libellé court, pour les petits widgets.
+        var shortTitle: String {
+            switch self {
+            case .bestVideo: String(localized: "Meilleure")
+            case .video1080: "1080p"
+            case .video720: "720p"
+            case .audioM4A: "M4A"
+            case .audioMP3: "MP3"
+            }
+        }
+
         var isAudio: Bool { self == .audioM4A || self == .audioMP3 }
         /// Le MP3 nécessite ffmpeg (conversion).
         var requiresFFmpeg: Bool { self == .audioMP3 }

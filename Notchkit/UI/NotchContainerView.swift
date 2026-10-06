@@ -48,7 +48,7 @@ struct NotchContainerView: View {
         // Autres activités en cours : petites bulles à droite, comme sur iPhone.
         .overlay(alignment: .topTrailing) {
             CompactBubbles(viewModel: viewModel)
-                .offset(x: NotchLayout.bubblesWidth(count: viewModel.bubbleModules.count, geometry: geometry))
+                .offset(x: NotchLayout.bubblesWidth(count: viewModel.bubbleModules.count, geometry: geometry, island: island))
         }
         .foregroundStyle(.white)
         .tint(viewModel.appearance.accentColor)
@@ -72,7 +72,7 @@ private struct CompactBubbles: View {
 
     var body: some View {
         let geometry = viewModel.geometry
-        let diameter = NotchLayout.bubbleDiameter(for: geometry)
+        let diameter = NotchLayout.bubbleDiameter(for: geometry, island: viewModel.isIsland)
         HStack(spacing: NotchLayout.bubbleGap) {
             ForEach(viewModel.bubbleModules.map(\.moduleID), id: \.self) { id in
                 if let module = viewModel.manager.module(for: id), let content = module.compactLeading() {

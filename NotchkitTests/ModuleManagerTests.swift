@@ -155,6 +155,10 @@ struct NotchLayoutTests {
         #expect(NotchLayout.bubblesWidth(count: 1, geometry: pill) == d + NotchLayout.bubbleGap)
         // Au plus deux bulles.
         #expect(NotchLayout.bubblesWidth(count: 5, geometry: pill) == 2 * (d + NotchLayout.bubbleGap))
+        // Île : les bulles prennent sa hauteur pour rester alignées.
+        let islandShape = NotchLayout.shapeSize(for: pill, isExpanded: false, hasCompactContent: true, island: true)
+        #expect(NotchLayout.bubbleDiameter(for: pill, island: true) == islandShape.height)
+        #expect(NotchLayout.bubbleDiameter(for: notch, island: true) == NotchLayout.bubbleDiameter(for: notch))
     }
 
     @Test func ileSeulementPourLaPastille() {

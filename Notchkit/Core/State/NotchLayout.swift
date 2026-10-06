@@ -54,15 +54,15 @@ enum NotchLayout {
     static let maxBubbles = 2
     static let bubbleGap: CGFloat = 6
 
-    /// Diamètre d'une bulle : la hauteur de l'encoche repliée.
-    static func bubbleDiameter(for geometry: NotchGeometry) -> CGFloat {
-        geometry.closedSize.height
+    /// Diamètre d'une bulle : la hauteur de l'encoche repliée (île comprise, pour rester alignée).
+    static func bubbleDiameter(for geometry: NotchGeometry, island: Bool = false) -> CGFloat {
+        geometry.closedSize.height + (island && geometry.style == .pill ? islandExtraHeight : 0)
     }
 
     /// Largeur occupée par `count` bulles à droite de l'encoche (espacements compris).
-    static func bubblesWidth(count: Int, geometry: NotchGeometry) -> CGFloat {
+    static func bubblesWidth(count: Int, geometry: NotchGeometry, island: Bool = false) -> CGFloat {
         let count = min(max(0, count), maxBubbles)
-        return CGFloat(count) * (bubbleDiameter(for: geometry) + bubbleGap)
+        return CGFloat(count) * (bubbleDiameter(for: geometry, island: island) + bubbleGap)
     }
 
     /// Rayon des coins en mode déplié.

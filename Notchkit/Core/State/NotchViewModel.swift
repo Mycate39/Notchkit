@@ -109,7 +109,7 @@ final class NotchViewModel {
                               island: isIsland)
         // Place autour de la forme pour que l'ombre (survol ou encoche dépliée) ne soit pas coupée.
         // Bulles à droite : la fenêtre s'élargit des deux côtés pour garder l'encoche centrée.
-        let bubbles = NotchLayout.bubblesWidth(count: bubbleModules.count, geometry: geometry)
+        let bubbles = NotchLayout.bubblesWidth(count: bubbleModules.count, geometry: geometry, island: isIsland)
         let margin = isExpanded ? NotchLayout.expandedShadowMargin : (showsHoverShadow ? NotchLayout.hoverShadowMargin : 0)
         guard margin > 0 || bubbles > 0 else { return size }
         return CGSize(width: size.width + (margin + bubbles) * 2, height: size.height + margin)

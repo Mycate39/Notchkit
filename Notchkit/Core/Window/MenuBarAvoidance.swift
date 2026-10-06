@@ -9,7 +9,7 @@ import ApplicationServices
 @MainActor
 enum MenuBarAvoidance {
     /// Espace laissé entre le dernier menu et l'encoche.
-    nonisolated static let margin: CGFloat = 10
+    nonisolated static let margin: CGFloat = 14
     /// Décalage maximal (au-delà, l'encoche risquerait de couvrir les icônes de droite).
     nonisolated static let maxOffset: CGFloat = 320
 

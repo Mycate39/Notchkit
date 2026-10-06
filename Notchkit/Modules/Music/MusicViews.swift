@@ -1,4 +1,5 @@
 import AppKit
+import AVKit
 import SwiftUI
 
 // MARK: - Pochette
@@ -124,45 +125,63 @@ struct MusicExpandedView: View {
             }
             .padding(8)
         } else if let info = module.nowPlaying {
-            HStack(spacing: 12) {
-                Button {
-                    module.openPlayerApp()
-                } label: {
-                    ArtworkView(info: info, size: size == .large ? 72 : 56, cornerRadius: 12)
-                        .overlay(alignment: .bottomTrailing) {
-                            // Petite icône de l'app qui joue, sauf si elle est déjà affichée en grand.
-                            if module.showAppBadge, info.artwork != nil, let icon = AppIconCache.icon(for: info.bundleIdentifier) {
-                                Image(nsImage: icon)
-                                    .resizable()
-                                    .frame(width: 20, height: 20)
-                                    .offset(x: 5, y: 5)
+            // Moyen et grand : présentation façon Dynamic Island de l'iPhone.
+            VStack(spacing: 10) {
+                HStack(spacing: 12) {
+                    Button {
+                        module.openPlayerApp()
+                    } label: {
+                        ArtworkView(info: info, size: size == .large ? 56 : 48, cornerRadius: 12)
+                            .overlay(alignment: .bottomTrailing) {
+                                // Petite icône de l'app qui joue (désactivable dans les réglages).
+                                if module.showAppBadge, info.artwork != nil, let icon = AppIconCache.icon(for: info.bundleIdentifier) {
+                                    Image(nsImage: icon)
+                                        .resizable()
+                                        .frame(width: 18, height: 18)
+                                        .offset(x: 4, y: 4)
+                                }
                             }
-                        }
-                }
-                .buttonStyle(.notch)
-                .help("Ouvrir l'app qui joue")
+                    }
+                    .buttonStyle(.notch)
+                    .help("Ouvrir l'app qui joue")
 
-                VStack(alignment: .leading, spacing: 6) {
-                    VStack(alignment: .leading, spacing: 1) {
+                    VStack(alignment: .leading, spacing: 2) {
                         Text(info.title)
-                            .font(.system(size: 13, weight: .semibold))
+                            .font(.system(size: 15, weight: .semibold))
                         if let artist = info.artist {
                             Text(artist)
-                                .font(.system(size: 11))
-                                .foregroundStyle(.white.opacity(0.6))
+                                .font(.system(size: 13))
+                                .foregroundStyle(.white.opacity(0.55))
                         }
                     }
                     .lineLimit(1)
+                    .frame(maxWidth: .infinity, alignment: .leading)
 
-                    if info.duration != nil {
-                        PlaybackProgressView(info: info)
-                    }
-
-                    PlaybackControls(module: module, isPlaying: info.isPlaying)
+                    // Barres colorées d'après la pochette, en haut à droite.
+                    EqualizerView(isAnimating: info.isPlaying, monitor: module.reactiveEqualizer ? module.spectrum : nil,
+                                  color: ArtworkTint.color(for: info), spacingRatio: 1, bellShaped: true)
+                        .frame(width: 24, height: 18)
+                        .frame(maxHeight: .infinity, alignment: .top)
+                        .padding(.top, 4)
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .fixedSize(horizontal: false, vertical: true)
+
+                if info.duration != nil {
+                    PlaybackProgressView(info: info)
+                }
+
+                ZStack {
+                    PlaybackControls(module: module, isPlaying: info.isPlaying)
+                    HStack {
+                        Spacer()
+                        AirPlayButton()
+                            .frame(width: 22, height: 22)
+                            .help("Sortie audio")
+                    }
+                }
             }
-            .padding(12)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
         } else {
             VStack(spacing: 6) {
                 LineGlyph(shape: MusicNoteShape())
@@ -186,7 +205,9 @@ private struct PlaybackProgressView: View {
             let duration = info.duration ?? 0
             let elapsed = info.elapsed(at: context.date)
 
-            VStack(spacing: 3) {
+            HStack(spacing: 8) {
+                Text(elapsed.map(Self.format) ?? "–:––")
+                    .frame(minWidth: 30, alignment: .leading)
                 GeometryReader { proxy in
                     let progress = duration > 0 ? (elapsed ?? 0) / duration : 0
                     ZStack(alignment: .leading) {
@@ -195,17 +216,13 @@ private struct PlaybackProgressView: View {
                             .frame(width: proxy.size.width * min(max(progress, 0), 1))
                     }
                 }
-                .frame(height: 4)
+                .frame(height: 5)
                 .opacity(elapsed == nil ? 0.4 : 1)
-
-                HStack {
-                    Text(elapsed.map(Self.format) ?? "–:––")
-                    Spacer()
-                    Text(elapsed.map { "-" + Self.format(max(0, duration - $0)) } ?? Self.format(duration))
-                }
-                .font(.system(size: 9, weight: .medium).monospacedDigit())
-                .foregroundStyle(.white.opacity(0.5))
+                Text(elapsed.map { "-" + Self.format(max(0, duration - $0)) } ?? Self.format(duration))
+                    .frame(minWidth: 34, alignment: .trailing)
             }
+            .font(.system(size: 10, weight: .medium).monospacedDigit())
+            .foregroundStyle(.white.opacity(0.55))
         }
     }
 
@@ -220,12 +237,12 @@ private struct PlaybackControls: View {
     var compact = false
 
     var body: some View {
-        HStack(spacing: compact ? 6 : 22) {
-            control("backward.fill", size: compact ? 11 : 14, help: "Morceau précédent") { module.send(.previousTrack) }
-            control(isPlaying ? "pause.fill" : "play.fill", size: compact ? 16 : 20, help: isPlaying ? "Pause" : "Lecture") {
+        HStack(spacing: compact ? 6 : 30) {
+            control("backward.fill", size: compact ? 11 : 18, help: "Morceau précédent") { module.send(.previousTrack) }
+            control(isPlaying ? "pause.fill" : "play.fill", size: compact ? 16 : 24, help: isPlaying ? "Pause" : "Lecture") {
                 module.send(.togglePlayPause)
             }
-            control("forward.fill", size: compact ? 11 : 14, help: "Morceau suivant") { module.send(.nextTrack) }
+            control("forward.fill", size: compact ? 11 : 18, help: "Morceau suivant") { module.send(.nextTrack) }
         }
         .frame(maxWidth: .infinity)
     }
@@ -234,13 +251,26 @@ private struct PlaybackControls: View {
         Button(action: action) {
             Image(systemName: symbol)
                 .font(.system(size: size, weight: .semibold))
-                .frame(width: 28, height: 24)
+                .frame(width: compact ? 24 : 34, height: compact ? 22 : 28)
                 .contentShape(Rectangle())
                 .contentTransition(.symbolEffect(.replace))
         }
         .buttonStyle(.notch)
         .help(help)
     }
+}
+
+/// Bouton AirPlay de macOS (choix de la sortie audio), via `AVRoutePickerView` (API publique).
+private struct AirPlayButton: NSViewRepresentable {
+    func makeNSView(context: Context) -> AVRoutePickerView {
+        let picker = AVRoutePickerView()
+        picker.isRoutePickerButtonBordered = false
+        picker.setRoutePickerButtonColor(.white.withAlphaComponent(0.75), for: .normal)
+        picker.setRoutePickerButtonColor(.white, for: .normalHighlighted)
+        return picker
+    }
+
+    func updateNSView(_ view: AVRoutePickerView, context: Context) {}
 }
 
 // MARK: - Réglages

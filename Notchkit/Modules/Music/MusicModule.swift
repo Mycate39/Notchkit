@@ -172,6 +172,13 @@ final class MusicModule: NotchModule {
         NSWorkspace.shared.openApplication(at: url, configuration: NSWorkspace.OpenConfiguration())
     }
 
+    #if DEBUG
+    /// Outil de captures : affiche un morceau fictif.
+    func debugSetNowPlaying(_ info: NowPlayingInfo?) {
+        nowPlaying = info
+    }
+    #endif
+
     // MARK: Affichage
 
     var compactPriority: ModulePriority {

@@ -107,6 +107,28 @@ enum SnapshotRenderer {
             .padding(16).background(.black),
              to: directory.appendingPathComponent("assistant-visage.png"))
 
+        // Lecteur de musique (grande carte) avec un morceau fictif.
+        if let music = manager.module(for: MusicModule.descriptor.id) as? MusicModule {
+            let artwork = NSImage(size: NSSize(width: 120, height: 120), flipped: false) { rect in
+                NSGradient(colors: [.systemPurple, .systemPink, .systemOrange])?.draw(in: rect, angle: 45)
+                return true
+            }
+            var info = NowPlayingInfo(origin: .appleMusic, title: "Entropy", artist: "Beach Bunny", isPlaying: true)
+            info.duration = 221
+            info.elapsed = 170
+            info.timestamp = Date()
+            info.artwork = artwork
+            info.artworkHash = 1
+            music.debugSetNowPlaying(info)
+            save(MusicExpandedView(module: music)
+                    .environment(\.widgetSize, .large)
+                    .frame(width: 420, height: 142)
+                    .notchCard()
+                    .padding(14).background(.black).foregroundStyle(.white).environment(\.colorScheme, .dark),
+                 to: directory.appendingPathComponent("musique-grande.png"))
+            music.debugSetNowPlaying(nil)
+        }
+
         // Icônes au trait et jauge de batterie en charge.
         save(HStack(spacing: 18) {
                 LineGlyph(shape: BoltShape()).frame(width: 40, height: 40)

@@ -138,8 +138,9 @@ struct NotchLayoutTests {
     }
 
     @Test func decalagePourLibererLesMenus() {
-        // Menus jusqu'à 672 pt, encoche centrée à 840 pt de 330 pt de large : bord gauche à 675.
-        #expect(MenuBarAvoidance.offset(menusRightEdge: 672, centerX: 840, halfWidth: 165) == 7)
+        // Menus jusqu'à 672 pt, encoche centrée à 840 pt de 330 pt de large : bord gauche à 675,
+        // décalée jusqu'à 672 + marge.
+        #expect(MenuBarAvoidance.offset(menusRightEdge: 672, centerX: 840, halfWidth: 165) == 672 + MenuBarAvoidance.margin - 675)
         // Menus courts : pas de décalage.
         #expect(MenuBarAvoidance.offset(menusRightEdge: 400, centerX: 840, halfWidth: 165) == 0)
         // Autorisation absente ou menus illisibles : pas de décalage.

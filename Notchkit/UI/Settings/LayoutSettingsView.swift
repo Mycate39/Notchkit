@@ -224,7 +224,7 @@ private struct WidgetTile: View {
         }
         .background(GeometryReader { proxy in Color.clear.onAppear { tileWidth = proxy.size.width } })
         .popover(isPresented: $showsOptions, arrowEdge: .bottom) {
-            VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading, spacing: 12) {
                 Label { Text(descriptor.name) } icon: { ModuleIcon(symbol: descriptor.systemImage) }
                     .font(.headline)
                 Picker("Taille", selection: Binding(
@@ -236,13 +236,16 @@ private struct WidgetTile: View {
                     }
                 }
                 .pickerStyle(.segmented)
+                .labelsHidden()
+                // Largeur naturelle : les libellés (plus longs en anglais) ne débordent jamais.
+                .fixedSize()
                 Button("Masquer ce widget", role: .destructive) {
                     showsOptions = false
                     withAnimation(.snappy) { manager.setEnabled(false, for: descriptor.id) }
                 }
             }
-            .padding(14)
-            .frame(width: 240)
+            .padding(16)
+            .fixedSize()
         }
     }
 

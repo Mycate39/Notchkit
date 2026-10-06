@@ -88,6 +88,14 @@ private struct CompactBubbles: View {
                             }
                         }
                         .contentShape(Circle())
+                        // Survol de la bulle : l'encoche s'ouvrira sur la page de cette activité.
+                        .onHover { inside in
+                            if inside {
+                                viewModel.requestedModuleID = id
+                            } else if viewModel.requestedModuleID == id, !viewModel.isExpanded {
+                                viewModel.requestedModuleID = nil
+                            }
+                        }
                         .onTapGesture { viewModel.expand(showing: id) }
                         .help(Text(type(of: module).descriptor.name))
                         .transition(.scale(scale: 0.4).combined(with: .opacity))
@@ -141,7 +149,7 @@ private struct CompactNotchView: View {
     private func compactRow(ear: CGFloat, leading: AnyView?, trailing: AnyView?) -> some View {
         // Hauteur du contenu bornée : les vues extensibles (pochette, barres) gardent une taille
         // raisonnable quelle que soit la hauteur de l'encoche (barre des menus ou encoche réelle).
-        let contentHeight = min(20, max(14, viewModel.geometry.closedSize.height - 6))
+        let contentHeight = min(22, max(14, viewModel.geometry.closedSize.height - 4))
         return HStack(spacing: 0) {
             leading
                 .frame(maxHeight: contentHeight)
@@ -207,9 +215,9 @@ private struct ExpandedNotchView: View {
                     return
                 }
             }
-            // On reste sur la page où l'on était, sauf si un module réclame l'attention
-            // (Claude au travail, rendez-vous imminent…) : on ouvre alors directement sa page.
-            if let module = viewModel.manager.compactModule, module.compactPriority >= .elevated,
+            // Une activité est affichée dans l'encoche repliée (musique, minuteur, Claude…) :
+            // on ouvre directement sa page. Sinon, on reste sur la page où l'on était.
+            if let module = viewModel.manager.compactModule, module.compactPriority >= .normal,
                let page = pages.first(where: { $0.modules.contains { $0.id == module.moduleID } }) {
                 viewModel.selectedPage = page.id
             }

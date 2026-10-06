@@ -14,6 +14,11 @@ struct MenuBarContent: View {
         }
         .keyboardShortcut(",")
 
+        Button("Rechercher les mises à jour…") {
+            Updater.shared.checkForUpdates()
+        }
+        .disabled(!Updater.shared.isAvailable)
+
         #if DEBUG
         Divider()
 

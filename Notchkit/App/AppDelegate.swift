@@ -16,6 +16,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        // Mises à jour automatiques (versions publiées uniquement).
+        Updater.shared.start()
+
         // Les alertes des modules s'affichent dans l'encoche.
         moduleManager.alertHandler = { [weak self] alert in
             self?.viewModel.present(alert)

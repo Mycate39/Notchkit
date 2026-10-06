@@ -49,5 +49,13 @@
 	<string>Notchkit uses your approximate location to show the local weather.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Notchkit uses your approximate location to show the local weather.</string>
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
+	<key>SUFeedURL</key>
+	<string>https://raw.githubusercontent.com/Mycate39/Notchkit/main/appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>tisE+cKf5tNeM+4INmuaSM425okZMyXgbhVNIpefFGY=</string>
+	<key>SUScheduledCheckInterval</key>
+	<integer>86400</integer>
 </dict>
 </plist>

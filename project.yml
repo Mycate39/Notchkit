@@ -19,6 +19,12 @@ settings:
     CODE_SIGN_STYLE: Manual
     DEVELOPMENT_TEAM: ""
 
+# Mises à jour automatiques (Sparkle, licence MIT) : voir Notchkit/App/Updater.swift.
+packages:
+  Sparkle:
+    url: https://github.com/sparkle-project/Sparkle
+    majorVersion: 2.6.0
+
 targets:
   Notchkit:
     type: application
@@ -31,6 +37,7 @@ targets:
       - path: ThirdParty/MediaRemoteAdapter/LICENSE.txt
         buildPhase: resources
     dependencies:
+      - package: Sparkle
       # Le framework est intégré à l'app mais PAS lié : seul le script Perl le charge.
       - target: MediaRemoteAdapter
         link: false
@@ -63,6 +70,11 @@ targets:
         NSLocationUsageDescription: "Notchkit uses your approximate location to show the local weather."
         NSLocationWhenInUseUsageDescription: "Notchkit uses your approximate location to show the local weather."
         NSAudioCaptureUsageDescription: "Notchkit analyzes the sound playing on your Mac to animate the equalizer bars in real time. Audio is never recorded or sent anywhere."
+        # Mises à jour (Sparkle) : liste des versions dans le dépôt, clé publique de vérification.
+        SUFeedURL: "https://raw.githubusercontent.com/Mycate39/Notchkit/main/appcast.xml"
+        SUPublicEDKey: "tisE+cKf5tNeM+4INmuaSM425okZMyXgbhVNIpefFGY="
+        SUEnableAutomaticChecks: true
+        SUScheduledCheckInterval: 86400
         NSAppleEventsUsageDescription: "Notchkit controls playback (play, pause, next track) in Music and Spotify from the notch."
     settings:
       base:

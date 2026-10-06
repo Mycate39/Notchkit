@@ -216,6 +216,7 @@ private struct GeneralSettingsView: View {
     @State private var screens: [ScreenOption] = ScreenOption.connected()
     @State private var launchAtLogin = LaunchAtLogin.isEnabled
     @State private var launchError: String?
+    @State private var autoUpdate = Updater.shared.automaticallyChecks
 
     var body: some View {
         Form {
@@ -277,6 +278,20 @@ private struct GeneralSettingsView: View {
                         .font(.caption)
                         .foregroundStyle(.red)
                 }
+            }
+
+            Section("Mises à jour") {
+                Toggle("Rechercher automatiquement les mises à jour", isOn: $autoUpdate)
+                    .onChange(of: autoUpdate) { _, newValue in Updater.shared.automaticallyChecks = newValue }
+                    .disabled(!Updater.shared.isAvailable)
+                Button("Rechercher maintenant…") { Updater.shared.checkForUpdates() }
+                    .disabled(!Updater.shared.isAvailable)
+                Text(Updater.shared.isAvailable
+                     ? "Notchkit vérifie une fois par jour si une nouvelle version est disponible sur GitHub, puis l'installe et redémarre après votre accord."
+                     : "Les mises à jour automatiques ne sont disponibles que dans les versions publiées.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
             }
 
             Section {

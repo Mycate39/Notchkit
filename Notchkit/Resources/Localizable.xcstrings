@@ -4436,6 +4436,22 @@
         }
       }
     },
+    "Les mises à jour automatiques ne sont disponibles que dans les versions publiées." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatic updates are only available in released builds."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les mises à jour automatiques ne sont disponibles que dans les versions publiées."
+          }
+        }
+      }
+    },
     "Les modules affichés, leurs pages et leurs tailles seront remplacés. Vous pourrez revenir en arrière." : {
       "localizations" : {
         "en" : {
@@ -4752,6 +4768,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mise à jour de l'intégration nécessaire"
+          }
+        }
+      }
+    },
+    "Mises à jour" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updates"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mises à jour"
           }
         }
       }
@@ -5200,6 +5232,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notchkit va télécharger le programme officiel yt-dlp pour macOS depuis GitHub (logiciel libre, environ 35 Mo), vérifier son empreinte, puis l'installer dans son dossier. Rien n'est modifié ailleurs sur votre Mac."
+          }
+        }
+      }
+    },
+    "Notchkit vérifie une fois par jour si une nouvelle version est disponible sur GitHub, puis l'installe et redémarre après votre accord." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit checks GitHub for a new version once a day, then installs it and relaunches with your approval."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit vérifie une fois par jour si une nouvelle version est disponible sur GitHub, puis l'installe et redémarre après votre accord."
           }
         }
       }
@@ -5968,6 +6016,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rechercher"
+          }
+        }
+      }
+    },
+    "Rechercher automatiquement les mises à jour" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatically check for updates"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher automatiquement les mises à jour"
+          }
+        }
+      }
+    },
+    "Rechercher les mises à jour…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check for Updates…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher les mises à jour…"
+          }
+        }
+      }
+    },
+    "Rechercher maintenant…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check Now…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher maintenant…"
           }
         }
       }

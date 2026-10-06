@@ -69,8 +69,8 @@ final class ModuleManager {
         return best
     }
 
-    /// Autres activités en cours (priorité normale ou plus), affichées en bulles à droite de
-    /// l'encoche repliée, de la plus importante à la moins importante.
+    /// Autres activités en cours (priorité normale ou plus), affichées à droite de l'encoche repliée
+    /// (une bulle, ou une pile qui se déroule au survol), de la plus importante à la moins importante.
     var secondaryCompactModules: [any NotchModule] {
         guard let primary = compactModule else { return [] }
         let others = activeModules.filter {

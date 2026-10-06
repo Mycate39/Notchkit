@@ -65,53 +65,132 @@ struct NotchContainerView: View {
 
 // MARK: - Mode compact
 
-/// Bulles des activités secondaires, à droite de l'encoche repliée (comme sur iPhone).
-/// Un clic ouvre l'encoche sur la page de l'activité.
+/// Activités secondaires, à droite de l'encoche repliée (comme sur iPhone).
+/// - une seule : une bulle (mini-encoche en mode encoche) ;
+/// - deux ou plus : une pile avec leur nombre. Au survol, elle se déroule en colonne de bulles
+///   rondes, la pile devenant elle-même la première bulle.
+/// Survoler (ou cliquer) une bulle ouvre l'encoche sur la page de son activité.
 private struct CompactBubbles: View {
     let viewModel: NotchViewModel
+    @Namespace private var namespace
+    @State private var closeTask: Task<Void, Never>?
 
     var body: some View {
         let geometry = viewModel.geometry
-        let diameter = NotchLayout.bubbleDiameter(for: geometry, island: viewModel.isIsland)
-        let width = NotchLayout.bubbleWidth(for: geometry, island: viewModel.isIsland)
-        // Pastille : bulle ronde comme sur iPhone. Encoche : mini-encoche collée au bord de l'écran,
-        // même forme et mêmes arrondis que la grande.
-        let shape: AnyShape = geometry.style == .notch
+        let island = viewModel.isIsland
+        let diameter = NotchLayout.bubbleDiameter(for: geometry, island: island)
+        let width = NotchLayout.bubbleWidth(for: geometry, island: island)
+        let ids = viewModel.bubbleModules.map(\.moduleID)
+        // Au repos : mini-encoche en mode encoche, bulle ronde sur la pastille.
+        let resting: AnyShape = geometry.style == .notch
             ? AnyShape(NotchShape(earRadius: NotchLayout.earRadius, topCornerRadius: 0,
                                   bottomCornerRadius: min(10, diameter / 3)))
             : AnyShape(Circle())
-        HStack(spacing: NotchLayout.bubbleGap) {
-            ForEach(viewModel.bubbleModules.map(\.moduleID), id: \.self) { id in
-                if let module = viewModel.manager.module(for: id), let content = module.compactLeading() {
-                    content
-                        .frame(width: diameter * 0.62, height: diameter * 0.62)
-                        .frame(width: width, height: diameter)
-                        .notchBackground(viewModel.appearance, style: geometry.style, shape: shape)
-                        .clipShape(shape)
-                        .overlay {
-                            // Même fin contour que l'île, sur la pastille flottante.
-                            if geometry.style == .pill {
-                                Circle().strokeBorder(.white.opacity(0.2), lineWidth: 1)
-                            }
+
+        Group {
+            if ids.count >= 2 {
+                stack(ids, diameter: diameter, width: width, resting: resting)
+            } else if let id = ids.first {
+                bubble(id, diameter: diameter, width: width, shape: resting)
+                    .onHover { inside in
+                        if inside {
+                            viewModel.requestedModuleID = id
+                        } else if viewModel.requestedModuleID == id, !viewModel.isExpanded {
+                            viewModel.requestedModuleID = nil
                         }
-                        .contentShape(shape)
-                        // Survol de la bulle : l'encoche s'ouvrira sur la page de cette activité.
-                        .onHover { inside in
-                            if inside {
-                                viewModel.requestedModuleID = id
-                            } else if viewModel.requestedModuleID == id, !viewModel.isExpanded {
-                                viewModel.requestedModuleID = nil
-                            }
-                        }
-                        .onTapGesture { viewModel.expand(showing: id) }
-                        .help(Text(type(of: module).descriptor.name))
-                        .transition(.scale(scale: 0.4).combined(with: .opacity))
-                }
+                    }
+                    .transition(.scale(scale: 0.4).combined(with: .opacity))
             }
         }
         .padding(.leading, NotchLayout.bubbleGap)
         .foregroundStyle(.white)
         .font(.system(size: 11, weight: .semibold))
+    }
+
+    // MARK: Pile et menu déroulant
+
+    @ViewBuilder
+    private func stack(_ ids: [String], diameter: CGFloat, width: CGFloat, resting: AnyShape) -> some View {
+        let isOpen = viewModel.isBubbleMenuOpen
+        VStack(spacing: NotchLayout.bubbleGap) {
+            if isOpen {
+                ForEach(Array(ids.enumerated()), id: \.element) { index, id in
+                    bubble(id, diameter: diameter, width: diameter, shape: AnyShape(Circle()))
+                        // La première bulle naît de la pile (même emplacement, la forme s'arrondit).
+                        .matchedGeometryEffect(id: index == 0 ? "pile" : id, in: namespace)
+                        .onHover { viewModel.hoverMenuBubble(id, inside: $0) }
+                        // Les suivantes tombent l'une après l'autre, avec un léger décalage.
+                        .transition(index == 0 ? .opacity : .asymmetric(
+                            insertion: .scale(scale: 0.5, anchor: .top)
+                                .combined(with: .opacity)
+                                .combined(with: .offset(y: -diameter * 0.6))
+                                .animation(NotchLayout.spring.delay(Double(index) * 0.04)),
+                            removal: .scale(scale: 0.5, anchor: .top).combined(with: .opacity)
+                        ))
+                }
+            } else {
+                pile(ids, diameter: diameter, width: width, shape: resting)
+                    .matchedGeometryEffect(id: "pile", in: namespace)
+                    .transition(.opacity)
+            }
+        }
+        // En mode encoche, le menu se détache légèrement du bord de l'écran.
+        .padding(.top, isOpen && viewModel.geometry.style == .notch ? NotchLayout.bubbleMenuTopInset : 0)
+        .frame(width: width, alignment: .top)
+        .contentShape(Rectangle())
+        .onHover { inside in
+            closeTask?.cancel()
+            if inside {
+                viewModel.setBubbleMenuOpen(true)
+            } else {
+                // Petit délai : passer d'une bulle à l'autre ne referme pas le menu.
+                closeTask = Task { @MainActor in
+                    try? await Task.sleep(for: .milliseconds(250))
+                    guard !Task.isCancelled else { return }
+                    viewModel.setBubbleMenuOpen(false)
+                }
+            }
+        }
+        .animation(NotchLayout.spring, value: isOpen)
+        .transition(.scale(scale: 0.4).combined(with: .opacity))
+    }
+
+    /// Pile repliée : l'activité la plus importante et le nombre d'activités rangées.
+    private func pile(_ ids: [String], diameter: CGFloat, width: CGFloat, shape: AnyShape) -> some View {
+        bubble(ids[0], diameter: diameter, width: width, shape: shape)
+            .overlay(alignment: .bottomTrailing) {
+                Text(verbatim: "\(ids.count)")
+                    .font(.system(size: 8, weight: .bold, design: .rounded))
+                    .monospacedDigit()
+                    .foregroundStyle(StandBy.onAccent)
+                    .frame(minWidth: 12, minHeight: 12)
+                    .background(.tint, in: Capsule())
+                    .offset(x: viewModel.geometry.style == .notch ? -NotchLayout.earRadius - 2 : 2, y: 1)
+            }
+            .help(Text("\(ids.count) activités en cours"))
+    }
+
+    // MARK: Bulle
+
+    private func bubble(_ id: String, diameter: CGFloat, width: CGFloat, shape: AnyShape) -> some View {
+        Group {
+            if let module = viewModel.manager.module(for: id), let content = module.compactLeading() {
+                content
+                    .frame(width: diameter * 0.62, height: diameter * 0.62)
+                    .frame(width: width, height: diameter)
+                    .notchBackground(viewModel.appearance, style: viewModel.geometry.style, shape: shape)
+                    .clipShape(shape)
+                    .overlay {
+                        // Même fin contour que l'île, sur la pastille flottante et dans le menu.
+                        if viewModel.geometry.style == .pill || viewModel.isBubbleMenuOpen {
+                            shape.stroke(.white.opacity(0.2), lineWidth: 1)
+                        }
+                    }
+                    .contentShape(shape)
+                    .onTapGesture { viewModel.expand(showing: id) }
+                    .help(Text(type(of: module).descriptor.name))
+            }
+        }
     }
 }
 

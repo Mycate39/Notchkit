@@ -50,9 +50,12 @@ enum NotchLayout {
     static let hoverShadowMargin: CGFloat = 12
     /// Marge de fenêtre réservée à l'ombre de l'encoche dépliée.
     static let expandedShadowMargin: CGFloat = 22
-    /// Bulles des activités secondaires (comme sur iPhone) : nombre maximal et espacement.
-    static let maxBubbles = 2
+    /// Activités secondaires : une seule bulle à droite de l'encoche. À partir de deux, elles sont
+    /// rangées dans une pile qui se déroule au survol (au plus `maxBubbles` bulles).
+    static let maxBubbles = 4
     static let bubbleGap: CGFloat = 6
+    /// Décalage du menu déroulé sous le bord de l'écran, en mode encoche.
+    static let bubbleMenuTopInset: CGFloat = 4
 
     /// Diamètre d'une bulle : la hauteur de l'encoche repliée (île comprise, pour rester alignée).
     static func bubbleDiameter(for geometry: NotchGeometry, island: Bool = false) -> CGFloat {
@@ -67,10 +70,18 @@ enum NotchLayout {
         return (diameter * 1.25).rounded() + earRadius * 2
     }
 
-    /// Largeur occupée par `count` bulles à droite de l'encoche (espacements compris).
+    /// Largeur réservée à droite de l'encoche : une seule place (bulle ou pile), espacement compris.
     static func bubblesWidth(count: Int, geometry: NotchGeometry, island: Bool = false) -> CGFloat {
+        count > 0 ? bubbleWidth(for: geometry, island: island) + bubbleGap : 0
+    }
+
+    /// Hauteur du menu déroulé : `count` bulles rondes empilées (décalage du haut compris).
+    static func bubbleMenuHeight(count: Int, geometry: NotchGeometry, island: Bool = false) -> CGFloat {
         let count = min(max(0, count), maxBubbles)
-        return CGFloat(count) * (bubbleWidth(for: geometry, island: island) + bubbleGap)
+        guard count > 0 else { return 0 }
+        let diameter = bubbleDiameter(for: geometry, island: island)
+        let top = geometry.style == .notch ? bubbleMenuTopInset : 0
+        return top + CGFloat(count) * diameter + CGFloat(count - 1) * bubbleGap
     }
 
     /// Rayon des coins en mode déplié.

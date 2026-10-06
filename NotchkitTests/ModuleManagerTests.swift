@@ -153,8 +153,12 @@ struct NotchLayoutTests {
         let d = NotchLayout.bubbleDiameter(for: pill)
         #expect(NotchLayout.bubblesWidth(count: 0, geometry: pill) == 0)
         #expect(NotchLayout.bubblesWidth(count: 1, geometry: pill) == d + NotchLayout.bubbleGap)
-        // Au plus deux bulles.
-        #expect(NotchLayout.bubblesWidth(count: 5, geometry: pill) == 2 * (d + NotchLayout.bubbleGap))
+        // À partir de deux activités, une seule place : la pile qui se déroule au survol.
+        #expect(NotchLayout.bubblesWidth(count: 3, geometry: pill) == d + NotchLayout.bubbleGap)
+        // Menu déroulé : bulles empilées, au plus `maxBubbles`.
+        #expect(NotchLayout.bubbleMenuHeight(count: 2, geometry: pill) == 2 * d + NotchLayout.bubbleGap)
+        #expect(NotchLayout.bubbleMenuHeight(count: 9, geometry: pill)
+                == NotchLayout.bubbleMenuHeight(count: NotchLayout.maxBubbles, geometry: pill))
         // Île : les bulles prennent sa hauteur pour rester alignées.
         let islandShape = NotchLayout.shapeSize(for: pill, isExpanded: false, hasCompactContent: true, island: true)
         #expect(NotchLayout.bubbleDiameter(for: pill, island: true) == islandShape.height)

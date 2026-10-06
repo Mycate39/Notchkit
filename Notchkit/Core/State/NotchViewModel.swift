@@ -81,6 +81,32 @@ final class NotchViewModel {
         return manager.secondaryCompactModules
     }
 
+    /// Au moins deux activités secondaires : rangées dans une pile qui se déroule au survol.
+    var showsBubbleStack: Bool { bubbleModules.count >= 2 }
+
+    /// Menu des bulles déroulé (souris sur la pile).
+    private var bubbleMenuRequested = false
+    var isBubbleMenuOpen: Bool { bubbleMenuRequested && showsBubbleStack }
+
+    /// Ouvre ou ferme le menu des bulles. Tant qu'il est ouvert, survoler la pile ne déplie pas
+    /// l'encoche : seule une bulle survolée l'ouvre, sur la page de son activité.
+    func setBubbleMenuOpen(_ open: Bool) {
+        guard open != bubbleMenuRequested else { return }
+        withAnimation(NotchLayout.spring) { bubbleMenuRequested = open }
+        setExpansionBlocked(open)
+    }
+
+    /// Souris sur une bulle du menu : l'encoche s'ouvrira sur la page de cette activité.
+    func hoverMenuBubble(_ moduleID: String, inside: Bool) {
+        if inside {
+            requestedModuleID = moduleID
+            setExpansionBlocked(false)
+        } else if !isExpanded {
+            if requestedModuleID == moduleID { requestedModuleID = nil }
+            if isBubbleMenuOpen { setExpansionBlocked(true) }
+        }
+    }
+
     /// Module à montrer à l'ouverture (bulle cliquée).
     @ObservationIgnored var requestedModuleID: String?
 
@@ -112,7 +138,13 @@ final class NotchViewModel {
         let bubbles = NotchLayout.bubblesWidth(count: bubbleModules.count, geometry: geometry, island: isIsland)
         let margin = isExpanded ? NotchLayout.expandedShadowMargin : (showsHoverShadow ? NotchLayout.hoverShadowMargin : 0)
         guard margin > 0 || bubbles > 0 else { return size }
-        return CGSize(width: size.width + (margin + bubbles) * 2, height: size.height + margin)
+        var height = size.height + margin
+        // Menu déroulé : la fenêtre descend pour contenir la colonne de bulles.
+        if isBubbleMenuOpen {
+            let menu = NotchLayout.bubbleMenuHeight(count: bubbleModules.count, geometry: geometry, island: isIsland)
+            height = max(height, NotchLayout.topInset(for: geometry.style) + menu + NotchLayout.hoverShadowMargin)
+        }
+        return CGSize(width: size.width + (margin + bubbles) * 2, height: height)
     }
 
     // MARK: - Géométrie
@@ -155,6 +187,9 @@ final class NotchViewModel {
 
     func expand() {
         guard state != .expanded else { return }
+        // Le menu des bulles se referme : l'encoche dépliée prend le relais.
+        bubbleMenuRequested = false
+        isExpansionBlocked = false
         Haptics.play(.tap)
         withAnimation(NotchLayout.spring) { state = .expanded }
     }

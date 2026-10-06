@@ -146,6 +146,22 @@
         }
       }
     },
+    "%lld activités en cours" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld live activities"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld activités en cours"
+          }
+        }
+      }
+    },
     "%lld fichiers" : {
       "localizations" : {
         "en" : {

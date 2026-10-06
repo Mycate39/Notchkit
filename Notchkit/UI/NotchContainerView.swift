@@ -73,21 +73,28 @@ private struct CompactBubbles: View {
     var body: some View {
         let geometry = viewModel.geometry
         let diameter = NotchLayout.bubbleDiameter(for: geometry, island: viewModel.isIsland)
+        let width = NotchLayout.bubbleWidth(for: geometry, island: viewModel.isIsland)
+        // Pastille : bulle ronde comme sur iPhone. Encoche : mini-encoche collée au bord de l'écran,
+        // même forme et mêmes arrondis que la grande.
+        let shape: AnyShape = geometry.style == .notch
+            ? AnyShape(NotchShape(earRadius: NotchLayout.earRadius, topCornerRadius: 0,
+                                  bottomCornerRadius: min(10, diameter / 3)))
+            : AnyShape(Circle())
         HStack(spacing: NotchLayout.bubbleGap) {
             ForEach(viewModel.bubbleModules.map(\.moduleID), id: \.self) { id in
                 if let module = viewModel.manager.module(for: id), let content = module.compactLeading() {
                     content
                         .frame(width: diameter * 0.62, height: diameter * 0.62)
-                        .frame(width: diameter, height: diameter)
-                        .notchBackground(viewModel.appearance, style: geometry.style, shape: Circle())
-                        .clipShape(Circle())
+                        .frame(width: width, height: diameter)
+                        .notchBackground(viewModel.appearance, style: geometry.style, shape: shape)
+                        .clipShape(shape)
                         .overlay {
                             // Même fin contour que l'île, sur la pastille flottante.
                             if geometry.style == .pill {
                                 Circle().strokeBorder(.white.opacity(0.2), lineWidth: 1)
                             }
                         }
-                        .contentShape(Circle())
+                        .contentShape(shape)
                         // Survol de la bulle : l'encoche s'ouvrira sur la page de cette activité.
                         .onHover { inside in
                             if inside {

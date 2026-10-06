@@ -59,10 +59,18 @@ enum NotchLayout {
         geometry.closedSize.height + (island && geometry.style == .pill ? islandExtraHeight : 0)
     }
 
+    /// Largeur d'une bulle. En mode encoche, c'est une mini-encoche suspendue au bord de l'écran :
+    /// un peu plus large que haute, avec les mêmes congés arrondis que la grande.
+    static func bubbleWidth(for geometry: NotchGeometry, island: Bool = false) -> CGFloat {
+        let diameter = bubbleDiameter(for: geometry, island: island)
+        guard geometry.style == .notch else { return diameter }
+        return (diameter * 1.25).rounded() + earRadius * 2
+    }
+
     /// Largeur occupée par `count` bulles à droite de l'encoche (espacements compris).
     static func bubblesWidth(count: Int, geometry: NotchGeometry, island: Bool = false) -> CGFloat {
         let count = min(max(0, count), maxBubbles)
-        return CGFloat(count) * (bubbleDiameter(for: geometry, island: island) + bubbleGap)
+        return CGFloat(count) * (bubbleWidth(for: geometry, island: island) + bubbleGap)
     }
 
     /// Rayon des coins en mode déplié.

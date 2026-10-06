@@ -159,6 +159,10 @@ struct NotchLayoutTests {
         let islandShape = NotchLayout.shapeSize(for: pill, isExpanded: false, hasCompactContent: true, island: true)
         #expect(NotchLayout.bubbleDiameter(for: pill, island: true) == islandShape.height)
         #expect(NotchLayout.bubbleDiameter(for: notch, island: true) == NotchLayout.bubbleDiameter(for: notch))
+        // Mode encoche : mini-encoche plus large que haute, congés compris ; pastille : bulle ronde.
+        #expect(NotchLayout.bubbleWidth(for: pill) == d)
+        #expect(NotchLayout.bubbleWidth(for: notch) > NotchLayout.bubbleDiameter(for: notch) + NotchLayout.earRadius * 2)
+        #expect(NotchLayout.bubblesWidth(count: 1, geometry: notch) == NotchLayout.bubbleWidth(for: notch) + NotchLayout.bubbleGap)
     }
 
     @Test func ileSeulementPourLaPastille() {

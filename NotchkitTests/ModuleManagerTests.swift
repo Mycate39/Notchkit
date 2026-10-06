@@ -137,6 +137,17 @@ struct NotchLayoutTests {
         #expect(size.width == 185 + NotchLayout.compactSideWidth * 2 + NotchLayout.earRadius * 2)
     }
 
+    @Test func ileSeulementPourLaPastille() {
+        // En mode encoche, l'affichage façon île ne change pas la forme (contenu hors des arrondis).
+        let normal = NotchLayout.shapeSize(for: notch, isExpanded: false, hasCompactContent: true)
+        let island = NotchLayout.shapeSize(for: notch, isExpanded: false, hasCompactContent: true, island: true)
+        #expect(island == normal)
+        // Pastille : un peu plus haute, aux proportions de la Dynamic Island.
+        let pillIsland = NotchLayout.shapeSize(for: pill, isExpanded: false, hasCompactContent: true, island: true)
+        #expect(pillIsland.height == 20 + NotchLayout.islandExtraHeight)
+        #expect(pillIsland.width == (pillIsland.height * NotchLayout.islandAspectRatio).rounded())
+    }
+
     @Test func pastilleAvecDecalageEnHaut() {
         let shape = NotchLayout.shapeSize(for: pill, isExpanded: true, hasCompactContent: false)
         let panel = NotchLayout.panelSize(for: pill, isExpanded: true, hasCompactContent: false)

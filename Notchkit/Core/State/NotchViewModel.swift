@@ -69,8 +69,10 @@ final class NotchViewModel {
     }
 
     /// Affichage replié façon « Dynamic Island » (module compact qui le demande, sans alerte).
+    /// Uniquement pour la pastille flottante : en mode encoche, le contenu doit rester à l'écart
+    /// des arrondis qui raccordent l'encoche au bord de l'écran.
     var isIsland: Bool {
-        !isExpanded && currentAlert == nil && manager.compactModule?.compactIsland == true
+        geometry.style == .pill && !isExpanded && currentAlert == nil && manager.compactModule?.compactIsland == true
     }
 
     /// Largeur de chaque côté de l'encoche repliée (une alerte peut demander plus de place).

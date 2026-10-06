@@ -98,11 +98,16 @@ private struct CompactNotchView: View {
     }
 
     private func compactRow(ear: CGFloat, leading: AnyView?, trailing: AnyView?) -> some View {
-        HStack(spacing: 0) {
+        // Hauteur du contenu bornée : les vues extensibles (pochette, barres) gardent une taille
+        // raisonnable quelle que soit la hauteur de l'encoche (barre des menus ou encoche réelle).
+        let contentHeight = min(20, max(14, viewModel.geometry.closedSize.height - 6))
+        return HStack(spacing: 0) {
             leading
+                .frame(maxHeight: contentHeight)
                 .frame(width: viewModel.compactSideWidth - 12, alignment: .leading)
             Spacer(minLength: 0)
             trailing
+                .frame(maxHeight: contentHeight)
                 .frame(width: viewModel.compactSideWidth - 12, alignment: .trailing)
         }
         .padding(.horizontal, ear + 10)

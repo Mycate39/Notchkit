@@ -3,6 +3,15 @@
   <channel>
     <title>Notchkit</title>
     <item>
+      <title>Notchkit 0.1.7</title>
+      <pubDate>Wed, 07 Oct 2026 19:46:52 GMT</pubDate>
+      <sparkle:version>8</sparkle:version>
+      <sparkle:shortVersionString>0.1.7</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[<h3>What&#x27;s new</h3><p>Notchkit 0.1.7 is the first official release: it is no longer a beta.</p><ul><li><b>Lock screen:</b> the notch now stays visible on the lock screen and shows live activities in their collapsed form. It never expands while the Mac is locked.</li><li><b>New battery icon:</b> redrawn in the style of Apple&#x27;s battery icon, with a cut-out charging bolt.</li><li><b>Layout settings:</b> hidden widgets now wrap onto several lines instead of being squeezed into one.</li><li><b>Claude Code:</b> replying to Claude from the notch after each answer is now off by default. You can turn it on in Settings &gt; Claude Code.</li></ul><h3>Installation</h3><p>If you already have Notchkit 0.1.5 or later, it offers this update by itself (or use <b>Check for Updates…</b> in its menu).</p><p>Otherwise, download <code>Notchkit-0.1.7.dmg</code>, open it, and drag <b>Notchkit.app</b> onto the <b>Applications</b> shortcut. Notchkit isn&#x27;t notarized yet: the first time, right-click the app &gt; <b>Open</b>.</p><p>Requires macOS 14 or later, on Apple silicon or Intel.</p>]]></description>
+      <enclosure url="https://github.com/Mycate39/Notchkit/releases/download/v0.1.7/Notchkit-0.1.7.dmg" sparkle:edSignature="A43Ek+zgn1j+haZEX9jkK+uieoO3kj/6lY/ai8rlX3MWobA0CAJLcIm47ILb4ahb1ID51FHTdc0wE60mdJfZAw==" length="7091455" type="application/octet-stream"/>
+    </item>
+    <item>
       <title>Notchkit 0.1.6</title>
       <pubDate>Tue, 06 Oct 2026 18:28:15 GMT</pubDate>
       <sparkle:version>7</sparkle:version>

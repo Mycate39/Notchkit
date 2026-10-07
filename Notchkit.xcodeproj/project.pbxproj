@@ -33,6 +33,7 @@
 		2A955B133EF6F4751FDA6DE2 /* AssistantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B67A15546467B5317CE1366 /* AssistantTests.swift */; };
 		2C3D4787E9AB5D151FCF7BAF /* AssistantViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0AFE5D48FC6891C6DAB0A4 /* AssistantViews.swift */; };
 		2CE8FE66D01A59F012F198E4 /* CalendarModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B0FE375C12A1424391655D /* CalendarModule.swift */; };
+		2D1C2E343A983DB9D039D0F8 /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCCB13B34C61302F294EFC0 /* FlowLayout.swift */; };
 		310A73D8AF9079086CAAACF4 /* NotchPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F6A4C1A5E799024B51A751 /* NotchPanel.swift */; };
 		3163ECEB928B70EC366B035F /* Debounce.h in Headers */ = {isa = PBXBuildFile; fileRef = C82EEAC4225615991537D76A /* Debounce.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		321C1FDDCAA432ED1667A806 /* MusicModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9740079B75CA6BAFEB2B7 /* MusicModule.swift */; };
@@ -271,6 +272,7 @@
 		8A426D361B19F11D7BD531E6 /* AirPodsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPodsTests.swift; sourceTree = "<group>"; };
 		8C3C0CDEA4B993CA2ECA8EEA /* test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = test.m; sourceTree = "<group>"; };
 		8C55985EC0A527176A3FFFB3 /* Notchkit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notchkit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DCCB13B34C61302F294EFC0 /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
 		8E52C7E24AFAF3440B483068 /* EntitlementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitlementManager.swift; sourceTree = "<group>"; };
 		938B1E14A3EA48C00556D332 /* WeatherModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModule.swift; sourceTree = "<group>"; };
 		93B0FE375C12A1424391655D /* CalendarModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarModule.swift; sourceTree = "<group>"; };
@@ -799,6 +801,7 @@
 		D9ECD655DD44E43284918905 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				8DCCB13B34C61302F294EFC0 /* FlowLayout.swift */,
 				4ECF3DDA8BA52758E6E1EC5B /* Glyphs.swift */,
 				A392BB245F4CD1284FD823DD /* ModuleIcon.swift */,
 				CBD303760BD8B274346EBC38 /* NotchContainerView.swift */,
@@ -1071,6 +1074,7 @@
 				C4FE1995D4A34E59EE65174D /* DropZone.swift in Sources */,
 				53009C2AA2481B9ED10B6FDE /* EntitlementManager.swift in Sources */,
 				36229702DCD121CC52D39711 /* EqualizerView.swift in Sources */,
+				2D1C2E343A983DB9D039D0F8 /* FlowLayout.swift in Sources */,
 				90DF0E4039BA56420C4DCA10 /* Glyphs.swift in Sources */,
 				BB01149799C433BEF7982DD5 /* Haptics.swift in Sources */,
 				9F65428EDD48F89CBDB4024D /* Keychain.swift in Sources */,

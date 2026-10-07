@@ -295,23 +295,28 @@ private struct HiddenWidgetsSection: View {
         VStack(alignment: .leading, spacing: 6) {
             Text("Widgets masqués")
                 .font(.headline)
-            HStack(spacing: 8) {
+            Group {
                 if hidden.isEmpty {
                     Text("Glissez un widget ici pour le masquer.")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                         .frame(maxWidth: .infinity)
                 } else {
-                    ForEach(hidden) { descriptor in
-                        Label { Text(descriptor.name) } icon: { ModuleIcon(symbol: descriptor.systemImage) }
-                            .font(.system(size: 11, weight: .medium))
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 6)
-                            .background(.quaternary, in: Capsule())
-                            .draggable(descriptor.id)
-                            .help("Glissez dans une page pour l'afficher")
+                    // Les pastilles passent à la ligne au lieu d'être comprimées sur une seule ligne.
+                    FlowLayout(spacing: 8, lineSpacing: 8) {
+                        ForEach(hidden) { descriptor in
+                            Label { Text(descriptor.name) } icon: { ModuleIcon(symbol: descriptor.systemImage) }
+                                .font(.system(size: 11, weight: .medium))
+                                .lineLimit(1)
+                                .fixedSize()
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 6)
+                                .background(.quaternary, in: Capsule())
+                                .draggable(descriptor.id)
+                                .help("Glissez dans une page pour l'afficher")
+                        }
                     }
-                    Spacer(minLength: 0)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
             .padding(10)

@@ -176,3 +176,32 @@ struct PresetApplyTests {
         #expect(manager.pageIDs == [["mock.a"]])
     }
 }
+
+struct FlowLayoutTests {
+    func arrange(_ widths: [CGFloat], maxWidth: CGFloat) -> (origins: [CGPoint], size: CGSize) {
+        FlowLayout.arrange(widths.map { CGSize(width: $0, height: 20) }, maxWidth: maxWidth, spacing: 8, lineSpacing: 8)
+    }
+
+    @Test func pastillesSurUneLigneQuandToutTient() {
+        let result = arrange([50, 60, 70], maxWidth: 400)
+        #expect(result.origins.map(\.x) == [0, 58, 126])
+        #expect(result.origins.allSatisfy { $0.y == 0 })
+        #expect(result.size == CGSize(width: 196, height: 20))
+    }
+
+    @Test func passeALaLigneSansComprimer() {
+        let result = arrange([100, 100, 100], maxWidth: 220)
+        #expect(result.origins == [CGPoint(x: 0, y: 0), CGPoint(x: 108, y: 0), CGPoint(x: 0, y: 28)])
+        #expect(result.size == CGSize(width: 208, height: 48))
+    }
+
+    @Test func elementTropLargeSeulSurSaLigne() {
+        let result = arrange([300, 40], maxWidth: 200)
+        #expect(result.origins == [CGPoint(x: 0, y: 0), CGPoint(x: 0, y: 28)])
+        #expect(result.size.width == 300)
+    }
+
+    @Test func aucunElement() {
+        #expect(arrange([], maxWidth: 200).size == .zero)
+    }
+}

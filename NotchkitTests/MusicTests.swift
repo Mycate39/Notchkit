@@ -112,3 +112,22 @@ struct NowPlayingArbiterTests {
         #expect(NowPlayingArbiter.select(mediaRemote: nil, publicSources: []) == nil)
     }
 }
+
+struct MediaRemoteOrphelinsTests {
+    let script = "/Applications/Notchkit.app/Contents/Resources/mediaremote-adapter.pl"
+
+    @Test func seulsLesScriptsSansParentSontArretes() {
+        let output = """
+          101     1 /usr/bin/perl \(script) /Applications/Notchkit.app/Contents/Frameworks/MediaRemoteAdapter.framework stream --micros
+          102   500 /usr/bin/perl \(script) /Applications/Notchkit.app/Contents/Frameworks/MediaRemoteAdapter.framework stream --micros
+          103     1 /usr/bin/perl /ailleurs/autre-script.pl stream
+          104     1 /System/Library/CoreServices/Finder.app/Contents/MacOS/Finder
+        """
+        #expect(MediaRemoteSource.orphanAdapterPIDs(psOutput: output) == [101])
+    }
+
+    @Test func sortieVideOuIllisible() {
+        #expect(MediaRemoteSource.orphanAdapterPIDs(psOutput: "").isEmpty)
+        #expect(MediaRemoteSource.orphanAdapterPIDs(psOutput: "n'importe quoi\n  12").isEmpty)
+    }
+}

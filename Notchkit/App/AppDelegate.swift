@@ -10,12 +10,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     lazy var viewModel = NotchViewModel(manager: moduleManager, settings: settings)
 
     private var notchWindow: NotchWindowController?
+    private var sigtermSource: DispatchSourceSignal?
     private let settingsRouter = SettingsRouter()
     private lazy var settingsWindow = SettingsWindowController { [unowned self] in
         AnyView(SettingsView(settings: settings, manager: moduleManager, router: settingsRouter))
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        // `kill` (SIGTERM) passe par une fermeture normale : les modules arrêtent leurs processus.
+        signal(SIGTERM, SIG_IGN)
+        let sigterm = DispatchSource.makeSignalSource(signal: SIGTERM, queue: .main)
+        sigterm.setEventHandler { MainActor.assumeIsolated { NSApp.terminate(nil) } }
+        sigterm.resume()
+        sigtermSource = sigterm
+
         // Mises à jour automatiques (versions publiées uniquement).
         Updater.shared.start()
 

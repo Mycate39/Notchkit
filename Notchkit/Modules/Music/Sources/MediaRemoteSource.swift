@@ -58,6 +58,7 @@ final class MediaRemoteSource {
         guard !isRunning else { return }
         isRunning = true
         restartAttempts = 0
+        Self.terminateOrphansOnce()
         launch()
     }
 
@@ -161,5 +162,40 @@ final class MediaRemoteSource {
         buffer = Data()
         stream = MediaRemoteStream()
         onUpdate?(nil)
+    }
+
+    // MARK: - Processus orphelins
+
+    private static var didTerminateOrphans = false
+
+    /// Une instance tuée sans préavis (Stop dans Xcode, plantage) laisse son script tourner indéfiniment,
+    /// car il n'écrit qu'à chaque changement de morceau. On arrête ces orphelins au premier démarrage.
+    private static func terminateOrphansOnce() {
+        guard !didTerminateOrphans else { return }
+        didTerminateOrphans = true
+        Task.detached(priority: .utility) {
+            let ps = Process()
+            ps.executableURL = URL(fileURLWithPath: "/bin/ps")
+            ps.arguments = ["-axo", "pid=,ppid=,command="]
+            let pipe = Pipe()
+            ps.standardOutput = pipe
+            ps.standardError = FileHandle.nullDevice
+            guard (try? ps.run()) != nil else { return }
+            let output = String(decoding: pipe.fileHandleForReading.readDataToEndOfFile(), as: UTF8.self)
+            ps.waitUntilExit()
+            for pid in orphanAdapterPIDs(psOutput: output) { kill(pid, SIGTERM) }
+        }
+    }
+
+    /// Scripts mediaremote-adapter d'une app Notchkit dont le parent a disparu (rattachés à launchd, ppid 1).
+    /// Les scripts d'une autre instance encore en vie ne sont jamais concernés.
+    nonisolated static func orphanAdapterPIDs(psOutput: String) -> [pid_t] {
+        psOutput.split(separator: "\n").compactMap { line in
+            let fields = line.split(separator: " ", maxSplits: 2, omittingEmptySubsequences: true)
+            guard fields.count == 3, let pid = pid_t(fields[0]), fields[1] == "1" else { return nil }
+            let command = fields[2]
+            guard command.contains("Notchkit.app/Contents/Resources/mediaremote-adapter.pl") else { return nil }
+            return pid
+        }
     }
 }

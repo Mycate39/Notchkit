@@ -4,7 +4,7 @@ Turn your Mac's notch into a living space: music, timers, battery, weather, cale
 clipboard, a file shelf, and live Claude Code activity, right at your cursor. No notch?
 Notchkit shows a floating pill instead, or simulates a notch.
 
-> **Beta.** Notchkit is under active development: please report issues in the *Issues* tab.
+> Found a bug or have an idea? Please open an issue in the *Issues* tab.
 
 ## Features
 

@@ -44,14 +44,19 @@ struct BatteryGlyph: View {
     }
 
     var body: some View {
-        let radius = size.height * 0.3
-        let inset = max(1.5, size.height * 0.14)
+        // Proportions reprises de l'icône batterie d'Apple : contour fin et translucide,
+        // jauge séparée du contour par un liseré vide, borne en demi-capsule.
+        let height = size.height
+        let radius = height * 0.3
+        let stroke = max(1, height * 0.08)
+        let inset = stroke + max(1, height * 0.1)
+        let capWidth = max(1.5, height * 0.13)
 
-        HStack(spacing: size.width * 0.04) {
+        HStack(spacing: max(0.75, height * 0.06)) {
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: radius, style: .continuous)
-                    .strokeBorder(.white.opacity(0.45), lineWidth: max(1, size.height * 0.08))
-                RoundedRectangle(cornerRadius: max(0, radius - inset * 0.6), style: .continuous)
+                    .strokeBorder(.white.opacity(0.4), lineWidth: stroke)
+                RoundedRectangle(cornerRadius: max(1, radius - inset * 0.75), style: .continuous)
                     .fill(color)
                     .frame(width: max(0, (size.width - inset * 2) * min(max(level, 0), 1)))
                     .padding(inset)
@@ -59,20 +64,24 @@ struct BatteryGlyph: View {
             .frame(width: size.width, height: size.height)
             .overlay {
                 if showsBolt {
-                    // Éclair au trait, cerné de noir pour rester lisible sur la jauge.
+                    // Éclair plein, détouré dans la jauge et le contour (comme sur iOS et macOS).
                     ZStack {
-                        LineGlyph(shape: BoltShape(), weight: 0.22).foregroundStyle(.black.opacity(0.55))
-                        LineGlyph(shape: BoltShape(), weight: 0.11).foregroundStyle(.white)
+                        BatteryBoltShape()
+                            .stroke(style: StrokeStyle(lineWidth: height * 0.13, lineJoin: .round))
+                            .blendMode(.destinationOut)
+                        BatteryBoltShape()
+                            .fill(.white)
                     }
-                    .frame(width: size.height * 1.05, height: size.height * 1.05)
-                        .transition(.scale.combined(with: .opacity))
+                    .frame(width: height * 0.5, height: height * 0.82)
+                    .transition(.scale.combined(with: .opacity))
                 }
             }
+            .compositingGroup()
 
             // Borne de la batterie
-            RoundedRectangle(cornerRadius: 1)
-                .fill(.white.opacity(0.45))
-                .frame(width: max(1.5, size.width * 0.06), height: size.height * 0.38)
+            UnevenRoundedRectangle(bottomTrailingRadius: capWidth, topTrailingRadius: capWidth, style: .continuous)
+                .fill(.white.opacity(0.4))
+                .frame(width: capWidth, height: height * 0.36)
         }
     }
 }

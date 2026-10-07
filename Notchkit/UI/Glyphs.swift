@@ -17,6 +17,20 @@ struct BoltShape: Shape {
     }
 }
 
+/// Éclair plein de la jauge, aux angles légèrement adoucis.
+struct BatteryBoltShape: Shape {
+    func path(in rect: CGRect) -> Path {
+        let points: [CGPoint] = [
+            CGPoint(x: 0.66, y: 0.00), CGPoint(x: 0.00, y: 0.58), CGPoint(x: 0.45, y: 0.58),
+            CGPoint(x: 0.34, y: 1.00), CGPoint(x: 1.00, y: 0.42), CGPoint(x: 0.55, y: 0.42),
+        ]
+        var path = Path()
+        path.addLines(points.map { rect.point(at: $0) })
+        path.closeSubpath()
+        return path.strokedPath(StrokeStyle(lineWidth: rect.width * 0.08, lineJoin: .round)).union(path)
+    }
+}
+
 /// Prise secteur : deux broches, un corps arrondi et le câble.
 struct PlugShape: Shape {
     func path(in rect: CGRect) -> Path {

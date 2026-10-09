@@ -34,3 +34,14 @@ struct GitStatusTests {
         #expect(!GitStatus.parse(output).branch.isEmpty)
     }
 }
+
+struct PullRequestChecksTests {
+    @Test func echecPuisEnCoursPuisSucces() {
+        #expect(PullRequestChecks.summary(statuses: [], conclusions: ["success", "failure"]) == .failure)
+        #expect(PullRequestChecks.summary(statuses: ["error"], conclusions: ["success"]) == .failure)
+        #expect(PullRequestChecks.summary(statuses: [], conclusions: ["success", nil]) == .pending)
+        #expect(PullRequestChecks.summary(statuses: ["pending"], conclusions: []) == .pending)
+        #expect(PullRequestChecks.summary(statuses: ["success"], conclusions: ["success", "skipped", "neutral"]) == .success)
+        #expect(PullRequestChecks.summary(statuses: [], conclusions: []) == PullRequest.Checks.none)
+    }
+}

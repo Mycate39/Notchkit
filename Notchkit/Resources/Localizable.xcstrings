@@ -1,6 +1,278 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "GitHub" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GitHub"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GitHub"
+          }
+        }
+      }
+    },
+    "Vos pull requests et l'état de leurs vérifications, en direct." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your pull requests and the status of their checks, live."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vos pull requests et l'état de leurs vérifications, en direct."
+          }
+        }
+      }
+    },
+    "Jeton refusé par GitHub. Vérifiez-le dans les réglages." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GitHub rejected the token. Check it in Settings."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeton refusé par GitHub. Vérifiez-le dans les réglages."
+          }
+        }
+      }
+    },
+    "GitHub est injoignable pour le moment." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GitHub can't be reached right now."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GitHub est injoignable pour le moment."
+          }
+        }
+      }
+    },
+    "Pull requests" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pull Requests"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pull requests"
+          }
+        }
+      }
+    },
+    "#%lld échoue" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "#%lld failing"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "#%lld échoue"
+          }
+        }
+      }
+    },
+    "Ajoutez un jeton d'accès personnel GitHub dans les réglages du module." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add a GitHub personal access token in the module's settings."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajoutez un jeton d'accès personnel GitHub dans les réglages du module."
+          }
+        }
+      }
+    },
+    "Mes pull requests" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My Pull Requests"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mes pull requests"
+          }
+        }
+      }
+    },
+    "%lld à relire" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld to review"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld à relire"
+          }
+        }
+      }
+    },
+    "Aucune pull request ouverte." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No open pull requests."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune pull request ouverte."
+          }
+        }
+      }
+    },
+    "%@ #%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ #%lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ #%lld"
+          }
+        }
+      }
+    },
+    "Ouvrir sur GitHub" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open on GitHub"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir sur GitHub"
+          }
+        }
+      }
+    },
+    "Jeton enregistré dans le trousseau" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Token saved in the keychain"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeton enregistré dans le trousseau"
+          }
+        }
+      }
+    },
+    "Retirer le jeton" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove Token"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retirer le jeton"
+          }
+        }
+      }
+    },
+    "Jeton d'accès personnel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personal access token"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeton d'accès personnel"
+          }
+        }
+      }
+    },
+    "Créez un jeton gratuit sur GitHub (Settings › Developer settings › Personal access tokens), avec l'accès en lecture aux dépôts. Il est gardé dans le trousseau de macOS." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create a free token on GitHub (Settings › Developer settings › Personal access tokens) with read access to repositories. It is kept in the macOS keychain."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Créez un jeton gratuit sur GitHub (Settings › Developer settings › Personal access tokens), avec l'accès en lecture aux dépôts. Il est gardé dans le trousseau de macOS."
+          }
+        }
+      }
+    },
+    "Créer un jeton sur GitHub" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create a Token on GitHub"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Créer un jeton sur GitHub"
+          }
+        }
+      }
+    },
     "Git" : {
       "localizations" : {
         "en" : {

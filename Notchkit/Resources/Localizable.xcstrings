@@ -1,6 +1,134 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "Rappels" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reminders"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rappels"
+          }
+        }
+      }
+    },
+    "Vos rappels à faire, à cocher ou ajouter depuis l'encoche." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your reminders to check off or add right from the notch."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vos rappels à faire, à cocher ou ajouter depuis l'encoche."
+          }
+        }
+      }
+    },
+    "Autorisez l'accès aux rappels pour les voir ici." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow access to Reminders to see them here."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorisez l'accès aux rappels pour les voir ici."
+          }
+        }
+      }
+    },
+    "L'accès aux rappels est refusé." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Access to Reminders is denied."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'accès aux rappels est refusé."
+          }
+        }
+      }
+    },
+    "Ouvrir Rappels" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Reminders"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir Rappels"
+          }
+        }
+      }
+    },
+    "Rien à faire. Profitez-en !" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing to do. Enjoy!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rien à faire. Profitez-en !"
+          }
+        }
+      }
+    },
+    "Nouveau rappel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Reminder"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouveau rappel"
+          }
+        }
+      }
+    },
+    "Marquer comme fait" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mark as done"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marquer comme fait"
+          }
+        }
+      }
+    },
     "Chronomètre" : {
       "localizations" : {
         "en" : {

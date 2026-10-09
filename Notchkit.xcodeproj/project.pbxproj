@@ -27,6 +27,7 @@
 		1C6A5C7809598012656141D5 /* WidgetsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D1FCC02B4ACF20842E1E6B /* WidgetsTests.swift */; };
 		1CDA13E5F9845A313287E1B8 /* AudioSpectrumMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8919AB6ED390FDA70C4B9EA7 /* AudioSpectrumMonitor.swift */; };
 		1F165902D58592E6CFEAE8BB /* keys.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3572EC44002A80A034CBF1 /* keys.m */; };
+		1FB0D7D9DF060DE328A65ACD /* TodoViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6E1ADCA24D42BB2616641B /* TodoViews.swift */; };
 		20F19EFE650862129A9C102F /* YTDLP.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D1CFB6785689A3BDA60C1C /* YTDLP.swift */; };
 		2250C1004E292ACCF0C246F1 /* ShelfTextClipping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1F4CC754A00D808FB63F22 /* ShelfTextClipping.swift */; };
 		26C391455DD8C384ED74BC3A /* AutomatedRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9CBF25534335CB0D5FB2F1 /* AutomatedRun.swift */; };
@@ -140,6 +141,7 @@
 		CF7166A65434F3E4E1E01E77 /* PowerSourceMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C50F8106E1C8E43432EE06 /* PowerSourceMonitor.swift */; };
 		D040BA8C10C9E1E29B0C74D7 /* AudioDeviceMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D331E9633CBDABB53E93E76A /* AudioDeviceMonitor.swift */; };
 		D16F3D025CDBB2EF8193BAC2 /* VideoDownloadModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC76D1C2CA657B593C11E7B /* VideoDownloadModule.swift */; };
+		D191E53D4E00A42215A9F880 /* TodoModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B74A16BD010E4F43063F37C /* TodoModule.swift */; };
 		D394C8AD7B7DDE1543A12AF0 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E67B71BB43A4F2B68A88A78 /* SettingsStore.swift */; };
 		D797CF3F33D0C1121AE88D86 /* CalendarEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B406F238DA99AD867A9D13E3 /* CalendarEvent.swift */; };
 		D7B9915FCDEDA4E93A192926 /* BluetoothBattery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7490954D53A50041640281D /* BluetoothBattery.swift */; };
@@ -236,6 +238,7 @@
 		39CD37F30EF339C02ECF8FDC /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		39D9454F2B90F4202312E9B9 /* SpectrumAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumAnalyzer.swift; sourceTree = "<group>"; };
 		3A3B538A66C6B3FB6E49A96A /* AirPodsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPodsModule.swift; sourceTree = "<group>"; };
+		3B74A16BD010E4F43063F37C /* TodoModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModule.swift; sourceTree = "<group>"; };
 		3C7676B52E8B648F97985269 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		3CA09C6155085C6AAB69F4A1 /* AirPodsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPodsViews.swift; sourceTree = "<group>"; };
 		3CF7506AC056617E590D6805 /* helpers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = helpers.m; sourceTree = "<group>"; };
@@ -343,6 +346,7 @@
 		DB25FBA895731ACD6329CB6F /* LayoutPresets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPresets.swift; sourceTree = "<group>"; };
 		DBA8D3B1EA83E4A1C07F1F13 /* NotchkitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotchkitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCD4A44AFAF64E2BE5E745B3 /* ModuleDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleDescriptor.swift; sourceTree = "<group>"; };
+		DD6E1ADCA24D42BB2616641B /* TodoViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViews.swift; sourceTree = "<group>"; };
 		DE6111A0CC43713D888AAAB4 /* MusicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicTests.swift; sourceTree = "<group>"; };
 		E2A73B719641636FD8ABD372 /* NotchAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchAlert.swift; sourceTree = "<group>"; };
 		E2C50F8106E1C8E43432EE06 /* PowerSourceMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerSourceMonitor.swift; sourceTree = "<group>"; };
@@ -451,6 +455,7 @@
 				FEB44DDF509E814E00D3B18F /* Screenshots */,
 				A64F17DD50A084CB2420C8CE /* Shelf */,
 				A1975F559D28B76D7DDB3598 /* SystemHUD */,
+				33C811E3D7564BB12E84C41C /* Todo */,
 				BC505A0BE850C40DDD5F800D /* Toggles */,
 				3FA596B71B3FA62F693D5259 /* Unlock */,
 				60E903AA01B658BF930B96E2 /* VideoDownload */,
@@ -494,6 +499,15 @@
 				D7490954D53A50041640281D /* BluetoothBattery.swift */,
 			);
 			path = AirPods;
+			sourceTree = "<group>";
+		};
+		33C811E3D7564BB12E84C41C /* Todo */ = {
+			isa = PBXGroup;
+			children = (
+				3B74A16BD010E4F43063F37C /* TodoModule.swift */,
+				DD6E1ADCA24D42BB2616641B /* TodoViews.swift */,
+			);
+			path = Todo;
 			sourceTree = "<group>";
 		};
 		3C274412C7BED95CC0F006FD /* Spectrum */ = {
@@ -1208,6 +1222,8 @@
 				A56A56BB6242B685DE85A1A9 /* SystemHUDModule.swift in Sources */,
 				5C6ED2CBBB8A11A2831FB4C5 /* SystemHUDViews.swift in Sources */,
 				F2100BE0648F4CF477DDD020 /* SystemToggles.swift in Sources */,
+				D191E53D4E00A42215A9F880 /* TodoModule.swift in Sources */,
+				1FB0D7D9DF060DE328A65ACD /* TodoViews.swift in Sources */,
 				462973951D8FA880BC007AB9 /* TogglesModule.swift in Sources */,
 				FD5123957AEBF3C31011FDEC /* TogglesViews.swift in Sources */,
 				7A1810C408E52729D11E4964 /* UnlockAnimations.swift in Sources */,

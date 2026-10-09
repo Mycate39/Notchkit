@@ -97,3 +97,22 @@ struct DayProgressTests {
         #expect(DayProgress.label(1110) == "18:30")
     }
 }
+
+struct TodoOrderingTests {
+    let now = Date(timeIntervalSince1970: 1_000_000)
+
+    func item(_ title: String, due: TimeInterval? = nil, priority: Int = 0) -> TodoItem {
+        TodoItem(id: title, title: title, due: due.map { now.addingTimeInterval($0) }, priority: priority, listColor: .orange)
+    }
+
+    @Test func datesPuisPrioritesPuisTitre() {
+        let items = [item("z"), item("b", priority: 1), item("tard", due: 7200), item("tôt", due: 60), item("a")]
+        #expect(TodoOrdering.sorted(items).map(\.title) == ["tôt", "tard", "b", "a", "z"])
+    }
+
+    @Test func rappelEnRetard() {
+        #expect(TodoOrdering.isOverdue(item("x", due: -60), now: now))
+        #expect(!TodoOrdering.isOverdue(item("x", due: 60), now: now))
+        #expect(!TodoOrdering.isOverdue(item("x"), now: now))
+    }
+}

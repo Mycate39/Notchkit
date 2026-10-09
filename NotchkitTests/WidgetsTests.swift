@@ -81,3 +81,19 @@ struct WeatherDecodingTests {
         #expect(WeatherCondition.symbol(code: 1234, isDay: true) == "cloud.fill")
     }
 }
+
+struct DayProgressTests {
+    @Test func progressionBorneeEntreDebutEtFin() {
+        #expect(DayProgress.fraction(at: 7 * 60, start: 480, end: 1080) == 0)
+        #expect(DayProgress.fraction(at: 13 * 60, start: 480, end: 1080) == 0.5)
+        #expect(DayProgress.fraction(at: 20 * 60, start: 480, end: 1080) == 1)
+        #expect(DayProgress.fraction(at: 600, start: 600, end: 600) == 0)
+    }
+
+    @Test func tempsRestantEtLibelle() {
+        #expect(DayProgress.remaining(at: 1020, end: 1080) == 60)
+        #expect(DayProgress.remaining(at: 1100, end: 1080) == 0)
+        #expect(DayProgress.label(480) == "8:00")
+        #expect(DayProgress.label(1110) == "18:30")
+    }
+}

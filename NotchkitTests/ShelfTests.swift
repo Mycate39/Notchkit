@@ -63,3 +63,11 @@ struct ScreenshotSessionTests {
         #expect(ScreenshotSession.sessionItems(items, since: t0).map(\.name) == ["c", "b"])
     }
 }
+
+struct ShelfTextClippingTests {
+    @Test func nomDuFichierDepuisLaPremiereLigne() {
+        #expect(ShelfTextClipping.fileName(for: "Idée : une app\nsuite du texte") == "Idée - une app.txt")
+        #expect(ShelfTextClipping.fileName(for: "a/b") == "a-b.txt")
+        #expect(ShelfTextClipping.fileName(for: String(repeating: "x", count: 100)).count == 44)
+    }
+}

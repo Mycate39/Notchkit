@@ -15,6 +15,8 @@ enum ModuleRegistry {
         ScreenshotsModule.self,
         TogglesModule.self,
         CameraModule.self,
+        DayProgressModule.self,
+        NotesModule.self,
         AirPodsModule.self,
         LiveActivitiesModule.self,
         ClipboardModule.self,

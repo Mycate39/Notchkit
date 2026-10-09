@@ -22,7 +22,7 @@ final class NotchHostingView<Content: View>: NSHostingView<Content> {
 
     override func viewDidMoveToWindow() {
         super.viewDidMoveToWindow()
-        registerForDraggedTypes([.fileURL])
+        registerForDraggedTypes([.fileURL, .string])
     }
 
     // MARK: Glisser-déposer de fichiers
@@ -37,6 +37,17 @@ final class NotchHostingView<Content: View>: NSHostingView<Content> {
         ) as? [URL] ?? []
     }
 
+    /// Texte glissé (sélection d'une page web, d'un document…), quand il n'y a pas de fichier.
+    private func droppedText(from info: NSDraggingInfo) -> String? {
+        guard info.draggingSource == nil else { return nil }
+        let text = info.draggingPasteboard.string(forType: .string)?.trimmingCharacters(in: .whitespacesAndNewlines)
+        return text?.isEmpty == false ? text : nil
+    }
+
+    private func hasDroppableContent(_ info: NSDraggingInfo) -> Bool {
+        !fileURLs(from: info).isEmpty || droppedText(from: info) != nil
+    }
+
     private func normalizedX(_ info: NSDraggingInfo) -> CGFloat {
         let point = convert(info.draggingLocation, from: nil)
         return bounds.width > 0 ? min(1, max(0, point.x / bounds.width)) : 0.5
@@ -45,13 +56,13 @@ final class NotchHostingView<Content: View>: NSHostingView<Content> {
     override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
         let count = fileURLs(from: sender).count
         dropLog.notice("entrée du glissement : \(count) fichier(s), source interne : \(sender.draggingSource != nil)")
-        guard count > 0 else { return [] }
+        guard hasDroppableContent(sender) else { return [] }
         onFileDrag?(normalizedX(sender))
         return .copy
     }
 
     override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
-        guard !fileURLs(from: sender).isEmpty else { return [] }
+        guard hasDroppableContent(sender) else { return [] }
         onFileDrag?(normalizedX(sender))
         return .copy
     }
@@ -65,12 +76,16 @@ final class NotchHostingView<Content: View>: NSHostingView<Content> {
     }
 
     override func prepareForDragOperation(_ sender: NSDraggingInfo) -> Bool {
-        !fileURLs(from: sender).isEmpty
+        hasDroppableContent(sender)
     }
 
     override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
-        let urls = fileURLs(from: sender)
-        dropLog.notice("dépôt : \(urls.count) fichier(s)")
+        var urls = fileURLs(from: sender)
+        // Texte sans fichier : enregistré dans un petit fichier texte, qui se récupère comme les autres.
+        if urls.isEmpty, let text = droppedText(from: sender), let file = ShelfTextClipping.save(text) {
+            urls = [file]
+        }
+        dropLog.notice("dépôt : \(urls.count) élément(s)")
         guard !urls.isEmpty else { return false }
         onFileDrop?(urls, normalizedX(sender))
         return true

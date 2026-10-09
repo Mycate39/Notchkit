@@ -23,7 +23,7 @@ struct LayoutEditorContent: View {
     }
 
     var body: some View {
-        let pages = manager.pageIDs
+        let pages = manager.layoutPageIDs
         let hidden = manager.orderedDescriptors.filter {
             $0.providesWidget && !manager.isEnabled($0.id) && manager.isUnlocked($0)
         }

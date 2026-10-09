@@ -95,11 +95,9 @@ final class ModuleManager {
         1.5
     }
 
-    /// Modules qui tournent « en contexte » : widget masqué, mais du contenu à montrer (voir
-    /// `NotchModule.hasContextualContent`). Ils restent hors de la disposition de l'utilisateur.
+    /// Modules contextuels dont le widget est masqué : ils tournent quand même, hors de la disposition
+    /// de l'utilisateur, et s'affichent en dernière page quand ils ont du contenu.
     private(set) var contextualIDs: Set<String> = []
-    /// Modules à charger en contexte au prochain `reload`, même sans contenu (ex. dépôt en cours).
-    @ObservationIgnored private var forcedContextual: Set<String> = []
 
     /// Modules actifs qui ont une carte dans l'encoche dépliée (hors modules en contexte).
     private var widgetModules: [any NotchModule] {
@@ -110,26 +108,23 @@ final class ModuleManager {
         Dictionary(uniqueKeysWithValues: widgetModules.map { ($0.moduleID, weight(for: $0.moduleID)) })
     }
 
-    /// Pages affichées dans l'encoche dépliée (identifiants des modules actifs). Les modules en
-    /// contexte s'ajoutent sur une dernière page, sans modifier la disposition.
-    var pageIDs: [[String]] {
-        let pages = WidgetLayoutEngine.pages(
+    /// Pages de la disposition de l'utilisateur (sans les modules contextuels) : celles de l'éditeur.
+    var layoutPageIDs: [[String]] {
+        WidgetLayoutEngine.pages(
             activeIDs: widgetModules.map(\.moduleID),
             weights: activeWeights,
             layout: settings.settings.widgetLayout
         )
-        let contextual = activeModules.map(\.moduleID).filter(contextualIDs.contains)
-        return contextual.isEmpty ? pages : pages + [contextual]
     }
 
-    /// Charge un module en contexte s'il n'est pas déjà actif (ex. l'étagère pour un dépôt de fichiers).
-    /// Appeler `reload()` ensuite : le module repart s'il n'a finalement rien à montrer.
-    func loadContextually(_ id: String) -> (any NotchModule)? {
-        if let module = module(for: id) { return module }
-        forcedContextual.insert(id)
-        reload()
-        forcedContextual.remove(id)
-        return module(for: id)
+    /// Pages affichées dans l'encoche dépliée (identifiants des modules actifs). Les modules en
+    /// contexte s'ajoutent sur une dernière page, sans modifier la disposition.
+    var pageIDs: [[String]] {
+        let pages = layoutPageIDs
+        let contextual = activeModules
+            .filter { contextualIDs.contains($0.moduleID) && $0.hasContextualContent }
+            .map(\.moduleID)
+        return contextual.isEmpty ? pages : pages + [contextual]
     }
 
     /// Disposition affichée, figée pour être modifiée.
@@ -153,7 +148,7 @@ final class ModuleManager {
 
     /// Position actuelle d'un widget (page, rang).
     func position(of id: String) -> (page: Int, index: Int)? {
-        for (page, ids) in pageIDs.enumerated() {
+        for (page, ids) in layoutPageIDs.enumerated() {
             if let index = ids.firstIndex(of: id) { return (page, index) }
         }
         return nil
@@ -221,8 +216,7 @@ final class ModuleManager {
             let descriptor = type.descriptor
             let unlocked = entitlements.isUnlocked(descriptor)
             let enabled = isEnabled(descriptor.id) && unlocked
-            let inContext = !enabled && unlocked
-                && (forcedContextual.contains(descriptor.id) || type.hasContextualContent)
+            let inContext = !enabled && unlocked && descriptor.contextual
             if inContext { contextual.insert(descriptor.id) }
             let shouldRun = enabled || inContext
 
@@ -269,8 +263,7 @@ final class ModuleManager {
             openSettings: { [weak self] in self?.settingsHandler?(moduleID) },
             holdExpanded: { [weak self] hold in self?.holdHandler?(hold) },
             dismissAlert: { [weak self] id in self?.dismissAlertHandler?(id) },
-            blockExpansion: { [weak self] blocked in self?.blockExpansionHandler?(blocked) },
-            contextualContentChanged: { [weak self] in self?.reload() }
+            blockExpansion: { [weak self] blocked in self?.blockExpansionHandler?(blocked) }
         )
     }
 }

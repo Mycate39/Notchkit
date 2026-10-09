@@ -57,11 +57,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             guard let self else { return }
             switch zone {
             case .shelf:
-                if let shelf = self.moduleManager.loadContextually(ShelfModule.descriptor.id) as? ShelfModule {
+                // L'étagère tourne toujours (module contextuel), même si son widget est masqué.
+                if let shelf = self.moduleManager.module(for: ShelfModule.descriptor.id) as? ShelfModule {
                     let added = shelf.add(urls)
                     if added > 0 { self.viewModel.present(ShelfAlerts.added(added)) }
                 }
-                self.moduleManager.reload()
             case .airDrop:
                 AirDrop.send(urls)
             }

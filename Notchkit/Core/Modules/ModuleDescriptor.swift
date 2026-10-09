@@ -43,4 +43,7 @@ struct ModuleDescriptor: Identifiable, Sendable {
     /// Faux pour un module qui fonctionne en arrière-plan sans carte dans l'encoche dépliée
     /// (ex. animations de déverrouillage) : il n'apparaît ni dans les pages ni dans l'éditeur.
     var providesWidget = true
+    /// Module « contextuel » : il tourne même quand son widget est masqué, et s'affiche alors en
+    /// dernière page de l'encoche tant qu'il a du contenu (`NotchModule.hasContextualContent`).
+    var contextual = false
 }

@@ -35,8 +35,6 @@ struct ModuleContext {
     /// Empêche temporairement l'encoche de s'ouvrir au survol (ex. bouton cliquable en mode replié).
     var blockExpansion: @MainActor (Bool) -> Void = { _ in }
 
-    /// Le contenu « contextuel » du module a changé (voir `hasContextualContent`).
-    var contextualContentChanged: @MainActor () -> Void = {}
 }
 
 /// Protocole commun à toutes les fonctionnalités de Notchkit.
@@ -53,9 +51,9 @@ struct ModuleContext {
 protocol NotchModule: AnyObject, Observable {
     static var descriptor: ModuleDescriptor { get }
 
-    /// Vrai si le module a du contenu à montrer même quand son widget est masqué (ex. fichiers posés
-    /// sur l'étagère) : il tourne alors « en contexte » et s'affiche en dernière page de l'encoche.
-    @MainActor static var hasContextualContent: Bool { get }
+    /// Module contextuel (`descriptor.contextual`) au widget masqué : vrai s'il a du contenu à montrer
+    /// (ex. fichiers posés sur l'étagère). Il s'affiche alors en dernière page de l'encoche.
+    var hasContextualContent: Bool { get }
 
     init(context: ModuleContext)
 
@@ -85,7 +83,7 @@ protocol NotchModule: AnyObject, Observable {
 extension NotchModule {
     var moduleID: String { Self.descriptor.id }
 
-    static var hasContextualContent: Bool { false }
+    var hasContextualContent: Bool { false }
     func start() {}
     func stop() {}
     func compactLeading() -> AnyView? { nil }

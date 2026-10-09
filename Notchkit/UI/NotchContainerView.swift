@@ -470,7 +470,7 @@ private struct WidgetContextMenu: View {
 
     var body: some View {
         let position = manager.position(of: box.id)
-        let pages = manager.pageIDs
+        let pages = manager.layoutPageIDs
 
         Picker("Taille", selection: Binding(
             get: { box.size },
@@ -510,8 +510,15 @@ private struct WidgetContextMenu: View {
 
         Divider()
 
-        Button("Masquer ce widget") {
-            manager.setEnabled(false, for: box.id)
+        if manager.contextualIDs.contains(box.id) {
+            // Widget apparu de lui-même (masqué, mais avec du contenu) : on peut le garder pour de bon.
+            Button("Ajouter à la disposition") {
+                manager.enable(box.id, atPage: max(0, pages.count - 1), index: .max)
+            }
+        } else {
+            Button("Masquer ce widget") {
+                manager.setEnabled(false, for: box.id)
+            }
         }
         Button("Modifier la disposition…") {
             viewModel.openSettings(tab: .layout)

@@ -19,7 +19,9 @@ final class ScreenshotsModule: NotchModule {
         systemImage: "camera.viewfinder",
         category: .productivity,
         tier: .free,
-        defaultEnabled: true
+        // Masqué par défaut : il apparaît de lui-même dès qu'il y a une capture dans la session.
+        defaultEnabled: false,
+        contextual: true
     )
 
     private(set) var items: [Screenshot] = []
@@ -141,6 +143,9 @@ final class ScreenshotsModule: NotchModule {
     }
 
     // MARK: Affichage
+
+    /// Au moins une capture dans la session : le widget s'affiche même s'il est masqué.
+    var hasContextualContent: Bool { !items.isEmpty }
 
     var compactPriority: ModulePriority { .none }
 

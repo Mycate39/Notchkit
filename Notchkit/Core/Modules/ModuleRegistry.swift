@@ -12,6 +12,7 @@ enum ModuleRegistry {
         WeatherModule.self,
         ClaudeModule.self,
         ShelfModule.self,
+        ScreenshotsModule.self,
         AirPodsModule.self,
         LiveActivitiesModule.self,
         ClipboardModule.self,

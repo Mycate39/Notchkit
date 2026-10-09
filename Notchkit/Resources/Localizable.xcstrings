@@ -1,6 +1,150 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "Captures d'écran" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Screenshots"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Captures d'écran"
+          }
+        }
+      }
+    },
+    "Les captures et enregistrements d'écran de votre session, à glisser où vous voulez." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Screenshots and screen recordings from your session, ready to drag anywhere."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les captures et enregistrements d'écran de votre session, à glisser où vous voulez."
+          }
+        }
+      }
+    },
+    "Captures" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Screenshots"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Captures"
+          }
+        }
+      }
+    },
+    "Enregistrement" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recording"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrement"
+          }
+        }
+      }
+    },
+    "Capture" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Screenshot"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Capture"
+          }
+        }
+      }
+    },
+    "Les captures d'écran faites depuis l'ouverture de votre session apparaîtront ici." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Screenshots taken since you logged in will appear here."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les captures d'écran faites depuis l'ouverture de votre session apparaîtront ici."
+          }
+        }
+      }
+    },
+    "Placer dans la corbeille" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Move to Trash"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Placer dans la corbeille"
+          }
+        }
+      }
+    },
+    "Afficher une alerte à chaque nouvelle capture" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show an alert for each new screenshot"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher une alerte à chaque nouvelle capture"
+          }
+        }
+      }
+    },
+    "Notchkit liste les captures et enregistrements d'écran faits depuis le démarrage du Mac ou l'ouverture de votre session, où qu'ils soient enregistrés. S'ils sont sur le Bureau, macOS demandera une fois l'accès à ce dossier pour afficher les aperçus." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit lists the screenshots and screen recordings made since your Mac started or you logged in, wherever they are saved. If they are on the Desktop, macOS asks once for access to that folder to show the previews."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit liste les captures et enregistrements d'écran faits depuis le démarrage du Mac ou l'ouverture de votre session, où qu'ils soient enregistrés. S'ils sont sur le Bureau, macOS demandera une fois l'accès à ce dossier pour afficher les aperçus."
+          }
+        }
+      }
+    },
     "" : {
 
     },

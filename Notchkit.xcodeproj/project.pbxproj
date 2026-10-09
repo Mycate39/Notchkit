@@ -101,12 +101,14 @@
 		9E5F1AAB2D6C98B155086961 /* ClipboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89908AA5686A7DBE051BD6EF /* ClipboardTests.swift */; };
 		9E7A63311A2BAFD715703A99 /* NotchShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E8841EA892E202FC4B79550 /* NotchShape.swift */; };
 		9EFC7A08DE1D2D77E0755A84 /* env.h in Headers */ = {isa = PBXBuildFile; fileRef = 28D7F4491917AC873CE7BC74 /* env.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9F5745D3E076C6C52EC603D8 /* ScreenshotsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC10CCCB7D263C85AE93B02 /* ScreenshotsViews.swift */; };
 		9F65428EDD48F89CBDB4024D /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7676B52E8B648F97985269 /* Keychain.swift */; };
 		9F7142925091280DBE0FE836 /* keys.h in Headers */ = {isa = PBXBuildFile; fileRef = D4D167C05CBBAD88AE1F8A4F /* keys.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A035E8F6860E327BAD3FEF0D /* BatteryModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C6F4F37F841F8FF9371E1E /* BatteryModule.swift */; };
 		A174F9940FC069ED71C0C579 /* MediaKeyTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DF39D707B871615662FAD5 /* MediaKeyTap.swift */; };
 		A2ABD358B67E256AF9105886 /* NowPlayingTest.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DF83BF34AFE3B80D8068FFA /* NowPlayingTest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A332BE0B606743A7032D6F14 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 98FB71F04AAECE1E8BD0926A /* Localizable.xcstrings */; };
+		A36F60159AC37E3010BC82FA /* ScreenshotsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE66842FA59F405AA5650F /* ScreenshotsModule.swift */; };
 		A3FD42D6E7DEB49B02389539 /* NotchAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A73B719641636FD8ABD372 /* NotchAlert.swift */; };
 		A48F76AE210F36AA7349FE22 /* LiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F1ED02F37A1EDCA8B3F577 /* LiveActivity.swift */; };
 		A56A56BB6242B685DE85A1A9 /* SystemHUDModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13612A2C0214BDCDDBF00C6C /* SystemHUDModule.swift */; };
@@ -148,6 +150,7 @@
 		E38E6D1F1CE0969164BCA220 /* PromoSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32900714A02A8501AE6BF88D /* PromoSnapshots.swift */; };
 		E7CB399A1524418E1152DDA6 /* ModuleDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD4A44AFAF64E2BE5E745B3 /* ModuleDescriptor.swift */; };
 		E954032D743568B2082B51F8 /* MusicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6111A0CC43713D888AAAB4 /* MusicTests.swift */; };
+		E982D9CEF0D561934BFF6751 /* ScreenshotSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810675008E358236974A7C3B /* ScreenshotSession.swift */; };
 		ED5BE3842572CB8E3454C102 /* AirPodsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A426D361B19F11D7BD531E6 /* AirPodsTests.swift */; };
 		ED68E3C0FB4C750D9D4480B1 /* ShelfModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DD4B3B5A025276532608BF /* ShelfModule.swift */; };
 		F49705A9A1C38568C414F8F7 /* ClaudeUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C529029D5145492C0C2626F /* ClaudeUsage.swift */; };
@@ -207,6 +210,7 @@
 		140868E51134AF3924DFBEF3 /* NotchLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchLayout.swift; sourceTree = "<group>"; };
 		14C15E810C63DBBAA6AD2F11 /* shuffle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = shuffle.m; sourceTree = "<group>"; };
 		1540EC4F1FC0F674F96EB7CE /* SystemHUDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemHUDTests.swift; sourceTree = "<group>"; };
+		18DE66842FA59F405AA5650F /* ScreenshotsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotsModule.swift; sourceTree = "<group>"; };
 		1E8841EA892E202FC4B79550 /* NotchShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchShape.swift; sourceTree = "<group>"; };
 		20084FD98CCD7BB5C7346A16 /* LockScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenTests.swift; sourceTree = "<group>"; };
 		21F3AA5E7B3A040B33B93437 /* ClaudeHookServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeHookServer.swift; sourceTree = "<group>"; };
@@ -250,6 +254,7 @@
 		635422DB9C95886A509BD9D8 /* UnlockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockTests.swift; sourceTree = "<group>"; };
 		6362B40DDA569D43BB37B057 /* AssistantFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantFace.swift; sourceTree = "<group>"; };
 		6704D0B10B983BEF736F0E06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6CC10CCCB7D263C85AE93B02 /* ScreenshotsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotsViews.swift; sourceTree = "<group>"; };
 		6CE100D153781049292573AA /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
 		6D79AFE5C1AEE52840020061 /* ScriptablePlayerSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptablePlayerSource.swift; sourceTree = "<group>"; };
 		6E67B71BB43A4F2B68A88A78 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
@@ -265,6 +270,7 @@
 		7E7EEFDAB8D951E6917D5D5F /* get.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = get.m; sourceTree = "<group>"; };
 		7EE518DE63D2C25D9F6E87F4 /* ClaudeModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeModule.swift; sourceTree = "<group>"; };
 		7FEAFA82740815C08DAF101F /* UnlockAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockAnimations.swift; sourceTree = "<group>"; };
+		810675008E358236974A7C3B /* ScreenshotSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotSession.swift; sourceTree = "<group>"; };
 		82317F3A93FC9B78D9981F5A /* helpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = helpers.h; sourceTree = "<group>"; };
 		82E32A0CD723246EBCF3F295 /* SpectrumTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumTests.swift; sourceTree = "<group>"; };
 		865FBBD206E6548CD19B74CE /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
@@ -425,6 +431,7 @@
 				61A436182527CE595E0012B7 /* Clock */,
 				70C8408ECB21451937903973 /* LiveActivities */,
 				519555DDFDCB99F283864CC9 /* Music */,
+				FEB44DDF509E814E00D3B18F /* Screenshots */,
 				A64F17DD50A084CB2420C8CE /* Shelf */,
 				A1975F559D28B76D7DDB3598 /* SystemHUD */,
 				3FA596B71B3FA62F693D5259 /* Unlock */,
@@ -871,6 +878,16 @@
 			path = State;
 			sourceTree = "<group>";
 		};
+		FEB44DDF509E814E00D3B18F /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				810675008E358236974A7C3B /* ScreenshotSession.swift */,
+				18DE66842FA59F405AA5650F /* ScreenshotsModule.swift */,
+				6CC10CCCB7D263C85AE93B02 /* ScreenshotsViews.swift */,
+			);
+			path = Screenshots;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1117,6 +1134,9 @@
 				CF7166A65434F3E4E1E01E77 /* PowerSourceMonitor.swift in Sources */,
 				E38E6D1F1CE0969164BCA220 /* PromoSnapshots.swift in Sources */,
 				40725F139A191DFF6204EE6F /* ScreenLocator.swift in Sources */,
+				E982D9CEF0D561934BFF6751 /* ScreenshotSession.swift in Sources */,
+				A36F60159AC37E3010BC82FA /* ScreenshotsModule.swift in Sources */,
+				9F5745D3E076C6C52EC603D8 /* ScreenshotsViews.swift in Sources */,
 				104E80908062F310B5609902 /* ScriptablePlayerSource.swift in Sources */,
 				D394C8AD7B7DDE1543A12AF0 /* SettingsStore.swift in Sources */,
 				DD4F43AE5E3C5678D35941B7 /* SettingsView.swift in Sources */,

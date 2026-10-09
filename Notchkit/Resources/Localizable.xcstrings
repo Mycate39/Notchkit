@@ -1,6 +1,118 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "Chronomètre" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stopwatch"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chronomètre"
+          }
+        }
+      }
+    },
+    "Alarme %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alarm %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alarme %@"
+          }
+        }
+      }
+    },
+    "Pomodoro · travail" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pomodoro · focus"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pomodoro · travail"
+          }
+        }
+      }
+    },
+    "Pomodoro · pause" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pomodoro · break"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pomodoro · pause"
+          }
+        }
+      }
+    },
+    "Alarme" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alarm"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alarme"
+          }
+        }
+      }
+    },
+    "Pomodoro (25 min de travail, 5 min de pause)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pomodoro (25 min focus, 5 min break)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pomodoro (25 min de travail, 5 min de pause)"
+          }
+        }
+      }
+    },
+    "Régler l'alarme" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Set Alarm"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Régler l'alarme"
+          }
+        }
+      }
+    },
     "Texte" : {
       "localizations" : {
         "en" : {

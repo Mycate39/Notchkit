@@ -4,8 +4,15 @@ import Foundation
 struct LiveActivity: Identifiable, Equatable, Sendable {
     enum Kind: String, Sendable {
         case timer
+        case stopwatch
         case download
         case task
+    }
+
+    /// Phase d'un Pomodoro (le minuteur enchaîne travail et pause tout seul).
+    enum PomodoroPhase: String, Sendable {
+        case work
+        case rest
     }
 
     let id: String
@@ -19,6 +26,14 @@ struct LiveActivity: Identifiable, Equatable, Sendable {
     /// Temps restant figé (minuteur en pause).
     var pausedRemaining: TimeInterval?
     var duration: TimeInterval = 0
+    /// Pomodoro : phase en cours et nombre de séances de travail terminées.
+    var pomodoro: PomodoroPhase?
+    var pomodoroCount = 0
+
+    // Chronomètre
+    /// Départ (chronomètre en marche) et temps déjà compté avant la dernière pause.
+    var startDate: Date?
+    var elapsedBase: TimeInterval = 0
 
     // Téléchargement ou tâche
     /// Progression 0…1 ; `nil` = indéterminée.
@@ -37,7 +52,19 @@ struct LiveActivity: Identifiable, Equatable, Sendable {
         return endDate.map { max(0, $0.timeIntervalSince(date)) }
     }
 
-    var isPaused: Bool { kind == .timer && pausedRemaining != nil && !isFinished }
+    var isPaused: Bool {
+        switch kind {
+        case .timer: pausedRemaining != nil && !isFinished
+        case .stopwatch: startDate == nil
+        case .download, .task: false
+        }
+    }
+
+    /// Temps compté par un chronomètre.
+    func elapsed(at date: Date = Date()) -> TimeInterval? {
+        guard kind == .stopwatch else { return nil }
+        return elapsedBase + (startDate.map { max(0, date.timeIntervalSince($0)) } ?? 0)
+    }
 
     /// Avancement 0…1 (minuteur : temps écoulé ; sinon : progression connue).
     func fraction(at date: Date = Date()) -> Double? {
@@ -48,7 +75,37 @@ struct LiveActivity: Identifiable, Equatable, Sendable {
             return min(1, max(0, 1 - remaining / duration))
         case .download, .task:
             return progress.map { min(1, max(0, $0)) }
+        case .stopwatch:
+            // Un tour de cadran par minute.
+            return elapsed(at: date).map { $0.truncatingRemainder(dividingBy: 60) / 60 }
         }
+    }
+
+    static func stopwatch(now: Date = Date()) -> LiveActivity {
+        LiveActivity(id: "stopwatch-\(UUID().uuidString)", kind: .stopwatch,
+                     title: String(localized: "Chronomètre"), symbol: "stopwatch", startDate: now)
+    }
+
+    /// Alarme : un minuteur qui sonne à une heure précise (aujourd'hui, sinon demain).
+    static func alarm(hour: Int, minute: Int, now: Date = Date(), calendar: Calendar = .current) -> LiveActivity {
+        let end = AlarmTime.nextDate(hour: hour, minute: minute, after: now, calendar: calendar)
+        let label = String(format: "%d:%02d", hour, minute)
+        return LiveActivity(id: "alarm-\(UUID().uuidString)", kind: .timer,
+                            title: String(localized: "Alarme \(label)"), symbol: "alarm",
+                            endDate: end, duration: end.timeIntervalSince(now))
+    }
+
+    static func pomodoro(_ phase: PomodoroPhase, count: Int = 0, now: Date = Date()) -> LiveActivity {
+        let duration = PomodoroPlan.duration(of: phase)
+        var activity = LiveActivity(
+            id: "pomodoro-\(UUID().uuidString)", kind: .timer,
+            title: phase == .work ? String(localized: "Pomodoro · travail") : String(localized: "Pomodoro · pause"),
+            symbol: phase == .work ? "brain.head.profile" : "cup.and.saucer.fill",
+            endDate: now.addingTimeInterval(duration), duration: duration
+        )
+        activity.pomodoro = phase
+        activity.pomodoroCount = count
+        return activity
     }
 
     static func timer(duration: TimeInterval, title: String? = nil, now: Date = Date()) -> LiveActivity {
@@ -63,6 +120,29 @@ struct LiveActivity: Identifiable, Equatable, Sendable {
     }
 }
 
+/// Heure d'une alarme : la prochaine occurrence de hh:mm.
+enum AlarmTime {
+    static func nextDate(hour: Int, minute: Int, after now: Date, calendar: Calendar = .current) -> Date {
+        let components = DateComponents(hour: hour, minute: minute, second: 0)
+        return calendar.nextDate(after: now, matching: components, matchingPolicy: .nextTime) ?? now
+    }
+}
+
+/// Pomodoro : 25 min de travail, 5 min de pause, en boucle.
+enum PomodoroPlan {
+    static let work: TimeInterval = 25 * 60
+    static let rest: TimeInterval = 5 * 60
+
+    static func duration(of phase: LiveActivity.PomodoroPhase) -> TimeInterval {
+        phase == .work ? work : rest
+    }
+
+    /// Phase suivante et nombre de séances de travail terminées.
+    static func next(after phase: LiveActivity.PomodoroPhase, count: Int) -> (LiveActivity.PomodoroPhase, Int) {
+        phase == .work ? (.rest, count + 1) : (.work, count)
+    }
+}
+
 /// Ordre de priorité pour l'encoche repliée : minuteur qui vient de sonner, minuteurs en cours
 /// (le plus proche d'abord), téléchargements, puis tâches.
 enum LiveActivityRanking {
@@ -73,7 +153,8 @@ enum LiveActivityRanking {
             .min(by: { ($0.remaining(at: date) ?? 0) < ($1.remaining(at: date) ?? 0) }) {
             return timer
         }
-        return running.first { $0.kind == .download } ?? running.first { $0.kind == .task }
+        return running.first { $0.kind == .stopwatch && !$0.isPaused }
+            ?? running.first { $0.kind == .download } ?? running.first { $0.kind == .task }
             ?? running.first
     }
 }

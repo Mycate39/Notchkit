@@ -88,8 +88,38 @@ final class LiveActivitiesModule: NotchModule {
         scheduleCompletion(of: timer)
     }
 
+    // MARK: Chronomètre, alarme, Pomodoro
+
+    func startStopwatch() {
+        withAnimation(.snappy) { activities.append(.stopwatch()) }
+    }
+
+    func startAlarm(hour: Int, minute: Int) {
+        let alarm = LiveActivity.alarm(hour: hour, minute: minute)
+        withAnimation(.snappy) { activities.append(alarm) }
+        scheduleCompletion(of: alarm)
+    }
+
+    func startPomodoro() {
+        let pomodoro = LiveActivity.pomodoro(.work)
+        withAnimation(.snappy) { activities.append(pomodoro) }
+        scheduleCompletion(of: pomodoro)
+    }
+
     func togglePause(_ id: String) {
-        guard let index = activities.firstIndex(where: { $0.id == id }), activities[index].kind == .timer else { return }
+        guard let index = activities.firstIndex(where: { $0.id == id }) else { return }
+        if activities[index].kind == .stopwatch {
+            var watch = activities[index]
+            if let start = watch.startDate {
+                watch.elapsedBase += Date().timeIntervalSince(start)
+                watch.startDate = nil
+            } else {
+                watch.startDate = Date()
+            }
+            activities[index] = watch
+            return
+        }
+        guard activities[index].kind == .timer else { return }
         var timer = activities[index]
         if let remaining = timer.pausedRemaining {
             timer.pausedRemaining = nil
@@ -141,6 +171,17 @@ final class LiveActivitiesModule: NotchModule {
 
     private func timerFinished(_ id: String) {
         guard let index = activities.firstIndex(where: { $0.id == id }) else { return }
+        // Pomodoro : la phase suivante démarre aussitôt (travail ↔ pause).
+        if let phase = activities[index].pomodoro {
+            let (next, count) = PomodoroPlan.next(after: phase, count: activities[index].pomodoroCount)
+            var following = LiveActivity.pomodoro(next, count: count)
+            timerTasks[id] = nil
+            if playSound { NSSound(named: "Glass")?.play() }
+            withAnimation(.snappy) { activities[index] = following }
+            context.presentAlert(LiveActivityAlerts.pomodoroPhase(next))
+            scheduleCompletion(of: following)
+            return
+        }
         activities[index].isFinished = true
         activities[index].finishedAt = Date()
         timerTasks[id] = nil
@@ -251,9 +292,9 @@ final class LiveActivitiesModule: NotchModule {
     func compactLeading() -> AnyView? {
         guard let activity = mostRelevant else { return nil }
         // Minuteur : icône orange, comme dans la Dynamic Island d'iOS.
-        if activity.kind == .timer {
+        if activity.kind == .timer || activity.kind == .stopwatch {
             return AnyView(
-                Image(systemName: activity.isPaused ? "pause.circle.fill" : "timer")
+                Image(systemName: activity.isPaused ? "pause.circle.fill" : activity.symbol)
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundStyle(.orange)
                     .contentTransition(.symbolEffect(.replace))
@@ -287,6 +328,16 @@ enum LiveActivityAlerts {
             leading: AnyView(RingingBell()),
             trailing: AnyView(Text("Terminé").foregroundStyle(.orange)),
             duration: .seconds(5)
+        )
+    }
+
+    @MainActor
+    static func pomodoroPhase(_ phase: LiveActivity.PomodoroPhase) -> NotchAlert {
+        NotchAlert(
+            leading: AnyView(Image(systemName: phase == .work ? "brain.head.profile" : "cup.and.saucer.fill")
+                .foregroundStyle(.orange)),
+            trailing: AnyView(Text(phase == .work ? "Au travail" : "Pause").foregroundStyle(.orange)),
+            duration: .seconds(4)
         )
     }
 

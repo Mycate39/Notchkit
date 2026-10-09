@@ -83,3 +83,36 @@ struct LiveActivitiesModuleTests {
         #expect(module.activities.isEmpty)
     }
 }
+
+struct ChronoAlarmePomodoroTests {
+    let t0 = Date(timeIntervalSince1970: 1_000_000)
+
+    @Test func chronometreCompteEtSeMetEnPause() {
+        var watch = LiveActivity.stopwatch(now: t0)
+        #expect(watch.elapsed(at: t0.addingTimeInterval(65)) == 65)
+        #expect(!watch.isPaused)
+        watch.elapsedBase = 65
+        watch.startDate = nil
+        #expect(watch.isPaused)
+        #expect(watch.elapsed(at: t0.addingTimeInterval(500)) == 65)
+    }
+
+    @Test func alarmeAujourdhuiOuDemain() {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "Europe/Paris")!
+        let now = calendar.date(from: DateComponents(year: 2026, month: 10, day: 9, hour: 10, minute: 0))!
+        let later = AlarmTime.nextDate(hour: 11, minute: 30, after: now, calendar: calendar)
+        #expect(later.timeIntervalSince(now) == 90 * 60)
+        let tomorrow = AlarmTime.nextDate(hour: 7, minute: 0, after: now, calendar: calendar)
+        #expect(tomorrow.timeIntervalSince(now) == 21 * 3600)
+    }
+
+    @Test func pomodoroEnchaineTravailEtPause() {
+        #expect(PomodoroPlan.next(after: .work, count: 0) == (.rest, 1))
+        #expect(PomodoroPlan.next(after: .rest, count: 1) == (.work, 1))
+        let work = LiveActivity.pomodoro(.work, now: t0)
+        #expect(work.duration == 25 * 60)
+        #expect(work.pomodoro == .work)
+        #expect(LiveActivity.pomodoro(.rest, now: t0).duration == 5 * 60)
+    }
+}

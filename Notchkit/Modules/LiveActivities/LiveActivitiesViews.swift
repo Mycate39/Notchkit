@@ -5,7 +5,7 @@ extension LiveActivity {
     var tint: Color {
         if isFinished && kind != .timer { return .green }
         switch kind {
-        case .timer: return .orange
+        case .timer, .stopwatch: return .orange
         case .download: return .blue
         case .task: return .purple
         }
@@ -54,7 +54,8 @@ struct ActivityCompactValue: View {
             HStack(spacing: 3) {
                 Text(value(at: context.date))
                     .monospacedDigit()
-                    .foregroundStyle(activity.kind == .timer || activity.isFinished ? activity.tint : .white)
+                    .foregroundStyle(activity.kind == .timer || activity.kind == .stopwatch || activity.isFinished
+                                     ? activity.tint : .white)
                 if extraCount > 0 {
                     Text("+\(extraCount)")
                         .font(.system(size: 9, weight: .bold))
@@ -65,6 +66,9 @@ struct ActivityCompactValue: View {
     }
 
     private func value(at date: Date) -> String {
+        if let elapsed = activity.elapsed(at: date) {
+            return LiveActivityFormat.countdown(elapsed)
+        }
         if let remaining = activity.remaining(at: date) {
             return activity.isFinished ? String(localized: "0:00") : LiveActivityFormat.countdown(remaining)
         }
@@ -91,11 +95,14 @@ struct LiveActivitiesExpandedView: View {
     @Environment(\.widgetSize) private var size
     /// Choix d'une durée précise (molettes heures / minutes / secondes).
     @State private var isPickingDuration = false
+    @State private var isPickingAlarm = false
 
     var body: some View {
         Group {
             if isPickingDuration {
                 TimerDurationPicker(module: module, isPresented: $isPickingDuration)
+            } else if isPickingAlarm {
+                AlarmPicker(module: module, isPresented: $isPickingAlarm)
             } else if module.activities.count == 1, let timer = module.activities.first, timer.kind == .timer {
                 // Un seul minuteur : présentation « Dynamic Island » d'iOS.
                 TimerHeroView(module: module, timer: timer, compact: size == .small)
@@ -124,22 +131,42 @@ struct LiveActivitiesExpandedView: View {
         .animation(.snappy(duration: 0.25), value: isPickingDuration)
     }
 
-    /// Lancement rapide d'un minuteur, ou choix d'une durée précise.
+    /// Lancement rapide d'un minuteur (durées, durée précise), chronomètre, alarme et Pomodoro.
+    /// La rangée garde autant de durées que la place le permet, sans jamais tronquer un libellé.
     private var timerLauncher: some View {
+        ViewThatFits(in: .horizontal) {
+            launcherRow(presets: LiveActivitiesModule.presets, extras: true)
+            launcherRow(presets: [5, 25], extras: true)
+            launcherRow(presets: [5], extras: true)
+            launcherRow(presets: [5], extras: false)
+        }
+    }
+
+    private func launcherRow(presets: [Int], extras: Bool) -> some View {
         HStack(spacing: 5) {
             Image(systemName: "timer")
                 .font(.system(size: 11, weight: .semibold))
                 .foregroundStyle(.tint)
-            ForEach(size == .small ? [5] : LiveActivitiesModule.presets, id: \.self) { minutes in
+            ForEach(presets, id: \.self) { minutes in
                 Button("\(minutes) min") { module.startTimer(minutes: Double(minutes)) }
                     .buttonStyle(.standBy(.small))
+                    .fixedSize()
             }
             Button { isPickingDuration = true } label: {
                 Image(systemName: "plus")
             }
-            .buttonStyle(.standBy(.small, circle: true))
             .help("Choisir une durée précise")
+            if extras {
+                Spacer(minLength: 6)
+                Button(action: module.startStopwatch) { Image(systemName: "stopwatch") }
+                    .help("Chronomètre")
+                Button { isPickingAlarm = true } label: { Image(systemName: "alarm") }
+                    .help("Alarme")
+                Button(action: module.startPomodoro) { Image(systemName: "brain.head.profile") }
+                    .help("Pomodoro (25 min de travail, 5 min de pause)")
+            }
         }
+        .buttonStyle(.standBy(.small, circle: true))
     }
 }
 
@@ -254,6 +281,38 @@ private struct TimerDurationPicker: View {
     }
 }
 
+/// Choix de l'heure d'une alarme (molettes heures / minutes).
+private struct AlarmPicker: View {
+    let module: LiveActivitiesModule
+    @Binding var isPresented: Bool
+
+    @AppStorage("module.activities.alarmHour") private var hour = 7
+    @AppStorage("module.activities.alarmMinute") private var minute = 30
+
+    var body: some View {
+        VStack(spacing: 8) {
+            HStack(spacing: 4) {
+                Image(systemName: "alarm").foregroundStyle(.tint)
+                WheelPicker(value: $hour, range: 0...23, unit: "h")
+                WheelPicker(value: $minute, range: 0...59, unit: "min")
+            }
+            HStack {
+                Button("Annuler") { isPresented = false }
+                    .buttonStyle(.standBy(.small))
+                Spacer()
+                Button {
+                    module.startAlarm(hour: hour, minute: minute)
+                    isPresented = false
+                } label: {
+                    Label("Régler l'alarme", systemImage: "alarm")
+                }
+                .buttonStyle(.standBy(.small, active: true))
+                .keyboardShortcut(.defaultAction)
+            }
+        }
+    }
+}
+
 /// Molette à défilement : la valeur sélectionnée s'aligne au centre, sur un bandeau gris.
 /// Défilement au trackpad ou à la souris, clic sur une valeur pour la choisir.
 private struct WheelPicker: View {
@@ -344,6 +403,12 @@ private struct ActivityRow: View {
     @ViewBuilder
     private var controls: some View {
         HStack(spacing: 6) {
+            if activity.kind == .stopwatch {
+                Button { module.togglePause(activity.id) } label: {
+                    Image(systemName: activity.isPaused ? "play.fill" : "pause.fill")
+                }
+                .help(activity.isPaused ? "Reprendre" : "Pause")
+            }
             if activity.kind == .timer {
                 Button { module.extend(activity.id, by: 60) } label: {
                     Text("+1")
@@ -368,6 +433,9 @@ private struct ActivityRow: View {
 
     private func subtitle(at date: Date) -> String {
         switch activity.kind {
+        case .stopwatch:
+            let elapsed = LiveActivityFormat.countdown(activity.elapsed(at: date) ?? 0)
+            return activity.isPaused ? String(localized: "En pause · \(elapsed)") : elapsed
         case .timer:
             if activity.isFinished { return String(localized: "Terminé") }
             let remaining = LiveActivityFormat.countdown(activity.remaining(at: date) ?? 0)

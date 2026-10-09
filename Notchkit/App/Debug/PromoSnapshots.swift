@@ -117,6 +117,11 @@ enum PromoSnapshots {
         save(card(CameraModule(context: context).expandedView(), weight: 1.5), to: file("11-webcam-carte"))
         save(card(DayProgressModule(context: context).expandedView(), weight: 2), to: file("12-journee-carte"))
         save(card(NotesModule(context: context).expandedView(), weight: 2), to: file("13-notes-carte"))
+        let multi = LiveActivitiesModule(context: context)
+        multi.startStopwatch()
+        multi.startPomodoro()
+        save(card(multi.expandedView(), weight: 2), to: file("14-activites-carte"))
+        multi.activities.map(\.id).forEach(multi.remove)
 
         activities.activities.map(\.id).forEach(activities.remove)
         music.debugSetNowPlaying(nil)

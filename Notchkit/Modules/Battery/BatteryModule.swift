@@ -173,3 +173,12 @@ final class BatteryModule: NotchModule {
         AnyView(BatterySettingsView(module: self))
     }
 }
+
+#if DEBUG
+extension BatteryModule {
+    /// État fictif pour les images de démonstration.
+    func debugSetState(_ state: BatteryState) {
+        self.state = state
+    }
+}
+#endif

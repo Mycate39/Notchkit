@@ -198,3 +198,12 @@ enum ClipboardHistory {
         return pinned + others
     }
 }
+
+#if DEBUG
+extension ClipboardModule {
+    /// Historique fictif pour les images de démonstration (non enregistré).
+    func debugSetItems(_ items: [ClipboardItem]) {
+        self.items = items
+    }
+}
+#endif

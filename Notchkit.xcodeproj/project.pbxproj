@@ -145,6 +145,7 @@
 		E0FAD540630F9E4B2FAA2E44 /* test.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3C0CDEA4B993CA2ECA8EEA /* test.m */; };
 		E115414832E52C24B6FC8B5F /* ClaudeTranscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59B0346E804B7D7CA6AC049 /* ClaudeTranscript.swift */; };
 		E184F5836F541C7C7D2573E7 /* UnlockModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66674969F092062C29D4F74 /* UnlockModule.swift */; };
+		E38E6D1F1CE0969164BCA220 /* PromoSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32900714A02A8501AE6BF88D /* PromoSnapshots.swift */; };
 		E7CB399A1524418E1152DDA6 /* ModuleDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD4A44AFAF64E2BE5E745B3 /* ModuleDescriptor.swift */; };
 		E954032D743568B2082B51F8 /* MusicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6111A0CC43713D888AAAB4 /* MusicTests.swift */; };
 		ED5BE3842572CB8E3454C102 /* AirPodsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A426D361B19F11D7BD531E6 /* AirPodsTests.swift */; };
@@ -213,6 +214,7 @@
 		28D7F4491917AC873CE7BC74 /* env.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = env.h; sourceTree = "<group>"; };
 		2C8C037FC30E0BB58579AC35 /* MediaRemote.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MediaRemote.h; sourceTree = "<group>"; };
 		2F971AD4A7B51FE0A4D75748 /* VideoDownloadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloadTests.swift; sourceTree = "<group>"; };
+		32900714A02A8501AE6BF88D /* PromoSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoSnapshots.swift; sourceTree = "<group>"; };
 		32D1FCC02B4ACF20842E1E6B /* WidgetsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetsTests.swift; sourceTree = "<group>"; };
 		3381C5D65450BE4DF9D533F2 /* LiveActivitiesViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivitiesViews.swift; sourceTree = "<group>"; };
 		3497CA2593D7F55A480C1EC3 /* globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = globals.h; sourceTree = "<group>"; };
@@ -381,6 +383,7 @@
 		114CF41200FB1C9C565916B6 /* Debug */ = {
 			isa = PBXGroup;
 			children = (
+				32900714A02A8501AE6BF88D /* PromoSnapshots.swift */,
 				51B8953EC0C3A1C08A19AF87 /* SnapshotRenderer.swift */,
 			);
 			path = Debug;
@@ -1112,6 +1115,7 @@
 				7D94E8681B4FF20CD811DF9F /* ObservationTracking.swift in Sources */,
 				A7A432CCFD9E85A7069F6DF1 /* OpenMeteoClient.swift in Sources */,
 				CF7166A65434F3E4E1E01E77 /* PowerSourceMonitor.swift in Sources */,
+				E38E6D1F1CE0969164BCA220 /* PromoSnapshots.swift in Sources */,
 				40725F139A191DFF6204EE6F /* ScreenLocator.swift in Sources */,
 				104E80908062F310B5609902 /* ScriptablePlayerSource.swift in Sources */,
 				D394C8AD7B7DDE1543A12AF0 /* SettingsStore.swift in Sources */,

@@ -177,3 +177,13 @@ enum AirPodsAlerts {
         )
     }
 }
+
+#if DEBUG
+extension AirPodsModule {
+    /// Casque fictif pour les images de démonstration.
+    func debugSetDevices(_ devices: [HeadphoneDevice], bluetooth: [BluetoothDeviceInfo]) {
+        self.devices = devices
+        bluetoothDevices = bluetooth
+    }
+}
+#endif

@@ -92,6 +92,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 try? await Task.sleep(for: .seconds(4))
                 SnapshotRenderer.renderAll(to: URL(fileURLWithPath: directory), viewModel: viewModel,
                                            settings: settings, manager: moduleManager)
+                PromoSnapshots.renderAll(to: URL(fileURLWithPath: directory))
                 NSApp.terminate(nil)
             }
         }

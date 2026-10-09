@@ -214,3 +214,12 @@ final class WeatherModule: NotchModule {
         AnyView(WeatherSettingsView(module: self))
     }
 }
+
+#if DEBUG
+extension WeatherModule {
+    /// Météo fictive pour les images de démonstration.
+    func debugSetSnapshot(_ snapshot: WeatherSnapshot) {
+        self.snapshot = snapshot
+    }
+}
+#endif

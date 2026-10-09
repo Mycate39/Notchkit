@@ -142,3 +142,12 @@ enum ShelfAlerts {
         )
     }
 }
+
+#if DEBUG
+extension ShelfModule {
+    /// Fichiers fictifs pour les images de démonstration (non enregistrés).
+    func debugSetItems(_ items: [ShelfItem]) {
+        self.items = items
+    }
+}
+#endif

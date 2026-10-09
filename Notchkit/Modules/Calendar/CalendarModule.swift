@@ -215,3 +215,13 @@ final class CalendarModule: NotchModule {
         AnyView(CalendarSettingsView(module: self))
     }
 }
+
+#if DEBUG
+extension CalendarModule {
+    /// Agenda fictif pour les images de démonstration.
+    func debugSetEvents(_ events: [CalendarEvent]) {
+        authorization = .fullAccess
+        self.events = events
+    }
+}
+#endif

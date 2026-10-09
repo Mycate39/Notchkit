@@ -435,3 +435,18 @@ enum ClaudeAlerts {
         )
     }
 }
+
+#if DEBUG
+extension ClaudeModule {
+    /// Session fictive pour les images de démonstration (rien n'est enregistré).
+    func debugSetDemo(events: [ClaudeHookEvent], conversation: [ClaudeChatEntry] = []) {
+        installStatus = .installed
+        var demo = ClaudeActivityTracker()
+        for event in events { _ = demo.apply(event) }
+        if let sessionID = events.first?.sessionID, !conversation.isEmpty {
+            demo.appendConversation(conversation, to: sessionID)
+        }
+        tracker = demo
+    }
+}
+#endif

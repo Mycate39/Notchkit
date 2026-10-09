@@ -25,6 +25,7 @@ enum ModuleRegistry {
         TranslationModule.self,
         GitModule.self,
         GitHubModule.self,
+        OllamaModule.self,
         AirPodsModule.self,
         LiveActivitiesModule.self,
         ClipboardModule.self,

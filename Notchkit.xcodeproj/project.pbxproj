@@ -136,6 +136,7 @@
 		A82ADE0CE71C07E58C944C16 /* now_playing.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBB0A65EC51EF3F4A67EB2F /* now_playing.m */; };
 		AB56A68BD40C4A5C39C4ED1E /* ClaudeHooksInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F59B743A5CB9C111DD7BEB /* ClaudeHooksInstaller.swift */; };
 		AC7269EC36E5FC05D7BD7336 /* ShelfTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A097E4F52274645DD920E62C /* ShelfTests.swift */; };
+		AD70AAC42115BEE6FBBD5B8F /* OllamaModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23C94C92B2062A545EB2478 /* OllamaModule.swift */; };
 		B065278DF2DA2018030030EE /* NotchAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB3060B718647EFCAAA46CA /* NotchAppearance.swift */; };
 		B136E4FC26610A03D60D8ED3 /* NotchContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD303760BD8B274346EBC38 /* NotchContainerView.swift */; };
 		B3C4DCC598F1A9070B3F668A /* helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF7506AC056617E590D6805 /* helpers.m */; };
@@ -393,6 +394,7 @@
 		EED212AC944BD64489CD960D /* MenuBarContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarContent.swift; sourceTree = "<group>"; };
 		F0BF3D614D5CC62B9E68FF35 /* ObservationTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationTracking.swift; sourceTree = "<group>"; };
 		F0D1CFB6785689A3BDA60C1C /* YTDLP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTDLP.swift; sourceTree = "<group>"; };
+		F23C94C92B2062A545EB2478 /* OllamaModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OllamaModule.swift; sourceTree = "<group>"; };
 		F2F0FA5356B3066E849853ED /* env.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = env.m; sourceTree = "<group>"; };
 		F57759630E262CEA88367992 /* ClaudeViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeViews.swift; sourceTree = "<group>"; };
 		F7DF39D707B871615662FAD5 /* MediaKeyTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaKeyTap.swift; sourceTree = "<group>"; };
@@ -491,6 +493,7 @@
 				70C8408ECB21451937903973 /* LiveActivities */,
 				519555DDFDCB99F283864CC9 /* Music */,
 				807A210FB9B15DB4D6E0154E /* Notes */,
+				423F56B2BB557CCFEA6A406C /* Ollama */,
 				FEB44DDF509E814E00D3B18F /* Screenshots */,
 				3AF7FC3C108706563004FB33 /* ScreenTime */,
 				A64F17DD50A084CB2420C8CE /* Shelf */,
@@ -578,6 +581,14 @@
 				D66674969F092062C29D4F74 /* UnlockModule.swift */,
 			);
 			path = Unlock;
+			sourceTree = "<group>";
+		};
+		423F56B2BB557CCFEA6A406C /* Ollama */ = {
+			isa = PBXGroup;
+			children = (
+				F23C94C92B2062A545EB2478 /* OllamaModule.swift */,
+			);
+			path = Ollama;
 			sourceTree = "<group>";
 		};
 		516AEEB757DBF96F66716E0B /* GitHub */ = {
@@ -1311,6 +1322,7 @@
 				67C7B8092113FF01A76075B0 /* NotesModule.swift in Sources */,
 				FF50D327E1B1D9C0E32DD427 /* NowPlayingInfo.swift in Sources */,
 				7D94E8681B4FF20CD811DF9F /* ObservationTracking.swift in Sources */,
+				AD70AAC42115BEE6FBBD5B8F /* OllamaModule.swift in Sources */,
 				A7A432CCFD9E85A7069F6DF1 /* OpenMeteoClient.swift in Sources */,
 				CF7166A65434F3E4E1E01E77 /* PowerSourceMonitor.swift in Sources */,
 				8470D79901C001C16067AFC0 /* ProjectDetector.swift in Sources */,

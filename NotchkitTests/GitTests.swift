@@ -45,3 +45,16 @@ struct PullRequestChecksTests {
         #expect(PullRequestChecks.summary(statuses: [], conclusions: []) == PullRequest.Checks.none)
     }
 }
+
+struct OllamaAPITests {
+    @Test func modelesChargesEtInstalles() {
+        let ps = """
+        {"models":[{"name":"llama3.2:3b","size":3200000000,"size_vram":3200000000,"expires_at":"2026-10-09T15:04:05.123456789+02:00"}]}
+        """
+        let models = OllamaAPI.runningModels(from: Data(ps.utf8))
+        #expect(models.map(\.name) == ["llama3.2:3b"])
+        #expect(models.first?.sizeVRAM == 3_200_000_000)
+        #expect(OllamaAPI.installedCount(from: Data(#"{"models":[{},{},{}]}"#.utf8)) == 3)
+        #expect(OllamaAPI.runningModels(from: Data("pas du json".utf8)).isEmpty)
+    }
+}

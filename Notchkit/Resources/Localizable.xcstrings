@@ -1,6 +1,150 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "Ollama" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ollama"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ollama"
+          }
+        }
+      }
+    },
+    "Le serveur d'IA local : modèles chargés en mémoire et modèles installés." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your local AI server: models loaded in memory and installed models."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le serveur d'IA local : modèles chargés en mémoire et modèles installés."
+          }
+        }
+      }
+    },
+    "Ollama en marche" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ollama running"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ollama en marche"
+          }
+        }
+      }
+    },
+    "Ollama arrêté" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ollama stopped"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ollama arrêté"
+          }
+        }
+      }
+    },
+    "%lld modèles installés" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld models installed"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld modèles installés"
+          }
+        }
+      }
+    },
+    "Lancez Ollama (app ou « ollama serve ») pour suivre vos modèles locaux." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start Ollama (the app or “ollama serve”) to follow your local models."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lancez Ollama (app ou « ollama serve ») pour suivre vos modèles locaux."
+          }
+        }
+      }
+    },
+    "Aucun modèle en mémoire." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No model in memory."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun modèle en mémoire."
+          }
+        }
+      }
+    },
+    "GPU" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GPU"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GPU"
+          }
+        }
+      }
+    },
+    "CPU" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CPU"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CPU"
+          }
+        }
+      }
+    },
     "GitHub" : {
       "localizations" : {
         "en" : {

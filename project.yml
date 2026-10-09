@@ -57,6 +57,8 @@ targets:
         # Nécessaires (avec le Hardened Runtime) pour le calendrier et la localisation (météo).
         com.apple.security.personal-information.calendars: true
         com.apple.security.personal-information.location: true
+        # Nécessaire (avec le Hardened Runtime) pour le miroir de la webcam.
+        com.apple.security.device.camera: true
     info:
       path: Notchkit/Resources/Info.plist
       properties:
@@ -81,7 +83,10 @@ targets:
         SUPublicEDKey: "tisE+cKf5tNeM+4INmuaSM425okZMyXgbhVNIpefFGY="
         SUEnableAutomaticChecks: true
         SUScheduledCheckInterval: 86400
-        NSAppleEventsUsageDescription: "Notchkit controls playback (play, pause, next track) in Music and Spotify from the notch."
+        NSAppleEventsUsageDescription: "Notchkit controls playback in Music and Spotify, switches Dark Mode with System Events, and reads the folder open in Terminal for the Git widget."
+        NSCameraUsageDescription: "Notchkit shows a mirror view of your camera in the notch, only while the Webcam widget is open. Nothing is recorded."
+        NSRemindersFullAccessUsageDescription: "Notchkit shows your reminders in the notch and lets you check them off or add new ones."
+        NSRemindersUsageDescription: "Notchkit shows your reminders in the notch and lets you check them off or add new ones."
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.andeolchenaux.notchkit

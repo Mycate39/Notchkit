@@ -46,6 +46,8 @@
 		3D65E40B050BAAC408A95957 /* repeat.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C6E3D4B63F646C8C9E6420 /* repeat.m */; };
 		3F0BBA7E0A0EBA46B97825EB /* BatteryViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEF7D2C8A909E113A1D6E60 /* BatteryViews.swift */; };
 		40725F139A191DFF6204EE6F /* ScreenLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8B0A0F7B0BB08616DAE1C /* ScreenLocator.swift */; };
+		45047861D7DEFEE2EE7D1D94 /* CameraModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4322CAFCD667E5F799BC79 /* CameraModule.swift */; };
+		462973951D8FA880BC007AB9 /* TogglesModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D369EEE4621CABF42CF1F /* TogglesModule.swift */; };
 		470A42B4488C58ECA73F9216 /* DownloadsMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873CE6E9E837CC7493E679DD /* DownloadsMonitor.swift */; };
 		474F1521AEEB244A5D70EA5E /* MusicViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F33792FD3837BD07B60F6A /* MusicViews.swift */; };
 		47D04EE53E7EB27F24B5C255 /* send.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4865DD8D0267CAE95D06A9 /* send.m */; };
@@ -153,9 +155,11 @@
 		E982D9CEF0D561934BFF6751 /* ScreenshotSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810675008E358236974A7C3B /* ScreenshotSession.swift */; };
 		ED5BE3842572CB8E3454C102 /* AirPodsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A426D361B19F11D7BD531E6 /* AirPodsTests.swift */; };
 		ED68E3C0FB4C750D9D4480B1 /* ShelfModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DD4B3B5A025276532608BF /* ShelfModule.swift */; };
+		F2100BE0648F4CF477DDD020 /* SystemToggles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496A0F2264DB47A62C01089E /* SystemToggles.swift */; };
 		F49705A9A1C38568C414F8F7 /* ClaudeUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C529029D5145492C0C2626F /* ClaudeUsage.swift */; };
 		F5543C69BD99F610B097FB7C /* BatteryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3050DD5E00E81450E55B9 /* BatteryState.swift */; };
 		F5B442D4B8F92CE48A597EE0 /* VideoDownloadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D110312DA9149C3CEA954F /* VideoDownloadViews.swift */; };
+		FD5123957AEBF3C31011FDEC /* TogglesViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF6A4512EA9FCF3875409E0 /* TogglesViews.swift */; };
 		FE1DCA399CB2B0AD60F96FB4 /* WebAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC44BD9A37D42A775568EA /* WebAssistant.swift */; };
 		FE84A29BB41889B5AC1BD36D /* WeatherViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAED0DCFD7BDF1DF1BDCDFFB /* WeatherViews.swift */; };
 		FF50D327E1B1D9C0E32DD427 /* NowPlayingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E0D029C5A9A33532D79DA9 /* NowPlayingInfo.swift */; };
@@ -239,6 +243,7 @@
 		46804D5EC7EFC5FEF7FAE1B0 /* stream.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = stream.m; sourceTree = "<group>"; };
 		48A13404708F6715E62455A7 /* Updater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Updater.swift; sourceTree = "<group>"; };
 		48E812AE3C1D2CCF46FF79A3 /* OpenMeteoClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenMeteoClient.swift; sourceTree = "<group>"; };
+		496A0F2264DB47A62C01089E /* SystemToggles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemToggles.swift; sourceTree = "<group>"; };
 		4AEF7D2C8A909E113A1D6E60 /* BatteryViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryViews.swift; sourceTree = "<group>"; };
 		4B0C124C4C4759A07017DB8D /* ShelfItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfItem.swift; sourceTree = "<group>"; };
 		4ECF3DDA8BA52758E6E1EC5B /* Glyphs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Glyphs.swift; sourceTree = "<group>"; };
@@ -250,7 +255,9 @@
 		5264B9579D2D1E49A90E0070 /* NotchStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchStyle.swift; sourceTree = "<group>"; };
 		578508F6730303155DAAC666 /* speed.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = speed.m; sourceTree = "<group>"; };
 		57D0955F6A00A94552C448F1 /* globals.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = globals.m; sourceTree = "<group>"; };
+		5CF6A4512EA9FCF3875409E0 /* TogglesViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogglesViews.swift; sourceTree = "<group>"; };
 		5D5A7E3E7FF4C76D4277A9D9 /* ClaudeActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeActivity.swift; sourceTree = "<group>"; };
+		5F4322CAFCD667E5F799BC79 /* CameraModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModule.swift; sourceTree = "<group>"; };
 		635422DB9C95886A509BD9D8 /* UnlockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockTests.swift; sourceTree = "<group>"; };
 		6362B40DDA569D43BB37B057 /* AssistantFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantFace.swift; sourceTree = "<group>"; };
 		6704D0B10B983BEF736F0E06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -278,6 +285,7 @@
 		8919AB6ED390FDA70C4B9EA7 /* AudioSpectrumMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSpectrumMonitor.swift; sourceTree = "<group>"; };
 		89908AA5686A7DBE051BD6EF /* ClipboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardTests.swift; sourceTree = "<group>"; };
 		8A426D361B19F11D7BD531E6 /* AirPodsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPodsTests.swift; sourceTree = "<group>"; };
+		8B4D369EEE4621CABF42CF1F /* TogglesModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogglesModule.swift; sourceTree = "<group>"; };
 		8C3C0CDEA4B993CA2ECA8EEA /* test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = test.m; sourceTree = "<group>"; };
 		8C55985EC0A527176A3FFFB3 /* Notchkit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notchkit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DCCB13B34C61302F294EFC0 /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
@@ -426,6 +434,7 @@
 				CC56EAF045B4116273357046 /* Assistant */,
 				A3F6B8D8397F337CCC1FA7A4 /* Battery */,
 				99BB9112389B45C7BA7E5294 /* Calendar */,
+				C07715C720E4A307585BF743 /* Camera */,
 				18ECCE2688342A89073C7E5F /* Claude */,
 				573AEA7B2B869983C2BB4DE8 /* Clipboard */,
 				61A436182527CE595E0012B7 /* Clock */,
@@ -434,6 +443,7 @@
 				FEB44DDF509E814E00D3B18F /* Screenshots */,
 				A64F17DD50A084CB2420C8CE /* Shelf */,
 				A1975F559D28B76D7DDB3598 /* SystemHUD */,
+				BC505A0BE850C40DDD5F800D /* Toggles */,
 				3FA596B71B3FA62F693D5259 /* Unlock */,
 				60E903AA01B658BF930B96E2 /* VideoDownload */,
 				DCA18EAF062B8C3CD01EEA35 /* Weather */,
@@ -761,6 +771,24 @@
 			path = Licensing;
 			sourceTree = "<group>";
 		};
+		BC505A0BE850C40DDD5F800D /* Toggles */ = {
+			isa = PBXGroup;
+			children = (
+				496A0F2264DB47A62C01089E /* SystemToggles.swift */,
+				8B4D369EEE4621CABF42CF1F /* TogglesModule.swift */,
+				5CF6A4512EA9FCF3875409E0 /* TogglesViews.swift */,
+			);
+			path = Toggles;
+			sourceTree = "<group>";
+		};
+		C07715C720E4A307585BF743 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				5F4322CAFCD667E5F799BC79 /* CameraModule.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
 		C651D35790B1263AF0F373BB /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -1078,6 +1106,7 @@
 				D797CF3F33D0C1121AE88D86 /* CalendarEvent.swift in Sources */,
 				2CE8FE66D01A59F012F198E4 /* CalendarModule.swift in Sources */,
 				52F60B725AB35D8D0408E14F /* CalendarViews.swift in Sources */,
+				45047861D7DEFEE2EE7D1D94 /* CameraModule.swift in Sources */,
 				59288D8DFAD7AD952E74C61C /* ClaudeActivity.swift in Sources */,
 				13B5219E73F9A1045A0D23F9 /* ClaudeHookServer.swift in Sources */,
 				AB56A68BD40C4A5C39C4ED1E /* ClaudeHooksInstaller.swift in Sources */,
@@ -1150,6 +1179,9 @@
 				A6596D02BBF2A11F995B9CF5 /* SystemControls.swift in Sources */,
 				A56A56BB6242B685DE85A1A9 /* SystemHUDModule.swift in Sources */,
 				5C6ED2CBBB8A11A2831FB4C5 /* SystemHUDViews.swift in Sources */,
+				F2100BE0648F4CF477DDD020 /* SystemToggles.swift in Sources */,
+				462973951D8FA880BC007AB9 /* TogglesModule.swift in Sources */,
+				FD5123957AEBF3C31011FDEC /* TogglesViews.swift in Sources */,
 				7A1810C408E52729D11E4964 /* UnlockAnimations.swift in Sources */,
 				E184F5836F541C7C7D2573E7 /* UnlockModule.swift in Sources */,
 				C2B273C739104386C59084FF /* Updater.swift in Sources */,

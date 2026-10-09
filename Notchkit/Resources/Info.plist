@@ -36,19 +36,25 @@
 	<key>LSUIElement</key>
 	<true/>
 	<key>NSAppleEventsUsageDescription</key>
-	<string>Notchkit controls playback (play, pause, next track) in Music and Spotify from the notch.</string>
+	<string>Notchkit controls playback in Music and Spotify, switches Dark Mode with System Events, and reads the folder open in Terminal for the Git widget.</string>
 	<key>NSAudioCaptureUsageDescription</key>
 	<string>Notchkit analyzes the sound playing on your Mac to animate the equalizer bars in real time. Audio is never recorded or sent anywhere.</string>
 	<key>NSCalendarsFullAccessUsageDescription</key>
 	<string>Notchkit shows your upcoming events in the notch and reminds you a few minutes before they start.</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>Notchkit shows your upcoming events in the notch and reminds you a few minutes before they start.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Notchkit shows a mirror view of your camera in the notch, only while the Webcam widget is open. Nothing is recorded.</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>© 2026 Notchkit</string>
 	<key>NSLocationUsageDescription</key>
 	<string>Notchkit uses your approximate location to show the local weather.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Notchkit uses your approximate location to show the local weather.</string>
+	<key>NSRemindersFullAccessUsageDescription</key>
+	<string>Notchkit shows your reminders in the notch and lets you check them off or add new ones.</string>
+	<key>NSRemindersUsageDescription</key>
+	<string>Notchkit shows your reminders in the notch and lets you check them off or add new ones.</string>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUFeedURL</key>

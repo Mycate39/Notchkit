@@ -13,6 +13,8 @@ enum ModuleRegistry {
         ClaudeModule.self,
         ShelfModule.self,
         ScreenshotsModule.self,
+        TogglesModule.self,
+        CameraModule.self,
         AirPodsModule.self,
         LiveActivitiesModule.self,
         ClipboardModule.self,

@@ -112,6 +112,10 @@ enum PromoSnapshots {
             save(compact(alert.leading, alert.trailing, sideWidth: alert.sideWidth), to: file("09-volume"))
         }
 
+        // Modules de la 1.0 (cartes de vérification).
+        save(card(TogglesModule(context: context).expandedView(), weight: 2), to: file("10-commutateurs-carte"))
+        save(card(CameraModule(context: context).expandedView(), weight: 1.5), to: file("11-webcam-carte"))
+
         activities.activities.map(\.id).forEach(activities.remove)
         music.debugSetNowPlaying(nil)
         box.alerts.removeAll()

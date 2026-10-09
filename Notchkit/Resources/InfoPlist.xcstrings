@@ -1,6 +1,54 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "NSCameraUsageDescription" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit shows a mirror view of your camera in the notch, only while the Webcam widget is open. Nothing is recorded."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit affiche un miroir de votre caméra dans l'encoche, uniquement pendant que le widget Webcam est ouvert. Rien n'est enregistré."
+          }
+        }
+      }
+    },
+    "NSRemindersFullAccessUsageDescription" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit shows your reminders in the notch and lets you check them off or add new ones."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit affiche vos rappels dans l'encoche et vous permet de les cocher ou d'en ajouter."
+          }
+        }
+      }
+    },
+    "NSRemindersUsageDescription" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit shows your reminders in the notch and lets you check them off or add new ones."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit affiche vos rappels dans l'encoche et vous permet de les cocher ou d'en ajouter."
+          }
+        }
+      }
+    },
     "CFBundleDisplayName" : {
       "comment" : "Bundle display name",
       "extractionState" : "extracted_with_value",
@@ -32,13 +80,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notchkit controls playback (play, pause, next track) in Music and Spotify from the notch."
+            "value" : "Notchkit controls playback in Music and Spotify, switches Dark Mode with System Events, and reads the folder open in Terminal for the Git widget."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notchkit pilote la lecture (lecture, pause, morceau suivant) de Music et Spotify depuis l'encoche."
+            "value" : "Notchkit pilote la lecture de Music et Spotify, bascule le mode sombre avec System Events et lit le dossier ouvert dans le Terminal pour le widget Git."
           }
         }
       }

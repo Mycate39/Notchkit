@@ -116,3 +116,10 @@ struct TodoOrderingTests {
         #expect(!TodoOrdering.isOverdue(item("x"), now: now))
     }
 }
+
+struct TranslationDirectionTests {
+    @Test func francaisVersAnglaisEtInversement() {
+        #expect(TranslationDirection.languages(for: "Bonjour, comment allez-vous aujourd'hui ?") == ("fr", "en"))
+        #expect(TranslationDirection.languages(for: "Hello, how are you doing today?") == ("en", "fr"))
+    }
+}

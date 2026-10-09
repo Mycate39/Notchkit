@@ -154,6 +154,7 @@
 		D394C8AD7B7DDE1543A12AF0 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E67B71BB43A4F2B68A88A78 /* SettingsStore.swift */; };
 		D797CF3F33D0C1121AE88D86 /* CalendarEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B406F238DA99AD867A9D13E3 /* CalendarEvent.swift */; };
 		D7B9915FCDEDA4E93A192926 /* BluetoothBattery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7490954D53A50041640281D /* BluetoothBattery.swift */; };
+		DB710993DB3B05328E51E76C /* TranslationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DCEFCA91CB9F9982B6A93 /* TranslationModule.swift */; };
 		DC2019893B3CE66134BBEBDA /* SnapshotRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B8953EC0C3A1C08A19AF87 /* SnapshotRenderer.swift */; };
 		DCFC8836E83C40FD29897251 /* get.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E7EEFDAB8D951E6917D5D5F /* get.m */; };
 		DD4F43AE5E3C5678D35941B7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B90EDE60261A06FD92A08E /* SettingsView.swift */; };
@@ -349,6 +350,7 @@
 		CC0AFE5D48FC6891C6DAB0A4 /* AssistantViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantViews.swift; sourceTree = "<group>"; };
 		CCB3060B718647EFCAAA46CA /* NotchAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchAppearance.swift; sourceTree = "<group>"; };
 		CD9CBF25534335CB0D5FB2F1 /* AutomatedRun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomatedRun.swift; sourceTree = "<group>"; };
+		CE0DCEFCA91CB9F9982B6A93 /* TranslationModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationModule.swift; sourceTree = "<group>"; };
 		CE9868E6BCDAB5B7301961AC /* EqualizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualizerView.swift; sourceTree = "<group>"; };
 		D01102B35009A7B86C3E3F66 /* DropZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropZone.swift; sourceTree = "<group>"; };
 		D0F33792FD3837BD07B60F6A /* MusicViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViews.swift; sourceTree = "<group>"; };
@@ -481,6 +483,7 @@
 				89207F9F6B4B515F8DAC6017 /* SystemMonitor */,
 				33C811E3D7564BB12E84C41C /* Todo */,
 				BC505A0BE850C40DDD5F800D /* Toggles */,
+				C18070AFFA65EF09AAB644C6 /* Translation */,
 				3FA596B71B3FA62F693D5259 /* Unlock */,
 				60E903AA01B658BF930B96E2 /* VideoDownload */,
 				DCA18EAF062B8C3CD01EEA35 /* Weather */,
@@ -877,6 +880,14 @@
 				5F4322CAFCD667E5F799BC79 /* CameraModule.swift */,
 			);
 			path = Camera;
+			sourceTree = "<group>";
+		};
+		C18070AFFA65EF09AAB644C6 /* Translation */ = {
+			isa = PBXGroup;
+			children = (
+				CE0DCEFCA91CB9F9982B6A93 /* TranslationModule.swift */,
+			);
+			path = Translation;
 			sourceTree = "<group>";
 		};
 		C651D35790B1263AF0F373BB /* Sources */ = {
@@ -1292,6 +1303,7 @@
 				1FB0D7D9DF060DE328A65ACD /* TodoViews.swift in Sources */,
 				462973951D8FA880BC007AB9 /* TogglesModule.swift in Sources */,
 				FD5123957AEBF3C31011FDEC /* TogglesViews.swift in Sources */,
+				DB710993DB3B05328E51E76C /* TranslationModule.swift in Sources */,
 				7A1810C408E52729D11E4964 /* UnlockAnimations.swift in Sources */,
 				E184F5836F541C7C7D2573E7 /* UnlockModule.swift in Sources */,
 				C2B273C739104386C59084FF /* Updater.swift in Sources */,

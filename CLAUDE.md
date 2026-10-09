@@ -99,7 +99,7 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 5. `git push`, `git tag -a vx.y.z`, pousser le tag, `gh release create vx.y.z <dmg> --prerelease --notes-file <notes.md>`.
    L'URL du flux est `https://raw.githubusercontent.com/Mycate39/Notchkit/main/appcast.xml`.
 
-## État (octobre 2026, version 0.1.7, première version officielle)
+## État (octobre 2026, version 0.1.8 ; 0.1.7 = première version officielle)
 
 ### Fonctionne
 - Fenêtre d'encoche sur n'importe quel écran : vraie encoche, encoche simulée ou pilule flottante ; reste en place à travers les Spaces ; se décale à droite pour ne jamais masquer les menus de l'app active (nécessite l'autorisation Accessibilité).

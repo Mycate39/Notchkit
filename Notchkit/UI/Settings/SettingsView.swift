@@ -31,10 +31,16 @@ struct SettingsView: View {
                     sidebarRow("Apparence", symbol: "paintpalette.fill", color: .pink).tag(SettingsTab.appearance)
                     sidebarRow("Disposition", symbol: "rectangle.3.group.fill", color: .blue).tag(SettingsTab.layout)
                 }
-                Section("Modules") {
-                    ForEach(manager.orderedDescriptors) { descriptor in
-                        ModuleSidebarRow(descriptor: descriptor, isEnabled: manager.isEnabled(descriptor.id))
-                            .tag(SettingsTab.module(descriptor.id))
+                // Modules regroupés par catégorie, comme dans les Réglages Système.
+                ForEach(ModuleCategory.allCases) { category in
+                    let descriptors = manager.orderedDescriptors.filter { $0.category == category }
+                    if !descriptors.isEmpty {
+                        Section(String(localized: category.title)) {
+                            ForEach(descriptors) { descriptor in
+                                ModuleSidebarRow(descriptor: descriptor, isEnabled: manager.isEnabled(descriptor.id))
+                                    .tag(SettingsTab.module(descriptor.id))
+                            }
+                        }
                     }
                 }
                 Section {

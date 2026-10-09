@@ -126,6 +126,15 @@ enum PromoSnapshots {
         save(card(DashboardModule(context: context).expandedView(), weight: 2), to: file("16-dashboard-carte"))
         save(card(ScreenTimeModule(context: context).expandedView(), weight: 2), to: file("17-temps-ecran-carte"))
         save(card(HealthModule(context: context).expandedView(), weight: 2), to: file("18-sante-carte"))
+        let git = GitModule(context: context)
+        git.debugSet(repository: URL(fileURLWithPath: "/Users/demo/Notchkit", isDirectory: true), status: GitStatus.parse("""
+        # branch.head main
+        # branch.ab +1 -2
+        1 .M N... 100644 100644 100644 a a Notchkit/UI/NotchContainerView.swift
+        1 A. N... 000000 100644 100644 0 a Notchkit/Modules/Git/GitModule.swift
+        ? docs/notes.md
+        """))
+        save(card(git.expandedView(), weight: 2), to: file("19-git-carte"))
         multi.activities.map(\.id).forEach(multi.remove)
 
         activities.activities.map(\.id).forEach(activities.remove)

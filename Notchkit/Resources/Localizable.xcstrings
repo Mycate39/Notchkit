@@ -1,6 +1,198 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "Git" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Git"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Git"
+          }
+        }
+      }
+    },
+    "Branche et fichiers modifiés du projet ouvert dans Xcode ou le Terminal, avec fetch et pull." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Branch and changed files of the project open in Xcode or Terminal, with fetch and pull."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Branche et fichiers modifiés du projet ouvert dans Xcode ou le Terminal, avec fetch et pull."
+          }
+        }
+      }
+    },
+    "Échec de la commande git (connexion, droits ou conflits)." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The git command failed (connection, permissions or conflicts)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Échec de la commande git (connexion, droits ou conflits)."
+          }
+        }
+      }
+    },
+    "Ouvrez un projet dans Xcode ou le Terminal, ou ajoutez un dossier dans les réglages." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open a project in Xcode or Terminal, or add a folder in Settings."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrez un projet dans Xcode ou le Terminal, ou ajoutez un dossier dans les réglages."
+          }
+        }
+      }
+    },
+    "Fetch" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fetch"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fetch"
+          }
+        }
+      }
+    },
+    "Pull (avance rapide uniquement)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pull (fast-forward only)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pull (avance rapide uniquement)"
+          }
+        }
+      }
+    },
+    "Ouvrir dans le Terminal" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open in Terminal"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir dans le Terminal"
+          }
+        }
+      }
+    },
+    "Aucune modification" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No changes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune modification"
+          }
+        }
+      }
+    },
+    "↑%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "↑%lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "↑%lld"
+          }
+        }
+      }
+    },
+    "↓%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "↓%lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "↓%lld"
+          }
+        }
+      }
+    },
+    "Le projet ouvert dans Xcode ou dans le Terminal est détecté automatiquement. Ajoutez ici d'autres dossiers à suivre." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The project open in Xcode or Terminal is detected automatically. Add other folders to follow here."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le projet ouvert dans Xcode ou dans le Terminal est détecté automatiquement. Ajoutez ici d'autres dossiers à suivre."
+          }
+        }
+      }
+    },
+    "Ajouter un dossier…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add a Folder…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter un dossier…"
+          }
+        }
+      }
+    },
     "Traduction" : {
       "localizations" : {
         "en" : {

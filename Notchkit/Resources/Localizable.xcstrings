@@ -1,6 +1,70 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "Dashboard" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dashboard"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dashboard"
+          }
+        }
+      }
+    },
+    "Vos apps préférées à un clic et l'état du Mac en un coup d'œil." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your favorite apps one click away and your Mac at a glance."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vos apps préférées à un clic et l'état du Mac en un coup d'œil."
+          }
+        }
+      }
+    },
+    "Retirer du Dashboard" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove from Dashboard"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retirer du Dashboard"
+          }
+        }
+      }
+    },
+    "Ajouter une app…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add an App…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter une app…"
+          }
+        }
+      }
+    },
     "Santé de la batterie" : {
       "localizations" : {
         "en" : {

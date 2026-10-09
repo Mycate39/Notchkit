@@ -19,6 +19,7 @@ enum ModuleRegistry {
         NotesModule.self,
         TodoModule.self,
         SystemMonitorModule.self,
+        DashboardModule.self,
         AirPodsModule.self,
         LiveActivitiesModule.self,
         ClipboardModule.self,

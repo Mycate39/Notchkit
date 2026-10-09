@@ -94,6 +94,7 @@
 		7D94E8681B4FF20CD811DF9F /* ObservationTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BF3D614D5CC62B9E68FF35 /* ObservationTracking.swift */; };
 		7DA7D78F529F69DF127E508D /* LiveActivitiesViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3381C5D65450BE4DF9D533F2 /* LiveActivitiesViews.swift */; };
 		7ED5BEDDC88EC58CE6592830 /* ClaudeModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE518DE63D2C25D9F6E87F4 /* ClaudeModule.swift */; };
+		8009497A18D9E01E72203EFC /* DashboardModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD1EC0D1F0DA726B6E361 /* DashboardModule.swift */; };
 		827ABA26CB3C09879BE52626 /* SystemMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6E589C9D69F4EEFC3F19FF /* SystemMonitorTests.swift */; };
 		85A1C2A05DF1806333AA3664 /* NotchStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5264B9579D2D1E49A90E0070 /* NotchStyle.swift */; };
 		89645F2C235F1A1C71CD6FAE /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 865FBBD206E6548CD19B74CE /* LICENSE.txt */; };
@@ -266,6 +267,7 @@
 		51B8953EC0C3A1C08A19AF87 /* SnapshotRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotRenderer.swift; sourceTree = "<group>"; };
 		51C6F4A15A7C1F5EED24D94C /* Notchkit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Notchkit.entitlements; sourceTree = "<group>"; };
 		5264B9579D2D1E49A90E0070 /* NotchStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchStyle.swift; sourceTree = "<group>"; };
+		55ACD1EC0D1F0DA726B6E361 /* DashboardModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardModule.swift; sourceTree = "<group>"; };
 		578508F6730303155DAAC666 /* speed.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = speed.m; sourceTree = "<group>"; };
 		57D0955F6A00A94552C448F1 /* globals.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = globals.m; sourceTree = "<group>"; };
 		5CF6A4512EA9FCF3875409E0 /* TogglesViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogglesViews.swift; sourceTree = "<group>"; };
@@ -457,6 +459,7 @@
 				18ECCE2688342A89073C7E5F /* Claude */,
 				573AEA7B2B869983C2BB4DE8 /* Clipboard */,
 				61A436182527CE595E0012B7 /* Clock */,
+				7FB20119D0308B0FE84921FF /* Dashboard */,
 				DB9098B291B2017574734885 /* DayProgress */,
 				70C8408ECB21451937903973 /* LiveActivities */,
 				519555DDFDCB99F283864CC9 /* Music */,
@@ -666,6 +669,14 @@
 				E2C8B0A0F7B0BB08616DAE1C /* ScreenLocator.swift */,
 			);
 			path = Window;
+			sourceTree = "<group>";
+		};
+		7FB20119D0308B0FE84921FF /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				55ACD1EC0D1F0DA726B6E361 /* DashboardModule.swift */,
+			);
+			path = Dashboard;
 			sourceTree = "<group>";
 		};
 		807A210FB9B15DB4D6E0154E /* Notes */ = {
@@ -1178,6 +1189,7 @@
 				6FFBD307CE76CBCCCE9EBBFA /* ClipboardModule.swift in Sources */,
 				94BF7B6108A44400EABE42EE /* ClipboardViews.swift in Sources */,
 				18F87A8929EA0A928A08E08D /* ClockModule.swift in Sources */,
+				8009497A18D9E01E72203EFC /* DashboardModule.swift in Sources */,
 				4399EF2DD0425FE6B46E5E5B /* DayProgressModule.swift in Sources */,
 				470A42B4488C58ECA73F9216 /* DownloadsMonitor.swift in Sources */,
 				C4FE1995D4A34E59EE65174D /* DropZone.swift in Sources */,

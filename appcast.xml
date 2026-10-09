@@ -3,6 +3,15 @@
   <channel>
     <title>Notchkit</title>
     <item>
+      <title>Notchkit 0.1.8</title>
+      <pubDate>Fri, 09 Oct 2026 06:29:50 GMT</pubDate>
+      <sparkle:version>9</sparkle:version>
+      <sparkle:shortVersionString>0.1.8</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[<h3>What&#x27;s new</h3><ul><li><b>Volume indicator with the Touch Bar:</b> changing the volume from the Touch Bar, Control Center or another app now shows the indicator in the notch, not only the keyboard volume keys.</li><li><b>Fewer background processes:</b> the helper that reads what&#x27;s playing no longer keeps running after Notchkit quits unexpectedly, and leftovers from earlier versions are cleaned up at launch.</li></ul><h3>Installation</h3><p>Notchkit 0.1.5 or later offers this update by itself (or use <b>Check for Updates…</b> in its menu).</p><p>Otherwise, download <code>Notchkit-0.1.8.dmg</code>, open it, and drag <b>Notchkit.app</b> onto the <b>Applications</b> shortcut. Notchkit isn&#x27;t notarized yet: the first time, right-click the app &gt; <b>Open</b>.</p><p>After updating, macOS may ask again for the <b>Accessibility</b> permission (used for the volume and brightness keys): if the volume indicator doesn&#x27;t appear, open System Settings &gt; Privacy &amp; Security &gt; Accessibility, remove Notchkit with <b>−</b>, then add it again.</p><p>Requires macOS 14 or later, on Apple silicon or Intel.</p>]]></description>
+      <enclosure url="https://github.com/Mycate39/Notchkit/releases/download/v0.1.8/Notchkit-0.1.8.dmg" sparkle:edSignature="x+Ci15CBIwp1c2/O6d2g1qZjcCSTI9mYY1oGdgjYMCDgSKB+7+5qivfPpaWnnaXDm45g7D0Sg/UtEDz4cfwiAg==" length="7108809" type="application/octet-stream"/>
+    </item>
+    <item>
       <title>Notchkit 0.1.7</title>
       <pubDate>Wed, 07 Oct 2026 19:46:52 GMT</pubDate>
       <sparkle:version>8</sparkle:version>

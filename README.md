@@ -6,6 +6,8 @@ Notchkit shows a floating pill instead, or simulates a notch.
 
 > Found a bug or have an idea? Please open an issue in the *Issues* tab.
 
+<a href="docs/notchkit-promo.mp4"><img src="docs/notchkit-promo-poster.jpg" alt="Watch the 60-second Notchkit tour" width="100%"></a>
+
 ## Features
 
 - **Music**: the current track (Apple Music, Spotify, and most players, including in the

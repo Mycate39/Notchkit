@@ -1,4 +1,5 @@
 import Foundation
+import ImageIO
 import Testing
 @testable import Notchkit
 
@@ -69,5 +70,40 @@ struct ShelfTextClippingTests {
         #expect(ShelfTextClipping.fileName(for: "Idée : une app\nsuite du texte") == "Idée - une app.txt")
         #expect(ShelfTextClipping.fileName(for: "a/b") == "a-b.txt")
         #expect(ShelfTextClipping.fileName(for: String(repeating: "x", count: 100)).count == 44)
+    }
+}
+
+struct FileActionsTests {
+    @Test func nomLibreAvecSuffixe() {
+        let folder = URL(fileURLWithPath: "/tmp/x")
+        let taken: Set<String> = ["/tmp/x/Photo.jpg", "/tmp/x/Photo 2.jpg"]
+        let url = FileActions.uniqueURL(named: "Photo", extension: "jpg", in: folder) { taken.contains($0.path) }
+        #expect(url.lastPathComponent == "Photo 3.jpg")
+    }
+
+    @Test func zipEtConversionReels() async throws {
+        let folder = FileManager.default.temporaryDirectory.appendingPathComponent("notchkit-tests-\(UUID().uuidString)")
+        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: folder) }
+
+        let a = folder.appendingPathComponent("a.txt"), b = folder.appendingPathComponent("b.txt")
+        try "un".write(to: a, atomically: true, encoding: .utf8)
+        try "deux".write(to: b, atomically: true, encoding: .utf8)
+        let archive = try #require(await FileActions.zip([a, b]))
+        #expect(archive.pathExtension == "zip")
+        #expect(FileManager.default.fileExists(atPath: archive.path))
+
+        // Image PNG 4×4 générée, convertie en JPEG.
+        let png = folder.appendingPathComponent("carre.png")
+        let context = try #require(CGContext(data: nil, width: 4, height: 4, bitsPerComponent: 8, bytesPerRow: 0,
+                                             space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue))
+        context.setFillColor(CGColor(red: 1, green: 0.6, blue: 0.1, alpha: 1))
+        context.fill(CGRect(x: 0, y: 0, width: 4, height: 4))
+        let destination = try #require(CGImageDestinationCreateWithURL(png as CFURL, "public.png" as CFString, 1, nil))
+        CGImageDestinationAddImage(destination, try #require(context.makeImage()), nil)
+        #expect(CGImageDestinationFinalize(destination))
+        #expect(FileActions.isImage(png))
+        let jpeg = try #require(await FileActions.convertImage(png, to: .jpeg))
+        #expect(jpeg.lastPathComponent == "carre.jpg")
     }
 }

@@ -48,6 +48,7 @@
 		321C1FDDCAA432ED1667A806 /* MusicModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9740079B75CA6BAFEB2B7 /* MusicModule.swift */; };
 		3243E456B87AD248B7E4E378 /* VideoDownloadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F971AD4A7B51FE0A4D75748 /* VideoDownloadTests.swift */; };
 		340499E5E2C58AE3801AC31E /* UnlockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635422DB9C95886A509BD9D8 /* UnlockTests.swift */; };
+		35FC1E83B107A5211C407957 /* FileActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67D4EC84BE228B039C705A0 /* FileActions.swift */; };
 		36229702DCD121CC52D39711 /* EqualizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9868E6BCDAB5B7301961AC /* EqualizerView.swift */; };
 		36D461934D0D51DA37BA4592 /* NotchWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9E3D7C9C763F9153C29C4C /* NotchWindowController.swift */; };
 		3732327BD3D844134DA10512 /* LayoutPresets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB25FBA895731ACD6329CB6F /* LayoutPresets.swift */; };
@@ -382,6 +383,7 @@
 		E2C50F8106E1C8E43432EE06 /* PowerSourceMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerSourceMonitor.swift; sourceTree = "<group>"; };
 		E2C8B0A0F7B0BB08616DAE1C /* ScreenLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLocator.swift; sourceTree = "<group>"; };
 		E343FA5573A1C385029263CF /* mediaremote-adapter.pl */ = {isa = PBXFileReference; lastKnownFileType = text.script.perl; path = "mediaremote-adapter.pl"; sourceTree = "<group>"; };
+		E67D4EC84BE228B039C705A0 /* FileActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileActions.swift; sourceTree = "<group>"; };
 		E6CB4D7C58B160007048AF25 /* LockScreenSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenSpace.swift; sourceTree = "<group>"; };
 		E88A3C1DCE9F2BBAD2E4119B /* BatteryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryTests.swift; sourceTree = "<group>"; };
 		E96221B80B58439CE85904D5 /* GitModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitModule.swift; sourceTree = "<group>"; };
@@ -872,6 +874,7 @@
 		A64F17DD50A084CB2420C8CE /* Shelf */ = {
 			isa = PBXGroup;
 			children = (
+				E67D4EC84BE228B039C705A0 /* FileActions.swift */,
 				4B0C124C4C4759A07017DB8D /* ShelfItem.swift */,
 				A8DD4B3B5A025276532608BF /* ShelfModule.swift */,
 				2D1F4CC754A00D808FB63F22 /* ShelfTextClipping.swift */,
@@ -1280,6 +1283,7 @@
 				C4FE1995D4A34E59EE65174D /* DropZone.swift in Sources */,
 				53009C2AA2481B9ED10B6FDE /* EntitlementManager.swift in Sources */,
 				36229702DCD121CC52D39711 /* EqualizerView.swift in Sources */,
+				35FC1E83B107A5211C407957 /* FileActions.swift in Sources */,
 				2D1C2E343A983DB9D039D0F8 /* FlowLayout.swift in Sources */,
 				24209980B127CC3844AD7F13 /* GitHubAPI.swift in Sources */,
 				06AAD4978F38CF57E0856B3F /* GitHubModule.swift in Sources */,

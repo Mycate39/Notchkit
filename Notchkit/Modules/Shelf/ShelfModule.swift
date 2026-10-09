@@ -100,6 +100,45 @@ final class ShelfModule: NotchModule {
         UserDefaults.standard.set(try? JSONEncoder().encode(items), forKey: Keys.items)
     }
 
+    // MARK: Actions sur les fichiers
+
+    /// Opération en cours (ZIP, conversion, copie) : l'en-tête affiche une roue.
+    private(set) var isWorking = false
+
+    func zip(_ items: [ShelfItem]) {
+        perform(symbol: "doc.zipper") { await FileActions.zip(items.compactMap { $0.resolvedURL() }).map { [$0] } ?? [] }
+    }
+
+    func convertImage(_ item: ShelfItem, to format: FileActions.ImageFormat) {
+        guard let url = item.resolvedURL() else { return }
+        perform(symbol: "photo") { await FileActions.convertImage(url, to: format).map { [$0] } ?? [] }
+    }
+
+    func convertVideo(_ item: ShelfItem) {
+        guard let url = item.resolvedURL() else { return }
+        perform(symbol: "film") { await FileActions.convertVideoToMP4(url).map { [$0] } ?? [] }
+    }
+
+    func copyToICloud(_ items: [ShelfItem]) {
+        perform(symbol: "icloud.and.arrow.up", addToShelf: false) {
+            await FileActions.copyToICloud(items.compactMap { $0.resolvedURL() })
+        }
+    }
+
+    var isICloudAvailable: Bool { FileActions.iCloudFolder != nil }
+
+    /// Lance une action, ajoute ses fichiers à l'étagère et confirme dans l'encoche.
+    private func perform(symbol: String, addToShelf: Bool = true, _ action: @escaping @MainActor () async -> [URL]) {
+        guard !isWorking else { return }
+        isWorking = true
+        Task {
+            let results = await action()
+            isWorking = false
+            if addToShelf { add(results) }
+            context.presentAlert(ShelfAlerts.actionFinished(symbol: symbol, succeeded: !results.isEmpty))
+        }
+    }
+
     /// Des fichiers sont posés sur l'étagère : elle s'affiche même si son widget est masqué.
     var hasContextualContent: Bool { !items.isEmpty }
 
@@ -137,6 +176,15 @@ final class ShelfModule: NotchModule {
 
 /// Alerte affichée après un dépôt sur l'étagère.
 enum ShelfAlerts {
+    @MainActor
+    static func actionFinished(symbol: String, succeeded: Bool) -> NotchAlert {
+        NotchAlert(
+            leading: AnyView(Image(systemName: symbol).foregroundStyle(succeeded ? .green : .red)),
+            trailing: AnyView(Image(systemName: succeeded ? "checkmark" : "xmark").foregroundStyle(succeeded ? .green : .red)),
+            duration: .seconds(2)
+        )
+    }
+
     @MainActor
     static func added(_ count: Int) -> NotchAlert {
         NotchAlert(

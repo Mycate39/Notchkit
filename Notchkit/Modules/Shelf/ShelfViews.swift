@@ -45,7 +45,22 @@ struct ShelfExpandedView: View {
                     .foregroundStyle(.white.opacity(0.5))
             }
             Spacer()
+            if module.isWorking {
+                ProgressView().controlSize(.mini)
+            }
             if !module.items.isEmpty {
+                Menu {
+                    Button("Tout compresser (ZIP)") { module.zip(module.items) }
+                    if module.isICloudAvailable {
+                        Button("Tout copier vers iCloud Drive") { module.copyToICloud(module.items) }
+                    }
+                } label: {
+                    Image(systemName: "ellipsis")
+                }
+                .menuStyle(.borderlessButton)
+                .menuIndicator(.hidden)
+                .fixedSize()
+                .help("Actions")
                 Button { module.airDrop(module.items) } label: {
                     Image(systemName: "dot.radiowaves.left.and.right")
                 }
@@ -105,6 +120,21 @@ private struct ShelfItemView: View {
             Button("Afficher dans le Finder") { module.reveal(item) }.disabled(url == nil)
             Button("Envoyer par AirDrop") { module.airDrop([item]) }.disabled(url == nil)
             Button("Copier") { module.copy([item]) }.disabled(url == nil)
+            Divider()
+            Button("Compresser (ZIP)") { module.zip([item]) }.disabled(url == nil)
+            if let url, FileActions.isImage(url) {
+                Menu("Convertir en") {
+                    ForEach(FileActions.ImageFormat.allCases, id: \.self) { format in
+                        Button(format.rawValue.uppercased()) { module.convertImage(item, to: format) }
+                    }
+                }
+            }
+            if let url, FileActions.isVideo(url) {
+                Button("Convertir en MP4") { module.convertVideo(item) }
+            }
+            if module.isICloudAvailable {
+                Button("Copier vers iCloud Drive") { module.copyToICloud([item]) }.disabled(url == nil)
+            }
             Divider()
             Button("Retirer de l'étagère") { module.remove(item) }
         }

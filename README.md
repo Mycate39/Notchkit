@@ -10,20 +10,52 @@ https://github.com/user-attachments/assets/805f5594-03e0-49f6-a223-b9498daf1901
 
 ## Features
 
+**Music and media**
 - **Music**: the current track (Apple Music, Spotify, and most players, including in the
   browser), artwork, controls, bars that react to the sound, and a Dynamic Island–style look.
-- **Volume and brightness**: an indicator in the notch instead of the macOS one.
-- **AirPods and headphones**: an animation on connect, and the battery of Bluetooth devices.
-- **Timers**: any duration, iPhone-style.
-- **Battery, clock, weather** (Open-Meteo), and **calendar**.
+- **Volume and brightness**: an indicator in the notch instead of the macOS one, including
+  changes from the Touch Bar and Control Center.
+- **AirPods and Bluetooth**: an animation on connect, and the battery of each device.
+- **Webcam**: a quick mirror to check how you look before a meeting.
+
+**System**
+- **Quick Toggles**: Dark Mode, stay awake, hide desktop icons, and a keyboard lock to clean it.
+- **System Monitor**: CPU per core, GPU, memory, disk, network speed, battery health, and heavy processes.
+- **Battery**: percentage and time remaining.
+- **Window Snapping**: drag a window toward the notch to snap it to a half, third, quarter or full screen.
+
+**Files and clipboard**
+- **Shelf and AirDrop**: drop files or text on the notch to keep them or send them, then
+  compress them, convert images and videos, or copy them to iCloud Drive.
+- **Screenshots**: the screenshots and screen recordings of your session, ready to drag anywhere.
 - **Clipboard**: searchable history and pinned items.
-- **Shelf and AirDrop**: drop files on the notch to keep them or send them.
+
+**Time and organization**
+- **Calendar, weather** (Open-Meteo) **and clock**.
+- **Live Activities**: timers, stopwatch, alarms, Pomodoro, downloads and task progress.
+- **Reminders**: check off and add reminders from the notch.
+- **Notes**: a scratchpad one hover away.
+- **Day progress**: how far along your workday you are.
+- **Dashboard**: your favorite apps and your Mac at a glance.
+- **Screen Time** and **Health**: time spent per app, break and hydration reminders, and
+  activity rings, all measured on your Mac only.
+- **Translation**: French ↔ English, on device (macOS 15 or later).
+
+**For developers**
 - **Claude Code**: what Claude is doing and saying, live, remaining usage, and the ability
   to write to Claude from the notch.
-- **Video downloads** (with yt-dlp, installed on demand).
-- **Unlock animations** and trackpad haptic feedback.
+- **Git**: branch and changes of the project open in Xcode or Terminal, with fetch and pull.
+- **GitHub**: your pull requests and their checks, with a personal access token kept in the keychain.
+- **Ollama**: the models your local AI server has loaded.
+
+**And more**
+- **Video downloads** (with yt-dlp, installed on demand), **unlock animations** and trackpad
+  haptic feedback.
 - **Customization**: widgets in several sizes, pages, ready-made layouts, notch size,
-  animations, colors, and background (including Liquid Glass on macOS 26).
+  animations, colors, and background (including Liquid Glass on macOS 26). New widgets
+  are off by default: turn them on in Settings.
+
+Everything is free and runs on your Mac: no account, no paid service.
 
 Notchkit is available in English and French, following your Mac's language.
 

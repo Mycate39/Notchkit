@@ -97,6 +97,15 @@ final class ShelfModule: NotchModule {
 
     private func save() {
         UserDefaults.standard.set(try? JSONEncoder().encode(items), forKey: Keys.items)
+        context.contextualContentChanged()
+    }
+
+    /// Des fichiers sont posés sur l'étagère : elle s'affiche même si son widget est masqué.
+    static var hasContextualContent: Bool {
+        guard let data = UserDefaults.standard.data(forKey: Keys.items),
+              let stored = try? JSONDecoder().decode([ShelfItem].self, from: data)
+        else { return false }
+        return !stored.isEmpty
     }
 
     // MARK: Affichage

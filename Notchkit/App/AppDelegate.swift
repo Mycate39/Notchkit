@@ -48,17 +48,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             self?.viewModel.setExpansionBlocked(blocked)
         }
         // Fichiers glissés sur l'encoche : étagère ou AirDrop.
+        // L'étagère accepte toujours les fichiers, même si son widget est masqué (elle s'affiche alors
+        // en dernière page tant qu'elle n'est pas vide).
         viewModel.dropHandlerAvailability = { [weak self] in
-            self?.moduleManager.module(for: ShelfModule.descriptor.id) != nil
+            self?.moduleManager.isUnlocked(ShelfModule.descriptor) ?? false
         }
         viewModel.dropHandler = { [weak self] urls, zone in
             guard let self else { return }
             switch zone {
             case .shelf:
-                if let shelf = self.moduleManager.module(for: ShelfModule.descriptor.id) as? ShelfModule {
+                if let shelf = self.moduleManager.loadContextually(ShelfModule.descriptor.id) as? ShelfModule {
                     let added = shelf.add(urls)
                     if added > 0 { self.viewModel.present(ShelfAlerts.added(added)) }
                 }
+                self.moduleManager.reload()
             case .airDrop:
                 AirDrop.send(urls)
             }

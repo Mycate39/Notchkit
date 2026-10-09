@@ -281,6 +281,7 @@ final class NotchViewModel {
     func fileDragMoved(normalizedX x: CGFloat) {
         hoverTask?.cancel()
         if !isDropMode {
+            dropLog.notice("mode dépôt : état \(String(describing: self.state)), écran verrouillé : \(self.isScreenLocked), étagère : \(self.isShelfAvailable)")
             withAnimation(NotchLayout.spring) { isDropMode = true }
             expand()
         }

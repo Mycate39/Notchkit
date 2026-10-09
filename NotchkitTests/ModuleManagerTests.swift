@@ -35,6 +35,22 @@ final class MockModuleB: NotchModule {
     func expandedView() -> AnyView { AnyView(EmptyView()) }
 }
 
+@MainActor
+@Observable
+final class MockContextualModule: NotchModule {
+    static let descriptor = ModuleDescriptor(
+        id: "mock.contextual", name: "C", summary: "", systemImage: "c.circle",
+        category: .widgets, tier: .free, defaultEnabled: false
+    )
+    /// Contenu simulé (statique, comme les fichiers enregistrés de l'étagère).
+    nonisolated(unsafe) static var hasContent = false
+    static var hasContextualContent: Bool { hasContent }
+    var compactPriority: ModulePriority = .none
+
+    init(context: ModuleContext) {}
+    func expandedView() -> AnyView { AnyView(EmptyView()) }
+}
+
 // MARK: - Tests
 
 @MainActor
@@ -197,5 +213,52 @@ struct NotchLayoutTests {
         let panel = NotchLayout.panelSize(for: pill, isExpanded: true, hasCompactContent: false)
         #expect(panel.height == shape.height + NotchLayout.pillTopInset)
         #expect(shape.width == NotchLayout.expandedSize.width)
+    }
+}
+
+@MainActor
+@Suite(.serialized)
+struct ContextualModuleTests {
+    let settings = SettingsStore(defaults: UserDefaults(suiteName: "notchkit.tests.\(UUID().uuidString)")!)
+
+    func makeManager() -> ModuleManager {
+        ModuleManager(settings: settings, entitlements: EntitlementManager(),
+                      availableModules: [MockModuleA.self, MockContextualModule.self])
+    }
+
+    @Test func widgetMasqueSansContenuNeTournePas() {
+        MockContextualModule.hasContent = false
+        let manager = makeManager()
+        manager.reload()
+        #expect(manager.module(for: "mock.contextual") == nil)
+        #expect(manager.pageIDs == [["mock.a"]])
+    }
+
+    @Test func widgetMasqueAvecContenuEnDernierePage() {
+        MockContextualModule.hasContent = true
+        defer { MockContextualModule.hasContent = false }
+        let manager = makeManager()
+        manager.reload()
+        #expect(manager.contextualIDs == ["mock.contextual"])
+        #expect(manager.pageIDs == [["mock.a"], ["mock.contextual"]])
+    }
+
+    @Test func chargementPourUnDepotPuisRetraitQuandVide() {
+        MockContextualModule.hasContent = false
+        let manager = makeManager()
+        manager.reload()
+        #expect(manager.loadContextually("mock.contextual") != nil)
+        manager.reload()
+        #expect(manager.module(for: "mock.contextual") == nil)
+    }
+
+    @Test func moduleActiveResteDansLaDisposition() {
+        MockContextualModule.hasContent = true
+        defer { MockContextualModule.hasContent = false }
+        let manager = makeManager()
+        manager.setEnabled(true, for: "mock.contextual")
+        #expect(manager.contextualIDs.isEmpty)
+        #expect(manager.pageIDs.flatMap { $0 }.contains("mock.contextual"))
+        #expect(manager.pageIDs.count == 1)
     }
 }

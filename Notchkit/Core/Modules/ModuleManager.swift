@@ -95,22 +95,41 @@ final class ModuleManager {
         1.5
     }
 
-    /// Modules actifs qui ont une carte dans l'encoche dépliée.
+    /// Modules qui tournent « en contexte » : widget masqué, mais du contenu à montrer (voir
+    /// `NotchModule.hasContextualContent`). Ils restent hors de la disposition de l'utilisateur.
+    private(set) var contextualIDs: Set<String> = []
+    /// Modules à charger en contexte au prochain `reload`, même sans contenu (ex. dépôt en cours).
+    @ObservationIgnored private var forcedContextual: Set<String> = []
+
+    /// Modules actifs qui ont une carte dans l'encoche dépliée (hors modules en contexte).
     private var widgetModules: [any NotchModule] {
-        activeModules.filter { type(of: $0).descriptor.providesWidget }
+        activeModules.filter { type(of: $0).descriptor.providesWidget && !contextualIDs.contains($0.moduleID) }
     }
 
     private var activeWeights: [String: CGFloat] {
         Dictionary(uniqueKeysWithValues: widgetModules.map { ($0.moduleID, weight(for: $0.moduleID)) })
     }
 
-    /// Pages affichées dans l'encoche dépliée (identifiants des modules actifs).
+    /// Pages affichées dans l'encoche dépliée (identifiants des modules actifs). Les modules en
+    /// contexte s'ajoutent sur une dernière page, sans modifier la disposition.
     var pageIDs: [[String]] {
-        WidgetLayoutEngine.pages(
+        let pages = WidgetLayoutEngine.pages(
             activeIDs: widgetModules.map(\.moduleID),
             weights: activeWeights,
             layout: settings.settings.widgetLayout
         )
+        let contextual = activeModules.map(\.moduleID).filter(contextualIDs.contains)
+        return contextual.isEmpty ? pages : pages + [contextual]
+    }
+
+    /// Charge un module en contexte s'il n'est pas déjà actif (ex. l'étagère pour un dépôt de fichiers).
+    /// Appeler `reload()` ensuite : le module repart s'il n'a finalement rien à montrer.
+    func loadContextually(_ id: String) -> (any NotchModule)? {
+        if let module = module(for: id) { return module }
+        forcedContextual.insert(id)
+        reload()
+        forcedContextual.remove(id)
+        return module(for: id)
     }
 
     /// Disposition affichée, figée pour être modifiée.
@@ -197,9 +216,15 @@ final class ModuleManager {
     /// viennent d'être activés, arrête ceux qui viennent d'être désactivés.
     func reload() {
         var loaded: [any NotchModule] = []
+        var contextual: Set<String> = []
         for type in orderedTypes {
             let descriptor = type.descriptor
-            let shouldRun = isEnabled(descriptor.id) && entitlements.isUnlocked(descriptor)
+            let unlocked = entitlements.isUnlocked(descriptor)
+            let enabled = isEnabled(descriptor.id) && unlocked
+            let inContext = !enabled && unlocked
+                && (forcedContextual.contains(descriptor.id) || type.hasContextualContent)
+            if inContext { contextual.insert(descriptor.id) }
+            let shouldRun = enabled || inContext
 
             if shouldRun {
                 if let existing = instances[descriptor.id] {
@@ -214,6 +239,7 @@ final class ModuleManager {
                 module.stop()
             }
         }
+        contextualIDs = contextual
         activeModules = loaded
     }
 
@@ -243,7 +269,8 @@ final class ModuleManager {
             openSettings: { [weak self] in self?.settingsHandler?(moduleID) },
             holdExpanded: { [weak self] hold in self?.holdHandler?(hold) },
             dismissAlert: { [weak self] id in self?.dismissAlertHandler?(id) },
-            blockExpansion: { [weak self] blocked in self?.blockExpansionHandler?(blocked) }
+            blockExpansion: { [weak self] blocked in self?.blockExpansionHandler?(blocked) },
+            contextualContentChanged: { [weak self] in self?.reload() }
         )
     }
 }

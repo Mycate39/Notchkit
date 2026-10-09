@@ -1,5 +1,9 @@
 import AppKit
 import SwiftUI
+import os
+
+/// Journal du glisser-déposer (visible avec `log show --predicate 'category == "drop"'`).
+let dropLog = Logger(subsystem: "com.andeolchenaux.notchkit", category: "drop")
 
 /// Vue d'hébergement SwiftUI qui détecte l'entrée et la sortie de la souris.
 ///
@@ -39,7 +43,9 @@ final class NotchHostingView<Content: View>: NSHostingView<Content> {
     }
 
     override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
-        guard !fileURLs(from: sender).isEmpty else { return [] }
+        let count = fileURLs(from: sender).count
+        dropLog.notice("entrée du glissement : \(count) fichier(s), source interne : \(sender.draggingSource != nil)")
+        guard count > 0 else { return [] }
         onFileDrag?(normalizedX(sender))
         return .copy
     }
@@ -64,6 +70,7 @@ final class NotchHostingView<Content: View>: NSHostingView<Content> {
 
     override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
         let urls = fileURLs(from: sender)
+        dropLog.notice("dépôt : \(urls.count) fichier(s)")
         guard !urls.isEmpty else { return false }
         onFileDrop?(urls, normalizedX(sender))
         return true

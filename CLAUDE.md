@@ -19,7 +19,7 @@ App de barre des menus (`LSUIElement`), distribuée hors Mac App Store, non sand
 | Tests | Swift Testing (`import Testing`, `@Test`, `#expect`, `#require`) |
 | Dépendances | Sparkle 2.10.0 (SPM, MIT) pour les mises à jour automatiques ; MediaRemoteAdapter (copié dans `ThirdParty/`, BSD 3-Clause) |
 | Architectures | Universelle (x86_64 + arm64) ; la machine de dev est un MacBook Pro Intel 2017 sans encoche |
-| Signature | Ad hoc (`CODE_SIGN_IDENTITY: "-"`) avec Hardened Runtime ; non notarisée |
+| Signature | Debug : ad hoc (`"-"`). Release : certificat auto-signé gratuit « Notchkit Self-Signed » (trousseau de session, valable jusqu'en 2036), avec Hardened Runtime ; non notarisée |
 
 ## Règles impératives
 
@@ -95,6 +95,7 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 2. Build universel :
    `xcodebuild -project Notchkit.xcodeproj -scheme Notchkit -configuration Release -derivedDataPath build.noindex/Release -destination 'generic/platform=macOS' ONLY_ACTIVE_ARCH=NO build`
 3. `scripts/make-dmg.sh build.noindex/Release/Build/Products/Release/Notchkit.app <dossier-sortie>`
+   Le build Release est signé avec « Notchkit Self-Signed » : vérifier `codesign -dvv <app>` (Authority=Notchkit Self-Signed). Ne jamais supprimer ce certificat du trousseau ni le remplacer : macOS ferait perdre aux utilisateurs leurs autorisations (Accessibilité) à la mise à jour suivante. Aucun certificat payant n'est utilisé.
 4. `scripts/add-to-appcast.sh <dossier-sortie>/Notchkit-x.y.z.dmg <app> <notes.md>` — signe le DMG avec la clé privée EdDSA stockée dans le trousseau de session (« Private key for signing Sparkle updates » ; ne jamais la supprimer) et ajoute l'entrée en tête de `appcast.xml`. Committer `appcast.xml`.
 5. `git push`, `git tag -a vx.y.z`, pousser le tag, `gh release create vx.y.z <dmg> --prerelease --notes-file <notes.md>`.
    L'URL du flux est `https://raw.githubusercontent.com/Mycate39/Notchkit/main/appcast.xml`.

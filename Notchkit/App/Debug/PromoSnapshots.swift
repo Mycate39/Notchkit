@@ -124,6 +124,8 @@ enum PromoSnapshots {
         SystemSampler.shared.debugSampleNow()
         save(card(SystemMonitorModule(context: context).expandedView(), weight: 2), to: file("15-moniteur-carte"))
         save(card(DashboardModule(context: context).expandedView(), weight: 2), to: file("16-dashboard-carte"))
+        save(card(ScreenTimeModule(context: context).expandedView(), weight: 2), to: file("17-temps-ecran-carte"))
+        save(card(HealthModule(context: context).expandedView(), weight: 2), to: file("18-sante-carte"))
         multi.activities.map(\.id).forEach(multi.remove)
 
         activities.activities.map(\.id).forEach(activities.remove)

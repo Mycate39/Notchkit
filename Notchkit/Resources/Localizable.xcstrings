@@ -1,6 +1,54 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "Ancrage des fenêtres" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Window Snapping"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ancrage des fenêtres"
+          }
+        }
+      }
+    },
+    "Glissez une fenêtre vers l'encoche pour la ranger en moitié, tiers, quart ou plein écran." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag a window toward the notch to snap it to a half, third, quarter or full screen."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Glissez une fenêtre vers l'encoche pour la ranger en moitié, tiers, quart ou plein écran."
+          }
+        }
+      }
+    },
+    "Faites glisser une fenêtre par sa barre de titre vers le haut de l'écran : des zones apparaissent sous l'encoche. Relâchez sur une zone pour y ranger la fenêtre." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag a window by its title bar to the top of the screen: zones appear under the notch. Release over a zone to snap the window there."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faites glisser une fenêtre par sa barre de titre vers le haut de l'écran : des zones apparaissent sous l'encoche. Relâchez sur une zone pour y ranger la fenêtre."
+          }
+        }
+      }
+    },
     "Archive" : {
       "localizations" : {
         "en" : {

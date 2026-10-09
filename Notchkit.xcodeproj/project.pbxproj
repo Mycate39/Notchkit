@@ -24,6 +24,7 @@
 		14B1C0436FB41EA321F96C8F /* ClipboardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2781BAED0868E8CA890510 /* ClipboardItem.swift */; };
 		18F87A8929EA0A928A08E08D /* ClockModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12CD8AFBB2574643418518B /* ClockModule.swift */; };
 		193A99D444FE4A6B2A2FCBB7 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 39CD37F30EF339C02ECF8FDC /* InfoPlist.xcstrings */; };
+		1947BE534B1F19266B413D56 /* SystemSampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C4826C1AB5AD4AD9B2D197 /* SystemSampler.swift */; };
 		1C6A5C7809598012656141D5 /* WidgetsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D1FCC02B4ACF20842E1E6B /* WidgetsTests.swift */; };
 		1CDA13E5F9845A313287E1B8 /* AudioSpectrumMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8919AB6ED390FDA70C4B9EA7 /* AudioSpectrumMonitor.swift */; };
 		1F165902D58592E6CFEAE8BB /* keys.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3572EC44002A80A034CBF1 /* keys.m */; };
@@ -45,6 +46,7 @@
 		36D461934D0D51DA37BA4592 /* NotchWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9E3D7C9C763F9153C29C4C /* NotchWindowController.swift */; };
 		3732327BD3D844134DA10512 /* LayoutPresets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB25FBA895731ACD6329CB6F /* LayoutPresets.swift */; };
 		3B0444E0AA274FEE6FC3A91C /* ShelfItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0C124C4C4759A07017DB8D /* ShelfItem.swift */; };
+		3D27935556AEC14D64004E2B /* SystemMonitorModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E74D5E2811CD766DECAC50 /* SystemMonitorModule.swift */; };
 		3D65E40B050BAAC408A95957 /* repeat.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C6E3D4B63F646C8C9E6420 /* repeat.m */; };
 		3F0BBA7E0A0EBA46B97825EB /* BatteryViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEF7D2C8A909E113A1D6E60 /* BatteryViews.swift */; };
 		40725F139A191DFF6204EE6F /* ScreenLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8B0A0F7B0BB08616DAE1C /* ScreenLocator.swift */; };
@@ -81,6 +83,7 @@
 		710BC8174F35E464FBB8D163 /* MediaRemote.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C8C037FC30E0BB58579AC35 /* MediaRemote.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71F9B975B44D7BEC0A59AD3A /* AppearanceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D264AF1EE80180C7CCB9778 /* AppearanceSettingsView.swift */; };
 		7217AD1F16C887AB09928542 /* AirPodsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA09C6155085C6AAB69F4A1 /* AirPodsViews.swift */; };
+		727B53B1FFAC36D6D61429D7 /* SystemMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA71D8EE96168A1B7A6690 /* SystemMetrics.swift */; };
 		73D5E9F7641B5F75B4E0B6CB /* WeatherModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71B97392FA1B40CE01E6DD5 /* WeatherModels.swift */; };
 		7605FF09B1B6548E2F21D2A4 /* AssistantFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6362B40DDA569D43BB37B057 /* AssistantFace.swift */; };
 		78F19EC00241A52E7E494A0E /* get.h in Headers */ = {isa = PBXBuildFile; fileRef = D87D32299F6B58A261AA0D12 /* get.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -91,6 +94,7 @@
 		7D94E8681B4FF20CD811DF9F /* ObservationTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BF3D614D5CC62B9E68FF35 /* ObservationTracking.swift */; };
 		7DA7D78F529F69DF127E508D /* LiveActivitiesViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3381C5D65450BE4DF9D533F2 /* LiveActivitiesViews.swift */; };
 		7ED5BEDDC88EC58CE6592830 /* ClaudeModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE518DE63D2C25D9F6E87F4 /* ClaudeModule.swift */; };
+		827ABA26CB3C09879BE52626 /* SystemMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6E589C9D69F4EEFC3F19FF /* SystemMonitorTests.swift */; };
 		85A1C2A05DF1806333AA3664 /* NotchStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5264B9579D2D1E49A90E0070 /* NotchStyle.swift */; };
 		89645F2C235F1A1C71CD6FAE /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 865FBBD206E6548CD19B74CE /* LICENSE.txt */; };
 		8BCDCE6F6E2F54D141980CF1 /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06D76A7B698E95219B11FEE /* LocationProvider.swift */; };
@@ -231,7 +235,9 @@
 		32900714A02A8501AE6BF88D /* PromoSnapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoSnapshots.swift; sourceTree = "<group>"; };
 		32D1FCC02B4ACF20842E1E6B /* WidgetsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetsTests.swift; sourceTree = "<group>"; };
 		3381C5D65450BE4DF9D533F2 /* LiveActivitiesViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivitiesViews.swift; sourceTree = "<group>"; };
+		33BA71D8EE96168A1B7A6690 /* SystemMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemMetrics.swift; sourceTree = "<group>"; };
 		3497CA2593D7F55A480C1EC3 /* globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = globals.h; sourceTree = "<group>"; };
+		35E74D5E2811CD766DECAC50 /* SystemMonitorModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemMonitorModule.swift; sourceTree = "<group>"; };
 		37C474C3B54576120030842F /* NotchHostingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchHostingView.swift; sourceTree = "<group>"; };
 		37E7FA6BA5FFA9983A5E8344 /* AssistantModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantModule.swift; sourceTree = "<group>"; };
 		38A70194D570981FFAA6853D /* ModuleRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleRegistry.swift; sourceTree = "<group>"; };
@@ -312,6 +318,7 @@
 		A65915A0E0BF3E9D51AE67E3 /* SystemHUDViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemHUDViews.swift; sourceTree = "<group>"; };
 		A71B97392FA1B40CE01E6DD5 /* WeatherModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModels.swift; sourceTree = "<group>"; };
 		A8DD4B3B5A025276532608BF /* ShelfModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfModule.swift; sourceTree = "<group>"; };
+		AB6E589C9D69F4EEFC3F19FF /* SystemMonitorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemMonitorTests.swift; sourceTree = "<group>"; };
 		ACBB0A65EC51EF3F4A67EB2F /* now_playing.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = now_playing.m; sourceTree = "<group>"; };
 		B06D76A7B698E95219B11FEE /* LocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
 		B406F238DA99AD867A9D13E3 /* CalendarEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEvent.swift; sourceTree = "<group>"; };
@@ -326,6 +333,7 @@
 		C5C6F4F37F841F8FF9371E1E /* BatteryModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryModule.swift; sourceTree = "<group>"; };
 		C69908874CE7985E60953470 /* ModuleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleManager.swift; sourceTree = "<group>"; };
 		C6D110312DA9149C3CEA954F /* VideoDownloadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloadViews.swift; sourceTree = "<group>"; };
+		C7C4826C1AB5AD4AD9B2D197 /* SystemSampler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemSampler.swift; sourceTree = "<group>"; };
 		C82EEAC4225615991537D76A /* Debounce.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Debounce.h; sourceTree = "<group>"; };
 		C9C6E3D4B63F646C8C9E6420 /* repeat.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = repeat.m; sourceTree = "<group>"; };
 		CBD303760BD8B274346EBC38 /* NotchContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchContainerView.swift; sourceTree = "<group>"; };
@@ -429,6 +437,7 @@
 				A097E4F52274645DD920E62C /* ShelfTests.swift */,
 				82E32A0CD723246EBCF3F295 /* SpectrumTests.swift */,
 				1540EC4F1FC0F674F96EB7CE /* SystemHUDTests.swift */,
+				AB6E589C9D69F4EEFC3F19FF /* SystemMonitorTests.swift */,
 				635422DB9C95886A509BD9D8 /* UnlockTests.swift */,
 				2F971AD4A7B51FE0A4D75748 /* VideoDownloadTests.swift */,
 				3E5200FEB865B8DCA4D43E73 /* WidgetLayoutTests.swift */,
@@ -455,6 +464,7 @@
 				FEB44DDF509E814E00D3B18F /* Screenshots */,
 				A64F17DD50A084CB2420C8CE /* Shelf */,
 				A1975F559D28B76D7DDB3598 /* SystemHUD */,
+				89207F9F6B4B515F8DAC6017 /* SystemMonitor */,
 				33C811E3D7564BB12E84C41C /* Todo */,
 				BC505A0BE850C40DDD5F800D /* Toggles */,
 				3FA596B71B3FA62F693D5259 /* Unlock */,
@@ -672,6 +682,16 @@
 				3DF83BF34AFE3B80D8068FFA /* NowPlayingTest.h */,
 			);
 			path = test;
+			sourceTree = "<group>";
+		};
+		89207F9F6B4B515F8DAC6017 /* SystemMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				33BA71D8EE96168A1B7A6690 /* SystemMetrics.swift */,
+				35E74D5E2811CD766DECAC50 /* SystemMonitorModule.swift */,
+				C7C4826C1AB5AD4AD9B2D197 /* SystemSampler.swift */,
+			);
+			path = SystemMonitor;
 			sourceTree = "<group>";
 		};
 		8E7EC287591CD85DE9FCD95B /* Products */ = {
@@ -1221,6 +1241,9 @@
 				A6596D02BBF2A11F995B9CF5 /* SystemControls.swift in Sources */,
 				A56A56BB6242B685DE85A1A9 /* SystemHUDModule.swift in Sources */,
 				5C6ED2CBBB8A11A2831FB4C5 /* SystemHUDViews.swift in Sources */,
+				727B53B1FFAC36D6D61429D7 /* SystemMetrics.swift in Sources */,
+				3D27935556AEC14D64004E2B /* SystemMonitorModule.swift in Sources */,
+				1947BE534B1F19266B413D56 /* SystemSampler.swift in Sources */,
 				F2100BE0648F4CF477DDD020 /* SystemToggles.swift in Sources */,
 				D191E53D4E00A42215A9F880 /* TodoModule.swift in Sources */,
 				1FB0D7D9DF060DE328A65ACD /* TodoViews.swift in Sources */,
@@ -1257,6 +1280,7 @@
 				AC7269EC36E5FC05D7BD7336 /* ShelfTests.swift in Sources */,
 				0CE35712354CA83AF734444A /* SpectrumTests.swift in Sources */,
 				5745C9E89B5256A77822D3EF /* SystemHUDTests.swift in Sources */,
+				827ABA26CB3C09879BE52626 /* SystemMonitorTests.swift in Sources */,
 				340499E5E2C58AE3801AC31E /* UnlockTests.swift in Sources */,
 				3243E456B87AD248B7E4E378 /* VideoDownloadTests.swift in Sources */,
 				2A8FC1478370BC212B9E8F67 /* WidgetLayoutTests.swift in Sources */,

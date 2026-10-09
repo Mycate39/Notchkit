@@ -121,6 +121,8 @@ enum PromoSnapshots {
         multi.startStopwatch()
         multi.startPomodoro()
         save(card(multi.expandedView(), weight: 2), to: file("14-activites-carte"))
+        SystemSampler.shared.debugSampleNow()
+        save(card(SystemMonitorModule(context: context).expandedView(), weight: 2), to: file("15-moniteur-carte"))
         multi.activities.map(\.id).forEach(multi.remove)
 
         activities.activities.map(\.id).forEach(activities.remove)

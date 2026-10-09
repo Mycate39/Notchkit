@@ -63,6 +63,7 @@ final class SystemHUDModule: NotchModule {
 
     @ObservationIgnored private let context: ModuleContext
     @ObservationIgnored private let tap = MediaKeyTap()
+    @ObservationIgnored private let volumeObserver = VolumeObserver()
     @ObservationIgnored private var trustPolling: Task<Void, Never>?
     @ObservationIgnored private var isStarted = false
     /// Alerte unique, réaffichée à chaque appui (même identifiant : prolongée, pas recréée).
@@ -84,6 +85,7 @@ final class SystemHUDModule: NotchModule {
         guard !isStarted else { return }
         isStarted = true
         tap.handler = { [weak self] key, modifiers in self?.handle(key, modifiers: modifiers) ?? false }
+        volumeObserver.onChange = { [weak self] in self?.volumeDidChange() }
         updateInterception()
     }
 
@@ -93,6 +95,7 @@ final class SystemHUDModule: NotchModule {
         trustPolling?.cancel()
         trustPolling = nil
         tap.stop()
+        volumeObserver.stop()
         isIntercepting = false
     }
 
@@ -100,10 +103,13 @@ final class SystemHUDModule: NotchModule {
         isTrusted = MediaKeyTap.isTrusted
         guard isStarted, replaceSystemHUD, !AutomatedRun.isActive else {
             tap.stop()
+            volumeObserver.stop()
             isIntercepting = false
             return
         }
         isIntercepting = tap.start()
+        // Seulement quand les touches sont interceptées : sinon macOS affiche déjà son indicateur.
+        if isIntercepting { volumeObserver.start() } else { volumeObserver.stop() }
     }
 
     /// Demande l'autorisation Accessibilité, puis surveille son obtention (toutes les 2 s, 2 min max).
@@ -152,8 +158,22 @@ final class SystemHUDModule: NotchModule {
         }
     }
 
-    private func show(_ kind: HUDState.Kind, level: Float, muted: Bool) {
-        Haptics.play(.step)
+    /// Volume changé hors du clavier (Touch Bar, Centre de contrôle…).
+    private func volumeDidChange() {
+        let level = SystemVolume.volume
+        let muted = SystemVolume.isMuted || level == 0
+        guard Self.isNewVolumeChange(shown: hud, level: level, muted: muted) else { return }
+        // Pas de retour haptique : le curseur de la Touch Bar envoie des dizaines de changements.
+        show(.volume, level: level, muted: muted, haptic: false)
+    }
+
+    /// Faux si l'indicateur affiche déjà ce volume (changement venu d'une touche déjà traitée).
+    static func isNewVolumeChange(shown: HUDState, level: Float, muted: Bool) -> Bool {
+        !(shown.kind == .volume && abs(shown.level - level) < 0.001 && shown.isMuted == muted)
+    }
+
+    private func show(_ kind: HUDState.Kind, level: Float, muted: Bool, haptic: Bool = true) {
+        if haptic { Haptics.play(.step) }
         withAnimation(.snappy(duration: 0.15)) {
             hud.kind = kind
             hud.level = level
@@ -181,3 +201,15 @@ final class SystemHUDModule: NotchModule {
         AnyView(SystemHUDSettingsView(module: self))
     }
 }
+
+#if DEBUG
+extension SystemHUDModule {
+    /// Affiche l'indicateur à un niveau donné, sans toucher au volume réel.
+    func debugShow(_ kind: HUDState.Kind, level: Float) {
+        hud.kind = kind
+        hud.level = level
+        hud.isMuted = false
+        context.presentAlert(alert)
+    }
+}
+#endif

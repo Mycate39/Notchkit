@@ -39,3 +39,27 @@ struct MediaKeyTests {
         #expect(wide.width - normal.width == (112 - NotchLayout.compactSideWidth) * 2)
     }
 }
+
+@MainActor
+struct VolumeTouchBarTests {
+    func state(_ kind: HUDState.Kind, level: Float, muted: Bool) -> HUDState {
+        let hud = HUDState()
+        hud.kind = kind
+        hud.level = level
+        hud.isMuted = muted
+        return hud
+    }
+
+    @Test func changementDejaAfficheParUneToucheIgnore() {
+        #expect(!SystemHUDModule.isNewVolumeChange(shown: state(.volume, level: 0.5, muted: false), level: 0.5, muted: false))
+    }
+
+    @Test func changementVenuDeLaTouchBarAffiche() {
+        #expect(SystemHUDModule.isNewVolumeChange(shown: state(.volume, level: 0.5, muted: false), level: 0.56, muted: false))
+        #expect(SystemHUDModule.isNewVolumeChange(shown: state(.volume, level: 0.5, muted: false), level: 0.5, muted: true))
+    }
+
+    @Test func apresLaLuminositeLeVolumeSAffiche() {
+        #expect(SystemHUDModule.isNewVolumeChange(shown: state(.brightness, level: 0.5, muted: false), level: 0.5, muted: false))
+    }
+}

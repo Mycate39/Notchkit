@@ -4,7 +4,7 @@ import CoreAudio
 
 /// Volume de la sortie audio par défaut (API publique Core Audio).
 enum SystemVolume {
-    private static func defaultOutputDevice() -> AudioObjectID? {
+    static func defaultOutputDevice() -> AudioObjectID? {
         var id = AudioObjectID(kAudioObjectUnknown)
         var size = UInt32(MemoryLayout<AudioObjectID>.size)
         var address = AudioObjectPropertyAddress(
@@ -16,7 +16,7 @@ enum SystemVolume {
         return status == noErr && id != kAudioObjectUnknown ? id : nil
     }
 
-    private static func volumeAddress() -> AudioObjectPropertyAddress {
+    static func volumeAddress() -> AudioObjectPropertyAddress {
         AudioObjectPropertyAddress(
             mSelector: kAudioHardwareServiceDeviceProperty_VirtualMainVolume,
             mScope: kAudioDevicePropertyScopeOutput,
@@ -24,7 +24,7 @@ enum SystemVolume {
         )
     }
 
-    private static func muteAddress() -> AudioObjectPropertyAddress {
+    static func muteAddress() -> AudioObjectPropertyAddress {
         AudioObjectPropertyAddress(
             mSelector: kAudioDevicePropertyMute,
             mScope: kAudioDevicePropertyScopeOutput,
@@ -71,6 +71,67 @@ enum SystemVolume {
             var value: UInt32 = newValue ? 1 : 0
             AudioObjectSetPropertyData(device, &address, 0, nil, UInt32(MemoryLayout<UInt32>.size), &value)
         }
+    }
+}
+
+/// Prévient à chaque changement de volume ou de sourdine de la sortie par défaut, quelle qu'en
+/// soit la source : Touch Bar, Centre de contrôle, autre app. Les touches du clavier ne suffisent
+/// pas, car la Touch Bar règle le volume directement, sans envoyer de touche.
+@MainActor
+final class VolumeObserver {
+    var onChange: (@MainActor () -> Void)?
+
+    private var device: AudioObjectID?
+    private var deviceListener: AudioObjectPropertyListenerBlock?
+    private var defaultListener: AudioObjectPropertyListenerBlock?
+
+    private static let defaultOutputAddress = AudioObjectPropertyAddress(
+        mSelector: kAudioHardwarePropertyDefaultOutputDevice,
+        mScope: kAudioObjectPropertyScopeGlobal,
+        mElement: kAudioObjectPropertyElementMain
+    )
+
+    func start() {
+        guard defaultListener == nil else { return }
+        // Changement de sortie (casque branché…) : on suit la nouvelle sortie par défaut.
+        let listener: AudioObjectPropertyListenerBlock = { [weak self] _, _ in
+            MainActor.assumeIsolated { self?.attachToDefaultOutput() }
+        }
+        var address = Self.defaultOutputAddress
+        AudioObjectAddPropertyListenerBlock(AudioObjectID(kAudioObjectSystemObject), &address, .main, listener)
+        defaultListener = listener
+        attachToDefaultOutput()
+    }
+
+    func stop() {
+        detach()
+        if let listener = defaultListener {
+            var address = Self.defaultOutputAddress
+            AudioObjectRemovePropertyListenerBlock(AudioObjectID(kAudioObjectSystemObject), &address, .main, listener)
+        }
+        defaultListener = nil
+    }
+
+    private func attachToDefaultOutput() {
+        detach()
+        guard let id = SystemVolume.defaultOutputDevice() else { return }
+        let listener: AudioObjectPropertyListenerBlock = { [weak self] _, _ in
+            MainActor.assumeIsolated { self?.onChange?() }
+        }
+        for var address in [SystemVolume.volumeAddress(), SystemVolume.muteAddress()] {
+            AudioObjectAddPropertyListenerBlock(id, &address, .main, listener)
+        }
+        device = id
+        deviceListener = listener
+    }
+
+    private func detach() {
+        guard let device, let listener = deviceListener else { return }
+        for var address in [SystemVolume.volumeAddress(), SystemVolume.muteAddress()] {
+            AudioObjectRemovePropertyListenerBlock(device, &address, .main, listener)
+        }
+        self.device = nil
+        deviceListener = nil
     }
 }
 

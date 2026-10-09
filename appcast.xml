@@ -3,6 +3,15 @@
   <channel>
     <title>Notchkit</title>
     <item>
+      <title>Notchkit 0.1.9</title>
+      <pubDate>Fri, 09 Oct 2026 11:16:14 GMT</pubDate>
+      <sparkle:version>10</sparkle:version>
+      <sparkle:shortVersionString>0.1.9</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[<h3>What&#x27;s new</h3><ul><li><b>Screenshots widget:</b> the screenshots and screen recordings you made since your Mac started or you logged in, wherever they are saved. Drag them into any app, open, copy, send with AirDrop or move them to the Trash. A small alert appears in the notch for each new screenshot.</li><li><b>Shelf without the widget:</b> files dropped on the notch are kept even if the Shelf widget is hidden.</li><li><b>Widgets that show up when needed:</b> the Shelf and Screenshots widgets appear by themselves as an extra page while they have something to show, without changing your layout. Right-click one and choose <b>Add to Layout</b> to keep it for good.</li><li><b>Permissions kept across updates:</b> Notchkit is now signed with a stable certificate, so macOS keeps its permissions (like Accessibility) from one version to the next.</li></ul><h3>Installation</h3><p>Notchkit 0.1.5 or later offers this update by itself (or use <b>Check for Updates…</b> in its menu).</p><p>Otherwise, download <code>Notchkit-0.1.9.dmg</code>, open it, and drag <b>Notchkit.app</b> onto the <b>Applications</b> shortcut. Notchkit isn&#x27;t notarized: the first time, right-click the app &gt; <b>Open</b>.</p><p><b>One last time</b> after this update, macOS may need the <b>Accessibility</b> permission again (used for the volume and brightness keys): open System Settings &gt; Privacy &amp; Security &gt; Accessibility, remove Notchkit with <b>−</b>, then add it again. Future updates keep it.</p><p>Requires macOS 14 or later, on Apple silicon or Intel.</p>]]></description>
+      <enclosure url="https://github.com/Mycate39/Notchkit/releases/download/v0.1.9/Notchkit-0.1.9.dmg" sparkle:edSignature="QF31TuhfN311ngK/zqOhlUG+hjwuESfb1QLBnfGsw02PEVunpllFqMjRk50pV/YCNb9AYW+BfiCiIE5DTu5NCg==" length="7193288" type="application/octet-stream"/>
+    </item>
+    <item>
       <title>Notchkit 0.1.8</title>
       <pubDate>Fri, 09 Oct 2026 06:29:50 GMT</pubDate>
       <sparkle:version>9</sparkle:version>

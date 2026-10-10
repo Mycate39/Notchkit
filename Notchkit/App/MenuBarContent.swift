@@ -19,6 +19,10 @@ struct MenuBarContent: View {
         }
         .disabled(!Updater.shared.isAvailable)
 
+        Button("Copier les informations de diagnostic") {
+            appDelegate.copyDiagnostics()
+        }
+
         #if DEBUG
         Divider()
 

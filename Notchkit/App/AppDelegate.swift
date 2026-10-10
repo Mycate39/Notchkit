@@ -96,6 +96,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 SnapshotRenderer.renderAll(to: URL(fileURLWithPath: directory), viewModel: viewModel,
                                            settings: settings, manager: moduleManager)
                 PromoSnapshots.renderAll(to: URL(fileURLWithPath: directory))
+                try? self.notchWindow?.diagnosticReport()
+                    .write(to: URL(fileURLWithPath: directory).appendingPathComponent("diagnostic.txt"), atomically: true, encoding: .utf8)
                 NSApp.terminate(nil)
             }
         }
@@ -146,6 +148,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     // MARK: - Actions du menu
+
+    /// Copie le rapport de diagnostic (écrans, encoche, fenêtre) pour signaler un problème.
+    func copyDiagnostics() {
+        guard let report = notchWindow?.diagnosticReport() else { return }
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(report, forType: .string)
+    }
 
     func showSettings(tab: SettingsTab? = nil) {
         if let tab { settingsRouter.tab = tab }

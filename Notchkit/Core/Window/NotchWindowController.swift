@@ -277,6 +277,33 @@ final class NotchWindowController {
     }
 }
 
+// MARK: - Diagnostic
+
+extension NotchWindowController {
+    /// Rapport texte (écrans, détection de l'encoche, fenêtre) à copier pour signaler un problème.
+    func diagnosticReport() -> String {
+        var lines: [String] = []
+        let bundle = Bundle.main
+        let version = bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "?"
+        let build = bundle.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "?"
+        var model = [CChar](repeating: 0, count: 64)
+        var size = model.count
+        sysctlbyname("hw.model", &model, &size, nil, 0)
+        lines.append("Notchkit \(version) (\(build)) · macOS \(ProcessInfo.processInfo.operatingSystemVersionString)")
+        lines.append("Mac : \(String(cString: model)) · Accessibilité : \(AXIsProcessTrusted())")
+        for (index, screen) in NSScreen.screens.enumerated() {
+            lines.append("Écran \(index) : frame \(screen.frame) · visible \(screen.visibleFrame) · échelle \(screen.backingScaleFactor)")
+            lines.append("  safeArea.top \(screen.safeAreaInsets.top) · gauche \(screen.auxiliaryTopLeftArea.map { "\($0)" } ?? "-") · droite \(screen.auxiliaryTopRightArea.map { "\($0)" } ?? "-")")
+        }
+        let geometry = viewModel.geometry
+        lines.append("Géométrie : \(geometry.style) · fermée \(geometry.closedSize) · centreX \(geometry.centerX) · écran \(geometry.screenFrame)")
+        lines.append("Fenêtre : \(panel.frame) · visible \(panel.isVisible) · espace actif \(panel.isOnActiveSpace) · occlusion \(panel.occlusionState.contains(.visible) ? "visible" : "cachée") · niveau \(panel.level.rawValue) · alpha \(panel.alphaValue)")
+        lines.append("État : déplié \(viewModel.isExpanded) · écran verrouillé \(viewModel.isScreenLocked) · décalage menus \(menuOffset)")
+        lines.append("Réglages : écran \(settings.settings.screenSelection) · simuler \(settings.settings.simulateNotch)")
+        return lines.joined(separator: "\n")
+    }
+}
+
 /// Conteneur dont l'origine est en haut à gauche, pour garder la vue SwiftUI collée en haut.
 final class FlippedView: NSView {
     override var isFlipped: Bool { true }

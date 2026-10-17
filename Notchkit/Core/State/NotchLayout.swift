@@ -46,10 +46,22 @@ enum NotchLayout {
     static let islandExtraHeight: CGFloat = 6
     /// Proportions de l'île (largeur / hauteur), comme la Dynamic Island pendant la lecture.
     static let islandAspectRatio: CGFloat = 4.8
+    /// Ombre portée par la forme : petite au survol, plus large une fois dépliée.
+    struct Shadow: Equatable {
+        var opacity: Double
+        var radius: CGFloat
+        var y: CGFloat
+
+        /// Place nécessaire sous la forme pour que le flou s'estompe avant le bord de la fenêtre
+        /// (sinon l'ombre est tranchée net et dessine une ligne) : décalage plus deux rayons de flou.
+        var margin: CGFloat { (y + radius * 2).rounded(.up) }
+    }
+    static let hoverShadow = Shadow(opacity: 0.45, radius: 5, y: 2)
+    static let expandedShadow = Shadow(opacity: 0.5, radius: 16, y: 6)
     /// Marge de fenêtre réservée à l'ombre de survol (sur les côtés et en bas).
-    static let hoverShadowMargin: CGFloat = 12
+    static var hoverShadowMargin: CGFloat { hoverShadow.margin }
     /// Marge de fenêtre réservée à l'ombre de l'encoche dépliée.
-    static let expandedShadowMargin: CGFloat = 22
+    static var expandedShadowMargin: CGFloat { expandedShadow.margin }
     /// Activités secondaires : une seule bulle à droite de l'encoche. À partir de deux, elles sont
     /// rangées dans une pile qui se déroule au survol (au plus `maxBubbles` bulles).
     static let maxBubbles = 4

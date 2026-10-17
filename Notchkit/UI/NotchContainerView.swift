@@ -5,10 +5,10 @@ import SwiftUI
 struct NotchContainerView: View {
     let viewModel: NotchViewModel
 
-    private var shadow: (opacity: Double, radius: CGFloat, y: CGFloat) {
-        if viewModel.isExpanded { return (0.5, 16, 6) }
-        if viewModel.showsHoverShadow { return (0.45, 5, 2) }
-        return (0, 0, 0)
+    private var shadow: NotchLayout.Shadow {
+        if viewModel.isExpanded { return NotchLayout.expandedShadow }
+        if viewModel.showsHoverShadow { return NotchLayout.hoverShadow }
+        return NotchLayout.Shadow(opacity: 0, radius: 0, y: 0)
     }
 
     var body: some View {

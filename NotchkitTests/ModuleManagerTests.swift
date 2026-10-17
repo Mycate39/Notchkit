@@ -154,6 +154,12 @@ struct NotchLayoutTests {
         #expect(NotchLayout.physicalNotchHeight(safeAreaTop: 32, menuBarHeight: 0) == 32)
     }
 
+    @Test func margeDeFenetreCouvreLOmbre() {
+        // Ombre dépliée : 16 pt de flou décalés de 6 pt ; la fenêtre doit laisser au moins 38 pt dessous.
+        #expect(NotchLayout.expandedShadowMargin >= NotchLayout.expandedShadow.y + NotchLayout.expandedShadow.radius * 2)
+        #expect(NotchLayout.hoverShadowMargin >= NotchLayout.hoverShadow.y + NotchLayout.hoverShadow.radius * 2)
+    }
+
     @Test func contenuCompactElargitDeChaqueCote() {
         let size = NotchLayout.shapeSize(for: notch, isExpanded: false, hasCompactContent: true)
         #expect(size.width == 185 + NotchLayout.compactSideWidth * 2 + NotchLayout.earRadius * 2)

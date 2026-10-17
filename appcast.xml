@@ -3,6 +3,19 @@
   <channel>
     <title>Notchkit</title>
     <item>
+      <title>Notchkit 1.0.3</title>
+      <pubDate>Sat, 17 Oct 2026 13:49:18 GMT</pubDate>
+      <sparkle:version>14</sparkle:version>
+      <sparkle:shortVersionString>1.0.3</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <link>https://github.com/Mycate39/Notchkit/releases/tag/v1.0.3</link>
+      <sparkle:informationalUpdate>
+        <sparkle:belowVersion>12</sparkle:belowVersion>
+      </sparkle:informationalUpdate>
+      <description><![CDATA[<h3>Fixed</h3><ul><li><b>Notchkit 1.0.1 and 1.0.2 didn&#x27;t launch.</b> Both versions quit right away on every Mac because of a signing issue. Sorry about that! Notchkit 1.0.3 fixes it and includes everything from 1.0.2:</li><li><b>New music player</b> that looks like an iPhone Live Activity.</li><li><b>Pure black widgets</b>, without a border.</li><li><b>Paused music stays in the notch</b>, even in a browser such as Brave.</li><li><b>Smaller live activities</b> and a <b>smoother shadow</b> under the expanded notch.</li></ul><h3>Installation</h3><p>Because 1.0.1 and 1.0.2 couldn&#x27;t launch, they can&#x27;t update themselves. Download <code>Notchkit-1.0.3.dmg</code>, open it, and drag <b>Notchkit.app</b> onto the <b>Applications</b> shortcut, replacing the old version. Notchkit isn&#x27;t notarized: the first time, right-click the app &gt; <b>Open</b>.</p><p>If you&#x27;re updating from Notchkit 1.0.0 or earlier, also give it the <b>Accessibility</b> permission again: open System Settings &gt; Privacy &amp; Security &gt; Accessibility, remove Notchkit with <b>−</b>, then add it again. Later updates install automatically and keep the permission.</p><p>Requires macOS 14 or later, on Apple silicon or Intel.</p>]]></description>
+      <enclosure url="https://github.com/Mycate39/Notchkit/releases/download/v1.0.3/Notchkit-1.0.3.dmg" sparkle:edSignature="KxILxdnOd5GlP9J6hCz93Hzcn7TF/eGnmVnv6UDU3Lua6jdKYuBwEyU77+GgApFJIV02K9+v4AHq723KSYm9Dw==" length="8175914" type="application/octet-stream"/>
+    </item>
+    <item>
       <title>Notchkit 1.0.2</title>
       <pubDate>Sat, 17 Oct 2026 13:41:07 GMT</pubDate>
       <sparkle:version>13</sparkle:version>

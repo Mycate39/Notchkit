@@ -59,6 +59,9 @@ targets:
         com.apple.security.personal-information.location: true
         # Nécessaire (avec le Hardened Runtime) pour le miroir de la webcam.
         com.apple.security.device.camera: true
+        # Certificat auto-signé, sans identifiant d'équipe : sans cette autorisation, le Hardened
+        # Runtime refuse de charger les frameworks intégrés (Sparkle) et l'app plante au lancement.
+        com.apple.security.cs.disable-library-validation: true
     info:
       path: Notchkit/Resources/Info.plist
       properties:

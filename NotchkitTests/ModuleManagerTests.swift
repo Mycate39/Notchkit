@@ -126,6 +126,17 @@ struct AppSettingsTests {
         #expect(try JSONDecoder().decode(AppSettings.self, from: data) == settings)
     }
 
+    @Test func tutorielSeulementPourUneNouvelleInstallation() throws {
+        // Nouvelle installation : pas encore vu.
+        #expect(AppSettings().onboardingCompleted == false)
+        // Réglages d'une version sans tutoriel : utilisateur existant, on ne le dérange pas.
+        let old = try JSONDecoder().decode(AppSettings.self, from: Data(#"{"hapticsEnabled": true}"#.utf8))
+        #expect(old.onboardingCompleted)
+        // Nouvelle installation quittée avant la fin : le tutoriel revient au lancement suivant.
+        let saved = try JSONDecoder().decode(AppSettings.self, from: JSONEncoder().encode(AppSettings()))
+        #expect(saved.onboardingCompleted == false)
+    }
+
     @Test func selectionEcranComparéeParIdentifiant() {
         #expect(ScreenSelection.specific(id: "X", name: "Ancien nom") == .specific(id: "X", name: "Nouveau nom"))
         #expect(ScreenSelection.specific(id: "X", name: "A") != .specific(id: "Y", name: "A"))
@@ -334,5 +345,18 @@ struct ContextualModuleTests {
         #expect(manager.contextualIDs.isEmpty)
         #expect(manager.layoutPageIDs.flatMap { $0 }.contains("mock.contextual"))
         #expect(manager.pageIDs == manager.layoutPageIDs)
+    }
+}
+
+struct OnboardingTests {
+    @Test func etapesDansLOrdreDuDebutALaFin() {
+        #expect(OnboardingStep.welcome.isFirst)
+        #expect(OnboardingStep.welcome.next == .hover)
+        #expect(OnboardingStep.done.isLast)
+        #expect(OnboardingStep.done.previous == .permissions)
+        // On peut parcourir toutes les étapes en avançant depuis la première.
+        var visited: [OnboardingStep] = [.welcome]
+        while let next = visited.last?.next { visited.append(next) }
+        #expect(visited == OnboardingStep.allCases)
     }
 }

@@ -15,6 +15,7 @@
 		0C5C1320E8DA35AB26BD3E2A /* LocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780FDFC3683479C675E3E0ED /* LocalizationTests.swift */; };
 		0CE35712354CA83AF734444A /* SpectrumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E32A0CD723246EBCF3F295 /* SpectrumTests.swift */; };
 		0D3C50C099B5A2963DBD093F /* AssistantModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E7FA6BA5FFA9983A5E8344 /* AssistantModule.swift */; };
+		0D8F43C59112452F0B59F026 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209EAFCB5E9FD69E8678E39C /* OnboardingView.swift */; };
 		0DAD6BA93A36E4EC90345619 /* SystemAudioTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7777E6515F511E3753C72A /* SystemAudioTap.swift */; };
 		0DE3A6F31820693836DDC753 /* globals.h in Headers */ = {isa = PBXBuildFile; fileRef = 3497CA2593D7F55A480C1EC3 /* globals.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0F5ED439E2F5648E15B3C072 /* LayoutSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9D3F695623AF356C363ADE /* LayoutSettingsView.swift */; };
@@ -95,6 +96,7 @@
 		7217AD1F16C887AB09928542 /* AirPodsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA09C6155085C6AAB69F4A1 /* AirPodsViews.swift */; };
 		727B53B1FFAC36D6D61429D7 /* SystemMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA71D8EE96168A1B7A6690 /* SystemMetrics.swift */; };
 		73D5E9F7641B5F75B4E0B6CB /* WeatherModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71B97392FA1B40CE01E6DD5 /* WeatherModels.swift */; };
+		743DF3635CD73F1F95DF92FC /* OnboardingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D442EFB00C038F7698DF0C8 /* OnboardingStep.swift */; };
 		7605FF09B1B6548E2F21D2A4 /* AssistantFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6362B40DDA569D43BB37B057 /* AssistantFace.swift */; };
 		78F19EC00241A52E7E494A0E /* get.h in Headers */ = {isa = PBXBuildFile; fileRef = D87D32299F6B58A261AA0D12 /* get.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		79537FE908D19E626C018946 /* ModuleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69908874CE7985E60953470 /* ModuleManager.swift */; };
@@ -115,6 +117,7 @@
 		8F0C77F6838C6EE29F25E86F /* ShelfViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B612155636B3FD4BB9FD1797 /* ShelfViews.swift */; };
 		8FC318594A37D67BB477BCA4 /* NotchHostingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C474C3B54576120030842F /* NotchHostingView.swift */; };
 		90DF0E4039BA56420C4DCA10 /* Glyphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECF3DDA8BA52758E6E1EC5B /* Glyphs.swift */; };
+		9187885142C293D5A677A428 /* OnboardingDemos.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E2C6CB6BF950202D8E77F3 /* OnboardingDemos.swift */; };
 		94BF7B6108A44400EABE42EE /* ClipboardViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA785DE3AC695C0AF583A476 /* ClipboardViews.swift */; };
 		9534909608C6D366FB3BCE9F /* mediaremote-adapter.pl in Resources */ = {isa = PBXBuildFile; fileRef = E343FA5573A1C385029263CF /* mediaremote-adapter.pl */; };
 		980B366CCDFB9D04BCACFB5C /* MenuBarAvoidance.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF22AF6E1341357C1F0E58 /* MenuBarAvoidance.swift */; };
@@ -244,6 +247,7 @@
 		18DE66842FA59F405AA5650F /* ScreenshotsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotsModule.swift; sourceTree = "<group>"; };
 		1E8841EA892E202FC4B79550 /* NotchShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchShape.swift; sourceTree = "<group>"; };
 		20084FD98CCD7BB5C7346A16 /* LockScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenTests.swift; sourceTree = "<group>"; };
+		209EAFCB5E9FD69E8678E39C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		21F3AA5E7B3A040B33B93437 /* ClaudeHookServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeHookServer.swift; sourceTree = "<group>"; };
 		228A1FC0EA2ADCAB2798FEC3 /* SnapZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapZone.swift; sourceTree = "<group>"; };
 		24EE9F8658125C2D9185EA96 /* LaunchAtLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLogin.swift; sourceTree = "<group>"; };
@@ -270,6 +274,7 @@
 		3CA09C6155085C6AAB69F4A1 /* AirPodsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPodsViews.swift; sourceTree = "<group>"; };
 		3CF7506AC056617E590D6805 /* helpers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = helpers.m; sourceTree = "<group>"; };
 		3D264AF1EE80180C7CCB9778 /* AppearanceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSettingsView.swift; sourceTree = "<group>"; };
+		3D442EFB00C038F7698DF0C8 /* OnboardingStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStep.swift; sourceTree = "<group>"; };
 		3DF83BF34AFE3B80D8068FFA /* NowPlayingTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NowPlayingTest.h; sourceTree = "<group>"; };
 		3E5200FEB865B8DCA4D43E73 /* WidgetLayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetLayoutTests.swift; sourceTree = "<group>"; };
 		3F9E3D7C9C763F9153C29C4C /* NotchWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchWindowController.swift; sourceTree = "<group>"; };
@@ -386,6 +391,7 @@
 		DCD4A44AFAF64E2BE5E745B3 /* ModuleDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleDescriptor.swift; sourceTree = "<group>"; };
 		DD6E1ADCA24D42BB2616641B /* TodoViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViews.swift; sourceTree = "<group>"; };
 		DE6111A0CC43713D888AAAB4 /* MusicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicTests.swift; sourceTree = "<group>"; };
+		E1E2C6CB6BF950202D8E77F3 /* OnboardingDemos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDemos.swift; sourceTree = "<group>"; };
 		E2A73B719641636FD8ABD372 /* NotchAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchAlert.swift; sourceTree = "<group>"; };
 		E2C50F8106E1C8E43432EE06 /* PowerSourceMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerSourceMonitor.swift; sourceTree = "<group>"; };
 		E2C8B0A0F7B0BB08616DAE1C /* ScreenLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLocator.swift; sourceTree = "<group>"; };
@@ -547,6 +553,16 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		2FF7B1083BD3D846923E8E5E /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				E1E2C6CB6BF950202D8E77F3 /* OnboardingDemos.swift */,
+				3D442EFB00C038F7698DF0C8 /* OnboardingStep.swift */,
+				209EAFCB5E9FD69E8678E39C /* OnboardingView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		3023F9D8C6E8C325E63EE40A /* AirPods */ = {
 			isa = PBXGroup;
 			children = (
@@ -705,6 +721,7 @@
 				98A6844ED04375186B9067D3 /* NotchkitApp.swift */,
 				48A13404708F6715E62455A7 /* Updater.swift */,
 				114CF41200FB1C9C565916B6 /* Debug */,
+				2FF7B1083BD3D846923E8E5E /* Onboarding */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -1347,6 +1364,9 @@
 				FF50D327E1B1D9C0E32DD427 /* NowPlayingInfo.swift in Sources */,
 				7D94E8681B4FF20CD811DF9F /* ObservationTracking.swift in Sources */,
 				AD70AAC42115BEE6FBBD5B8F /* OllamaModule.swift in Sources */,
+				9187885142C293D5A677A428 /* OnboardingDemos.swift in Sources */,
+				743DF3635CD73F1F95DF92FC /* OnboardingStep.swift in Sources */,
+				0D8F43C59112452F0B59F026 /* OnboardingView.swift in Sources */,
 				A7A432CCFD9E85A7069F6DF1 /* OpenMeteoClient.swift in Sources */,
 				CF7166A65434F3E4E1E01E77 /* PowerSourceMonitor.swift in Sources */,
 				8470D79901C001C16067AFC0 /* ProjectDetector.swift in Sources */,

@@ -382,7 +382,7 @@ private struct PresetGallery: View {
 }
 
 /// Carte d'une disposition : schéma des pages (rectangles proportionnels aux tailles) et nom.
-private struct PresetCard: View {
+struct PresetCard: View {
     let preset: LayoutPreset
 
     var body: some View {

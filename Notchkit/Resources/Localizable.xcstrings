@@ -1,6 +1,374 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "Bienvenue dans Notchkit" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome to Notchkit"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bienvenue dans Notchkit"
+          }
+        }
+      }
+    },
+    "Survolez l'encoche pour l'ouvrir" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hover over the notch to open it"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Survolez l'encoche pour l'ouvrir"
+          }
+        }
+      }
+    },
+    "Vos activités vivent dans l'encoche" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your activities live in the notch"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vos activités vivent dans l'encoche"
+          }
+        }
+      }
+    },
+    "Déposez des fichiers sur l'encoche" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drop files on the notch"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déposez des fichiers sur l'encoche"
+          }
+        }
+      }
+    },
+    "Choisissez vos widgets" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose your widgets"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez vos widgets"
+          }
+        }
+      }
+    },
+    "Autorisations et démarrage" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permissions and startup"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorisations et démarrage"
+          }
+        }
+      }
+    },
+    "Tout est prêt" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You're all set"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout est prêt"
+          }
+        }
+      }
+    },
+    "Notchkit transforme l'encoche de votre Mac en un espace vivant : musique, minuteurs, batterie, météo, calendrier et bien plus. Sur un Mac sans encoche, une pastille flottante prend sa place." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit turns your Mac's notch into a living space: music, timers, battery, weather, calendar and much more. On a Mac without a notch, a floating pill takes its place."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit transforme l'encoche de votre Mac en un espace vivant : musique, minuteurs, batterie, météo, calendrier et bien plus. Sur un Mac sans encoche, une pastille flottante prend sa place."
+          }
+        }
+      }
+    },
+    "Placez le pointeur sur l'encoche : elle se déplie et affiche vos widgets. Balayez avec deux doigts ou cliquez sur les onglets pour changer de page. Éloignez le pointeur pour la refermer." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Move the pointer over the notch: it opens and shows your widgets. Swipe with two fingers or click the tabs to change pages. Move the pointer away to close it."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Placez le pointeur sur l'encoche : elle se déplie et affiche vos widgets. Balayez avec deux doigts ou cliquez sur les onglets pour changer de page. Éloignez le pointeur pour la refermer."
+          }
+        }
+      }
+    },
+    "Quand une musique joue, qu'un minuteur tourne ou que Claude Code travaille, l'activité s'affiche de part et d'autre de l'encoche. S'il y en a plusieurs, les autres deviennent des bulles : cliquez dessus pour les ouvrir." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When music plays, a timer runs or Claude Code is working, the activity shows on both sides of the notch. When there are several, the others become bubbles: click one to open it."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quand une musique joue, qu'un minuteur tourne ou que Claude Code travaille, l'activité s'affiche de part et d'autre de l'encoche. S'il y en a plusieurs, les autres deviennent des bulles : cliquez dessus pour les ouvrir."
+          }
+        }
+      }
+    },
+    "Faites glisser des fichiers sur l'encoche : déposez-les sur l'étagère pour les garder sous la main, ou sur AirDrop pour les envoyer à un appareil proche." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag files onto the notch: drop them on the shelf to keep them at hand, or on AirDrop to send them to a nearby device."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faites glisser des fichiers sur l'encoche : déposez-les sur l'étagère pour les garder sous la main, ou sur AirDrop pour les envoyer à un appareil proche."
+          }
+        }
+      }
+    },
+    "Commencez avec une disposition prête à l'emploi. Vous pourrez ensuite ajouter, retirer et redimensionner chaque widget dans les réglages." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start with a ready-made layout. You can then add, remove and resize each widget in Settings."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commencez avec une disposition prête à l'emploi. Vous pourrez ensuite ajouter, retirer et redimensionner chaque widget dans les réglages."
+          }
+        }
+      }
+    },
+    "L'autorisation Accessibilité permet d'afficher le volume et la luminosité quand vous utilisez les touches du clavier, et d'éviter que l'encoche cache les menus. Elle est facultative." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Accessibility permission lets Notchkit show volume and brightness when you use the keyboard keys, and keep the notch from covering menus. It's optional."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'autorisation Accessibilité permet d'afficher le volume et la luminosité quand vous utilisez les touches du clavier, et d'éviter que l'encoche cache les menus. Elle est facultative."
+          }
+        }
+      }
+    },
+    "Notchkit est prêt. Vous retrouverez les réglages et ce tutoriel dans le menu Notchkit de la barre des menus." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit is ready. You'll find Settings and this tutorial in the Notchkit menu in the menu bar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit est prêt. Vous retrouverez les réglages et ce tutoriel dans le menu Notchkit de la barre des menus."
+          }
+        }
+      }
+    },
+    "Passer le tutoriel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip Tutorial"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passer le tutoriel"
+          }
+        }
+      }
+    },
+    "Retour" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Back"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retour"
+          }
+        }
+      }
+    },
+    "Continuer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuer"
+          }
+        }
+      }
+    },
+    "Commencer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get Started"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commencer"
+          }
+        }
+      }
+    },
+    "Personnaliser dans les réglages…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Customize in Settings…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personnaliser dans les réglages…"
+          }
+        }
+      }
+    },
+    "Accessibilité" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accessibility"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accessibilité"
+          }
+        }
+      }
+    },
+    "Autorisée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allowed"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorisée"
+          }
+        }
+      }
+    },
+    "Facultative, modifiable à tout moment" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Optional, can be changed at any time"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Facultative, modifiable à tout moment"
+          }
+        }
+      }
+    },
+    "Revoir le tutoriel…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Tutorial…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revoir le tutoriel…"
+          }
+        }
+      }
+    },
     "Pleine vers %@" : {
       "localizations" : {
         "en" : {

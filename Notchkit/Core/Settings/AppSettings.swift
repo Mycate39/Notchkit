@@ -47,6 +47,8 @@ struct AppSettings: Codable, Equatable, Sendable {
     var hapticsEnabled = true
     /// Décale l'encoche (simulée ou pastille) pour ne pas cacher les menus de l'app active.
     var avoidAppMenus = true
+    /// Tutoriel de bienvenue terminé (ou passé). Faux pour une nouvelle installation.
+    var onboardingCompleted = false
 
     init() {}
 
@@ -65,5 +67,8 @@ struct AppSettings: Codable, Equatable, Sendable {
         appearance = (try? c.decodeIfPresent(NotchAppearance.self, forKey: .appearance)) ?? d.appearance
         hapticsEnabled = try c.decodeIfPresent(Bool.self, forKey: .hapticsEnabled) ?? d.hapticsEnabled
         avoidAppMenus = try c.decodeIfPresent(Bool.self, forKey: .avoidAppMenus) ?? d.avoidAppMenus
+        // Réglages enregistrés par une version sans tutoriel : l'app est déjà installée et
+        // utilisée, on ne montre pas le tutoriel (il reste accessible depuis le menu).
+        onboardingCompleted = try c.decodeIfPresent(Bool.self, forKey: .onboardingCompleted) ?? true
     }
 }

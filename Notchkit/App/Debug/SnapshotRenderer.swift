@@ -107,6 +107,13 @@ enum SnapshotRenderer {
             .padding(16).background(.black),
              to: directory.appendingPathComponent("assistant-visage.png"))
 
+        // Tutoriel de bienvenue : une image par étape.
+        for step in OnboardingStep.allCases {
+            save(OnboardingView(manager: manager, openLayoutSettings: {}, finish: {}, startAt: step)
+                    .environment(\.colorScheme, .dark),
+                 to: directory.appendingPathComponent("tutoriel-\(step.rawValue + 1).png"))
+        }
+
         // Lecteur de musique (grande carte) avec un morceau fictif.
         if let music = manager.module(for: MusicModule.descriptor.id) as? MusicModule {
             let artwork = NSImage(size: NSSize(width: 120, height: 120), flipped: false) { rect in

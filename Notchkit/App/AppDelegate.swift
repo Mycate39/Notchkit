@@ -15,6 +15,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private lazy var settingsWindow = SettingsWindowController { [unowned self] in
         AnyView(SettingsView(settings: settings, manager: moduleManager, router: settingsRouter))
     }
+    private lazy var onboardingWindow = OnboardingWindowController(
+        settings: settings, manager: moduleManager,
+        openLayoutSettings: { [unowned self] in self.showSettings(tab: .layout) }
+    )
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         // `kill` (SIGTERM) passe par une fermeture normale : les modules arrêtent leurs processus.
@@ -85,6 +89,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         controller.show()
         notchWindow = controller
 
+        // Première installation : tutoriel de bienvenue, une fois l'encoche en place.
+        if !settings.settings.onboardingCompleted && !AutomatedRun.isActive {
+            Task { @MainActor in
+                try? await Task.sleep(for: .milliseconds(600))
+                self.showOnboarding()
+            }
+        }
+
         #if DEBUG
         if ProcessInfo.processInfo.environment["NOTCHKIT_STRESS"] != nil {
             runStressTest()
@@ -154,6 +166,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         guard let report = notchWindow?.diagnosticReport() else { return }
         NSPasteboard.general.clearContents()
         NSPasteboard.general.setString(report, forType: .string)
+    }
+
+    func showOnboarding() {
+        onboardingWindow.show()
     }
 
     func showSettings(tab: SettingsTab? = nil) {

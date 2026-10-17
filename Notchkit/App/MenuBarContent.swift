@@ -14,6 +14,10 @@ struct MenuBarContent: View {
         }
         .keyboardShortcut(",")
 
+        Button("Revoir le tutoriel…") {
+            appDelegate.showOnboarding()
+        }
+
         Button("Rechercher les mises à jour…") {
             Updater.shared.checkForUpdates()
         }

@@ -24,7 +24,11 @@ struct VideoDownloadExpandedView: View {
             } else {
                 linkField
                 formatRow
-                if module.downloads.isEmpty {
+                if let choice = module.resolutionChoice {
+                    resolutionRow(choice)
+                        .transition(.opacity.combined(with: .move(edge: .top)))
+                }
+                if module.downloads.isEmpty, module.resolutionChoice == nil {
                     Text("Collez un lien de vidéo puis appuyez sur Entrée.")
                         .font(.system(size: 10))
                         .foregroundStyle(.white.opacity(0.5))
@@ -85,7 +89,7 @@ struct VideoDownloadExpandedView: View {
     private func formatRow(fullTitle: Bool, folderName: Bool) -> some View {
         HStack(spacing: 6) {
             Menu {
-                ForEach(YTDLP.Format.allCases) { format in
+                ForEach(YTDLP.Format.menuCases) { format in
                     Button {
                         module.format = format
                     } label: {
@@ -123,9 +127,37 @@ struct VideoDownloadExpandedView: View {
         }
     }
 
+    /// Résolutions proposées par la vidéo collée (indicateur pendant la recherche).
+    private func resolutionRow(_ choice: ResolutionChoice) -> some View {
+        HStack(spacing: 6) {
+            if let heights = choice.heights {
+                ScrollView(.horizontal) {
+                    HStack(spacing: 5) {
+                        ForEach(heights, id: \.self) { height in
+                            Button(YTDLP.label(height: height)) { module.chooseResolution(height) }
+                                .buttonStyle(.standBy(.small, active: height == heights.first))
+                                .help(height > 1080 ? "Converti en HEVC après le téléchargement, pour QuickTime"
+                                                    : "MP4 H.264, lisible partout")
+                        }
+                    }
+                }
+                .scrollIndicators(.never)
+            } else {
+                ProgressView().controlSize(.small)
+                Text("Recherche des résolutions…")
+                    .font(.system(size: 10, weight: .medium))
+                    .foregroundStyle(.white.opacity(0.6))
+                Spacer(minLength: 0)
+            }
+            Button { module.cancelResolutionChoice() } label: { Image(systemName: "xmark") }
+                .buttonStyle(.standBy(.small, circle: true))
+                .help("Annuler")
+        }
+    }
+
     private func start() {
         guard YTDLP.isValidLink(link) else { return }
-        module.download(link)
+        module.prepareDownload(link)
         link = ""
         isTyping = false
     }
@@ -189,8 +221,12 @@ private struct DownloadRow: View {
         switch download.state {
         case .running:
             let percent = download.progress.formatted(.percent.precision(.fractionLength(0)))
-            return download.detail.isEmpty ? percent : "\(percent) · \(download.detail)"
-        case .finished: return String(localized: "Terminé")
+            let parts = [download.height.map(YTDLP.label(height:)), percent, download.detail.isEmpty ? nil : download.detail]
+            return parts.compactMap { $0 }.joined(separator: " · ")
+        case .finished:
+            // Note éventuelle (conversion impossible), sinon « Terminé » et la résolution.
+            if !download.detail.isEmpty { return download.detail }
+            return [String(localized: "Terminé"), download.height.map(YTDLP.label(height:))].compactMap { $0 }.joined(separator: " · ")
         case let .failed(message): return message
         case .cancelled: return String(localized: "Annulé")
         }
@@ -209,7 +245,7 @@ struct VideoDownloadSettingsView: View {
                 Label(module.isToolInstalled ? "yt-dlp installé" : "yt-dlp non installé",
                       systemImage: module.isToolInstalled ? "checkmark.circle.fill" : "xmark.circle")
                     .foregroundStyle(module.isToolInstalled ? .green : .orange)
-                Label(module.hasFFmpeg ? "ffmpeg installé" : "ffmpeg absent (qualité limitée, pas de MP3)",
+                Label(module.hasFFmpeg ? "ffmpeg installé" : "ffmpeg absent (nécessaire pour YouTube et le MP3)",
                       systemImage: module.hasFFmpeg ? "checkmark.circle.fill" : "info.circle")
                     .foregroundStyle(module.hasFFmpeg ? .green : .secondary)
             }
@@ -220,7 +256,7 @@ struct VideoDownloadSettingsView: View {
                     .disabled(module.isInstalling)
             }
             if !module.hasFFmpeg {
-                Text("ffmpeg (facultatif : meilleure qualité, MP3) s'installe dans le Terminal avec « brew install ffmpeg ». Sur un Mac Intel, Homebrew peut devoir le compiler, ce qui est long.")
+                Text("ffmpeg est nécessaire pour la plupart des vidéos YouTube, qui séparent l'image et le son, et pour le MP3. Installez-le dans le Terminal avec « brew install ffmpeg deno » (deno permet à yt-dlp de lire tous les formats de YouTube). Sur un Mac Intel, Homebrew peut devoir compiler ffmpeg, ce qui est long.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .textSelection(.enabled)

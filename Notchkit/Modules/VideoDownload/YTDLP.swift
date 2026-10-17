@@ -31,7 +31,7 @@ enum YTDLP {
 
         var title: LocalizedStringResource {
             switch self {
-            case .bestVideo: "Vidéo (meilleure qualité)"
+            case .bestVideo: "Vidéo"
             case .video1080: "Vidéo 1080p"
             case .video720: "Vidéo 720p"
             case .audioM4A: "Audio (M4A)"
@@ -42,7 +42,7 @@ enum YTDLP {
         /// Libellé court, pour les petits widgets.
         var shortTitle: String {
             switch self {
-            case .bestVideo: String(localized: "Meilleure")
+            case .bestVideo: String(localized: "Vidéo")
             case .video1080: "1080p"
             case .video720: "720p"
             case .audioM4A: "M4A"
@@ -51,15 +51,22 @@ enum YTDLP {
         }
 
         var isAudio: Bool { self == .audioM4A || self == .audioMP3 }
+        /// Choix proposés dans le menu : la résolution se choisit ensuite, d'après la vidéo.
+        /// (1080p et 720p restent pour décoder les anciens réglages.)
+        static let menuCases: [Format] = [.bestVideo, .audioM4A, .audioMP3]
         /// Le MP3 nécessite ffmpeg (conversion).
         var requiresFFmpeg: Bool { self == .audioMP3 }
     }
 
     /// Arguments de yt-dlp pour un téléchargement (fonction pure, testée).
-    static func arguments(url: String, format: Format, directory: URL, hasFFmpeg: Bool, ffmpegLocation: URL?) -> [String] {
+    /// - Parameter height: résolution choisie parmi celles de la vidéo (`availableHeights`), ou `nil`.
+    static func arguments(url: String, format: Format, directory: URL, hasFFmpeg: Bool, ffmpegLocation: URL?,
+                          height: Int? = nil) -> [String] {
         var args = [
             "--newline", "--no-playlist", "--no-colors",
             "--print", "before_dl:NOTCHKIT_TITLE %(title)s",
+            "--print", "before_dl:NOTCHKIT_VCODEC %(vcodec)s",
+            "--print", "before_dl:NOTCHKIT_DURATION %(duration)s",
             "--print", "after_move:NOTCHKIT_FILE %(filepath)s",
             "--no-simulate",
             "-o", directory.appendingPathComponent("%(title)s.%(ext)s").path,
@@ -68,12 +75,25 @@ enum YTDLP {
 
         func video(maxHeight: Int?) -> [String] {
             let limit = maxHeight.map { "[height<=\($0)]" } ?? ""
-            if hasFFmpeg {
-                // Vidéo et son séparés (meilleure qualité), assemblés en MP4 par ffmpeg.
-                return ["-f", "bv*\(limit)[ext=mp4]+ba[ext=m4a]/b\(limit)[ext=mp4]/b\(limit)", "--merge-output-format", "mp4"]
+            if hasFFmpeg, let height {
+                // Résolution exacte : H.264 si YouTube en propose (jusqu'en 1080p), sinon SDR de
+                // préférence (la conversion HEVC qui suit ne gère pas le HDR), sinon ce qui existe.
+                let exact = "[height=\(height)]"
+                let h264 = height <= 1080 ? "bv*\(exact)[vcodec^=avc1]+ba[ext=m4a]/" : ""
+                return ["-f", h264 + "bv*\(exact)[dynamic_range=SDR]+ba[ext=m4a]/bv*\(exact)+ba[ext=m4a]/"
+                            + "bv*\(exact)+ba/b[height<=\(height)]",
+                        "--merge-output-format", "mp4"]
             }
-            // Sans ffmpeg : un seul fichier contenant déjà image et son.
-            return ["-f", "b\(limit)[ext=mp4]/b\(limit)"]
+            if hasFFmpeg {
+                // Vidéo et son séparés, assemblés en MP4 par ffmpeg. H.264 d'abord : lisible par
+                // QuickTime sur tous les Mac (YouTube le propose jusqu'en 1080p), alors que l'AV1
+                // de la 4K ne se décode qu'à partir des puces M3. Sinon, le meilleur MP4 disponible.
+                return ["-f", "bv*\(limit)[vcodec^=avc1]+ba[ext=m4a]/b\(limit)[vcodec^=avc1]/"
+                            + "bv*\(limit)[ext=mp4]+ba[ext=m4a]/b\(limit)[ext=mp4]/b\(limit)",
+                        "--merge-output-format", "mp4"]
+            }
+            // Sans ffmpeg : un seul fichier contenant déjà image et son, en H.264 si possible.
+            return ["-f", "b\(limit)[vcodec^=avc1]/b\(limit)[ext=mp4]/b\(limit)"]
         }
 
         switch format {
@@ -86,9 +106,21 @@ enum YTDLP {
         return args + ["--", url]
     }
 
+    /// Message d'erreur affiché à l'utilisateur (fonction pure, testée). Sans ffmpeg, YouTube ne
+    /// propose souvent aucun fichier contenant à la fois l'image et le son : yt-dlp répond alors
+    /// « Requested format is not available », qu'on remplace par la marche à suivre.
+    static func displayError(_ message: String, hasFFmpeg: Bool) -> String {
+        guard !hasFFmpeg, message.contains("Requested format is not available") else { return message }
+        return String(localized: "Cette vidéo nécessite ffmpeg pour assembler l'image et le son : installez-le dans le Terminal avec « brew install ffmpeg ».")
+    }
+
     /// Ligne de sortie de yt-dlp interprétée.
     enum OutputLine: Equatable, Sendable {
         case title(String)
+        /// Codec vidéo retenu (ex. « avc1.64002A », « av01.0.13M.10 »).
+        case videoCodec(String)
+        /// Durée en secondes (pour suivre la conversion).
+        case duration(Double)
         case progress(percent: Double, detail: String)
         case file(String)
         case error(String)
@@ -98,6 +130,11 @@ enum YTDLP {
     static func parse(_ line: String) -> OutputLine? {
         let trimmed = line.trimmingCharacters(in: .whitespacesAndNewlines)
         if trimmed.hasPrefix("NOTCHKIT_TITLE ") { return .title(String(trimmed.dropFirst(15))) }
+        if trimmed.hasPrefix("NOTCHKIT_VCODEC ") {
+            let codec = String(trimmed.dropFirst(16))
+            return codec == "none" || codec == "NA" ? nil : .videoCodec(codec)
+        }
+        if trimmed.hasPrefix("NOTCHKIT_DURATION ") { return Double(trimmed.dropFirst(18)).map(OutputLine.duration) }
         if trimmed.hasPrefix("NOTCHKIT_FILE ") { return .file(String(trimmed.dropFirst(14))) }
         if trimmed.hasPrefix("ERROR:") { return .error(String(trimmed.dropFirst(6)).trimmingCharacters(in: .whitespaces)) }
         // Ex. « [download]  42.3% of   12.34MiB at    2.10MiB/s ETA 00:05 »
@@ -114,6 +151,68 @@ enum YTDLP {
             detail = detail.isEmpty ? value : "\(value) · \(detail)"
         }
         return .progress(percent: percent / 100, detail: detail)
+    }
+
+    // MARK: Résolutions
+
+    /// Arguments pour lire la description d'une vidéo (formats compris) sans la télécharger.
+    static func probeArguments(url: String) -> [String] {
+        ["--no-playlist", "--no-colors", "--no-warnings", "-J", "--", url]
+    }
+
+    /// Hauteurs d'image proposées par la vidéo, de la plus grande à la plus petite (fonction pure,
+    /// testée), lues dans la sortie JSON de `yt-dlp -J`. Ignore les pistes audio et les planches
+    /// d'aperçu.
+    static func availableHeights(json: Data) -> [Int] {
+        guard let object = try? JSONSerialization.jsonObject(with: json) as? [String: Any],
+              let formats = object["formats"] as? [[String: Any]]
+        else { return [] }
+        let heights = formats.compactMap { format -> Int? in
+            guard let codec = format["vcodec"] as? String, codec != "none", format["ext"] as? String != "mhtml",
+                  let height = format["height"] as? Int, height > 0
+            else { return nil }
+            return height
+        }
+        return Array(Set(heights)).sorted(by: >)
+    }
+
+    /// Libellé d'une résolution (« 2160p »).
+    static func label(height: Int) -> String { "\(height)p" }
+
+    // MARK: Conversion HEVC
+
+    /// L'AV1 et le VP9 (seuls codecs de YouTube au-delà de 1080p) ne se lisent pas dans QuickTime
+    /// sur tous les Mac : on les convertit en HEVC (fonction pure, testée).
+    static func needsConversion(videoCodec: String?) -> Bool {
+        guard let codec = videoCodec?.lowercased() else { return false }
+        return ["av01", "vp09", "vp9", "vp8"].contains { codec.hasPrefix($0) }
+    }
+
+    /// Débit HEVC visé selon la hauteur d'image.
+    static func hevcBitrate(height: Int?) -> String {
+        switch height ?? 1080 {
+        case 2000...: "20M"
+        case 1300...: "12M"
+        case 1000...: "8M"
+        default: "5M"
+        }
+    }
+
+    /// Arguments de ffmpeg pour convertir en HEVC avec l'encodeur matériel du Mac (VideoToolbox),
+    /// son copié tel quel, progression sur la sortie standard.
+    static func conversionArguments(input: URL, output: URL, height: Int?) -> [String] {
+        ["-nostdin", "-y", "-i", input.path,
+         "-map", "0:v:0", "-map", "0:a?",
+         "-c:v", "hevc_videotoolbox", "-profile:v", "main10", "-pix_fmt", "p010le",
+         "-b:v", hevcBitrate(height: height), "-tag:v", "hvc1",
+         "-c:a", "copy", "-movflags", "+faststart",
+         "-progress", "pipe:1", "-nostats", output.path]
+    }
+
+    /// Avancement de la conversion d'après une ligne de `-progress` (« out_time_us=… »).
+    static func conversionProgress(_ line: String, duration: Double) -> Double? {
+        guard duration > 0, line.hasPrefix("out_time_us="), let micros = Double(line.dropFirst(12)) else { return nil }
+        return min(max(micros / 1_000_000 / duration, 0), 1)
     }
 
     /// Lien plausible (http/https).

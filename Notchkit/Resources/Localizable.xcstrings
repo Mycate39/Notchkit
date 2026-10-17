@@ -1,6 +1,150 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "Vidéo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vidéo"
+          }
+        }
+      }
+    },
+    "Recherche des résolutions…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Looking up resolutions…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recherche des résolutions…"
+          }
+        }
+      }
+    },
+    "Conversion en HEVC…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Converting to HEVC…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conversion en HEVC…"
+          }
+        }
+      }
+    },
+    "Conversion impossible : vidéo gardée dans son format d'origine." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't convert: the video was kept in its original format."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conversion impossible : vidéo gardée dans son format d'origine."
+          }
+        }
+      }
+    },
+    "Converti en HEVC après le téléchargement, pour QuickTime" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Converted to HEVC after downloading, for QuickTime"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Converti en HEVC après le téléchargement, pour QuickTime"
+          }
+        }
+      }
+    },
+    "MP4 H.264, lisible partout" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "H.264 MP4, plays everywhere"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MP4 H.264, lisible partout"
+          }
+        }
+      }
+    },
+    "Cette vidéo nécessite ffmpeg pour assembler l'image et le son : installez-le dans le Terminal avec « brew install ffmpeg »." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This video needs ffmpeg to combine picture and sound: install it in Terminal with “brew install ffmpeg”."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette vidéo nécessite ffmpeg pour assembler l'image et le son : installez-le dans le Terminal avec « brew install ffmpeg »."
+          }
+        }
+      }
+    },
+    "ffmpeg absent (nécessaire pour YouTube et le MP3)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ffmpeg missing (needed for YouTube and MP3)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ffmpeg absent (nécessaire pour YouTube et le MP3)"
+          }
+        }
+      }
+    },
+    "ffmpeg est nécessaire pour la plupart des vidéos YouTube, qui séparent l'image et le son, et pour le MP3. Installez-le dans le Terminal avec « brew install ffmpeg deno » (deno permet à yt-dlp de lire tous les formats de YouTube). Sur un Mac Intel, Homebrew peut devoir compiler ffmpeg, ce qui est long." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ffmpeg is needed for most YouTube videos, which keep picture and sound separate, and for MP3. Install it in Terminal with “brew install ffmpeg deno” (deno lets yt-dlp read every YouTube format). On an Intel Mac, Homebrew may need to build ffmpeg, which takes a while."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ffmpeg est nécessaire pour la plupart des vidéos YouTube, qui séparent l'image et le son, et pour le MP3. Installez-le dans le Terminal avec « brew install ffmpeg deno » (deno permet à yt-dlp de lire tous les formats de YouTube). Sur un Mac Intel, Homebrew peut devoir compiler ffmpeg, ce qui est long."
+          }
+        }
+      }
+    },
     "Sur un écran sans encoche, l'encoche se décale vers la droite si elle couvre les menus de l'app au premier plan. Sur une vraie encoche, l'activité compacte se rétrécit, ou se masque, pour laisser les menus visibles. Nécessite l'autorisation Accessibilité (Réglages Système > Confidentialité et sécurité > Accessibilité)." : {
       "localizations" : {
         "en" : {

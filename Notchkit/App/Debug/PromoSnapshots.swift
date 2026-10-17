@@ -37,14 +37,14 @@ enum PromoSnapshots {
         info.artwork = artwork
         info.artworkHash = 1
         music.debugSetNowPlaying(info)
-        save(compact(music.compactLeading(), music.compactTrailing()), to: file("01-musique-compacte"))
+        save(compact(music.compactLeading(), music.compactTrailing(), sideWidth: music.compactSideWidth), to: file("01-musique-compacte"))
         save(island(music.compactLeading(), music.compactTrailing()), to: file("01-musique-pilule"))
         save(card(music.expandedView(), weight: 2), to: file("01-musique-carte"))
 
         // Minuteur.
         let activities = LiveActivitiesModule(context: context)
         activities.startTimer(seconds: 299)
-        save(compact(activities.compactLeading(), activities.compactTrailing()), to: file("02-minuteur-compact"))
+        save(compact(activities.compactLeading(), activities.compactTrailing(), sideWidth: activities.compactSideWidth), to: file("02-minuteur-compact"))
         save(card(activities.expandedView(), weight: 1.5), to: file("02-minuteur-carte"))
 
         // Claude Code : au travail, puis la conversation avec le champ de réponse.

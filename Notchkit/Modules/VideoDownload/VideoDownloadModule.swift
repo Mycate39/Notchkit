@@ -232,6 +232,9 @@ final class VideoDownloadModule: NotchModule {
 
     var expandedWidthWeight: CGFloat { 2 }
 
+    /// Juste la place de « 100 % ».
+    var compactSideWidth: CGFloat { 52 }
+
     func compactLeading() -> AnyView? {
         guard activeDownload != nil else { return nil }
         return AnyView(Image(systemName: "arrow.down.to.line.circle.fill").foregroundStyle(.red))

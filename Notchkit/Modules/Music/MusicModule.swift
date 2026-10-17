@@ -240,6 +240,8 @@ final class MusicModule: NotchModule {
     /// Affichage replié façon Dynamic Island : pochette à gauche, barres teintées à droite.
     var compactIsland: Bool { true }
 
+    /// Juste la place de pochette et barres de l'égaliseur (26 pt).
+    var compactSideWidth: CGFloat { 38 }
 
     func compactLeading() -> AnyView? {
         guard let nowPlaying else { return nil }

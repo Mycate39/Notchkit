@@ -137,6 +137,9 @@ final class BatteryModule: NotchModule {
         return showInCompact ? .low : .none
     }
 
+    /// Juste la place de « 100 % ».
+    var compactSideWidth: CGFloat { 52 }
+
     func compactLeading() -> AnyView? {
         guard let state else { return nil }
         return AnyView(BatteryGlyph(state: state, isLowPowerMode: isLowPowerMode))

@@ -150,6 +150,9 @@ final class ShelfModule: NotchModule {
 
     var expandedWidthWeight: CGFloat { 2 }
 
+    /// Juste la place de nombre de fichiers.
+    var compactSideWidth: CGFloat { 40 }
+
     func compactLeading() -> AnyView? {
         guard !items.isEmpty else { return nil }
         return AnyView(Image(systemName: "tray.full.fill").foregroundStyle(.white.opacity(0.85)))

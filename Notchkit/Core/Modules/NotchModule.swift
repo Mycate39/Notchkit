@@ -69,6 +69,9 @@ protocol NotchModule: AnyObject, Observable {
     func compactTrailing() -> AnyView?
     /// Affichage replié façon « Dynamic Island » : capsule un peu plus haute, avec contour.
     var compactIsland: Bool { get }
+    /// Largeur de chaque côté de l'encoche repliée : juste la place du contenu le plus long
+    /// (fixe, pour que la forme ne saute pas quand un chiffre change).
+    var compactSideWidth: CGFloat { get }
     /// Contenu affiché quand l'encoche est dépliée.
     func expandedView() -> AnyView
     /// Largeur relative de la carte dans l'encoche dépliée (1 = normale, 2 = double).
@@ -89,6 +92,7 @@ extension NotchModule {
     func compactLeading() -> AnyView? { nil }
     func compactTrailing() -> AnyView? { nil }
     var compactIsland: Bool { false }
+    var compactSideWidth: CGFloat { NotchLayout.compactSideWidth }
     func settingsView() -> AnyView? { nil }
     var expandedWidthWeight: CGFloat { 1 }
 

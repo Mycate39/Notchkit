@@ -170,8 +170,9 @@ final class NotchViewModel {
     /// Largeur de chaque côté de l'encoche repliée (une alerte peut demander plus de place).
     var compactSideWidth: CGFloat {
         if let currentAlert { return currentAlert.sideWidth ?? NotchLayout.compactSideWidth }
-        guard let menuLimitedSideWidth, menuLimitedSideWidth > 0 else { return NotchLayout.compactSideWidth }
-        return min(NotchLayout.compactSideWidth, menuLimitedSideWidth)
+        let moduleWidth = manager.compactModule?.compactSideWidth ?? NotchLayout.compactSideWidth
+        guard let menuLimitedSideWidth, menuLimitedSideWidth > 0 else { return moduleWidth }
+        return min(moduleWidth, menuLimitedSideWidth)
     }
 
     var shapeSize: CGSize {

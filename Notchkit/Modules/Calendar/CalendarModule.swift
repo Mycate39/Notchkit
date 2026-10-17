@@ -183,6 +183,9 @@ final class CalendarModule: NotchModule {
 
     var expandedWidthWeight: CGFloat { 2 }
 
+    /// Juste la place de « 45 min ».
+    var compactSideWidth: CGFloat { 56 }
+
     func compactLeading() -> AnyView? {
         guard let event = reminderEvent else { return nil }
         return AnyView(

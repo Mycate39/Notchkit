@@ -182,6 +182,9 @@ final class WeatherModule: NotchModule {
 
     var expandedWidthWeight: CGFloat { 1.5 }
 
+    /// Juste la place de « -12° ».
+    var compactSideWidth: CGFloat { 46 }
+
     func compactLeading() -> AnyView? {
         guard let snapshot else { return nil }
         return AnyView(

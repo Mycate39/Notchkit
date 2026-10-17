@@ -111,6 +111,26 @@ struct NowPlayingArbiterTests {
         #expect(selected?.origin == .appleMusic)
         #expect(NowPlayingArbiter.select(mediaRemote: nil, publicSources: []) == nil)
     }
+
+    @Test func lecteurSortiDeMediaRemoteResteEnPause() {
+        // Brave quitte MediaRemote à la pause : son morceau reste affiché, figé à la position atteinte.
+        let start = Date(timeIntervalSince1970: 1_000)
+        var playing = NowPlayingInfo(origin: .mediaRemote, title: "Too Long", isPlaying: true)
+        playing.elapsed = 100
+        playing.timestamp = start
+        let retained = playing.retainedAfterDisappearing(at: start.addingTimeInterval(30))
+        #expect(retained.isPlaying == false)
+        #expect(retained.resumesInApp)
+        #expect(retained.elapsed(at: start.addingTimeInterval(600)) == 130)
+
+        // Retenu en l'absence d'autre lecteur ; un lecteur public qui joue passe devant ;
+        // un nouvel état MediaRemote aussi.
+        #expect(NowPlayingArbiter.select(mediaRemote: nil, retained: retained, publicSources: [])?.title == "Too Long")
+        #expect(NowPlayingArbiter.select(mediaRemote: nil, retained: retained,
+                                         publicSources: [info(.spotify, playing: true, at: 2)])?.origin == .spotify)
+        #expect(NowPlayingArbiter.select(mediaRemote: info(.mediaRemote, playing: true, at: 3), retained: retained,
+                                         publicSources: [])?.resumesInApp == false)
+    }
 }
 
 struct MediaRemoteOrphelinsTests {

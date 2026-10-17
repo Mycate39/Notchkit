@@ -34,6 +34,9 @@ struct NowPlayingInfo {
     var artworkHash: Int?
     /// Date de réception (pour départager plusieurs sources).
     var receivedAt = Date()
+    /// Le lecteur a quitté MediaRemote en se mettant en pause (ex. Brave) : aucune commande ne le
+    /// joint plus, seule son app peut reprendre la lecture.
+    var resumesInApp = false
 
     /// Position estimée à une date donnée (avance tant que la lecture est en cours).
     func elapsed(at date: Date) -> TimeInterval? {
@@ -42,6 +45,18 @@ struct NowPlayingInfo {
         let rate = playbackRate > 0 ? playbackRate : 1
         let value = max(0, elapsed + date.timeIntervalSince(timestamp) * rate)
         return duration.map { min(value, $0) } ?? value
+    }
+
+    /// Dernier état d'un lecteur qui vient de quitter MediaRemote : figé en pause à la position
+    /// atteinte, et marqué pour être repris depuis son app.
+    func retainedAfterDisappearing(at date: Date) -> NowPlayingInfo {
+        var info = self
+        info.elapsed = elapsed(at: date)
+        info.timestamp = date
+        info.isPlaying = false
+        info.resumesInApp = true
+        info.receivedAt = date
+        return info
     }
 
     /// Identifie le morceau (pour savoir si on a changé de titre).
@@ -127,12 +142,13 @@ extension NowPlayingInfo {
 
 enum NowPlayingArbiter {
     /// MediaRemote (toutes les apps) a la priorité ; sinon un lecteur public en cours de lecture,
-    /// sinon le plus récent en pause.
-    static func select(mediaRemote: NowPlayingInfo?, publicSources: [NowPlayingInfo]) -> NowPlayingInfo? {
+    /// sinon le plus récent en pause, y compris le dernier lecteur sorti de MediaRemote (`retained`).
+    static func select(mediaRemote: NowPlayingInfo?, retained: NowPlayingInfo? = nil,
+                       publicSources: [NowPlayingInfo]) -> NowPlayingInfo? {
         if let mediaRemote { return mediaRemote }
         if let playing = publicSources.filter(\.isPlaying).max(by: { $0.receivedAt < $1.receivedAt }) {
             return playing
         }
-        return publicSources.max(by: { $0.receivedAt < $1.receivedAt })
+        return (publicSources + [retained].compactMap { $0 }).max(by: { $0.receivedAt < $1.receivedAt })
     }
 }

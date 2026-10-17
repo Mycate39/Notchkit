@@ -70,6 +70,12 @@ final class MusicModule: NotchModule {
         .spotify: ScriptablePlayerSource(player: ScriptablePlayerSource.spotify),
     ]
     @ObservationIgnored private var mediaRemoteInfo: NowPlayingInfo?
+    /// Dernier morceau d'un lecteur qui a quitté MediaRemote en pause (voir `resumesInApp`).
+    @ObservationIgnored private var retainedInfo: NowPlayingInfo?
+    @ObservationIgnored private var retainedExpiryTask: Task<Void, Never>?
+    @ObservationIgnored private var terminationObserver: NSObjectProtocol?
+    /// Au-delà, le morceau retenu est oublié (onglet fermé, écoute abandonnée).
+    private static let retainedLifetime: Duration = .seconds(30 * 60)
     @ObservationIgnored private var publicInfos: [NowPlayingInfo.Origin: NowPlayingInfo] = [:]
     @ObservationIgnored private var isStarted = false
     @ObservationIgnored private var spectrumStopTask: Task<Void, Never>?
@@ -89,8 +95,18 @@ final class MusicModule: NotchModule {
         isStarted = true
 
         mediaRemote.onUpdate = { [weak self] info in
-            self?.mediaRemoteInfo = info
-            self?.updateSelection()
+            self?.mediaRemoteChanged(info)
+        }
+        // App du morceau retenu quittée : plus rien à reprendre.
+        terminationObserver = NSWorkspace.shared.notificationCenter.addObserver(
+            forName: NSWorkspace.didTerminateApplicationNotification, object: nil, queue: .main
+        ) { [weak self] notification in
+            let bundleID = (notification.userInfo?[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication)?.bundleIdentifier
+            MainActor.assumeIsolated {
+                guard let self, bundleID != nil, bundleID == self.retainedInfo?.bundleIdentifier else { return }
+                self.forgetRetained()
+                self.updateSelection()
+            }
         }
         if useMediaRemote { mediaRemote.start() }
 
@@ -109,15 +125,44 @@ final class MusicModule: NotchModule {
         mediaRemote.stop()
         publicSources.values.forEach { $0.stop() }
         mediaRemoteInfo = nil
+        forgetRetained()
+        terminationObserver.map(NSWorkspace.shared.notificationCenter.removeObserver)
+        terminationObserver = nil
         publicInfos.removeAll()
         nowPlaying = nil
         spectrumStopTask?.cancel()
         spectrum.stop()
     }
 
+    /// Certains lecteurs (navigateurs) quittent MediaRemote dès qu'on les met en pause : on garde
+    /// leur dernier morceau, en pause, pour pouvoir le reprendre depuis l'encoche.
+    private func mediaRemoteChanged(_ info: NowPlayingInfo?) {
+        if info == nil, let previous = mediaRemoteInfo {
+            retainedInfo = previous.retainedAfterDisappearing(at: Date())
+            retainedExpiryTask?.cancel()
+            retainedExpiryTask = Task { [weak self] in
+                try? await Task.sleep(for: Self.retainedLifetime)
+                guard !Task.isCancelled, let self else { return }
+                self.forgetRetained()
+                self.updateSelection()
+            }
+        } else if info != nil {
+            forgetRetained()
+        }
+        mediaRemoteInfo = info
+        updateSelection()
+    }
+
+    private func forgetRetained() {
+        retainedInfo = nil
+        retainedExpiryTask?.cancel()
+        retainedExpiryTask = nil
+    }
+
     private func updateSelection() {
         nowPlaying = NowPlayingArbiter.select(
             mediaRemote: useMediaRemote ? mediaRemoteInfo : nil,
+            retained: useMediaRemote ? retainedInfo : nil,
             publicSources: Array(publicInfos.values)
         )
         updateSpectrumCapture()
@@ -151,6 +196,11 @@ final class MusicModule: NotchModule {
 
     func send(_ command: PlaybackCommand) {
         guard let current = nowPlaying else { return }
+        // Lecteur sorti de MediaRemote : aucune commande ne l'atteint, on ouvre son app.
+        if current.resumesInApp {
+            openPlayerApp()
+            return
+        }
         switch current.origin {
         case .mediaRemote: mediaRemote.send(command)
         case .appleMusic, .spotify: publicSources[current.origin]?.send(command)
@@ -189,6 +239,7 @@ final class MusicModule: NotchModule {
 
     /// Affichage replié façon Dynamic Island : pochette à gauche, barres teintées à droite.
     var compactIsland: Bool { true }
+
 
     func compactLeading() -> AnyView? {
         guard let nowPlaying else { return nil }

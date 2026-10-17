@@ -3,6 +3,19 @@
   <channel>
     <title>Notchkit</title>
     <item>
+      <title>Notchkit 1.0.6</title>
+      <pubDate>Sat, 17 Oct 2026 21:53:09 GMT</pubDate>
+      <sparkle:version>17</sparkle:version>
+      <sparkle:shortVersionString>1.0.6</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <link>https://github.com/Mycate39/Notchkit/releases/tag/v1.0.6</link>
+      <sparkle:informationalUpdate>
+        <sparkle:belowVersion>12</sparkle:belowVersion>
+      </sparkle:informationalUpdate>
+      <description><![CDATA[<h3>What&#x27;s new</h3><p>A smoother notch, especially on MacBooks with a real notch.</p><ul><li><b>Crisp edges at rest:</b> on a real notch, Notchkit no longer draws its own shape over the hardware notch when nothing is happening, so the edges stay perfectly sharp.</li><li><b>Centered while opening:</b> widgets stay centered as the notch opens, including with the <b>Bouncy</b> animation, and no longer shift by a couple of points at the end.</li><li><b>Live activities come back like they start:</b> when the notch closes, it first returns to its resting size, then the live activity grows back out on each side.</li><li><b>No more accidental reopening:</b> after the notch closes, only the closed notch area reopens it, and it waits a moment first. Moving the pointer up to the menu bar no longer reopens it by mistake.</li></ul><h3>Installation</h3><p>Notchkit 1.0.3 or later offers this update by itself (or use <b>Check for Updates…</b> in its menu).</p><p>If you have Notchkit 1.0.2 or earlier, download <code>Notchkit-1.0.6.dmg</code>, open it, and drag <b>Notchkit.app</b> onto the <b>Applications</b> shortcut. Notchkit isn&#x27;t notarized: the first time, right-click the app &gt; <b>Open</b>. Coming from 1.0.0 or earlier, also give it the <b>Accessibility</b> permission again: open System Settings &gt; Privacy &amp; Security &gt; Accessibility, remove Notchkit with <b>−</b>, then add it again.</p><p>Requires macOS 14 or later, on Apple silicon or Intel.</p>]]></description>
+      <enclosure url="https://github.com/Mycate39/Notchkit/releases/download/v1.0.6/Notchkit-1.0.6.dmg" sparkle:edSignature="RvRjp+Wnm8Pl4xqz/h3RfI2BpIiF3fgxFomH55wKtv0mwQhBEYkS7H3B3hEvMuBHsIv8Uvcv/BIuL6KFaC9aCQ==" length="8041797" type="application/octet-stream"/>
+    </item>
+    <item>
       <title>Notchkit 1.0.5</title>
       <pubDate>Sat, 17 Oct 2026 15:58:26 GMT</pubDate>
       <sparkle:version>16</sparkle:version>

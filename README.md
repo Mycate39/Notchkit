@@ -12,7 +12,8 @@ https://github.com/user-attachments/assets/805f5594-03e0-49f6-a223-b9498daf1901
 
 **Music and media**
 - **Music**: the current track (Apple Music, Spotify, and most players, including in the
-  browser), artwork, controls, bars that react to the sound, and a Dynamic Island–style look.
+  browser), artwork, controls, and bars that react to the sound, in an iPhone Live Activity
+  style. A paused track stays in the notch, ready to resume.
 - **Volume and brightness**: an indicator in the notch instead of the macOS one, including
   changes from the Touch Bar and Control Center.
 - **AirPods and Bluetooth**: an animation on connect, and the battery of each device.
@@ -21,7 +22,8 @@ https://github.com/user-attachments/assets/805f5594-03e0-49f6-a223-b9498daf1901
 **System**
 - **Quick Toggles**: Dark Mode, stay awake, hide desktop icons, and a keyboard lock to clean it.
 - **System Monitor**: CPU per core, GPU, memory, disk, network speed, battery health, and heavy processes.
-- **Battery**: percentage and time remaining.
+- **Battery**: percentage, time remaining, and while charging, the time left until full and
+  when it will be full (optionally as a live activity next to the notch).
 - **Window Snapping**: drag a window toward the notch to snap it to a half, third, quarter or full screen.
 
 **Files and clipboard**
@@ -49,11 +51,15 @@ https://github.com/user-attachments/assets/805f5594-03e0-49f6-a223-b9498daf1901
 - **Ollama**: the models your local AI server has loaded.
 
 **And more**
-- **Video downloads** (with yt-dlp, installed on demand), **unlock animations** and trackpad
-  haptic feedback.
+- **Video downloads** (with yt-dlp, installed on demand): pick any resolution the video
+  offers, up to 4K, and get an MP4 that plays in QuickTime on every Mac. Most YouTube videos
+  need [ffmpeg](https://ffmpeg.org): `brew install ffmpeg deno`.
+- **Unlock animations** and trackpad haptic feedback.
 - **Customization**: widgets in several sizes, pages, ready-made layouts, notch size,
   animations, colors, and background (including Liquid Glass on macOS 26). New widgets
   are off by default: turn them on in Settings.
+- **Made for the real notch**: it matches the hardware notch exactly, keeps the active app's
+  menus visible around it, and stays out of the way when you move to the menu bar.
 
 Everything is free and runs on your Mac: no account, no paid service.
 
@@ -69,6 +75,10 @@ Notchkit is available in English and French, following your Mac's language.
 
 Notchkit updates itself: it checks for a new version once a day and installs it with your approval (you can also use **Check for Updates…** in its menu).
 
+> **Coming from Notchkit 1.0.2 or earlier?** Those versions can't update themselves to the
+> current one (Notchkit is now signed with new keys): download the latest DMG once and
+> replace the app. From 1.0.0 or earlier, also give the **Accessibility** permission again.
+
 Notchkit lives in the menu bar (no Dock icon). Open the settings from its menu bar icon or
 from the gear in the notch.
 
@@ -79,14 +89,21 @@ from the gear in the notch.
 
 ### Permissions
 
-Notchkit only asks for a permission when a feature needs it: Accessibility (volume and
-brightness keys), Calendars, Location (weather), and System Audio Recording (music-reactive
-bars). Nothing is sent over the internet, except weather requests (Open-Meteo) and the
-yt-dlp download if you install it.
+Notchkit only asks for a permission when a feature needs it:
+
+- **Accessibility**: volume and brightness keys, and keeping the notch clear of the active
+  app's menus.
+- **Calendars** and **Reminders**, **Location** (weather), **Camera** (Webcam widget),
+  **System Audio Recording** (music-reactive bars), and **Automation** (controlling Music
+  and Spotify, Dark Mode, and reading the folder open in Terminal for the Git widget).
+
+Notchkit has no account and no analytics. It only goes online for weather (Open-Meteo),
+update checks (GitHub), the GitHub widget if you add a token, and the yt-dlp tool and
+videos you choose to download.
 
 ## Building from source
 
-Requirements: Xcode 26 and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
+Requirements: Xcode 26 or later and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
 
 ```sh
 xcodegen generate
@@ -96,8 +113,8 @@ open Notchkit.xcodeproj
 ## Notes
 
 Some features rely on unofficial macOS interfaces (reading the current track from any app,
-built-in display brightness). A macOS update may break them; Notchkit then falls back to
-public interfaces.
+built-in display brightness, staying visible on the lock screen). A macOS update may break
+them; Notchkit then falls back to public interfaces.
 
 ## License
 

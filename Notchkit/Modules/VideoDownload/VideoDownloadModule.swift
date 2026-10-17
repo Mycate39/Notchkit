@@ -103,7 +103,7 @@ final class VideoDownloadModule: NotchModule {
         process.standardOutput = pipe
         process.standardError = pipe
         let id = item.id
-        var buffer = Data()
+        let buffer = OutputLineBuffer()
         pipe.fileHandleForReading.readabilityHandler = { [weak self] handle in
             let data = handle.availableData
             guard !data.isEmpty else {
@@ -112,10 +112,7 @@ final class VideoDownloadModule: NotchModule {
             }
             DispatchQueue.main.async {
                 MainActor.assumeIsolated {
-                    buffer.append(data)
-                    while let newline = buffer.firstIndex(where: { $0 == 0x0A || $0 == 0x0D }) {
-                        let line = String(decoding: buffer[buffer.startIndex..<newline], as: UTF8.self)
-                        buffer.removeSubrange(buffer.startIndex...newline)
+                    for line in buffer.append(data) {
                         if let parsed = YTDLP.parse(line) { self?.apply(parsed, to: id) }
                     }
                 }
@@ -268,5 +265,23 @@ final class VideoDownloadModule: NotchModule {
 
     func openSettings() {
         context.openSettings()
+    }
+}
+
+/// Tampon de la sortie de yt-dlp, découpée en lignes. Isolé sur le thread principal
+/// pour pouvoir être capturé par le gestionnaire de lecture du pipe sans course de données.
+@MainActor
+private final class OutputLineBuffer {
+    private var data = Data()
+
+    /// Ajoute un morceau de sortie et renvoie les lignes complètes qu'il termine.
+    func append(_ chunk: Data) -> [String] {
+        data.append(chunk)
+        var lines: [String] = []
+        while let newline = data.firstIndex(where: { $0 == 0x0A || $0 == 0x0D }) {
+            lines.append(String(decoding: data[data.startIndex..<newline], as: UTF8.self))
+            data.removeSubrange(data.startIndex...newline)
+        }
+        return lines
     }
 }

@@ -23,15 +23,24 @@ struct NotchContainerView: View {
             bottomCornerRadius: radii.bottom
         )
 
+        // Contenu dans un cadre fixe et persistant, isolé par `geometryGroup` : pendant que la forme
+        // grandit (et dépasse, avec le ressort rebondissant), ce cadre reste centré sur l'encoche et la
+        // forme le dévoile depuis le centre. Sans lui, le contenu inséré à l'ouverture suivait le bord
+        // gauche de la forme animée.
+        let expanded = NotchLayout.shapeSize(for: geometry, isExpanded: true, hasCompactContent: true)
         ZStack(alignment: .top) {
             if viewModel.isExpanded {
                 ExpandedNotchView(viewModel: viewModel)
+                    .frame(width: expanded.width, height: expanded.height)
                     .transition(.materialize)
             } else {
                 CompactNotchView(viewModel: viewModel)
+                    .frame(width: size.width, height: size.height, alignment: .top)
                     .transition(.opacity)
             }
         }
+        .frame(width: max(expanded.width, size.width), height: max(expanded.height, size.height), alignment: .top)
+        .geometryGroup()
         .frame(width: size.width, height: size.height, alignment: .top)
         .notchBackground(viewModel.appearance, style: geometry.style, shape: shape)
         // Fin contour gris, comme la Dynamic Island : pour l'île, et quand la barre des menus est
@@ -50,6 +59,12 @@ struct NotchContainerView: View {
         .shadow(color: .black.opacity(shadow.opacity), radius: shadow.radius, y: shadow.y)
         // Indice au survol : l'encoche gonfle légèrement, depuis le haut, avant de s'ouvrir.
         .scaleEffect(viewModel.showsHoverShadow ? 1.03 : 1, anchor: .top)
+        // Vraie encoche au repos : rien par-dessus, l'encoche de l'écran suffit (bords nets).
+        // Apparition immédiate ; disparition une fois le repli terminé, pour qu'on le voie.
+        // Animation limitée à l'opacité : le repli lui-même garde son ressort, sans délai.
+        .animation(viewModel.showsShape ? NotchLayout.spring : NotchLayout.shapeFadeOut) { content in
+            content.opacity(viewModel.showsShape ? 1 : 0)
+        }
         // Autres activités en cours : petites bulles à droite, comme sur iPhone.
         .overlay(alignment: .topTrailing) {
             CompactBubbles(viewModel: viewModel)

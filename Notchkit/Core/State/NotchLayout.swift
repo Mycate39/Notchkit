@@ -18,6 +18,8 @@ struct NotchGeometry: Equatable, Sendable {
     var screenFrame: CGRect
     /// Centre horizontal de l'encoche, en coordonnées écran.
     var centerX: CGFloat
+    /// Encoche matérielle (et non simulée ou pastille) : au repos, on ne dessine rien par-dessus.
+    var isPhysicalNotch = false
 
     static let placeholder = NotchGeometry(
         style: .pill,
@@ -69,6 +71,26 @@ enum NotchLayout {
     /// Décalage du menu déroulé sous le bord de l'écran, en mode encoche.
     static let bubbleMenuTopInset: CGFloat = 4
 
+    /// Forme noire dessinée ? (fonction pure, testée). Sur une encoche matérielle au repos, une
+    /// forme par-dessus serait un peu plus large (congés) et ses coins ne tomberaient pas
+    /// exactement sur ceux de l'écran : bords crénelés. On laisse alors l'encoche réelle seule.
+    static func showsShape(isPhysicalNotch: Bool, isExpanded: Bool, hasCompactContent: Bool,
+                           isHovering: Bool, hasBubbles: Bool) -> Bool {
+        !isPhysicalNotch || isExpanded || hasCompactContent || isHovering || hasBubbles
+    }
+
+    /// Juste après un repli, l'encoche ne se rouvre que si le pointeur s'y attarde : en remontant
+    /// vers la barre des menus, on la traverse sans le vouloir.
+    static let reopenGuardWindow: TimeInterval = 1.0
+    static let reopenGuardDelay: TimeInterval = 0.5
+
+    /// Délai d'ouverture au survol (fonction pure, testée) : allongé pendant `reopenGuardWindow`
+    /// après un repli, sinon le délai choisi dans les réglages.
+    static func openDelay(base: TimeInterval, sinceCollapse: TimeInterval?) -> TimeInterval {
+        guard let sinceCollapse, sinceCollapse < reopenGuardWindow else { return base }
+        return max(base, reopenGuardDelay)
+    }
+
     /// Hauteur d'une encoche physique. La zone de sécurité (32 pt sur un MacBook Pro 14") s'arrête
     /// environ 1 pt au-dessus du bas réel de l'encoche, qui coïncide avec la barre des menus (33 pt).
     /// On prend la plus grande des deux ; si la barre est masquée (hauteur 0), la zone de sécurité.
@@ -104,6 +126,14 @@ enum NotchLayout {
             && fromTop <= topInset(for: style) + shapeSize.height + tolerance
     }
 
+    /// Pointeur dans l'encoche ? (fonction pure, testée). Dépliée : toute la fenêtre lui appartient.
+    /// Sinon, seulement la forme repliée : pendant le repli, la fenêtre a encore la taille de
+    /// l'encoche dépliée, et un pointeur resté (ou passant) dans cette grande zone la rouvrait.
+    static func isPointerInside(isExpanded: Bool, dx: CGFloat, fromTop: CGFloat, shapeSize: CGSize,
+                                style: NotchStyle) -> Bool {
+        isExpanded || isOverNotch(dx: dx, fromTop: fromTop, shapeSize: shapeSize, style: style)
+    }
+
     /// Hauteur du menu déroulé : `count` bulles rondes empilées (décalage du haut compris).
     static func bubbleMenuHeight(count: Int, geometry: NotchGeometry, island: Bool = false) -> CGFloat {
         let count = min(max(0, count), maxBubbles)
@@ -126,6 +156,22 @@ enum NotchLayout {
         if NSWorkspace.shared.accessibilityDisplayShouldReduceMotion { return .easeOut(duration: 0.18 * animationSlowdown) }
         let style = appearance.animation
         return .spring(duration: style.spring.duration * animationSlowdown, bounce: style.spring.bounce)
+    }
+    /// Disparition de la forme au-dessus d'une vraie encoche : seulement une fois le repli terminé,
+    /// sinon le fondu se joue pendant le repli et le rend presque invisible.
+    @MainActor static var shapeFadeOut: Animation {
+        let reduceMotion = NSWorkspace.shared.accessibilityDisplayShouldReduceMotion
+        let collapse = reduceMotion ? 0.18 : appearance.animation.spring.duration
+        return .easeOut(duration: 0.2 * animationSlowdown).delay(collapse * animationSlowdown)
+    }
+    /// Part du repli après laquelle l'activité compacte ressort : le ressort a presque fini sa course
+    /// bien avant sa durée nominale, attendre la fin laisse un temps mort.
+    static let collapseSettleFraction = 0.6
+    /// Attente avant que l'activité compacte ressorte au repli.
+    @MainActor static var collapseSettleDelay: Duration {
+        let reduceMotion = NSWorkspace.shared.accessibilityDisplayShouldReduceMotion
+        let collapse = reduceMotion ? 0.18 : appearance.animation.spring.duration
+        return .milliseconds(Int(collapse * collapseSettleFraction * 1000 * animationSlowdown))
     }
     /// Temps laissé à l'animation de repli avant de réduire la fenêtre.
     @MainActor static var shrinkDelay: Duration {

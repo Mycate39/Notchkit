@@ -32,6 +32,13 @@ final class NotchViewModel {
     /// Petite ombre sous l'encoche repliée quand la souris la survole.
     var showsHoverShadow: Bool { isHovering && !isExpanded }
 
+    /// Forme noire visible (voir `NotchLayout.showsShape`) : masquée au repos sur une vraie encoche.
+    var showsShape: Bool {
+        NotchLayout.showsShape(isPhysicalNotch: geometry.isPhysicalNotch, isExpanded: isExpanded,
+                               hasCompactContent: hasCompactContent, isHovering: isHovering,
+                               hasBubbles: !bubbleModules.isEmpty)
+    }
+
     /// Des fichiers sont glissés au-dessus de l'encoche : elle affiche les zones de dépôt.
     private(set) var isDropMode = false
     /// Zone de dépôt survolée.
@@ -65,8 +72,15 @@ final class NotchViewModel {
     var isExpanded: Bool { state == .expanded }
 
     var hasCompactContent: Bool {
-        currentAlert != nil || (manager.compactModule != nil && menuLimitedSideWidth != 0)
+        currentAlert != nil || (!isSettlingAfterCollapse && manager.compactModule != nil && menuLimitedSideWidth != 0)
     }
+
+    /// Repli en cours : l'encoche se referme d'abord jusqu'à sa taille de repos, puis l'activité
+    /// compacte ressort, comme quand elle démarre. Les alertes ne sont pas retardées.
+    private(set) var isSettlingAfterCollapse = false
+    @ObservationIgnored private var settleTask: Task<Void, Never>?
+    /// Dernier repli (voir `NotchLayout.openDelay`).
+    @ObservationIgnored private var lastCollapse: Date?
 
     /// Largeur laissée par les menus de l'app active autour d'une encoche réelle
     /// (voir `MenuBarAvoidance.compactSideWidth`) : `nil` sans contrainte, `0` pour masquer
@@ -82,7 +96,7 @@ final class NotchViewModel {
 
     /// Activités secondaires affichées en bulles (encoche repliée, sans alerte agrandie).
     var bubbleModules: [any NotchModule] {
-        guard !isExpanded, currentAlert?.expandedContent == nil else { return [] }
+        guard !isExpanded, !isSettlingAfterCollapse, currentAlert?.expandedContent == nil else { return [] }
         return manager.secondaryCompactModules
     }
 
@@ -144,10 +158,11 @@ final class NotchViewModel {
     @ObservationIgnored private(set) var isPointerOverNotch = false
 
     /// La grande encoche occupe le centre de la fenêtre ; les bulles sont à droite.
-    /// Encoche dépliée : toute la fenêtre lui appartient (les bulles sont masquées).
+    /// Encoche dépliée : toute la fenêtre lui appartient (les bulles sont masquées) ; repliée,
+    /// seulement sa forme (voir `NotchLayout.isPointerInside`).
     func pointerMoved(dx: CGFloat, fromTop: CGFloat) {
-        let inside = isExpanded || bubbleModules.isEmpty
-            || NotchLayout.isOverNotch(dx: dx, fromTop: fromTop, shapeSize: shapeSize, style: geometry.style)
+        let inside = NotchLayout.isPointerInside(isExpanded: isExpanded, dx: dx, fromTop: fromTop,
+                                                 shapeSize: shapeSize, style: geometry.style)
         guard inside != isPointerOverNotch else { return }
         isPointerOverNotch = inside
         hoverChanged(isInside: inside)
@@ -229,7 +244,9 @@ final class NotchViewModel {
         if !isInside && isHeld { return }
         if isInside && isExpansionBlocked && !isExpanded { return }
         hoverTask?.cancel()
-        let delay = isInside ? settings.settings.hoverOpenDelay : settings.settings.hoverCloseDelay
+        let openDelay = NotchLayout.openDelay(base: settings.settings.hoverOpenDelay,
+                                              sinceCollapse: lastCollapse.map { Date().timeIntervalSince($0) })
+        let delay = isInside ? openDelay : settings.settings.hoverCloseDelay
         hoverTask = Task { [weak self] in
             try? await Task.sleep(for: .seconds(delay))
             guard !Task.isCancelled else { return }
@@ -246,12 +263,27 @@ final class NotchViewModel {
         bubbleMenuRequested = false
         bubbleHoverTask?.cancel()
         Haptics.play(.tap)
-        withAnimation(NotchLayout.spring) { state = .expanded }
+        settleTask?.cancel()
+        withAnimation(NotchLayout.spring) {
+            isSettlingAfterCollapse = false
+            state = .expanded
+        }
     }
 
     func collapse() {
         guard state != .collapsed else { return }
-        withAnimation(NotchLayout.spring) { state = .collapsed }
+        lastCollapse = Date()
+        withAnimation(NotchLayout.spring) {
+            isSettlingAfterCollapse = true
+            state = .collapsed
+        }
+        // Une fois l'encoche refermée, l'activité compacte ressort avec le ressort habituel.
+        settleTask?.cancel()
+        settleTask = Task { [weak self] in
+            try? await Task.sleep(for: NotchLayout.collapseSettleDelay)
+            guard !Task.isCancelled, let self else { return }
+            withAnimation(NotchLayout.spring) { self.isSettlingAfterCollapse = false }
+        }
     }
 
     /// Maintient (ou relâche) l'encoche dépliée. Au relâchement, elle se replie si la souris est ailleurs.

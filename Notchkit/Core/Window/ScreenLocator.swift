@@ -35,7 +35,8 @@ enum ScreenLocator {
                 style: .notch,
                 closedSize: CGSize(width: notchWidth, height: height),
                 screenFrame: frame,
-                centerX: frame.minX + left.width + notchWidth / 2
+                centerX: frame.minX + left.width + notchWidth / 2,
+                isPhysicalNotch: true
             )
         }
 

@@ -154,6 +154,47 @@ struct NotchLayoutTests {
         #expect(NotchLayout.physicalNotchHeight(safeAreaTop: 32, menuBarHeight: 0) == 32)
     }
 
+    @Test func seuleLEncocheReplieeRouvre() {
+        // Encoche repliée (forme de 201 × 33 pt) dans une fenêtre encore à la taille dépliée.
+        let closed = CGSize(width: 201, height: 33)
+        func inside(expanded: Bool, dx: CGFloat, fromTop: CGFloat) -> Bool {
+            NotchLayout.isPointerInside(isExpanded: expanded, dx: dx, fromTop: fromTop, shapeSize: closed, style: .notch)
+        }
+        // Repliée : seul le dessus de la forme compte, pas le reste de l'ancienne zone dépliée.
+        #expect(inside(expanded: false, dx: 0, fromTop: 10))
+        #expect(!inside(expanded: false, dx: 0, fromTop: 120))
+        #expect(!inside(expanded: false, dx: 300, fromTop: 10))
+        // Dépliée : toute la fenêtre.
+        #expect(inside(expanded: true, dx: 300, fromTop: 120))
+    }
+
+    @Test func pasDeReouvertureEnTraversantLEncocheJusteApresUnRepli() {
+        // Juste après un repli : il faut s'attarder.
+        #expect(NotchLayout.openDelay(base: 0.12, sinceCollapse: 0.2) == NotchLayout.reopenGuardDelay)
+        // Ensuite, ou sans repli récent : le délai des réglages.
+        #expect(NotchLayout.openDelay(base: 0.12, sinceCollapse: 1.5) == 0.12)
+        #expect(NotchLayout.openDelay(base: 0.12, sinceCollapse: nil) == 0.12)
+        // Un délai réglé plus long que la garde reste respecté.
+        #expect(NotchLayout.openDelay(base: 0.8, sinceCollapse: 0.2) == 0.8)
+    }
+
+    @Test func rienParDessusUneVraieEncocheAuRepos() {
+        func shows(physical: Bool, expanded: Bool = false, compact: Bool = false, hover: Bool = false,
+                   bubbles: Bool = false) -> Bool {
+            NotchLayout.showsShape(isPhysicalNotch: physical, isExpanded: expanded, hasCompactContent: compact,
+                                   isHovering: hover, hasBubbles: bubbles)
+        }
+        // Vraie encoche au repos : l'encoche de l'écran suffit.
+        #expect(!shows(physical: true))
+        // Dès qu'il se passe quelque chose, la forme réapparaît.
+        #expect(shows(physical: true, expanded: true))
+        #expect(shows(physical: true, compact: true))
+        #expect(shows(physical: true, hover: true))
+        #expect(shows(physical: true, bubbles: true))
+        // Encoche simulée ou pastille : toujours dessinée (rien d'autre ne la montre).
+        #expect(shows(physical: false))
+    }
+
     @Test func margeDeFenetreCouvreLOmbre() {
         // Ombre dépliée : 16 pt de flou décalés de 6 pt ; la fenêtre doit laisser au moins 38 pt dessous.
         #expect(NotchLayout.expandedShadowMargin >= NotchLayout.expandedShadow.y + NotchLayout.expandedShadow.radius * 2)

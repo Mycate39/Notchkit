@@ -227,12 +227,13 @@ private struct BlurModifier: ViewModifier {
 }
 
 extension AnyTransition {
-    /// Apparition depuis l'encoche : léger agrandissement ancré en haut, flou qui se dissipe et fondu.
-    /// Même chemin à l'aller et au retour.
+    /// Apparition depuis l'encoche : flou qui se dissipe et fondu, la forme qui grandit donnant
+    /// l'élan. Même chemin à l'aller et au retour. Pas d'agrandissement : sur les vues AppKit (pages
+    /// défilantes), SwiftUI redimensionne réellement le cadre à chaque image, le défilement dérive
+    /// de quelques points puis se recale d'un coup à la fin de l'animation.
     static var materialize: AnyTransition {
         .modifier(active: BlurModifier(radius: 6), identity: BlurModifier(radius: 0))
             .combined(with: .opacity)
-            .combined(with: .scale(scale: 0.96, anchor: .top))
     }
 }
 

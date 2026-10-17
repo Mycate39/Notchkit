@@ -116,6 +116,9 @@ struct MusicExpandedView: View {
         } else if let info = module.nowPlaying {
             // Moyen et grand : présentation façon Dynamic Island de l'iPhone, resserrée si la carte est basse.
             ViewThatFits(in: .vertical) {
+                if size == .large {
+                    islandLayout(info, artworkSize: 60, showsProgress: true, largeControls: true)
+                }
                 islandLayout(info, artworkSize: size == .large ? 50 : 46, showsProgress: true, largeControls: true)
                 islandLayout(info, artworkSize: 40, showsProgress: true, largeControls: false)
                 islandLayout(info, artworkSize: 36, showsProgress: false, largeControls: false)
@@ -158,12 +161,14 @@ struct MusicExpandedView: View {
 
     private func islandLayout(_ info: NowPlayingInfo, artworkSize: CGFloat, showsProgress: Bool,
                               largeControls: Bool) -> some View {
-        VStack(spacing: 8) {
+        // Présentation des Live Activities de l'iPhone : pochette, titre en gras et barres en haut,
+        // barre fine au milieu, glyphes blancs sans fond en bas.
+        VStack(spacing: largeControls ? 10 : 6) {
             HStack(spacing: 12) {
                 Button {
                     module.openPlayerApp()
                 } label: {
-                    ArtworkView(info: info, size: artworkSize, cornerRadius: artworkSize * 0.24)
+                    ArtworkView(info: info, size: artworkSize, cornerRadius: artworkSize * 0.22)
                         .overlay(alignment: .bottomTrailing) {
                             // Petite icône de l'app qui joue (désactivable dans les réglages).
                             if module.showAppBadge, info.artwork != nil, let icon = AppIconCache.icon(for: info.bundleIdentifier) {
@@ -177,17 +182,18 @@ struct MusicExpandedView: View {
                 .buttonStyle(.notch)
                 .help("Ouvrir l'app qui joue")
 
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(alignment: .leading, spacing: 1) {
                     Text(info.title)
-                        .font(.system(size: 15, weight: .semibold))
+                        .font(.system(size: 16, weight: .bold))
                     if let artist = info.artist {
                         Text(artist)
-                            .font(.system(size: 13))
-                            .foregroundStyle(.white.opacity(0.55))
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundStyle(.white.opacity(0.5))
                     }
                 }
                 .lineLimit(1)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .animation(.smooth, value: info.title)
 
                 // Barres colorées d'après la pochette, en haut à droite.
                 EqualizerView(isAnimating: info.isPlaying, monitor: module.reactiveEqualizer ? module.spectrum : nil,
@@ -205,16 +211,14 @@ struct MusicExpandedView: View {
             // Commandes centrées, AirPlay à droite : un emplacement vide de même largeur à gauche
             // garde les commandes au centre sans jamais chevaucher le bouton AirPlay.
             HStack(spacing: 0) {
-                Color.clear.frame(width: 30, height: 1)
+                Color.clear.frame(width: 26, height: 1)
                 Spacer(minLength: 4)
                 PlaybackControls(module: module, isPlaying: info.isPlaying, large: largeControls,
-                                 spacing: size == .large ? 18 : 12)
+                                 spacing: size == .large ? 34 : 24)
                 Spacer(minLength: 4)
-                // Même cercle sombre que les boutons précédent et suivant (style StandBy).
                 AirPlayButton()
-                    .frame(width: 18, height: 18)
-                    .frame(width: 30, height: 30)
-                    .background(StandBy.surface, in: Circle())
+                    .frame(width: 22, height: 22)
+                    .frame(width: 26, height: 26)
                     .help("Sortie audio")
             }
         }
@@ -231,16 +235,16 @@ private struct PlaybackProgressView: View {
             let duration = info.duration ?? 0
             let elapsed = info.elapsed(at: context.date)
 
-            HStack(spacing: 8) {
+            HStack(spacing: 10) {
                 Text(elapsed.map(Self.format) ?? "–:––")
                     .frame(minWidth: 30, alignment: .leading)
-                StandByBar(value: duration > 0 ? (elapsed ?? 0) / duration : 0, height: 6)
+                ProgressLine(value: duration > 0 ? (elapsed ?? 0) / duration : 0)
                     .opacity(elapsed == nil ? 0.4 : 1)
                 Text(elapsed.map { "-" + Self.format(max(0, duration - $0)) } ?? Self.format(duration))
                     .frame(minWidth: 34, alignment: .trailing)
             }
-            .font(.system(size: 10, weight: .medium).monospacedDigit())
-            .foregroundStyle(.white.opacity(0.55))
+            .font(.system(size: 11, weight: .medium).monospacedDigit())
+            .foregroundStyle(.white.opacity(0.5))
         }
     }
 
@@ -249,39 +253,70 @@ private struct PlaybackProgressView: View {
     }
 }
 
+/// Barre de progression fine : partie écoulée claire sur fond gris sombre, comme sur l'iPhone.
+private struct ProgressLine: View {
+    var value: Double
+    var height: CGFloat = 5
+
+    var body: some View {
+        GeometryReader { proxy in
+            let fraction = min(max(value, 0), 1)
+            ZStack(alignment: .leading) {
+                Capsule().fill(.white.opacity(0.18))
+                Capsule().fill(.white.opacity(0.8))
+                    // Jamais plus étroite qu'un cercle, pour garder des bouts arrondis.
+                    .frame(width: fraction > 0 ? max(height, proxy.size.width * fraction) : 0)
+            }
+        }
+        .frame(height: height)
+        .animation(.smooth, value: value)
+    }
+}
+
 private struct PlaybackControls: View {
     let module: MusicModule
     let isPlaying: Bool
     /// Petit widget : boutons serrés.
     var compact = false
-    /// Grand bouton lecture/pause (sinon taille intermédiaire, pour les cartes basses).
+    /// Grands glyphes (sinon taille intermédiaire, pour les cartes basses).
     var large = true
-    var spacing: CGFloat = 18
+    var spacing: CGFloat = 34
 
-    // Style StandBy : lecture/pause en grand cercle ambre, morceaux précédent/suivant en cercles sombres.
+    // Glyphes blancs pleins, sans fond ; lecture/pause plus grand que précédent/suivant.
     var body: some View {
-        let side: StandByButtonStyle.Size = compact || !large ? .small : .regular
-        let main: StandByButtonStyle.Size = compact || !large ? .regular : .large
-        HStack(spacing: compact ? 6 : spacing) {
-            control("backward.fill", style: .standBy(side, circle: true),
-                    help: "Morceau précédent") { module.send(.previousTrack) }
-            control(isPlaying ? "pause.fill" : "play.fill", style: .standBy(main, active: true, circle: true),
-                    help: isPlaying ? "Pause" : "Lecture") {
+        let side: CGFloat = compact ? 13 : (large ? 22 : 17)
+        let main: CGFloat = compact ? 18 : (large ? 32 : 24)
+        HStack(spacing: compact ? 12 : spacing) {
+            control("backward.fill", size: side, help: "Morceau précédent") { module.send(.previousTrack) }
+            control(isPlaying ? "pause.fill" : "play.fill", size: main, help: isPlaying ? "Pause" : "Lecture") {
                 module.send(.togglePlayPause)
             }
-            control("forward.fill", style: .standBy(side, circle: true),
-                    help: "Morceau suivant") { module.send(.nextTrack) }
+            .frame(width: main * 1.2)  // largeur fixe : lecture et pause n'ont pas la même chasse
+            control("forward.fill", size: side, help: "Morceau suivant") { module.send(.nextTrack) }
         }
     }
 
-    private func control(_ symbol: String, style: StandByButtonStyle, help: LocalizedStringKey,
+    private func control(_ symbol: String, size: CGFloat, help: LocalizedStringKey,
                          action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Image(systemName: symbol)
+                .font(.system(size: size, weight: .bold))
                 .contentTransition(.symbolEffect(.replace))
         }
-        .buttonStyle(style)
+        .buttonStyle(GlyphButtonStyle())
         .help(help)
+    }
+}
+
+/// Bouton réduit à son glyphe blanc : s'assombrit et rétrécit légèrement quand on appuie.
+private struct GlyphButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .foregroundStyle(.white.opacity(configuration.isPressed ? 0.5 : 1))
+            .scaleEffect(configuration.isPressed ? 0.88 : 1)
+            .padding(4)
+            .contentShape(Rectangle())
+            .animation(.smooth(duration: 0.15), value: configuration.isPressed)
     }
 }
 
@@ -290,7 +325,7 @@ private struct AirPlayButton: NSViewRepresentable {
     func makeNSView(context: Context) -> AVRoutePickerView {
         let picker = AVRoutePickerView()
         picker.isRoutePickerButtonBordered = false
-        picker.setRoutePickerButtonColor(.white.withAlphaComponent(0.75), for: .normal)
+        picker.setRoutePickerButtonColor(.white.withAlphaComponent(0.55), for: .normal)
         picker.setRoutePickerButtonColor(.white, for: .normalHighlighted)
         // Sortie AirPlay en cours : symbole ambre, comme les autres états actifs.
         let amber = NSColor(StandBy.amber)

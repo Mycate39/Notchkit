@@ -127,6 +127,17 @@ enum SnapshotRenderer {
                     .padding(14).background(.black).foregroundStyle(.white).environment(\.colorScheme, .dark)
                     .tint(StandBy.amber),
                  to: directory.appendingPathComponent("musique-grande.png"))
+            // Carte moyenne et carte basse (petite taille d'encoche) : la disposition se resserre.
+            for (name, widgetSize, cardSize) in [("musique-moyenne", WidgetSize.medium, CGSize(width: 310, height: 142)),
+                                                 ("musique-basse", WidgetSize.large, CGSize(width: 420, height: 112))] {
+                save(MusicExpandedView(module: music)
+                        .environment(\.widgetSize, widgetSize)
+                        .frame(width: cardSize.width, height: cardSize.height)
+                        .notchCard()
+                        .padding(14).background(.black).foregroundStyle(.white).environment(\.colorScheme, .dark)
+                        .tint(StandBy.amber),
+                     to: directory.appendingPathComponent("\(name).png"))
+            }
             music.debugSetNowPlaying(nil)
         }
 

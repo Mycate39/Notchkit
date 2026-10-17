@@ -80,7 +80,7 @@ targets:
         NSAudioCaptureUsageDescription: "Notchkit analyzes the sound playing on your Mac to animate the equalizer bars in real time. Audio is never recorded or sent anywhere."
         # Mises à jour (Sparkle) : liste des versions dans le dépôt, clé publique de vérification.
         SUFeedURL: "https://raw.githubusercontent.com/Mycate39/Notchkit/main/appcast.xml"
-        SUPublicEDKey: "tisE+cKf5tNeM+4INmuaSM425okZMyXgbhVNIpefFGY="
+        SUPublicEDKey: "5pRDy/Edy8EfI4FCrd/7zb8sScxLjOiV6ElIFyrSoCs="
         SUEnableAutomaticChecks: true
         SUScheduledCheckInterval: 86400
         NSAppleEventsUsageDescription: "Notchkit controls playback in Music and Spotify, switches Dark Mode with System Events, and reads the folder open in Terminal for the Git widget."
@@ -90,8 +90,8 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.andeolchenaux.notchkit
-        MARKETING_VERSION: "1.0.0"
-        CURRENT_PROJECT_VERSION: "11"
+        MARKETING_VERSION: "1.0.1"
+        CURRENT_PROJECT_VERSION: "12"
         ENABLE_HARDENED_RUNTIME: YES
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor

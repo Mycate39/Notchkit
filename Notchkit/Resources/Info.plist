@@ -60,7 +60,7 @@
 	<key>SUFeedURL</key>
 	<string>https://raw.githubusercontent.com/Mycate39/Notchkit/main/appcast.xml</string>
 	<key>SUPublicEDKey</key>
-	<string>tisE+cKf5tNeM+4INmuaSM425okZMyXgbhVNIpefFGY=</string>
+	<string>5pRDy/Edy8EfI4FCrd/7zb8sScxLjOiV6ElIFyrSoCs=</string>
 	<key>SUScheduledCheckInterval</key>
 	<integer>86400</integer>
 </dict>

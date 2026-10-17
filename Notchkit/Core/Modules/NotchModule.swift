@@ -109,12 +109,16 @@ struct MiniWidget<Visual: View>: View {
     let value: String?
     let caption: String?
     var tint: Color = .white
+    /// Garde la légende, en petit, même dans une mini empilée (sinon masquée quand il y a une valeur).
+    var keepsCaption = false
 
-    init(value: String?, caption: String? = nil, tint: Color = .white, @ViewBuilder visual: () -> Visual) {
+    init(value: String?, caption: String? = nil, tint: Color = .white, keepsCaption: Bool = false,
+         @ViewBuilder visual: () -> Visual) {
         self.visual = visual()
         self.value = value
         self.caption = caption
         self.tint = tint
+        self.keepsCaption = keepsCaption
     }
 
     var body: some View {
@@ -141,7 +145,7 @@ struct MiniWidget<Visual: View>: View {
                         // Valeur toujours sur une ligne (« ≈ 49 % » ne doit pas se couper en deux).
                         .lineLimit(1)
                 }
-                if let caption, !isShort || value == nil {
+                if let caption, !isShort || value == nil || keepsCaption {
                     Text(caption)
                         .font(.system(size: captionSize, weight: .medium))
                         .foregroundStyle(.white.opacity(0.55))

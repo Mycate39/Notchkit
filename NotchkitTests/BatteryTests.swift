@@ -104,3 +104,42 @@ struct BatteryEventDetectorTests {
         #expect(detector.process(from: state(8, plugged: false), to: state(7, plugged: false)) == nil)
     }
 }
+
+struct ChargeTimeTests {
+    func charging(_ level: Int, minutes: Int?) -> BatteryState {
+        BatteryState(level: level, isCharging: true, isCharged: false, powerSource: .ac, minutesToFull: minutes)
+    }
+
+    @Test func formatCourtDuTempsDeCharge() {
+        #expect(ChargeTimeFormat.compact(minutes: 45) == "45 min")
+        #expect(ChargeTimeFormat.compact(minutes: 0) == "1 min")
+        #expect(ChargeTimeFormat.compact(minutes: 65) == "1 h 05")
+        #expect(ChargeTimeFormat.compact(minutes: 120) == "2 h")
+    }
+
+    @Test func heurePrevueDeLaChargeComplete() {
+        let now = Date(timeIntervalSince1970: 0)
+        #expect(charging(50, minutes: 90).estimatedFullDate(from: now) == now.addingTimeInterval(5400))
+        // Estimation en cours ou charge en pause : pas d'heure.
+        #expect(charging(50, minutes: nil).estimatedFullDate(from: now) == nil)
+        let paused = BatteryState(level: 80, isCharging: false, isCharged: false, powerSource: .ac, minutesToFull: nil)
+        #expect(paused.estimatedFullDate(from: now) == nil)
+    }
+
+    @Test @MainActor func activiteDeChargeSeulementPendantLaCharge() {
+        func priority(_ state: BatteryState?, activity: Bool = true, permanent: Bool = false) -> ModulePriority {
+            BatteryModule.compactPriority(for: state, showInCompact: permanent, lowBatteryAlert: true,
+                                          chargingActivity: activity)
+        }
+        #expect(priority(charging(40, minutes: 50)) == .normal)
+        // Réglage coupé : seulement le niveau permanent, s'il est demandé.
+        #expect(priority(charging(40, minutes: 50), activity: false) == .none)
+        #expect(priority(charging(40, minutes: 50), activity: false, permanent: true) == .low)
+        // Pleine ou en pause : plus d'activité.
+        #expect(priority(BatteryState(level: 100, isCharging: false, isCharged: true, powerSource: .ac)) == .none)
+        #expect(priority(BatteryState(level: 80, isCharging: false, isCharged: false, powerSource: .ac)) == .none)
+        // Batterie très faible : toujours affichée.
+        #expect(priority(BatteryState(level: 8, isCharging: false, isCharged: false, powerSource: .battery)) == .normal)
+        #expect(priority(nil) == .none)
+    }
+}

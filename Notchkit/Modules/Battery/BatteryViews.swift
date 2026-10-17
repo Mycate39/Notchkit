@@ -158,6 +158,12 @@ struct BatteryExpandedView: View {
                             .font(.system(size: 11))
                             .foregroundStyle(.white.opacity(0.6))
                     }
+                    // Heure prévue de la charge complète.
+                    if let full = state.estimatedFullDate(from: Date()) {
+                        Text("Pleine vers \(full, format: .dateTime.hour().minute())")
+                            .font(.system(size: 11, weight: .medium))
+                            .foregroundStyle(.green)
+                    }
                     if module.isLowPowerMode {
                         Label("Économie d'énergie", systemImage: "leaf.fill")
                             .font(.system(size: 10, weight: .medium))
@@ -244,6 +250,7 @@ struct BatterySettingsView: View {
             Toggle("Toujours afficher le niveau quand l'encoche est repliée", isOn: $module.showInCompact)
             Toggle("Animation au branchement et au débranchement", isOn: $module.alertOnPowerChange)
             Toggle("Alerte de batterie faible (20 % et 10 %)", isOn: $module.lowBatteryAlert)
+            Toggle("Temps restant avant la charge complète, pendant la charge", isOn: $module.chargingActivity)
         }
     }
 }

@@ -1,6 +1,54 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "Pleine vers %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Full at %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pleine vers %@"
+          }
+        }
+      }
+    },
+    "Temps restant avant la charge complète, pendant la charge" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time left until fully charged, while charging"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temps restant avant la charge complète, pendant la charge"
+          }
+        }
+      }
+    },
+    "Temps restant avant la charge complète" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time left until fully charged"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temps restant avant la charge complète"
+          }
+        }
+      }
+    },
     "Vidéo" : {
       "localizations" : {
         "en" : {

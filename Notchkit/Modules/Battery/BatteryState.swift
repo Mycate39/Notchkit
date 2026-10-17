@@ -45,6 +45,22 @@ struct BatteryState: Equatable, Sendable {
 
     /// Batterie faible : sur batterie et à 20 % ou moins.
     var isLow: Bool { !isPluggedIn && level <= 20 }
+
+    /// Heure prévue de la charge complète, si macOS a fini son estimation.
+    func estimatedFullDate(from now: Date) -> Date? {
+        guard status == .charging, let minutesToFull else { return nil }
+        return now.addingTimeInterval(TimeInterval(minutesToFull * 60))
+    }
+}
+
+/// Temps de charge, au format court de l'activité compacte (fonctions pures, testées).
+enum ChargeTimeFormat {
+    /// « 45 min », « 1 h 05 », « 2 h ».
+    static func compact(minutes: Int) -> String {
+        guard minutes >= 60 else { return "\(max(minutes, 1)) min" }
+        let (hours, rest) = minutes.quotientAndRemainder(dividingBy: 60)
+        return rest == 0 ? "\(hours) h" : "\(hours) h " + String(format: "%02d", rest)
+    }
 }
 
 // MARK: - Lecture depuis IOKit

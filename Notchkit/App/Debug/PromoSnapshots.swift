@@ -73,6 +73,18 @@ enum PromoSnapshots {
         let plugged = BatteryAlertFactory.alert(for: .pluggedIn, state: charging)
         save(compact(plugged.leading, plugged.trailing), to: file("05-batterie-alerte"))
         save(card(battery.expandedView(), weight: 1), to: file("05-batterie-carte"))
+        // En charge : activité du temps restant et carte moyenne avec l'heure prévue.
+        battery.debugSetState(BatteryState(level: 62, isCharging: true, isCharged: false, powerSource: .ac,
+                                           minutesToFull: 75))
+        save(compact(battery.compactLeading(), battery.compactTrailing(), sideWidth: battery.compactSideWidth),
+             to: file("05-batterie-charge"))
+        save(card(battery.expandedView(), weight: 1.5), to: file("05-batterie-charge-carte"))
+        save(battery.miniView()
+                .environment(\.widgetSize, .mini)
+                .environment(\.miniStacked, true)
+                .frame(width: 70, height: 66)
+                .padding(8).background(.black).foregroundStyle(.white).environment(\.colorScheme, .dark),
+             to: file("05-batterie-charge-mini"))
 
         // Étagère : deux fichiers (créés dans le dossier temporaire, jamais enregistrés).
         let shelf = ShelfModule(context: context)

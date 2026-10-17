@@ -34,11 +34,16 @@ final class BatteryModule: NotchModule {
     var lowBatteryAlert: Bool {
         didSet { UserDefaults.standard.set(lowBatteryAlert, forKey: Keys.lowBatteryAlert) }
     }
+    /// Activité compacte pendant la charge : temps restant avant la charge complète.
+    var chargingActivity: Bool {
+        didSet { UserDefaults.standard.set(chargingActivity, forKey: Keys.chargingActivity) }
+    }
 
     private enum Keys {
         static let showInCompact = "module.battery.showInCompact"
         static let alertOnPowerChange = "module.battery.alertOnPowerChange"
         static let lowBatteryAlert = "module.battery.lowBatteryAlert"
+        static let chargingActivity = "module.battery.chargingActivity"
     }
 
     // MARK: Privé
@@ -54,6 +59,7 @@ final class BatteryModule: NotchModule {
         showInCompact = defaults.object(forKey: Keys.showInCompact) as? Bool ?? false
         alertOnPowerChange = defaults.object(forKey: Keys.alertOnPowerChange) as? Bool ?? true
         lowBatteryAlert = defaults.object(forKey: Keys.lowBatteryAlert) as? Bool ?? true
+        chargingActivity = defaults.object(forKey: Keys.chargingActivity) as? Bool ?? false
     }
 
     // MARK: Cycle de vie
@@ -132,13 +138,25 @@ final class BatteryModule: NotchModule {
     // MARK: Affichage
 
     var compactPriority: ModulePriority {
+        Self.compactPriority(for: state, showInCompact: showInCompact, lowBatteryAlert: lowBatteryAlert,
+                             chargingActivity: chargingActivity)
+    }
+
+    /// Priorité compacte (fonction pure, testée) : batterie très faible ou charge en cours
+    /// (activité du temps restant), sinon le niveau permanent s'il est demandé.
+    static func compactPriority(for state: BatteryState?, showInCompact: Bool, lowBatteryAlert: Bool,
+                                chargingActivity: Bool) -> ModulePriority {
         guard let state else { return .none }
         if lowBatteryAlert && !state.isPluggedIn && state.level <= 10 { return .normal }
+        if chargingActivity && state.status == .charging { return .normal }
         return showInCompact ? .low : .none
     }
 
-    /// Juste la place de « 100 % ».
-    var compactSideWidth: CGFloat { 52 }
+    /// Activité de charge affichée : le temps restant remplace le niveau à droite.
+    private var showsChargeTime: Bool { chargingActivity && state?.status == .charging }
+
+    /// Juste la place de « 45 min » ou « 100 % ».
+    var compactSideWidth: CGFloat { 56 }
 
     func compactLeading() -> AnyView? {
         guard let state else { return nil }
@@ -147,6 +165,16 @@ final class BatteryModule: NotchModule {
 
     func compactTrailing() -> AnyView? {
         guard let state else { return nil }
+        // En charge : temps restant (le niveau en attendant l'estimation de macOS).
+        if showsChargeTime, let minutes = state.minutesToFull {
+            return AnyView(
+                Text(ChargeTimeFormat.compact(minutes: minutes))
+                    .monospacedDigit()
+                    .foregroundStyle(.green)
+                    .contentTransition(.numericText())
+                    .help(Text("Temps restant avant la charge complète"))
+            )
+        }
         return AnyView(
             Text("\(state.level) %")
                 .monospacedDigit()
@@ -161,11 +189,20 @@ final class BatteryModule: NotchModule {
             })
         }
         return AnyView(
-            MiniWidget(value: "\(state.level) %", caption: state.isPluggedIn ? String(localized: "Branchée") : nil,
-                       tint: BatteryStyle.textColor(for: state, isLowPowerMode: isLowPowerMode)) {
+            MiniWidget(value: "\(state.level) %", caption: miniCaption(for: state),
+                       tint: BatteryStyle.textColor(for: state, isLowPowerMode: isLowPowerMode),
+                       keepsCaption: state.status == .charging && state.minutesToFull != nil) {
                 BatteryGlyph(state: state, isLowPowerMode: isLowPowerMode, size: CGSize(width: 36, height: 17))
             }
         )
+    }
+
+    /// Légende de la miniature : temps restant pendant la charge, sinon « Branchée ».
+    private func miniCaption(for state: BatteryState) -> String? {
+        if state.status == .charging, let minutes = state.minutesToFull {
+            return ChargeTimeFormat.compact(minutes: minutes)
+        }
+        return state.isPluggedIn ? String(localized: "Branchée") : nil
     }
 
     func expandedView() -> AnyView {

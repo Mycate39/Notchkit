@@ -65,8 +65,13 @@ final class NotchViewModel {
     var isExpanded: Bool { state == .expanded }
 
     var hasCompactContent: Bool {
-        currentAlert != nil || manager.compactModule != nil
+        currentAlert != nil || (manager.compactModule != nil && menuLimitedSideWidth != 0)
     }
+
+    /// Largeur laissée par les menus de l'app active autour d'une encoche réelle
+    /// (voir `MenuBarAvoidance.compactSideWidth`) : `nil` sans contrainte, `0` pour masquer
+    /// l'activité compacte. Les alertes passagères (volume…) n'en tiennent pas compte.
+    var menuLimitedSideWidth: CGFloat?
 
     /// Affichage replié façon « Dynamic Island » (module compact qui le demande, sans alerte).
     /// Uniquement pour la pastille flottante : en mode encoche, le contenu doit rester à l'écart
@@ -164,7 +169,9 @@ final class NotchViewModel {
 
     /// Largeur de chaque côté de l'encoche repliée (une alerte peut demander plus de place).
     var compactSideWidth: CGFloat {
-        currentAlert?.sideWidth ?? NotchLayout.compactSideWidth
+        if let currentAlert { return currentAlert.sideWidth ?? NotchLayout.compactSideWidth }
+        guard let menuLimitedSideWidth, menuLimitedSideWidth > 0 else { return NotchLayout.compactSideWidth }
+        return min(NotchLayout.compactSideWidth, menuLimitedSideWidth)
     }
 
     var shapeSize: CGSize {

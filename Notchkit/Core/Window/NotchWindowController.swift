@@ -195,8 +195,20 @@ final class NotchWindowController {
     private func updateMenuAvoidance() {
         let geometry = viewModel.geometry
         let screen = ScreenLocator.screen(for: settings.settings.screenSelection)
-        // Encoche réelle : macOS place déjà les menus de part et d'autre.
+        // Encoche réelle : macOS place les menus de part et d'autre de l'encoche physique, mais
+        // l'activité compacte la déborde ; on la rétrécit (ou la masque) au lieu de la décaler.
         let hasRealNotch = (screen?.safeAreaInsets.top ?? 0) > 0
+        var sideWidth: CGFloat?
+        if settings.settings.avoidAppMenus, hasRealNotch, !AutomatedRun.isActive {
+            let notchMinX = geometry.centerX - geometry.screenFrame.minX - geometry.closedSize.width / 2
+            sideWidth = MenuBarAvoidance.compactSideWidth(
+                menuSpans: MenuBarAvoidance.frontmostMenuSpans(),
+                notchMinX: notchMinX, notchMaxX: notchMinX + geometry.closedSize.width,
+                preferred: NotchLayout.compactSideWidth
+            )
+        }
+        if viewModel.menuLimitedSideWidth != sideWidth { viewModel.menuLimitedSideWidth = sideWidth }
+
         var offset: CGFloat = 0
         if settings.settings.avoidAppMenus, !hasRealNotch, !AutomatedRun.isActive {
             let normal = NotchLayout.shapeSize(for: geometry, isExpanded: false, hasCompactContent: true)

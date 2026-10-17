@@ -16,6 +16,12 @@ enum MenuBarAvoidance {
     /// Bord droit des menus de l'app au premier plan, relatif au bord gauche de son écran.
     /// `nil` si l'autorisation manque ou si les menus sont illisibles.
     static func frontmostMenusRightEdge() -> CGFloat? {
+        frontmostMenuSpans()?.map(\.upperBound).max()
+    }
+
+    /// Étendue horizontale de chaque menu de l'app au premier plan, relative au bord gauche
+    /// de son écran. `nil` si l'autorisation manque ou si les menus sont illisibles.
+    static func frontmostMenuSpans() -> [ClosedRange<CGFloat>]? {
         guard AXIsProcessTrusted(),
               let app = NSWorkspace.shared.frontmostApplication,
               app.bundleIdentifier != Bundle.main.bundleIdentifier
@@ -35,14 +41,42 @@ enum MenuBarAvoidance {
 
         // Coordonnées globales (origine en haut à gauche de l'écran principal).
         let frames = items.compactMap(frame(of:)).filter { $0.width > 0 }
-        guard let first = frames.min(by: { $0.minX < $1.minX }),
-              let last = frames.max(by: { $0.maxX < $1.maxX })
-        else { return nil }
+        guard let first = frames.min(by: { $0.minX < $1.minX }) else { return nil }
         // Les menus sont dessinés sur l'écran de la barre active ; on garde leur étendue
         // relative au bord gauche de cet écran (identique sur chaque écran).
         let screenMinX = NSScreen.screens.first { $0.frame.minX <= first.minX && first.minX < $0.frame.maxX }?.frame.minX ?? 0
-        return last.maxX - screenMinX
+        return frames.map { ($0.minX - screenMinX)...($0.maxX - screenMinX) }
     }
+
+    /// Largeur maximale de chaque côté de l'activité compacte autour d'une encoche réelle, pour
+    /// ne pas couvrir les menus que macOS place de part et d'autre (fonction pure, testée).
+    /// La forme dépasse de l'encoche de `sideWidth + earRadius` de chaque côté ; elle reste
+    /// symétrique, donc le côté le plus encombré fixe la largeur des deux.
+    /// - Returns: `nil` sans contrainte, `0` si la place ne suffit plus (activité masquée),
+    ///   sinon une largeur comprise entre `minimumSideWidth` et `preferred`.
+    nonisolated static func compactSideWidth(menuSpans: [ClosedRange<CGFloat>]?,
+                                             notchMinX: CGFloat, notchMaxX: CGFloat,
+                                             preferred: CGFloat) -> CGFloat? {
+        guard let menuSpans, !menuSpans.isEmpty else { return nil }
+        let center = (notchMinX + notchMaxX) / 2
+        let overhang = NotchLayout.earRadius + notchMargin
+        var limit = CGFloat.infinity
+        // Menus à gauche de l'encoche : place entre le dernier d'entre eux et l'encoche.
+        if let leftEdge = menuSpans.filter({ ($0.lowerBound + $0.upperBound) / 2 < center }).map(\.upperBound).max() {
+            limit = min(limit, notchMinX - leftEdge - overhang)
+        }
+        // Menus à droite (repoussés après l'encoche quand ils ne tiennent pas à gauche).
+        if let rightEdge = menuSpans.filter({ ($0.lowerBound + $0.upperBound) / 2 >= center }).map(\.lowerBound).min() {
+            limit = min(limit, rightEdge - notchMaxX - overhang)
+        }
+        guard limit < preferred else { return nil }
+        return limit >= minimumSideWidth ? limit.rounded(.down) : 0
+    }
+
+    /// Espace laissé entre un menu et l'activité compacte, autour d'une encoche réelle.
+    nonisolated static let notchMargin: CGFloat = 6
+    /// En dessous, une icône ne tient plus de ce côté : l'activité compacte est masquée.
+    nonisolated static let minimumSideWidth: CGFloat = 34
 
     /// Décalage horizontal à appliquer à l'encoche pour libérer les menus (fonction pure, testée).
     /// - Parameters:

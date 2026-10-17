@@ -171,6 +171,35 @@ struct NotchLayoutTests {
         #expect(MenuBarAvoidance.offset(menusRightEdge: 1600, centerX: 840, halfWidth: 165) == MenuBarAvoidance.maxOffset)
     }
 
+    @Test func activiteCompacteRetrecieAutourDesMenusDUneEncocheReelle() {
+        // MacBook Pro 14" : encoche de 663,5 à 848,5 pt ; la forme la déborde de sideWidth + 8 + 6.
+        func side(_ spans: [ClosedRange<CGFloat>]?) -> CGFloat? {
+            MenuBarAvoidance.compactSideWidth(menuSpans: spans, notchMinX: 663.5, notchMaxX: 848.5, preferred: 72)
+        }
+        // Menus courts : aucune contrainte.
+        #expect(side([10...60, 70...400]) == nil)
+        // Autorisation absente ou menus illisibles : aucune contrainte.
+        #expect(side(nil) == nil)
+        // Menus jusqu'à 600 pt : il reste 49,5 pt de chaque côté.
+        #expect(side([10...600]) == 49)
+        // Menus collés à l'encoche (Xcode) : l'activité compacte est masquée.
+        #expect(side([10...650]) == 0)
+        // Menus repoussés à droite de l'encoche : le côté droit, plus étroit, fixe la largeur.
+        #expect(side([10...400, 900...960]) == 37)
+    }
+
+    @Test @MainActor func activiteCompacteMasqueeQuandLesMenusLaCouvriraient() {
+        let settings = SettingsStore(defaults: UserDefaults(suiteName: "notchkit.tests.\(UUID().uuidString)")!)
+        let manager = ModuleManager(settings: settings, entitlements: EntitlementManager(), availableModules: [])
+        let viewModel = NotchViewModel(manager: manager, settings: settings)
+        viewModel.menuLimitedSideWidth = 40
+        #expect(viewModel.compactSideWidth == 40)
+        viewModel.menuLimitedSideWidth = 0
+        #expect(viewModel.compactSideWidth == NotchLayout.compactSideWidth)
+        viewModel.menuLimitedSideWidth = nil
+        #expect(viewModel.compactSideWidth == NotchLayout.compactSideWidth)
+    }
+
     @Test func largeurDesBulles() {
         let d = NotchLayout.bubbleDiameter(for: pill)
         #expect(NotchLayout.bubblesWidth(count: 0, geometry: pill) == 0)

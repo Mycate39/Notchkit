@@ -17,9 +17,15 @@ URL="${5:-https://github.com/Mycate39/Notchkit/releases/download/v$VERSION/$(bas
 # Sortie : sparkle:edSignature="…" length="…"
 SIGNATURE=$("$SPARKLE_BIN/sign_update" "$DMG")
 
-python3 - "$APPCAST" "$VERSION" "$BUILD" "$URL" "$SIGNATURE" "$NOTES" <<'PY'
+# Clé EdDSA remplacée au build 12 (l'ancienne clé privée a été perdue avec l'ancien Mac) :
+# les versions antérieures ne peuvent plus vérifier les mises à jour. Pour elles, chaque entrée
+# est seulement informative (Sparkle affiche un lien vers la release au lieu d'installer).
+KEY_ROTATION_BUILD=12
+PAGE="https://github.com/Mycate39/Notchkit/releases/tag/v$VERSION"
+
+python3 - "$APPCAST" "$VERSION" "$BUILD" "$URL" "$SIGNATURE" "$NOTES" "$KEY_ROTATION_BUILD" "$PAGE" <<'PY'
 import sys, os, html, email.utils
-appcast, version, build, url, signature, notes = sys.argv[1:]
+appcast, version, build, url, signature, notes, rotation, page = sys.argv[1:]
 # Notes en Markdown simple → HTML (titres, listes, gras, code).
 import re
 body = []
@@ -42,6 +48,10 @@ item = f"""    <item>
       <sparkle:version>{build}</sparkle:version>
       <sparkle:shortVersionString>{version}</sparkle:shortVersionString>
       <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <link>{page}</link>
+      <sparkle:informationalUpdate>
+        <sparkle:belowVersion>{rotation}</sparkle:belowVersion>
+      </sparkle:informationalUpdate>
       <description><![CDATA[{"".join(body)}]]></description>
       <enclosure url="{url}" {signature} type="application/octet-stream"/>
     </item>

@@ -93,8 +93,13 @@ private struct SidebarIcon: View {
                 .frame(width: size, height: size)
                 .background(ClaudeMark.background, in: RoundedRectangle(cornerRadius: size * 0.25, style: .continuous))
         } else {
+            // Symbole ajusté dans une boîte fixe : les symboles larges (batterie, traduction)
+            // ne débordent plus du carré et les compacts ne paraissent plus minuscules.
             Image(systemName: symbol)
-                .font(.system(size: size * 0.55, weight: .semibold))
+                .resizable()
+                .fontWeight(.semibold)
+                .scaledToFit()
+                .frame(width: size * 0.7, height: size * 0.6)
                 .foregroundStyle(.white)
                 .frame(width: size, height: size)
                 .background(color.gradient, in: RoundedRectangle(cornerRadius: size * 0.25, style: .continuous))

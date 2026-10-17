@@ -193,23 +193,21 @@ struct StandBySlider: View {
 
 // MARK: - Cartes
 
-/// Surface d'une carte : fond discret et liseré plus clair en haut (la lumière accroche le bord),
-/// renforcé quand « Augmenter le contraste » est activé dans macOS.
+/// Surface d'une carte : fond noir opaque et sans bordure, comme les Live Activities de l'iPhone.
+/// Seul « Augmenter le contraste » (Réglages Système > Accessibilité) ajoute un liseré pour
+/// distinguer les cartes de l'encoche.
 struct NotchCardSurface: ViewModifier {
     var cornerRadius: CGFloat
     @Environment(\.colorSchemeContrast) private var contrast
 
     func body(content: Content) -> some View {
         let shape = RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-        let high = contrast == .increased
         content
-            .background(.white.opacity(high ? 0.12 : 0.065), in: shape)
+            .background(.black, in: shape)
             .overlay {
-                shape.strokeBorder(
-                    LinearGradient(colors: [.white.opacity(high ? 0.4 : 0.14), .white.opacity(high ? 0.25 : 0.03)],
-                                   startPoint: .top, endPoint: .bottom),
-                    lineWidth: high ? 1 : 0.5
-                )
+                if contrast == .increased {
+                    shape.strokeBorder(.white.opacity(0.4), lineWidth: 1)
+                }
             }
     }
 }

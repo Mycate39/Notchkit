@@ -290,7 +290,8 @@ extension NotchWindowController {
         var size = model.count
         sysctlbyname("hw.model", &model, &size, nil, 0)
         lines.append("Notchkit \(version) (\(build)) · macOS \(ProcessInfo.processInfo.operatingSystemVersionString)")
-        lines.append("Mac : \(String(cString: model)) · Accessibilité : \(AXIsProcessTrusted())")
+        let modelName = String(decoding: model.prefix { $0 != 0 }.map { UInt8(bitPattern: $0) }, as: UTF8.self)
+        lines.append("Mac : \(modelName) · Accessibilité : \(AXIsProcessTrusted())")
         for (index, screen) in NSScreen.screens.enumerated() {
             lines.append("Écran \(index) : frame \(screen.frame) · visible \(screen.visibleFrame) · échelle \(screen.backingScaleFactor)")
             lines.append("  safeArea.top \(screen.safeAreaInsets.top) · gauche \(screen.auxiliaryTopLeftArea.map { "\($0)" } ?? "-") · droite \(screen.auxiliaryTopRightArea.map { "\($0)" } ?? "-")")

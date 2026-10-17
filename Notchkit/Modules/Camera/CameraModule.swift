@@ -94,12 +94,22 @@ private struct CameraPreview: NSViewRepresentable {
 }
 
 final class CameraPreviewView: NSView {
-    private let session = AVCaptureSession()
+    /// La session n'est pas marquée `Sendable`, mais Apple recommande de la démarrer et de l'arrêter
+    /// sur une file à part (opérations bloquantes) : on ne la touche plus ailleurs une fois configurée.
+    private final class SessionBox: @unchecked Sendable {
+        let session = AVCaptureSession()
+
+        func start() { session.startRunning() }
+        func stop() { session.stopRunning() }
+    }
+
+    private let box = SessionBox()
+    private var session: AVCaptureSession { box.session }
     private let queue = DispatchQueue(label: "com.andeolchenaux.notchkit.camera")
     private let previewLayer: AVCaptureVideoPreviewLayer
 
     override init(frame: NSRect) {
-        previewLayer = AVCaptureVideoPreviewLayer(session: session)
+        previewLayer = AVCaptureVideoPreviewLayer(session: box.session)
         super.init(frame: frame)
         wantsLayer = true
         layer?.backgroundColor = NSColor.black.cgColor
@@ -115,8 +125,8 @@ final class CameraPreviewView: NSView {
             connection.automaticallyAdjustsVideoMirroring = false
             connection.isVideoMirrored = true
         }
-        let session = session
-        queue.async { session.startRunning() }
+        let box = box
+        queue.async { box.start() }
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) non utilisé") }
@@ -127,9 +137,13 @@ final class CameraPreviewView: NSView {
     }
 
     func stop() {
-        let session = session
-        queue.async { session.stopRunning() }
+        let box = box
+        queue.async { box.stop() }
     }
 
-    deinit { stop() }
+    // Le deinit n'est pas isolé au thread principal : il arrête la session lui-même.
+    deinit {
+        let box = box
+        queue.async { box.stop() }
+    }
 }

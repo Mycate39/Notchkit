@@ -167,7 +167,8 @@ enum SystemReaders {
             var name = [CChar](repeating: 0, count: 256)
             proc_name(pid, &name, UInt32(name.count))
             let cpu = Double(usage.ri_user_time + usage.ri_system_time) * toSeconds
-            result[pid] = (String(cString: name), cpu, usage.ri_phys_footprint)
+            let processName = String(decoding: name.prefix { $0 != 0 }.map { UInt8(bitPattern: $0) }, as: UTF8.self)
+            result[pid] = (processName, cpu, usage.ri_phys_footprint)
         }
         return result
     }

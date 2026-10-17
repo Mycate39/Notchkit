@@ -174,7 +174,7 @@ final class LiveActivitiesModule: NotchModule {
         // Pomodoro : la phase suivante démarre aussitôt (travail ↔ pause).
         if let phase = activities[index].pomodoro {
             let (next, count) = PomodoroPlan.next(after: phase, count: activities[index].pomodoroCount)
-            var following = LiveActivity.pomodoro(next, count: count)
+            let following = LiveActivity.pomodoro(next, count: count)
             timerTasks[id] = nil
             if playSound { NSSound(named: "Glass")?.play() }
             withAnimation(.snappy) { activities[index] = following }

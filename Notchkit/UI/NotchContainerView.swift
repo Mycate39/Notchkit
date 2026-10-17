@@ -178,7 +178,6 @@ private struct CompactBubbles: View {
                     .frame(width: diameter * 0.62, height: diameter * 0.62)
                     .frame(width: width, height: diameter)
                     .notchBackground(viewModel.appearance, style: viewModel.geometry.style, shape: shape)
-                    .clipShape(shape)
                     .overlay {
                         // Même fin contour que l'île : pastille flottante, menu déroulé, barre sombre.
                         if viewModel.geometry.style == .pill || viewModel.isBubbleMenuOpen || viewModel.showsOutline {
@@ -189,6 +188,9 @@ private struct CompactBubbles: View {
                                 }
                         }
                     }
+                    // Découpe après le contour, comme la grande encoche : seule sa moitié intérieure
+                    // (1 pt) reste, au lieu d'un trait de 2 pt rogné par le bord de la fenêtre.
+                    .clipShape(shape)
                     .contentShape(shape)
                     .onTapGesture { viewModel.expand(showing: id) }
                     .help(Text(type(of: module).descriptor.name))

@@ -21,6 +21,7 @@ enum ScreenLocator {
 
     static func geometry(for screen: NSScreen, simulateNotch: Bool) -> NotchGeometry {
         let frame = screen.frame
+        let menuBarHeight = frame.maxY - screen.visibleFrame.maxY
 
         // Encoche réelle : macOS la signale via la zone de sécurité et les deux zones
         // libres de part et d'autre (auxiliaryTopLeftArea / auxiliaryTopRightArea).
@@ -28,16 +29,17 @@ enum ScreenLocator {
            let left = screen.auxiliaryTopLeftArea,
            let right = screen.auxiliaryTopRightArea {
             let notchWidth = frame.width - left.width - right.width
+            let height = NotchLayout.physicalNotchHeight(safeAreaTop: screen.safeAreaInsets.top,
+                                                         menuBarHeight: menuBarHeight)
             return NotchGeometry(
                 style: .notch,
-                closedSize: CGSize(width: notchWidth, height: screen.safeAreaInsets.top),
+                closedSize: CGSize(width: notchWidth, height: height),
                 screenFrame: frame,
                 centerX: frame.minX + left.width + notchWidth / 2
             )
         }
 
         // Hauteur de la barre des menus (24 pt par défaut si elle est masquée).
-        let menuBarHeight = frame.maxY - screen.visibleFrame.maxY
         let barHeight = menuBarHeight > 0 ? menuBarHeight : 24
 
         if simulateNotch {

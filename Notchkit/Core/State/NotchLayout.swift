@@ -57,6 +57,13 @@ enum NotchLayout {
     /// Décalage du menu déroulé sous le bord de l'écran, en mode encoche.
     static let bubbleMenuTopInset: CGFloat = 4
 
+    /// Hauteur d'une encoche physique. La zone de sécurité (32 pt sur un MacBook Pro 14") s'arrête
+    /// environ 1 pt au-dessus du bas réel de l'encoche, qui coïncide avec la barre des menus (33 pt).
+    /// On prend la plus grande des deux ; si la barre est masquée (hauteur 0), la zone de sécurité.
+    static func physicalNotchHeight(safeAreaTop: CGFloat, menuBarHeight: CGFloat) -> CGFloat {
+        max(safeAreaTop, menuBarHeight)
+    }
+
     /// Diamètre d'une bulle : la hauteur de l'encoche repliée (île comprise, pour rester alignée).
     static func bubbleDiameter(for geometry: NotchGeometry, island: Bool = false) -> CGFloat {
         geometry.closedSize.height + (island && geometry.style == .pill ? islandExtraHeight : 0)

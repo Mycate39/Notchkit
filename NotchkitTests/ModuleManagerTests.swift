@@ -147,6 +147,13 @@ struct NotchLayoutTests {
         #expect(size == CGSize(width: 185 + NotchLayout.earRadius * 2, height: 32))
     }
 
+    @Test func hauteurDeLEncochePhysiqueAligneeSurLaBarreDesMenus() {
+        // MacBook Pro 14" : zone de sécurité 32 pt, barre des menus 33 pt.
+        #expect(NotchLayout.physicalNotchHeight(safeAreaTop: 32, menuBarHeight: 33) == 33)
+        // Barre des menus masquée : on garde la zone de sécurité.
+        #expect(NotchLayout.physicalNotchHeight(safeAreaTop: 32, menuBarHeight: 0) == 32)
+    }
+
     @Test func contenuCompactElargitDeChaqueCote() {
         let size = NotchLayout.shapeSize(for: notch, isExpanded: false, hasCompactContent: true)
         #expect(size.width == 185 + NotchLayout.compactSideWidth * 2 + NotchLayout.earRadius * 2)

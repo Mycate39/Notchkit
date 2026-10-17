@@ -19,7 +19,7 @@ App de barre des menus (`LSUIElement`), distribuée hors Mac App Store, non sand
 | Tests | Swift Testing (`import Testing`, `@Test`, `#expect`, `#require`) |
 | Dépendances | Sparkle 2.10.0 (SPM, MIT) pour les mises à jour automatiques ; MediaRemoteAdapter (copié dans `ThirdParty/`, BSD 3-Clause) |
 | Architectures | Universelle (x86_64 + arm64) ; la machine de dev est un MacBook Pro 14" M1 Pro avec une vraie encoche (MacBookPro18,3 : encoche 185 × 32 pt, barre des menus 33 pt) |
-| Signature | Debug : ad hoc (`"-"`). Release : certificat auto-signé gratuit « Notchkit Self-Signed » (trousseau de session, recréé le 17/10/2026 après la perte de l'ancien Mac, valable jusqu'en 2036), avec Hardened Runtime ; non notarisée |
+| Signature | Debug : ad hoc (`"-"`). Release : certificat auto-signé gratuit « Notchkit Self-Signed » (trousseau de session, recréé le 17/10/2026 après la perte de l'ancien Mac, valable jusqu'en 2036), avec Hardened Runtime et `disable-library-validation` (sans identifiant d'équipe, sinon Sparkle ne se charge pas et l'app plante au lancement) ; non notarisée |
 
 ## Règles impératives
 
@@ -96,11 +96,12 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
    `xcodebuild -project Notchkit.xcodeproj -scheme Notchkit -configuration Release -derivedDataPath build.noindex/Release -destination 'generic/platform=macOS' ONLY_ACTIVE_ARCH=NO build`
 3. `scripts/make-dmg.sh build.noindex/Release/Build/Products/Release/Notchkit.app <dossier-sortie>`
    Le build Release est signé avec « Notchkit Self-Signed » : vérifier `codesign -dvv <app>` (Authority=Notchkit Self-Signed). Ne jamais supprimer ce certificat du trousseau ni le remplacer : macOS ferait perdre aux utilisateurs leurs autorisations (Accessibilité) à la mise à jour suivante. Il doit exister une sauvegarde chiffrée (export .p12) hors de ce Mac : l'ancien certificat a été perdu avec l'ancien Mac. Aucun certificat payant n'est utilisé.
+   **Avant de publier, lancer l'app Release** (`<app>/Contents/MacOS/Notchkit`) et vérifier qu'elle tourne encore après quelques secondes : les tests et le stress test passent par le build Debug (signé ad hoc) et ne détectent pas un échec de chargement propre au build Release (1.0.1 et 1.0.2 ont été publiées dans cet état).
 4. `scripts/add-to-appcast.sh <dossier-sortie>/Notchkit-x.y.z.dmg <app> <notes.md>` — signe le DMG avec la clé privée EdDSA stockée dans le trousseau de session (« Private key for signing Sparkle updates » ; ne jamais la supprimer, sauvegarde via `generate_keys -x`) et ajoute l'entrée en tête de `appcast.xml`. La clé a été remplacée au build 12 (1.0.1) : le script marque chaque entrée comme informative (`sparkle:informationalUpdate`, `belowVersion` 12) pour que les builds 11 et antérieurs affichent un lien vers la release au lieu d'échouer. Committer `appcast.xml` seulement après la création de la release GitHub.
 5. `git push`, `git tag -a vx.y.z`, pousser le tag, `gh release create vx.y.z <dmg> --latest --notes-file <notes.md>` (les versions 1.x ne sont plus des préversions), puis pousser `appcast.xml`.
    L'URL du flux est `https://raw.githubusercontent.com/Mycate39/Notchkit/main/appcast.xml`.
 
-## État (octobre 2026, version 1.0.1 publiée)
+## État (octobre 2026, version 1.0.3 publiée)
 
 ### Fonctionne
 - Fenêtre d'encoche sur n'importe quel écran : vraie encoche, encoche simulée ou pilule flottante ; reste en place à travers les Spaces ; se décale à droite pour ne jamais masquer les menus de l'app active (nécessite l'autorisation Accessibilité).

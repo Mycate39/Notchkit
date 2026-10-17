@@ -3,6 +3,19 @@
   <channel>
     <title>Notchkit</title>
     <item>
+      <title>Notchkit 1.0.1</title>
+      <pubDate>Sat, 17 Oct 2026 12:41:49 GMT</pubDate>
+      <sparkle:version>12</sparkle:version>
+      <sparkle:shortVersionString>1.0.1</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <link>https://github.com/Mycate39/Notchkit/releases/tag/v1.0.1</link>
+      <sparkle:informationalUpdate>
+        <sparkle:belowVersion>12</sparkle:belowVersion>
+      </sparkle:informationalUpdate>
+      <description><![CDATA[<h3>What&#x27;s new</h3><ul><li><b>Exact notch height:</b> on MacBooks with a notch, Notchkit now lines up with the bottom of the physical notch instead of stopping 1 pt above it.</li><li><b>Menus stay visible:</b> around a real notch, the compact activity no longer covers the menus of the app you&#x27;re using. It shrinks to the free space, or hides while there is no room (it still opens on hover). Requires the Accessibility permission.</li><li><b>Settings icons:</b> wide symbols such as Battery and Translation no longer overflow their tile, and all icons have a consistent size.</li></ul><h3>Please reinstall manually this once</h3><p>Notchkit 1.0.1 is signed with new keys, so earlier versions can&#x27;t install it by themselves: they only show a link to this page. Download <code>Notchkit-1.0.1.dmg</code>, open it, and drag <b>Notchkit.app</b> onto the <b>Applications</b> shortcut, replacing the old version. Notchkit isn&#x27;t notarized: the first time, right-click the app &gt; <b>Open</b>.</p><p>macOS will also need the <b>Accessibility</b> permission again: open System Settings &gt; Privacy &amp; Security &gt; Accessibility, remove Notchkit with <b>−</b>, then add it again. Later updates install automatically again and keep the permission.</p><p>Requires macOS 14 or later, on Apple silicon or Intel.</p>]]></description>
+      <enclosure url="https://github.com/Mycate39/Notchkit/releases/download/v1.0.1/Notchkit-1.0.1.dmg" sparkle:edSignature="Ue6XUnmM4QoFDp8pve8yJNJTxIbLLJC+R08wF6Egfh6K4GoYYuyD60Lb8Fd22sbx16w8WuYmjOGP8Z90gDFXCQ==" length="8107320" type="application/octet-stream"/>
+    </item>
+    <item>
       <title>Notchkit 1.0.0</title>
       <pubDate>Sat, 10 Oct 2026 10:46:04 GMT</pubDate>
       <sparkle:version>11</sparkle:version>

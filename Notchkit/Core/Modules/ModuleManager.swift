@@ -24,6 +24,8 @@ final class ModuleManager {
     @ObservationIgnored var blockExpansionHandler: (@MainActor (Bool) -> Void)?
     /// Déplie l'encoche sur la page d'un module.
     @ObservationIgnored var showModuleHandler: (@MainActor (String) -> Void)?
+    /// Encoche discrète (mode jeu).
+    @ObservationIgnored var quietHandler: (@MainActor (Bool) -> Void)?
 
     @ObservationIgnored let availableModules: [any NotchModule.Type]
     @ObservationIgnored private let settings: SettingsStore
@@ -271,7 +273,8 @@ final class ModuleManager {
             blockExpansion: { [weak self] blocked in self?.blockExpansionHandler?(blocked) },
             otherModule: { [weak self] id in self?.module(for: id) },
             showModule: { [weak self] in self?.showModuleHandler?(moduleID) },
-            mascot: { [weak self] in self?.settings.settings.mascot ?? .pip }
+            mascot: { [weak self] in self?.settings.settings.mascot ?? .pip },
+            setQuietMode: { [weak self] quiet in self?.quietHandler?(quiet) }
         )
     }
 }

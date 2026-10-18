@@ -9,6 +9,10 @@ struct MenuBarContent: View {
             appDelegate.viewModel.toggle()
         }
 
+        if let gameMode = appDelegate.moduleManager.module(for: GameModeModule.descriptor.id) as? GameModeModule {
+            Toggle("Mode jeu", isOn: Binding(get: { gameMode.isActive }, set: { gameMode.setManual($0) }))
+        }
+
         Button("Réglages…") {
             appDelegate.showSettings()
         }

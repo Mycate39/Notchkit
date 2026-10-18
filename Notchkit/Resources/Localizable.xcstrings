@@ -1,6 +1,102 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "Mode jeu" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game Mode"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mode jeu"
+          }
+        }
+      }
+    },
+    "Pendant une partie, l'encoche se fait discrète et affiche la charge du processeur, de la carte graphique et l'état thermique." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "During a game, the notch stays out of the way and shows CPU and GPU load and the thermal state."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pendant une partie, l'encoche se fait discrète et affiche la charge du processeur, de la carte graphique et l'état thermique."
+          }
+        }
+      }
+    },
+    "S'activer quand un jeu est au premier plan" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn on when a game is in front"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "S'activer quand un jeu est au premier plan"
+          }
+        }
+      }
+    },
+    "Les jeux sont reconnus à leur catégorie App Store et aux jeux Steam. Vous pouvez aussi l'activer ou le couper depuis l'icône de Notchkit dans la barre des menus." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Games are recognized by their App Store category and Steam games. You can also turn it on or off from the Notchkit icon in the menu bar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les jeux sont reconnus à leur catégorie App Store et aux jeux Steam. Vous pouvez aussi l'activer ou le couper depuis l'icône de Notchkit dans la barre des menus."
+          }
+        }
+      }
+    },
+    "Afficher la charge du processeur et de la carte graphique" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show CPU and GPU load"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher la charge du processeur et de la carte graphique"
+          }
+        }
+      }
+    },
+    "Pendant une partie, l'encoche ne s'ouvre plus au survol et les alertes et bulles sont mises en pause." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "During a game, the notch no longer opens on hover and alerts and bubbles are paused."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pendant une partie, l'encoche ne s'ouvre plus au survol et les alertes et bulles sont mises en pause."
+          }
+        }
+      }
+    },
     "" : {
 
     },

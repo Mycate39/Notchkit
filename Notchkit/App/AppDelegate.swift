@@ -54,6 +54,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         moduleManager.showModuleHandler = { [weak self] moduleID in
             self?.viewModel.expand(showing: moduleID)
         }
+        moduleManager.quietHandler = { [weak self] quiet in
+            self?.viewModel.setQuiet(quiet)
+        }
         // Fichiers glissés sur l'encoche : étagère ou AirDrop.
         // L'étagère accepte toujours les fichiers, même si son widget est masqué (elle s'affiche alors
         // en dernière page tant qu'elle n'est pas vide).

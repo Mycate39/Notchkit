@@ -12,6 +12,7 @@ enum ModuleRegistry {
         WeatherModule.self,
         ClaudeModule.self,
         AgentsModule.self,
+        GameModeModule.self,
         ShelfModule.self,
         ScreenshotsModule.self,
         TogglesModule.self,

@@ -96,8 +96,25 @@ final class NotchViewModel {
 
     /// Activités secondaires affichées en bulles (encoche repliée, sans alerte agrandie).
     var bubbleModules: [any NotchModule] {
-        guard !isExpanded, !isSettlingAfterCollapse, currentAlert?.expandedContent == nil else { return [] }
+        guard !isExpanded, !isSettlingAfterCollapse, !isQuiet, currentAlert?.expandedContent == nil else { return [] }
         return manager.secondaryCompactModules
+    }
+
+    /// Mode jeu : l'encoche reste repliée et discrète (pas d'ouverture au survol, ni alertes, ni bulles).
+    /// Seuls les gestes explicites (menu, raccourci) peuvent encore la déplier.
+    private(set) var isQuiet = false
+
+    func setQuiet(_ quiet: Bool) {
+        guard quiet != isQuiet else { return }
+        isQuiet = quiet
+        guard quiet else { return }
+        hoverTask?.cancel()
+        bubbleHoverTask?.cancel()
+        bubbleMenuRequested = false
+        if isHovering { withAnimation(.easeOut(duration: 0.18)) { isHovering = false } }
+        alertTask?.cancel()
+        if currentAlert != nil { withAnimation(NotchLayout.spring) { currentAlert = nil } }
+        if !isHeld { collapse() }
     }
 
     /// Écran verrouillé : seules les activités en cours restent affichées, sans aucune interaction
@@ -145,7 +162,7 @@ final class NotchViewModel {
 
     func hoverBubble(_ moduleID: String, inside: Bool) {
         bubbleHoverTask?.cancel()
-        guard !isScreenLocked else { return }
+        guard !isScreenLocked, !isQuiet else { return }
         if inside {
             requestedModuleID = moduleID
             let delay = settings.settings.hoverOpenDelay
@@ -185,6 +202,8 @@ final class NotchViewModel {
 
     /// Ouvre l'encoche sur la page d'un module (clic sur une bulle).
     func expand(showing moduleID: String) {
+        // Mode jeu : pas d'ouverture surprise en pleine partie.
+        guard !isQuiet else { return }
         requestedModuleID = moduleID
         expand()
     }
@@ -245,8 +264,8 @@ final class NotchViewModel {
     }
 
     func hoverChanged(isInside: Bool) {
-        // Écran verrouillé : l'encoche ignore la souris.
-        guard !isScreenLocked else { return }
+        // Écran verrouillé ou mode jeu : l'encoche ignore la souris.
+        guard !isScreenLocked, !isQuiet else { return }
         if isInside != isHovering {
             withAnimation(.easeOut(duration: 0.18)) { isHovering = isInside }
         }
@@ -372,6 +391,8 @@ final class NotchViewModel {
     }
 
     func present(_ alert: NotchAlert) {
+        // Mode jeu : les alertes attendent la fin de la partie (elles ne sont pas rejouées).
+        guard !isQuiet else { return }
         alertTask?.cancel()
         // Même alerte déjà affichée (ex. indicateur de volume) : on prolonge seulement sa durée,
         // son contenu se met à jour de lui-même.

@@ -41,6 +41,8 @@ struct ModuleContext {
     var showModule: @MainActor () -> Void = {}
     /// Mascotte choisie dans les réglages.
     var mascot: @MainActor () -> MascotDesign = { .pip }
+    /// Encoche discrète (mode jeu) : ni survol, ni alertes, ni bulles.
+    var setQuietMode: @MainActor (Bool) -> Void = { _ in }
 
 }
 

@@ -207,6 +207,48 @@ enum SnapshotRenderer {
                 .background(Color(nsColor: .windowBackgroundColor)),
              to: directory.appendingPathComponent("reglages-disposition.png"))
 
+        // Propositions de mascotte : une ligne par personnage, une colonne par humeur.
+        let moods: [(String, MascotMood, CGSize)] = [
+            ("Repos", .idle, .zero), ("Regarde", .idle, CGSize(width: -1, height: -0.4)),
+            ("Travaille", .working, CGSize(width: 0.6, height: 0.6)), ("Attend", .waiting, .zero),
+            ("Contente", .happy, .zero), ("Fâchée", .angry, .zero),
+        ]
+        // Toutes les propositions sur une seule image : deux colonnes de personnages, numérotés.
+        let all = MascotDesign.allBoards
+        let half = (all.count + 1) / 2
+        let column = { (designs: ArraySlice<MascotDesign>, offset: Int) in
+            VStack(alignment: .leading, spacing: 6) {
+                HStack(spacing: 0) {
+                    Text("").frame(width: 110)
+                    ForEach(moods, id: \.0) { mood in
+                        Text(mood.0).font(.system(size: 11, weight: .semibold)).foregroundStyle(.white.opacity(0.55))
+                            .frame(width: 92)
+                    }
+                }
+                ForEach(Array(designs.enumerated()), id: \.offset) { position, design in
+                    HStack(spacing: 0) {
+                        HStack(spacing: 6) {
+                            Text("\(offset + position + 1)").font(.system(size: 12, weight: .bold).monospacedDigit())
+                                .foregroundStyle(.white.opacity(0.4)).frame(width: 22, alignment: .trailing)
+                            Text(design.name).font(.system(size: 14, weight: .bold)).foregroundStyle(.white)
+                        }
+                        .frame(width: 110, alignment: .leading)
+                        ForEach(moods, id: \.0) { mood in
+                            MascotView(design: design, mood: mood.1, gaze: mood.2, size: 50)
+                                .frame(width: 92, height: 84)
+                        }
+                    }
+                }
+            }
+        }
+        save(HStack(alignment: .top, spacing: 40) {
+                column(all[0..<half], 0)
+                column(all[half...], half)
+            }
+            .padding(28)
+            .background(.black),
+             to: directory.appendingPathComponent("mascotte-propositions.png"))
+
         // Égaliseur (vue AppKit) : agrandi pour vérifier les bouts arrondis des barres.
         saveWindow(HStack(spacing: 40) {
                 EqualizerView(isAnimating: false, monitor: nil, color: .white).frame(width: 96, height: 72)
@@ -219,10 +261,10 @@ enum SnapshotRenderer {
 
         // Fenêtre de réglages, onglet Widgets puis page d'un module (contrôles AppKit : rendu en fenêtre).
         let router = SettingsRouter()
-        for (tab, name) in [(SettingsTab.widgets, "reglages-widgets"), (.module(MusicModule.descriptor.id), "reglages-widget-musique")] {
+        for (tab, name) in [(SettingsTab.widgets, "reglages-widgets"), (.module(MusicModule.descriptor.id), "reglages-widget-musique"), (.appearance, "reglages-apparence")] {
             router.tab = tab
             saveWindow(SettingsView(settings: settings, manager: manager, router: router),
-                       size: CGSize(width: 820, height: 620),
+                       size: CGSize(width: 820, height: tab == .appearance ? 1300 : 620),
                        to: directory.appendingPathComponent("\(name).png"))
         }
     }

@@ -137,6 +137,19 @@ struct AppSettingsTests {
         #expect(saved.onboardingCompleted == false)
     }
 
+    @Test func mascotteChoisieEtDecodageTolerant() throws {
+        // Par défaut, Pip ; le choix est conservé à l'enregistrement.
+        #expect(AppSettings().mascot == .pip)
+        var settings = AppSettings()
+        settings.mascot = .faceGlass
+        let saved = try JSONDecoder().decode(AppSettings.self, from: JSONEncoder().encode(settings))
+        #expect(saved.mascot == .faceGlass)
+        // Mascotte inconnue (retirée d'une version suivante) : retour à celle par défaut, sans perdre le reste.
+        let unknown = try JSONDecoder().decode(AppSettings.self, from: Data(#"{"mascot": "disparue", "hapticsEnabled": false}"#.utf8))
+        #expect(unknown.mascot == .pip)
+        #expect(unknown.hapticsEnabled == false)
+    }
+
     @Test func selectionEcranComparéeParIdentifiant() {
         #expect(ScreenSelection.specific(id: "X", name: "Ancien nom") == .specific(id: "X", name: "Nouveau nom"))
         #expect(ScreenSelection.specific(id: "X", name: "A") != .specific(id: "Y", name: "A"))

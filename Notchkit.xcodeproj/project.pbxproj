@@ -69,6 +69,7 @@
 		4938BC53B652E7BF0D8F67F8 /* ModuleIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A392BB245F4CD1284FD823DD /* ModuleIcon.swift */; };
 		4DA7F19EF634F138BD5A42D5 /* SpectrumAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D9454F2B90F4202312E9B9 /* SpectrumAnalyzer.swift */; };
 		4F396C9C347E18A649275B67 /* LaunchAtLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE9F8658125C2D9185EA96 /* LaunchAtLogin.swift */; };
+		506C40B02FC95301118B3117 /* MascotDesigns.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE11A66058CB54565C8EE2BD /* MascotDesigns.swift */; };
 		511B45FE6AA1A39FCE772EA7 /* LockScreenSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CB4D7C58B160007048AF25 /* LockScreenSpace.swift */; };
 		51B5BB1B342B747110C0A0C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6704D0B10B983BEF736F0E06 /* Assets.xcassets */; };
 		52B8567D96E53EBF58A2FBA1 /* ModuleRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A70194D570981FFAA6853D /* ModuleRegistry.swift */; };
@@ -82,6 +83,7 @@
 		59288D8DFAD7AD952E74C61C /* ClaudeActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5A7E3E7FF4C76D4277A9D9 /* ClaudeActivity.swift */; };
 		5B3D1634B477F555CDEEFF2F /* AIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D50B8CBFEAF7AF299025B3 /* AIProvider.swift */; };
 		5C6ED2CBBB8A11A2831FB4C5 /* SystemHUDViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65915A0E0BF3E9D51AE67E3 /* SystemHUDViews.swift */; };
+		5EA8E3F352119135793792A4 /* FaceIDMascots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BABC45EF2D16700138B67F2 /* FaceIDMascots.swift */; };
 		5ED07894AE2CE76DB414FD91 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980E81038BC99D26608D1A6B /* AppSettings.swift */; };
 		5FF44B76A97ECAD01249F200 /* globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 57D0955F6A00A94552C448F1 /* globals.m */; };
 		601D9B8C8D44ED81CC990946 /* ModuleManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC306A7DAC40B0ECC5A20A71 /* ModuleManagerTests.swift */; };
@@ -98,6 +100,7 @@
 		73D5E9F7641B5F75B4E0B6CB /* WeatherModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71B97392FA1B40CE01E6DD5 /* WeatherModels.swift */; };
 		743DF3635CD73F1F95DF92FC /* OnboardingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D442EFB00C038F7698DF0C8 /* OnboardingStep.swift */; };
 		7605FF09B1B6548E2F21D2A4 /* AssistantFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6362B40DDA569D43BB37B057 /* AssistantFace.swift */; };
+		77A69D7A8DBAA12139814133 /* MascotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7ECF822A5C4B46DA1E8023 /* MascotView.swift */; };
 		78F19EC00241A52E7E494A0E /* get.h in Headers */ = {isa = PBXBuildFile; fileRef = D87D32299F6B58A261AA0D12 /* get.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		79537FE908D19E626C018946 /* ModuleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69908874CE7985E60953470 /* ModuleManager.swift */; };
 		7A1810C408E52729D11E4964 /* UnlockAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FEAFA82740815C08DAF101F /* UnlockAnimations.swift */; };
@@ -106,6 +109,7 @@
 		7D94E8681B4FF20CD811DF9F /* ObservationTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BF3D614D5CC62B9E68FF35 /* ObservationTracking.swift */; };
 		7DA7D78F529F69DF127E508D /* LiveActivitiesViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3381C5D65450BE4DF9D533F2 /* LiveActivitiesViews.swift */; };
 		7ED5BEDDC88EC58CE6592830 /* ClaudeModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE518DE63D2C25D9F6E87F4 /* ClaudeModule.swift */; };
+		7FFE19150039A400059B71A0 /* RobotMascots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD5B4C0E21097CFF75A692F /* RobotMascots.swift */; };
 		8009497A18D9E01E72203EFC /* DashboardModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ACD1EC0D1F0DA726B6E361 /* DashboardModule.swift */; };
 		827ABA26CB3C09879BE52626 /* SystemMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6E589C9D69F4EEFC3F19FF /* SystemMonitorTests.swift */; };
 		8470D79901C001C16067AFC0 /* ProjectDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77AD0A4987A774670BCE7DB /* ProjectDetector.swift */; };
@@ -301,9 +305,11 @@
 		5CF6A4512EA9FCF3875409E0 /* TogglesViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogglesViews.swift; sourceTree = "<group>"; };
 		5D5A7E3E7FF4C76D4277A9D9 /* ClaudeActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeActivity.swift; sourceTree = "<group>"; };
 		5F4322CAFCD667E5F799BC79 /* CameraModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModule.swift; sourceTree = "<group>"; };
+		5FD5B4C0E21097CFF75A692F /* RobotMascots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobotMascots.swift; sourceTree = "<group>"; };
 		635422DB9C95886A509BD9D8 /* UnlockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockTests.swift; sourceTree = "<group>"; };
 		6362B40DDA569D43BB37B057 /* AssistantFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantFace.swift; sourceTree = "<group>"; };
 		6704D0B10B983BEF736F0E06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6BABC45EF2D16700138B67F2 /* FaceIDMascots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceIDMascots.swift; sourceTree = "<group>"; };
 		6CC10CCCB7D263C85AE93B02 /* ScreenshotsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotsViews.swift; sourceTree = "<group>"; };
 		6CE100D153781049292573AA /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
 		6CEE09B9AE9BBDCD97B56C2A /* NotesModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesModule.swift; sourceTree = "<group>"; };
@@ -356,6 +362,7 @@
 		B612155636B3FD4BB9FD1797 /* ShelfViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfViews.swift; sourceTree = "<group>"; };
 		B974952A590C9D987A413C84 /* LiveActivitiesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivitiesTests.swift; sourceTree = "<group>"; };
 		BD3572EC44002A80A034CBF1 /* keys.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = keys.m; sourceTree = "<group>"; };
+		BD7ECF822A5C4B46DA1E8023 /* MascotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MascotView.swift; sourceTree = "<group>"; };
 		BEB45AC94D29F371CA2C5934 /* LiveActivitiesModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivitiesModule.swift; sourceTree = "<group>"; };
 		BFC76D1C2CA657B593C11E7B /* VideoDownloadModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloadModule.swift; sourceTree = "<group>"; };
 		C12CD8AFBB2574643418518B /* ClockModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockModule.swift; sourceTree = "<group>"; };
@@ -390,6 +397,7 @@
 		DBA8D3B1EA83E4A1C07F1F13 /* NotchkitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotchkitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCD4A44AFAF64E2BE5E745B3 /* ModuleDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleDescriptor.swift; sourceTree = "<group>"; };
 		DD6E1ADCA24D42BB2616641B /* TodoViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViews.swift; sourceTree = "<group>"; };
+		DE11A66058CB54565C8EE2BD /* MascotDesigns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MascotDesigns.swift; sourceTree = "<group>"; };
 		DE6111A0CC43713D888AAAB4 /* MusicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicTests.swift; sourceTree = "<group>"; };
 		E1E2C6CB6BF950202D8E77F3 /* OnboardingDemos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDemos.swift; sourceTree = "<group>"; };
 		E2A73B719641636FD8ABD372 /* NotchAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchAlert.swift; sourceTree = "<group>"; };
@@ -452,6 +460,17 @@
 				51C6F4A15A7C1F5EED24D94C /* Notchkit.entitlements */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		0E6E30C97F0F9C447F08853E /* Mascot */ = {
+			isa = PBXGroup;
+			children = (
+				6BABC45EF2D16700138B67F2 /* FaceIDMascots.swift */,
+				DE11A66058CB54565C8EE2BD /* MascotDesigns.swift */,
+				BD7ECF822A5C4B46DA1E8023 /* MascotView.swift */,
+				5FD5B4C0E21097CFF75A692F /* RobotMascots.swift */,
+			);
+			path = Mascot;
 			sourceTree = "<group>";
 		};
 		114CF41200FB1C9C565916B6 /* Debug */ = {
@@ -1031,6 +1050,7 @@
 				CBD303760BD8B274346EBC38 /* NotchContainerView.swift */,
 				1E8841EA892E202FC4B79550 /* NotchShape.swift */,
 				5264B9579D2D1E49A90E0070 /* NotchStyle.swift */,
+				0E6E30C97F0F9C447F08853E /* Mascot */,
 				21AD8E9157C11F575BF67215 /* Settings */,
 			);
 			path = UI;
@@ -1198,7 +1218,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 2710;
 				TargetAttributes = {
 					14BFCA8BA84651626C6F1B45 = {
 						DevelopmentTeam = "";
@@ -1320,6 +1340,7 @@
 				C4FE1995D4A34E59EE65174D /* DropZone.swift in Sources */,
 				53009C2AA2481B9ED10B6FDE /* EntitlementManager.swift in Sources */,
 				36229702DCD121CC52D39711 /* EqualizerView.swift in Sources */,
+				5EA8E3F352119135793792A4 /* FaceIDMascots.swift in Sources */,
 				35FC1E83B107A5211C407957 /* FileActions.swift in Sources */,
 				2D1C2E343A983DB9D039D0F8 /* FlowLayout.swift in Sources */,
 				24209980B127CC3844AD7F13 /* GitHubAPI.swift in Sources */,
@@ -1338,6 +1359,8 @@
 				A48F76AE210F36AA7349FE22 /* LiveActivity.swift in Sources */,
 				8BCDCE6F6E2F54D141980CF1 /* LocationProvider.swift in Sources */,
 				511B45FE6AA1A39FCE772EA7 /* LockScreenSpace.swift in Sources */,
+				506C40B02FC95301118B3117 /* MascotDesigns.swift in Sources */,
+				77A69D7A8DBAA12139814133 /* MascotView.swift in Sources */,
 				A174F9940FC069ED71C0C579 /* MediaKeyTap.swift in Sources */,
 				09A63C00ADCB71C6BF4392D4 /* MediaRemoteSource.swift in Sources */,
 				980B366CCDFB9D04BCACFB5C /* MenuBarAvoidance.swift in Sources */,
@@ -1371,6 +1394,7 @@
 				CF7166A65434F3E4E1E01E77 /* PowerSourceMonitor.swift in Sources */,
 				8470D79901C001C16067AFC0 /* ProjectDetector.swift in Sources */,
 				E38E6D1F1CE0969164BCA220 /* PromoSnapshots.swift in Sources */,
+				7FFE19150039A400059B71A0 /* RobotMascots.swift in Sources */,
 				40725F139A191DFF6204EE6F /* ScreenLocator.swift in Sources */,
 				1706961A977B90B61986C9F5 /* ScreenTimeModule.swift in Sources */,
 				E982D9CEF0D561934BFF6751 /* ScreenshotSession.swift in Sources */,
@@ -1465,6 +1489,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1482,6 +1507,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1501,6 +1527,7 @@
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1517,9 +1544,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				OTHER_CFLAGS = (
-					"-fvisibility=default",
-				);
+				OTHER_CFLAGS = "-fvisibility=default";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andeolchenaux.notchkit.MediaRemoteAdapter;
 				PRODUCT_NAME = MediaRemoteAdapter;
 				SDKROOT = macosx;
@@ -1536,6 +1561,7 @@
 				CODE_SIGN_ENTITLEMENTS = Notchkit/Resources/Notchkit.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 18;
+				DEAD_CODE_STRIPPING = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				INFOPLIST_FILE = Notchkit/Resources/Info.plist;
@@ -1555,6 +1581,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1587,6 +1614,7 @@
 				CODE_SIGN_IDENTITY = "Notchkit Self-Signed";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1604,6 +1632,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 6.0;
@@ -1618,6 +1647,7 @@
 				CODE_SIGN_ENTITLEMENTS = Notchkit/Resources/Notchkit.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 18;
+				DEAD_CODE_STRIPPING = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				INFOPLIST_FILE = Notchkit/Resources/Info.plist;
@@ -1640,6 +1670,7 @@
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1656,9 +1687,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				OTHER_CFLAGS = (
-					"-fvisibility=default",
-				);
+				OTHER_CFLAGS = "-fvisibility=default";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andeolchenaux.notchkit.MediaRemoteAdapter;
 				PRODUCT_NAME = MediaRemoteAdapter;
 				SDKROOT = macosx;
@@ -1671,6 +1700,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1703,6 +1733,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1727,6 +1758,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 6.0;

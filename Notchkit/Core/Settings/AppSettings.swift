@@ -49,6 +49,8 @@ struct AppSettings: Codable, Equatable, Sendable {
     var avoidAppMenus = true
     /// Tutoriel de bienvenue terminé (ou passé). Faux pour une nouvelle installation.
     var onboardingCompleted = false
+    /// Mascotte choisie (réglages > Apparence).
+    var mascot: MascotDesign = .pip
 
     init() {}
 
@@ -70,5 +72,7 @@ struct AppSettings: Codable, Equatable, Sendable {
         // Réglages enregistrés par une version sans tutoriel : l'app est déjà installée et
         // utilisée, on ne montre pas le tutoriel (il reste accessible depuis le menu).
         onboardingCompleted = try c.decodeIfPresent(Bool.self, forKey: .onboardingCompleted) ?? true
+        // Mascotte inconnue (retirée dans une version suivante) : on reprend celle par défaut.
+        mascot = (try? c.decodeIfPresent(MascotDesign.self, forKey: .mascot)) ?? d.mascot
     }
 }

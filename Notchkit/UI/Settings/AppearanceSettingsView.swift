@@ -70,6 +70,10 @@ struct AppearanceSettingsView: View {
                 }
             }
 
+            Section("Mascotte") {
+                MascotPicker(selection: $settings.settings.mascot)
+            }
+
             Section("Couleurs") {
                 Group {
                     Picker("Fond de l'encoche", selection: appearance.background) {
@@ -164,5 +168,53 @@ private struct AppearancePreview: View {
             expanded = false
             withAnimation(.spring(duration: max(0.15, style.duration), bounce: style.bounce)) { expanded = true }
         }
+    }
+}
+
+/// Choix de la mascotte : aperçu de ses humeurs, puis grille de tous les personnages.
+private struct MascotPicker: View {
+    @Binding var selection: MascotDesign
+
+    private let columns = [GridItem(.adaptive(minimum: 74, maximum: 90), spacing: 8)]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            // La mascotte choisie, dans toutes ses humeurs, sur fond noir comme dans l'encoche.
+            HStack(spacing: 0) {
+                ForEach(MascotMood.allCases, id: \.self) { mood in
+                    MascotView(design: selection, mood: mood, size: 40)
+                        .frame(maxWidth: .infinity)
+                }
+            }
+            .padding(.vertical, 10)
+            .background(.black, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+
+            LazyVGrid(columns: columns, spacing: 8) {
+                ForEach(MascotDesign.allBoards, id: \.self) { design in
+                    Button {
+                        selection = design
+                    } label: {
+                        VStack(spacing: 2) {
+                            MascotView(design: design, size: 30)
+                                .frame(height: 42)
+                            Text(verbatim: design.name)
+                                .font(.caption2.weight(.medium))
+                                .foregroundStyle(.white.opacity(0.75))
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 6)
+                        .background(.black, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .strokeBorder(selection == design ? Color.accentColor : .clear, lineWidth: 2)
+                        }
+                        .contentShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    }
+                    .buttonStyle(.plain)
+                    .help(Text(verbatim: design.name))
+                }
+            }
+        }
+        .padding(.vertical, 4)
     }
 }

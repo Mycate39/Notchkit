@@ -213,6 +213,31 @@ enum SnapshotRenderer {
             ("Travaille", .working, CGSize(width: 0.6, height: 0.6)), ("Attend", .waiting, .zero),
             ("Contente", .happy, .zero), ("Fâchée", .angry, .zero),
         ]
+        // Page Agents : sans agent, au travail, puis en attente d'accord.
+        let agents = AgentsModule(context: ModuleContext(presentAlert: { _ in }, openSettings: {}, holdExpanded: { _ in },
+                                                         mascot: { settings.settings.mascot }))
+        let now = Date()
+        var working = ClaudeSession(id: "w", projectName: "notchkit", state: .working,
+                                    prompt: "Ajoute le widget pleine page des agents", lastEventAt: now)
+        let actions = [("doc.text.magnifyingglass", "Lit WidgetLayout.swift"), ("magnifyingglass", "Recherche « fullPage »"),
+                       ("pencil", "Modifie ModuleManager.swift"), ("terminal", "Exécute : xcodebuild test")]
+        working.recentActions = actions.enumerated().reversed().map { ClaudeAction(symbol: $1.0, text: $1.1, date: now.addingTimeInterval(Double($0))) }
+        working.currentAction = working.recentActions.first
+        var waiting = ClaudeSession(id: "p", projectName: "korus", state: .waitingForPermission,
+                                    prompt: "Corrige le calcul de la TVA", lastEventAt: now.addingTimeInterval(5))
+        waiting.attentionMessage = "Claude needs your permission to use Bash"
+        for (name, sessions) in [("vide", [ClaudeSession]()), ("travail", [working]), ("attente", [waiting, working])] {
+            agents.previewSessions = sessions
+            save(AgentsHomeView(module: agents)
+                    .frame(width: 740, height: 150)
+                    .notchCard(cornerRadius: 16)
+                    .padding(18)
+                    .background(.black)
+                    .foregroundStyle(.white)
+                    .environment(\.colorScheme, .dark),
+                 to: directory.appendingPathComponent("agents-\(name).png"))
+        }
+
         // Toutes les propositions sur une seule image : deux colonnes de personnages, numérotés.
         let all = MascotDesign.allBoards
         let half = (all.count + 1) / 2

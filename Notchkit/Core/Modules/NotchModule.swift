@@ -35,6 +35,13 @@ struct ModuleContext {
     /// Empêche temporairement l'encoche de s'ouvrir au survol (ex. bouton cliquable en mode replié).
     var blockExpansion: @MainActor (Bool) -> Void = { _ in }
 
+    /// Autre module actif, par identifiant (ex. le module Agents lit les sessions de Claude Code).
+    var otherModule: @MainActor (String) -> (any NotchModule)? = { _ in nil }
+    /// Déplie l'encoche sur la page de ce module (ex. un agent attend une réponse).
+    var showModule: @MainActor () -> Void = {}
+    /// Mascotte choisie dans les réglages.
+    var mascot: @MainActor () -> MascotDesign = { .pip }
+
 }
 
 /// Protocole commun à toutes les fonctionnalités de Notchkit.

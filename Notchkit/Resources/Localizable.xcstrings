@@ -1,6 +1,182 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "Agents" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agents"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agents"
+          }
+        }
+      }
+    },
+    "Vos agents IA sur une page entière : la mascotte suit leur travail et l'encoche s'ouvre quand l'un d'eux attend votre réponse." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your AI agents on a full page: the mascot follows their work and the notch opens when one of them is waiting for your answer."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vos agents IA sur une page entière : la mascotte suit leur travail et l'encoche s'ouvre quand l'un d'eux attend votre réponse."
+          }
+        }
+      }
+    },
+    "Aucun agent au travail" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No agent at work"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun agent au travail"
+          }
+        }
+      }
+    },
+    "Lancez une demande dans Claude Code : la mascotte suivra son travail ici." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start a request in Claude Code: the mascot will follow its work here."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lancez une demande dans Claude Code : la mascotte suivra son travail ici."
+          }
+        }
+      }
+    },
+    "Activez Claude Code dans les réglages pour suivre ses sessions ici." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn on Claude Code in Settings to follow its sessions here."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activez Claude Code dans les réglages pour suivre ses sessions ici."
+          }
+        }
+      }
+    },
+    "Étapes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Steps"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Étapes"
+          }
+        }
+      }
+    },
+    "Les étapes de l'agent s'afficheront ici." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The agent's steps will show up here."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les étapes de l'agent s'afficheront ici."
+          }
+        }
+      }
+    },
+    "Pas encore d'étape." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No steps yet."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas encore d'étape."
+          }
+        }
+      }
+    },
+    "Attend votre accord" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Waiting for your approval"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attend votre accord"
+          }
+        }
+      }
+    },
+    "Terminé, à votre écoute" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done, listening"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terminé, à votre écoute"
+          }
+        }
+      }
+    },
+    "Pleine page" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Full page"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pleine page"
+          }
+        }
+      }
+    },
     "Mascotte" : {
       "localizations" : {
         "en" : {

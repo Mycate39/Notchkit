@@ -46,4 +46,6 @@ struct ModuleDescriptor: Identifiable, Sendable {
     /// Module « contextuel » : il tourne même quand son widget est masqué, et s'affiche alors en
     /// dernière page de l'encoche tant qu'il a du contenu (`NotchModule.hasContextualContent`).
     var contextual = false
+    /// Widget pleine page : il occupe toujours une page entière à lui seul, en une seule taille.
+    var fullPage = false
 }

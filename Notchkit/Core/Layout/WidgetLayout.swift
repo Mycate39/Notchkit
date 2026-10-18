@@ -80,7 +80,7 @@ enum WidgetLayoutEngine {
     /// actifs qu'elle ne mentionne pas encore (ex. nouveau module), répartis automatiquement à la fin.
     /// Sans disposition, tout est réparti automatiquement selon l'ordre des modules.
     static func pages(activeIDs: [String], weights: [String: CGFloat], layout: WidgetLayout?,
-                      capacity: CGFloat = NotchLayout.pageCapacity) -> [[String]] {
+                      capacity: CGFloat = NotchLayout.pageCapacity, fullPage: Set<String> = []) -> [[String]] {
         let active = Set(activeIDs)
         var result: [[String]] = []
         var placed = Set<String>()
@@ -95,6 +95,27 @@ enum WidgetLayoutEngine {
         let sizes = WidgetColumns.sizes(fromWeights: remaining.map { weights[$0] ?? 1 })
         let automatic = NotchLayout.paginate(weights: WidgetColumns.effectiveWeights(sizes: sizes), capacity: capacity)
         result += automatic.map { $0.map { remaining[$0] } }
+        return isolate(fullPage, in: result)
+    }
+
+    /// Donne une page à part entière à chaque widget pleine page, à l'endroit où il se trouvait :
+    /// les widgets placés avant et après lui sur sa page restent groupés de part et d'autre.
+    static func isolate(_ fullPage: Set<String>, in pages: [[String]]) -> [[String]] {
+        guard !fullPage.isEmpty else { return pages }
+        var result: [[String]] = []
+        for page in pages {
+            var current: [String] = []
+            for id in page {
+                if fullPage.contains(id) {
+                    if !current.isEmpty { result.append(current) }
+                    result.append([id])
+                    current = []
+                } else {
+                    current.append(id)
+                }
+            }
+            if !current.isEmpty { result.append(current) }
+        }
         return result
     }
 

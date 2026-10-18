@@ -249,7 +249,14 @@ private struct ModuleDetailView: View {
                         options
                     }
                 }
-                if descriptor.providesWidget {
+                if descriptor.fullPage {
+                    Section("Dans l'encoche") {
+                        LabeledContent("Taille du widget", value: String(localized: "Pleine page"))
+                        if let position = manager.position(of: descriptor.id) {
+                            LabeledContent("Emplacement", value: String(localized: "Page \(position.page + 1), position \(position.index + 1)"))
+                        }
+                    }
+                } else if descriptor.providesWidget {
                     Section("Dans l'encoche") {
                         LabeledContent("Taille du widget") {
                             Picker("Taille", selection: Binding(

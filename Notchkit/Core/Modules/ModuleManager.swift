@@ -22,6 +22,8 @@ final class ModuleManager {
     @ObservationIgnored var dismissAlertHandler: (@MainActor (UUID) -> Void)?
     /// Bloque l'ouverture au survol (branché sur le `NotchViewModel`).
     @ObservationIgnored var blockExpansionHandler: (@MainActor (Bool) -> Void)?
+    /// Déplie l'encoche sur la page d'un module.
+    @ObservationIgnored var showModuleHandler: (@MainActor (String) -> Void)?
 
     @ObservationIgnored let availableModules: [any NotchModule.Type]
     @ObservationIgnored private let settings: SettingsStore
@@ -83,6 +85,8 @@ final class ModuleManager {
 
     /// Taille d'un widget : celle choisie par l'utilisateur, sinon celle du module.
     func size(for id: String) -> WidgetSize {
+        // Un widget pleine page n'a qu'une taille.
+        if orderedDescriptors.first(where: { $0.id == id })?.fullPage == true { return .large }
         if let chosen = settings.settings.widgetLayout?.sizes[id] { return chosen }
         let module = activeModules.first { $0.moduleID == id }
         return WidgetSize(weight: module?.expandedWidthWeight ?? defaultWeight(for: id))
@@ -113,7 +117,8 @@ final class ModuleManager {
         WidgetLayoutEngine.pages(
             activeIDs: widgetModules.map(\.moduleID),
             weights: activeWeights,
-            layout: settings.settings.widgetLayout
+            layout: settings.settings.widgetLayout,
+            fullPage: Set(widgetModules.filter { type(of: $0).descriptor.fullPage }.map(\.moduleID))
         )
     }
 
@@ -263,7 +268,10 @@ final class ModuleManager {
             openSettings: { [weak self] in self?.settingsHandler?(moduleID) },
             holdExpanded: { [weak self] hold in self?.holdHandler?(hold) },
             dismissAlert: { [weak self] id in self?.dismissAlertHandler?(id) },
-            blockExpansion: { [weak self] blocked in self?.blockExpansionHandler?(blocked) }
+            blockExpansion: { [weak self] blocked in self?.blockExpansionHandler?(blocked) },
+            otherModule: { [weak self] id in self?.module(for: id) },
+            showModule: { [weak self] in self?.showModuleHandler?(moduleID) },
+            mascot: { [weak self] in self?.settings.settings.mascot ?? .pip }
         )
     }
 }

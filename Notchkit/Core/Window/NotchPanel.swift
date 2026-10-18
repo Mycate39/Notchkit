@@ -15,7 +15,7 @@ final class NotchPanel: NSPanel {
             defer: false
         )
         isFloatingPanel = true
-        level = NSWindow.Level(rawValue: NSWindow.Level.mainMenu.rawValue + 3)
+        level = Self.normalLevel
         collectionBehavior = [.canJoinAllSpaces, .stationary, .fullScreenAuxiliary, .ignoresCycle]
         backgroundColor = .clear
         isOpaque = false
@@ -24,7 +24,14 @@ final class NotchPanel: NSPanel {
         hidesOnDeactivate = false
         isReleasedWhenClosed = false
         animationBehavior = .none
+        // Autorise l'affichage hors session : sans cela, macOS masque la fenêtre à l'écran verrouillé.
+        canBecomeVisibleWithoutLogin = true
     }
+
+    /// Niveau habituel : juste au-dessus de la barre des menus.
+    static let normalLevel = NSWindow.Level(rawValue: NSWindow.Level.mainMenu.rawValue + 3)
+    /// Niveau à l'écran verrouillé : au-dessus du « bouclier » qui masque les fenêtres pendant le verrouillage.
+    static let lockedLevel = NSWindow.Level(rawValue: Int(CGShieldingWindowLevel()) + 1)
 
     // Peut devenir « key » (utile plus tard pour les champs de texte), jamais fenêtre principale.
     override var canBecomeKey: Bool { true }

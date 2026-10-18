@@ -1,5 +1,6 @@
 import AppKit
 import SwiftUI
+import os
 
 /// Gère le panneau de l'encoche : position sur l'écran choisi, taille, survol.
 ///
@@ -19,7 +20,7 @@ final class NotchWindowController {
     /// Seconde remise au premier plan après un changement de bureau.
     private var spaceTask: Task<Void, Never>?
     private var shrinkTask: Task<Void, Never>?
-    /// Affichage sur l'écran de verrouillage (API privée SkyLight, `nil` si indisponible).
+    /// Espace au-dessus de tous les bureaux et de l'écran verrouillé (API privée SkyLight, `nil` si indisponible).
     private lazy var lockScreenSpace: LockScreenSpace? = AutomatedRun.isActive ? nil : LockScreenSpace()
     private let hostingView: NotchHostingView<NotchContainerView>
     private let container = FlippedView()
@@ -72,6 +73,8 @@ final class NotchWindowController {
         refreshGeometry()
         setPanelSize(viewModel.panelSize)
         panel.orderFrontRegardless()
+        // L'encoche ne suit plus les transitions entre bureaux : ni disparition, ni redimensionnement.
+        lockScreenSpace?.pin(panel)
         startObserving()
         scheduleMenuAvoidance()
     }
@@ -157,18 +160,23 @@ final class NotchWindowController {
     }
 
     private func screenLockChanged(locked: Bool) {
+        Logger(subsystem: "com.andeolchenaux.notchkit", category: "espace")
+            .notice("écran \(locked ? "verrouillé" : "déverrouillé") · espace SkyLight \(self.lockScreenSpace != nil ? "disponible" : "indisponible") · fenêtre visible \(self.panel.isVisible)")
         viewModel.setScreenLocked(locked)
+        // Le panneau est déjà dans l'espace au-dessus de l'écran verrouillé : on le remet seulement devant.
         if locked {
-            lockScreenSpace?.moveToLockScreen(panel)
+            lockScreenSpace?.pin(panel)
+            panel.level = NotchPanel.lockedLevel
             panel.orderFrontRegardless()
         } else {
-            lockScreenSpace?.moveBack(panel)
+            panel.level = NotchPanel.normalLevel
             reassertOnActiveSpace()
         }
     }
 
     /// Remet l'encoche à sa place sur le bureau qui vient de s'afficher.
     private func reassertOnActiveSpace() {
+        // Pas de nouveau placement dans l'espace SkyLight ici : le panneau y est déjà.
         panel.orderFrontRegardless()
         spaceTask?.cancel()
         spaceTask = Task { [weak self] in

@@ -73,6 +73,8 @@ struct NotchContainerView: View {
         .foregroundStyle(.white)
         .tint(viewModel.appearance.accentColor)
         .environment(\.colorScheme, .dark)
+        // Écran verrouillé : activités visibles, mais aucun bouton ni bulle cliquable.
+        .allowsHitTesting(!viewModel.isScreenLocked)
         .padding(.top, NotchLayout.topInset(for: geometry.style))
         // La fenêtre peut être plus grande que la forme (pendant le repli) : on reste centré en haut.
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)

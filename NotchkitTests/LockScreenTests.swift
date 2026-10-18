@@ -27,4 +27,23 @@ struct LockScreenTests {
         viewModel.expand()
         #expect(viewModel.isExpanded)
     }
+
+    @Test func verrouillageIgnoreSurvolBullesEtDepot() {
+        let viewModel = makeViewModel()
+        viewModel.setScreenLocked(true)
+        // Ni gonflement au survol, ni ouverture programmée.
+        viewModel.hoverChanged(isInside: true)
+        #expect(!viewModel.showsHoverShadow)
+        // Ni menu des bulles, ni mode dépôt de fichiers.
+        viewModel.setBubbleMenuOpen(true)
+        #expect(!viewModel.isBubbleMenuOpen)
+        viewModel.fileDragMoved(normalizedX: 0.5)
+        #expect(!viewModel.isDropMode)
+        #expect(!viewModel.isExpanded)
+        // Déverrouillage : le survol fonctionne de nouveau.
+        viewModel.setScreenLocked(false)
+        viewModel.hoverChanged(isInside: true)
+        #expect(viewModel.showsHoverShadow)
+        viewModel.hoverChanged(isInside: false)
+    }
 }

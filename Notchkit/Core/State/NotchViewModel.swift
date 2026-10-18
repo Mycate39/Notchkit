@@ -100,7 +100,8 @@ final class NotchViewModel {
         return manager.secondaryCompactModules
     }
 
-    /// Écran verrouillé : l'encoche reste affichée (activités en cours) mais ne s'ouvre plus.
+    /// Écran verrouillé : seules les activités en cours restent affichées, sans aucune interaction
+    /// (ni ouverture, ni gonflement au survol, ni menu des bulles, ni dépôt de fichiers).
     private(set) var isScreenLocked = false
 
     func setScreenLocked(_ locked: Bool) {
@@ -111,6 +112,11 @@ final class NotchViewModel {
             bubbleHoverTask?.cancel()
             holdReasons.removeAll()
             bubbleMenuRequested = false
+            isHovering = false
+            if isDropMode {
+                isDropMode = false
+                hoveredDropZone = nil
+            }
             collapse()
         }
     }
@@ -129,7 +135,7 @@ final class NotchViewModel {
 
     /// Ouvre ou ferme le menu des bulles (souris sur la pile).
     func setBubbleMenuOpen(_ open: Bool) {
-        guard open != bubbleMenuRequested else { return }
+        guard open != bubbleMenuRequested, !(open && isScreenLocked) else { return }
         withAnimation(NotchLayout.spring) { bubbleMenuRequested = open }
     }
 
@@ -139,6 +145,7 @@ final class NotchViewModel {
 
     func hoverBubble(_ moduleID: String, inside: Bool) {
         bubbleHoverTask?.cancel()
+        guard !isScreenLocked else { return }
         if inside {
             requestedModuleID = moduleID
             let delay = settings.settings.hoverOpenDelay
@@ -238,6 +245,8 @@ final class NotchViewModel {
     }
 
     func hoverChanged(isInside: Bool) {
+        // Écran verrouillé : l'encoche ignore la souris.
+        guard !isScreenLocked else { return }
         if isInside != isHovering {
             withAnimation(.easeOut(duration: 0.18)) { isHovering = isInside }
         }
@@ -319,6 +328,7 @@ final class NotchViewModel {
     // MARK: - Glisser-déposer de fichiers
 
     func fileDragMoved(normalizedX x: CGFloat) {
+        guard !isScreenLocked else { return }
         hoverTask?.cancel()
         if !isDropMode {
             dropLog.notice("mode dépôt : état \(String(describing: self.state)), écran verrouillé : \(self.isScreenLocked), étagère : \(self.isShelfAvailable)")
@@ -342,6 +352,7 @@ final class NotchViewModel {
     }
 
     func dropFiles(_ urls: [URL], normalizedX x: CGFloat) {
+        guard !isScreenLocked else { return }
         let zone = DropZone.zone(atNormalizedX: x, shelfAvailable: isShelfAvailable)
         withAnimation(NotchLayout.spring) {
             isDropMode = false

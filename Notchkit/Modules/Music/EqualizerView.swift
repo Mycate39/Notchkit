@@ -49,6 +49,12 @@ final class EqualizerNSView: NSView {
     private var isAnimating = false
     /// Vrai tant que des niveaux en direct arrivent.
     private var isLive = false
+    /// Instant des derniers niveaux reçus, et surveillance : si le flux s'interrompt sans prévenir
+    /// (changement de bureau, périphérique audio…), les barres ne restent pas figées.
+    private var lastLiveUpdate: CFAbsoluteTime = 0
+    private var liveWatchdog: Timer?
+
+    private static let liveTimeout: CFAbsoluteTime = 0.3
 
     private var spacingRatio: CGFloat = 0.5
     /// Hauteur maximale de chaque barre (1 partout, sauf en forme de cloche).
@@ -70,6 +76,29 @@ final class EqualizerNSView: NSView {
             bar.anchorPoint = CGPoint(x: 0.5, y: 0)
             layer?.addSublayer(bar)
         }
+        // Au changement de bureau, macOS peut retirer les animations en cours : on les relance.
+        NSWorkspace.shared.notificationCenter.addObserver(
+            self, selector: #selector(restartLoopsIfNeeded),
+            name: NSWorkspace.activeSpaceDidChangeNotification, object: nil
+        )
+    }
+
+    override func viewDidMoveToWindow() {
+        super.viewDidMoveToWindow()
+        NotificationCenter.default.removeObserver(self, name: NSWindow.didChangeOcclusionStateNotification, object: nil)
+        if let window {
+            NotificationCenter.default.addObserver(
+                self, selector: #selector(restartLoopsIfNeeded),
+                name: NSWindow.didChangeOcclusionStateNotification, object: window
+            )
+        }
+        restartLoopsIfNeeded()
+    }
+
+    /// Remet les animations en boucle qui auraient disparu (les autres sont laissées telles quelles).
+    @objc private func restartLoopsIfNeeded() {
+        guard isAnimating, !isLive else { return }
+        startLoopAnimations(true)
     }
 
     required init?(coder: NSCoder) {
@@ -128,6 +157,7 @@ final class EqualizerNSView: NSView {
     /// S'abonne (ou se désabonne) aux niveaux en direct.
     func attach(to newMonitor: AudioSpectrumMonitor?) {
         guard newMonitor !== monitor else { return }
+        if newMonitor == nil { stopLiveWatchdog() }
         if let subscription { monitor?.unsubscribe(subscription) }
         subscription = nil
         monitor = newMonitor
@@ -142,18 +172,21 @@ final class EqualizerNSView: NSView {
         guard let levels, isAnimating else {
             if isLive {
                 isLive = false
+                stopLiveWatchdog()
                 startLoopAnimations(isAnimating)
             }
             return
         }
+        lastLiveUpdate = CFAbsoluteTimeGetCurrent()
         if !isLive {
             isLive = true
             bars.forEach { $0.removeAnimation(forKey: Self.animationKey) }
+            startLiveWatchdog()
         }
-        // Très courte transition implicite entre deux mises à jour (≈ 60 par seconde).
+        // Hauteur posée directement, sans animation implicite : les niveaux arrivent déjà lissés
+        // (≈ 50 par seconde).
         CATransaction.begin()
-        CATransaction.setAnimationDuration(1.0 / 60)
-        CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: .linear))
+        CATransaction.setDisableActions(true)
         for (index, bar) in bars.enumerated() {
             let level = CGFloat(index < levels.count ? levels[index] : 0)
             let top = maxScales[index]
@@ -163,11 +196,31 @@ final class EqualizerNSView: NSView {
         CATransaction.commit()
     }
 
+    /// Vérifie quatre fois par seconde que les niveaux arrivent encore ; sinon, animation simple.
+    private func startLiveWatchdog() {
+        liveWatchdog?.invalidate()
+        let timer = Timer(timeInterval: 0.25, repeats: true) { [weak self] _ in
+            MainActor.assumeIsolated {
+                guard let self, self.isLive,
+                      CFAbsoluteTimeGetCurrent() - self.lastLiveUpdate > Self.liveTimeout else { return }
+                self.apply(nil)
+            }
+        }
+        RunLoop.main.add(timer, forMode: .common)
+        liveWatchdog = timer
+    }
+
+    private func stopLiveWatchdog() {
+        liveWatchdog?.invalidate()
+        liveWatchdog = nil
+    }
+
     func setAnimating(_ animating: Bool) {
         guard animating != isAnimating else { return }
         isAnimating = animating
         if !animating {
             isLive = false
+            stopLiveWatchdog()
             CATransaction.begin()
             CATransaction.setDisableActions(true)
             for (index, bar) in bars.enumerated() {

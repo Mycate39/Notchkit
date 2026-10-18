@@ -1,2856 +1,25 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
-    "Bienvenue dans Notchkit" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Welcome to Notchkit"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bienvenue dans Notchkit"
-          }
-        }
-      }
-    },
-    "Survolez l'encoche pour l'ouvrir" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hover over the notch to open it"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Survolez l'encoche pour l'ouvrir"
-          }
-        }
-      }
-    },
-    "Vos activités vivent dans l'encoche" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your activities live in the notch"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vos activités vivent dans l'encoche"
-          }
-        }
-      }
-    },
-    "Déposez des fichiers sur l'encoche" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Drop files on the notch"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Déposez des fichiers sur l'encoche"
-          }
-        }
-      }
-    },
-    "Choisissez vos widgets" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Choose your widgets"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Choisissez vos widgets"
-          }
-        }
-      }
-    },
-    "Autorisations et démarrage" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions and startup"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Autorisations et démarrage"
-          }
-        }
-      }
-    },
-    "Tout est prêt" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You're all set"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tout est prêt"
-          }
-        }
-      }
-    },
-    "Notchkit transforme l'encoche de votre Mac en un espace vivant : musique, minuteurs, batterie, météo, calendrier et bien plus. Sur un Mac sans encoche, une pastille flottante prend sa place." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notchkit turns your Mac's notch into a living space: music, timers, battery, weather, calendar and much more. On a Mac without a notch, a floating pill takes its place."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notchkit transforme l'encoche de votre Mac en un espace vivant : musique, minuteurs, batterie, météo, calendrier et bien plus. Sur un Mac sans encoche, une pastille flottante prend sa place."
-          }
-        }
-      }
-    },
-    "Placez le pointeur sur l'encoche : elle se déplie et affiche vos widgets. Balayez avec deux doigts ou cliquez sur les onglets pour changer de page. Éloignez le pointeur pour la refermer." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Move the pointer over the notch: it opens and shows your widgets. Swipe with two fingers or click the tabs to change pages. Move the pointer away to close it."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Placez le pointeur sur l'encoche : elle se déplie et affiche vos widgets. Balayez avec deux doigts ou cliquez sur les onglets pour changer de page. Éloignez le pointeur pour la refermer."
-          }
-        }
-      }
-    },
-    "Quand une musique joue, qu'un minuteur tourne ou que Claude Code travaille, l'activité s'affiche de part et d'autre de l'encoche. S'il y en a plusieurs, les autres deviennent des bulles : cliquez dessus pour les ouvrir." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When music plays, a timer runs or Claude Code is working, the activity shows on both sides of the notch. When there are several, the others become bubbles: click one to open it."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quand une musique joue, qu'un minuteur tourne ou que Claude Code travaille, l'activité s'affiche de part et d'autre de l'encoche. S'il y en a plusieurs, les autres deviennent des bulles : cliquez dessus pour les ouvrir."
-          }
-        }
-      }
-    },
-    "Faites glisser des fichiers sur l'encoche : déposez-les sur l'étagère pour les garder sous la main, ou sur AirDrop pour les envoyer à un appareil proche." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Drag files onto the notch: drop them on the shelf to keep them at hand, or on AirDrop to send them to a nearby device."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Faites glisser des fichiers sur l'encoche : déposez-les sur l'étagère pour les garder sous la main, ou sur AirDrop pour les envoyer à un appareil proche."
-          }
-        }
-      }
-    },
-    "Commencez avec une disposition prête à l'emploi. Vous pourrez ensuite ajouter, retirer et redimensionner chaque widget dans les réglages." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Start with a ready-made layout. You can then add, remove and resize each widget in Settings."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Commencez avec une disposition prête à l'emploi. Vous pourrez ensuite ajouter, retirer et redimensionner chaque widget dans les réglages."
-          }
-        }
-      }
-    },
-    "L'autorisation Accessibilité permet d'afficher le volume et la luminosité quand vous utilisez les touches du clavier, et d'éviter que l'encoche cache les menus. Elle est facultative." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The Accessibility permission lets Notchkit show volume and brightness when you use the keyboard keys, and keep the notch from covering menus. It's optional."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "L'autorisation Accessibilité permet d'afficher le volume et la luminosité quand vous utilisez les touches du clavier, et d'éviter que l'encoche cache les menus. Elle est facultative."
-          }
-        }
-      }
-    },
-    "Notchkit est prêt. Vous retrouverez les réglages et ce tutoriel dans le menu Notchkit de la barre des menus." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notchkit is ready. You'll find Settings and this tutorial in the Notchkit menu in the menu bar."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notchkit est prêt. Vous retrouverez les réglages et ce tutoriel dans le menu Notchkit de la barre des menus."
-          }
-        }
-      }
-    },
-    "Passer le tutoriel" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Skip Tutorial"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Passer le tutoriel"
-          }
-        }
-      }
-    },
-    "Retour" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Back"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Retour"
-          }
-        }
-      }
-    },
-    "Continuer" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Continue"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Continuer"
-          }
-        }
-      }
-    },
-    "Commencer" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Get Started"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Commencer"
-          }
-        }
-      }
-    },
-    "Personnaliser dans les réglages…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Customize in Settings…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Personnaliser dans les réglages…"
-          }
-        }
-      }
-    },
-    "Accessibilité" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Accessibility"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Accessibilité"
-          }
-        }
-      }
-    },
-    "Autorisée" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allowed"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Autorisée"
-          }
-        }
-      }
-    },
-    "Facultative, modifiable à tout moment" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Optional, can be changed at any time"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Facultative, modifiable à tout moment"
-          }
-        }
-      }
-    },
-    "Revoir le tutoriel…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Tutorial…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Revoir le tutoriel…"
-          }
-        }
-      }
-    },
-    "Pleine vers %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Full at %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pleine vers %@"
-          }
-        }
-      }
-    },
-    "Temps restant avant la charge complète, pendant la charge" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Time left until fully charged, while charging"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Temps restant avant la charge complète, pendant la charge"
-          }
-        }
-      }
-    },
-    "Temps restant avant la charge complète" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Time left until fully charged"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Temps restant avant la charge complète"
-          }
-        }
-      }
-    },
-    "Vidéo" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Video"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vidéo"
-          }
-        }
-      }
-    },
-    "Recherche des résolutions…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Looking up resolutions…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Recherche des résolutions…"
-          }
-        }
-      }
-    },
-    "Conversion en HEVC…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Converting to HEVC…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Conversion en HEVC…"
-          }
-        }
-      }
-    },
-    "Conversion impossible : vidéo gardée dans son format d'origine." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Couldn't convert: the video was kept in its original format."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Conversion impossible : vidéo gardée dans son format d'origine."
-          }
-        }
-      }
-    },
-    "Converti en HEVC après le téléchargement, pour QuickTime" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Converted to HEVC after downloading, for QuickTime"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Converti en HEVC après le téléchargement, pour QuickTime"
-          }
-        }
-      }
-    },
-    "MP4 H.264, lisible partout" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "H.264 MP4, plays everywhere"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "MP4 H.264, lisible partout"
-          }
-        }
-      }
-    },
-    "Cette vidéo nécessite ffmpeg pour assembler l'image et le son : installez-le dans le Terminal avec « brew install ffmpeg »." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This video needs ffmpeg to combine picture and sound: install it in Terminal with “brew install ffmpeg”."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cette vidéo nécessite ffmpeg pour assembler l'image et le son : installez-le dans le Terminal avec « brew install ffmpeg »."
-          }
-        }
-      }
-    },
-    "ffmpeg absent (nécessaire pour YouTube et le MP3)" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ffmpeg missing (needed for YouTube and MP3)"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ffmpeg absent (nécessaire pour YouTube et le MP3)"
-          }
-        }
-      }
-    },
-    "ffmpeg est nécessaire pour la plupart des vidéos YouTube, qui séparent l'image et le son, et pour le MP3. Installez-le dans le Terminal avec « brew install ffmpeg deno » (deno permet à yt-dlp de lire tous les formats de YouTube). Sur un Mac Intel, Homebrew peut devoir compiler ffmpeg, ce qui est long." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ffmpeg is needed for most YouTube videos, which keep picture and sound separate, and for MP3. Install it in Terminal with “brew install ffmpeg deno” (deno lets yt-dlp read every YouTube format). On an Intel Mac, Homebrew may need to build ffmpeg, which takes a while."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ffmpeg est nécessaire pour la plupart des vidéos YouTube, qui séparent l'image et le son, et pour le MP3. Installez-le dans le Terminal avec « brew install ffmpeg deno » (deno permet à yt-dlp de lire tous les formats de YouTube). Sur un Mac Intel, Homebrew peut devoir compiler ffmpeg, ce qui est long."
-          }
-        }
-      }
-    },
-    "Sur un écran sans encoche, l'encoche se décale vers la droite si elle couvre les menus de l'app au premier plan. Sur une vraie encoche, l'activité compacte se rétrécit, ou se masque, pour laisser les menus visibles. Nécessite l'autorisation Accessibilité (Réglages Système > Confidentialité et sécurité > Accessibilité)." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "On a screen without a notch, the notch moves to the right if it covers the active app's menus. On a real notch, the compact activity shrinks, or hides, to keep the menus visible. Requires the Accessibility permission (System Settings > Privacy & Security > Accessibility)."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sur un écran sans encoche, l'encoche se décale vers la droite si elle couvre les menus de l'app au premier plan. Sur une vraie encoche, l'activité compacte se rétrécit, ou se masque, pour laisser les menus visibles. Nécessite l'autorisation Accessibilité (Réglages Système > Confidentialité et sécurité > Accessibilité)."
-          }
-        }
-      }
-    },
-    "Copier les informations de diagnostic" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy Diagnostic Information"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copier les informations de diagnostic"
-          }
-        }
-      }
-    },
-    "Ancrage des fenêtres" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Window Snapping"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ancrage des fenêtres"
-          }
-        }
-      }
-    },
-    "Glissez une fenêtre vers l'encoche pour la ranger en moitié, tiers, quart ou plein écran." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Drag a window toward the notch to snap it to a half, third, quarter or full screen."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Glissez une fenêtre vers l'encoche pour la ranger en moitié, tiers, quart ou plein écran."
-          }
-        }
-      }
-    },
-    "Faites glisser une fenêtre par sa barre de titre vers le haut de l'écran : des zones apparaissent sous l'encoche. Relâchez sur une zone pour y ranger la fenêtre." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Drag a window by its title bar to the top of the screen: zones appear under the notch. Release over a zone to snap the window there."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Faites glisser une fenêtre par sa barre de titre vers le haut de l'écran : des zones apparaissent sous l'encoche. Relâchez sur une zone pour y ranger la fenêtre."
-          }
-        }
-      }
-    },
-    "Archive" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Archive"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Archive"
-          }
-        }
-      }
-    },
-    "Tout compresser (ZIP)" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compress All (ZIP)"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tout compresser (ZIP)"
-          }
-        }
-      }
-    },
-    "Tout copier vers iCloud Drive" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy All to iCloud Drive"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tout copier vers iCloud Drive"
-          }
-        }
-      }
-    },
-    "Actions" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Actions"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Actions"
-          }
-        }
-      }
-    },
-    "Compresser (ZIP)" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compress (ZIP)"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compresser (ZIP)"
-          }
-        }
-      }
-    },
-    "Convertir en" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Convert To"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Convertir en"
-          }
-        }
-      }
-    },
-    "Convertir en MP4" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Convert to MP4"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Convertir en MP4"
-          }
-        }
-      }
-    },
-    "Copier vers iCloud Drive" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy to iCloud Drive"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copier vers iCloud Drive"
-          }
-        }
-      }
-    },
-    "Ollama" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ollama"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ollama"
-          }
-        }
-      }
-    },
-    "Le serveur d'IA local : modèles chargés en mémoire et modèles installés." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your local AI server: models loaded in memory and installed models."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le serveur d'IA local : modèles chargés en mémoire et modèles installés."
-          }
-        }
-      }
-    },
-    "Ollama en marche" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ollama running"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ollama en marche"
-          }
-        }
-      }
-    },
-    "Ollama arrêté" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ollama stopped"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ollama arrêté"
-          }
-        }
-      }
-    },
-    "%lld modèles installés" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld models installed"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld modèles installés"
-          }
-        }
-      }
-    },
-    "Lancez Ollama (app ou « ollama serve ») pour suivre vos modèles locaux." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Start Ollama (the app or “ollama serve”) to follow your local models."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lancez Ollama (app ou « ollama serve ») pour suivre vos modèles locaux."
-          }
-        }
-      }
-    },
-    "Aucun modèle en mémoire." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No model in memory."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucun modèle en mémoire."
-          }
-        }
-      }
-    },
-    "GPU" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GPU"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GPU"
-          }
-        }
-      }
-    },
-    "CPU" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CPU"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CPU"
-          }
-        }
-      }
-    },
-    "GitHub" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GitHub"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GitHub"
-          }
-        }
-      }
-    },
-    "Vos pull requests et l'état de leurs vérifications, en direct." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your pull requests and the status of their checks, live."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vos pull requests et l'état de leurs vérifications, en direct."
-          }
-        }
-      }
-    },
-    "Jeton refusé par GitHub. Vérifiez-le dans les réglages." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GitHub rejected the token. Check it in Settings."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Jeton refusé par GitHub. Vérifiez-le dans les réglages."
-          }
-        }
-      }
-    },
-    "GitHub est injoignable pour le moment." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GitHub can't be reached right now."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GitHub est injoignable pour le moment."
-          }
-        }
-      }
-    },
-    "Pull requests" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pull Requests"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pull requests"
-          }
-        }
-      }
-    },
-    "#%lld échoue" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "#%lld failing"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "#%lld échoue"
-          }
-        }
-      }
-    },
-    "Ajoutez un jeton d'accès personnel GitHub dans les réglages du module." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add a GitHub personal access token in the module's settings."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajoutez un jeton d'accès personnel GitHub dans les réglages du module."
-          }
-        }
-      }
-    },
-    "Mes pull requests" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "My Pull Requests"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mes pull requests"
-          }
-        }
-      }
-    },
-    "%lld à relire" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld to review"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld à relire"
-          }
-        }
-      }
-    },
-    "Aucune pull request ouverte." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No open pull requests."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucune pull request ouverte."
-          }
-        }
-      }
-    },
-    "%@ #%lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ #%lld"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ #%lld"
-          }
-        }
-      }
-    },
-    "Ouvrir sur GitHub" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open on GitHub"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ouvrir sur GitHub"
-          }
-        }
-      }
-    },
-    "Jeton enregistré dans le trousseau" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Token saved in the keychain"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Jeton enregistré dans le trousseau"
-          }
-        }
-      }
-    },
-    "Retirer le jeton" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remove Token"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Retirer le jeton"
-          }
-        }
-      }
-    },
-    "Jeton d'accès personnel" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Personal access token"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Jeton d'accès personnel"
-          }
-        }
-      }
-    },
-    "Créez un jeton gratuit sur GitHub (Settings › Developer settings › Personal access tokens), avec l'accès en lecture aux dépôts. Il est gardé dans le trousseau de macOS." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Create a free token on GitHub (Settings › Developer settings › Personal access tokens) with read access to repositories. It is kept in the macOS keychain."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Créez un jeton gratuit sur GitHub (Settings › Developer settings › Personal access tokens), avec l'accès en lecture aux dépôts. Il est gardé dans le trousseau de macOS."
-          }
-        }
-      }
-    },
-    "Créer un jeton sur GitHub" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Create a Token on GitHub"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Créer un jeton sur GitHub"
-          }
-        }
-      }
-    },
-    "Git" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Git"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Git"
-          }
-        }
-      }
-    },
-    "Branche et fichiers modifiés du projet ouvert dans Xcode ou le Terminal, avec fetch et pull." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Branch and changed files of the project open in Xcode or Terminal, with fetch and pull."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Branche et fichiers modifiés du projet ouvert dans Xcode ou le Terminal, avec fetch et pull."
-          }
-        }
-      }
-    },
-    "Échec de la commande git (connexion, droits ou conflits)." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The git command failed (connection, permissions or conflicts)."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Échec de la commande git (connexion, droits ou conflits)."
-          }
-        }
-      }
-    },
-    "Ouvrez un projet dans Xcode ou le Terminal, ou ajoutez un dossier dans les réglages." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open a project in Xcode or Terminal, or add a folder in Settings."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ouvrez un projet dans Xcode ou le Terminal, ou ajoutez un dossier dans les réglages."
-          }
-        }
-      }
-    },
-    "Fetch" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fetch"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fetch"
-          }
-        }
-      }
-    },
-    "Pull (avance rapide uniquement)" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pull (fast-forward only)"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pull (avance rapide uniquement)"
-          }
-        }
-      }
-    },
-    "Ouvrir dans le Terminal" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open in Terminal"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ouvrir dans le Terminal"
-          }
-        }
-      }
-    },
-    "Aucune modification" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No changes"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucune modification"
-          }
-        }
-      }
-    },
-    "↑%lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "↑%lld"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "↑%lld"
-          }
-        }
-      }
-    },
-    "↓%lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "↓%lld"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "↓%lld"
-          }
-        }
-      }
-    },
-    "Le projet ouvert dans Xcode ou dans le Terminal est détecté automatiquement. Ajoutez ici d'autres dossiers à suivre." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The project open in Xcode or Terminal is detected automatically. Add other folders to follow here."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le projet ouvert dans Xcode ou dans le Terminal est détecté automatiquement. Ajoutez ici d'autres dossiers à suivre."
-          }
-        }
-      }
-    },
-    "Ajouter un dossier…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add a Folder…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajouter un dossier…"
-          }
-        }
-      }
-    },
-    "Traduction" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Translation"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Traduction"
-          }
-        }
-      }
-    },
-    "Traduit le texte sélectionné, du français vers l'anglais et inversement, sur le Mac." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Translates the selected text between French and English, on your Mac."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Traduit le texte sélectionné, du français vers l'anglais et inversement, sur le Mac."
-          }
-        }
-      }
-    },
-    "La traduction nécessite macOS 15 ou plus." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Translation requires macOS 15 or later."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La traduction nécessite macOS 15 ou plus."
-          }
-        }
-      }
-    },
-    "Traduire la sélection" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Translate Selection"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Traduire la sélection"
-          }
-        }
-      }
-    },
-    "Copier la traduction" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy translation"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copier la traduction"
-          }
-        }
-      }
-    },
-    "Sélectionnez du texte dans une app, puis touchez « Traduire la sélection »." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select text in an app, then click “Translate Selection”."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sélectionnez du texte dans une app, puis touchez « Traduire la sélection »."
-          }
-        }
-      }
-    },
-    "Traduction impossible pour le moment." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Translation isn't available right now."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Traduction impossible pour le moment."
-          }
-        }
-      }
-    },
-    "%@ → %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ → %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ → %@"
-          }
-        }
-      }
-    },
-    "Temps d'écran" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Screen Time"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Temps d'écran"
-          }
-        }
-      }
-    },
-    "Le temps passé sur le Mac et dans chaque app, mesuré sur ce Mac uniquement." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Time spent on your Mac and in each app, measured on this Mac only."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le temps passé sur le Mac et dans chaque app, mesuré sur ce Mac uniquement."
-          }
-        }
-      }
-    },
-    "aujourd'hui" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "today"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "aujourd'hui"
-          }
-        }
-      }
-    },
-    "Le temps d'écran apparaîtra ici au fil de la journée." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your screen time will show up here throughout the day."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le temps d'écran apparaîtra ici au fil de la journée."
-          }
-        }
-      }
-    },
-    "Santé" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Health"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Santé"
-          }
-        }
-      }
-    },
-    "Rappels de pause et d'hydratation, et anneaux de votre journée devant le Mac." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Break and hydration reminders, and rings for your day at the Mac."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rappels de pause et d'hydratation, et anneaux de votre journée devant le Mac."
-          }
-        }
-      }
-    },
-    "Faites une pause" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Take a break"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Faites une pause"
-          }
-        }
-      }
-    },
-    "Un verre d'eau ?" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Glass of water?"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Un verre d'eau ?"
-          }
-        }
-      }
-    },
-    "Pauses : %lld/%lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Breaks: %lld/%lld"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pauses : %lld/%lld"
-          }
-        }
-      }
-    },
-    "Eau : %lld/%lld verres" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Water: %lld/%lld glasses"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eau : %lld/%lld verres"
-          }
-        }
-      }
-    },
-    "Actif : %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Active: %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Actif : %@"
-          }
-        }
-      }
-    },
-    "Sans pause depuis %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No break for %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sans pause depuis %@"
-          }
-        }
-      }
-    },
-    "J'ai bu un verre" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "I Had a Glass"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "J'ai bu un verre"
-          }
-        }
-      }
-    },
-    "Dashboard" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dashboard"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dashboard"
-          }
-        }
-      }
-    },
-    "Vos apps préférées à un clic et l'état du Mac en un coup d'œil." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your favorite apps one click away and your Mac at a glance."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vos apps préférées à un clic et l'état du Mac en un coup d'œil."
-          }
-        }
-      }
-    },
-    "Retirer du Dashboard" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remove from Dashboard"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Retirer du Dashboard"
-          }
-        }
-      }
-    },
-    "Ajouter une app…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add an App…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajouter une app…"
-          }
-        }
-      }
-    },
-    "Santé de la batterie" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Battery health"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Santé de la batterie"
-          }
-        }
-      }
-    },
-    "Cycles de charge" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Charge cycles"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cycles de charge"
-          }
-        }
-      }
-    },
-    "%lld cycles" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld cycles"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld cycles"
-          }
-        }
-      }
-    },
-    "Moniteur système" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "System Monitor"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Moniteur système"
-          }
-        }
-      }
-    },
-    "Processeur, graphismes, mémoire, disque, réseau, batterie et processus gourmands." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CPU, graphics, memory, disk, network, battery and heavy processes."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Processeur, graphismes, mémoire, disque, réseau, batterie et processus gourmands."
-          }
-        }
-      }
-    },
-    "Processeur" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CPU"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Processeur"
-          }
-        }
-      }
-    },
-    "Mémoire" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Memory"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mémoire"
-          }
-        }
-      }
-    },
-    "Disque" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disk"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disque"
-          }
-        }
-      }
-    },
-    "%@ libres" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ free"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ libres"
-          }
-        }
-      }
-    },
-    "GPU %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GPU %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GPU %@"
-          }
-        }
-      }
-    },
-    "GPU —" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GPU —"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GPU —"
-          }
-        }
-      }
-    },
-    "Santé %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Health %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Santé %@"
-          }
-        }
-      }
-    },
-    " · %lld cycles" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : " · %lld cycles"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : " · %lld cycles"
-          }
-        }
-      }
-    },
-    "Rappels" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reminders"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rappels"
-          }
-        }
-      }
-    },
-    "Vos rappels à faire, à cocher ou ajouter depuis l'encoche." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your reminders to check off or add right from the notch."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vos rappels à faire, à cocher ou ajouter depuis l'encoche."
-          }
-        }
-      }
-    },
-    "Autorisez l'accès aux rappels pour les voir ici." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow access to Reminders to see them here."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Autorisez l'accès aux rappels pour les voir ici."
-          }
-        }
-      }
-    },
-    "L'accès aux rappels est refusé." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Access to Reminders is denied."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "L'accès aux rappels est refusé."
-          }
-        }
-      }
-    },
-    "Ouvrir Rappels" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Reminders"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ouvrir Rappels"
-          }
-        }
-      }
-    },
-    "Rien à faire. Profitez-en !" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nothing to do. Enjoy!"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rien à faire. Profitez-en !"
-          }
-        }
-      }
-    },
-    "Nouveau rappel" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "New Reminder"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nouveau rappel"
-          }
-        }
-      }
-    },
-    "Marquer comme fait" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mark as done"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Marquer comme fait"
-          }
-        }
-      }
-    },
-    "Chronomètre" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stopwatch"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chronomètre"
-          }
-        }
-      }
-    },
-    "Alarme %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Alarm %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Alarme %@"
-          }
-        }
-      }
-    },
-    "Pomodoro · travail" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pomodoro · focus"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pomodoro · travail"
-          }
-        }
-      }
-    },
-    "Pomodoro · pause" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pomodoro · break"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pomodoro · pause"
-          }
-        }
-      }
-    },
-    "Alarme" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Alarm"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Alarme"
-          }
-        }
-      }
-    },
-    "Pomodoro (25 min de travail, 5 min de pause)" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pomodoro (25 min focus, 5 min break)"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pomodoro (25 min de travail, 5 min de pause)"
-          }
-        }
-      }
-    },
-    "Régler l'alarme" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Set Alarm"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Régler l'alarme"
-          }
-        }
-      }
-    },
-    "Texte" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Text"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Texte"
-          }
-        }
-      }
-    },
-    "Journée" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Day"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Journée"
-          }
-        }
-      }
-    },
-    "Une barre qui montre où vous en êtes de votre journée de travail." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "A bar that shows how far along your workday you are."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Une barre qui montre où vous en êtes de votre journée de travail."
-          }
-        }
-      }
-    },
-    "Journée terminée" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Day is over"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Journée terminée"
-          }
-        }
-      }
-    },
-    "La journée n'a pas commencé" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The day hasn't started"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La journée n'a pas commencé"
-          }
-        }
-      }
-    },
-    "Encore %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ left"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Encore %@"
-          }
-        }
-      }
-    },
-    "Début de la journée" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Start of the day"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Début de la journée"
-          }
-        }
-      }
-    },
-    "Fin de la journée" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "End of the day"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fin de la journée"
-          }
-        }
-      }
-    },
-    "Notes" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notes"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notes"
-          }
-        }
-      }
-    },
-    "Un brouillon toujours à portée de survol pour noter une idée." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "A scratchpad one hover away to jot down an idea."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Un brouillon toujours à portée de survol pour noter une idée."
-          }
-        }
-      }
-    },
-    "Une idée ? Notez-la ici…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Got an idea? Jot it down here…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Une idée ? Notez-la ici…"
-          }
-        }
-      }
-    },
-    "Commutateurs rapides" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quick Toggles"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Commutateurs rapides"
-          }
-        }
-      }
-    },
-    "Mode sombre, anti-veille, icônes du bureau et verrouillage du clavier pour le nettoyer." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dark Mode, stay awake, desktop icons, and a keyboard lock for cleaning."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mode sombre, anti-veille, icônes du bureau et verrouillage du clavier pour le nettoyer."
-          }
-        }
-      }
-    },
-    "Commutateurs" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Toggles"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Commutateurs"
-          }
-        }
-      }
-    },
-    "Mode sombre" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dark Mode"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mode sombre"
-          }
-        }
-      }
-    },
-    "Anti-veille" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stay Awake"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Anti-veille"
-          }
-        }
-      }
-    },
-    "Bureau" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Desktop"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bureau"
-          }
-        }
-      }
-    },
-    "Masquer les icônes du bureau" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hide desktop icons"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Masquer les icônes du bureau"
-          }
-        }
-      }
-    },
-    "Afficher les icônes du bureau" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show desktop icons"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Afficher les icônes du bureau"
-          }
-        }
-      }
-    },
-    "Nettoyage" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cleaning"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nettoyage"
-          }
-        }
-      }
-    },
-    "Verrouille le clavier pendant 60 s pour le nettoyer" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Locks the keyboard for 60 s so you can clean it"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verrouille le clavier pendant 60 s pour le nettoyer"
-          }
-        }
-      }
-    },
-    "Clavier verrouillé" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keyboard locked"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clavier verrouillé"
-          }
-        }
-      }
-    },
-    "Nettoyez tranquillement. Il se libère de lui-même." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clean away. It unlocks by itself."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nettoyez tranquillement. Il se libère de lui-même."
-          }
-        }
-      }
-    },
-    "Déverrouiller" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unlock"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Déverrouiller"
-          }
-        }
-      }
-    },
-    "Webcam" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Webcam"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Webcam"
-          }
-        }
-      }
-    },
-    "Un miroir rapide pour vérifier votre allure avant une réunion." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "A quick mirror to check how you look before a meeting."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Un miroir rapide pour vérifier votre allure avant une réunion."
-          }
-        }
-      }
-    },
-    "Autorisez la caméra pour voir votre miroir." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow camera access to see your mirror."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Autorisez la caméra pour voir votre miroir."
-          }
-        }
-      }
-    },
-    "L'accès à la caméra est refusé." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Camera access is denied."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "L'accès à la caméra est refusé."
-          }
-        }
-      }
-    },
-    "Ouvrir les réglages…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Settings…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ouvrir les réglages…"
-          }
-        }
-      }
-    },
-    "Ajouter à la disposition" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add to Layout"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajouter à la disposition"
-          }
-        }
-      }
-    },
-    "Captures d'écran" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Screenshots"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Captures d'écran"
-          }
-        }
-      }
-    },
-    "Les captures et enregistrements d'écran de votre session, à glisser où vous voulez." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Screenshots and screen recordings from your session, ready to drag anywhere."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Les captures et enregistrements d'écran de votre session, à glisser où vous voulez."
-          }
-        }
-      }
-    },
-    "Captures" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Screenshots"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Captures"
-          }
-        }
-      }
-    },
-    "Enregistrement" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Recording"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enregistrement"
-          }
-        }
-      }
-    },
-    "Capture" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Screenshot"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Capture"
-          }
-        }
-      }
-    },
-    "Les captures d'écran faites depuis l'ouverture de votre session apparaîtront ici." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Screenshots taken since you logged in will appear here."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Les captures d'écran faites depuis l'ouverture de votre session apparaîtront ici."
-          }
-        }
-      }
-    },
-    "Placer dans la corbeille" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Move to Trash"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Placer dans la corbeille"
-          }
-        }
-      }
-    },
-    "Afficher une alerte à chaque nouvelle capture" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show an alert for each new screenshot"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Afficher une alerte à chaque nouvelle capture"
-          }
-        }
-      }
-    },
-    "Notchkit liste les captures et enregistrements d'écran faits depuis le démarrage du Mac ou l'ouverture de votre session, où qu'ils soient enregistrés. S'ils sont sur le Bureau, macOS demandera une fois l'accès à ce dossier pour afficher les aperçus." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notchkit lists the screenshots and screen recordings made since your Mac started or you logged in, wherever they are saved. If they are on the Desktop, macOS asks once for access to that folder to show the previews."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notchkit liste les captures et enregistrements d'écran faits depuis le démarrage du Mac ou l'ouverture de votre session, où qu'ils soient enregistrés. S'ils sont sur le Bureau, macOS demandera une fois l'accès à ce dossier pour afficher les aperçus."
-          }
-        }
-      }
-    },
     "" : {
 
+    },
+    " · %lld cycles" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " · %lld cycles"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " · %lld cycles"
+          }
+        }
+      }
     },
     "·" : {
       "localizations" : {
@@ -2896,6 +65,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "« Réduire les animations » est activé dans macOS : les animations sont désactivées."
+          }
+        }
+      }
+    },
+    "#%lld échoue" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "#%lld failing"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "#%lld échoue"
           }
         }
       }
@@ -2960,6 +145,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$@ / %2$lld de largeur"
+          }
+        }
+      }
+    },
+    "%@ #%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ #%lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ #%lld"
+          }
+        }
+      }
+    },
+    "%@ → %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ → %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ → %@"
+          }
+        }
+      }
+    },
+    "%@ libres" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ free"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ libres"
           }
         }
       }
@@ -3044,6 +277,22 @@
         }
       }
     },
+    "%lld à relire" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld to review"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld à relire"
+          }
+        }
+      }
+    },
     "%lld activités en cours" : {
       "localizations" : {
         "en" : {
@@ -3056,6 +305,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld activités en cours"
+          }
+        }
+      }
+    },
+    "%lld cycles" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld cycles"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld cycles"
           }
         }
       }
@@ -3108,6 +374,22 @@
         }
       }
     },
+    "%lld modèles installés" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld models installed"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld modèles installés"
+          }
+        }
+      }
+    },
     "%lld pt" : {
       "localizations" : {
         "en" : {
@@ -3137,6 +419,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld s après un changement d'app"
+          }
+        }
+      }
+    },
+    "↑%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "↑%lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "↑%lld"
+          }
+        }
+      }
+    },
+    "↓%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "↓%lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "↓%lld"
           }
         }
       }
@@ -3206,6 +520,7 @@
       }
     },
     "10 min" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3285,7 +600,56 @@
         }
       }
     },
+    "Accessibilité" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accessibility"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accessibilité"
+          }
+        }
+      }
+    },
+    "Actif : %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Active: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actif : %@"
+          }
+        }
+      }
+    },
+    "Actions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actions"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actions"
+          }
+        }
+      }
+    },
     "Activé" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3622,7 +986,40 @@
         }
       }
     },
+    "Afficher les icônes du bureau" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show desktop icons"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher les icônes du bureau"
+          }
+        }
+      }
+    },
+    "Afficher une alerte à chaque nouvelle capture" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show an alert for each new screenshot"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher une alerte à chaque nouvelle capture"
+          }
+        }
+      }
+    },
     "Afficher une alerte de test" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3670,6 +1067,22 @@
         }
       }
     },
+    "Ajouter à la disposition" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add to Layout"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter à la disposition"
+          }
+        }
+      }
+    },
     "Ajouter cinq minutes" : {
       "localizations" : {
         "en" : {
@@ -3682,6 +1095,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ajouter cinq minutes"
+          }
+        }
+      }
+    },
+    "Ajouter un dossier…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add a Folder…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter un dossier…"
+          }
+        }
+      }
+    },
+    "Ajouter une app…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add an App…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter une app…"
           }
         }
       }
@@ -3702,6 +1147,22 @@
         }
       }
     },
+    "Ajoutez un jeton d'accès personnel GitHub dans les réglages du module." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add a GitHub personal access token in the module's settings."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajoutez un jeton d'accès personnel GitHub dans les réglages du module."
+          }
+        }
+      }
+    },
     "Ajoutez votre clé API pour discuter avec l'assistant." : {
       "localizations" : {
         "en" : {
@@ -3714,6 +1175,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ajoutez votre clé API pour discuter avec l'assistant."
+          }
+        }
+      }
+    },
+    "Alarme" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alarm"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alarme"
+          }
+        }
+      }
+    },
+    "Alarme %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alarm %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alarme %@"
           }
         }
       }
@@ -3778,6 +1271,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Analyse le son joué par le Mac pour animer les barres. macOS demande l'autorisation « Enregistrement audio du système » et affiche un indicateur pendant l'écoute. Le son n'est ni enregistré ni envoyé."
+          }
+        }
+      }
+    },
+    "Ancrage des fenêtres" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Window Snapping"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ancrage des fenêtres"
           }
         }
       }
@@ -3911,6 +1420,7 @@
       }
     },
     "Animations au ralenti (×8)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4022,7 +1532,24 @@
         }
       }
     },
+    "Anti-veille" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stay Awake"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anti-veille"
+          }
+        }
+      }
+    },
     "Aperçu : demande de mot de passe" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4039,6 +1566,7 @@
       }
     },
     "Aperçu : demande Touch ID" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4055,6 +1583,7 @@
       }
     },
     "Aperçu : déverrouillage Face ID" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4130,6 +1659,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Après chaque réponse de Claude, vous pouvez encore lui écrire depuis l'encoche pendant ce délai : il repart aussitôt. Pendant ce temps, Claude Code l'affiche comme « en cours » (Échap pour arrêter)."
+          }
+        }
+      }
+    },
+    "Archive" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archive"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archive"
           }
         }
       }
@@ -4242,6 +1787,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aucun événement aujourd'hui ni demain"
+          }
+        }
+      }
+    },
+    "Aucun modèle en mémoire." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No model in memory."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun modèle en mémoire."
           }
         }
       }
@@ -4407,6 +1968,38 @@
         }
       }
     },
+    "Aucune modification" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No changes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune modification"
+          }
+        }
+      }
+    },
+    "Aucune pull request ouverte." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No open pull requests."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune pull request ouverte."
+          }
+        }
+      }
+    },
     "Aucune session d'utilisation en cours" : {
       "localizations" : {
         "en" : {
@@ -4455,6 +2048,22 @@
         }
       }
     },
+    "aujourd'hui" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "today"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "aujourd'hui"
+          }
+        }
+      }
+    },
     "Automatique" : {
       "localizations" : {
         "en" : {
@@ -4483,6 +2092,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Autorisation Accessibilité nécessaire"
+          }
+        }
+      }
+    },
+    "Autorisations et démarrage" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permissions and startup"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorisations et démarrage"
+          }
+        }
+      }
+    },
+    "Autorisée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allowed"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorisée"
           }
         }
       }
@@ -4547,6 +2188,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Autoriser…"
+          }
+        }
+      }
+    },
+    "Autorisez l'accès aux rappels pour les voir ici." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow access to Reminders to see them here."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorisez l'accès aux rappels pour les voir ici."
+          }
+        }
+      }
+    },
+    "Autorisez la caméra pour voir votre miroir." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow camera access to see your mirror."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorisez la caméra pour voir votre miroir."
           }
         }
       }
@@ -4616,6 +2289,7 @@
       }
     },
     "Batterie : simuler la batterie faible" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4632,6 +2306,7 @@
       }
     },
     "Batterie : simuler le branchement" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4648,6 +2323,7 @@
       }
     },
     "Batterie : simuler le débranchement" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4659,6 +2335,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Batterie : simuler le débranchement"
+          }
+        }
+      }
+    },
+    "Bienvenue dans Notchkit" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome to Notchkit"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bienvenue dans Notchkit"
           }
         }
       }
@@ -4708,6 +2400,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bouton « ◀ App » pour revenir à l'app d'avant, comme sur iPhone."
+          }
+        }
+      }
+    },
+    "Branche et fichiers modifiés du projet ouvert dans Xcode ou le Terminal, avec fetch et pull." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Branch and changed files of the project open in Xcode or Terminal, with fetch and pull."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Branche et fichiers modifiés du projet ouvert dans Xcode ou le Terminal, avec fetch et pull."
           }
         }
       }
@@ -4792,6 +2500,22 @@
         }
       }
     },
+    "Bureau" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desktop"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bureau"
+          }
+        }
+      }
+    },
     "Calcul de l'autonomie…" : {
       "localizations" : {
         "en" : {
@@ -4840,6 +2564,54 @@
         }
       }
     },
+    "Capture" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Screenshot"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Capture"
+          }
+        }
+      }
+    },
+    "Captures" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Screenshots"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Captures"
+          }
+        }
+      }
+    },
+    "Captures d'écran" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Screenshots"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Captures d'écran"
+          }
+        }
+      }
+    },
     "Ce module fonctionne en arrière-plan, sans carte dans l'encoche." : {
       "localizations" : {
         "en" : {
@@ -4868,6 +2640,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cette sortie audio n'a pas de volume réglable."
+          }
+        }
+      }
+    },
+    "Cette vidéo nécessite ffmpeg pour assembler l'image et le son : installez-le dans le Terminal avec « brew install ffmpeg »." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This video needs ffmpeg to combine picture and sound: install it in Terminal with “brew install ffmpeg”."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette vidéo nécessite ffmpeg pour assembler l'image et le son : installez-le dans le Terminal avec « brew install ffmpeg »."
           }
         }
       }
@@ -4996,6 +2784,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Choisir une ville…"
+          }
+        }
+      }
+    },
+    "Choisissez vos widgets" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose your widgets"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez vos widgets"
+          }
+        }
+      }
+    },
+    "Chronomètre" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stopwatch"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chronomètre"
           }
         }
       }
@@ -5144,6 +2964,22 @@
         }
       }
     },
+    "Clavier verrouillé" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keyboard locked"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clavier verrouillé"
+          }
+        }
+      }
+    },
     "Clé API" : {
       "localizations" : {
         "en" : {
@@ -5256,6 +3092,70 @@
         }
       }
     },
+    "Commencer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get Started"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commencer"
+          }
+        }
+      }
+    },
+    "Commencez avec une disposition prête à l'emploi. Vous pourrez ensuite ajouter, retirer et redimensionner chaque widget dans les réglages." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start with a ready-made layout. You can then add, remove and resize each widget in Settings."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commencez avec une disposition prête à l'emploi. Vous pourrez ensuite ajouter, retirer et redimensionner chaque widget dans les réglages."
+          }
+        }
+      }
+    },
+    "Commutateurs" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toggles"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commutateurs"
+          }
+        }
+      }
+    },
+    "Commutateurs rapides" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quick Toggles"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commutateurs rapides"
+          }
+        }
+      }
+    },
     "Compacte" : {
       "localizations" : {
         "en" : {
@@ -5284,6 +3184,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Compatible OpenAI"
+          }
+        }
+      }
+    },
+    "Compresser (ZIP)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compress (ZIP)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compresser (ZIP)"
           }
         }
       }
@@ -5400,6 +3316,102 @@
         }
       }
     },
+    "Continuer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuer"
+          }
+        }
+      }
+    },
+    "Conversion en HEVC…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Converting to HEVC…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conversion en HEVC…"
+          }
+        }
+      }
+    },
+    "Conversion impossible : vidéo gardée dans son format d'origine." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't convert: the video was kept in its original format."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conversion impossible : vidéo gardée dans son format d'origine."
+          }
+        }
+      }
+    },
+    "Converti en HEVC après le téléchargement, pour QuickTime" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Converted to HEVC after downloading, for QuickTime"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Converti en HEVC après le téléchargement, pour QuickTime"
+          }
+        }
+      }
+    },
+    "Convertir en" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Convert To"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Convertir en"
+          }
+        }
+      }
+    },
+    "Convertir en MP4" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Convert to MP4"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Convertir en MP4"
+          }
+        }
+      }
+    },
     "Copié" : {
       "localizations" : {
         "en" : {
@@ -5428,6 +3440,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Copier"
+          }
+        }
+      }
+    },
+    "Copier la traduction" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy translation"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copier la traduction"
+          }
+        }
+      }
+    },
+    "Copier les informations de diagnostic" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy Diagnostic Information"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copier les informations de diagnostic"
+          }
+        }
+      }
+    },
+    "Copier vers iCloud Drive" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy to iCloud Drive"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copier vers iCloud Drive"
           }
         }
       }
@@ -5544,6 +3604,70 @@
         }
       }
     },
+    "CPU" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CPU"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CPU"
+          }
+        }
+      }
+    },
+    "Créer un jeton sur GitHub" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create a Token on GitHub"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Créer un jeton sur GitHub"
+          }
+        }
+      }
+    },
+    "Créez un jeton gratuit sur GitHub (Settings › Developer settings › Personal access tokens), avec l'accès en lecture aux dépôts. Il est gardé dans le trousseau de macOS." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create a free token on GitHub (Settings › Developer settings › Personal access tokens) with read access to repositories. It is kept in the macOS keychain."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Créez un jeton gratuit sur GitHub (Settings › Developer settings › Personal access tokens), avec l'accès en lecture aux dépôts. Il est gardé dans le trousseau de macOS."
+          }
+        }
+      }
+    },
+    "Cycles de charge" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Charge cycles"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cycles de charge"
+          }
+        }
+      }
+    },
     "D" : {
       "comment" : "Écouteur droit (Right)",
       "localizations" : {
@@ -5577,7 +3701,24 @@
         }
       }
     },
+    "Dashboard" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dashboard"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dashboard"
+          }
+        }
+      }
+    },
     "Débogage" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5605,6 +3746,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Début"
+          }
+        }
+      }
+    },
+    "Début de la journée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start of the day"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Début de la journée"
           }
         }
       }
@@ -5769,6 +3926,22 @@
         }
       }
     },
+    "Déposez des fichiers sur l'encoche" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drop files on the notch"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déposez des fichiers sur l'encoche"
+          }
+        }
+      }
+    },
     "Déposez des fichiers sur l'encoche pour les garder à portée de main ou les envoyer par AirDrop." : {
       "localizations" : {
         "en" : {
@@ -5929,6 +4102,22 @@
         }
       }
     },
+    "Déverrouiller" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlock"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déverrouiller"
+          }
+        }
+      }
+    },
     "Disposition" : {
       "localizations" : {
         "en" : {
@@ -5957,6 +4146,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dispositions prêtes à l'emploi"
+          }
+        }
+      }
+    },
+    "Disque" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disk"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disque"
           }
         }
       }
@@ -6053,6 +4258,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dubaï"
+          }
+        }
+      }
+    },
+    "Eau : %lld/%lld verres" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Water: %lld/%lld glasses"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eau : %lld/%lld verres"
+          }
+        }
+      }
+    },
+    "Échec de la commande git (connexion, droits ou conflits)." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The git command failed (connection, permissions or conflicts)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Échec de la commande git (connexion, droits ou conflits)."
           }
         }
       }
@@ -6313,6 +4550,22 @@
         }
       }
     },
+    "Encore %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ left"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encore %@"
+          }
+        }
+      }
+    },
     "Enregistrée dans le trousseau" : {
       "localizations" : {
         "en" : {
@@ -6325,6 +4578,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enregistrée dans le trousseau"
+          }
+        }
+      }
+    },
+    "Enregistrement" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recording"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrement"
           }
         }
       }
@@ -6537,6 +4806,22 @@
         }
       }
     },
+    "Facultative, modifiable à tout moment" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Optional, can be changed at any time"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Facultative, modifiable à tout moment"
+          }
+        }
+      }
+    },
     "Faites glisser des fichiers sur l'encoche : à gauche pour les garder ici, à droite pour les envoyer par AirDrop. Les fichiers ne sont ni copiés ni déplacés, l'étagère garde seulement un lien vers eux." : {
       "localizations" : {
         "en" : {
@@ -6549,6 +4834,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Faites glisser des fichiers sur l'encoche : à gauche pour les garder ici, à droite pour les envoyer par AirDrop. Les fichiers ne sont ni copiés ni déplacés, l'étagère garde seulement un lien vers eux."
+          }
+        }
+      }
+    },
+    "Faites glisser des fichiers sur l'encoche : déposez-les sur l'étagère pour les garder sous la main, ou sur AirDrop pour les envoyer à un appareil proche." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag files onto the notch: drop them on the shelf to keep them at hand, or on AirDrop to send them to a nearby device."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faites glisser des fichiers sur l'encoche : déposez-les sur l'étagère pour les garder sous la main, ou sur AirDrop pour les envoyer à un appareil proche."
+          }
+        }
+      }
+    },
+    "Faites glisser une fenêtre par sa barre de titre vers le haut de l'écran : des zones apparaissent sous l'encoche. Relâchez sur une zone pour y ranger la fenêtre." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag a window by its title bar to the top of the screen: zones appear under the notch. Release over a zone to snap the window there."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faites glisser une fenêtre par sa barre de titre vers le haut de l'écran : des zones apparaissent sous l'encoche. Relâchez sur une zone pour y ranger la fenêtre."
+          }
+        }
+      }
+    },
+    "Faites une pause" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Take a break"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faites une pause"
           }
         }
       }
@@ -6569,7 +4902,24 @@
         }
       }
     },
+    "Fetch" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fetch"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fetch"
+          }
+        }
+      }
+    },
     "ffmpeg (facultatif : meilleure qualité, MP3) s'installe dans le Terminal avec « brew install ffmpeg ». Sur un Mac Intel, Homebrew peut devoir le compiler, ce qui est long." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6585,7 +4935,24 @@
         }
       }
     },
+    "ffmpeg absent (nécessaire pour YouTube et le MP3)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ffmpeg missing (needed for YouTube and MP3)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ffmpeg absent (nécessaire pour YouTube et le MP3)"
+          }
+        }
+      }
+    },
     "ffmpeg absent (qualité limitée, pas de MP3)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6597,6 +4964,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ffmpeg absent (qualité limitée, pas de MP3)"
+          }
+        }
+      }
+    },
+    "ffmpeg est nécessaire pour la plupart des vidéos YouTube, qui séparent l'image et le son, et pour le MP3. Installez-le dans le Terminal avec « brew install ffmpeg deno » (deno permet à yt-dlp de lire tous les formats de YouTube). Sur un Mac Intel, Homebrew peut devoir compiler ffmpeg, ce qui est long." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ffmpeg is needed for most YouTube videos, which keep picture and sound separate, and for MP3. Install it in Terminal with “brew install ffmpeg deno” (deno lets yt-dlp read every YouTube format). On an Intel Mac, Homebrew may need to build ffmpeg, which takes a while."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ffmpeg est nécessaire pour la plupart des vidéos YouTube, qui séparent l'image et le son, et pour le MP3. Installez-le dans le Terminal avec « brew install ffmpeg deno » (deno permet à yt-dlp de lire tous les formats de YouTube). Sur un Mac Intel, Homebrew peut devoir compiler ffmpeg, ce qui est long."
           }
         }
       }
@@ -6629,6 +5012,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fichier introuvable (déplacé ou supprimé)"
+          }
+        }
+      }
+    },
+    "Fin de la journée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "End of the day"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fin de la journée"
           }
         }
       }
@@ -6778,6 +5177,54 @@
         }
       }
     },
+    "Git" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Git"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Git"
+          }
+        }
+      }
+    },
+    "GitHub" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GitHub"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GitHub"
+          }
+        }
+      }
+    },
+    "GitHub est injoignable pour le moment." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GitHub can't be reached right now."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GitHub est injoignable pour le moment."
+          }
+        }
+      }
+    },
     "Glissez dans une page pour l'afficher" : {
       "localizations" : {
         "en" : {
@@ -6854,6 +5301,70 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Glissez un widget ici pour le masquer."
+          }
+        }
+      }
+    },
+    "Glissez une fenêtre vers l'encoche pour la ranger en moitié, tiers, quart ou plein écran." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag a window toward the notch to snap it to a half, third, quarter or full screen."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Glissez une fenêtre vers l'encoche pour la ranger en moitié, tiers, quart ou plein écran."
+          }
+        }
+      }
+    },
+    "GPU" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GPU"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GPU"
+          }
+        }
+      }
+    },
+    "GPU —" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GPU —"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GPU —"
+          }
+        }
+      }
+    },
+    "GPU %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GPU %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GPU %@"
           }
         }
       }
@@ -7258,6 +5769,70 @@
         }
       }
     },
+    "J'ai bu un verre" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I Had a Glass"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "J'ai bu un verre"
+          }
+        }
+      }
+    },
+    "Jeton d'accès personnel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personal access token"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeton d'accès personnel"
+          }
+        }
+      }
+    },
+    "Jeton enregistré dans le trousseau" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Token saved in the keychain"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeton enregistré dans le trousseau"
+          }
+        }
+      }
+    },
+    "Jeton refusé par GitHub. Vérifiez-le dans les réglages." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GitHub rejected the token. Check it in Settings."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeton refusé par GitHub. Vérifiez-le dans les réglages."
+          }
+        }
+      }
+    },
     "Jour" : {
       "localizations" : {
         "en" : {
@@ -7274,6 +5849,54 @@
         }
       }
     },
+    "Journée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Day"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Journée"
+          }
+        }
+      }
+    },
+    "Journée terminée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Day is over"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Journée terminée"
+          }
+        }
+      }
+    },
+    "L'accès à la caméra est refusé." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Camera access is denied."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'accès à la caméra est refusé."
+          }
+        }
+      }
+    },
     "L'accès aux calendriers est refusé." : {
       "localizations" : {
         "en" : {
@@ -7286,6 +5909,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "L'accès aux calendriers est refusé."
+          }
+        }
+      }
+    },
+    "L'accès aux rappels est refusé." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Access to Reminders is denied."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'accès aux rappels est refusé."
           }
         }
       }
@@ -7318,6 +5957,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "L'analyse du son n'a pas pu démarrer : %@"
+          }
+        }
+      }
+    },
+    "L'autorisation Accessibilité permet d'afficher le volume et la luminosité quand vous utilisez les touches du clavier, et d'éviter que l'encoche cache les menus. Elle est facultative." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Accessibility permission lets Notchkit show volume and brightness when you use the keyboard keys, and keep the notch from covering menus. It's optional."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'autorisation Accessibilité permet d'afficher le volume et la luminosité quand vous utilisez les touches du clavier, et d'éviter que l'encoche cache les menus. Elle est facultative."
           }
         }
       }
@@ -7370,6 +6025,22 @@
         }
       }
     },
+    "La journée n'a pas commencé" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The day hasn't started"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La journée n'a pas commencé"
+          }
+        }
+      }
+    },
     "La recherche a échoué. Vérifiez votre connexion." : {
       "localizations" : {
         "en" : {
@@ -7382,6 +6053,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "La recherche a échoué. Vérifiez votre connexion."
+          }
+        }
+      }
+    },
+    "La traduction nécessite macOS 15 ou plus." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Translation requires macOS 15 or later."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La traduction nécessite macOS 15 ou plus."
           }
         }
       }
@@ -7414,6 +6101,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lancer Notchkit à l'ouverture de session"
+          }
+        }
+      }
+    },
+    "Lancez Ollama (app ou « ollama serve ») pour suivre vos modèles locaux." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start Ollama (the app or “ollama serve”) to follow your local models."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lancez Ollama (app ou « ollama serve ») pour suivre vos modèles locaux."
           }
         }
       }
@@ -7482,6 +6185,38 @@
         }
       }
     },
+    "Le projet ouvert dans Xcode ou dans le Terminal est détecté automatiquement. Ajoutez ici d'autres dossiers à suivre." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The project open in Xcode or Terminal is detected automatically. Add other folders to follow here."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le projet ouvert dans Xcode ou dans le Terminal est détecté automatiquement. Ajoutez ici d'autres dossiers à suivre."
+          }
+        }
+      }
+    },
+    "Le serveur d'IA local : modèles chargés en mémoire et modèles installés." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your local AI server: models loaded in memory and installed models."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le serveur d'IA local : modèles chargés en mémoire et modèles installés."
+          }
+        }
+      }
+    },
     "Le serveur local n'a pas pu démarrer sur le port %@ : %@" : {
       "localizations" : {
         "en" : {
@@ -7510,6 +6245,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le site officiel s'ouvre dans une fenêtre sous l'encoche : connectez-vous une fois avec votre compte, la session est conservée. Votre abonnement (ChatGPT Plus, Gemini Advanced, SuperGrok…) s'applique normalement."
+          }
+        }
+      }
+    },
+    "Le temps d'écran apparaîtra ici au fil de la journée." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your screen time will show up here throughout the day."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le temps d'écran apparaîtra ici au fil de la journée."
+          }
+        }
+      }
+    },
+    "Le temps passé sur le Mac et dans chaque app, mesuré sur ce Mac uniquement." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time spent on your Mac and in each app, measured on this Mac only."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le temps passé sur le Mac et dans chaque app, mesuré sur ce Mac uniquement."
           }
         }
       }
@@ -7558,6 +6325,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lecture en grand, casque et volume à portée de main."
+          }
+        }
+      }
+    },
+    "Les captures d'écran faites depuis l'ouverture de votre session apparaîtront ici." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Screenshots taken since you logged in will appear here."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les captures d'écran faites depuis l'ouverture de votre session apparaîtront ici."
+          }
+        }
+      }
+    },
+    "Les captures et enregistrements d'écran de votre session, à glisser où vous voulez." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Screenshots and screen recordings from your session, ready to drag anywhere."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les captures et enregistrements d'écran de votre session, à glisser où vous voulez."
           }
         }
       }
@@ -7738,6 +6537,22 @@
         }
       }
     },
+    "Marquer comme fait" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mark as done"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marquer comme fait"
+          }
+        }
+      }
+    },
     "Masquer ce widget" : {
       "localizations" : {
         "en" : {
@@ -7750,6 +6565,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Masquer ce widget"
+          }
+        }
+      }
+    },
+    "Masquer les icônes du bureau" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide desktop icons"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Masquer les icônes du bureau"
           }
         }
       }
@@ -7787,6 +6618,7 @@
       }
     },
     "Meilleure" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7798,6 +6630,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Meilleure"
+          }
+        }
+      }
+    },
+    "Mémoire" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Memory"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mémoire"
+          }
+        }
+      }
+    },
+    "Mes pull requests" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My Pull Requests"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mes pull requests"
           }
         }
       }
@@ -8010,6 +6874,38 @@
         }
       }
     },
+    "Mode sombre" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dark Mode"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mode sombre"
+          }
+        }
+      }
+    },
+    "Mode sombre, anti-veille, icônes du bureau et verrouillage du clavier pour le nettoyer." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dark Mode, stay awake, desktop icons, and a keyboard lock for cleaning."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mode sombre, anti-veille, icônes du bureau et verrouillage du clavier pour le nettoyer."
+          }
+        }
+      }
+    },
     "Modèle" : {
       "localizations" : {
         "en" : {
@@ -8059,6 +6955,7 @@
       }
     },
     "Modules" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8070,6 +6967,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Modules"
+          }
+        }
+      }
+    },
+    "Moniteur système" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System Monitor"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moniteur système"
           }
         }
       }
@@ -8186,6 +7099,22 @@
         }
       }
     },
+    "MP4 H.264, lisible partout" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "H.264 MP4, plays everywhere"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MP4 H.264, lisible partout"
+          }
+        }
+      }
+    },
     "Mumbai" : {
       "localizations" : {
         "en" : {
@@ -8298,6 +7227,38 @@
         }
       }
     },
+    "Nettoyage" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cleaning"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nettoyage"
+          }
+        }
+      }
+    },
+    "Nettoyez tranquillement. Il se libère de lui-même." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clean away. It unlocks by itself."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nettoyez tranquillement. Il se libère de lui-même."
+          }
+        }
+      }
+    },
     "New York" : {
       "localizations" : {
         "en" : {
@@ -8394,6 +7355,54 @@
         }
       }
     },
+    "Notchkit est prêt. Vous retrouverez les réglages et ce tutoriel dans le menu Notchkit de la barre des menus." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit is ready. You'll find Settings and this tutorial in the Notchkit menu in the menu bar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit est prêt. Vous retrouverez les réglages et ce tutoriel dans le menu Notchkit de la barre des menus."
+          }
+        }
+      }
+    },
+    "Notchkit liste les captures et enregistrements d'écran faits depuis le démarrage du Mac ou l'ouverture de votre session, où qu'ils soient enregistrés. S'ils sont sur le Bureau, macOS demandera une fois l'accès à ce dossier pour afficher les aperçus." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit lists the screenshots and screen recordings made since your Mac started or you logged in, wherever they are saved. If they are on the Desktop, macOS asks once for access to that folder to show the previews."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit liste les captures et enregistrements d'écran faits depuis le démarrage du Mac ou l'ouverture de votre session, où qu'ils soient enregistrés. S'ils sont sur le Bureau, macOS demandera une fois l'accès à ce dossier pour afficher les aperçus."
+          }
+        }
+      }
+    },
+    "Notchkit transforme l'encoche de votre Mac en un espace vivant : musique, minuteurs, batterie, météo, calendrier et bien plus. Sur un Mac sans encoche, une pastille flottante prend sa place." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit turns your Mac's notch into a living space: music, timers, battery, weather, calendar and much more. On a Mac without a notch, a floating pill takes its place."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit transforme l'encoche de votre Mac en un espace vivant : musique, minuteurs, batterie, météo, calendrier et bien plus. Sur un Mac sans encoche, une pastille flottante prend sa place."
+          }
+        }
+      }
+    },
     "Notchkit va ajouter des hooks et une barre d'état dans ~/.claude/settings.json pour que Claude Code le prévienne de son activité et lui transmette votre utilisation réelle (connexion locale uniquement, protégée par un jeton). Vos réglages existants sont conservés et une copie de sauvegarde est faite. Les nouvelles sessions de Claude Code en tiendront compte." : {
       "localizations" : {
         "en" : {
@@ -8442,6 +7451,38 @@
         }
       }
     },
+    "Notes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notes"
+          }
+        }
+      }
+    },
+    "Nouveau rappel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Reminder"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouveau rappel"
+          }
+        }
+      }
+    },
     "Nouvelle conversation" : {
       "localizations" : {
         "en" : {
@@ -8470,6 +7511,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nouvelle page"
+          }
+        }
+      }
+    },
+    "Ollama" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ollama"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ollama"
+          }
+        }
+      }
+    },
+    "Ollama arrêté" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ollama stopped"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ollama arrêté"
+          }
+        }
+      }
+    },
+    "Ollama en marche" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ollama running"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ollama en marche"
           }
         }
       }
@@ -8518,6 +7607,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Orage avec grêle"
+          }
+        }
+      }
+    },
+    "Ouvrez un projet dans Xcode ou le Terminal, ou ajoutez un dossier dans les réglages." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open a project in Xcode or Terminal, or add a folder in Settings."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrez un projet dans Xcode ou le Terminal, ou ajoutez un dossier dans les réglages."
           }
         }
       }
@@ -8602,6 +7707,22 @@
         }
       }
     },
+    "Ouvrir dans le Terminal" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open in Terminal"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir dans le Terminal"
+          }
+        }
+      }
+    },
     "Ouvrir l'app qui joue" : {
       "localizations" : {
         "en" : {
@@ -8646,6 +7767,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ouvrir les Réglages Système"
+          }
+        }
+      }
+    },
+    "Ouvrir les réglages…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Settings…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir les réglages…"
+          }
+        }
+      }
+    },
+    "Ouvrir Rappels" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Reminders"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir Rappels"
+          }
+        }
+      }
+    },
+    "Ouvrir sur GitHub" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open on GitHub"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir sur GitHub"
           }
         }
       }
@@ -8778,6 +7947,22 @@
         }
       }
     },
+    "Passer le tutoriel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip Tutorial"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passer le tutoriel"
+          }
+        }
+      }
+    },
     "Pause" : {
       "localizations" : {
         "en" : {
@@ -8790,6 +7975,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pause"
+          }
+        }
+      }
+    },
+    "Pauses : %lld/%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Breaks: %lld/%lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pauses : %lld/%lld"
           }
         }
       }
@@ -8826,6 +8027,22 @@
         }
       }
     },
+    "Personnaliser dans les réglages…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Customize in Settings…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personnaliser dans les réglages…"
+          }
+        }
+      }
+    },
     "Petit" : {
       "localizations" : {
         "en" : {
@@ -8858,6 +8075,38 @@
         }
       }
     },
+    "Placer dans la corbeille" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Move to Trash"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Placer dans la corbeille"
+          }
+        }
+      }
+    },
+    "Placez le pointeur sur l'encoche : elle se déplie et affiche vos widgets. Balayez avec deux doigts ou cliquez sur les onglets pour changer de page. Éloignez le pointeur pour la refermer." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Move the pointer over the notch: it opens and shows your widgets. Swipe with two fingers or click the tabs to change pages. Move the pointer away to close it."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Placez le pointeur sur l'encoche : elle se déplie et affiche vos widgets. Balayez avec deux doigts ou cliquez sur les onglets pour changer de page. Éloignez le pointeur pour la refermer."
+          }
+        }
+      }
+    },
     "Pleine dans %@" : {
       "localizations" : {
         "en" : {
@@ -8870,6 +8119,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pleine dans %@"
+          }
+        }
+      }
+    },
+    "Pleine vers %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Full at %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pleine vers %@"
           }
         }
       }
@@ -8918,6 +8183,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pluie verglaçante"
+          }
+        }
+      }
+    },
+    "Pomodoro · pause" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pomodoro · break"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pomodoro · pause"
+          }
+        }
+      }
+    },
+    "Pomodoro · travail" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pomodoro · focus"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pomodoro · travail"
+          }
+        }
+      }
+    },
+    "Pomodoro (25 min de travail, 5 min de pause)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pomodoro (25 min focus, 5 min break)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pomodoro (25 min de travail, 5 min de pause)"
           }
         }
       }
@@ -9034,6 +8347,38 @@
         }
       }
     },
+    "Processeur" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CPU"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Processeur"
+          }
+        }
+      }
+    },
+    "Processeur, graphismes, mémoire, disque, réseau, batterie et processus gourmands." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CPU, graphics, memory, disk, network, battery and heavy processes."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Processeur, graphismes, mémoire, disque, réseau, batterie et processus gourmands."
+          }
+        }
+      }
+    },
     "Prochains événements et rappel avant un rendez-vous." : {
       "localizations" : {
         "en" : {
@@ -9062,6 +8407,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Productivité"
+          }
+        }
+      }
+    },
+    "Pull (avance rapide uniquement)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pull (fast-forward only)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pull (avance rapide uniquement)"
+          }
+        }
+      }
+    },
+    "Pull requests" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pull Requests"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pull requests"
+          }
+        }
+      }
+    },
+    "Quand une musique joue, qu'un minuteur tourne ou que Claude Code travaille, l'activité s'affiche de part et d'autre de l'encoche. S'il y en a plusieurs, les autres deviennent des bulles : cliquez dessus pour les ouvrir." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When music plays, a timer runs or Claude Code is working, the activity shows on both sides of the notch. When there are several, the others become bubbles: click one to open it."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quand une musique joue, qu'un minuteur tourne ou que Claude Code travaille, l'activité s'affiche de part et d'autre de l'encoche. S'il y en a plusieurs, les autres deviennent des bulles : cliquez dessus pour les ouvrir."
           }
         }
       }
@@ -9114,6 +8507,38 @@
         }
       }
     },
+    "Rappels" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reminders"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rappels"
+          }
+        }
+      }
+    },
+    "Rappels de pause et d'hydratation, et anneaux de votre journée devant le Mac." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Break and hydration reminders, and rings for your day at the Mac."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rappels de pause et d'hydratation, et anneaux de votre journée devant le Mac."
+          }
+        }
+      }
+    },
     "Rebondissante" : {
       "localizations" : {
         "en" : {
@@ -9158,6 +8583,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Recherche « %@ »"
+          }
+        }
+      }
+    },
+    "Recherche des résolutions…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Looking up resolutions…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recherche des résolutions…"
           }
         }
       }
@@ -9318,6 +8759,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Réglages…"
+          }
+        }
+      }
+    },
+    "Régler l'alarme" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Set Alarm"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Régler l'alarme"
           }
         }
       }
@@ -9562,6 +9019,54 @@
         }
       }
     },
+    "Retirer du Dashboard" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove from Dashboard"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retirer du Dashboard"
+          }
+        }
+      }
+    },
+    "Retirer le jeton" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove Token"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retirer le jeton"
+          }
+        }
+      }
+    },
+    "Retour" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Back"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retour"
+          }
+        }
+      }
+    },
     "Retour à l'app précédente" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -9628,6 +9133,38 @@
         }
       }
     },
+    "Revoir le tutoriel…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Tutorial…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revoir le tutoriel…"
+          }
+        }
+      }
+    },
+    "Rien à faire. Profitez-en !" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing to do. Enjoy!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rien à faire. Profitez-en !"
+          }
+        }
+      }
+    },
     "Rien de prévu" : {
       "localizations" : {
         "en" : {
@@ -9660,6 +9197,22 @@
         }
       }
     },
+    "Sans pause depuis %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No break for %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sans pause depuis %@"
+          }
+        }
+      }
+    },
     "Sans titre" : {
       "localizations" : {
         "en" : {
@@ -9672,6 +9225,55 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sans titre"
+          }
+        }
+      }
+    },
+    "Santé" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Health"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Santé"
+          }
+        }
+      }
+    },
+    "Santé %@" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Health %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Santé %@"
+          }
+        }
+      }
+    },
+    "Santé de la batterie" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery health"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Santé de la batterie"
           }
         }
       }
@@ -9736,6 +9338,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Secteur"
+          }
+        }
+      }
+    },
+    "Sélectionnez du texte dans une app, puis touchez « Traduire la sélection »." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select text in an app, then click “Translate Selection”."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sélectionnez du texte dans une app, puis touchez « Traduire la sélection »."
           }
         }
       }
@@ -9997,6 +9615,7 @@
       }
     },
     "Sur un écran sans encoche, l'encoche se décale vers la droite si elle couvre les menus de l'app au premier plan. Nécessite l'autorisation Accessibilité (Réglages Système > Confidentialité et sécurité > Accessibilité)." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10008,6 +9627,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sur un écran sans encoche, l'encoche se décale vers la droite si elle couvre les menus de l'app au premier plan. Nécessite l'autorisation Accessibilité (Réglages Système > Confidentialité et sécurité > Accessibilité)."
+          }
+        }
+      }
+    },
+    "Sur un écran sans encoche, l'encoche se décale vers la droite si elle couvre les menus de l'app au premier plan. Sur une vraie encoche, l'activité compacte se rétrécit, ou se masque, pour laisser les menus visibles. Nécessite l'autorisation Accessibilité (Réglages Système > Confidentialité et sécurité > Accessibilité)." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On a screen without a notch, the notch moves to the right if it covers the active app's menus. On a real notch, the compact activity shrinks, or hides, to keep the menus visible. Requires the Accessibility permission (System Settings > Privacy & Security > Accessibility)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sur un écran sans encoche, l'encoche se décale vers la droite si elle couvre les menus de l'app au premier plan. Sur une vraie encoche, l'activité compacte se rétrécit, ou se masque, pour laisser les menus visibles. Nécessite l'autorisation Accessibilité (Réglages Système > Confidentialité et sécurité > Accessibilité)."
           }
         }
       }
@@ -10024,6 +9659,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Survol"
+          }
+        }
+      }
+    },
+    "Survolez l'encoche pour l'ouvrir" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hover over the notch to open it"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Survolez l'encoche pour l'ouvrir"
           }
         }
       }
@@ -10188,6 +9839,54 @@
         }
       }
     },
+    "Temps d'écran" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Screen Time"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temps d'écran"
+          }
+        }
+      }
+    },
+    "Temps restant avant la charge complète" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time left until fully charged"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temps restant avant la charge complète"
+          }
+        }
+      }
+    },
+    "Temps restant avant la charge complète, pendant la charge" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time left until fully charged, while charging"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temps restant avant la charge complète, pendant la charge"
+          }
+        }
+      }
+    },
     "Temps restant pour répondre à Claude depuis l'encoche" : {
       "localizations" : {
         "en" : {
@@ -10232,6 +9931,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Test"
+          }
+        }
+      }
+    },
+    "Texte" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Text"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Texte"
           }
         }
       }
@@ -10333,6 +10048,38 @@
         }
       }
     },
+    "Tout compresser (ZIP)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compress All (ZIP)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout compresser (ZIP)"
+          }
+        }
+      }
+    },
+    "Tout copier vers iCloud Drive" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy All to iCloud Drive"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout copier vers iCloud Drive"
+          }
+        }
+      }
+    },
     "Tout envoyer par AirDrop" : {
       "localizations" : {
         "en" : {
@@ -10345,6 +10092,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tout envoyer par AirDrop"
+          }
+        }
+      }
+    },
+    "Tout est prêt" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You're all set"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout est prêt"
           }
         }
       }
@@ -10381,6 +10144,70 @@
         }
       }
     },
+    "Traduction" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Translation"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Traduction"
+          }
+        }
+      }
+    },
+    "Traduction impossible pour le moment." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Translation isn't available right now."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Traduction impossible pour le moment."
+          }
+        }
+      }
+    },
+    "Traduire la sélection" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Translate Selection"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Traduire la sélection"
+          }
+        }
+      }
+    },
+    "Traduit le texte sélectionné, du français vers l'anglais et inversement, sur le Mac." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Translates the selected text between French and English, on your Mac."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Traduit le texte sélectionné, du français vers l'anglais et inversement, sur le Mac."
+          }
+        }
+      }
+    },
     "Transformez l'encoche de votre Mac en une zone interactive et modulaire." : {
       "localizations" : {
         "en" : {
@@ -10393,6 +10220,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Transformez l'encoche de votre Mac en une zone interactive et modulaire."
+          }
+        }
+      }
+    },
+    "Un brouillon toujours à portée de survol pour noter une idée." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A scratchpad one hover away to jot down an idea."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un brouillon toujours à portée de survol pour noter une idée."
           }
         }
       }
@@ -10413,6 +10256,54 @@
         }
       }
     },
+    "Un miroir rapide pour vérifier votre allure avant une réunion." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A quick mirror to check how you look before a meeting."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un miroir rapide pour vérifier votre allure avant une réunion."
+          }
+        }
+      }
+    },
+    "Un verre d'eau ?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Glass of water?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un verre d'eau ?"
+          }
+        }
+      }
+    },
+    "Une barre qui montre où vous en êtes de votre journée de travail." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A bar that shows how far along your workday you are."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une barre qui montre où vous en êtes de votre journée de travail."
+          }
+        }
+      }
+    },
     "Une encoche plus grande accueille plus de widgets par page (%@ unités de largeur)." : {
       "localizations" : {
         "en" : {
@@ -10425,6 +10316,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Une encoche plus grande accueille plus de widgets par page (%@ unités de largeur)."
+          }
+        }
+      }
+    },
+    "Une idée ? Notez-la ici…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Got an idea? Jot it down here…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une idée ? Notez-la ici…"
           }
         }
       }
@@ -10493,6 +10400,22 @@
         }
       }
     },
+    "Verrouille le clavier pendant 60 s pour le nettoyer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locks the keyboard for 60 s so you can clean it"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verrouille le clavier pendant 60 s pour le nettoyer"
+          }
+        }
+      }
+    },
     "Version %@" : {
       "localizations" : {
         "en" : {
@@ -10525,7 +10448,24 @@
         }
       }
     },
+    "Vidéo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vidéo"
+          }
+        }
+      }
+    },
     "Vidéo (meilleure qualité)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10685,6 +10625,70 @@
         }
       }
     },
+    "Vos activités vivent dans l'encoche" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your activities live in the notch"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vos activités vivent dans l'encoche"
+          }
+        }
+      }
+    },
+    "Vos apps préférées à un clic et l'état du Mac en un coup d'œil." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your favorite apps one click away and your Mac at a glance."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vos apps préférées à un clic et l'état du Mac en un coup d'œil."
+          }
+        }
+      }
+    },
+    "Vos pull requests et l'état de leurs vérifications, en direct." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your pull requests and the status of their checks, live."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vos pull requests et l'état de leurs vérifications, en direct."
+          }
+        }
+      }
+    },
+    "Vos rappels à faire, à cocher ou ajouter depuis l'encoche." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your reminders to check off or add right from the notch."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vos rappels à faire, à cocher ou ajouter depuis l'encoche."
+          }
+        }
+      }
+    },
     "Votre accord" : {
       "localizations" : {
         "en" : {
@@ -10729,6 +10733,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vous avez déjà votre propre barre d'état Claude Code : Notchkit ne la remplace pas, l'utilisation affichée reste donc une estimation."
+          }
+        }
+      }
+    },
+    "Webcam" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Webcam"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Webcam"
           }
         }
       }

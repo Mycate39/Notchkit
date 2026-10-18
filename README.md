@@ -6,7 +6,7 @@ Notchkit shows a floating pill instead, or simulates a notch.
 
 > Found a bug or have an idea? Please open an issue in the *Issues* tab.
 
-https://github.com/user-attachments/assets/805f5594-03e0-49f6-a223-b9498daf1901
+https://github.com/user-attachments/assets/5b6919a6-630f-4ba4-a222-9da7eb7c3a71
 
 ## Features
 

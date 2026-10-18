@@ -101,6 +101,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         if ProcessInfo.processInfo.environment["NOTCHKIT_STRESS"] != nil {
             runStressTest()
         }
+        if let directory = ProcessInfo.processInfo.environment["NOTCHKIT_MASCOT_VIDEO"] {
+            // Images de la vidéo de démonstration de la mascotte (celle choisie dans les réglages).
+            Task { @MainActor in
+                MascotVideoRenderer.renderFrames(design: settings.settings.mascot,
+                                                 to: URL(fileURLWithPath: directory))
+                NSApp.terminate(nil)
+            }
+        }
         if let directory = ProcessInfo.processInfo.environment["NOTCHKIT_SNAPSHOT"] {
             Task { @MainActor in
                 // Laisse le temps aux modules de charger leurs données (météo, calendrier…).

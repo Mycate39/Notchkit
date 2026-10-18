@@ -182,7 +182,7 @@ private struct MascotPicker: View {
             // La mascotte choisie, dans toutes ses humeurs, sur fond noir comme dans l'encoche.
             HStack(spacing: 0) {
                 ForEach(MascotMood.allCases, id: \.self) { mood in
-                    MascotView(design: selection, mood: mood, size: 40)
+                    LiveMascotView(design: selection, mood: mood, size: 40)
                         .frame(maxWidth: .infinity)
                 }
             }

@@ -8,6 +8,7 @@ enum AutomatedRun {
         let environment = ProcessInfo.processInfo.environment
         return environment["NOTCHKIT_STRESS"] != nil
             || environment["NOTCHKIT_SNAPSHOT"] != nil
+            || environment["NOTCHKIT_MASCOT_VIDEO"] != nil
             || environment["XCTestConfigurationFilePath"] != nil
             || NSClassFromString("XCTestCase") != nil
     }

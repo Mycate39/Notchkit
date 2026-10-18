@@ -238,7 +238,16 @@ enum SnapshotRenderer {
         var waiting = ClaudeSession(id: "p", projectName: "korus", state: .waitingForPermission,
                                     prompt: "Corrige le calcul de la TVA", lastEventAt: now.addingTimeInterval(5))
         waiting.attentionMessage = "Claude needs your permission to use Bash"
-        for (name, sessions) in [("vide", [ClaudeSession]()), ("travail", [working]), ("commande", [testing]), ("attente", [waiting, working])] {
+        waiting.permissionPrompt = ClaudePermissionPrompt(symbol: "terminal", text: "Exécute : supprimer node_modules",
+                                                          detail: "rm -rf node_modules", canAlwaysAllow: true)
+        var asking = ClaudeSession(id: "q", projectName: "korus", state: .waitingForPermission,
+                                   prompt: "Ajoute un graphique des ventes", lastEventAt: now)
+        asking.questionPrompt = ClaudeQuestionPrompt(input: ["questions": [[
+            "question": "Quelle bibliothèque de graphiques utiliser ?", "header": "Graphiques", "multiSelect": false,
+            "options": [["label": "Recharts"], ["label": "Chart.js"], ["label": "D3"]],
+        ], ["question": "Quelles périodes ?", "header": "Périodes", "multiSelect": true,
+            "options": [["label": "Jour"], ["label": "Semaine"], ["label": "Mois"]]]]])
+        for (name, sessions) in [("vide", [ClaudeSession]()), ("travail", [working]), ("commande", [testing]), ("attente", [waiting, working]), ("question", [asking])] {
             agents.previewSessions = sessions
             save(AgentsHomeView(module: agents)
                     .frame(width: 740, height: 150)

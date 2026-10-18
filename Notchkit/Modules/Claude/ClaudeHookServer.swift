@@ -120,6 +120,9 @@ final class ClaudeHookServer {
     }
 
     nonisolated static let path = "/notchkit/claude/hook"
+    /// En-tête des hooks qui peuvent attendre une décision, et clé ajoutée au JSON reçu.
+    nonisolated static let waitHeader = "x-notchkit-wait"
+    nonisolated static let waitKey = "_notchkit_can_wait"
     /// Données de la barre d'état de Claude Code (utilisation réelle des abonnements).
     nonisolated static let statusPath = "/notchkit/claude/status"
     nonisolated static let tokenHeader = "x-notchkit-token"
@@ -230,9 +233,11 @@ final class ClaudeHookServer {
         guard request.headers[Self.tokenHeader] == token else {
             return reply(on: connection, HTTPParser.response(status: 401))
         }
-        guard let json = try? JSONSerialization.jsonObject(with: request.body) as? [String: Any] else {
+        guard var json = try? JSONSerialization.jsonObject(with: request.body) as? [String: Any] else {
             return reply(on: connection, HTTPParser.response(status: 400))
         }
+        // Hook installé avec un long délai : Notchkit peut attendre la réponse de l'utilisateur.
+        if request.headers[Self.waitHeader] == "1" { json[Self.waitKey] = true }
 
         if request.path == Self.statusPath {
             let text = statusHandler?(json) ?? ""

@@ -277,3 +277,143 @@ struct AgentPermissionPanel: View {
         .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).strokeBorder(StandBy.amber.opacity(0.35), lineWidth: 1))
     }
 }
+
+// MARK: - Décision depuis l'encoche
+
+/// Demande de permission avec ses boutons : Autoriser, Toujours (si Claude Code propose une règle), Refuser.
+struct AgentDecisionPanel: View {
+    let prompt: ClaudePermissionPrompt
+    let onDecide: (_ allow: Bool, _ always: Bool) -> Void
+    let onTerminal: () -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 7) {
+            HStack(spacing: 6) {
+                Image(systemName: "hand.raised.fill").foregroundStyle(StandBy.amber)
+                Text("Claude demande l'autorisation")
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundStyle(StandBy.amber)
+                Spacer(minLength: 0)
+                Button("Terminal", action: onTerminal)
+                    .buttonStyle(.notch)
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundStyle(.white.opacity(0.5))
+                    .help("Répondre dans le terminal de Claude Code")
+            }
+            Label(prompt.text, systemImage: prompt.symbol)
+                .font(.system(size: 12, weight: .semibold))
+                .lineLimit(1)
+            if let detail = prompt.detail {
+                Text(detail)
+                    .font(.system(size: 10.5, design: .monospaced))
+                    .foregroundStyle(.white.opacity(0.6))
+                    .lineLimit(1)
+                    .truncationMode(.middle)
+            }
+            HStack(spacing: 8) {
+                Button { onDecide(true, false) } label: { Label("Autoriser", systemImage: "checkmark") }
+                    .buttonStyle(.standBy(.regular, active: true))
+                if prompt.canAlwaysAllow {
+                    Button { onDecide(true, true) } label: { Text("Toujours") }
+                        .buttonStyle(.standBy(.regular))
+                        .help("Autoriser et ne plus demander pour cette action")
+                }
+                Button { onDecide(false, false) } label: { Label("Refuser", systemImage: "xmark") }
+                    .buttonStyle(.standBy(.regular))
+                Spacer(minLength: 0)
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(10)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(StandBy.amber.opacity(0.1), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).strokeBorder(StandBy.amber.opacity(0.35), lineWidth: 1))
+    }
+}
+
+/// Questions de Claude, une à la fois : un clic sur un choix y répond ; en choix multiple, on coche
+/// puis on valide. Après la dernière question, les réponses partent à Claude Code.
+struct AgentQuestionPanel: View {
+    let prompt: ClaudeQuestionPrompt
+    let onAnswer: ([String: [String]]) -> Void
+    let onTerminal: () -> Void
+
+    @State private var index = 0
+    @State private var selections: [String: [String]] = [:]
+
+    private var question: ClaudeQuestionPrompt.Question { prompt.questions[min(index, prompt.questions.count - 1)] }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(spacing: 6) {
+                Image(systemName: "questionmark.bubble.fill").foregroundStyle(StandBy.amber)
+                Text(question.header ?? String(localized: "Question"))
+                    .font(.system(size: 11, weight: .bold))
+                    .foregroundStyle(StandBy.amber)
+                if prompt.questions.count > 1 {
+                    Text(verbatim: "\(index + 1)/\(prompt.questions.count)")
+                        .font(.system(size: 10, weight: .semibold).monospacedDigit())
+                        .foregroundStyle(.white.opacity(0.4))
+                }
+                Spacer(minLength: 0)
+                Button("Terminal", action: onTerminal)
+                    .buttonStyle(.notch)
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundStyle(.white.opacity(0.5))
+                    .help("Répondre dans le terminal de Claude Code")
+            }
+            Text(question.question)
+                .font(.system(size: 12, weight: .semibold))
+                .lineLimit(2)
+            HStack(spacing: 6) {
+                ForEach(question.options.prefix(4), id: \.label) { option in
+                    let chosen = selections[question.question, default: []].contains(option.label)
+                    Button {
+                        choose(option.label)
+                    } label: {
+                        HStack(spacing: 4) {
+                            if question.multiSelect {
+                                Image(systemName: chosen ? "checkmark.square.fill" : "square")
+                            }
+                            Text(option.label).lineLimit(1)
+                        }
+                    }
+                    .buttonStyle(.standBy(.small, active: chosen))
+                    .help(option.description ?? option.label)
+                }
+                Spacer(minLength: 0)
+                if question.multiSelect {
+                    Button { next() } label: { Image(systemName: "arrow.right") }
+                        .buttonStyle(.standBy(.small, active: true, circle: true))
+                        .disabled(selections[question.question, default: []].isEmpty)
+                        .help("Valider")
+                }
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(10)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color.white.opacity(0.05), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .animation(NotchLayout.pageIndicatorSpring, value: index)
+    }
+
+    private func choose(_ label: String) {
+        let key = question.question
+        if question.multiSelect {
+            var current = selections[key, default: []]
+            if let position = current.firstIndex(of: label) { current.remove(at: position) } else { current.append(label) }
+            selections[key] = current
+        } else {
+            selections[key] = [label]
+            next()
+        }
+    }
+
+    private func next() {
+        if index + 1 < prompt.questions.count {
+            index += 1
+        } else {
+            onAnswer(selections)
+        }
+    }
+}

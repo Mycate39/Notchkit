@@ -46,7 +46,13 @@ struct ClaudeHooksInstallerTests {
         #expect((installed["statusLine"] as? [String: Any])?["command"] as? String == "'/x/claude-statusline.sh'")
         let hooks = try #require(installed["hooks"] as? [String: Any])
         let pre = try #require(hooks["PreToolUse"] as? [[String: Any]])
-        #expect(pre.count == 2, "le hook personnel doit être conservé")
+        // Le hook personnel est conservé ; Notchkit ajoute le sien et celui d'AskUserQuestion.
+        #expect(pre.count == 3, "le hook personnel doit être conservé")
+        let ask = try #require(pre.first { $0["matcher"] as? String == "AskUserQuestion" }?["hooks"] as? [[String: Any]])
+        #expect(ask.first?["timeout"] as? Int == ClaudeHooksInstaller.decisionTimeout)
+        #expect((ask.first?["headers"] as? [String: Any])?["X-Notchkit-Wait"] as? String == "1")
+        let permission = try #require((hooks["PermissionRequest"] as? [[String: Any]])?.first?["hooks"] as? [[String: Any]])
+        #expect(permission.first?["timeout"] as? Int == ClaudeHooksInstaller.decisionTimeout)
         #expect(ClaudeHooksInstaller.isInstalled(in: installed, port: 52731, token: "t"))
         // Le hook Stop a un délai plus long, pour la fenêtre de réponse.
         let stop = try #require((hooks["Stop"] as? [[String: Any]])?.first?["hooks"] as? [[String: Any]])
@@ -61,7 +67,7 @@ struct ClaudeHooksInstallerTests {
         )
         let hooks = try #require(twice["hooks"] as? [String: Any])
         #expect((hooks["Stop"] as? [[String: Any]])?.count == 1)
-        #expect((hooks["PreToolUse"] as? [[String: Any]])?.count == 2)
+        #expect((hooks["PreToolUse"] as? [[String: Any]])?.count == 3)
     }
 
     @Test func desinstallationRetrouveLEtatInitial() throws {

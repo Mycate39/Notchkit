@@ -76,6 +76,8 @@ final class ClaudeModule: NotchModule {
     @ObservationIgnored private var isStarted = false
     /// Hooks Stop gardés ouverts (fenêtre de réponse), par session.
     @ObservationIgnored private var heldStops: [String: HookReply] = [:]
+    /// Demandes de permission ou questions retenues en attendant la décision prise dans l'encoche.
+    @ObservationIgnored private var heldDecisions: [String: HeldDecision] = [:]
     @ObservationIgnored private var replyTimers: [String: Task<Void, Never>] = [:]
 
     init(context: ModuleContext) {
@@ -116,6 +118,11 @@ final class ClaudeModule: NotchModule {
         server.statusHandler = { [weak self] json in self?.handleStatus(json) ?? "" }
         server.start(port: port)
         refreshInstallState()
+        // Hooks installés par l'utilisateur mais d'une version précédente : mis à jour d'eux-mêmes
+        // (nouveaux événements, comme les demandes de permission). Une sauvegarde est faite au passage.
+        if installStatus == .outdated, !AutomatedRun.isActive {
+            installHooks()
+        }
 
         // Toutes les minutes : sessions interrompues sans hook Stop, et toutes les 10 minutes : utilisation.
         maintenanceTask = Task { [weak self] in
@@ -137,6 +144,7 @@ final class ClaudeModule: NotchModule {
         transcriptTask?.cancel()
         transcriptTask = nil
         for id in Array(heldStops.keys) { closeReplyWindow(id, respond: true) }
+        for id in Array(heldDecisions.keys) { releaseDecision(id, respond: true) }
         server.stop()
     }
 
@@ -145,7 +153,15 @@ final class ClaudeModule: NotchModule {
     /// Traite un événement reçu et répond à Claude Code (tout de suite, ou plus tard pour Stop).
     func handle(_ json: [String: Any], reply: HookReply) {
         guard let event = ClaudeHookEvent(json: json) else { return reply.send(nil) }
+        let canWait = json[ClaudeHookServer.waitKey] as? Bool == true
+        // Le hook AskUserQuestion « qui peut attendre » double le PreToolUse général, déjà compté.
+        if canWait && event.kind == .preToolUse {
+            return holdForDecision(json, event: event, reply: reply)
+        }
         let transition = tracker.apply(event)
+        if canWait {
+            return holdForDecision(json, event: event, reply: reply)
+        }
         readTranscript(of: event.sessionID)
         updateTranscriptPolling()
 
@@ -168,6 +184,98 @@ final class ClaudeModule: NotchModule {
             return openReplyWindow(event.sessionID, reply: reply)
         }
         reply.send(nil)
+    }
+
+    // MARK: Décisions depuis l'encoche
+
+    /// Requête retenue : la réponse est envoyée quand l'utilisateur décide dans l'encoche.
+    private final class HeldDecision {
+        enum Kind { case permission, question }
+        let kind: Kind
+        let reply: HookReply
+        /// Règles proposées par Claude Code pour « Toujours » (permission).
+        let suggestions: [[String: Any]]
+        /// Entrée de l'outil, renvoyée complétée des réponses (questions).
+        let input: [String: Any]
+
+        init(kind: Kind, reply: HookReply, suggestions: [[String: Any]], input: [String: Any]) {
+            self.kind = kind
+            self.reply = reply
+            self.suggestions = suggestions
+            self.input = input
+        }
+    }
+
+    /// Retient une demande de permission ou des questions pour y répondre depuis la page Agents.
+    /// Sans page Agents active, Claude Code les pose comme d'habitude dans le terminal.
+    private func holdForDecision(_ json: [String: Any], event: ClaudeHookEvent, reply: HookReply) {
+        guard context.otherModule("agents") != nil else { return reply.send(nil) }
+        let id = event.sessionID
+        releaseDecision(id, respond: true)
+        let input = json["tool_input"] as? [String: Any] ?? [:]
+
+        if event.kind == .preToolUse, event.toolName == "AskUserQuestion", let prompt = ClaudeQuestionPrompt(input: input) {
+            guard tracker.sessions[id] != nil else { return reply.send(nil) }
+            heldDecisions[id] = HeldDecision(kind: .question, reply: reply, suggestions: [], input: input)
+            tracker.setQuestionPrompt(prompt, for: id)
+        } else if case .other("PermissionRequest") = event.kind, let tool = event.toolName {
+            let suggestions = (json["permission_suggestions"] as? [[String: Any]] ?? [])
+                .filter { $0["behavior"] as? String == "allow" }
+            let (symbol, text) = ClaudeToolDescriber.describe(toolName: tool, summary: event.toolSummary)
+            let detail = event.toolSummary["command"] ?? event.toolSummary["file_path"] ?? event.toolSummary["url"]
+            heldDecisions[id] = HeldDecision(kind: .permission, reply: reply, suggestions: suggestions, input: input)
+            tracker.setPermissionPrompt(ClaudePermissionPrompt(symbol: symbol, text: text, detail: detail,
+                                                               canAlwaysAllow: !suggestions.isEmpty), for: id)
+        } else {
+            return reply.send(nil)
+        }
+        // Réponse donnée dans le terminal (ou Échap) : Claude Code abandonne la requête.
+        reply.onClientClose = { [weak self] in self?.releaseDecision(id, respond: false) }
+    }
+
+    /// Autorise (éventuellement pour toujours) ou refuse la permission demandée par une session.
+    func decidePermission(_ sessionID: String, allow: Bool, always: Bool = false) {
+        guard let held = heldDecisions[sessionID], held.kind == .permission else { return }
+        var decision: [String: Any] = ["behavior": allow ? "allow" : "deny"]
+        if allow, always, let rule = held.suggestions.first {
+            decision["updatedPermissions"] = [rule]
+        }
+        if !allow {
+            decision["message"] = "Refusé depuis Notchkit."
+        }
+        finishDecision(sessionID, response: ["hookSpecificOutput": ["hookEventName": "PermissionRequest", "decision": decision]])
+    }
+
+    /// Répond aux questions de Claude : texte de chaque question → libellés choisis.
+    func answerQuestions(_ sessionID: String, selections: [String: [String]]) {
+        guard let held = heldDecisions[sessionID], held.kind == .question else { return }
+        var input = held.input
+        input["answers"] = ClaudeQuestionPrompt.answers(selections)
+        finishDecision(sessionID, response: ["hookSpecificOutput": [
+            "hookEventName": "PreToolUse",
+            "permissionDecision": "allow",
+            "updatedInput": input,
+        ]])
+    }
+
+    /// Laisse Claude Code poser la question dans son terminal.
+    func answerInTerminal(_ sessionID: String) {
+        releaseDecision(sessionID, respond: true)
+    }
+
+    private func finishDecision(_ sessionID: String, response: [String: Any]) {
+        guard let held = heldDecisions.removeValue(forKey: sessionID) else { return }
+        held.reply.send(response)
+        tracker.setPermissionPrompt(nil, for: sessionID)
+        tracker.setQuestionPrompt(nil, for: sessionID)
+    }
+
+    /// Abandonne la décision en attente ; `respond` : Claude Code reçoit une réponse vide (il demande alors lui-même).
+    private func releaseDecision(_ sessionID: String, respond: Bool) {
+        guard let held = heldDecisions.removeValue(forKey: sessionID) else { return }
+        if respond { held.reply.send(nil) }
+        tracker.setPermissionPrompt(nil, for: sessionID)
+        tracker.setQuestionPrompt(nil, for: sessionID)
     }
 
     // MARK: Messages en direct

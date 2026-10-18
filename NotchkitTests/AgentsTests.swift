@@ -94,3 +94,88 @@ struct AgentsLiveTests {
         #expect(AgentEditorPanel.visibleCounts(lengths: [5, 3], typed: 100) == [5, 3])
     }
 }
+
+/// Autoriser, refuser et répondre aux questions depuis l'encoche.
+@MainActor
+struct AgentsDecisionTests {
+    /// Module Claude dont le contexte voit une page Agents active (sinon rien n'est retenu).
+    private func makeModule(withAgents: Bool = true) -> ClaudeModule {
+        let base = ModuleContext(presentAlert: { _ in }, openSettings: {}, holdExpanded: { _ in })
+        let agents = AgentsModule(context: base)
+        var context = base
+        context.otherModule = { id in withAgents && id == "agents" ? agents : nil }
+        return ClaudeModule(context: context)
+    }
+
+    private let permission: [String: Any] = [
+        "hook_event_name": "PermissionRequest", "session_id": "s", "tool_name": "Bash",
+        "tool_input": ["command": "rm -rf node_modules"],
+        "permission_suggestions": [["type": "addRules", "rules": [["toolName": "Bash", "ruleContent": "rm -rf node_modules"]],
+                                    "behavior": "allow", "destination": "localSettings"]],
+        ClaudeHookServer.waitKey: true,
+    ]
+
+    @Test func permissionRetenuePuisAutoriseePourToujours() throws {
+        let module = makeModule()
+        _ = module.handle(["hook_event_name": "UserPromptSubmit", "session_id": "s"])
+        var response: [String: Any]??
+        module.handle(permission, reply: HookReply { response = .some($0) })
+        // Rien n'est répondu tant que l'utilisateur n'a pas décidé.
+        #expect(response == nil)
+        let prompt = try #require(module.tracker.sessions["s"]?.permissionPrompt)
+        #expect(prompt.canAlwaysAllow)
+        #expect(module.tracker.sessions["s"]?.state == .waitingForPermission)
+
+        module.decidePermission("s", allow: true, always: true)
+        let output = try #require(response??["hookSpecificOutput"] as? [String: Any])
+        let decision = try #require(output["decision"] as? [String: Any])
+        #expect(decision["behavior"] as? String == "allow")
+        #expect((decision["updatedPermissions"] as? [[String: Any]])?.first?["type"] as? String == "addRules")
+        #expect(module.tracker.sessions["s"]?.permissionPrompt == nil)
+        #expect(module.tracker.sessions["s"]?.state == .working)
+    }
+
+    @Test func permissionRefusee() throws {
+        let module = makeModule()
+        _ = module.handle(["hook_event_name": "UserPromptSubmit", "session_id": "s"])
+        var response: [String: Any]?
+        module.handle(permission, reply: HookReply { response = $0 })
+        module.decidePermission("s", allow: false)
+        let decision = try #require((response?["hookSpecificOutput"] as? [String: Any])?["decision"] as? [String: Any])
+        #expect(decision["behavior"] as? String == "deny")
+    }
+
+    @Test func sansPageAgentsLeTerminalDemande() {
+        let module = makeModule(withAgents: false)
+        _ = module.handle(["hook_event_name": "UserPromptSubmit", "session_id": "s"])
+        var answered = false
+        module.handle(permission, reply: HookReply { _ in answered = true })
+        #expect(answered)
+        #expect(module.tracker.sessions["s"]?.permissionPrompt == nil)
+    }
+
+    @Test func questionsReponduesDepuisLEncoche() throws {
+        let module = makeModule()
+        _ = module.handle(["hook_event_name": "UserPromptSubmit", "session_id": "s"])
+        let input: [String: Any] = ["questions": [[
+            "question": "Quel framework ?", "header": "Framework", "multiSelect": false,
+            "options": [["label": "React", "description": "Composants"], ["label": "Vue"]],
+        ]]]
+        var response: [String: Any]?
+        module.handle(["hook_event_name": "PreToolUse", "session_id": "s", "tool_name": "AskUserQuestion",
+                       "tool_input": input, ClaudeHookServer.waitKey: true], reply: HookReply { response = $0 })
+        let prompt = try #require(module.tracker.sessions["s"]?.questionPrompt)
+        #expect(prompt.questions.first?.options.map(\.label) == ["React", "Vue"])
+
+        module.answerQuestions("s", selections: ["Quel framework ?": ["React"]])
+        let output = try #require(response?["hookSpecificOutput"] as? [String: Any])
+        #expect(output["permissionDecision"] as? String == "allow")
+        let updated = try #require(output["updatedInput"] as? [String: Any])
+        #expect((updated["answers"] as? [String: String])?["Quel framework ?"] == "React")
+        #expect(updated["questions"] != nil)
+    }
+
+    @Test func reponsesMultiplesSepareesParDesVirgules() {
+        #expect(ClaudeQuestionPrompt.answers(["Q": ["A", "B"]]) == ["Q": "A, B"])
+    }
+}

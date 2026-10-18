@@ -162,6 +162,53 @@ struct ClaudeCommand: Equatable, Sendable {
     }
 }
 
+/// Demande de permission en attente d'une décision depuis l'encoche.
+struct ClaudePermissionPrompt: Equatable, Sendable {
+    let symbol: String
+    let text: String
+    /// Détail brut (commande ou chemin), affiché en police à chasse fixe.
+    let detail: String?
+    /// Claude Code propose une règle pour ne plus redemander (« Toujours »).
+    let canAlwaysAllow: Bool
+}
+
+/// Questions à choix de Claude (outil AskUserQuestion), à répondre depuis l'encoche.
+struct ClaudeQuestionPrompt: Equatable, Sendable {
+    struct Option: Equatable, Sendable {
+        let label: String
+        let description: String?
+    }
+    struct Question: Equatable, Sendable {
+        let question: String
+        let header: String?
+        let options: [Option]
+        let multiSelect: Bool
+    }
+
+    let questions: [Question]
+
+    /// Lit `tool_input` d'AskUserQuestion (au plus quatre questions).
+    init?(input: [String: Any]) {
+        let raw = input["questions"] as? [[String: Any]] ?? []
+        questions = raw.prefix(4).compactMap { item in
+            guard let text = item["question"] as? String else { return nil }
+            let options = (item["options"] as? [[String: Any]] ?? []).compactMap { option -> Option? in
+                guard let label = option["label"] as? String else { return nil }
+                return Option(label: label, description: option["description"] as? String)
+            }
+            return Question(question: text, header: item["header"] as? String, options: options,
+                            multiSelect: item["multiSelect"] as? Bool ?? false)
+        }
+        guard !questions.isEmpty else { return nil }
+    }
+
+    /// Réponses au format attendu par Claude Code : texte de la question → libellés choisis
+    /// (séparés par des virgules pour un choix multiple).
+    static func answers(_ selections: [String: [String]]) -> [String: String] {
+        selections.mapValues { $0.joined(separator: ", ") }
+    }
+}
+
 /// Grandes étapes du travail d'un agent, affichées comme une liste à cocher.
 enum ClaudePhase: CaseIterable, Sendable {
     case read, edit, run
@@ -258,6 +305,9 @@ struct ClaudeSession: Identifiable, Equatable, Sendable {
     /// Étapes déjà franchies pour la demande en cours, et étape en cours.
     var phases: Set<ClaudePhase> = []
     var currentPhase: ClaudePhase?
+    /// Permission ou questions en attente d'une réponse depuis l'encoche.
+    var permissionPrompt: ClaudePermissionPrompt?
+    var questionPrompt: ClaudeQuestionPrompt?
 }
 
 /// Ce qui vient de changer, pour déclencher une alerte.
@@ -377,6 +427,24 @@ struct ClaudeActivityTracker: Equatable, Sendable {
             if session.state == .awaitingReply { session.state = .finished }
             session.replyDeadline = nil
         }
+        sessions[sessionID] = session
+    }
+
+    /// Affiche (ou retire) une demande de permission à traiter depuis l'encoche.
+    mutating func setPermissionPrompt(_ prompt: ClaudePermissionPrompt?, for sessionID: String, at date: Date = Date()) {
+        guard var session = sessions[sessionID] else { return }
+        session.permissionPrompt = prompt
+        session.state = prompt == nil ? .working : .waitingForPermission
+        session.lastEventAt = date
+        sessions[sessionID] = session
+    }
+
+    /// Affiche (ou retire) des questions de Claude à traiter depuis l'encoche.
+    mutating func setQuestionPrompt(_ prompt: ClaudeQuestionPrompt?, for sessionID: String, at date: Date = Date()) {
+        guard var session = sessions[sessionID] else { return }
+        session.questionPrompt = prompt
+        session.state = prompt == nil ? .working : .waitingForPermission
+        session.lastEventAt = date
         sessions[sessionID] = session
     }
 

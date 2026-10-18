@@ -1,38 +1,6 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
-    "Reçoit l'activité de Claude Code pour la page Agents, l'activité de l'encoche repliée et l'utilisation estimée." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Receives Claude Code's activity for the Agents page, the collapsed notch activity and the estimated usage."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reçoit l'activité de Claude Code pour la page Agents, l'activité de l'encoche repliée et l'utilisation estimée."
-          }
-        }
-      }
-    },
-    "Agents IA, activités, presse-papiers et étagère." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AI agents, activities, clipboard and shelf."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Agents IA, activités, presse-papiers et étagère."
-          }
-        }
-      }
-    },
     "" : {
 
     },
@@ -407,6 +375,7 @@
       }
     },
     "%lld modèles installés" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -762,6 +731,7 @@
       }
     },
     "Activité de Claude Code en direct, messages depuis l'encoche et utilisation estimée." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1111,6 +1081,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Agents"
+          }
+        }
+      }
+    },
+    "Agents IA, activités, presse-papiers et étagère." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI agents, activities, clipboard and shelf."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agents IA, activités, presse-papiers et étagère."
           }
         }
       }
@@ -1888,6 +1874,7 @@
       }
     },
     "Aucun modèle en mémoire." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2220,6 +2207,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Autorisée"
+          }
+        }
+      }
+    },
+    "Autoriser" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autoriser"
+          }
+        }
+      }
+    },
+    "Autoriser et ne plus demander pour cette action" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow and don't ask again for this action"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autoriser et ne plus demander pour cette action"
           }
         }
       }
@@ -3013,6 +3032,7 @@
       }
     },
     "Claude Code, activités, presse-papiers et étagère." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3024,6 +3044,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Claude Code, activités, presse-papiers et étagère."
+          }
+        }
+      }
+    },
+    "Claude demande l'autorisation" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude asks for permission"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude demande l'autorisation"
           }
         }
       }
@@ -3717,6 +3753,7 @@
       }
     },
     "CPU" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5451,6 +5488,7 @@
       }
     },
     "GPU" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6235,6 +6273,7 @@
       }
     },
     "Lancez Ollama (app ou « ollama serve ») pour suivre vos modèles locaux." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6347,6 +6386,7 @@
       }
     },
     "Le serveur d'IA local : modèles chargés en mémoire et modèles installés." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7725,6 +7765,7 @@
       }
     },
     "Ollama" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7741,6 +7782,7 @@
       }
     },
     "Ollama arrêté" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7757,6 +7799,7 @@
       }
     },
     "Ollama en marche" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8700,6 +8743,22 @@
         }
       }
     },
+    "Question" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Question"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Question"
+          }
+        }
+      }
+    },
     "Quitter Notchkit" : {
       "localizations" : {
         "en" : {
@@ -8924,6 +8983,22 @@
         }
       }
     },
+    "Reçoit l'activité de Claude Code pour la page Agents, l'activité de l'encoche repliée et l'utilisation estimée." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Receives Claude Code's activity for the Agents page, the collapsed notch activity and the estimated usage."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reçoit l'activité de Claude Code pour la page Agents, l'activité de l'encoche repliée et l'utilisation estimée."
+          }
+        }
+      }
+    },
     "Réessayer" : {
       "localizations" : {
         "en" : {
@@ -8936,6 +9011,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Réessayer"
+          }
+        }
+      }
+    },
+    "Refuser" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deny"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Refuser"
           }
         }
       }
@@ -9144,6 +9235,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Répondez pour qu'il continue"
+          }
+        }
+      }
+    },
+    "Répondre dans le terminal de Claude Code" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Answer in Claude Code's terminal"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Répondre dans le terminal de Claude Code"
           }
         }
       }
@@ -10160,6 +10267,22 @@
         }
       }
     },
+    "Terminal" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terminal"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terminal"
+          }
+        }
+      }
+    },
     "Terminé" : {
       "localizations" : {
         "en" : {
@@ -10273,7 +10396,6 @@
       }
     },
     "Toujours" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10653,6 +10775,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Utiliser ma position"
+          }
+        }
+      }
+    },
+    "Valider" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valider"
           }
         }
       }

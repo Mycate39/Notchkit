@@ -22,13 +22,16 @@ enum ClaudeHooksInstaller {
         ("Stop", false),
         ("Notification", true),
         ("SessionEnd", false),
+        ("PermissionRequest", true),
     ]
 
     /// Version de notre configuration : à incrémenter quand elle change (une réinstallation est alors proposée).
-    static let version = "3"
+    static let version = "4"
     /// Le hook Stop peut rester ouvert pendant la fenêtre de réponse (au plus 4 min) : délai plus long.
     static let stopTimeout = 300
     static let defaultTimeout = 10
+    /// Demandes de permission et questions : Claude Code attend la décision prise dans l'encoche.
+    static let decisionTimeout = 600
 
     static var settingsURL: URL {
         FileManager.default.homeDirectoryForCurrentUser
@@ -74,8 +77,10 @@ enum ClaudeHooksInstaller {
             let hook: [String: Any] = [
                 "type": "http",
                 "url": hookURL(port: port),
-                "timeout": event.name == "Stop" ? stopTimeout : defaultTimeout,
-                "headers": ["X-Notchkit-Token": token, "X-Notchkit-Version": version],
+                "timeout": event.name == "Stop" ? stopTimeout : event.name == "PermissionRequest" ? decisionTimeout : defaultTimeout,
+                "headers": event.name == "PermissionRequest"
+                    ? ["X-Notchkit-Token": token, "X-Notchkit-Version": version, "X-Notchkit-Wait": "1"]
+                    : ["X-Notchkit-Token": token, "X-Notchkit-Version": version],
             ]
             var groups = hooks[event.name] as? [[String: Any]] ?? []
             var group: [String: Any] = ["hooks": [hook]]
@@ -83,6 +88,18 @@ enum ClaudeHooksInstaller {
             groups.append(group)
             hooks[event.name] = groups
         }
+        // Questions de Claude : un second hook PreToolUse, réservé à AskUserQuestion, peut attendre la réponse.
+        var preToolUse = hooks["PreToolUse"] as? [[String: Any]] ?? []
+        preToolUse.append([
+            "matcher": "AskUserQuestion",
+            "hooks": [[
+                "type": "http",
+                "url": hookURL(port: port),
+                "timeout": decisionTimeout,
+                "headers": ["X-Notchkit-Token": token, "X-Notchkit-Version": version, "X-Notchkit-Wait": "1"],
+            ]],
+        ])
+        hooks["PreToolUse"] = preToolUse
         result["hooks"] = hooks
         return result
     }

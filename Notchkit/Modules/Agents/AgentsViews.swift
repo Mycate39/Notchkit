@@ -69,7 +69,16 @@ struct AgentsHomeView: View {
                 HStack { Spacer(); sessionPills }
             }
             Group {
-                if let session, session.state == .waitingForPermission {
+                if let session, let prompt = session.questionPrompt {
+                    AgentQuestionPanel(prompt: prompt,
+                                       onAnswer: { module.claude?.answerQuestions(session.id, selections: $0) },
+                                       onTerminal: { module.claude?.answerInTerminal(session.id) })
+                        .id(session.id)
+                } else if let session, let prompt = session.permissionPrompt {
+                    AgentDecisionPanel(prompt: prompt,
+                                       onDecide: { allow, always in module.claude?.decidePermission(session.id, allow: allow, always: always) },
+                                       onTerminal: { module.claude?.answerInTerminal(session.id) })
+                } else if let session, session.state == .waitingForPermission {
                     AgentPermissionPanel(session: session)
                 } else if let session, let edit = session.lastEdit,
                           (session.lastEditAt ?? .distantPast) >= (session.lastCommandAt ?? .distantPast) {

@@ -34,10 +34,10 @@ struct LayoutPreset: Identifiable, Sendable {
                     "weather": .small, "clock": .mini, "battery": .mini, "music": .medium]
         ),
         LayoutPreset(
-            id: "developer", name: "Développeur", summary: "Claude Code, activités, presse-papiers et étagère.",
+            id: "developer", name: "Développeur", summary: "Agents IA, activités, presse-papiers et étagère.",
             symbol: "chevron.left.forwardslash.chevron.right",
-            pages: [["claude", "activities"], ["clipboard", "shelf"], ["music", "clock", "battery"]],
-            sizes: ["claude": .large, "activities": .large, "clipboard": .large, "shelf": .large,
+            pages: [["agents"], ["activities", "shelf"], ["clipboard", "music"], ["clock", "battery"]],
+            sizes: ["agents": .large, "activities": .large, "clipboard": .large, "shelf": .large,
                     "music": .large, "clock": .mini, "battery": .mini]
         ),
         LayoutPreset(
@@ -45,12 +45,12 @@ struct LayoutPreset: Identifiable, Sendable {
             symbol: "square.grid.3x3.fill",
             pages: [
                 ["music", "clock", "battery", "weather", "calendar"],
-                ["claude"],
+                ["agents"],
                 ["activities", "shelf"],
                 ["clipboard", "airpods", "systemhud", "videodownload"],
             ],
             sizes: ["music": .large, "clock": .mini, "battery": .mini, "weather": .mini, "calendar": .mini,
-                    "claude": .large, "activities": .large, "shelf": .large,
+                    "agents": .large, "activities": .large, "shelf": .large,
                     "clipboard": .medium, "airpods": .mini, "systemhud": .mini, "videodownload": .mini]
         ),
     ]

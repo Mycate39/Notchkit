@@ -223,10 +223,22 @@ enum SnapshotRenderer {
                        ("pencil", "Modifie ModuleManager.swift"), ("terminal", "Exécute : xcodebuild test")]
         working.recentActions = actions.enumerated().reversed().map { ClaudeAction(symbol: $1.0, text: $1.1, date: now.addingTimeInterval(Double($0))) }
         working.currentAction = working.recentActions.first
+        working.phases = [.read, .edit]
+        working.currentPhase = .edit
+        working.lastEdit = ClaudeEdit(filePath: "/Users/moi/korus/src/invoice.ts",
+                                      removed: ["const TVA = 0.196"],
+                                      added: ["const TVA = 0.20 // 2026", "export const round = (n: number) =>", "  Math.round(n * 100) / 100"],
+                                      firstLine: 12)
+        working.lastEditAt = now.addingTimeInterval(-0.6)
+        var testing = working
+        testing.phases = [.read, .edit, .run]
+        testing.currentPhase = .run
+        testing.lastCommand = ClaudeCommand(command: "npm test", output: "PASS tests/invoice.test.ts\n  ✓ applique la TVA à 20 % (3 ms)\nTests: 48 passed, 48 total")
+        testing.lastCommandAt = now
         var waiting = ClaudeSession(id: "p", projectName: "korus", state: .waitingForPermission,
                                     prompt: "Corrige le calcul de la TVA", lastEventAt: now.addingTimeInterval(5))
         waiting.attentionMessage = "Claude needs your permission to use Bash"
-        for (name, sessions) in [("vide", [ClaudeSession]()), ("travail", [working]), ("attente", [waiting, working])] {
+        for (name, sessions) in [("vide", [ClaudeSession]()), ("travail", [working]), ("commande", [testing]), ("attente", [waiting, working])] {
             agents.previewSessions = sessions
             save(AgentsHomeView(module: agents)
                     .frame(width: 740, height: 150)

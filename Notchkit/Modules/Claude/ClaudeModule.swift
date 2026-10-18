@@ -16,11 +16,13 @@ final class ClaudeModule: NotchModule {
     static let descriptor = ModuleDescriptor(
         id: "claude",
         name: "Claude Code",
-        summary: "Activité de Claude Code en direct, messages depuis l'encoche et utilisation estimée.",
+        summary: "Reçoit l'activité de Claude Code pour la page Agents, l'activité de l'encoche repliée et l'utilisation estimée.",
         systemImage: ClaudeMark.symbolName,
         category: .productivity,
         tier: .free,
-        defaultEnabled: true
+        defaultEnabled: true,
+        // Plus de widget : son activité s'affiche dans la page Agents.
+        providesWidget: false
     )
 
     static let defaultPort: UInt16 = 52_731

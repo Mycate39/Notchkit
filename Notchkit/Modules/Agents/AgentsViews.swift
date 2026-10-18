@@ -18,33 +18,32 @@ struct AgentsHomeView: View {
     var body: some View {
         TimelineView(.periodic(from: .now, by: 1)) { context in
             let celebrating = (module.celebrateUntil ?? .distantPast) > context.date
-            HStack(spacing: 14) {
+            HStack(spacing: 12) {
                 identity(celebrating: celebrating)
-                    .frame(width: 250, alignment: .leading)
-                Divider().overlay(.white.opacity(0.08))
-                steps
+                    .frame(width: 236, alignment: .leading)
+                workPanel
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             }
-            .padding(14)
+            .padding(12)
         }
     }
 
-    // MARK: Mascotte et session
+    // MARK: Mascotte, session et étapes
 
     private func identity(celebrating: Bool) -> some View {
-        HStack(spacing: 12) {
-            LiveMascotView(design: module.mascot, mood: AgentsModule.mood(for: session, celebrating: celebrating), size: 52)
-                .frame(width: 84, height: 80)
-            VStack(alignment: .leading, spacing: 3) {
+        HStack(alignment: .center, spacing: 10) {
+            LiveMascotView(design: module.mascot, mood: AgentsModule.mood(for: session, celebrating: celebrating), size: 50)
+                .frame(width: 80, height: 78)
+            VStack(alignment: .leading, spacing: 2) {
                 if let session {
                     Text(session.projectName ?? String(localized: "Session"))
-                        .font(.system(size: 16, weight: .bold))
+                        .font(.system(size: 15, weight: .bold))
                         .lineLimit(1)
                     Text(verbatim: "Claude Code")
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.system(size: 11, weight: .medium))
                         .foregroundStyle(.white.opacity(0.5))
-                    AgentStateLabel(state: session.state)
-                        .padding(.top, 4)
+                    AgentPhaseList(session: session)
+                        .padding(.top, 5)
                 } else {
                     Text("Aucun agent au travail")
                         .font(.system(size: 14, weight: .semibold))
@@ -59,37 +58,42 @@ struct AgentsHomeView: View {
         }
     }
 
-    // MARK: Étapes
+    // MARK: Travail en cours
 
+    /// Panneau de droite : la dernière modification (éditeur), la dernière commande (terminal),
+    /// la demande d'accord, ou à défaut la liste des actions.
     @ViewBuilder
-    private var steps: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                Text(session?.prompt ?? String(localized: "Étapes"))
-                    .font(.system(size: 12, weight: .semibold))
-                    .foregroundStyle(.white.opacity(0.6))
-                    .lineLimit(1)
-                Spacer(minLength: 8)
-                if sessions.count > 1 { sessionPills }
+    private var workPanel: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            if sessions.count > 1 {
+                HStack { Spacer(); sessionPills }
             }
-            if let session, !session.recentActions.isEmpty {
-                // De la plus ancienne à la plus récente ; la dernière tourne tant que Claude travaille.
-                ForEach(Array(session.recentActions.prefix(4).reversed().enumerated()), id: \.element.id) { index, action in
-                    let isCurrent = session.state == .working && action.id == session.currentAction?.id
-                    AgentStepRow(action: action, isCurrent: isCurrent)
-                        .transition(.asymmetric(insertion: .move(edge: .bottom).combined(with: .opacity), removal: .opacity))
+            Group {
+                if let session, session.state == .waitingForPermission {
+                    AgentPermissionPanel(session: session)
+                } else if let session, let edit = session.lastEdit,
+                          (session.lastEditAt ?? .distantPast) >= (session.lastCommandAt ?? .distantPast) {
+                    AgentEditorPanel(edit: edit, editedAt: session.lastEditAt ?? .now, isLive: session.state == .working)
+                        .id(session.lastEditAt)
+                } else if let session, let command = session.lastCommand {
+                    AgentTerminalPanel(command: command, isLive: session.state == .working)
+                } else if let session, !session.recentActions.isEmpty {
+                    VStack(alignment: .leading, spacing: 7) {
+                        ForEach(Array(session.recentActions.prefix(4).reversed()), id: \.id) { action in
+                            AgentStepRow(action: action, isCurrent: session.state == .working && action.id == session.currentAction?.id)
+                        }
+                    }
+                } else {
+                    Text(session == nil ? "Les étapes de l'agent s'afficheront ici." : "Pas encore d'étape.")
+                        .font(.system(size: 12))
+                        .foregroundStyle(.white.opacity(0.4))
                 }
-            } else if session?.state == .waitingForPermission, let message = session?.attentionMessage {
-                Label(message, systemImage: "hand.raised.fill")
-                    .font(.system(size: 13, weight: .medium))
-                    .foregroundStyle(StandBy.amber)
-            } else {
-                Text(session == nil ? "Les étapes de l'agent s'afficheront ici." : "Pas encore d'étape.")
-                    .font(.system(size: 12))
-                    .foregroundStyle(.white.opacity(0.4))
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            .transition(.opacity.combined(with: .scale(scale: 0.98)))
         }
-        .animation(NotchLayout.pageIndicatorSpring, value: session?.recentActions.first?.id)
+        .animation(NotchLayout.pageIndicatorSpring, value: session?.lastEditAt)
+        .animation(NotchLayout.pageIndicatorSpring, value: session?.lastCommandAt)
     }
 
     private var sessionPills: some View {

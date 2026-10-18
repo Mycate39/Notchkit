@@ -259,6 +259,23 @@ enum SnapshotRenderer {
                  to: directory.appendingPathComponent("agents-\(name).png"))
         }
 
+        // Services : déploiements Vercel et paiements Stripe de démonstration.
+        agents.services.setPreview(
+            deployments: [VercelDeployment(id: "1", project: "korus-web", state: .ready, created: now.addingTimeInterval(-300), message: "Corrige la TVA"),
+                          VercelDeployment(id: "2", project: "korus-api", state: .building, created: now.addingTimeInterval(-60), message: "Ajoute les factures")],
+            charges: [StripeCharge(id: "a", amount: 49, currency: "EUR", customer: "Sarah L.", created: now),
+                      StripeCharge(id: "b", amount: 49, currency: "EUR", customer: "Camille R.", created: now),
+                      StripeCharge(id: "c", amount: 19, currency: "EUR", customer: "Hugo M.", created: now)])
+        for service in [AgentServices.Service.vercel, .stripe] {
+            save(ServicesPanel(module: agents, initial: service)
+                    .frame(width: 480, height: 126)
+                    .padding(14)
+                    .background(.black)
+                    .foregroundStyle(.white)
+                    .environment(\.colorScheme, .dark),
+                 to: directory.appendingPathComponent("services-\(service.rawValue).png"))
+        }
+
         // Toutes les propositions sur une seule image : deux colonnes de personnages, numérotés.
         let all = MascotDesign.allBoards
         let half = (all.count + 1) / 2

@@ -149,6 +149,7 @@
 		A36F60159AC37E3010BC82FA /* ScreenshotsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE66842FA59F405AA5650F /* ScreenshotsModule.swift */; };
 		A3FD42D6E7DEB49B02389539 /* NotchAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A73B719641636FD8ABD372 /* NotchAlert.swift */; };
 		A48F76AE210F36AA7349FE22 /* LiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F1ED02F37A1EDCA8B3F577 /* LiveActivity.swift */; };
+		A4E4BA4B21EBC058DDC75DF4 /* ServicesViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80663A85CF05888B948AA24F /* ServicesViews.swift */; };
 		A56A56BB6242B685DE85A1A9 /* SystemHUDModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13612A2C0214BDCDDBF00C6C /* SystemHUDModule.swift */; };
 		A6596D02BBF2A11F995B9CF5 /* SystemControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE7398DD9F8BB31AAAC295D /* SystemControls.swift */; };
 		A7A432CCFD9E85A7069F6DF1 /* OpenMeteoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E812AE3C1D2CCF46FF79A3 /* OpenMeteoClient.swift */; };
@@ -172,6 +173,7 @@
 		C4FE1995D4A34E59EE65174D /* DropZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01102B35009A7B86C3E3F66 /* DropZone.swift */; };
 		C550D3C753805E70B75EF80D /* NotchModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7C1CB75F1F1F6747AF33C3 /* NotchModule.swift */; };
 		C6CA29E3B81F258BF6263FE4 /* NotchLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140868E51134AF3924DFBEF3 /* NotchLayout.swift */; };
+		CAA1E6C70D9A9307E5C3D0E9 /* AgentServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B3D13162EFA7496E605E7 /* AgentServices.swift */; };
 		CF7166A65434F3E4E1E01E77 /* PowerSourceMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C50F8106E1C8E43432EE06 /* PowerSourceMonitor.swift */; };
 		D040BA8C10C9E1E29B0C74D7 /* AudioDeviceMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D331E9633CBDABB53E93E76A /* AudioDeviceMonitor.swift */; };
 		D16F3D025CDBB2EF8193BAC2 /* VideoDownloadModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC76D1C2CA657B593C11E7B /* VideoDownloadModule.swift */; };
@@ -341,6 +343,7 @@
 		7E7EEFDAB8D951E6917D5D5F /* get.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = get.m; sourceTree = "<group>"; };
 		7EE518DE63D2C25D9F6E87F4 /* ClaudeModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeModule.swift; sourceTree = "<group>"; };
 		7FEAFA82740815C08DAF101F /* UnlockAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockAnimations.swift; sourceTree = "<group>"; };
+		80663A85CF05888B948AA24F /* ServicesViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesViews.swift; sourceTree = "<group>"; };
 		810675008E358236974A7C3B /* ScreenshotSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotSession.swift; sourceTree = "<group>"; };
 		82317F3A93FC9B78D9981F5A /* helpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = helpers.h; sourceTree = "<group>"; };
 		82E32A0CD723246EBCF3F295 /* SpectrumTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumTests.swift; sourceTree = "<group>"; };
@@ -421,6 +424,7 @@
 		E2C50F8106E1C8E43432EE06 /* PowerSourceMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerSourceMonitor.swift; sourceTree = "<group>"; };
 		E2C8B0A0F7B0BB08616DAE1C /* ScreenLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLocator.swift; sourceTree = "<group>"; };
 		E343FA5573A1C385029263CF /* mediaremote-adapter.pl */ = {isa = PBXFileReference; lastKnownFileType = text.script.perl; path = "mediaremote-adapter.pl"; sourceTree = "<group>"; };
+		E61B3D13162EFA7496E605E7 /* AgentServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentServices.swift; sourceTree = "<group>"; };
 		E67D4EC84BE228B039C705A0 /* FileActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileActions.swift; sourceTree = "<group>"; };
 		E6CB4D7C58B160007048AF25 /* LockScreenSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenSpace.swift; sourceTree = "<group>"; };
 		E88A3C1DCE9F2BBAD2E4119B /* BatteryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryTests.swift; sourceTree = "<group>"; };
@@ -470,10 +474,12 @@
 			isa = PBXGroup;
 			children = (
 				72F1D7838B0087D64BCCB9AE /* AgentPanels.swift */,
+				E61B3D13162EFA7496E605E7 /* AgentServices.swift */,
 				64D14C1D655BAC94FC759020 /* AgentsModule.swift */,
 				B037B66FDB492EA7754DD971 /* AgentsViews.swift */,
 				715C5609D9DF611E2D55DF73 /* MascotChat.swift */,
 				9D613DE7CC6C7A3B7A4BD5A7 /* MascotChatViews.swift */,
+				80663A85CF05888B948AA24F /* ServicesViews.swift */,
 			);
 			path = Agents;
 			sourceTree = "<group>";
@@ -1328,6 +1334,7 @@
 				5B3D1634B477F555CDEEFF2F /* AIProvider.swift in Sources */,
 				52D69B31DEA6FFF27CB7922E /* ActivityClock.swift in Sources */,
 				7598C45B17C1F42E1305FD85 /* AgentPanels.swift in Sources */,
+				CAA1E6C70D9A9307E5C3D0E9 /* AgentServices.swift in Sources */,
 				D1B27D09EE22684451375258 /* AgentsModule.swift in Sources */,
 				0962405C73FD40EC1723FD54 /* AgentsViews.swift in Sources */,
 				1101C84B606905D7ED45F9BC /* AirPodsModule.swift in Sources */,
@@ -1431,6 +1438,7 @@
 				A36F60159AC37E3010BC82FA /* ScreenshotsModule.swift in Sources */,
 				9F5745D3E076C6C52EC603D8 /* ScreenshotsViews.swift in Sources */,
 				104E80908062F310B5609902 /* ScriptablePlayerSource.swift in Sources */,
+				A4E4BA4B21EBC058DDC75DF4 /* ServicesViews.swift in Sources */,
 				D394C8AD7B7DDE1543A12AF0 /* SettingsStore.swift in Sources */,
 				DD4F43AE5E3C5678D35941B7 /* SettingsView.swift in Sources */,
 				7D7E9B2D620F4A6D188804A6 /* SettingsWindowController.swift in Sources */,

@@ -30,6 +30,11 @@ final class AgentsModule: NotchModule {
 
     /// Discussion avec la mascotte (Apple Intelligence ou Claude).
     @ObservationIgnored private(set) var chat: MascotChat!
+    /// Services suivis (Vercel, Stripe ; GitHub vient de son module).
+    let services = AgentServices()
+
+    /// Module GitHub, s'il est actif.
+    var github: GitHubModule? { context.otherModule("github") as? GitHubModule }
 
     init(context: ModuleContext) {
         self.context = context
@@ -88,10 +93,16 @@ final class AgentsModule: NotchModule {
     func start() {
         isRunning = true
         observeSessions()
+        // Nouveau paiement : petite fête de la mascotte.
+        services.onNewCharge = { [weak self] in
+            self?.celebrateUntil = Date().addingTimeInterval(Self.celebrationDuration)
+        }
+        services.start()
     }
 
     func stop() {
         isRunning = false
+        services.stop()
     }
 
     /// Suit les sessions : nouvelle demande d'accord → l'encoche s'ouvre ; tâche finie → fête.
@@ -141,7 +152,7 @@ final class AgentsModule: NotchModule {
     }
 
     func settingsView() -> AnyView? {
-        AnyView(AgentsSettingsView(chat: chat))
+        AnyView(AgentsSettingsView(chat: chat, services: services))
     }
 
     /// Garde l'encoche ouverte pendant la saisie d'un message.

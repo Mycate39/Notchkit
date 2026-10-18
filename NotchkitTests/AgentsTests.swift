@@ -212,3 +212,34 @@ struct MascotChatTests {
         #expect(!chat.isResponding)
     }
 }
+
+/// Lecture des réponses de Vercel et de Stripe.
+struct ServiceParsingTests {
+    @Test func deploiementsVercel() {
+        let json = #"{"deployments":[{"uid":"d1","name":"korus","state":"READY","created":1760000000000,"meta":{"githubCommitMessage":"Corrige la TVA"}},{"uid":"d2","name":"api","readyState":"BUILDING","created":1760000100000}]}"#
+        let deployments = ServiceParsing.vercelDeployments(from: Data(json.utf8))
+        #expect(deployments.map(\.state) == [.ready, .building])
+        #expect(deployments.first?.message == "Corrige la TVA")
+        #expect(ServiceParsing.vercelDeployments(from: Data("pas du json".utf8)).isEmpty)
+    }
+
+    @Test func paiementsStripeReussisSeulement() {
+        let json = #"{"data":[{"id":"ch1","amount":4900,"currency":"eur","status":"succeeded","created":1760000000,"billing_details":{"name":"Sarah"}},{"id":"ch2","amount":1000,"currency":"eur","status":"failed","created":1760000000},{"id":"ch3","amount":500,"currency":"eur","status":"succeeded","refunded":true,"created":1760000000},{"id":"ch4","amount":1500,"currency":"jpy","status":"succeeded","created":1760000000}]}"#
+        let charges = ServiceParsing.stripeCharges(from: Data(json.utf8))
+        #expect(charges.map(\.id) == ["ch1", "ch4"])
+        #expect(charges.first?.amount == 49)
+        #expect(charges.first?.customer == "Sarah")
+        // Les yens n'ont pas de centimes.
+        #expect(charges.last?.amount == 1500)
+    }
+
+    @Test func totalDansLaDeviseDuPremierPaiement() {
+        let charges = [StripeCharge(id: "a", amount: 49, currency: "EUR", customer: nil, created: .now),
+                       StripeCharge(id: "b", amount: 19.5, currency: "EUR", customer: nil, created: .now),
+                       StripeCharge(id: "c", amount: 10, currency: "USD", customer: nil, created: .now)]
+        let total = ServiceParsing.total(of: charges)
+        #expect(total?.amount == 68.5)
+        #expect(total?.currency == "EUR")
+        #expect(ServiceParsing.total(of: []) == nil)
+    }
+}

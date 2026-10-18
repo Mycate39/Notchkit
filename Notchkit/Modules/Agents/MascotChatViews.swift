@@ -151,6 +151,7 @@ private struct TypingDots: View {
 /// Réglages du widget Agents : moteur de la discussion et clé Claude.
 struct AgentsSettingsView: View {
     let chat: MascotChat
+    let services: AgentServices
     @State private var key = ""
 
     var body: some View {
@@ -183,6 +184,15 @@ struct AgentsSettingsView: View {
             }
         }
         Text("La clé reste dans le trousseau de votre Mac. Les messages envoyés à Claude passent par l'API d'Anthropic ; avec Apple Intelligence, rien ne quitte votre Mac.")
+            .font(.caption)
+            .foregroundStyle(.secondary)
+            .fixedSize(horizontal: false, vertical: true)
+
+        ServiceKeyRow(title: "Jeton Vercel", placeholder: "Jeton d'accès", isConfigured: services.configured.contains(.vercel),
+                      onSave: { services.saveKey($0, for: .vercel) }, onDelete: { services.deleteKey(for: .vercel) })
+        ServiceKeyRow(title: "Clé Stripe", placeholder: "rk_live_…", isConfigured: services.configured.contains(.stripe),
+                      onSave: { services.saveKey($0, for: .stripe) }, onDelete: { services.deleteKey(for: .stripe) })
+        Text("Services en lecture seule : préférez une clé Stripe à accès restreint (lecture des paiements). GitHub utilise le jeton de son propre widget.")
             .font(.caption)
             .foregroundStyle(.secondary)
             .fixedSize(horizontal: false, vertical: true)

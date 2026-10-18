@@ -5,8 +5,10 @@ import SwiftUI
 struct AgentsHomeView: View {
     let module: AgentsModule
     @State private var selectedID: String?
-    /// Onglet affiché à droite : le travail des agents, ou la discussion avec la mascotte.
-    @State private var showsChat = false
+    /// Onglet affiché à droite : le travail des agents, la discussion avec la mascotte ou les services.
+    enum Tab { case agents, chat, services }
+    @State private var tab: Tab = .agents
+    private var showsChat: Bool { tab == .chat }
 
     private var sessions: [ClaudeSession] { module.sessions }
 
@@ -25,13 +27,16 @@ struct AgentsHomeView: View {
                     .frame(width: 236, alignment: .leading)
                 VStack(alignment: .trailing, spacing: 6) {
                     HStack(spacing: 6) {
-                        if !showsChat && sessions.count > 1 { sessionPills }
+                        if tab == .agents && sessions.count > 1 { sessionPills }
                         Spacer(minLength: 0)
                         tabs
                     }
                     Group {
-                        if showsChat {
+                        if tab == .chat {
                             MascotChatPanel(module: module)
+                                .transition(.opacity.combined(with: .move(edge: .trailing)))
+                        } else if tab == .services {
+                            ServicesPanel(module: module)
                                 .transition(.opacity.combined(with: .move(edge: .trailing)))
                         } else {
                             workPanel
@@ -45,21 +50,22 @@ struct AgentsHomeView: View {
         }
         // Un agent attend une réponse : on revient au travail des agents.
         .onChange(of: session?.state == .waitingForPermission) { _, waiting in
-            if waiting { withAnimation(NotchLayout.pageIndicatorSpring) { showsChat = false } }
+            if waiting { withAnimation(NotchLayout.pageIndicatorSpring) { tab = .agents } }
         }
     }
 
     /// Onglets : travail des agents ou discussion.
     private var tabs: some View {
         HStack(spacing: 2) {
-            tab(symbol: "sparkles.rectangle.stack", selected: !showsChat, help: "Agents") { showsChat = false }
-            tab(symbol: "bubble.left.fill", selected: showsChat, help: "Discussion") { showsChat = true }
+            tabButton(symbol: "sparkles.rectangle.stack", selected: tab == .agents, help: "Agents") { tab = .agents }
+            tabButton(symbol: "bubble.left.fill", selected: tab == .chat, help: "Discussion") { tab = .chat }
+            tabButton(symbol: "square.grid.2x2.fill", selected: tab == .services, help: "Services") { tab = .services }
         }
         .padding(2)
         .background(Color.white.opacity(0.06), in: Capsule())
     }
 
-    private func tab(symbol: String, selected: Bool, help: LocalizedStringKey, action: @escaping () -> Void) -> some View {
+    private func tabButton(symbol: String, selected: Bool, help: LocalizedStringKey, action: @escaping () -> Void) -> some View {
         Button {
             withAnimation(NotchLayout.pageIndicatorSpring) { action() }
         } label: {

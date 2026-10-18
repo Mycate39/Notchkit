@@ -372,22 +372,13 @@ struct AgentQuestionPanel: View {
                 .lineLimit(1)
                 .help(question.question)
             HStack(spacing: 6) {
-                ForEach(question.options.prefix(4), id: \.label) { option in
-                    let chosen = selections[question.question, default: []].contains(option.label)
-                    Button {
-                        choose(option.label)
-                    } label: {
-                        HStack(spacing: 4) {
-                            if question.multiSelect {
-                                Image(systemName: chosen ? "checkmark.square.fill" : "square")
-                            }
-                            Text(option.label).lineLimit(1)
-                        }
-                    }
-                    .buttonStyle(.standBy(.small, active: chosen))
-                    .help(option.description ?? option.label)
+                // Libellés entiers : s'ils ne tiennent pas, la rangée défile au trackpad.
+                ViewThatFits(in: .horizontal) {
+                    optionButtons
+                    ScrollView(.horizontal) { optionButtons }
+                        .scrollIndicators(.never)
+                        .frame(height: StandByButtonStyle.Size.small.height + 2)
                 }
-                Spacer(minLength: 0)
                 if question.multiSelect {
                     Button { next() } label: { Image(systemName: "arrow.right") }
                         .buttonStyle(.standBy(.small, active: true, circle: true))
@@ -400,6 +391,26 @@ struct AgentQuestionPanel: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color.white.opacity(0.05), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
         .animation(NotchLayout.pageIndicatorSpring, value: index)
+    }
+
+    private var optionButtons: some View {
+        HStack(spacing: 6) {
+            ForEach(question.options.prefix(4), id: \.label) { option in
+                let chosen = selections[question.question, default: []].contains(option.label)
+                Button {
+                    choose(option.label)
+                } label: {
+                    HStack(spacing: 4) {
+                        if question.multiSelect {
+                            Image(systemName: chosen ? "checkmark.square.fill" : "square")
+                        }
+                        Text(option.label).lineLimit(1).fixedSize()
+                    }
+                }
+                .buttonStyle(.standBy(.small, active: chosen))
+                .help(option.description ?? option.label)
+            }
+        }
     }
 
     private func choose(_ label: String) {

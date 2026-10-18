@@ -243,8 +243,9 @@ enum SnapshotRenderer {
         var asking = ClaudeSession(id: "q", projectName: "korus", state: .waitingForPermission,
                                    prompt: "Ajoute un graphique des ventes", lastEventAt: now)
         asking.questionPrompt = ClaudeQuestionPrompt(input: ["questions": [[
-            "question": "Quelle bibliothèque de graphiques utiliser ?", "header": "Graphiques", "multiSelect": false,
-            "options": [["label": "Recharts"], ["label": "Chart.js"], ["label": "D3"]],
+            "question": "Pour le « mode jeu », qu'est-ce que tu imagines ?", "header": "Mode jeu", "multiSelect": true,
+            "options": [["label": "Encoche discrète en jeu"], ["label": "Infos de jeu dans l'encoche"],
+                        ["label": "Ne pas déranger"], ["label": "Bouton manuel"]],
         ], ["question": "Quelles périodes ?", "header": "Périodes", "multiSelect": true,
             "options": [["label": "Jour"], ["label": "Semaine"], ["label": "Mois"]]]]])
         for (name, sessions) in [("vide", [ClaudeSession]()), ("travail", [working]), ("commande", [testing]), ("attente", [waiting, working]), ("question", [asking])] {
@@ -258,6 +259,17 @@ enum SnapshotRenderer {
                     .environment(\.colorScheme, .dark),
                  to: directory.appendingPathComponent("agents-\(name).png"))
         }
+
+        // Question aux libellés longs, dans une vraie fenêtre (la rangée défile).
+        agents.previewSessions = [asking]
+        saveWindow(AgentsHomeView(module: agents)
+                    .frame(width: 508, height: 123)
+                    .padding(18)
+                    .background(.black)
+                    .foregroundStyle(.white)
+                    .environment(\.colorScheme, .dark),
+                   size: CGSize(width: 544, height: 159),
+                   to: directory.appendingPathComponent("agents-question-fenetre.png"))
 
         // Services : déploiements Vercel et paiements Stripe de démonstration.
         agents.services.setPreview(

@@ -101,7 +101,7 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 ### Publication
 
 1. Augmenter `MARKETING_VERSION` et `CURRENT_PROJECT_VERSION` dans `project.yml`, lancer `xcodegen generate`, tester, committer `Version x.y.z`.
-   Xcode modifie seul les catalogues `.xcstrings` (réordonnancement) : ne jamais les committer tels quels. Les mettre de côté pendant la publication (`git stash push -- Notchkit/Resources/*.xcstrings`, puis `git stash pop`). Pour committer de nouvelles chaînes, partir du catalogue de HEAD et n'y ajouter que les nouvelles clés.
+   Xcode réécrit parfois les catalogues `.xcstrings` (mise en forme, `extractionState`, commentaires). Avant de committer un tel changement, vérifier qu'aucune traduction n'est ajoutée, retirée ou modifiée ; s'il ne s'agit que de métadonnées, le committer à part (« Sync string catalogs with Xcode »). Pendant une publication, les mettre de côté (`git stash push -- Notchkit/Resources/*.xcstrings`, puis `git stash pop`).
 2. Build universel :
    `xcodebuild -project Notchkit.xcodeproj -scheme Notchkit -configuration Release -derivedDataPath build.noindex/Release -destination 'generic/platform=macOS' ONLY_ACTIVE_ARCH=NO build`
 3. `scripts/make-dmg.sh build.noindex/Release/Build/Products/Release/Notchkit.app <dossier-sortie>`

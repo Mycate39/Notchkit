@@ -1,3 +1,4 @@
+import CoreAudio
 import SwiftUI
 
 /// Icône de l'indicateur (haut-parleur ou soleil selon le niveau).
@@ -34,12 +35,65 @@ struct HUDLevelBar: View {
 struct SystemHUDExpandedView: View {
     let module: SystemHUDModule
 
+    /// Onglets du centre du son.
+    enum Tab: CaseIterable { case levels, output, input, apps }
+    @State private var tab: Tab = .levels
     @State private var volume: Float = SystemVolume.volume
     @State private var brightness: Float = DisplayBrightness.brightness ?? 0
     @State private var isMuted = SystemVolume.isMuted
 
+    private var audio: AudioCenter { module.audio }
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 8) {
+            tabs
+            Group {
+                switch tab {
+                case .levels: levels
+                case .output: AudioDeviceList(audio: audio, devices: audio.outputs, selected: audio.defaultOutput, input: false)
+                case .input: AudioDeviceList(audio: audio, devices: audio.inputs, selected: audio.defaultInput, input: true)
+                case .apps: AudioAppList(audio: audio)
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            .transition(.opacity)
+        }
+        .padding(10)
+        .animation(NotchLayout.pageIndicatorSpring, value: tab)
+        .onAppear {
+            volume = SystemVolume.volume
+            brightness = DisplayBrightness.brightness ?? 0
+            isMuted = SystemVolume.isMuted
+            audio.start()
+        }
+        .onDisappear { audio.stop() }
+    }
+
+    private var tabs: some View {
+        HStack(spacing: 2) {
+            tabButton(.levels, symbol: "slider.horizontal.3", help: "Volume et luminosité")
+            tabButton(.output, symbol: "hifispeaker.2.fill", help: "Sortie audio")
+            tabButton(.input, symbol: "mic.fill", help: "Micro")
+            tabButton(.apps, symbol: "square.grid.2x2.fill", help: "Apps qui jouent du son")
+        }
+        .padding(2)
+        .background(Color.white.opacity(0.06), in: Capsule())
+    }
+
+    private func tabButton(_ value: Tab, symbol: String, help: LocalizedStringKey) -> some View {
+        Button { tab = value } label: {
+            Image(systemName: symbol)
+                .font(.system(size: 10, weight: .semibold))
+                .frame(width: 28, height: 18)
+                .background(tab == value ? StandBy.surface : .clear, in: Capsule())
+                .foregroundStyle(.white.opacity(tab == value ? 1 : 0.5))
+        }
+        .buttonStyle(.notch)
+        .help(Text(help))
+    }
+
+    private var levels: some View {
+        VStack(alignment: .leading, spacing: 10) {
             row(symbol: isMuted ? "speaker.slash.fill" : "speaker.wave.2.fill", value: $volume, enabled: SystemVolume.isAdjustable) {
                 SystemVolume.volume = $0
             } onSymbolTap: {
@@ -57,13 +111,6 @@ struct SystemHUDExpandedView: View {
                     .foregroundStyle(.white.opacity(0.5))
             }
         }
-        .padding(12)
-        .frame(maxHeight: .infinity)
-        .onAppear {
-            volume = SystemVolume.volume
-            brightness = DisplayBrightness.brightness ?? 0
-            isMuted = SystemVolume.isMuted
-        }
     }
 
     private func row(symbol: String, value: Binding<Float>, enabled: Bool,
@@ -80,6 +127,90 @@ struct SystemHUDExpandedView: View {
             }
             .disabled(!enabled)
         }
+    }
+}
+
+/// Liste des sorties (ou des micros) : un clic choisit l'appareil, son volume s'affiche dessous.
+struct AudioDeviceList: View {
+    let audio: AudioCenter
+    let devices: [AudioDevice]
+    let selected: AudioObjectID?
+    let input: Bool
+    @State private var level: Double = 0
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 3) {
+                    ForEach(devices) { device in
+                        Button { audio.makeDefault(device, input: input); readLevel() } label: {
+                            HStack(spacing: 7) {
+                                Image(systemName: device.symbol)
+                                    .font(.system(size: 11, weight: .semibold))
+                                    .frame(width: 18)
+                                Text(device.name).font(.system(size: 12, weight: device.id == selected ? .semibold : .regular)).lineLimit(1)
+                                Spacer(minLength: 4)
+                                if device.id == selected {
+                                    Image(systemName: "checkmark").font(.system(size: 10, weight: .bold)).foregroundStyle(.tint)
+                                }
+                            }
+                            .padding(.horizontal, 7)
+                            .padding(.vertical, 4)
+                            .background(device.id == selected ? StandBy.surface : .clear, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                            .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.notch)
+                    }
+                }
+            }
+            .scrollIndicators(.never)
+            if let selected, audio.volume(of: selected, input: input) != nil {
+                HStack(spacing: 8) {
+                    Image(systemName: input ? "mic.fill" : "speaker.wave.2.fill")
+                        .font(.system(size: 10, weight: .semibold))
+                        .foregroundStyle(.white.opacity(0.6))
+                    StandBySlider(value: $level, height: 16) { audio.setVolume(Float($0), of: selected, input: input) }
+                }
+            }
+        }
+        .onAppear(perform: readLevel)
+        .onChange(of: selected) { readLevel() }
+    }
+
+    private func readLevel() {
+        guard let selected else { return }
+        level = Double(audio.volume(of: selected, input: input) ?? 0)
+    }
+}
+
+/// Apps qui jouent du son en ce moment.
+struct AudioAppList: View {
+    let audio: AudioCenter
+
+    var body: some View {
+        if audio.playingApps.isEmpty {
+            Text(availabilityText)
+                .font(.system(size: 11))
+                .foregroundStyle(.white.opacity(0.45))
+                .fixedSize(horizontal: false, vertical: true)
+        } else {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 5) {
+                    ForEach(audio.playingApps) { app in
+                        AudioAppRow(audio: audio, app: app)
+                    }
+                    if let error = audio.appVolumeError {
+                        Text(error).font(.system(size: 9)).foregroundStyle(Color(red: 1, green: 0.45, blue: 0.4))
+                    }
+                }
+            }
+            .scrollIndicators(.never)
+        }
+    }
+
+    private var availabilityText: LocalizedStringKey {
+        if #available(macOS 14.2, *) { return "Aucune app ne joue de son en ce moment." }
+        return "La liste des apps qui jouent du son demande macOS 14.2 ou plus récent."
     }
 }
 
@@ -117,5 +248,27 @@ struct SystemHUDSettingsView: View {
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
         }
+    }
+}
+
+/// Une app qui joue : icône, nom et curseur de volume (100 % = son normal, sans interception).
+private struct AudioAppRow: View {
+    let audio: AudioCenter
+    let app: AudioApp
+    @State private var volume: Double = 1
+
+    var body: some View {
+        HStack(spacing: 7) {
+            if let icon = app.icon {
+                Image(nsImage: icon).resizable().frame(width: 18, height: 18)
+            }
+            Text(app.name)
+                .font(.system(size: 11.5, weight: .medium))
+                .lineLimit(1)
+                .frame(width: 74, alignment: .leading)
+            StandBySlider(value: $volume, height: 14) { audio.setVolume(Float($0), for: app) }
+                .help(Text("Volume de \(app.name)"))
+        }
+        .onAppear { volume = Double(audio.appVolumes[app.id] ?? 1) }
     }
 }

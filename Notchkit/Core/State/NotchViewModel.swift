@@ -271,6 +271,8 @@ final class NotchViewModel {
         }
         if !isInside && isHeld { return }
         if isInside && isExpansionBlocked && !isExpanded { return }
+        // Survol pendant une alerte liée à un module : l'encoche s'ouvre sur sa page.
+        if isInside, !isExpanded, let moduleID = currentAlert?.openModuleID { requestedModuleID = moduleID }
         hoverTask?.cancel()
         let openDelay = NotchLayout.openDelay(base: settings.settings.hoverOpenDelay,
                                               sinceCollapse: lastCollapse.map { Date().timeIntervalSince($0) })

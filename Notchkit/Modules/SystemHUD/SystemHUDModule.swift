@@ -67,16 +67,29 @@ final class SystemHUDModule: NotchModule {
     @ObservationIgnored private var trustPolling: Task<Void, Never>?
     @ObservationIgnored private var isStarted = false
     /// Alerte unique, réaffichée à chaque appui (même identifiant : prolongée, pas recréée).
-    @ObservationIgnored private lazy var alert = NotchAlert(
-        leading: AnyView(HUDIcon(state: hud)),
-        trailing: AnyView(HUDLevelBar(state: hud)),
-        duration: .seconds(1.6),
-        sideWidth: 112
-    )
+    @ObservationIgnored private lazy var alert: NotchAlert = {
+        var alert = NotchAlert(
+            leading: AnyView(HUDIcon(state: hud)),
+            trailing: AnyView(HUDLevelBar(state: hud)),
+            duration: .seconds(1.6),
+            sideWidth: 112
+        )
+        // Survoler l'indicateur ouvre le centre du son.
+        alert.openModuleID = Self.descriptor.id
+        return alert
+    }()
+
+    /// Centre du son : appareils, volumes et apps qui jouent (actif seulement quand la carte est affichée).
+    let audio = AudioCenter()
 
     init(context: ModuleContext) {
         self.context = context
         replaceSystemHUD = UserDefaults.standard.object(forKey: Keys.replaceSystemHUD) as? Bool ?? true
+        audio.nowPlayingBundleID = { [weak self] in
+            guard let info = (self?.context.otherModule(MusicModule.descriptor.id) as? MusicModule)?.nowPlaying,
+                  info.isPlaying else { return nil }
+            return info.bundleIdentifier
+        }
     }
 
     // MARK: Cycle de vie

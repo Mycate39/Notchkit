@@ -1,3 +1,4 @@
+import CoreAudio
 import Foundation
 import Testing
 @testable import Notchkit
@@ -37,5 +38,31 @@ struct GameModeTests {
         viewModel.hoverChanged(isInside: true)
         #expect(viewModel.showsHoverShadow)
         viewModel.hoverChanged(isInside: false)
+    }
+}
+
+/// Centre du son : rattachement des processus auxiliaires et types d'appareils.
+struct AudioCenterTests {
+    @Test func processusAuxiliaireRattacheASonApp() {
+        #expect(AudioCenter.outermostApp(in: "/Applications/Discord.app/Contents/Frameworks/Discord Helper (Renderer).app/Contents/MacOS/Discord Helper (Renderer)")
+                == "/Applications/Discord.app")
+        #expect(AudioCenter.outermostApp(in: "/usr/libexec/coreaudiod") == nil)
+    }
+
+    @Test func appsQuiJouentRegroupentTousLeursProcessus() {
+        // Brave (10) joue par un auxiliaire ; Discord (20) ne joue pas ; Musique (30) est « À l'écoute » sans sortie signalée.
+        let entries: [(object: AudioObjectID, owner: pid_t, output: Bool)] = [
+            (5, 10, false), (6, 10, true), (7, 20, false), (8, 30, false), (4, 10, false),
+        ]
+        let groups = AudioCenter.playingGroups(entries, nowPlaying: 30)
+        #expect(groups == [10: [4, 5, 6], 30: [8]])
+        #expect(AudioCenter.playingGroups(entries, nowPlaying: nil) == [10: [4, 5, 6]])
+    }
+
+    @Test func typesDAppareils() {
+        #expect(AudioDevice.kind(transport: kAudioDeviceTransportTypeBuiltIn) == .builtIn)
+        #expect(AudioDevice.kind(transport: kAudioDeviceTransportTypeBluetooth) == .bluetooth)
+        #expect(AudioDevice(id: 1, name: "AirPods Pro de Léa", kind: .bluetooth, hasOutput: true, hasInput: true).symbol == "airpodspro")
+        #expect(AudioDevice(id: 2, name: "Haut-parleurs MacBook Pro", kind: .builtIn, hasOutput: true, hasInput: false).symbol == "laptopcomputer")
     }
 }

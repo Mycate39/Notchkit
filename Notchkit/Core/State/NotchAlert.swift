@@ -12,6 +12,8 @@ struct NotchAlert: Identifiable {
     /// Alerte « agrandie » (façon Dynamic Island) : contenu centré sous l'encoche, à cette taille.
     var expandedContent: AnyView?
     var expandedSize: CGSize?
+    /// Module ouvert si l'on survole l'encoche pendant l'alerte (ex. l'indicateur de volume mène au centre du son).
+    var openModuleID: String?
 
     init(leading: AnyView = AnyView(EmptyView()), trailing: AnyView = AnyView(EmptyView()),
          duration: Duration = .seconds(2.5), sideWidth: CGFloat? = nil,

@@ -124,6 +124,7 @@
 		8BCDCE6F6E2F54D141980CF1 /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06D76A7B698E95219B11FEE /* LocationProvider.swift */; };
 		8C0ED9AB5ED77DD0A591BF76 /* Debounce.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E6A11EA97C90A4B6372215A /* Debounce.m */; };
 		8D3C25BBB6510879F7C4F184 /* WindowSnapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DED92BBDFC37957D73A97C1 /* WindowSnapTests.swift */; };
+		8EE0041953C81F90D56FB00B /* AudioCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A54B7DB40265F516AD3C02 /* AudioCenter.swift */; };
 		8F0C77F6838C6EE29F25E86F /* ShelfViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B612155636B3FD4BB9FD1797 /* ShelfViews.swift */; };
 		8FC318594A37D67BB477BCA4 /* NotchHostingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C474C3B54576120030842F /* NotchHostingView.swift */; };
 		90DF0E4039BA56420C4DCA10 /* Glyphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECF3DDA8BA52758E6E1EC5B /* Glyphs.swift */; };
@@ -176,6 +177,7 @@
 		C550D3C753805E70B75EF80D /* NotchModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7C1CB75F1F1F6747AF33C3 /* NotchModule.swift */; };
 		C6CA29E3B81F258BF6263FE4 /* NotchLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140868E51134AF3924DFBEF3 /* NotchLayout.swift */; };
 		CAA1E6C70D9A9307E5C3D0E9 /* AgentServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B3D13162EFA7496E605E7 /* AgentServices.swift */; };
+		CD24093DAC5A14CB6FEBA8DB /* AppVolumeTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAF727765EB9848F95CF1F /* AppVolumeTap.swift */; };
 		CF7166A65434F3E4E1E01E77 /* PowerSourceMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C50F8106E1C8E43432EE06 /* PowerSourceMonitor.swift */; };
 		D040BA8C10C9E1E29B0C74D7 /* AudioDeviceMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D331E9633CBDABB53E93E76A /* AudioDeviceMonitor.swift */; };
 		D16F3D025CDBB2EF8193BAC2 /* VideoDownloadModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC76D1C2CA657B593C11E7B /* VideoDownloadModule.swift */; };
@@ -246,6 +248,7 @@
 /* Begin PBXFileReference section */
 		00E2A367001574FD5301B5C5 /* CalendarViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViews.swift; sourceTree = "<group>"; };
 		01F59B743A5CB9C111DD7BEB /* ClaudeHooksInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeHooksInstaller.swift; sourceTree = "<group>"; };
+		02AAF727765EB9848F95CF1F /* AppVolumeTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVolumeTap.swift; sourceTree = "<group>"; };
 		09BC44BD9A37D42A775568EA /* WebAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebAssistant.swift; sourceTree = "<group>"; };
 		09F4553ED4B6A1EE1B08F5C3 /* ClipboardModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardModule.swift; sourceTree = "<group>"; };
 		0B080423C926D385B46825A3 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
@@ -374,6 +377,7 @@
 		A60B8D5B298F953E63F8A098 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		A65915A0E0BF3E9D51AE67E3 /* SystemHUDViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemHUDViews.swift; sourceTree = "<group>"; };
 		A71B97392FA1B40CE01E6DD5 /* WeatherModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModels.swift; sourceTree = "<group>"; };
+		A7A54B7DB40265F516AD3C02 /* AudioCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCenter.swift; sourceTree = "<group>"; };
 		A82DC6F2135BA865F1C5A085 /* GameModeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModeTests.swift; sourceTree = "<group>"; };
 		A8DD4B3B5A025276532608BF /* ShelfModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfModule.swift; sourceTree = "<group>"; };
 		AB6E589C9D69F4EEFC3F19FF /* SystemMonitorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemMonitorTests.swift; sourceTree = "<group>"; };
@@ -908,6 +912,8 @@
 		A1975F559D28B76D7DDB3598 /* SystemHUD */ = {
 			isa = PBXGroup;
 			children = (
+				02AAF727765EB9848F95CF1F /* AppVolumeTap.swift */,
+				A7A54B7DB40265F516AD3C02 /* AudioCenter.swift */,
 				F7DF39D707B871615662FAD5 /* MediaKeyTap.swift */,
 				4FE7398DD9F8BB31AAAC295D /* SystemControls.swift */,
 				13612A2C0214BDCDDBF00C6C /* SystemHUDModule.swift */,
@@ -1355,10 +1361,12 @@
 				7217AD1F16C887AB09928542 /* AirPodsViews.swift in Sources */,
 				DD9AE10502A766B798DD4FDC /* AppDelegate.swift in Sources */,
 				5ED07894AE2CE76DB414FD91 /* AppSettings.swift in Sources */,
+				CD24093DAC5A14CB6FEBA8DB /* AppVolumeTap.swift in Sources */,
 				71F9B975B44D7BEC0A59AD3A /* AppearanceSettingsView.swift in Sources */,
 				7605FF09B1B6548E2F21D2A4 /* AssistantFace.swift in Sources */,
 				0D3C50C099B5A2963DBD093F /* AssistantModule.swift in Sources */,
 				2C3D4787E9AB5D151FCF7BAF /* AssistantViews.swift in Sources */,
+				8EE0041953C81F90D56FB00B /* AudioCenter.swift in Sources */,
 				D040BA8C10C9E1E29B0C74D7 /* AudioDeviceMonitor.swift in Sources */,
 				1CDA13E5F9845A313287E1B8 /* AudioSpectrumMonitor.swift in Sources */,
 				26C391455DD8C384ED74BC3A /* AutomatedRun.swift in Sources */,

@@ -1,6 +1,86 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "Micro" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Microphone"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Micro"
+          }
+        }
+      }
+    },
+    "Apps qui jouent du son" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apps playing sound"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apps qui jouent du son"
+          }
+        }
+      }
+    },
+    "Aucune app ne joue de son en ce moment." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No app is playing sound right now."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune app ne joue de son en ce moment."
+          }
+        }
+      }
+    },
+    "La liste des apps qui jouent du son demande macOS 14.2 ou plus récent." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The list of apps playing sound requires macOS 14.2 or later."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La liste des apps qui jouent du son demande macOS 14.2 ou plus récent."
+          }
+        }
+      }
+    },
+    "Volume de %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ volume"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volume de %@"
+          }
+        }
+      }
+    },
     "Mode jeu" : {
       "localizations" : {
         "en" : {

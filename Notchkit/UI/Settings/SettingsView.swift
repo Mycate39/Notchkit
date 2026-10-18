@@ -5,7 +5,9 @@ enum SettingsTab: Hashable {
     case general
     case appearance
     case layout
-    /// Page d'un module (identifiant du module).
+    /// Liste de tous les widgets et modules.
+    case widgets
+    /// Page d'un module (identifiant du module), ouverte depuis la liste des widgets.
     case module(String)
     case about
 }
@@ -25,23 +27,12 @@ struct SettingsView: View {
 
     var body: some View {
         NavigationSplitView {
-            List(selection: Binding<SettingsTab?>(get: { router.tab }, set: { if let tab = $0 { router.tab = tab } })) {
+            List(selection: Binding<SettingsTab?>(get: { router.tab.sidebarTab }, set: { if let tab = $0 { router.tab = tab } })) {
                 Section {
                     sidebarRow("Général", symbol: "gearshape.fill", color: .gray).tag(SettingsTab.general)
                     sidebarRow("Apparence", symbol: "paintpalette.fill", color: .pink).tag(SettingsTab.appearance)
                     sidebarRow("Disposition", symbol: "rectangle.3.group.fill", color: .blue).tag(SettingsTab.layout)
-                }
-                // Modules regroupés par catégorie, comme dans les Réglages Système.
-                ForEach(ModuleCategory.allCases) { category in
-                    let descriptors = manager.orderedDescriptors.filter { $0.category == category }
-                    if !descriptors.isEmpty {
-                        Section(String(localized: category.title)) {
-                            ForEach(descriptors) { descriptor in
-                                ModuleSidebarRow(descriptor: descriptor, isEnabled: manager.isEnabled(descriptor.id))
-                                    .tag(SettingsTab.module(descriptor.id))
-                            }
-                        }
-                    }
+                    sidebarRow("Widgets", symbol: "square.grid.2x2.fill", color: .orange).tag(SettingsTab.widgets)
                 }
                 Section {
                     sidebarRow("À propos", symbol: "info.circle.fill", color: .secondary).tag(SettingsTab.about)
@@ -61,10 +52,7 @@ struct SettingsView: View {
         case .general: GeneralSettingsView(settings: settings).navigationTitle("Général")
         case .appearance: AppearanceSettingsView(settings: settings).navigationTitle("Apparence")
         case .layout: LayoutSettingsView(manager: manager).navigationTitle("Disposition")
-        case let .module(id):
-            if let descriptor = manager.orderedDescriptors.first(where: { $0.id == id }) {
-                ModuleDetailView(descriptor: descriptor, manager: manager).navigationTitle(Text(descriptor.name))
-            }
+        case .widgets, .module: WidgetsSettingsView(manager: manager, router: router)
         case .about: AboutSettingsView().navigationTitle("À propos")
         }
     }
@@ -107,22 +95,100 @@ private struct SidebarIcon: View {
     }
 }
 
-private struct ModuleSidebarRow: View {
-    let descriptor: ModuleDescriptor
-    let isEnabled: Bool
+extension SettingsTab {
+    /// Entrée de la barre latérale sélectionnée : la page d'un module reste sous « Widgets ».
+    var sidebarTab: SettingsTab {
+        if case .module = self { return .widgets }
+        return self
+    }
+}
+
+/// Onglet « Widgets » : tous les modules, groupés par catégorie, chacun avec son interrupteur ;
+/// un clic ouvre ses réglages (bouton retour pour revenir à la liste).
+struct WidgetsSettingsView: View {
+    let manager: ModuleManager
+    @Bindable var router: SettingsRouter
+
+    /// Le module ouvert est porté par la page des réglages : un lien direct vers un module
+    /// (menu contextuel d'un widget) ouvre la liste déjà poussée sur ce module.
+    private var path: Binding<[String]> {
+        Binding(
+            get: { if case let .module(id) = router.tab { [id] } else { [] } },
+            set: { router.tab = $0.last.map(SettingsTab.module) ?? .widgets }
+        )
+    }
 
     var body: some View {
-        Label {
-            HStack {
-                Text(descriptor.name)
-                Spacer()
-                if isEnabled {
-                    Circle().fill(.green).frame(width: 6, height: 6)
-                        .help("Activé")
+        NavigationStack(path: path) {
+            Form {
+                ForEach(ModuleCategory.allCases) { category in
+                    let descriptors = manager.orderedDescriptors.filter { $0.category == category }
+                    if !descriptors.isEmpty {
+                        Section(String(localized: category.title)) {
+                            ForEach(descriptors) { descriptor in
+                                WidgetRow(descriptor: descriptor, manager: manager)
+                            }
+                        }
+                    }
                 }
             }
-        } icon: {
-            SidebarIcon(symbol: descriptor.systemImage, color: ModuleStyle.color(for: descriptor.category))
+            .formStyle(.grouped)
+            .navigationTitle("Widgets")
+            .navigationDestination(for: String.self) { id in
+                if let descriptor = manager.orderedDescriptors.first(where: { $0.id == id }) {
+                    ModuleDetailView(descriptor: descriptor, manager: manager)
+                        .navigationTitle(Text(descriptor.name))
+                        // La barre d'outils de la fenêtre n'affiche pas de bouton retour : on en pose un en haut.
+                        .safeAreaInset(edge: .top, spacing: 0) {
+                            HStack {
+                                Button {
+                                    router.tab = .widgets
+                                } label: {
+                                    Label("Widgets", systemImage: "chevron.left")
+                                }
+                                .buttonStyle(.borderless)
+                                .keyboardShortcut("[", modifiers: .command)
+                                Spacer()
+                            }
+                            .padding(.horizontal, 20)
+                            .padding(.top, 10)
+                        }
+                }
+            }
+        }
+    }
+}
+
+/// Ligne d'un module : icône, nom et description ouvrent ses réglages ; l'interrupteur l'active.
+private struct WidgetRow: View {
+    let descriptor: ModuleDescriptor
+    let manager: ModuleManager
+
+    var body: some View {
+        HStack(spacing: 10) {
+            NavigationLink(value: descriptor.id) {
+                HStack(spacing: 10) {
+                    SidebarIcon(symbol: descriptor.systemImage, color: ModuleStyle.color(for: descriptor.category), size: 26)
+                    VStack(alignment: .leading, spacing: 1) {
+                        Text(descriptor.name)
+                        Text(descriptor.summary)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(1)
+                    }
+                    Spacer(minLength: 8)
+                }
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            Toggle("Activer", isOn: Binding(
+                get: { manager.isEnabled(descriptor.id) },
+                set: { manager.setEnabled($0, for: descriptor.id) }
+            ))
+            .labelsHidden()
+            .toggleStyle(.switch)
+            .controlSize(.small)
+            .disabled(!manager.isUnlocked(descriptor))
         }
     }
 }

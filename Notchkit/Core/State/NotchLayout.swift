@@ -173,6 +173,8 @@ enum NotchLayout {
         let collapse = reduceMotion ? 0.18 : appearance.animation.spring.duration
         return .milliseconds(Int(collapse * collapseSettleFraction * 1000 * animationSlowdown))
     }
+    /// Durée pendant laquelle l'indicateur de pages reste visible après un balayage.
+    static let pageIndicatorLinger: Duration = .milliseconds(1200)
     /// Temps laissé à l'animation de repli avant de réduire la fenêtre.
     @MainActor static var shrinkDelay: Duration {
         .milliseconds(500) * animationSlowdown

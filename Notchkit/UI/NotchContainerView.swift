@@ -290,6 +290,9 @@ private struct ExpandedNotchView: View {
     let viewModel: NotchViewModel
     /// La pastille de la page affichée glisse d'un point à l'autre.
     @Namespace private var pageIndicator
+    /// L'indicateur de pages n'apparaît que pendant un balayage, puis s'efface.
+    @State private var showsPageIndicator = false
+    @State private var hidePageIndicatorTask: Task<Void, Never>?
 
     var body: some View {
         let ear = viewModel.geometry.style == .notch ? NotchLayout.earRadius : 0
@@ -377,6 +380,8 @@ private struct ExpandedNotchView: View {
                         .help(Text(page.modules.map { String(localized: type(of: $0.module).descriptor.name) }.joined(separator: ", ")))
                     }
                 }
+                .opacity(showsPageIndicator ? 1 : 0)
+                .allowsHitTesting(showsPageIndicator)
             } else {
                 Text("Notchkit")
                     .font(.system(size: 12, weight: .semibold))
@@ -386,10 +391,29 @@ private struct ExpandedNotchView: View {
             Button {
                 viewModel.openSettings()
             } label: {
+                // Engrenage seul, sans pastille ronde ; la zone cliquable garde la taille du bouton.
                 Image(systemName: "gearshape.fill")
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundStyle(.white.opacity(0.7))
+                    .frame(width: 22, height: 22)
+                    .contentShape(Rectangle())
             }
-            .buttonStyle(.standBy(.small, circle: true))
+            .buttonStyle(.notch)
             .help("Réglages")
+        }
+    }
+
+    /// Montre l'indicateur de pages ; il s'efface peu après, sauf tant que `holding` (doigts sur le trackpad).
+    private func revealPageIndicator(holding: Bool = false) {
+        hidePageIndicatorTask?.cancel()
+        if !showsPageIndicator {
+            withAnimation(.easeOut(duration: 0.15)) { showsPageIndicator = true }
+        }
+        guard !holding else { return }
+        hidePageIndicatorTask = Task {
+            try? await Task.sleep(for: NotchLayout.pageIndicatorLinger)
+            guard !Task.isCancelled else { return }
+            withAnimation(.easeInOut(duration: 0.35)) { showsPageIndicator = false }
         }
     }
 
@@ -425,8 +449,16 @@ private struct ExpandedNotchView: View {
                     .scrollTargetBehavior(.paging)
                     .scrollPosition(id: Binding(
                         get: { min(viewModel.selectedPage, pages.count - 1) },
-                        set: { if let page = $0 { viewModel.selectedPage = page } }
+                        set: {
+                            guard let page = $0 else { return }
+                            if page != viewModel.selectedPage { revealPageIndicator() }
+                            viewModel.selectedPage = page
+                        }
                     ))
+                    .modifier(ScrollPhaseObserver { isScrolling in
+                        // Fin de balayage : on lance seulement l'effacement de l'indicateur déjà visible.
+                        if isScrolling || showsPageIndicator { revealPageIndicator(holding: isScrolling) }
+                    })
                     .onAppear {
                         // La vue est recréée à chaque ouverture : on replace explicitement le défilement
                         // sur la page mémorisée (la position initiale n'est pas toujours appliquée).
@@ -434,6 +466,27 @@ private struct ExpandedNotchView: View {
                     }
                 }
             }
+        }
+    }
+}
+
+/// Suit le balayage des pages (macOS 15+) : `true` dès que le défilement commence, `false` à l'arrêt.
+/// Sur macOS 14, seul le changement de page révèle l'indicateur.
+private struct ScrollPhaseObserver: ViewModifier {
+    let onChange: (Bool) -> Void
+
+    func body(content: Content) -> some View {
+        if #available(macOS 15, *) {
+            content.onScrollPhaseChange { oldPhase, newPhase in
+                // Ignore les défilements programmés (placement initial sur la page mémorisée).
+                if newPhase.isScrolling {
+                    if newPhase == .interacting || oldPhase == .interacting { onChange(true) }
+                } else if oldPhase.isScrolling {
+                    onChange(false)
+                }
+            }
+        } else {
+            content
         }
     }
 }

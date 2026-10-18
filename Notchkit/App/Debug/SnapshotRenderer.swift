@@ -206,6 +206,33 @@ enum SnapshotRenderer {
                 .frame(width: 620, height: 1100)
                 .background(Color(nsColor: .windowBackgroundColor)),
              to: directory.appendingPathComponent("reglages-disposition.png"))
+
+        // Fenêtre de réglages, onglet Widgets puis page d'un module (contrôles AppKit : rendu en fenêtre).
+        let router = SettingsRouter()
+        for (tab, name) in [(SettingsTab.widgets, "reglages-widgets"), (.module(MusicModule.descriptor.id), "reglages-widget-musique")] {
+            router.tab = tab
+            saveWindow(SettingsView(settings: settings, manager: manager, router: router),
+                       size: CGSize(width: 820, height: 620),
+                       to: directory.appendingPathComponent("\(name).png"))
+        }
+    }
+
+    /// Rendu d'une vue dans une vraie fenêtre (hors écran), pour les contrôles AppKit
+    /// (formulaires, interrupteurs) qu'`ImageRenderer` ne dessine pas.
+    private static func saveWindow(_ view: some View, size: CGSize, to url: URL) {
+        let window = NSWindow(contentRect: CGRect(origin: CGPoint(x: -10_000, y: -10_000), size: size),
+                              styleMask: [.titled, .fullSizeContentView], backing: .buffered, defer: false)
+        window.isReleasedWhenClosed = false
+        let host = NSHostingView(rootView: view)
+        window.contentView = host
+        window.orderFrontRegardless()
+        // Laisse SwiftUI mettre en page la barre latérale et la pile de navigation.
+        RunLoop.current.run(until: Date().addingTimeInterval(0.8))
+        host.layoutSubtreeIfNeeded()
+        defer { window.close() }
+        guard let rep = host.bitmapImageRepForCachingDisplay(in: host.bounds) else { return }
+        host.cacheDisplay(in: host.bounds, to: rep)
+        try? rep.representation(using: .png, properties: [:])?.write(to: url)
     }
 
     private static func save(_ view: some View, to url: URL) {

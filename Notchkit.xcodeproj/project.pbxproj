@@ -94,6 +94,7 @@
 		64D124042C3D01F7089C1EAE /* AgentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB20EE407DC36B9F18735F2 /* AgentsTests.swift */; };
 		66322E21FA223080C743AF7D /* ClaudeSparkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1FA58A222029EF8472F5FC /* ClaudeSparkView.swift */; };
 		67C7B8092113FF01A76075B0 /* NotesModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEE09B9AE9BBDCD97B56C2A /* NotesModule.swift */; };
+		681367ACE466EF47C574ACE4 /* MascotChatViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D613DE7CC6C7A3B7A4BD5A7 /* MascotChatViews.swift */; };
 		6CE519CFAF12847A733CA497 /* MediaRemote.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B938216BE691DF97D65B80A /* MediaRemote.m */; };
 		6FFBD307CE76CBCCCE9EBBFA /* ClipboardModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F4553ED4B6A1EE1B08F5C3 /* ClipboardModule.swift */; };
 		710BC8174F35E464FBB8D163 /* MediaRemote.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C8C037FC30E0BB58579AC35 /* MediaRemote.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -142,6 +143,7 @@
 		9F7142925091280DBE0FE836 /* keys.h in Headers */ = {isa = PBXBuildFile; fileRef = D4D167C05CBBAD88AE1F8A4F /* keys.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A035E8F6860E327BAD3FEF0D /* BatteryModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C6F4F37F841F8FF9371E1E /* BatteryModule.swift */; };
 		A174F9940FC069ED71C0C579 /* MediaKeyTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7DF39D707B871615662FAD5 /* MediaKeyTap.swift */; };
+		A17811425EEE053D38C8BCE4 /* MascotChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715C5609D9DF611E2D55DF73 /* MascotChat.swift */; };
 		A2ABD358B67E256AF9105886 /* NowPlayingTest.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DF83BF34AFE3B80D8068FFA /* NowPlayingTest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A332BE0B606743A7032D6F14 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 98FB71F04AAECE1E8BD0926A /* Localizable.xcstrings */; };
 		A36F60159AC37E3010BC82FA /* ScreenshotsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE66842FA59F405AA5650F /* ScreenshotsModule.swift */; };
@@ -325,6 +327,7 @@
 		6D79AFE5C1AEE52840020061 /* ScriptablePlayerSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptablePlayerSource.swift; sourceTree = "<group>"; };
 		6E67B71BB43A4F2B68A88A78 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
 		6F1D357738A1DF21BA08CC18 /* DayProgressModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayProgressModule.swift; sourceTree = "<group>"; };
+		715C5609D9DF611E2D55DF73 /* MascotChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MascotChat.swift; sourceTree = "<group>"; };
 		72F1D7838B0087D64BCCB9AE /* AgentPanels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentPanels.swift; sourceTree = "<group>"; };
 		77C38E58910B7C41117212E1 /* NotchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchViewModel.swift; sourceTree = "<group>"; };
 		780FDFC3683479C675E3E0ED /* LocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationTests.swift; sourceTree = "<group>"; };
@@ -357,6 +360,7 @@
 		989E4B90FFB50F9F50B284A7 /* HealthModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthModule.swift; sourceTree = "<group>"; };
 		98A6844ED04375186B9067D3 /* NotchkitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchkitApp.swift; sourceTree = "<group>"; };
 		98FB71F04AAECE1E8BD0926A /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		9D613DE7CC6C7A3B7A4BD5A7 /* MascotChatViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MascotChatViews.swift; sourceTree = "<group>"; };
 		9E6A11EA97C90A4B6372215A /* Debounce.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Debounce.m; sourceTree = "<group>"; };
 		9F21C814CD3DE60B75B2C723 /* now_playing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = now_playing.h; sourceTree = "<group>"; };
 		A097E4F52274645DD920E62C /* ShelfTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfTests.swift; sourceTree = "<group>"; };
@@ -468,6 +472,8 @@
 				72F1D7838B0087D64BCCB9AE /* AgentPanels.swift */,
 				64D14C1D655BAC94FC759020 /* AgentsModule.swift */,
 				B037B66FDB492EA7754DD971 /* AgentsViews.swift */,
+				715C5609D9DF611E2D55DF73 /* MascotChat.swift */,
+				9D613DE7CC6C7A3B7A4BD5A7 /* MascotChatViews.swift */,
 			);
 			path = Agents;
 			sourceTree = "<group>";
@@ -1380,6 +1386,8 @@
 				A48F76AE210F36AA7349FE22 /* LiveActivity.swift in Sources */,
 				8BCDCE6F6E2F54D141980CF1 /* LocationProvider.swift in Sources */,
 				511B45FE6AA1A39FCE772EA7 /* LockScreenSpace.swift in Sources */,
+				A17811425EEE053D38C8BCE4 /* MascotChat.swift in Sources */,
+				681367ACE466EF47C574ACE4 /* MascotChatViews.swift in Sources */,
 				506C40B02FC95301118B3117 /* MascotDesigns.swift in Sources */,
 				55834FC0F261A9F9836CC482 /* MascotMotion.swift in Sources */,
 				9E79FD8CDFB758987F648C84 /* MascotVideoRenderer.swift in Sources */,
@@ -1593,6 +1601,11 @@
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = "2.0.0-beta.1";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-weak_framework",
+					FoundationModels,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.andeolchenaux.notchkit;
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1675,6 +1688,11 @@
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = "2.0.0-beta.1";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-weak_framework",
+					FoundationModels,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.andeolchenaux.notchkit;
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;

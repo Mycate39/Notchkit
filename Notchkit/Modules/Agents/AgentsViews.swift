@@ -5,6 +5,8 @@ import SwiftUI
 struct AgentsHomeView: View {
     let module: AgentsModule
     @State private var selectedID: String?
+    /// Onglet affiché à droite : le travail des agents, ou la discussion avec la mascotte.
+    @State private var showsChat = false
 
     private var sessions: [ClaudeSession] { module.sessions }
 
@@ -21,18 +23,63 @@ struct AgentsHomeView: View {
             HStack(spacing: 12) {
                 identity(celebrating: celebrating)
                     .frame(width: 236, alignment: .leading)
-                workPanel
+                VStack(alignment: .trailing, spacing: 6) {
+                    HStack(spacing: 6) {
+                        if !showsChat && sessions.count > 1 { sessionPills }
+                        Spacer(minLength: 0)
+                        tabs
+                    }
+                    Group {
+                        if showsChat {
+                            MascotChatPanel(module: module)
+                                .transition(.opacity.combined(with: .move(edge: .trailing)))
+                        } else {
+                            workPanel
+                                .transition(.opacity.combined(with: .move(edge: .leading)))
+                        }
+                    }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                }
             }
             .padding(12)
         }
+        // Un agent attend une réponse : on revient au travail des agents.
+        .onChange(of: session?.state == .waitingForPermission) { _, waiting in
+            if waiting { withAnimation(NotchLayout.pageIndicatorSpring) { showsChat = false } }
+        }
+    }
+
+    /// Onglets : travail des agents ou discussion.
+    private var tabs: some View {
+        HStack(spacing: 2) {
+            tab(symbol: "sparkles.rectangle.stack", selected: !showsChat, help: "Agents") { showsChat = false }
+            tab(symbol: "bubble.left.fill", selected: showsChat, help: "Discussion") { showsChat = true }
+        }
+        .padding(2)
+        .background(Color.white.opacity(0.06), in: Capsule())
+    }
+
+    private func tab(symbol: String, selected: Bool, help: LocalizedStringKey, action: @escaping () -> Void) -> some View {
+        Button {
+            withAnimation(NotchLayout.pageIndicatorSpring) { action() }
+        } label: {
+            Image(systemName: symbol)
+                .font(.system(size: 10, weight: .semibold))
+                .frame(width: 26, height: 18)
+                .background(selected ? StandBy.surface : .clear, in: Capsule())
+                .foregroundStyle(.white.opacity(selected ? 1 : 0.5))
+        }
+        .buttonStyle(.notch)
+        .help(Text(help))
     }
 
     // MARK: Mascotte, session et étapes
 
     private func identity(celebrating: Bool) -> some View {
         HStack(alignment: .center, spacing: 10) {
-            LiveMascotView(design: module.mascot, mood: AgentsModule.mood(for: session, celebrating: celebrating), size: 50)
+            LiveMascotView(design: module.mascot,
+                           mood: showsChat && module.chat.isResponding ? .working : AgentsModule.mood(for: session, celebrating: celebrating),
+                           size: 50)
                 .frame(width: 80, height: 78)
             VStack(alignment: .leading, spacing: 2) {
                 if let session {
@@ -65,9 +112,6 @@ struct AgentsHomeView: View {
     @ViewBuilder
     private var workPanel: some View {
         VStack(alignment: .leading, spacing: 6) {
-            if sessions.count > 1 {
-                HStack { Spacer(); sessionPills }
-            }
             Group {
                 if let session, let prompt = session.questionPrompt {
                     AgentQuestionPanel(prompt: prompt,

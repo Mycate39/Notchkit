@@ -101,6 +101,8 @@ targets:
         SWIFT_EMIT_LOC_STRINGS: YES
         LOCALIZATION_PREFERS_STRING_CATALOGS: YES
         ENABLE_USER_SCRIPT_SANDBOXING: YES
+        # Apple Intelligence (macOS 26+) : lien faible, l'app reste lançable sur macOS 14 et 15.
+        OTHER_LDFLAGS: ["$(inherited)", "-weak_framework", "FoundationModels"]
 
   # Framework tiers (BSD 3 clauses) chargé par /usr/bin/perl pour accéder à MediaRemote.
   # Voir ThirdParty/MediaRemoteAdapter/PROVENANCE.md.

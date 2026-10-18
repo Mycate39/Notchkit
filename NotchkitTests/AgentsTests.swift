@@ -179,3 +179,36 @@ struct AgentsDecisionTests {
         #expect(ClaudeQuestionPrompt.answers(["Q": ["A", "B"]]) == ["Q": "A, B"])
     }
 }
+
+/// Discussion avec la mascotte : ce qu'elle sait des agents et sa personnalité.
+@MainActor
+struct MascotChatTests {
+    private func makeModule() -> AgentsModule {
+        AgentsModule(context: ModuleContext(presentAlert: { _ in }, openSettings: {}, holdExpanded: { _ in },
+                                            mascot: { .visor }))
+    }
+
+    @Test func resumeDesAgentsPourAppleIntelligence() {
+        let module = makeModule()
+        module.previewSessions = []
+        #expect(module.statusSummary.contains("Aucun agent"))
+        var session = ClaudeSession(id: "s", projectName: "korus", state: .waitingForPermission,
+                                    prompt: "Corrige la TVA", lastEventAt: Date())
+        session.currentAction = ClaudeAction(symbol: "pencil", text: "Modifie invoice.ts", date: Date())
+        module.previewSessions = [session]
+        let summary = module.statusSummary
+        #expect(summary.contains("korus"))
+        #expect(summary.contains("attend l'accord"))
+        #expect(summary.contains("Modifie invoice.ts"))
+    }
+
+    @Test func laMascottePorteSonNom() {
+        #expect(makeModule().persona.contains("Visor"))
+    }
+
+    @Test func discussionVideAuDepart() {
+        let chat = makeModule().chat!
+        #expect(chat.messages.isEmpty)
+        #expect(!chat.isResponding)
+    }
+}

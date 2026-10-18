@@ -682,6 +682,22 @@
         }
       }
     },
+    "Activez Apple Intelligence dans Réglages Système pour l'utiliser ici." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn on Apple Intelligence in System Settings to use it here."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activez Apple Intelligence dans Réglages Système pour l'utiliser ici."
+          }
+        }
+      }
+    },
     "Activez Claude Code dans les réglages pour suivre ses sessions ici." : {
       "localizations" : {
         "en" : {
@@ -1213,6 +1229,22 @@
         }
       }
     },
+    "Ajoutez votre clé API Claude dans les réglages du widget Agents pour discuter avec Claude." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add your Claude API key in the Agents widget settings to chat with Claude."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajoutez votre clé API Claude dans les réglages du widget Agents pour discuter avec Claude."
+          }
+        }
+      }
+    },
     "Ajoutez votre clé API pour discuter avec l'assistant." : {
       "localizations" : {
         "en" : {
@@ -1661,6 +1693,86 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Apparence"
+          }
+        }
+      }
+    },
+    "Apple Intelligence demande macOS 26 ou plus récent." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence requires macOS 26 or later."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence demande macOS 26 ou plus récent."
+          }
+        }
+      }
+    },
+    "Apple Intelligence est disponible : gratuit, privé et hors ligne." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence is available: free, private and offline."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence est disponible : gratuit, privé et hors ligne."
+          }
+        }
+      }
+    },
+    "Apple Intelligence n'est pas disponible sur ce Mac : choisissez Claude dans les réglages du widget Agents." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence isn't available on this Mac: choose Claude in the Agents widget settings."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence n'est pas disponible sur ce Mac : choisissez Claude dans les réglages du widget Agents."
+          }
+        }
+      }
+    },
+    "Apple Intelligence n'est pas disponible sur ce Mac." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence isn't available on this Mac."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence n'est pas disponible sur ce Mac."
+          }
+        }
+      }
+    },
+    "Apple Intelligence se prépare (téléchargement du modèle) : réessayez plus tard." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence is getting ready (downloading the model): try again later."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Intelligence se prépare (téléchargement du modèle) : réessayez plus tard."
           }
         }
       }
@@ -2727,6 +2839,22 @@
         }
       }
     },
+    "Ce Mac ne prend pas en charge Apple Intelligence." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This Mac doesn't support Apple Intelligence."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce Mac ne prend pas en charge Apple Intelligence."
+          }
+        }
+      }
+    },
     "Ce module fonctionne en arrière-plan, sans carte dans l'encoche." : {
       "localizations" : {
         "en" : {
@@ -3124,6 +3252,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Clé API"
+          }
+        }
+      }
+    },
+    "Clé API Claude" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude API key"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clé API Claude"
           }
         }
       }
@@ -4267,6 +4411,38 @@
         }
       }
     },
+    "Discussion" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chat"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discussion"
+          }
+        }
+      }
+    },
+    "Discussion avec la mascotte" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chat with the mascot"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discussion avec la mascotte"
+          }
+        }
+      }
+    },
     "Disposition" : {
       "localizations" : {
         "en" : {
@@ -4519,6 +4695,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Écrire à Claude…"
+          }
+        }
+      }
+    },
+    "Écrire à la mascotte…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Message the mascot…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écrire à la mascotte…"
           }
         }
       }
@@ -6192,6 +6384,22 @@
         }
       }
     },
+    "La clé reste dans le trousseau de votre Mac. Les messages envoyés à Claude passent par l'API d'Anthropic ; avec Apple Intelligence, rien ne quitte votre Mac." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The key stays in your Mac's keychain. Messages sent to Claude go through Anthropic's API; with Apple Intelligence, nothing leaves your Mac."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La clé reste dans le trousseau de votre Mac. Les messages envoyés à Claude passent par l'API d'Anthropic ; avec Apple Intelligence, rien ne quitte votre Mac."
+          }
+        }
+      }
+    },
     "La journée n'a pas commencé" : {
       "localizations" : {
         "en" : {
@@ -7332,6 +7540,22 @@
         }
       }
     },
+    "Moteur de la discussion" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chat engine"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moteur de la discussion"
+          }
+        }
+      }
+    },
     "Moyen" : {
       "localizations" : {
         "en" : {
@@ -7744,6 +7968,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nouvelle conversation"
+          }
+        }
+      }
+    },
+    "Nouvelle discussion" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New chat"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouvelle discussion"
           }
         }
       }
@@ -8531,6 +8771,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Port invalide"
+          }
+        }
+      }
+    },
+    "Posez une question : je réponds avec Apple Intelligence, directement sur votre Mac." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ask me anything: I answer with Apple Intelligence, right on your Mac."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posez une question : je réponds avec Apple Intelligence, directement sur votre Mac."
+          }
+        }
+      }
+    },
+    "Posez une question à Claude." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ask Claude a question."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posez une question à Claude."
           }
         }
       }
@@ -9865,6 +10137,9 @@
           }
         }
       }
+    },
+    "sk-ant-…" : {
+
     },
     "Son à la fin d'un minuteur" : {
       "localizations" : {

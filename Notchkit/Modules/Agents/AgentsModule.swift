@@ -28,8 +28,43 @@ final class AgentsModule: NotchModule {
     /// Fin de la petite fête après une tâche terminée.
     private(set) var celebrateUntil: Date?
 
+    /// Discussion avec la mascotte (Apple Intelligence ou Claude).
+    @ObservationIgnored private(set) var chat: MascotChat!
+
     init(context: ModuleContext) {
         self.context = context
+        chat = MascotChat(
+            persona: { [weak self] in self?.persona ?? "" },
+            agentsSummary: { [weak self] in self?.statusSummary ?? "" }
+        )
+    }
+
+    /// Consignes données à Apple Intelligence : la mascotte, son ton, ses limites.
+    var persona: String {
+        """
+        Tu es \(mascot.name), la petite mascotte de Notchkit qui vit dans l'encoche du Mac. \
+        Tu es gentille, enjouée et brève : deux ou trois phrases au plus, sans listes ni Markdown, \
+        car tes réponses s'affichent dans un tout petit espace. Réponds dans la langue de l'utilisateur. \
+        Pour parler du travail des agents de code (Claude Code), utilise l'outil etatDesAgents. \
+        Si une question demande un long raisonnement ou du code, suggère de passer à Claude.
+        """
+    }
+
+    /// État des agents en quelques lignes (pour l'outil d'Apple Intelligence).
+    var statusSummary: String {
+        let sessions = sessions
+        guard !sessions.isEmpty else { return "Aucun agent de code n'est actif en ce moment." }
+        return sessions.prefix(5).map { session in
+            let state = switch session.state {
+            case .working: "au travail"
+            case .waitingForPermission: "attend l'accord de l'utilisateur"
+            case .awaitingReply, .finished: "a terminé"
+            }
+            var line = "Projet \(session.projectName ?? "sans nom") (Claude Code) : \(state)"
+            if let prompt = session.prompt { line += ". Demande : \(prompt)" }
+            if let action = session.currentAction { line += ". Action en cours : \(action.text)" }
+            return line
+        }.joined(separator: "\n")
     }
 
     /// Module Claude Code, s'il est actif (il reçoit les événements des hooks).
@@ -103,5 +138,14 @@ final class AgentsModule: NotchModule {
 
     func expandedView() -> AnyView {
         AnyView(AgentsHomeView(module: self))
+    }
+
+    func settingsView() -> AnyView? {
+        AnyView(AgentsSettingsView(chat: chat))
+    }
+
+    /// Garde l'encoche ouverte pendant la saisie d'un message.
+    func holdExpanded(_ hold: Bool) {
+        context.holdExpanded(hold)
     }
 }

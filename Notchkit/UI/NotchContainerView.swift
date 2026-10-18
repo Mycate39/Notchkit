@@ -347,40 +347,19 @@ private struct ExpandedNotchView: View {
                     ForEach(pages) { page in
                         let isSelected = viewModel.selectedPage == page.id
                         Button {
-                            withAnimation(NotchLayout.spring) { viewModel.selectedPage = page.id }
+                            withAnimation(NotchLayout.pageIndicatorSpring) { viewModel.selectedPage = page.id }
                         } label: {
-                            Group {
-                                if isSelected {
-                                    HStack(spacing: 6) {
-                                        ForEach(page.modules.prefix(5)) { box in
-                                            ModuleIcon(symbol: box.systemImage)
-                                                .frame(height: 11)
-                                        }
-                                    }
-                                    .font(.system(size: 10, weight: .semibold))
-                                    .padding(.horizontal, 11)
-                                    .padding(.vertical, 5)
-                                    .background {
-                                        // Onglet choisi : pilule ambre, icônes en noir chaud (style StandBy).
-                                        Capsule()
-                                            .fill(.tint)
-                                            .matchedGeometryEffect(id: "pastille", in: pageIndicator)
-                                    }
-                                    .foregroundStyle(StandBy.onAccent)
-                                } else {
-                                    Circle()
-                                        .fill(.white.opacity(0.35))
-                                        .frame(width: 6, height: 6)
-                                        .padding(5)
-                                }
-                            }
+                            pageTab(page, isSelected: isSelected)
                             .contentShape(Capsule())
                         }
                         .buttonStyle(.notch)
                         .help(Text(page.modules.map { String(localized: type(of: $0.module).descriptor.name) }.joined(separator: ", ")))
                     }
                 }
+                // Apparition depuis la gauche : légère croissance, flou qui se dissipe.
                 .opacity(showsPageIndicator ? 1 : 0)
+                .scaleEffect(showsPageIndicator ? 1 : 0.8, anchor: .leading)
+                .blur(radius: showsPageIndicator ? 0 : 4)
                 .allowsHitTesting(showsPageIndicator)
             } else {
                 Text("Notchkit")
@@ -403,11 +382,42 @@ private struct ExpandedNotchView: View {
         }
     }
 
+    /// Onglet d'une page : la pastille ambre avec ses icônes pour la page affichée, un point sinon.
+    @ViewBuilder
+    private func pageTab(_ page: ModulePage, isSelected: Bool) -> some View {
+        if isSelected {
+            HStack(spacing: 6) {
+                ForEach(page.modules.prefix(5)) { box in
+                    ModuleIcon(symbol: box.systemImage)
+                        .frame(height: 11)
+                }
+            }
+            // Les icônes de la page arrivent floues et grossissent pendant que la pastille glisse.
+            .modifier(PageIconsEntrance())
+            .font(.system(size: 10, weight: .semibold))
+            .padding(.horizontal, 11)
+            .padding(.vertical, 5)
+            .background {
+                // Onglet choisi : pilule ambre, icônes en noir chaud (style StandBy).
+                Capsule()
+                    .fill(.tint)
+                    .matchedGeometryEffect(id: "pastille", in: pageIndicator)
+            }
+            .foregroundStyle(StandBy.onAccent)
+        } else {
+            Circle()
+                .fill(.white.opacity(0.35))
+                .frame(width: 6, height: 6)
+                .padding(5)
+                .transition(.scale(scale: 0.3).combined(with: .opacity))
+        }
+    }
+
     /// Montre l'indicateur de pages ; il s'efface peu après, sauf tant que `holding` (doigts sur le trackpad).
     private func revealPageIndicator(holding: Bool = false) {
         hidePageIndicatorTask?.cancel()
         if !showsPageIndicator {
-            withAnimation(.easeOut(duration: 0.15)) { showsPageIndicator = true }
+            withAnimation(NotchLayout.pageIndicatorSpring) { showsPageIndicator = true }
         }
         guard !holding else { return }
         hidePageIndicatorTask = Task {
@@ -451,8 +461,10 @@ private struct ExpandedNotchView: View {
                         get: { min(viewModel.selectedPage, pages.count - 1) },
                         set: {
                             guard let page = $0 else { return }
-                            if page != viewModel.selectedPage { revealPageIndicator() }
-                            viewModel.selectedPage = page
+                            guard page != viewModel.selectedPage else { return }
+                            revealPageIndicator()
+                            // La pastille glisse vers la nouvelle page au lieu de sauter.
+                            withAnimation(NotchLayout.pageIndicatorSpring) { viewModel.selectedPage = page }
                         }
                     ))
                     .modifier(ScrollPhaseObserver { isScrolling in
@@ -467,6 +479,21 @@ private struct ExpandedNotchView: View {
                 }
             }
         }
+    }
+}
+
+/// Entrée des icônes de la pastille : floues et réduites, elles se précisent avec un ressort.
+private struct PageIconsEntrance: ViewModifier {
+    @State private var appeared = false
+
+    func body(content: Content) -> some View {
+        content
+            .scaleEffect(appeared ? 1 : 0.6)
+            .blur(radius: appeared ? 0 : 3)
+            .opacity(appeared ? 1 : 0)
+            .onAppear {
+                withAnimation(NotchLayout.pageIndicatorSpring.delay(0.05)) { appeared = true }
+            }
     }
 }
 

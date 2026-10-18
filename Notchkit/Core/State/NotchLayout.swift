@@ -175,6 +175,8 @@ enum NotchLayout {
     }
     /// Durée pendant laquelle l'indicateur de pages reste visible après un balayage.
     static let pageIndicatorLinger: Duration = .milliseconds(1200)
+    /// Ressort de l'indicateur de pages : la pastille glisse d'une page à l'autre avec un léger rebond.
+    static let pageIndicatorSpring = Animation.spring(duration: 0.4, bounce: 0.3)
     /// Temps laissé à l'animation de repli avant de réduire la fenêtre.
     @MainActor static var shrinkDelay: Duration {
         .milliseconds(500) * animationSlowdown

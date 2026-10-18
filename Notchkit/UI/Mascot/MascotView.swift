@@ -100,6 +100,8 @@ struct MascotView: View {
     var blink: CGFloat = 0
     /// Hauteur de référence du personnage.
     var size: CGFloat = 64
+    /// Pastille d'état (points, « ! », coche…) : masquée dans l'encoche repliée, trop petite pour la lire.
+    var showsBadge = true
 
     var body: some View {
         ZStack {
@@ -118,8 +120,10 @@ struct MascotView: View {
         }
         .frame(width: size * 1.5, height: size * 1.3)
         .overlay(alignment: .topTrailing) {
-            MoodBadge(mood: mood, size: size * 0.32)
-                .offset(x: -size * 0.02, y: size * 0.08)
+            if showsBadge {
+                MoodBadge(mood: mood, size: size * 0.32)
+                    .offset(x: -size * 0.02, y: size * 0.08)
+            }
         }
     }
 }

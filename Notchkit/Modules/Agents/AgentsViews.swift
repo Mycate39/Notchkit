@@ -22,10 +22,10 @@ struct AgentsHomeView: View {
     var body: some View {
         TimelineView(.periodic(from: .now, by: 1)) { context in
             let celebrating = (module.celebrateUntil ?? .distantPast) > context.date
-            HStack(spacing: 12) {
+            HStack(spacing: 10) {
                 identity(celebrating: celebrating)
-                    .frame(width: 236, alignment: .leading)
-                VStack(alignment: .trailing, spacing: 6) {
+                    .frame(width: 214, alignment: .leading)
+                VStack(alignment: .trailing, spacing: 5) {
                     HStack(spacing: 6) {
                         if tab == .agents && sessions.count > 1 { sessionPills }
                         Spacer(minLength: 0)
@@ -46,7 +46,9 @@ struct AgentsHomeView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 }
             }
-            .padding(12)
+            // Marges serrées : en taille Compacte, la page n'a qu'environ 120 points de haut.
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
         }
         // Un agent attend une réponse : on revient au travail des agents.
         .onChange(of: session?.state == .waitingForPermission) { _, waiting in
@@ -82,21 +84,21 @@ struct AgentsHomeView: View {
     // MARK: Mascotte, session et étapes
 
     private func identity(celebrating: Bool) -> some View {
-        HStack(alignment: .center, spacing: 10) {
+        HStack(alignment: .center, spacing: 8) {
             LiveMascotView(design: module.mascot,
                            mood: showsChat && module.chat.isResponding ? .working : AgentsModule.mood(for: session, celebrating: celebrating),
-                           size: 50)
-                .frame(width: 80, height: 78)
-            VStack(alignment: .leading, spacing: 2) {
+                           size: 42)
+                .frame(width: 66, height: 62)
+            VStack(alignment: .leading, spacing: 1) {
                 if let session {
                     Text(session.projectName ?? String(localized: "Session"))
-                        .font(.system(size: 15, weight: .bold))
+                        .font(.system(size: 14, weight: .bold))
                         .lineLimit(1)
                     Text(verbatim: "Claude Code")
-                        .font(.system(size: 11, weight: .medium))
+                        .font(.system(size: 10.5, weight: .medium))
                         .foregroundStyle(.white.opacity(0.5))
                     AgentPhaseList(session: session)
-                        .padding(.top, 5)
+                        .padding(.top, 3)
                 } else {
                     Text("Aucun agent au travail")
                         .font(.system(size: 14, weight: .semibold))

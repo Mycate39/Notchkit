@@ -1,246 +1,6 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
-    "Services" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Services"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Services"
-          }
-        }
-      }
-    },
-    "Actualiser" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Refresh"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Actualiser"
-          }
-        }
-      }
-    },
-    "Aucune pull request ouverte. Tout est à jour." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No open pull requests. All caught up."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucune pull request ouverte. Tout est à jour."
-          }
-        }
-      }
-    },
-    "Activez le widget GitHub (Réglages > Widgets) et ajoutez votre jeton pour suivre vos pull requests ici." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Turn on the GitHub widget (Settings > Widgets) and add your token to follow your pull requests here."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activez le widget GitHub (Réglages > Widgets) et ajoutez votre jeton pour suivre vos pull requests ici."
-          }
-        }
-      }
-    },
-    "Ajoutez un jeton Vercel dans les réglages du widget Agents pour suivre vos déploiements." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add a Vercel token in the Agents widget settings to follow your deployments."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajoutez un jeton Vercel dans les réglages du widget Agents pour suivre vos déploiements."
-          }
-        }
-      }
-    },
-    "Aucun déploiement récent." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No recent deployments."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucun déploiement récent."
-          }
-        }
-      }
-    },
-    "Ajoutez une clé Stripe à accès restreint (lecture seule) dans les réglages du widget Agents." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add a restricted (read-only) Stripe key in the Agents widget settings."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajoutez une clé Stripe à accès restreint (lecture seule) dans les réglages du widget Agents."
-          }
-        }
-      }
-    },
-    "Encaissé aujourd'hui" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Collected today"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Encaissé aujourd'hui"
-          }
-        }
-      }
-    },
-    "Client" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Customer"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Client"
-          }
-        }
-      }
-    },
-    "Jeton Vercel" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vercel token"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Jeton Vercel"
-          }
-        }
-      }
-    },
-    "Clé Stripe" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stripe key"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clé Stripe"
-          }
-        }
-      }
-    },
-    "Services en lecture seule : préférez une clé Stripe à accès restreint (lecture des paiements). GitHub utilise le jeton de son propre widget." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Read-only services: prefer a restricted Stripe key (read payments). GitHub uses its own widget's token."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Services en lecture seule : préférez une clé Stripe à accès restreint (lecture des paiements). GitHub utilise le jeton de son propre widget."
-          }
-        }
-      }
-    },
-    "Clé refusée : vérifiez-la dans les réglages." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Key rejected: check it in Settings."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clé refusée : vérifiez-la dans les réglages."
-          }
-        }
-      }
-    },
-    "Erreur %lld du service." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Service error %lld."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erreur %lld du service."
-          }
-        }
-      }
-    },
-    "Service injoignable." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Service unreachable."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Service injoignable."
-          }
-        }
-      }
-    },
     "" : {
 
     },
@@ -986,6 +746,22 @@
         }
       }
     },
+    "Activez le widget GitHub (Réglages > Widgets) et ajoutez votre jeton pour suivre vos pull requests ici." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn on the GitHub widget (Settings > Widgets) and add your token to follow your pull requests here."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activez le widget GitHub (Réglages > Widgets) et ajoutez votre jeton pour suivre vos pull requests ici."
+          }
+        }
+      }
+    },
     "Activité de Claude Code en direct, messages depuis l'encoche et utilisation estimée." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1015,6 +791,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Activités live"
+          }
+        }
+      }
+    },
+    "Actualiser" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Refresh"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualiser"
           }
         }
       }
@@ -1465,6 +1257,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ajoutez un jeton d'accès personnel GitHub dans les réglages du module."
+          }
+        }
+      }
+    },
+    "Ajoutez un jeton Vercel dans les réglages du widget Agents pour suivre vos déploiements." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add a Vercel token in the Agents widget settings to follow your deployments."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajoutez un jeton Vercel dans les réglages du widget Agents pour suivre vos déploiements."
+          }
+        }
+      }
+    },
+    "Ajoutez une clé Stripe à accès restreint (lecture seule) dans les réglages du widget Agents." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add a restricted (read-only) Stripe key in the Agents widget settings."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajoutez une clé Stripe à accès restreint (lecture seule) dans les réglages du widget Agents."
           }
         }
       }
@@ -2209,6 +2033,22 @@
         }
       }
     },
+    "Aucun déploiement récent." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No recent deployments."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun déploiement récent."
+          }
+        }
+      }
+    },
     "Aucun événement aujourd'hui ni demain" : {
       "localizations" : {
         "en" : {
@@ -2435,6 +2275,22 @@
         }
       }
     },
+    "Aucune pull request ouverte. Tout est à jour." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No open pull requests. All caught up."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune pull request ouverte. Tout est à jour."
+          }
+        }
+      }
+    },
     "Aucune session d'utilisation en cours" : {
       "localizations" : {
         "en" : {
@@ -2527,6 +2383,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Autorisation Accessibilité nécessaire"
+          }
+        }
+      }
+    },
+    "Autorisation demandée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permission requested"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorisation demandée"
           }
         }
       }
@@ -3417,6 +3289,7 @@
       }
     },
     "Claude demande l'autorisation" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3524,6 +3397,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Clé API manquante : ajoutez-la dans les réglages de l'assistant."
+          }
+        }
+      }
+    },
+    "Clé refusée : vérifiez-la dans les réglages." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Key rejected: check it in Settings."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clé refusée : vérifiez-la dans les réglages."
+          }
+        }
+      }
+    },
+    "Clé Stripe" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stripe key"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clé Stripe"
+          }
+        }
+      }
+    },
+    "Client" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Customer"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Client"
           }
         }
       }
@@ -5131,6 +5052,22 @@
         }
       }
     },
+    "Encaissé aujourd'hui" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Collected today"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encaissé aujourd'hui"
+          }
+        }
+      }
+    },
     "Encore %@" : {
       "localizations" : {
         "en" : {
@@ -5255,6 +5192,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erreur %1$lld : %2$@"
+          }
+        }
+      }
+    },
+    "Erreur %lld du service." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Service error %lld."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur %lld du service."
           }
         }
       }
@@ -6428,6 +6381,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jeton refusé par GitHub. Vérifiez-le dans les réglages."
+          }
+        }
+      }
+    },
+    "Jeton Vercel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vercel token"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeton Vercel"
           }
         }
       }
@@ -10278,6 +10247,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Service"
+          }
+        }
+      }
+    },
+    "Service injoignable." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Service unreachable."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Service injoignable."
+          }
+        }
+      }
+    },
+    "Services" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Services"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Services"
+          }
+        }
+      }
+    },
+    "Services en lecture seule : préférez une clé Stripe à accès restreint (lecture des paiements). GitHub utilise le jeton de son propre widget." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read-only services: prefer a restricted Stripe key (read payments). GitHub uses its own widget's token."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Services en lecture seule : préférez une clé Stripe à accès restreint (lecture des paiements). GitHub utilise le jeton de son propre widget."
           }
         }
       }

@@ -168,7 +168,7 @@ final class ClaudeModule: NotchModule {
         switch transition {
         case .finished:
             if alertOnFinish && pendingMessages[event.sessionID]?.isEmpty != false {
-                context.presentAlert(ClaudeAlerts.finished())
+                context.presentAlert(ClaudeAlerts.finished(mascot: context.mascot()))
             }
             Task { await refreshUsage() }
         case .needsPermission, nil:
@@ -468,9 +468,15 @@ final class ClaudeModule: NotchModule {
 
     func compactLeading() -> AnyView? {
         guard let session = displayedSession, session.state != .finished else { return nil }
+        // La mascotte choisie remplace le logo de Claude, avec l'humeur de la session.
+        let mood: MascotMood = switch session.state {
+        case .working: .working
+        case .waitingForPermission: .waiting
+        case .awaitingReply, .finished: .happy
+        }
         return AnyView(
-            ClaudeSparkView(isAnimating: session.state == .working)
-                .frame(width: 18, height: 18)
+            LiveMascotView(design: context.mascot(), mood: mood, size: 14, showsBadge: false)
+                .frame(width: 22, height: 18)
         )
     }
 
@@ -533,9 +539,10 @@ final class ClaudeModule: NotchModule {
 
 enum ClaudeAlerts {
     @MainActor
-    static func finished() -> NotchAlert {
+    static func finished(mascot: MascotDesign) -> NotchAlert {
         NotchAlert(
-            leading: AnyView(ClaudeSparkView(isAnimating: false).frame(width: 18, height: 18)),
+            // La mascotte saute de joie quand Claude a terminé.
+            leading: AnyView(LiveMascotView(design: mascot, mood: .happy, size: 14, showsBadge: false).frame(width: 22, height: 18)),
             trailing: AnyView(
                 Label("Terminé", systemImage: "checkmark")
                     .labelStyle(.iconOnly)

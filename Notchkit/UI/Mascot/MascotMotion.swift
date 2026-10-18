@@ -90,13 +90,14 @@ struct LiveMascotView: View {
     var mood: MascotMood = .idle
     var gaze: CGSize?
     var size: CGFloat = 64
+    var showsBadge = true
 
     @State private var moodStart = Date()
 
     var body: some View {
         TimelineView(.animation(minimumInterval: 1.0 / 60)) { context in
             let pose = MascotMotion.pose(at: context.date.timeIntervalSince(moodStart), mood: mood)
-            MascotPoseView(design: design, mood: mood, pose: pose, gaze: gaze, size: size)
+            MascotPoseView(design: design, mood: mood, pose: pose, gaze: gaze, size: size, showsBadge: showsBadge)
         }
         .onChange(of: mood) { moodStart = Date() }
     }
@@ -109,9 +110,10 @@ struct MascotPoseView: View {
     var pose: MascotPose
     var gaze: CGSize?
     var size: CGFloat
+    var showsBadge = true
 
     var body: some View {
-        MascotView(design: design, mood: mood, gaze: gaze ?? pose.gaze, blink: pose.blink, size: size)
+        MascotView(design: design, mood: mood, gaze: gaze ?? pose.gaze, blink: pose.blink, size: size, showsBadge: showsBadge)
             .scaleEffect(x: pose.scaleX, y: pose.scaleY, anchor: .bottom)
             .rotationEffect(.degrees(pose.tilt), anchor: .bottom)
             .offset(y: pose.lift * size)

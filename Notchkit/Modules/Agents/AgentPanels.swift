@@ -8,7 +8,7 @@ struct AgentPhaseList: View {
     let session: ClaudeSession
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 3) {
+        VStack(alignment: .leading, spacing: 1) {
             row(.read, title: "Lire", symbol: "doc.text")
             row(.edit, title: "Modifier", symbol: "pencil")
             row(.run, title: "Commande", symbol: "terminal")
@@ -43,10 +43,10 @@ struct AgentPhaseList: View {
                         .foregroundStyle(.white.opacity(0.3))
                 }
             }
-            .font(.system(size: 11, weight: .semibold))
-            .frame(width: 14, height: 14)
+            .font(.system(size: 10, weight: .semibold))
+            .frame(width: 13, height: 13)
             Text(title)
-                .font(.system(size: 11, weight: isCurrent ? .bold : .medium))
+                .font(.system(size: 10.5, weight: isCurrent ? .bold : .medium))
                 .foregroundStyle(.white.opacity(isCurrent ? 1 : isDone ? 0.75 : 0.35))
         }
     }
@@ -238,8 +238,9 @@ struct AgentTerminalPanel: View {
             Spacer(minLength: 0)
         }
         .padding(8)
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(Color.white.opacity(0.05), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
     }
 }
 
@@ -287,11 +288,11 @@ struct AgentDecisionPanel: View {
     let onTerminal: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 7) {
+        VStack(alignment: .leading, spacing: 5) {
             HStack(spacing: 6) {
                 Image(systemName: "hand.raised.fill").foregroundStyle(StandBy.amber)
-                Text("Claude demande l'autorisation")
-                    .font(.system(size: 12, weight: .bold))
+                Text("Autorisation demandée")
+                    .font(.system(size: 11.5, weight: .bold))
                     .foregroundStyle(StandBy.amber)
                 Spacer(minLength: 0)
                 Button("Terminal", action: onTerminal)
@@ -300,31 +301,35 @@ struct AgentDecisionPanel: View {
                     .foregroundStyle(.white.opacity(0.5))
                     .help("Répondre dans le terminal de Claude Code")
             }
-            Label(prompt.text, systemImage: prompt.symbol)
-                .font(.system(size: 12, weight: .semibold))
-                .lineLimit(1)
-            if let detail = prompt.detail {
-                Text(detail)
-                    .font(.system(size: 10.5, design: .monospaced))
-                    .foregroundStyle(.white.opacity(0.6))
+            // Action et détail sur une seule ligne ; le chemin complet reste dans l'info-bulle.
+            HStack(spacing: 6) {
+                Label(prompt.text, systemImage: prompt.symbol)
+                    .font(.system(size: 11.5, weight: .semibold))
                     .lineLimit(1)
-                    .truncationMode(.middle)
+                    .layoutPriority(1)
+                if let detail = prompt.detail {
+                    Text(detail)
+                        .font(.system(size: 10, design: .monospaced))
+                        .foregroundStyle(.white.opacity(0.5))
+                        .lineLimit(1)
+                        .truncationMode(.head)
+                        .help(detail)
+                }
             }
-            HStack(spacing: 8) {
+            HStack(spacing: 6) {
                 Button { onDecide(true, false) } label: { Label("Autoriser", systemImage: "checkmark") }
-                    .buttonStyle(.standBy(.regular, active: true))
+                    .buttonStyle(.standBy(.small, active: true))
                 if prompt.canAlwaysAllow {
                     Button { onDecide(true, true) } label: { Text("Toujours") }
-                        .buttonStyle(.standBy(.regular))
+                        .buttonStyle(.standBy(.small))
                         .help("Autoriser et ne plus demander pour cette action")
                 }
                 Button { onDecide(false, false) } label: { Label("Refuser", systemImage: "xmark") }
-                    .buttonStyle(.standBy(.regular))
+                    .buttonStyle(.standBy(.small))
                 Spacer(minLength: 0)
             }
-            Spacer(minLength: 0)
         }
-        .padding(10)
+        .padding(8)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(StandBy.amber.opacity(0.1), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
         .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).strokeBorder(StandBy.amber.opacity(0.35), lineWidth: 1))
@@ -344,7 +349,7 @@ struct AgentQuestionPanel: View {
     private var question: ClaudeQuestionPrompt.Question { prompt.questions[min(index, prompt.questions.count - 1)] }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 5) {
             HStack(spacing: 6) {
                 Image(systemName: "questionmark.bubble.fill").foregroundStyle(StandBy.amber)
                 Text(question.header ?? String(localized: "Question"))
@@ -363,8 +368,9 @@ struct AgentQuestionPanel: View {
                     .help("Répondre dans le terminal de Claude Code")
             }
             Text(question.question)
-                .font(.system(size: 12, weight: .semibold))
-                .lineLimit(2)
+                .font(.system(size: 11.5, weight: .semibold))
+                .lineLimit(1)
+                .help(question.question)
             HStack(spacing: 6) {
                 ForEach(question.options.prefix(4), id: \.label) { option in
                     let chosen = selections[question.question, default: []].contains(option.label)
@@ -389,9 +395,8 @@ struct AgentQuestionPanel: View {
                         .help("Valider")
                 }
             }
-            Spacer(minLength: 0)
         }
-        .padding(10)
+        .padding(8)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color.white.opacity(0.05), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
         .animation(NotchLayout.pageIndicatorSpring, value: index)

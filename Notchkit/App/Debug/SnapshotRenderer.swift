@@ -250,7 +250,7 @@ enum SnapshotRenderer {
         for (name, sessions) in [("vide", [ClaudeSession]()), ("travail", [working]), ("commande", [testing]), ("attente", [waiting, working]), ("question", [asking])] {
             agents.previewSessions = sessions
             save(AgentsHomeView(module: agents)
-                    .frame(width: 740, height: 150)
+                    .frame(width: 508, height: 123)
                     .notchCard(cornerRadius: 16)
                     .padding(18)
                     .background(.black)

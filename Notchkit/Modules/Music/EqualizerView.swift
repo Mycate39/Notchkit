@@ -40,6 +40,9 @@ final class EqualizerNSView: NSView {
     private let durations: [CFTimeInterval] = [0.46, 0.62, 0.39, 0.54, 0.43, 0.58, 0.36]
     private static let restingScale: CGFloat = 0.3
     private static let animationKey = "equalizer"
+    /// Les barres changent de hauteur (et non d'échelle) : un étirement vertical aplatirait
+    /// leurs bouts arrondis.
+    private static let heightKeyPath = "bounds.size.height"
 
     private weak var monitor: AudioSpectrumMonitor?
     private var subscription: UUID?
@@ -50,6 +53,9 @@ final class EqualizerNSView: NSView {
     private var spacingRatio: CGFloat = 0.5
     /// Hauteur maximale de chaque barre (1 partout, sauf en forme de cloche).
     private var maxScales: [CGFloat] = Array(repeating: 1, count: SpectrumAnalyzer.defaultBandCount)
+    /// Hauteur actuelle de chaque barre, relative à la hauteur de la vue (valeur du modèle, hors animation en boucle).
+    private var scales: [CGFloat] = Array(repeating: restingScale, count: SpectrumAnalyzer.defaultBandCount)
+    private var barWidth: CGFloat = 0
 
     var barColor: NSColor = .white {
         didSet { bars.forEach { $0.backgroundColor = barColor.cgColor } }
@@ -62,7 +68,6 @@ final class EqualizerNSView: NSView {
             bar.backgroundColor = barColor.cgColor
             // Les barres grandissent depuis le bas.
             bar.anchorPoint = CGPoint(x: 0.5, y: 0)
-            bar.transform = CATransform3DMakeScale(1, Self.restingScale, 1)
             layer?.addSublayer(bar)
         }
     }
@@ -81,6 +86,8 @@ final class EqualizerNSView: NSView {
         guard spacingRatio != self.spacingRatio || scales != maxScales else { return }
         self.spacingRatio = spacingRatio
         maxScales = scales
+        // Au repos, les barres suivent aussi la forme de cloche.
+        if !isAnimating { self.scales = scales.map { $0 * Self.restingScale } }
         needsLayout = true
         if isAnimating && !isLive {
             bars.forEach { $0.removeAnimation(forKey: Self.animationKey) }
@@ -94,17 +101,28 @@ final class EqualizerNSView: NSView {
         // count × largeur + (count − 1) × espace = largeur totale, avec espace = ratio × largeur.
         let width = bounds.width / (count + (count - 1) * spacingRatio)
         let spacing = width * spacingRatio
+        barWidth = width
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         for (index, bar) in bars.enumerated() {
             // En forme de cloche, les barres grandissent depuis le centre ; sinon depuis le bas.
             let centered = maxScales.contains { $0 < 1 }
             bar.anchorPoint = CGPoint(x: 0.5, y: centered ? 0.5 : 0)
-            bar.bounds = CGRect(x: 0, y: 0, width: width, height: bounds.height)
+            bar.bounds = CGRect(x: 0, y: 0, width: width, height: height(scales[index]))
             bar.position = CGPoint(x: CGFloat(index) * (width + spacing) + width / 2, y: centered ? bounds.midY : 0)
             bar.cornerRadius = width / 2
         }
         CATransaction.commit()
+        // Les animations en boucle portent des hauteurs absolues : on les relance à la nouvelle taille.
+        if isAnimating && !isLive {
+            bars.forEach { $0.removeAnimation(forKey: Self.animationKey) }
+            startLoopAnimations(true)
+        }
+    }
+
+    /// Hauteur d'une barre (jamais moins que sa largeur, pour garder deux bouts ronds).
+    private func height(_ scale: CGFloat) -> CGFloat {
+        max(barWidth, bounds.height * scale)
     }
 
     /// S'abonne (ou se désabonne) aux niveaux en direct.
@@ -139,7 +157,8 @@ final class EqualizerNSView: NSView {
         for (index, bar) in bars.enumerated() {
             let level = CGFloat(index < levels.count ? levels[index] : 0)
             let top = maxScales[index]
-            bar.transform = CATransform3DMakeScale(1, Self.restingScale * top + (top - Self.restingScale * top) * level, 1)
+            scales[index] = Self.restingScale * top + (top - Self.restingScale * top) * level
+            bar.bounds.size.height = height(scales[index])
         }
         CATransaction.commit()
     }
@@ -152,7 +171,8 @@ final class EqualizerNSView: NSView {
             CATransaction.begin()
             CATransaction.setDisableActions(true)
             for (index, bar) in bars.enumerated() {
-                bar.transform = CATransform3DMakeScale(1, Self.restingScale * maxScales[index], 1)
+                scales[index] = Self.restingScale * maxScales[index]
+                bar.bounds.size.height = height(scales[index])
             }
             CATransaction.commit()
         }
@@ -163,9 +183,9 @@ final class EqualizerNSView: NSView {
         for (index, bar) in bars.enumerated() {
             if animating {
                 guard bar.animation(forKey: Self.animationKey) == nil else { continue }
-                let animation = CABasicAnimation(keyPath: "transform.scale.y")
-                animation.fromValue = Self.restingScale * maxScales[index]
-                animation.toValue = maxScales[index]
+                let animation = CABasicAnimation(keyPath: Self.heightKeyPath)
+                animation.fromValue = height(Self.restingScale * maxScales[index])
+                animation.toValue = height(maxScales[index])
                 animation.duration = durations[index % durations.count]
                 animation.autoreverses = true
                 animation.repeatCount = .infinity

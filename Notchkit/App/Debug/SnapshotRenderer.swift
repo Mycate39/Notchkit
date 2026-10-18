@@ -207,6 +207,16 @@ enum SnapshotRenderer {
                 .background(Color(nsColor: .windowBackgroundColor)),
              to: directory.appendingPathComponent("reglages-disposition.png"))
 
+        // Égaliseur (vue AppKit) : agrandi pour vérifier les bouts arrondis des barres.
+        saveWindow(HStack(spacing: 40) {
+                EqualizerView(isAnimating: false, monitor: nil, color: .white).frame(width: 96, height: 72)
+                EqualizerView(isAnimating: false, monitor: nil, color: .systemPink, bellShaped: true).frame(width: 96, height: 72)
+            }
+            .padding(30)
+            .background(.black),
+                   size: CGSize(width: 312, height: 132),
+                   to: directory.appendingPathComponent("egaliseur.png"))
+
         // Fenêtre de réglages, onglet Widgets puis page d'un module (contrôles AppKit : rendu en fenêtre).
         let router = SettingsRouter()
         for (tab, name) in [(SettingsTab.widgets, "reglages-widgets"), (.module(MusicModule.descriptor.id), "reglages-widget-musique")] {

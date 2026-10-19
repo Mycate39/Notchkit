@@ -239,6 +239,17 @@ func withClaudeModule(_ body: (ClaudeModule) throws -> Void) rethrows {
 }
 
 @MainActor
+struct ClaudeWidgetLinkTests {
+    @Test func activiteDeClaudeOuvreLaPageAgents() {
+        withClaudeModule { module in
+            #expect(module.widgetModuleID == AgentsModule.descriptor.id)
+        }
+        let agents = AgentsModule(context: ModuleContext(presentAlert: { _ in }, openSettings: {}, holdExpanded: { _ in }))
+        #expect(agents.widgetModuleID == agents.moduleID)
+    }
+}
+
+@MainActor
 struct ClaudeMessageDeliveryTests {
     @Test func messageRemisALaProchaineAction() throws {
         try withClaudeModule { module in

@@ -321,18 +321,19 @@ private struct ExpandedNotchView: View {
                 .padding(.top, 4)
         }
         .onAppear {
-            // Bulle cliquée : on ouvre la page de son module.
+            // Bulle cliquée : on ouvre la page de son widget (ex. Claude Code → page Agents).
             if let requested = viewModel.requestedModuleID {
                 viewModel.requestedModuleID = nil
-                if let page = pages.first(where: { $0.modules.contains { $0.id == requested } }) {
+                let target = viewModel.manager.module(for: requested)?.widgetModuleID ?? requested
+                if let page = pages.first(where: { $0.modules.contains { $0.id == target } }) {
                     viewModel.selectedPage = page.id
                     return
                 }
             }
             // Une activité est affichée dans l'encoche repliée (musique, minuteur, Claude…) :
-            // on ouvre directement sa page. Sinon, on reste sur la page où l'on était.
+            // on ouvre directement la page de son widget. Sinon, on reste sur la page où l'on était.
             if let module = viewModel.manager.compactModule, module.compactPriority >= .normal,
-               let page = pages.first(where: { $0.modules.contains { $0.id == module.moduleID } }) {
+               let page = pages.first(where: { $0.modules.contains { $0.id == module.widgetModuleID } }) {
                 viewModel.selectedPage = page.id
             }
         }

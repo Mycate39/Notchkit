@@ -470,6 +470,9 @@ final class ClaudeModule: NotchModule {
         AnyView(ClaudeExpandedView(module: self))
     }
 
+    /// Son activité s'ouvre sur la page Agents.
+    var widgetModuleID: String { AgentsModule.descriptor.id }
+
     /// Réglé depuis la page Agents (seule l'intégration Claude Code reste réglable).
     func settingsView() -> AnyView? { nil }
 }

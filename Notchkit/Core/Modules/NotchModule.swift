@@ -70,6 +70,9 @@ protocol NotchModule: AnyObject, Observable {
     func stop()
 
     /// Priorité actuelle en mode compact. `.none` = le module ne demande pas d'affichage.
+    /// Widget à ouvrir quand on déplie l'encoche pendant l'activité de ce module (lui-même par défaut ;
+    /// ex. Claude Code ouvre la page Agents).
+    var widgetModuleID: String { get }
     var compactPriority: ModulePriority { get }
 
     /// Contenu affiché à gauche de l'encoche quand elle est repliée.
@@ -94,6 +97,7 @@ protocol NotchModule: AnyObject, Observable {
 // Implémentations par défaut : un module n'implémente que ce dont il a besoin.
 extension NotchModule {
     var moduleID: String { Self.descriptor.id }
+    var widgetModuleID: String { Self.descriptor.id }
 
     var hasContextualContent: Bool { false }
     func start() {}

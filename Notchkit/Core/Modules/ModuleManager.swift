@@ -67,7 +67,7 @@ final class ModuleManager {
     /// puis ordre de l'utilisateur en cas d'égalité.
     var compactModule: (any NotchModule)? {
         var best: (any NotchModule)?
-        for module in activeModules where module.compactPriority > (best?.compactPriority ?? .none) {
+        for module in displayedModules where module.compactPriority > (best?.compactPriority ?? .none) {
             best = module
         }
         return best
@@ -77,7 +77,7 @@ final class ModuleManager {
     /// (une bulle, ou une pile qui se déroule au survol), de la plus importante à la moins importante.
     var secondaryCompactModules: [any NotchModule] {
         guard let primary = compactModule else { return [] }
-        let others = activeModules.filter {
+        let others = displayedModules.filter {
             $0.moduleID != primary.moduleID && $0.compactPriority >= .normal && $0.compactLeading() != nil
         }
         return Array(others.sorted { $0.compactPriority > $1.compactPriority }.prefix(NotchLayout.maxBubbles))
@@ -105,9 +105,17 @@ final class ModuleManager {
     /// de l'utilisateur, et s'affichent en dernière page quand ils ont du contenu.
     private(set) var contextualIDs: Set<String> = []
 
+    /// Modules qui tournent widget désactivé, seulement pour leurs animations (`backgroundEvents`).
+    private(set) var backgroundIDs: Set<String> = []
+
+    /// Modules qui peuvent s'afficher (cartes, activités repliées) : tous sauf ceux en arrière-plan.
+    private var displayedModules: [any NotchModule] {
+        activeModules.filter { !backgroundIDs.contains($0.moduleID) }
+    }
+
     /// Modules actifs qui ont une carte dans l'encoche dépliée (hors modules en contexte).
     private var widgetModules: [any NotchModule] {
-        activeModules.filter { type(of: $0).descriptor.providesWidget && !contextualIDs.contains($0.moduleID) }
+        displayedModules.filter { type(of: $0).descriptor.providesWidget && !contextualIDs.contains($0.moduleID) }
     }
 
     private var activeWeights: [String: CGFloat] {
@@ -219,13 +227,18 @@ final class ModuleManager {
     func reload() {
         var loaded: [any NotchModule] = []
         var contextual: Set<String> = []
+        var background: Set<String> = []
         for type in orderedTypes {
             let descriptor = type.descriptor
             let unlocked = entitlements.isUnlocked(descriptor)
-            let enabled = isEnabled(descriptor.id) && unlocked
+            // Un moteur (ex. Claude Code) suit le module qu'il sert.
+            let enabled = isEnabled(descriptor.companionOf ?? descriptor.id) && unlocked
             let inContext = !enabled && unlocked && descriptor.contextual
             if inContext { contextual.insert(descriptor.id) }
-            let shouldRun = enabled || inContext
+            // Widget désactivé : ses animations restent actives (le module tourne sans s'afficher).
+            let inBackground = !enabled && !inContext && unlocked && descriptor.backgroundEvents
+            if inBackground { background.insert(descriptor.id) }
+            let shouldRun = enabled || inContext || inBackground
 
             if shouldRun {
                 if let existing = instances[descriptor.id] {
@@ -241,6 +254,7 @@ final class ModuleManager {
             }
         }
         contextualIDs = contextual
+        backgroundIDs = background
         activeModules = loaded
     }
 

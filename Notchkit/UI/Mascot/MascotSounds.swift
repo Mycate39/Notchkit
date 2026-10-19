@@ -15,12 +15,6 @@ final class MascotSounds {
         case happy
         /// Erreur ou échec.
         case grumble
-        /// Message envoyé dans la discussion.
-        case send
-        /// Syllabe pendant que la mascotte « parle ».
-        case blip
-        /// Nouvel événement (paiement, déploiement prêt).
-        case coin
     }
 
     static let shared = MascotSounds()
@@ -32,16 +26,12 @@ final class MascotSounds {
     /// Hauteur globale des sons : les partitions sont transposées d'une quarte vers le grave.
     nonisolated static let pitch = 0.75
 
-    /// Écart minimal entre deux syllabes, pour un babillage lisible et pas une rafale.
-    static let blipInterval: TimeInterval = 0.09
-
     private let engine = AVAudioEngine()
     private var players: [AVAudioPlayerNode] = []
     private var nextPlayer = 0
     private var buffers: [Effect: [AVAudioPCMBuffer]] = [:]
     private let format = AVAudioFormat(standardFormatWithSampleRate: 44_100, channels: 1)!
     private var stopTask: Task<Void, Never>?
-    private var lastBlip = Date.distantPast
     private var isConfigured = false
 
     private init() {}
@@ -49,10 +39,6 @@ final class MascotSounds {
     /// Joue un effet (sans effet si les sons sont coupés ou pendant une exécution automatisée).
     func play(_ effect: Effect) {
         guard Self.isEnabled, Self.volume > 0, !AutomatedRun.isActive else { return }
-        if effect == .blip {
-            guard Date().timeIntervalSince(lastBlip) >= Self.blipInterval else { return }
-            lastBlip = Date()
-        }
         configureIfNeeded()
         guard let variants = buffers[effect], let buffer = variants.randomElement() else { return }
         do {
@@ -131,12 +117,6 @@ final class MascotSounds {
               Note(from: 1175, to: 1175, duration: 0.08, start: 0.16), Note(from: 1568, to: 1568, duration: 0.2, start: 0.24)]]
         case .grumble:
             [[Note(from: 220, to: 160, duration: 0.16, grit: 0.5), Note(from: 190, to: 120, duration: 0.2, start: 0.14, grit: 0.5)]]
-        case .send:
-            [[Note(from: 500, to: 1300, duration: 0.09, gain: 0.7, grit: 0)]]
-        case .blip:
-            [500.0, 560, 620, 680, 740].map { [Note(from: $0, to: $0 * 1.08, duration: 0.045, gain: 0.45, grit: 0.35)] }
-        case .coin:
-            [[Note(from: 988, to: 988, duration: 0.07, grit: 0.3), Note(from: 1319, to: 1319, duration: 0.28, start: 0.07, grit: 0.3)]]
         }
     }
 

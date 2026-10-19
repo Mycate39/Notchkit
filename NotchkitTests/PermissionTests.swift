@@ -34,12 +34,14 @@ struct SliderLayoutTests {
         #expect(NotchLayout.sliderHitHeight(for: 26) == 26)
     }
 
-    @Test func loupeResteDansLeRail() {
-        #expect(NotchLayout.sliderKnobOffset(fraction: 0, trackWidth: 200, knobWidth: 40) == 0)
-        #expect(NotchLayout.sliderKnobOffset(fraction: 1, trackWidth: 200, knobWidth: 40) == 160)
-        #expect(NotchLayout.sliderKnobOffset(fraction: 0.5, trackWidth: 200, knobWidth: 40) == 80)
+    @Test func pastilleResteDansLeRail() {
+        #expect(NotchLayout.sliderKnobCenter(fraction: 0, trackWidth: 200, knobWidth: 40) == 20)
+        #expect(NotchLayout.sliderKnobCenter(fraction: 1, trackWidth: 200, knobWidth: 40) == 180)
+        #expect(NotchLayout.sliderFraction(atX: 100, trackWidth: 200, knobWidth: 40) == 0.5)
+        #expect(NotchLayout.sliderFraction(atX: -10, trackWidth: 200, knobWidth: 40) == 0)
         let resting = NotchLayout.sliderKnobSize(for: 26, isDragging: false)
         let dragging = NotchLayout.sliderKnobSize(for: 26, isDragging: true)
         #expect(dragging.height > resting.height)
+        #expect(NotchLayout.sliderTrackThickness(for: 26) < resting.height)
     }
 }

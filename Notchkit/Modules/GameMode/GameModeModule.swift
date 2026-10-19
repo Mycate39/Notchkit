@@ -125,7 +125,6 @@ final class GameModeModule: NotchModule {
     // MARK: Encoche repliée
 
     var compactPriority: ModulePriority { isActive && showsStats ? .high : .none }
-    var compactSideWidth: CGFloat { 62 }
 
     func compactLeading() -> AnyView? {
         guard isActive, showsStats else { return nil }

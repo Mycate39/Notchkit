@@ -126,7 +126,7 @@ struct WidgetsSettingsView: View {
         NavigationStack(path: path) {
             Form {
                 ForEach(ModuleCategory.allCases) { category in
-                    let descriptors = manager.orderedDescriptors.filter { $0.category == category }
+                    let descriptors = manager.orderedDescriptors.filter { $0.category == category && $0.companionOf == nil }
                     if !descriptors.isEmpty {
                         Section(String(localized: category.title)) {
                             ForEach(descriptors) { descriptor in

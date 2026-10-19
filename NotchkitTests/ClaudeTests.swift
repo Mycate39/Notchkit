@@ -232,21 +232,16 @@ struct ClaudeUsageTests {
     }
 }
 
-/// Les tests tournent dans l'app : on restaure le réglage réel de l'utilisateur après chaque test.
+/// Module Claude neuf pour les tests.
 @MainActor
-func withReplyWindow(_ seconds: Int, _ body: (ClaudeModule) throws -> Void) rethrows {
-    let key = "module.claude.replyWindow"
-    let original = UserDefaults.standard.object(forKey: key)
-    defer { UserDefaults.standard.set(original, forKey: key) }
-    let module = ClaudeModule(context: ModuleContext(presentAlert: { _ in }, openSettings: {}, holdExpanded: { _ in }))
-    module.replyWindow = seconds
-    try body(module)
+func withClaudeModule(_ body: (ClaudeModule) throws -> Void) rethrows {
+    try body(ClaudeModule(context: ModuleContext(presentAlert: { _ in }, openSettings: {}, holdExpanded: { _ in })))
 }
 
 @MainActor
 struct ClaudeMessageDeliveryTests {
     @Test func messageRemisALaProchaineAction() throws {
-        try withReplyWindow(0) { module in
+        try withClaudeModule { module in
         _ = module.handle(["hook_event_name": "UserPromptSubmit", "session_id": "s", "prompt": "Travaille"])
         module.send("Utilise plutôt une liste")
 
@@ -261,7 +256,7 @@ struct ClaudeMessageDeliveryTests {
     }
 
     @Test func messageAuMomentDeLArretRelanceClaude() throws {
-        try withReplyWindow(0) { module in
+        try withClaudeModule { module in
         _ = module.handle(["hook_event_name": "UserPromptSubmit", "session_id": "s"])
         module.send("Ajoute aussi des tests")
 
@@ -273,52 +268,12 @@ struct ClaudeMessageDeliveryTests {
     }
 
     @Test func messageVidesOuSansSessionIgnores() {
-        withReplyWindow(0) { module in
+        withClaudeModule { module in
         module.send("Personne pour le recevoir")
         #expect(module.pendingMessages.isEmpty)
         _ = module.handle(["hook_event_name": "UserPromptSubmit", "session_id": "s"])
         module.send("   ")
         #expect(module.pendingMessages.isEmpty)
-        }
-    }
-}
-
-@MainActor
-struct ClaudeReplyWindowTests {
-    @Test func reponsePendantLaFenetreRelanceClaude() {
-        withReplyWindow(120) { module in
-        _ = module.handle(["hook_event_name": "UserPromptSubmit", "session_id": "s"])
-
-        var stopResponse: [String: Any]?
-        var answered = false
-        module.handle(["hook_event_name": "Stop", "session_id": "s"], reply: HookReply { stopResponse = $0; answered = true })
-        #expect(!answered, "le hook Stop doit rester ouvert")
-        #expect(module.displayedSession?.state == .awaitingReply)
-
-        module.send("Encore une chose")
-        #expect(answered)
-        #expect(stopResponse?["decision"] as? String == "block")
-        #expect(module.displayedSession?.state == .working)
-        }
-    }
-
-    @Test func fenetreDesactiveeRepondTouteSuite() {
-        withReplyWindow(0) { module in
-        _ = module.handle(["hook_event_name": "UserPromptSubmit", "session_id": "s"])
-        var answered = false
-        module.handle(["hook_event_name": "Stop", "session_id": "s"], reply: HookReply { _ in answered = true })
-        #expect(answered)
-        #expect(module.displayedSession?.state == .finished)
-        }
-    }
-
-    @Test func abandonParClaudeCodeFermeLaFenetre() {
-        withReplyWindow(120) { module in
-        _ = module.handle(["hook_event_name": "UserPromptSubmit", "session_id": "s"])
-        let reply = HookReply { _ in }
-        module.handle(["hook_event_name": "Stop", "session_id": "s"], reply: reply)
-        reply.clientClosed()
-        #expect(module.displayedSession?.state == .finished)
         }
     }
 }

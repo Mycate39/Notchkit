@@ -16,7 +16,8 @@ final class AirPodsModule: NotchModule {
         systemImage: "airpods.pro",
         category: .system,
         tier: .free,
-        defaultEnabled: true
+        defaultEnabled: true,
+        backgroundEvents: true
     )
 
     private(set) var devices: [HeadphoneDevice] = []

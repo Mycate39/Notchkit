@@ -9,7 +9,7 @@ final class AgentsModule: NotchModule {
     static let descriptor = ModuleDescriptor(
         id: "agents",
         name: "Agents",
-        summary: "Vos agents IA sur une page entière : la mascotte suit leur travail et l'encoche s'ouvre quand l'un d'eux attend votre réponse.",
+        summary: "Claude Code sur une page entière : la mascotte suit son travail, son activité s'affiche dans l'encoche repliée et l'encoche s'ouvre quand il attend votre réponse.",
         systemImage: "sparkles.rectangle.stack",
         category: .productivity,
         tier: .free,
@@ -28,48 +28,10 @@ final class AgentsModule: NotchModule {
     /// Fin de la petite fête après une tâche terminée.
     private(set) var celebrateUntil: Date?
 
-    /// Discussion avec la mascotte (Apple Intelligence ou Claude).
-    @ObservationIgnored private(set) var chat: MascotChat!
-    /// Services suivis (Vercel, Stripe ; GitHub vient de son module).
-    let services = AgentServices()
 
-    /// Module GitHub, s'il est actif.
-    var github: GitHubModule? { context.otherModule("github") as? GitHubModule }
 
     init(context: ModuleContext) {
         self.context = context
-        chat = MascotChat(
-            persona: { [weak self] in self?.persona ?? "" },
-            agentsSummary: { [weak self] in self?.statusSummary ?? "" }
-        )
-    }
-
-    /// Consignes données à Apple Intelligence : la mascotte, son ton, ses limites.
-    var persona: String {
-        """
-        Tu es \(mascot.name), la petite mascotte de Notchkit qui vit dans l'encoche du Mac. \
-        Tu es gentille, enjouée et brève : deux ou trois phrases au plus, sans listes ni Markdown, \
-        car tes réponses s'affichent dans un tout petit espace. Réponds dans la langue de l'utilisateur. \
-        Pour parler du travail des agents de code (Claude Code), utilise l'outil etatDesAgents. \
-        Si une question demande un long raisonnement ou du code, suggère de passer à Claude.
-        """
-    }
-
-    /// État des agents en quelques lignes (pour l'outil d'Apple Intelligence).
-    var statusSummary: String {
-        let sessions = sessions
-        guard !sessions.isEmpty else { return "Aucun agent de code n'est actif en ce moment." }
-        return sessions.prefix(5).map { session in
-            let state = switch session.state {
-            case .working: "au travail"
-            case .waitingForPermission: "attend l'accord de l'utilisateur"
-            case .awaitingReply, .finished: "a terminé"
-            }
-            var line = "Projet \(session.projectName ?? "sans nom") (Claude Code) : \(state)"
-            if let prompt = session.prompt { line += ". Demande : \(prompt)" }
-            if let action = session.currentAction { line += ". Action en cours : \(action.text)" }
-            return line
-        }.joined(separator: "\n")
     }
 
     /// Module Claude Code, s'il est actif (il reçoit les événements des hooks).
@@ -93,26 +55,10 @@ final class AgentsModule: NotchModule {
     func start() {
         isRunning = true
         observeSessions()
-        // Nouveau paiement : petite fête de la mascotte.
-        services.onNewCharge = { [weak self] in
-            self?.celebrateUntil = Date().addingTimeInterval(Self.celebrationDuration)
-            MascotSounds.shared.play(.coin)
-        }
-        // Déploiement Vercel terminé : fête s'il est en ligne, grognement s'il a échoué.
-        services.onDeploymentFinished = { [weak self] state in
-            if state == .ready {
-                self?.celebrateUntil = Date().addingTimeInterval(Self.celebrationDuration)
-                MascotSounds.shared.play(.coin)
-            } else if state == .error {
-                MascotSounds.shared.play(.grumble)
-            }
-        }
-        services.start()
     }
 
     func stop() {
         isRunning = false
-        services.stop()
     }
 
     /// Suit les sessions : nouvelle demande d'accord → l'encoche s'ouvre ; tâche finie → fête.
@@ -140,7 +86,7 @@ final class AgentsModule: NotchModule {
         }
         // Une session qui travaillait vient de s'arrêter (terminée ou en attente d'une suite).
         let stopped = knownWorking.subtracting(working).subtracting(waiting)
-        if sessions.contains(where: { stopped.contains($0.id) && ($0.state == .finished || $0.state == .awaitingReply) }) {
+        if sessions.contains(where: { stopped.contains($0.id) && $0.state == .finished }) {
             celebrateUntil = Date().addingTimeInterval(Self.celebrationDuration)
             MascotSounds.shared.play(.happy)
         }
@@ -167,7 +113,7 @@ final class AgentsModule: NotchModule {
     }
 
     func settingsView() -> AnyView? {
-        AnyView(AgentsSettingsView(chat: chat, services: services))
+        AnyView(AgentsSettingsView(claude: claude))
     }
 
     /// Garde l'encoche ouverte pendant la saisie d'un message.

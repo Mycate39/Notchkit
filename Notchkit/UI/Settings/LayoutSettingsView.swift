@@ -25,7 +25,7 @@ struct LayoutEditorContent: View {
     var body: some View {
         let pages = manager.layoutPageIDs
         let hidden = manager.orderedDescriptors.filter {
-            $0.providesWidget && !manager.isEnabled($0.id) && manager.isUnlocked($0)
+            $0.providesWidget && $0.companionOf == nil && !manager.isEnabled($0.id) && manager.isUnlocked($0)
         }
 
             VStack(alignment: .leading, spacing: 18) {

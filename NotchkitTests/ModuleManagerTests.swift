@@ -50,6 +50,19 @@ final class MockContextualModule: NotchModule {
     func expandedView() -> AnyView { AnyView(EmptyView()) }
 }
 
+@MainActor
+@Observable
+final class MockBackgroundModule: NotchModule {
+    static let descriptor = ModuleDescriptor(
+        id: "mock.background", name: "D", summary: "", systemImage: "d.circle",
+        category: .system, tier: .free, defaultEnabled: false, backgroundEvents: true
+    )
+    var compactPriority: ModulePriority = .high
+
+    init(context: ModuleContext) {}
+    func expandedView() -> AnyView { AnyView(EmptyView()) }
+}
+
 // MARK: - Tests
 
 @MainActor
@@ -358,6 +371,29 @@ struct ContextualModuleTests {
         #expect(manager.contextualIDs.isEmpty)
         #expect(manager.layoutPageIDs.flatMap { $0 }.contains("mock.contextual"))
         #expect(manager.pageIDs == manager.layoutPageIDs)
+    }
+}
+
+/// Animations système (branchement, AirPods, volume) actives même widget désactivé.
+@MainActor
+struct BackgroundEventsTests {
+    let settings = SettingsStore(defaults: UserDefaults(suiteName: "notchkit.tests.\(UUID().uuidString)")!)
+
+    @Test func widgetDesactiveTourneSansSAfficher() {
+        let manager = ModuleManager(settings: settings, entitlements: EntitlementManager(),
+                                    availableModules: [MockModuleA.self, MockBackgroundModule.self])
+        manager.reload()
+        // Il tourne (ses alertes restent possibles)…
+        #expect(manager.module(for: "mock.background") != nil)
+        #expect(manager.backgroundIDs == ["mock.background"])
+        // … mais n'a ni carte ni activité repliée, malgré sa priorité.
+        #expect(manager.pageIDs == [["mock.a"]])
+        #expect(manager.compactModule?.moduleID == "mock.a")
+
+        // Widget activé : il redevient un module ordinaire.
+        manager.enable("mock.background", atPage: 0, index: .max)
+        #expect(manager.backgroundIDs.isEmpty)
+        #expect(manager.compactModule?.moduleID == "mock.background")
     }
 }
 

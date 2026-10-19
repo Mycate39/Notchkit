@@ -31,16 +31,6 @@ enum MascotReaction: Int, CaseIterable, Sendable {
     var next: MascotReaction { MascotReaction(rawValue: (rawValue + 1) % Self.allCases.count) ?? .jump }
 }
 
-/// Attitude pendant une discussion avec la mascotte.
-enum MascotChatPhase: Equatable, Sendable {
-    /// L'utilisateur écrit : elle se penche vers le champ et hoche la tête.
-    case listening
-    /// Avant le premier mot de la réponse : regard en l'air, tête qui balance.
-    case thinking
-    /// La réponse s'affiche : petits rebonds au rythme des syllabes.
-    case talking
-}
-
 /// Mouvements de la mascotte : une fonction pure du temps écoulé dans l'humeur courante,
 /// pour des animations identiques dans l'app, les captures et les vidéos.
 enum MascotMotion {
@@ -96,36 +86,6 @@ enum MascotMotion {
         return pose
     }
 
-    /// Posture pendant une discussion (remplace les mouvements de l'humeur, garde respiration et clignements).
-    static func pose(at t: TimeInterval, chat phase: MascotChatPhase) -> MascotPose {
-        var pose = MascotPose()
-        let breath = sin(2 * .pi * t / breathPeriod)
-        pose.scaleY = 1 + 0.02 * breath
-        pose.scaleX = 1 - 0.01 * breath
-        pose.blink = blink(at: t)
-        switch phase {
-        case .listening:
-            // Penchée vers la saisie, petit hochement toutes les 1,4 s.
-            pose.tilt = -5 + 3 * hop(at: t, period: 1.4, duration: 0.35)
-            pose.lift = -0.03 * hop(at: t, period: 1.4, duration: 0.35)
-            pose.gaze = CGSize(width: 0.5, height: 0.9)
-        case .thinking:
-            // Regard en l'air qui hésite, tête qui balance lentement.
-            pose.tilt = 6 * sin(2 * .pi * t / 2.4)
-            pose.lift = -0.04 - 0.02 * sin(2 * .pi * t / 1.2)
-            pose.gaze = CGSize(width: -0.6 + 0.4 * sin(t * 1.3), height: -0.9)
-        case .talking:
-            // Syllabes : rebonds rapides et irréguliers, avec léger écrasement.
-            let beat = abs(sin(2 * .pi * t * 3.1)) * (0.6 + 0.4 * abs(sin(2 * .pi * t * 0.7)))
-            pose.lift = -0.05 * beat
-            pose.scaleY *= 1 + 0.05 * beat
-            pose.scaleX *= 1 - 0.03 * beat
-            pose.tilt = 2.5 * sin(2 * .pi * t * 0.9)
-            pose.gaze = CGSize(width: 0.3 * sin(t * 1.7), height: 0.1)
-        }
-        return pose
-    }
-
     /// Ajoute une réaction au clic à la posture, `t` secondes après le clic (sans effet une fois finie).
     static func apply(_ reaction: MascotReaction, at t: TimeInterval, to pose: inout MascotPose) {
         guard t >= 0, t < reaction.duration else { return }
@@ -174,15 +134,14 @@ enum MascotMotion {
 }
 
 /// Mascotte animée en continu (respiration, clignements, mouvements propres à l'humeur).
-/// `gaze` imposé (ex. suivre la souris) remplace le regard automatique. `chat` impose une attitude
-/// de discussion ; avec `reactsToTap`, un clic déclenche une réaction (et un son).
+/// `gaze` imposé (ex. suivre la souris) remplace le regard automatique ; avec `reactsToTap`,
+/// un clic déclenche une réaction (et un son).
 struct LiveMascotView: View {
     var design: MascotDesign
     var mood: MascotMood = .idle
     var gaze: CGSize?
     var size: CGFloat = 64
     var showsBadge = true
-    var chat: MascotChatPhase?
     var reactsToTap = false
 
     @State private var moodStart = Date()
@@ -192,7 +151,7 @@ struct LiveMascotView: View {
     var body: some View {
         TimelineView(.animation(minimumInterval: 1.0 / 60)) { context in
             let elapsed = context.date.timeIntervalSince(moodStart)
-            var pose = chat.map { MascotMotion.pose(at: elapsed, chat: $0) } ?? MascotMotion.pose(at: elapsed, mood: mood)
+            var pose = MascotMotion.pose(at: elapsed, mood: mood)
             let sinceTap = reactionStart.map { context.date.timeIntervalSince($0) }
             let isReacting = sinceTap.map { $0 < reaction.duration } ?? false
             if let sinceTap, isReacting { MascotMotion.apply(reaction, at: sinceTap, to: &pose) }
@@ -210,7 +169,6 @@ struct LiveMascotView: View {
         }
         .allowsHitTesting(reactsToTap)
         .onChange(of: mood) { moodStart = Date() }
-        .onChange(of: chat) { moodStart = Date() }
     }
 }
 

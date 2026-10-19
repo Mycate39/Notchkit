@@ -35,6 +35,9 @@ enum NotchLayout {
     /// Rayon des petits « congés » concaves qui raccordent l'encoche au bord de l'écran.
     static let earRadius: CGFloat = 8
     /// Largeur ajoutée de chaque côté de l'encoche pour le contenu compact.
+    /// Largeur de chaque côté pour une activité (musique, minuteur, Claude…) : la même pour toutes,
+    /// celle de la pochette et des barres de la musique. Les alertes gardent `compactSideWidth`.
+    static let activitySideWidth: CGFloat = 38
     static let compactSideWidth: CGFloat = 72
     /// Taille de l'encoche dépliée.
     /// Apparence en vigueur (mise à jour par l'AppDelegate quand les réglages changent ;
@@ -193,16 +196,29 @@ enum NotchLayout {
         max(barHeight, sliderMinimumHitHeight)
     }
 
-    /// Loupe de verre : un peu plus haute que la barre, et plus grosse pendant le glissement.
-    static func sliderKnobSize(for barHeight: CGFloat, isDragging: Bool) -> CGSize {
-        let height = isDragging ? min(barHeight + 10, barHeight * 1.6) : barHeight + 4
-        return CGSize(width: height * 1.6, height: height)
+    /// Épaisseur du rail (fin, comme sur iOS).
+    static func sliderTrackThickness(for height: CGFloat) -> CGFloat {
+        max(4, (height * 0.22).rounded())
     }
 
-    /// Position de la loupe : centrée sur le bout du remplissage, sans sortir du rail.
-    static func sliderKnobOffset(fraction: Double, trackWidth: CGFloat, knobWidth: CGFloat) -> CGFloat {
-        let centered = trackWidth * CGFloat(min(max(fraction, 0), 1)) - knobWidth / 2
-        return min(max(centered, 0), max(0, trackWidth - knobWidth))
+    /// Pastille : capsule blanche au repos, plus grosse pendant le glissement.
+    static func sliderKnobSize(for height: CGFloat, isDragging: Bool) -> CGSize {
+        let base = max(12, height * 0.82)
+        let knobHeight = isDragging ? base * 1.3 : base
+        return CGSize(width: knobHeight * 1.7, height: knobHeight)
+    }
+
+    /// Centre de la pastille : elle reste entière dans le rail, de bout en bout.
+    static func sliderKnobCenter(fraction: Double, trackWidth: CGFloat, knobWidth: CGFloat) -> CGFloat {
+        let travel = max(0, trackWidth - knobWidth)
+        return knobWidth / 2 + travel * CGFloat(min(max(fraction, 0), 1))
+    }
+
+    /// Valeur (0…1) à la position `x` (inverse de `sliderKnobCenter`).
+    static func sliderFraction(atX x: CGFloat, trackWidth: CGFloat, knobWidth: CGFloat) -> Double {
+        let travel = trackWidth - knobWidth
+        guard travel > 0 else { return x >= trackWidth / 2 ? 1 : 0 }
+        return Double(min(max((x - knobWidth / 2) / travel, 0), 1))
     }
     /// Temps laissé à l'animation de repli avant de réduire la fenêtre.
     @MainActor static var shrinkDelay: Duration {

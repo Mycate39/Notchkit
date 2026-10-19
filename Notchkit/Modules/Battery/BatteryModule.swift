@@ -13,7 +13,8 @@ final class BatteryModule: NotchModule {
         systemImage: "battery.75percent",
         category: .system,
         tier: .free,
-        defaultEnabled: true
+        defaultEnabled: true,
+        backgroundEvents: true
     )
 
     /// `nil` si le Mac n'a pas de batterie (Mac de bureau).
@@ -155,8 +156,6 @@ final class BatteryModule: NotchModule {
     /// Activité de charge affichée : le temps restant remplace le niveau à droite.
     private var showsChargeTime: Bool { chargingActivity && state?.status == .charging }
 
-    /// Juste la place de « 45 min » ou « 100 % ».
-    var compactSideWidth: CGFloat { 56 }
 
     func compactLeading() -> AnyView? {
         guard let state else { return nil }

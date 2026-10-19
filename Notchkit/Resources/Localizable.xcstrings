@@ -1,310 +1,6 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
-    "Déposer pour convertir" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Drop to convert"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Déposer pour convertir"
-          }
-        }
-      }
-    },
-    "Convertisseur" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Converter"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Convertisseur"
-          }
-        }
-      }
-    },
-    "Convertissez images, sons, vidéos et documents : déposez-les sur l'encoche puis choisissez le format." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Convert images, audio, videos and documents: drop them on the notch, then pick a format."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Convertissez images, sons, vidéos et documents : déposez-les sur l'encoche puis choisissez le format."
-          }
-        }
-      }
-    },
-    "Aucun de ces fichiers ne peut être converti." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "None of these files can be converted."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucun de ces fichiers ne peut être converti."
-          }
-        }
-      }
-    },
-    "Choisissez les fichiers à convertir" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Choose the files to convert"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Choisissez les fichiers à convertir"
-          }
-        }
-      }
-    },
-    "Fichier illisible ou format non pris en charge." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unreadable file or unsupported format."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fichier illisible ou format non pris en charge."
-          }
-        }
-      }
-    },
-    "La conversion a échoué." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The conversion failed."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La conversion a échoué."
-          }
-        }
-      }
-    },
-    "Effacer" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clear"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Effacer"
-          }
-        }
-      }
-    },
-    "Choisir des fichiers…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Choose Files…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Choisir des fichiers…"
-          }
-        }
-      }
-    },
-    "Glissez des fichiers sur l'encoche, sur « Convertir », ou cliquez sur +." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Drag files onto the notch and drop them on “Convert”, or click +."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Glissez des fichiers sur l'encoche, sur « Convertir », ou cliquez sur +."
-          }
-        }
-      }
-    },
-    "Déposez des fichiers ici" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Drop files here"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Déposez des fichiers ici"
-          }
-        }
-      }
-    },
-    "Conversion…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Converting…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Conversion…"
-          }
-        }
-      }
-    },
-    "%lld fichiers convertis" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld files converted"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld fichiers convertis"
-          }
-        }
-      }
-    },
-    "%lld échec(s)" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld failed"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld échec(s)"
-          }
-        }
-      }
-    },
-    "Convertir" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Convert"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Convertir"
-          }
-        }
-      }
-    },
-    "Sons de la mascotte" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mascot sounds"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sons de la mascotte"
-          }
-        }
-      }
-    },
-    "Au clic, quand un agent change d'humeur, pendant la discussion et à chaque nouvel événement (paiement, déploiement)." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "On click, when an agent's mood changes, while chatting and for each new event (payment, deployment)."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Au clic, quand un agent change d'humeur, pendant la discussion et à chaque nouvel événement (paiement, déploiement)."
-          }
-        }
-      }
-    },
-    "Écouter" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preview"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Écouter"
-          }
-        }
-      }
-    },
-    "Choisir…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Choose…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Choisir…"
-          }
-        }
-      }
-    },
     "" : {
 
     },
@@ -325,7 +21,42 @@
         }
       }
     },
+    ", en charge" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ", charging"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ", en charge"
+          }
+        }
+      }
+    },
+    ", environ %lld h %lld min d'autonomie" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ", about %lld h %lld min left"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ", environ %lld h %lld min d'autonomie"
+          }
+        }
+      }
+    },
     "·" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -374,6 +105,7 @@
       }
     },
     "#%lld échoue" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -454,6 +186,7 @@
       }
     },
     "%@ #%lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -481,6 +214,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ → %@"
+          }
+        }
+      }
+    },
+    "%@ est ouverte." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ is open."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ est ouverte."
           }
         }
       }
@@ -581,7 +331,42 @@
         }
       }
     },
+    "%lld %% de risque de pluie" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld%% chance of rain"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld %% de risque de pluie"
+          }
+        }
+      }
+    },
+    "%lld °C (ressenti %lld °C)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld °C (feels like %lld °C)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld °C (ressenti %lld °C)"
+          }
+        }
+      }
+    },
     "%lld à relire" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -630,6 +415,22 @@
         }
       }
     },
+    "%lld échec(s)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld failed"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld échec(s)"
+          }
+        }
+      }
+    },
     "%lld fichiers" : {
       "localizations" : {
         "en" : {
@@ -642,6 +443,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld fichiers"
+          }
+        }
+      }
+    },
+    "%lld fichiers convertis" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld files converted"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld fichiers convertis"
           }
         }
       }
@@ -729,6 +546,7 @@
       }
     },
     "↑%lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -745,6 +563,7 @@
       }
     },
     "↓%lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -889,6 +708,40 @@
         }
       }
     },
+    "Accès aux calendriers non autorisé (Réglages de Notchkit > Autorisations)." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calendar access not allowed (Notchkit Settings > Permissions)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accès aux calendriers non autorisé (Réglages de Notchkit > Autorisations)."
+          }
+        }
+      }
+    },
+    "Accès aux rappels non autorisé (Réglages de Notchkit > Autorisations)." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reminders access not allowed (Notchkit Settings > Permissions)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accès aux rappels non autorisé (Réglages de Notchkit > Autorisations)."
+          }
+        }
+      }
+    },
     "Accès requis" : {
       "localizations" : {
         "en" : {
@@ -987,6 +840,7 @@
       }
     },
     "Activez Apple Intelligence dans Réglages Système pour l'utiliser ici." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1051,6 +905,7 @@
       }
     },
     "Activez le widget GitHub (Réglages > Widgets) et ajoutez votre jeton pour suivre vos pull requests ici." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1100,6 +955,7 @@
       }
     },
     "Actualiser" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1229,6 +1085,7 @@
       }
     },
     "Afficher l'activité quand l'encoche est repliée" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1518,6 +1375,7 @@
       }
     },
     "Ajouter un dossier…" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1566,6 +1424,7 @@
       }
     },
     "Ajoutez un jeton d'accès personnel GitHub dans les réglages du module." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1582,6 +1441,7 @@
       }
     },
     "Ajoutez un jeton Vercel dans les réglages du widget Agents pour suivre vos déploiements." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1598,6 +1458,7 @@
       }
     },
     "Ajoutez une clé Stripe à accès restreint (lecture seule) dans les réglages du widget Agents." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1614,6 +1475,7 @@
       }
     },
     "Ajoutez votre clé API Claude dans les réglages du widget Agents pour discuter avec Claude." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1694,6 +1556,7 @@
       }
     },
     "Alerte quand Claude a terminé" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2082,6 +1945,7 @@
       }
     },
     "Apple Intelligence demande macOS 26 ou plus récent." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2098,6 +1962,7 @@
       }
     },
     "Apple Intelligence est disponible : gratuit, privé et hors ligne." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2114,6 +1979,7 @@
       }
     },
     "Apple Intelligence n'est pas disponible sur ce Mac : choisissez Claude dans les réglages du widget Agents." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2130,6 +1996,7 @@
       }
     },
     "Apple Intelligence n'est pas disponible sur ce Mac." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2146,6 +2013,7 @@
       }
     },
     "Apple Intelligence se prépare (téléchargement du modèle) : réessayez plus tard." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2210,6 +2078,7 @@
       }
     },
     "Après chaque réponse de Claude, vous pouvez encore lui écrire depuis l'encoche pendant ce délai : il repart aussitôt. Pendant ce temps, Claude Code l'affiche comme « en cours » (Échap pour arrêter)." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2305,6 +2174,39 @@
         }
       }
     },
+    "Au clic et quand un agent change d'humeur (au travail, en attente de votre réponse, tâche terminée)." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On click and when an agent's mood changes (working, waiting for your answer, task done)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Au clic et quand un agent change d'humeur (au travail, en attente de votre réponse, tâche terminée)."
+          }
+        }
+      }
+    },
+    "Au clic, quand un agent change d'humeur, pendant la discussion et à chaque nouvel événement (paiement, déploiement)." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On click, when an agent's mood changes, while chatting and for each new event (payment, deployment)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Au clic, quand un agent change d'humeur, pendant la discussion et à chaque nouvel événement (paiement, déploiement)."
+          }
+        }
+      }
+    },
     "Au travail" : {
       "localizations" : {
         "en" : {
@@ -2369,7 +2271,24 @@
         }
       }
     },
+    "Aucun de ces fichiers ne peut être converti." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None of these files can be converted."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun de ces fichiers ne peut être converti."
+          }
+        }
+      }
+    },
     "Aucun déploiement récent." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2397,6 +2316,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aucun événement aujourd'hui ni demain"
+          }
+        }
+      }
+    },
+    "Aucun événement sur cette période." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No events in this period."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun événement sur cette période."
           }
         }
       }
@@ -2446,6 +2382,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aucun module actif"
+          }
+        }
+      }
+    },
+    "Aucun raccourci." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No shortcuts."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun raccourci."
+          }
+        }
+      }
+    },
+    "Aucun rappel en attente." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No pending reminders."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun rappel en attente."
           }
         }
       }
@@ -2596,6 +2566,7 @@
       }
     },
     "Aucune modification" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2611,7 +2582,25 @@
         }
       }
     },
+    "Aucune musique en cours." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing is playing."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune musique en cours."
+          }
+        }
+      }
+    },
     "Aucune pull request ouverte." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2628,6 +2617,7 @@
       }
     },
     "Aucune pull request ouverte. Tout est à jour." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3094,6 +3084,23 @@
         }
       }
     },
+    "Batterie à %lld %%" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery at %lld%%"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batterie à %lld %%"
+          }
+        }
+      }
+    },
     "Bienvenue dans Notchkit" : {
       "localizations" : {
         "en" : {
@@ -3160,6 +3167,7 @@
       }
     },
     "Branche et fichiers modifiés du projet ouvert dans Xcode ou le Terminal, avec fetch et pull." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3267,6 +3275,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bureau"
+          }
+        }
+      }
+    },
+    "C'est fait." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "C'est fait."
           }
         }
       }
@@ -3399,7 +3424,25 @@
         }
       }
     },
+    "Ce Mac n'a pas de batterie." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This Mac has no battery."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce Mac n'a pas de batterie."
+          }
+        }
+      }
+    },
     "Ce Mac ne prend pas en charge Apple Intelligence." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3575,6 +3618,22 @@
         }
       }
     },
+    "Choisir des fichiers…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose Files…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisir des fichiers…"
+          }
+        }
+      }
+    },
     "Choisir une durée précise" : {
       "localizations" : {
         "en" : {
@@ -3603,6 +3662,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Choisir une ville…"
+          }
+        }
+      }
+    },
+    "Choisir…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisir…"
+          }
+        }
+      }
+    },
+    "Choisissez les fichiers à convertir" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose the files to convert"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez les fichiers à convertir"
           }
         }
       }
@@ -3735,6 +3826,22 @@
         }
       }
     },
+    "Claude Code sur une page entière : la mascotte suit son travail, son activité s'affiche dans l'encoche repliée et l'encoche s'ouvre quand il attend votre réponse." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code on a full page: the mascot follows its work, its activity shows in the collapsed notch, and the notch opens when it needs your answer."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code sur une page entière : la mascotte suit son travail, son activité s'affiche dans l'encoche repliée et l'encoche s'ouvre quand il attend votre réponse."
+          }
+        }
+      }
+    },
     "Claude Code, activités, presse-papiers et étagère." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -3834,6 +3941,7 @@
       }
     },
     "Clé API Claude" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3866,6 +3974,7 @@
       }
     },
     "Clé refusée : vérifiez-la dans les réglages." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3882,6 +3991,7 @@
       }
     },
     "Clé Stripe" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3898,6 +4008,7 @@
       }
     },
     "Client" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4297,6 +4408,22 @@
         }
       }
     },
+    "Conversion…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Converting…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conversion…"
+          }
+        }
+      }
+    },
     "Converti en HEVC après le téléchargement, pour QuickTime" : {
       "localizations" : {
         "en" : {
@@ -4309,6 +4436,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Converti en HEVC après le téléchargement, pour QuickTime"
+          }
+        }
+      }
+    },
+    "Convertir" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Convert"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Convertir"
           }
         }
       }
@@ -4341,6 +4484,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Convertir en MP4"
+          }
+        }
+      }
+    },
+    "Convertisseur" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Converter"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Convertisseur"
+          }
+        }
+      }
+    },
+    "Convertissez images, sons, vidéos et documents : déposez-les sur l'encoche puis choisissez le format." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Convert images, audio, videos and documents: drop them on the notch, then pick a format."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Convertissez images, sons, vidéos et documents : déposez-les sur l'encoche puis choisissez le format."
           }
         }
       }
@@ -4473,6 +4648,22 @@
         }
       }
     },
+    "Couleur des curseurs" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Slider color"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couleur des curseurs"
+          }
+        }
+      }
+    },
     "Couleur du fond" : {
       "localizations" : {
         "en" : {
@@ -4501,6 +4692,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Couleur personnalisée (onglets, barres de progression)"
+          }
+        }
+      }
+    },
+    "Couleur propre aux curseurs" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Custom slider color"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couleur propre aux curseurs"
           }
         }
       }
@@ -4555,6 +4762,7 @@
       }
     },
     "Créer un jeton sur GitHub" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4571,6 +4779,7 @@
       }
     },
     "Créez un jeton gratuit sur GitHub (Settings › Developer settings › Personal access tokens), avec l'accès en lecture aux dépôts. Il est gardé dans le trousseau de macOS." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4749,6 +4958,7 @@
       }
     },
     "Délai pour répondre depuis l'encoche" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4876,6 +5086,38 @@
         }
       }
     },
+    "Déposer pour convertir" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drop to convert"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déposer pour convertir"
+          }
+        }
+      }
+    },
+    "Déposez des fichiers ici" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drop files here"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déposez des fichiers ici"
+          }
+        }
+      }
+    },
     "Déposez des fichiers sur l'encoche" : {
       "localizations" : {
         "en" : {
@@ -4925,6 +5167,7 @@
       }
     },
     "Désactivé" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5085,6 +5328,7 @@
       }
     },
     "Discussion" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5101,6 +5345,7 @@
       }
     },
     "Discussion avec la mascotte" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5277,6 +5522,7 @@
       }
     },
     "Échec de la commande git (connexion, droits ou conflits)." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5320,6 +5566,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Économie d'énergie"
+          }
+        }
+      }
+    },
+    "Écouter" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preview"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écouter"
           }
         }
       }
@@ -5373,6 +5635,7 @@
       }
     },
     "Écrire à la mascotte…" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5400,6 +5663,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Écrit %@"
+          }
+        }
+      }
+    },
+    "Effacer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Effacer"
           }
         }
       }
@@ -5500,6 +5779,23 @@
         }
       }
     },
+    "En lecture : %@%@." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Playing: %@%@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En lecture : %@%@."
+          }
+        }
+      }
+    },
     "En mode encoche (réelle ou simulée), le fond reste toujours noir pour se fondre avec la découpe de l'écran : ce choix s'applique à la pastille flottante. « Verre » utilise le Liquid Glass de macOS 26." : {
       "localizations" : {
         "en" : {
@@ -5548,6 +5844,23 @@
         }
       }
     },
+    "En pause : %@%@." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paused: %@%@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En pause : %@%@."
+          }
+        }
+      }
+    },
     "En pause · %@" : {
       "localizations" : {
         "en" : {
@@ -5565,6 +5878,7 @@
       }
     },
     "Encaissé aujourd'hui" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5725,6 +6039,7 @@
       }
     },
     "Erreur %lld du service." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5983,6 +6298,7 @@
       }
     },
     "Fetch" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6076,6 +6392,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ffmpeg installé"
+          }
+        }
+      }
+    },
+    "Fichier illisible ou format non pris en charge." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unreadable file or unsupported format."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fichier illisible ou format non pris en charge."
           }
         }
       }
@@ -6274,6 +6606,7 @@
       }
     },
     "Git" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6290,6 +6623,7 @@
       }
     },
     "GitHub" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6306,6 +6640,7 @@
       }
     },
     "GitHub est injoignable pour le moment." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6349,6 +6684,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Glissez des fichiers sur l'encoche pour les garder ici."
+          }
+        }
+      }
+    },
+    "Glissez des fichiers sur l'encoche, sur « Convertir », ou cliquez sur +." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag files onto the notch and drop them on “Convert”, or click +."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Glissez des fichiers sur l'encoche, sur « Convertir », ou cliquez sur +."
           }
         }
       }
@@ -6642,6 +6993,23 @@
         }
       }
     },
+    "Impossible d'ajouter le rappel." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't add the reminder."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible d'ajouter le rappel."
+          }
+        }
+      }
+    },
     "Installation…" : {
       "localizations" : {
         "en" : {
@@ -6882,7 +7250,42 @@
         }
       }
     },
+    "Je n'ai pas accès à %@." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I don't have access to %@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je n'ai pas accès à %@."
+          }
+        }
+      }
+    },
+    "Je ne trouve pas l'app « %@ »." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I can't find the app “%@”."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je ne trouve pas l'app « %@ »."
+          }
+        }
+      }
+    },
     "Jeton d'accès personnel" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6899,6 +7302,7 @@
       }
     },
     "Jeton enregistré dans le trousseau" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6915,6 +7319,7 @@
       }
     },
     "Jeton refusé par GitHub. Vérifiez-le dans les réglages." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6931,6 +7336,7 @@
       }
     },
     "Jeton Vercel" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7140,6 +7546,7 @@
       }
     },
     "La clé reste dans le trousseau de votre Mac. Les messages envoyés à Claude passent par l'API d'Anthropic ; avec Apple Intelligence, rien ne quitte votre Mac." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7151,6 +7558,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "La clé reste dans le trousseau de votre Mac. Les messages envoyés à Claude passent par l'API d'Anthropic ; avec Apple Intelligence, rien ne quitte votre Mac."
+          }
+        }
+      }
+    },
+    "La conversion a échoué." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The conversion failed."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La conversion a échoué."
           }
         }
       }
@@ -7183,6 +7606,74 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "La liste des apps qui jouent du son demande macOS 14.2 ou plus récent."
+          }
+        }
+      }
+    },
+    "la météo (widget Météo désactivé)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "the weather (Weather widget turned off)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "la météo (widget Météo désactivé)"
+          }
+        }
+      }
+    },
+    "La météo n'est pas encore chargée." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The weather hasn't loaded yet."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La météo n'est pas encore chargée."
+          }
+        }
+      }
+    },
+    "la musique" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "music"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "la musique"
+          }
+        }
+      }
+    },
+    "la musique (widget Musique désactivé)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "music (Music widget turned off)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "la musique (widget Musique désactivé)"
           }
         }
       }
@@ -7365,6 +7856,7 @@
       }
     },
     "Le projet ouvert dans Xcode ou dans le Terminal est détecté automatiquement. Ajoutez ici d'autres dossiers à suivre." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7376,6 +7868,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le projet ouvert dans Xcode ou dans le Terminal est détecté automatiquement. Ajoutez ici d'autres dossiers à suivre."
+          }
+        }
+      }
+    },
+    "Le raccourci « %@ » a échoué ou n'existe pas." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The shortcut “%@” failed or doesn't exist."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le raccourci « %@ » a échoué ou n'existe pas."
           }
         }
       }
@@ -7585,6 +8094,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Les jeux sont reconnus à leur catégorie App Store et aux jeux Steam. Vous pouvez aussi l'activer ou le couper depuis l'icône de Notchkit dans la barre des menus."
+          }
+        }
+      }
+    },
+    "les minuteurs (widget Activités désactivé)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "timers (Live Activities widget turned off)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "les minuteurs (widget Activités désactivé)"
           }
         }
       }
@@ -7927,6 +8453,7 @@
       }
     },
     "Mes pull requests" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8086,6 +8613,23 @@
         }
       }
     },
+    "min %lld °C, max %lld °C" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "low %lld °C, high %lld °C"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "min %lld °C, max %lld °C"
+          }
+        }
+      }
+    },
     "Mini" : {
       "localizations" : {
         "en" : {
@@ -8114,6 +8658,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Minuteur"
+          }
+        }
+      }
+    },
+    "Minuteur de %lld min lancé." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min timer started."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minuteur de %lld min lancé."
           }
         }
       }
@@ -8439,7 +9000,25 @@
         }
       }
     },
+    "Moteur : %@" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Engine: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moteur : %@"
+          }
+        }
+      }
+    },
     "Moteur de la discussion" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8855,6 +9434,23 @@
         }
       }
     },
+    "Nous sommes le %@, il est %@ (fuseau %@)." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today is %@, it's %@ (time zone %@)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nous sommes le %@, il est %@ (fuseau %@)."
+          }
+        }
+      }
+    },
     "Nouveau rappel" : {
       "localizations" : {
         "en" : {
@@ -8888,6 +9484,7 @@
       }
     },
     "Nouvelle discussion" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9019,6 +9616,7 @@
       }
     },
     "Ouvrez un projet dans Xcode ou le Terminal, ou ajoutez un dossier dans les réglages." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9115,6 +9713,7 @@
       }
     },
     "Ouvrir dans le Terminal" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9211,6 +9810,7 @@
       }
     },
     "Ouvrir sur GitHub" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9254,6 +9854,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Page %1$lld, position %2$lld"
+          }
+        }
+      }
+    },
+    "Page ouverte." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Page opened."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Page ouverte."
           }
         }
       }
@@ -9739,6 +10356,7 @@
       }
     },
     "Posez une question : je réponds avec Apple Intelligence, directement sur votre Mac." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9755,6 +10373,7 @@
       }
     },
     "Posez une question à Claude." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9947,6 +10566,7 @@
       }
     },
     "Pull (avance rapide uniquement)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9963,6 +10583,7 @@
       }
     },
     "Pull requests" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10026,6 +10647,23 @@
         }
       }
     },
+    "Raccourci « %@ » lancé." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shortcut “%@” started."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raccourci « %@ » lancé."
+          }
+        }
+      }
+    },
     "Rapide" : {
       "localizations" : {
         "en" : {
@@ -10038,6 +10676,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rapide"
+          }
+        }
+      }
+    },
+    "Rappel « %@ » ajouté." : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reminder “%@” added."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rappel « %@ » ajouté."
           }
         }
       }
@@ -10507,6 +11162,7 @@
       }
     },
     "Répondez pour qu'il continue" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10683,6 +11339,7 @@
       }
     },
     "Retirer le jeton" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11070,6 +11727,7 @@
       }
     },
     "Service injoignable." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11086,6 +11744,7 @@
       }
     },
     "Services" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11102,6 +11761,7 @@
       }
     },
     "Services en lecture seule : préférez une clé Stripe à accès restreint (lecture des paiements). GitHub utilise le jeton de son propre widget." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11213,9 +11873,6 @@
         }
       }
     },
-    "sk-ant-…" : {
-
-    },
     "Son à la fin d'un minuteur" : {
       "localizations" : {
         "en" : {
@@ -11228,6 +11885,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Son à la fin d'un minuteur"
+          }
+        }
+      }
+    },
+    "Sons de la mascotte" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mascot sounds"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sons de la mascotte"
           }
         }
       }
@@ -11602,6 +12275,7 @@
       }
     },
     "Temps restant pour répondre à Claude depuis l'encoche" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -11650,6 +12324,7 @@
       }
     },
     "Terminé, à votre écoute" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -12418,6 +13093,22 @@
         }
       }
     },
+    "Volume, luminosité, volume des apps… Sinon, ils prennent la couleur d'accent." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volume, brightness, per-app volume… Otherwise they use the accent color."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volume, luminosité, volume des apps… Sinon, ils prennent la couleur d'accent."
+          }
+        }
+      }
+    },
     "Vos activités vivent dans l'encoche" : {
       "localizations" : {
         "en" : {
@@ -12435,6 +13126,7 @@
       }
     },
     "Vos agents IA sur une page entière : la mascotte suit leur travail et l'encoche s'ouvre quand l'un d'eux attend votre réponse." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -12467,6 +13159,7 @@
       }
     },
     "Vos pull requests et l'état de leurs vérifications, en direct." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

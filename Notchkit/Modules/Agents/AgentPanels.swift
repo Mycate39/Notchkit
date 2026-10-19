@@ -25,7 +25,7 @@ struct AgentPhaseList: View {
     }
 
     private var doneRow: some View {
-        let isDone = session.state == .finished || session.state == .awaitingReply
+        let isDone = session.state == .finished
         return line(title: "Terminé", symbol: "flag.checkered", isCurrent: false, isDone: isDone)
     }
 
@@ -74,11 +74,15 @@ struct AgentEditorPanel: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             tab
-            TimelineView(.animation(minimumInterval: 1.0 / 30, paused: !isTyping(at: .now))) { context in
-                let typed = Int(context.date.timeIntervalSince(editedAt) * Self.typingSpeed)
-                lines(typed: isLive ? typed : .max)
+            // Lignes entières (passage à la ligne) ; si le diff dépasse, le panneau défile.
+            ScrollView(.vertical) {
+                TimelineView(.animation(minimumInterval: 1.0 / 30, paused: !isTyping(at: .now))) { context in
+                    let typed = Int(context.date.timeIntervalSince(editedAt) * Self.typingSpeed)
+                    lines(typed: isLive ? typed : .max)
+                }
+                .padding(.vertical, 4)
             }
-            .padding(.vertical, 4)
+            .scrollIndicators(.never)
             Spacer(minLength: 0)
         }
         .background(Color.white.opacity(0.05), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
@@ -157,20 +161,17 @@ private struct DiffLine: View {
     var showsCursor = false
 
     var body: some View {
-        HStack(spacing: 6) {
+        HStack(alignment: .firstTextBaseline, spacing: 6) {
             Text(number.map(String.init) ?? "")
                 .foregroundStyle(.white.opacity(0.3))
                 .frame(width: 26, alignment: .trailing)
             Text(marker).foregroundStyle(color)
-            HStack(spacing: 0) {
-                Text(text)
-                    .strikethrough(struck, color: color.opacity(0.6))
-                    .foregroundStyle(struck ? color.opacity(0.75) : .white)
-                if showsCursor {
-                    Rectangle().fill(.white).frame(width: 6, height: 11)
-                }
-            }
-            .lineLimit(1)
+            // Curseur de frappe collé au dernier caractère, la ligne passe à la ligne si elle est longue.
+            (Text(text)
+                .strikethrough(struck, color: color.opacity(0.6))
+                .foregroundStyle(struck ? color.opacity(0.75) : .white)
+             + Text(verbatim: showsCursor ? "▌" : "").foregroundStyle(.white))
+                .fixedSize(horizontal: false, vertical: true)
             Spacer(minLength: 0)
         }
         .font(.system(size: 11, design: .monospaced))
@@ -223,20 +224,29 @@ struct AgentTerminalPanel: View {
     let isLive: Bool
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 2) {
-            HStack(spacing: 6) {
-                Text(verbatim: "$").foregroundStyle(Color(red: 0.3, green: 0.85, blue: 0.45))
-                Text(command.command).foregroundStyle(.white).lineLimit(1).truncationMode(.tail)
+        // Commande et sortie en entier, sans « … » : les lignes passent à la ligne et le panneau
+        // défile, en restant collé au bas (la sortie la plus récente) comme un vrai terminal.
+        ScrollView(.vertical) {
+            VStack(alignment: .leading, spacing: 2) {
+                HStack(alignment: .firstTextBaseline, spacing: 6) {
+                    Text(verbatim: "$").foregroundStyle(Color(red: 0.3, green: 0.85, blue: 0.45))
+                    Text(command.command)
+                        .foregroundStyle(.white)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .textSelection(.enabled)
+                }
+                .font(.system(size: 11, weight: .semibold, design: .monospaced))
+                ForEach(Array(command.output.suffix(20).enumerated()), id: \.offset) { _, line in
+                    Text(line)
+                        .font(.system(size: 10.5, design: .monospaced))
+                        .foregroundStyle(.white.opacity(0.6))
+                        .fixedSize(horizontal: false, vertical: true)
+                }
             }
-            .font(.system(size: 11, weight: .semibold, design: .monospaced))
-            ForEach(Array(command.output.suffix(4).enumerated()), id: \.offset) { _, line in
-                Text(line)
-                    .font(.system(size: 10.5, design: .monospaced))
-                    .foregroundStyle(.white.opacity(0.6))
-                    .lineLimit(1)
-            }
-            Spacer(minLength: 0)
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .scrollIndicators(.never)
+        .defaultScrollAnchor(.bottom)
         .padding(8)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(Color.white.opacity(0.05), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
@@ -301,21 +311,22 @@ struct AgentDecisionPanel: View {
                     .foregroundStyle(.white.opacity(0.5))
                     .help("Répondre dans le terminal de Claude Code")
             }
-            // Action et détail sur une seule ligne ; le chemin complet reste dans l'info-bulle.
-            HStack(spacing: 6) {
-                Label(prompt.text, systemImage: prompt.symbol)
-                    .font(.system(size: 11.5, weight: .semibold))
-                    .lineLimit(1)
-                    .layoutPriority(1)
-                if let detail = prompt.detail {
-                    Text(detail)
-                        .font(.system(size: 10, design: .monospaced))
-                        .foregroundStyle(.white.opacity(0.5))
-                        .lineLimit(1)
-                        .truncationMode(.head)
-                        .help(detail)
+            // Action et détail en entier (passage à la ligne, défilement si besoin).
+            ScrollView(.vertical) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Label(prompt.text, systemImage: prompt.symbol)
+                        .font(.system(size: 11.5, weight: .semibold))
+                        .fixedSize(horizontal: false, vertical: true)
+                    if let detail = prompt.detail {
+                        Text(detail)
+                            .font(.system(size: 10, design: .monospaced))
+                            .foregroundStyle(.white.opacity(0.5))
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
+            .scrollIndicators(.never)
             HStack(spacing: 6) {
                 Button { onDecide(true, false) } label: { Label("Autoriser", systemImage: "checkmark") }
                     .buttonStyle(.standBy(.small, active: true))
@@ -367,25 +378,26 @@ struct AgentQuestionPanel: View {
                     .foregroundStyle(.white.opacity(0.5))
                     .help("Répondre dans le terminal de Claude Code")
             }
-            Text(question.question)
-                .font(.system(size: 11.5, weight: .semibold))
-                .lineLimit(1)
-                .help(question.question)
-            HStack(spacing: 6) {
-                // Libellés entiers : s'ils ne tiennent pas, la rangée défile au trackpad.
-                ViewThatFits(in: .horizontal) {
-                    optionButtons
-                    ScrollView(.horizontal) { optionButtons }
-                        .scrollIndicators(.never)
-                        .frame(height: StandByButtonStyle.Size.small.height + 2)
-                }
-                if question.multiSelect {
-                    Button { next() } label: { Image(systemName: "arrow.right") }
-                        .buttonStyle(.standBy(.small, active: true, circle: true))
-                        .disabled(selections[question.question, default: []].isEmpty)
-                        .help("Valider")
+            // Question et choix en entier : le texte passe à la ligne, les choix aussi ;
+            // si le tout dépasse la hauteur de l'encoche, le panneau défile verticalement.
+            ScrollView(.vertical) {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text(question.question)
+                        .font(.system(size: 11.5, weight: .semibold))
+                        .fixedSize(horizontal: false, vertical: true)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    FlowLayout(spacing: 6, lineSpacing: 5) {
+                        optionButtons
+                        if question.multiSelect {
+                            Button { next() } label: { Image(systemName: "arrow.right") }
+                                .buttonStyle(.standBy(.small, active: true, circle: true))
+                                .disabled(selections[question.question, default: []].isEmpty)
+                                .help("Valider")
+                        }
+                    }
                 }
             }
+            .scrollIndicators(.never)
         }
         .padding(8)
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -393,8 +405,8 @@ struct AgentQuestionPanel: View {
         .animation(NotchLayout.pageIndicatorSpring, value: index)
     }
 
+    @ViewBuilder
     private var optionButtons: some View {
-        HStack(spacing: 6) {
             ForEach(question.options.prefix(4), id: \.label) { option in
                 let chosen = selections[question.question, default: []].contains(option.label)
                 Button {
@@ -410,7 +422,6 @@ struct AgentQuestionPanel: View {
                 .buttonStyle(.standBy(.small, active: chosen))
                 .help(option.description ?? option.label)
             }
-        }
     }
 
     private func choose(_ label: String) {

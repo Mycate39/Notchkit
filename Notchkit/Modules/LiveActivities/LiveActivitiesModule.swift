@@ -289,8 +289,6 @@ final class LiveActivitiesModule: NotchModule {
 
     var expandedWidthWeight: CGFloat { 2 }
 
-    /// Juste la place de « 1:23:45 » et « +2 ».
-    var compactSideWidth: CGFloat { 64 }
 
     func compactLeading() -> AnyView? {
         guard let activity = mostRelevant else { return nil }

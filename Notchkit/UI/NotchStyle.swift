@@ -83,31 +83,39 @@ private struct StandByButtonBody: View {
     let isActive: Bool
     let isCircle: Bool
     @Environment(\.isEnabled) private var isEnabled
+    @State private var isHovering = false
+
+    /// Bouton rond secondaire (« + », « × », réglages…) : le symbole seul, sans fond ni contour.
+    private var isBare: Bool { isCircle && !isActive }
 
     var body: some View {
         let pressed = configuration.isPressed
         let shape: AnyShape = isCircle ? AnyShape(Circle()) : AnyShape(Capsule())
         configuration.label
-            .font(.system(size: size.fontSize, weight: .semibold, design: .rounded))
+            .font(.system(size: isBare ? size.fontSize + 3 : size.fontSize, weight: .semibold, design: .rounded))
             .lineLimit(1)
-            .foregroundStyle(isActive ? AnyShapeStyle(StandBy.onAccent) : AnyShapeStyle(.white))
+            .foregroundStyle(isActive ? AnyShapeStyle(StandBy.onAccent)
+                                      : AnyShapeStyle(.white.opacity(isBare && !isHovering ? 0.8 : 1)))
             .padding(.horizontal, isCircle ? 0 : size.horizontalPadding)
             .frame(width: isCircle ? size.height : nil, height: size.height)
             .background {
                 if isActive {
                     shape.fill(.tint)
-                } else {
+                } else if !isBare {
                     shape.fill(StandBy.surface)
                 }
             }
             // Liseré clair en haut : la pilule paraît légèrement bombée.
             .overlay {
-                shape.stroke(
-                    LinearGradient(colors: [.white.opacity(isActive ? 0.25 : 0.1), .clear],
-                                   startPoint: .top, endPoint: .bottom),
-                    lineWidth: 0.5
-                )
+                if !isBare {
+                    shape.stroke(
+                        LinearGradient(colors: [.white.opacity(isActive ? 0.25 : 0.1), .clear],
+                                       startPoint: .top, endPoint: .bottom),
+                        lineWidth: 0.5
+                    )
+                }
             }
+            .onHover { isHovering = $0 }
             .contentShape(shape)
             .brightness(pressed ? (isActive ? -0.1 : 0.08) : 0)
             .scaleEffect(pressed ? 0.93 : 1)
@@ -143,9 +151,21 @@ struct StandByBar: View {
     }
 }
 
-/// Curseur StandBy : une pilule épaisse qu'on remplit en glissant, comme les curseurs du centre de contrôle
-/// de l'iPhone. Sur macOS 26, rail en Liquid Glass et loupe de verre au survol et pendant le glissement.
-/// La zone cliquable est plus haute que la barre (`NotchLayout.sliderHitHeight`) sans changer la mise en page.
+/// Couleur du remplissage des curseurs (`nil` = couleur d'accent).
+private struct SliderTintKey: EnvironmentKey {
+    static let defaultValue: Color? = nil
+}
+
+extension EnvironmentValues {
+    var sliderTint: Color? {
+        get { self[SliderTintKey.self] }
+        set { self[SliderTintKey.self] = newValue }
+    }
+}
+
+/// Curseur façon iOS 26 : rail fin, remplissage coloré jusqu'à une pastille blanche toujours visible,
+/// qui grossit et devient une loupe de verre pendant le glissement (Liquid Glass sur macOS 26).
+/// `height` est la hauteur occupée ; la zone cliquable fait au moins `NotchLayout.sliderMinimumHitHeight`.
 struct StandBySlider: View {
     @Binding var value: Double
     var height: CGFloat = 26
@@ -153,12 +173,12 @@ struct StandBySlider: View {
 
     @Environment(\.isEnabled) private var isEnabled
     @State private var isDragging = false
-    @State private var isHovering = false
 
     var body: some View {
         let hitHeight = NotchLayout.sliderHitHeight(for: height)
+        let knob = NotchLayout.sliderKnobSize(for: height, isDragging: false)
         GeometryReader { proxy in
-            track(width: proxy.size.width)
+            SliderTrack(value: value, height: height, width: proxy.size.width, isDragging: isDragging)
                 .frame(height: height)
                 .frame(maxHeight: .infinity)
                 .contentShape(Rectangle())
@@ -166,7 +186,7 @@ struct StandBySlider: View {
                     DragGesture(minimumDistance: 0)
                         .onChanged { drag in
                             isDragging = true
-                            set(drag.location.x / max(1, proxy.size.width))
+                            set(NotchLayout.sliderFraction(atX: drag.location.x, trackWidth: proxy.size.width, knobWidth: knob.width))
                         }
                         .onEnded { _ in isDragging = false }
                 )
@@ -174,9 +194,7 @@ struct StandBySlider: View {
         .frame(height: hitHeight)
         // Zone cliquable agrandie, encombrement inchangé.
         .padding(.vertical, -(hitHeight - height) / 2)
-        .onHover { isHovering = $0 }
-        .animation(.spring(duration: 0.25, bounce: 0.2), value: isDragging)
-        .animation(.spring(duration: 0.3, bounce: 0.15), value: isHovering)
+        .animation(.spring(duration: 0.3, bounce: 0.25), value: isDragging)
         .opacity(isEnabled ? 1 : 0.4)
         .accessibilityElement()
         .accessibilityValue(Text(value.formatted(.percent.precision(.fractionLength(0)))))
@@ -186,17 +204,6 @@ struct StandBySlider: View {
             case .decrement: set(value - 1.0 / 16)
             @unknown default: break
             }
-        }
-    }
-
-    @ViewBuilder
-    private func track(width: CGFloat) -> some View {
-        if #available(macOS 26.0, *) {
-            LiquidGlassTrack(value: value, height: height, width: width,
-                             showsKnob: isEnabled && (isDragging || isHovering), isDragging: isDragging)
-        } else {
-            StandByBar(value: value, height: height)
-                .scaleEffect(y: isDragging ? 1.08 : 1)
         }
     }
 
@@ -210,42 +217,51 @@ struct StandBySlider: View {
     }
 }
 
-/// Rail Liquid Glass : verre sombre, remplissage teinté avec reflet, loupe de verre au bout du remplissage.
-@available(macOS 26.0, *)
-struct LiquidGlassTrack: View {
+/// Rail du curseur : fin, remplissage coloré jusqu'au centre de la pastille.
+struct SliderTrack: View {
     var value: Double
     var height: CGFloat
     var width: CGFloat
-    var showsKnob: Bool
     var isDragging: Bool
+
+    @Environment(\.sliderTint) private var sliderTint
 
     var body: some View {
         let fraction = min(max(value, 0), 1)
+        let thickness = NotchLayout.sliderTrackThickness(for: height)
+        let rest = NotchLayout.sliderKnobSize(for: height, isDragging: false)
         let knob = NotchLayout.sliderKnobSize(for: height, isDragging: isDragging)
-        let fillWidth = fraction > 0 ? max(height, width * fraction) : 0
+        let center = NotchLayout.sliderKnobCenter(fraction: fraction, trackWidth: width, knobWidth: rest.width)
         ZStack(alignment: .leading) {
             Capsule()
-                .fill(.white.opacity(0.06))
-                .glassEffect(.regular.tint(.white.opacity(0.04)), in: Capsule())
+                .fill(.white.opacity(0.2))
+                .frame(height: thickness)
             Capsule()
-                .fill(.tint)
-                .overlay {
-                    // Reflet du verre sur le haut du remplissage.
-                    Capsule()
-                        .fill(LinearGradient(colors: [.white.opacity(0.35), .white.opacity(0)],
-                                             startPoint: .top, endPoint: .center))
-                        .padding(.horizontal, height * 0.15)
-                        .padding(.top, 1)
-                }
-                .frame(width: fillWidth)
-            if showsKnob {
-                Capsule()
-                    .fill(.white.opacity(isDragging ? 0.08 : 0.9))
-                    .glassEffect(.regular.interactive(), in: Capsule())
-                    .frame(width: knob.width, height: knob.height)
-                    .offset(x: NotchLayout.sliderKnobOffset(fraction: fraction, trackWidth: width, knobWidth: knob.width))
-                    .transition(.scale(scale: 0.4).combined(with: .opacity))
-            }
+                .fill(sliderTint.map { AnyShapeStyle($0) } ?? AnyShapeStyle(.tint))
+                .frame(width: max(thickness, center), height: thickness)
+            SliderKnob(isDragging: isDragging)
+                .frame(width: knob.width, height: knob.height)
+                .offset(x: center - knob.width / 2)
+        }
+        .frame(width: width, height: height)
+    }
+}
+
+/// Pastille : blanche au repos, loupe de verre transparente pendant le glissement.
+private struct SliderKnob: View {
+    var isDragging: Bool
+
+    var body: some View {
+        if #available(macOS 26.0, *) {
+            Capsule()
+                .fill(.white.opacity(isDragging ? 0.06 : 1))
+                .glassEffect(isDragging ? .clear.interactive() : .regular.interactive(), in: Capsule())
+                .shadow(color: .black.opacity(0.25), radius: isDragging ? 6 : 3, y: 1)
+        } else {
+            Capsule()
+                .fill(.white.opacity(isDragging ? 0.18 : 1))
+                .overlay(Capsule().strokeBorder(.white.opacity(isDragging ? 0.8 : 0), lineWidth: 1))
+                .shadow(color: .black.opacity(0.25), radius: isDragging ? 6 : 3, y: 1)
         }
     }
 }

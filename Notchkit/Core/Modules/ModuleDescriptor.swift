@@ -46,6 +46,13 @@ struct ModuleDescriptor: Identifiable, Sendable {
     /// Module « contextuel » : il tourne même quand son widget est masqué, et s'affiche alors en
     /// dernière page de l'encoche tant qu'il a du contenu (`NotchModule.hasContextualContent`).
     var contextual = false
+    /// Animations déclenchées par le système (branchement du chargeur, AirPods, touches de volume) :
+    /// elles fonctionnent même widget désactivé. Le module tourne alors en arrière-plan, sans carte ni
+    /// activité dans l'encoche repliée ; l'interrupteur des réglages ne règle que l'affichage du widget.
+    var backgroundEvents = false
     /// Widget pleine page : il occupe toujours une page entière à lui seul, en une seule taille.
     var fullPage = false
+    /// Moteur d'un autre module (son identifiant) : il tourne quand celui-ci est activé et n'apparaît
+    /// pas dans les réglages (ex. Claude Code, moteur de la page Agents).
+    var companionOf: String?
 }

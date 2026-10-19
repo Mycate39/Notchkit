@@ -277,8 +277,6 @@ struct ClaudeSession: Identifiable, Equatable, Sendable {
     enum State: Sendable, Equatable {
         case working
         case waitingForPermission
-        /// Claude a terminé mais attend encore une éventuelle réponse depuis l'encoche.
-        case awaitingReply
         case finished
     }
 
@@ -294,8 +292,6 @@ struct ClaudeSession: Identifiable, Equatable, Sendable {
     /// Messages texte échangés (demandes et réponses de Claude), du plus ancien au plus récent.
     var conversation: [ClaudeChatEntry] = []
     var transcriptPath: String?
-    /// Fin de la fenêtre de réponse (état `awaitingReply`).
-    var replyDeadline: Date?
     var lastEventAt: Date
     /// Dernière modification de fichier et dernière commande, avec leur date (pour choisir laquelle montrer).
     var lastEdit: ClaudeEdit?
@@ -346,7 +342,6 @@ struct ClaudeActivityTracker: Equatable, Sendable {
         switch event.kind {
         case .userPromptSubmit:
             session.state = .working
-            session.replyDeadline = nil
             session.prompt = event.prompt.map { String($0.prefix(300)) }
             session.currentAction = nil
             session.recentActions = []
@@ -382,9 +377,8 @@ struct ClaudeActivityTracker: Equatable, Sendable {
             }
 
         case .stop:
-            if session.state != .finished && session.state != .awaitingReply { transition = .finished }
+            if session.state != .finished { transition = .finished }
             session.state = .finished
-            session.replyDeadline = nil
             session.currentAction = nil
             session.attentionMessage = nil
             session.currentPhase = nil
@@ -417,19 +411,6 @@ struct ClaudeActivityTracker: Equatable, Sendable {
         sessions[sessionID] = session
     }
 
-    /// Ouvre (avec une date de fin) ou ferme (`nil`) la fenêtre de réponse d'une session terminée.
-    mutating func setReplyDeadline(_ deadline: Date?, for sessionID: String) {
-        guard var session = sessions[sessionID] else { return }
-        if let deadline {
-            session.state = .awaitingReply
-            session.replyDeadline = deadline
-        } else {
-            if session.state == .awaitingReply { session.state = .finished }
-            session.replyDeadline = nil
-        }
-        sessions[sessionID] = session
-    }
-
     /// Affiche (ou retire) une demande de permission à traiter depuis l'encoche.
     mutating func setPermissionPrompt(_ prompt: ClaudePermissionPrompt?, for sessionID: String, at date: Date = Date()) {
         guard var session = sessions[sessionID] else { return }
@@ -452,7 +433,6 @@ struct ClaudeActivityTracker: Equatable, Sendable {
     mutating func markWorking(_ sessionID: String, at date: Date = Date()) {
         guard var session = sessions[sessionID] else { return }
         session.state = .working
-        session.replyDeadline = nil
         session.lastEventAt = date
         sessions[sessionID] = session
     }

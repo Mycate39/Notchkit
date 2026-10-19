@@ -101,7 +101,7 @@ extension NotchModule {
     func compactLeading() -> AnyView? { nil }
     func compactTrailing() -> AnyView? { nil }
     var compactIsland: Bool { false }
-    var compactSideWidth: CGFloat { NotchLayout.compactSideWidth }
+    var compactSideWidth: CGFloat { NotchLayout.activitySideWidth }
     func settingsView() -> AnyView? { nil }
     var expandedWidthWeight: CGFloat { 1 }
 

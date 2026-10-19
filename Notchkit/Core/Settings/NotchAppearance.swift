@@ -113,6 +113,8 @@ struct NotchAppearance: Codable, Equatable, Sendable {
     var customBackground = StoredColor(red: 0.1, green: 0.1, blue: 0.18)
     /// Couleur d'accent (onglets, liens, curseurs) ; `nil` = ambre du style StandBy.
     var accent: StoredColor?
+    /// Couleur du remplissage des curseurs ; `nil` = couleur d'accent.
+    var sliderColor: StoredColor?
 
     init() {}
 
@@ -127,6 +129,7 @@ struct NotchAppearance: Codable, Equatable, Sendable {
         background = (try? c.decodeIfPresent(Background.self, forKey: .background)) ?? d.background
         customBackground = (try? c.decodeIfPresent(StoredColor.self, forKey: .customBackground)) ?? d.customBackground
         accent = try? c.decodeIfPresent(StoredColor.self, forKey: .accent)
+        sliderColor = try? c.decodeIfPresent(StoredColor.self, forKey: .sliderColor)
     }
 
     /// Taille effective de l'encoche dépliée.

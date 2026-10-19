@@ -74,7 +74,7 @@ struct AppearanceSettingsView: View {
                 MascotPicker(selection: $settings.settings.mascot)
                 Toggle(isOn: $settings.settings.mascotSounds) {
                     Text("Sons de la mascotte")
-                    Text("Au clic, quand un agent change d'humeur, pendant la discussion et à chaque nouvel événement (paiement, déploiement).")
+                    Text("Au clic et quand un agent change d'humeur (au travail, en attente de votre réponse, tâche terminée).")
                 }
                 if settings.settings.mascotSounds {
                     LabeledContent("Volume") {
@@ -127,6 +127,19 @@ struct AppearanceSettingsView: View {
                     ColorPicker("Couleur d'accent", selection: Binding(
                         get: { settings.settings.appearance.accentColor },
                         set: { settings.settings.appearance.accent = StoredColor($0) }
+                    ), supportsOpacity: false)
+                }
+                Toggle(isOn: Binding(
+                    get: { settings.settings.appearance.sliderColor != nil },
+                    set: { settings.settings.appearance.sliderColor = $0 ? StoredColor(.blue) : nil }
+                )) {
+                    Text("Couleur propre aux curseurs")
+                    Text("Volume, luminosité, volume des apps… Sinon, ils prennent la couleur d'accent.")
+                }
+                if let color = settings.settings.appearance.sliderColor {
+                    ColorPicker("Couleur des curseurs", selection: Binding(
+                        get: { color.color },
+                        set: { settings.settings.appearance.sliderColor = StoredColor($0) }
                     ), supportsOpacity: false)
                 }
             }

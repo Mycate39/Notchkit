@@ -171,16 +171,15 @@ enum SnapshotRenderer {
             .tint(StandBy.amber),
              to: directory.appendingPathComponent("standby-controles.png"))
 
-        // Curseurs Liquid Glass : repos, survol (loupe), glissement (grosse loupe).
-        if #available(macOS 26.0, *) {
-            save(VStack(alignment: .leading, spacing: 22) {
-                LiquidGlassTrack(value: 0.45, height: 26, width: 240, showsKnob: false, isDragging: false).frame(width: 240, height: 26)
-                LiquidGlassTrack(value: 0.6, height: 26, width: 240, showsKnob: true, isDragging: false).frame(width: 240, height: 26)
-                LiquidGlassTrack(value: 0.3, height: 26, width: 240, showsKnob: true, isDragging: true).frame(width: 240, height: 26)
-            }
-            .padding(24).background(.black).environment(\.colorScheme, .dark).tint(StandBy.amber),
-                 to: directory.appendingPathComponent("curseurs-verre.png"))
+        // Curseurs façon iOS : repos, glissement (loupe), couleur personnalisée, petite taille.
+        save(VStack(alignment: .leading, spacing: 22) {
+            SliderTrack(value: 0.45, height: 26, width: 240, isDragging: false)
+            SliderTrack(value: 0.6, height: 26, width: 240, isDragging: true)
+            SliderTrack(value: 0.7, height: 26, width: 240, isDragging: false).environment(\.sliderTint, .blue)
+            SliderTrack(value: 0.3, height: 14, width: 240, isDragging: false)
         }
+        .padding(24).background(.black).environment(\.colorScheme, .dark).tint(StandBy.amber),
+             to: directory.appendingPathComponent("curseurs-verre.png"))
 
         // Icônes au trait et jauge de batterie en charge.
         save(HStack(spacing: 18) {
@@ -309,23 +308,6 @@ enum SnapshotRenderer {
                    size: CGSize(width: 544, height: 159),
                    to: directory.appendingPathComponent("agents-question-fenetre.png"))
 
-        // Services : déploiements Vercel et paiements Stripe de démonstration.
-        agents.services.setPreview(
-            deployments: [VercelDeployment(id: "1", project: "korus-web", state: .ready, created: now.addingTimeInterval(-300), message: "Corrige la TVA"),
-                          VercelDeployment(id: "2", project: "korus-api", state: .building, created: now.addingTimeInterval(-60), message: "Ajoute les factures")],
-            charges: [StripeCharge(id: "a", amount: 49, currency: "EUR", customer: "Sarah L.", created: now),
-                      StripeCharge(id: "b", amount: 49, currency: "EUR", customer: "Camille R.", created: now),
-                      StripeCharge(id: "c", amount: 19, currency: "EUR", customer: "Hugo M.", created: now)])
-        for service in [AgentServices.Service.vercel, .stripe] {
-            save(ServicesPanel(module: agents, initial: service)
-                    .frame(width: 480, height: 126)
-                    .padding(14)
-                    .background(.black)
-                    .foregroundStyle(.white)
-                    .environment(\.colorScheme, .dark),
-                 to: directory.appendingPathComponent("services-\(service.rawValue).png"))
-        }
-
         // Toutes les propositions sur une seule image : deux colonnes de personnages, numérotés.
         let all = MascotDesign.allBoards
         let half = (all.count + 1) / 2
@@ -374,7 +356,7 @@ enum SnapshotRenderer {
 
         // Fenêtre de réglages, onglet Widgets puis page d'un module (contrôles AppKit : rendu en fenêtre).
         let router = SettingsRouter()
-        for (tab, name) in [(SettingsTab.widgets, "reglages-widgets"), (.module(MusicModule.descriptor.id), "reglages-widget-musique"), (.appearance, "reglages-apparence"), (.permissions, "reglages-autorisations")] {
+        for (tab, name) in [(SettingsTab.widgets, "reglages-widgets"), (.module(MusicModule.descriptor.id), "reglages-widget-musique"), (.appearance, "reglages-apparence"), (.permissions, "reglages-autorisations"), (.module(AgentsModule.descriptor.id), "reglages-widget-agents")] {
             router.tab = tab
             saveWindow(SettingsView(settings: settings, manager: manager, router: router),
                        size: CGSize(width: 820, height: tab == .appearance ? 1300 : 620),

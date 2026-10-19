@@ -5,10 +5,6 @@ import SwiftUI
 struct AgentsHomeView: View {
     let module: AgentsModule
     @State private var selectedID: String?
-    /// Onglet affiché à droite : le travail des agents, la discussion avec la mascotte ou les services.
-    enum Tab { case agents, chat, services }
-    @State private var tab: Tab = .agents
-    private var showsChat: Bool { tab == .chat }
 
     private var sessions: [ClaudeSession] { module.sessions }
 
@@ -22,63 +18,34 @@ struct AgentsHomeView: View {
     var body: some View {
         TimelineView(.periodic(from: .now, by: 1)) { context in
             let celebrating = (module.celebrateUntil ?? .distantPast) > context.date
+            // Question ou autorisation de Claude : le panneau prend toute la place (mascotte seule à gauche)
+            // pour que la question et ses choix s'affichent en entier.
+            let needsRoom = session?.questionPrompt != nil || session?.permissionPrompt != nil
             HStack(spacing: 10) {
-                identity(celebrating: celebrating)
-                    .frame(width: 214, alignment: .leading)
+                if needsRoom {
+                    LiveMascotView(design: module.mascot, mood: .waiting, size: 34, reactsToTap: true)
+                        .frame(width: 52)
+                        .transition(.opacity)
+                } else {
+                    identity(celebrating: celebrating)
+                        .frame(width: 214, alignment: .leading)
+                        .transition(.opacity)
+                }
                 VStack(alignment: .trailing, spacing: 5) {
-                    HStack(spacing: 6) {
-                        if tab == .agents && sessions.count > 1 { sessionPills }
-                        Spacer(minLength: 0)
-                        tabs
-                    }
-                    Group {
-                        if tab == .chat {
-                            MascotChatPanel(module: module)
-                                .transition(.opacity.combined(with: .move(edge: .trailing)))
-                        } else if tab == .services {
-                            ServicesPanel(module: module)
-                                .transition(.opacity.combined(with: .move(edge: .trailing)))
-                        } else {
-                            workPanel
-                                .transition(.opacity.combined(with: .move(edge: .leading)))
+                    if !needsRoom && sessions.count > 1 {
+                        HStack(spacing: 6) {
+                            Spacer(minLength: 0)
+                            sessionPills
                         }
                     }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                    workPanel
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 }
             }
             // Marges serrées : en taille Compacte, la page n'a qu'environ 120 points de haut.
             .padding(.horizontal, 10)
             .padding(.vertical, 6)
         }
-        // Un agent attend une réponse : on revient au travail des agents.
-        .onChange(of: session?.state == .waitingForPermission) { _, waiting in
-            if waiting { withAnimation(NotchLayout.pageIndicatorSpring) { tab = .agents } }
-        }
-    }
-
-    /// Onglets : travail des agents ou discussion.
-    private var tabs: some View {
-        HStack(spacing: 2) {
-            tabButton(symbol: "sparkles.rectangle.stack", selected: tab == .agents, help: "Agents") { tab = .agents }
-            tabButton(symbol: "bubble.left.fill", selected: tab == .chat, help: "Discussion") { tab = .chat }
-            tabButton(symbol: "square.grid.2x2.fill", selected: tab == .services, help: "Services") { tab = .services }
-        }
-        .padding(2)
-        .background(Color.white.opacity(0.06), in: Capsule())
-    }
-
-    private func tabButton(symbol: String, selected: Bool, help: LocalizedStringKey, action: @escaping () -> Void) -> some View {
-        Button {
-            withAnimation(NotchLayout.pageIndicatorSpring) { action() }
-        } label: {
-            Image(systemName: symbol)
-                .font(.system(size: 10, weight: .semibold))
-                .frame(width: 26, height: 18)
-                .background(selected ? StandBy.surface : .clear, in: Capsule())
-                .foregroundStyle(.white.opacity(selected ? 1 : 0.5))
-        }
-        .buttonStyle(.notch)
-        .help(Text(help))
     }
 
     // MARK: Mascotte, session et étapes
@@ -86,9 +53,8 @@ struct AgentsHomeView: View {
     private func identity(celebrating: Bool) -> some View {
         HStack(alignment: .center, spacing: 8) {
             LiveMascotView(design: module.mascot,
-                           mood: showsChat ? (module.chat.afterglow ?? AgentsModule.mood(for: session, celebrating: celebrating)) : AgentsModule.mood(for: session, celebrating: celebrating),
+                           mood: AgentsModule.mood(for: session, celebrating: celebrating),
                            size: 42,
-                           chat: showsChat ? module.chat.phase : nil,
                            reactsToTap: true)
                 .frame(width: 66, height: 62)
             VStack(alignment: .leading, spacing: 1) {
@@ -198,7 +164,6 @@ struct AgentStateLabel: View {
         switch state {
         case .working: "Au travail"
         case .waitingForPermission: "Attend votre accord"
-        case .awaitingReply: "Terminé, à votre écoute"
         case .finished: "Terminé"
         }
     }
@@ -207,7 +172,7 @@ struct AgentStateLabel: View {
         switch state {
         case .working: Color(red: 0.35, green: 0.65, blue: 1)
         case .waitingForPermission: StandBy.amber
-        case .awaitingReply, .finished: Color(red: 0.2, green: 0.78, blue: 0.35)
+        case .finished: Color(red: 0.2, green: 0.78, blue: 0.35)
         }
     }
 }
@@ -254,6 +219,17 @@ struct AgentSpinner: View {
                     .rotationEffect(.degrees(angle))
             }
             .frame(width: 13, height: 13)
+        }
+    }
+}
+
+/// Réglages du widget Agents : l'intégration Claude Code.
+struct AgentsSettingsView: View {
+    let claude: ClaudeModule?
+
+    var body: some View {
+        if let claude {
+            ClaudeIntegrationView(module: claude)
         }
     }
 }

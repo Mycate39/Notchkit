@@ -72,6 +72,7 @@ struct NotchContainerView: View {
         }
         .foregroundStyle(.white)
         .tint(viewModel.appearance.accentColor)
+        .environment(\.sliderTint, viewModel.appearance.sliderColor?.color)
         .environment(\.colorScheme, .dark)
         // Écran verrouillé : activités visibles, mais aucun bouton ni bulle cliquable.
         .allowsHitTesting(!viewModel.isScreenLocked)
@@ -271,6 +272,8 @@ private struct CompactNotchView: View {
         .frame(height: viewModel.geometry.closedSize.height)
         .font(.system(size: 12, weight: .semibold))
         .lineLimit(1)
+        // Toutes les activités ont la largeur de la musique : un texte trop long rétrécit au lieu d'être coupé.
+        .minimumScaleFactor(0.6)
     }
 
     /// Une alerte en cours passe avant le module compact.

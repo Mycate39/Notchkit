@@ -42,7 +42,8 @@ final class SystemHUDModule: NotchModule {
         systemImage: "speaker.wave.2",
         category: .system,
         tier: .free,
-        defaultEnabled: true
+        defaultEnabled: true,
+        backgroundEvents: true
     )
 
     let hud = HUDState()

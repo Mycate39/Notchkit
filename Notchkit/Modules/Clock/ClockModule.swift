@@ -62,8 +62,6 @@ final class ClockModule: NotchModule {
         showInCompact ? .low : .none
     }
 
-    /// Juste la place de « 23:59 ».
-    var compactSideWidth: CGFloat { 48 }
 
     func compactLeading() -> AnyView? {
         AnyView(

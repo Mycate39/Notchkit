@@ -1,6 +1,54 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "Sons de la mascotte" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mascot sounds"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sons de la mascotte"
+          }
+        }
+      }
+    },
+    "Au clic, quand un agent change d'humeur, pendant la discussion et à chaque nouvel événement (paiement, déploiement)." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On click, when an agent's mood changes, while chatting and for each new event (payment, deployment)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Au clic, quand un agent change d'humeur, pendant la discussion et à chaque nouvel événement (paiement, déploiement)."
+          }
+        }
+      }
+    },
+    "Écouter" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preview"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Écouter"
+          }
+        }
+      }
+    },
     "Choisir…" : {
       "localizations" : {
         "en" : {

@@ -86,8 +86,10 @@ struct AgentsHomeView: View {
     private func identity(celebrating: Bool) -> some View {
         HStack(alignment: .center, spacing: 8) {
             LiveMascotView(design: module.mascot,
-                           mood: showsChat && module.chat.isResponding ? .working : AgentsModule.mood(for: session, celebrating: celebrating),
-                           size: 42)
+                           mood: showsChat ? (module.chat.afterglow ?? AgentsModule.mood(for: session, celebrating: celebrating)) : AgentsModule.mood(for: session, celebrating: celebrating),
+                           size: 42,
+                           chat: showsChat ? module.chat.phase : nil,
+                           reactsToTap: true)
                 .frame(width: 66, height: 62)
             VStack(alignment: .leading, spacing: 1) {
                 if let session {

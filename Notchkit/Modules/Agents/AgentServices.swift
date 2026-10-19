@@ -59,6 +59,12 @@ enum ServiceParsing {
         }
     }
 
+    /// Déploiements qui étaient en cours et viennent de se terminer : leur nouvel état.
+    static func finishedDeployments(old: [VercelDeployment], new: [VercelDeployment]) -> [VercelDeployment.State] {
+        let pending = Set(old.filter { $0.state == .building || $0.state == .queued }.map(\.id))
+        return new.filter { pending.contains($0.id) && ($0.state == .ready || $0.state == .error) }.map(\.state)
+    }
+
     /// Devises sans centimes chez Stripe (yen, won…).
     static func divisor(for currency: String) -> Double {
         ["JPY", "KRW", "VND", "CLP", "ISK", "XOF", "XAF"].contains(currency) ? 1 : 100
@@ -106,6 +112,8 @@ final class AgentServices {
     private(set) var configured: Set<Service> = []
     /// Appelé quand un nouveau paiement arrive (la mascotte se réjouit).
     @ObservationIgnored var onNewCharge: (() -> Void)?
+    /// Appelé quand un déploiement suivi se termine (en ligne ou en échec).
+    @ObservationIgnored var onDeploymentFinished: ((VercelDeployment.State) -> Void)?
 
     @ObservationIgnored private var loop: Task<Void, Never>?
     @ObservationIgnored private var knownCharges: Set<String>?
@@ -164,7 +172,11 @@ final class AgentServices {
         guard !AutomatedRun.isActive else { return }
         if let key = Service.vercel.keychainAccount.flatMap(Keychain.read), !key.isEmpty {
             await load(.vercel, url: "https://api.vercel.com/v6/deployments?limit=6", key: key) { data in
-                self.deployments = ServiceParsing.vercelDeployments(from: data)
+                let deployments = ServiceParsing.vercelDeployments(from: data)
+                for state in ServiceParsing.finishedDeployments(old: self.deployments, new: deployments) {
+                    self.onDeploymentFinished?(state)
+                }
+                self.deployments = deployments
             }
         }
         if let key = Service.stripe.keychainAccount.flatMap(Keychain.read), !key.isEmpty {

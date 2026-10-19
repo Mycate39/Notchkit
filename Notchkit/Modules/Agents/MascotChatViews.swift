@@ -13,8 +13,14 @@ struct MascotChatPanel: View {
             messages
             inputRow
         }
-        .onChange(of: isTyping) { _, typing in module.holdExpanded(typing) }
-        .onDisappear { if isTyping { module.holdExpanded(false) } }
+        .onChange(of: isTyping) { _, typing in
+            module.holdExpanded(typing)
+            chat.isComposing = typing
+        }
+        .onDisappear {
+            if isTyping { module.holdExpanded(false) }
+            chat.isComposing = false
+        }
     }
 
     // MARK: Messages

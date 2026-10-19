@@ -96,6 +96,16 @@ final class AgentsModule: NotchModule {
         // Nouveau paiement : petite fête de la mascotte.
         services.onNewCharge = { [weak self] in
             self?.celebrateUntil = Date().addingTimeInterval(Self.celebrationDuration)
+            MascotSounds.shared.play(.coin)
+        }
+        // Déploiement Vercel terminé : fête s'il est en ligne, grognement s'il a échoué.
+        services.onDeploymentFinished = { [weak self] state in
+            if state == .ready {
+                self?.celebrateUntil = Date().addingTimeInterval(Self.celebrationDuration)
+                MascotSounds.shared.play(.coin)
+            } else if state == .error {
+                MascotSounds.shared.play(.grumble)
+            }
         }
         services.start()
     }
@@ -123,11 +133,16 @@ final class AgentsModule: NotchModule {
         let working = Set(sessions.filter { $0.state == .working }.map(\.id))
         if !waiting.subtracting(knownWaiting).isEmpty {
             context.showModule()
+            MascotSounds.shared.play(.question)
+        } else if !working.subtracting(knownWorking).subtracting(knownWaiting).isEmpty {
+            // Un agent se met au travail (pas une simple reprise après un accord).
+            MascotSounds.shared.play(.start)
         }
         // Une session qui travaillait vient de s'arrêter (terminée ou en attente d'une suite).
         let stopped = knownWorking.subtracting(working).subtracting(waiting)
         if sessions.contains(where: { stopped.contains($0.id) && ($0.state == .finished || $0.state == .awaitingReply) }) {
             celebrateUntil = Date().addingTimeInterval(Self.celebrationDuration)
+            MascotSounds.shared.play(.happy)
         }
         knownWaiting = waiting
         knownWorking = working

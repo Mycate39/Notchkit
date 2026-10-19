@@ -72,6 +72,19 @@ struct AppearanceSettingsView: View {
 
             Section("Mascotte") {
                 MascotPicker(selection: $settings.settings.mascot)
+                Toggle(isOn: $settings.settings.mascotSounds) {
+                    Text("Sons de la mascotte")
+                    Text("Au clic, quand un agent change d'humeur, pendant la discussion et à chaque nouvel événement (paiement, déploiement).")
+                }
+                if settings.settings.mascotSounds {
+                    LabeledContent("Volume") {
+                        HStack {
+                            Slider(value: $settings.settings.mascotSoundVolume, in: 0.05...1)
+                                .frame(maxWidth: 220)
+                            Button("Écouter") { MascotSounds.shared.play(.happy) }
+                        }
+                    }
+                }
             }
 
             Section("Couleurs") {
@@ -182,7 +195,7 @@ private struct MascotPicker: View {
             // La mascotte choisie, dans toutes ses humeurs, sur fond noir comme dans l'encoche.
             HStack(spacing: 0) {
                 ForEach(MascotMood.allCases, id: \.self) { mood in
-                    LiveMascotView(design: selection, mood: mood, size: 40)
+                    LiveMascotView(design: selection, mood: mood, size: 40, reactsToTap: true)
                         .frame(maxWidth: .infinity)
                 }
             }

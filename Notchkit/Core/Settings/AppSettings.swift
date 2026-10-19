@@ -51,6 +51,9 @@ struct AppSettings: Codable, Equatable, Sendable {
     var onboardingCompleted = false
     /// Mascotte choisie (réglages > Apparence).
     var mascot: MascotDesign = .pip
+    /// Sons de la mascotte (clic, humeurs, discussion, événements) et leur volume (0…1).
+    var mascotSounds = true
+    var mascotSoundVolume = 0.5
 
     init() {}
 
@@ -74,5 +77,7 @@ struct AppSettings: Codable, Equatable, Sendable {
         onboardingCompleted = try c.decodeIfPresent(Bool.self, forKey: .onboardingCompleted) ?? true
         // Mascotte inconnue (retirée dans une version suivante) : on reprend celle par défaut.
         mascot = (try? c.decodeIfPresent(MascotDesign.self, forKey: .mascot)) ?? d.mascot
+        mascotSounds = try c.decodeIfPresent(Bool.self, forKey: .mascotSounds) ?? d.mascotSounds
+        mascotSoundVolume = try c.decodeIfPresent(Double.self, forKey: .mascotSoundVolume) ?? d.mascotSoundVolume
     }
 }

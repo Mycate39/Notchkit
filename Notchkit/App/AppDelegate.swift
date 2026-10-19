@@ -82,13 +82,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         // Apparence et retour haptique : appliqués au lancement puis à chaque modification des réglages.
         viewModel.applyAppearance(settings.settings.appearance)
         Haptics.isEnabled = settings.settings.hapticsEnabled
+        applyMascotSounds()
         trackChanges(of: { [weak self] in
             _ = self?.settings.settings.appearance
             _ = self?.settings.settings.hapticsEnabled
+            _ = self?.settings.settings.mascotSounds
+            _ = self?.settings.settings.mascotSoundVolume
         }, perform: { [weak self] in
             guard let self else { return }
             self.viewModel.applyAppearance(self.settings.settings.appearance)
             Haptics.isEnabled = self.settings.settings.hapticsEnabled
+            self.applyMascotSounds()
         })
 
         let controller = NotchWindowController(viewModel: viewModel, settings: settings)
@@ -184,6 +188,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func showOnboarding() {
         onboardingWindow.show()
+    }
+
+    private func applyMascotSounds() {
+        MascotSounds.isEnabled = settings.settings.mascotSounds
+        MascotSounds.volume = Float(settings.settings.mascotSoundVolume)
     }
 
     func showSettings(tab: SettingsTab? = nil) {

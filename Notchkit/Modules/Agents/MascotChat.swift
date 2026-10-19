@@ -49,12 +49,30 @@ final class MascotChat {
     private(set) var isResponding = false
     private(set) var errorMessage: String?
     private(set) var hasClaudeKey: Bool
+    /// L'utilisateur est en train d'écrire (la mascotte l'écoute).
+    var isComposing = false
+    /// Humeur passagère après une réponse : joie, ou moue en cas d'erreur.
+    private(set) var afterglow: MascotMood?
+
+    /// Attitude de la mascotte dans la discussion (fonction pure de l'état, testée).
+    nonisolated static func phase(isResponding: Bool, answerIsEmpty: Bool, isComposing: Bool) -> MascotChatPhase? {
+        if isResponding { return answerIsEmpty ? .thinking : .talking }
+        return isComposing ? .listening : nil
+    }
+
+    var phase: MascotChatPhase? {
+        let last = messages.last
+        return Self.phase(isResponding: isResponding,
+                          answerIsEmpty: last?.role != .assistant || last?.text.isEmpty == true,
+                          isComposing: isComposing)
+    }
 
     @ObservationIgnored private let persona: @MainActor () -> String
     @ObservationIgnored private let agentsSummary: @MainActor () -> String
     @ObservationIgnored private var task: Task<Void, Never>?
     /// Session Apple Intelligence (gardée d'une question à l'autre pour le contexte).
     @ObservationIgnored private var appleSession: AnyObject?
+    @ObservationIgnored private var afterglowTask: Task<Void, Never>?
 
     init(persona: @escaping @MainActor () -> String, agentsSummary: @escaping @MainActor () -> String) {
         self.persona = persona
@@ -109,6 +127,8 @@ final class MascotChat {
         messages.append(ChatMessage(role: .assistant, text: ""))
         messages = Array(messages.suffix(Self.maxMessages))
         isResponding = true
+        afterglow = nil
+        MascotSounds.shared.play(.send)
 
         task = Task { [weak self] in
             guard let self else { return }
@@ -117,8 +137,12 @@ final class MascotChat {
                 case .appleIntelligence: try await self.answerWithApple(trimmed)
                 case .claude: try await self.answerWithClaude()
                 }
+                self.showAfterglow(.happy)
+                MascotSounds.shared.play(.tap)
             } catch is CancellationError {
             } catch {
+                self.showAfterglow(.angry)
+                MascotSounds.shared.play(.grumble)
                 self.errorMessage = error.localizedDescription
                 // Session Apple trop longue ou en erreur : on repart d'une session neuve.
                 self.appleSession = nil
@@ -130,8 +154,21 @@ final class MascotChat {
         }
     }
 
+    /// Humeur affichée quelques secondes après la réponse.
+    private func showAfterglow(_ mood: MascotMood) {
+        afterglow = mood
+        afterglowTask?.cancel()
+        afterglowTask = Task { [weak self] in
+            try? await Task.sleep(for: .seconds(2.5))
+            guard !Task.isCancelled else { return }
+            self?.afterglow = nil
+        }
+    }
+
     private func updateAnswer(_ text: String) {
         guard let index = messages.indices.last, messages[index].role == .assistant else { return }
+        // Babillage : une syllabe quand du texte arrive (espacées par MascotSounds.blipInterval).
+        if text.count > messages[index].text.count { MascotSounds.shared.play(.blip) }
         messages[index].text = text
     }
 

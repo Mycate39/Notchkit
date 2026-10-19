@@ -224,6 +224,33 @@ enum SnapshotRenderer {
             ("Travaille", .working, CGSize(width: 0.6, height: 0.6)), ("Attend", .waiting, .zero),
             ("Contente", .happy, .zero), ("Fâchée", .angry, .zero),
         ]
+        // Convertisseur : vide, un document, plusieurs images, résultat ; puis les zones de dépôt.
+        let converter = ConverterModule(context: ModuleContext(presentAlert: { _ in }, openSettings: {}, holdExpanded: { _ in }))
+        let converterStates: [(String, () -> Void)] = [
+            ("convertisseur-vide", { converter.clear() }),
+            ("convertisseur-document", { converter.add([URL(fileURLWithPath: "/Users/moi/Documents/Rapport annuel.docx")]) }),
+            ("convertisseur-images", { converter.add(["IMG_0042.HEIC", "IMG_0043.HEIC", "Plage.jpg"].map { URL(fileURLWithPath: "/tmp/\($0)") }) }),
+            ("convertisseur-resultat", { converter.debugSetResults([URL(fileURLWithPath: "/tmp/Rapport annuel.pdf")]) }),
+            ("convertisseur-depot", { converter.isDropTargeted = true }),
+        ]
+        for (name, apply) in converterStates {
+            apply()
+            for (suffix, widgetSize, cardSize) in [("", WidgetSize.medium, CGSize(width: 310, height: 142)),
+                                                   ("-petit", WidgetSize.small, CGSize(width: 200, height: 142))] {
+                save(ConverterExpandedView(module: converter)
+                        .environment(\.widgetSize, widgetSize)
+                        .frame(width: cardSize.width, height: cardSize.height)
+                        .notchCard()
+                        .padding(14).background(.black).foregroundStyle(.white).environment(\.colorScheme, .dark)
+                        .tint(StandBy.amber),
+                     to: directory.appendingPathComponent("\(name)\(suffix).png"))
+            }
+        }
+        save(DropZonesView(hovered: .convert, zones: [.shelf, .convert, .airDrop])
+                .frame(width: 520, height: 130)
+                .padding(14).background(.black).foregroundStyle(.white).environment(\.colorScheme, .dark),
+             to: directory.appendingPathComponent("zones-depot.png"))
+
         // Page Agents : sans agent, au travail, puis en attente d'accord.
         let agents = AgentsModule(context: ModuleContext(presentAlert: { _ in }, openSettings: {}, holdExpanded: { _ in },
                                                          mascot: { settings.settings.mascot }))

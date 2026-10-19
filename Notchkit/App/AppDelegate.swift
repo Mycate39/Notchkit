@@ -60,8 +60,26 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         // Fichiers glissés sur l'encoche : étagère ou AirDrop.
         // L'étagère accepte toujours les fichiers, même si son widget est masqué (elle s'affiche alors
         // en dernière page tant qu'elle n'est pas vide).
-        viewModel.dropHandlerAvailability = { [weak self] in
-            self?.moduleManager.isUnlocked(ShelfModule.descriptor) ?? false
+        // Étagère, conversion et AirDrop sont toujours proposés : l'étagère et le convertisseur sont
+        // des widgets temporaires, qui s'affichent même masqués tant qu'ils ont du contenu.
+        viewModel.dropZonesProvider = { [weak self] in
+            guard let self else { return [.airDrop] }
+            var zones: [DropZone] = []
+            if self.moduleManager.isUnlocked(ShelfModule.descriptor) { zones.append(.shelf) }
+            if self.moduleManager.module(for: ConverterModule.descriptor.id) != nil { zones.append(.convert) }
+            zones.append(.airDrop)
+            return zones
+        }
+        // Fichier glissé au-dessus du convertisseur ouvert : déposé directement dedans.
+        viewModel.directDropModules = [ConverterModule.descriptor.id]
+        viewModel.directDropChanged = { [weak self] old, new in
+            guard let self else { return }
+            for id in [old, new].compactMap({ $0 }) {
+                (self.moduleManager.module(for: id) as? ConverterModule)?.isDropTargeted = (id == new)
+            }
+        }
+        viewModel.directDropHandler = { [weak self] urls, id in
+            (self?.moduleManager.module(for: id) as? ConverterModule)?.add(urls)
         }
         viewModel.dropHandler = { [weak self] urls, zone in
             guard let self else { return }
@@ -71,6 +89,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 if let shelf = self.moduleManager.module(for: ShelfModule.descriptor.id) as? ShelfModule {
                     let added = shelf.add(urls)
                     if added > 0 { self.viewModel.present(ShelfAlerts.added(added)) }
+                }
+            case .convert:
+                if let converter = self.moduleManager.module(for: ConverterModule.descriptor.id) as? ConverterModule,
+                   converter.add(urls) > 0 {
+                    // L'encoche se replie après le dépôt : on la rouvre sur le convertisseur pour choisir le format.
+                    DispatchQueue.main.async { self.viewModel.expand(showing: ConverterModule.descriptor.id) }
                 }
             case .airDrop:
                 AirDrop.send(urls)

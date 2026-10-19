@@ -4,14 +4,21 @@ import AppKit
 enum DropZone: String, Sendable {
     /// Garder les fichiers dans l'étagère.
     case shelf
+    /// Les convertir dans un autre format (widget Convertisseur).
+    case convert
     /// Les envoyer par AirDrop.
     case airDrop
 
-    /// Zone survolée selon la position horizontale (0 = bord gauche, 1 = bord droit) :
-    /// étagère à gauche, AirDrop à droite. Sans étagère, tout l'espace sert à AirDrop.
+    /// Zone survolée selon la position horizontale (0 = bord gauche, 1 = bord droit) : les zones
+    /// disponibles se partagent la largeur, de gauche à droite (étagère, conversion, AirDrop).
+    static func zone(atNormalizedX x: CGFloat, zones: [DropZone]) -> DropZone {
+        guard !zones.isEmpty else { return .airDrop }
+        let index = Int(min(max(x, 0), 0.9999) * CGFloat(zones.count))
+        return zones[index]
+    }
+
     static func zone(atNormalizedX x: CGFloat, shelfAvailable: Bool) -> DropZone {
-        guard shelfAvailable else { return .airDrop }
-        return x < 0.5 ? .shelf : .airDrop
+        zone(atNormalizedX: x, zones: shelfAvailable ? [.shelf, .airDrop] : [.airDrop])
     }
 }
 

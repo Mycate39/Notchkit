@@ -146,14 +146,17 @@ private struct ShelfItemView: View {
 /// Affichées à la place des widgets quand on glisse des fichiers sur l'encoche.
 struct DropZonesView: View {
     let hovered: DropZone?
-    let shelfAvailable: Bool
+    let zones: [DropZone]
 
     var body: some View {
         HStack(spacing: 12) {
-            if shelfAvailable {
-                zone(.shelf, title: "Garder dans l'étagère", symbol: "tray.and.arrow.down.fill", color: .green)
+            ForEach(zones, id: \.self) { item in
+                switch item {
+                case .shelf: zone(.shelf, title: "Garder dans l'étagère", symbol: "tray.and.arrow.down.fill", color: .green)
+                case .convert: zone(.convert, title: "Convertir", symbol: "arrow.triangle.2.circlepath", color: .orange)
+                case .airDrop: zone(.airDrop, title: "Envoyer par AirDrop", symbol: "dot.radiowaves.left.and.right", color: .blue)
+                }
             }
-            zone(.airDrop, title: "Envoyer par AirDrop", symbol: "dot.radiowaves.left.and.right", color: .blue)
         }
     }
 

@@ -23,6 +23,8 @@ final class NotchWindowController {
     /// Espace au-dessus de tous les bureaux et de l'écran verrouillé (API privée SkyLight, `nil` si indisponible).
     private lazy var lockScreenSpace: LockScreenSpace? = AutomatedRun.isActive ? nil : LockScreenSpace()
     private let hostingView: NotchHostingView<NotchContainerView>
+    /// Reçoit le glisser-déposer à la place de l'encoche quand elle vit dans l'espace SkyLight.
+    private var dropCatcher: DropCatcher?
     private let container = FlippedView()
 
     init(viewModel: NotchViewModel, settings: SettingsStore) {
@@ -75,6 +77,23 @@ final class NotchWindowController {
         panel.orderFrontRegardless()
         // L'encoche ne suit plus les transitions entre bureaux : ni disparition, ni redimensionnement.
         lockScreenSpace?.pin(panel)
+        if lockScreenSpace != nil {
+            let catcher = DropCatcher(forwardingTo: hostingView)
+            // Pendant un glisser, le contenu de l'encoche passe dans la fenêtre de réception (bureau ordinaire) :
+            // dans l'espace SkyLight, l'encoche cacherait l'image du fichier glissé.
+            catcher.onDragStart = { [weak self] in
+                guard let self, !self.viewModel.isScreenLocked else { return }
+                self.panel.contentView = NSView()
+                self.dropCatcher?.host(self.container)
+            }
+            catcher.onDragEnd = { [weak self] in
+                guard let self, self.panel.contentView !== self.container else { return }
+                self.container.removeFromSuperview()
+                self.panel.contentView = self.container
+            }
+            catcher.start(frame: panel.frame)
+            dropCatcher = catcher
+        }
         startObserving()
         scheduleMenuAvoidance()
     }
@@ -282,6 +301,7 @@ final class NotchWindowController {
             width: size.width,
             height: size.height
         )
+        dropCatcher?.follow(frame)
         if animated {
             // Glissement doux quand l'encoche s'écarte des menus.
             NSAnimationContext.runAnimationGroup { context in

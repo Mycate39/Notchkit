@@ -306,7 +306,7 @@ private struct ExpandedNotchView: View {
 
             Group {
                 if viewModel.isDropMode {
-                    DropZonesView(hovered: viewModel.hoveredDropZone, shelfAvailable: viewModel.isShelfAvailable)
+                    DropZonesView(hovered: viewModel.hoveredDropZone, zones: viewModel.dropZones)
                         .padding(.horizontal, ear + 18)
                         .transition(.opacity.combined(with: .scale(scale: 0.97)))
                 } else {

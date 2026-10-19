@@ -44,10 +44,21 @@ final class NotchViewModel {
     /// Zone de dépôt survolée.
     private(set) var hoveredDropZone: DropZone?
     /// L'étagère est-elle disponible (module activé) ? Sinon, seule la zone AirDrop est proposée.
-    var isShelfAvailable: Bool { dropHandlerAvailability() }
+    var isShelfAvailable: Bool { dropZones.contains(.shelf) }
+    /// Zones proposées au dépôt de fichiers, de gauche à droite.
+    var dropZones: [DropZone] { dropZonesProvider() }
     /// Traite les fichiers déposés (fourni par l'AppDelegate).
     @ObservationIgnored var dropHandler: @MainActor ([URL], DropZone) -> Void = { _, _ in }
-    @ObservationIgnored var dropHandlerAvailability: @MainActor () -> Bool = { false }
+    @ObservationIgnored var dropZonesProvider: @MainActor () -> [DropZone] = { [.airDrop] }
+    /// Modules qui reçoivent directement un fichier glissé au-dessus de leur page ouverte (ex. Convertisseur),
+    /// sans passer par les zones de dépôt.
+    @ObservationIgnored var directDropModules: Set<String> = []
+    /// Module visé par le glissement en cours (dépôt direct) ; prévenu par `directDropChanged`.
+    private(set) var directDropTarget: String? {
+        didSet { if directDropTarget != oldValue { directDropChanged(oldValue, directDropTarget) } }
+    }
+    @ObservationIgnored var directDropChanged: @MainActor (_ old: String?, _ new: String?) -> Void = { _, _ in }
+    @ObservationIgnored var directDropHandler: @MainActor ([URL], String) -> Void = { _, _ in }
 
     @ObservationIgnored let manager: ModuleManager
     @ObservationIgnored private let settings: SettingsStore
@@ -348,15 +359,30 @@ final class NotchViewModel {
 
     // MARK: - Glisser-déposer de fichiers
 
+    /// Module de la page ouverte qui accepte un dépôt direct, s'il y en a un.
+    private var directDropCandidate: String? {
+        guard isExpanded, !isDropMode, !directDropModules.isEmpty else { return nil }
+        let pages = ModulePage.pages(from: manager)
+        guard pages.indices.contains(selectedPage) else { return nil }
+        return pages[selectedPage].modules.map(\.id).first(where: directDropModules.contains)
+    }
+
     func fileDragMoved(normalizedX x: CGFloat) {
         guard !isScreenLocked else { return }
         hoverTask?.cancel()
+        // Page d'un module qui reçoit les fichiers directement : pas de zones de dépôt.
+        if directDropTarget != nil { return }
+        if let target = directDropCandidate {
+            directDropTarget = target
+            Haptics.play(.snap)
+            return
+        }
         if !isDropMode {
             dropLog.notice("mode dépôt : état \(String(describing: self.state)), écran verrouillé : \(self.isScreenLocked), étagère : \(self.isShelfAvailable)")
             withAnimation(NotchLayout.spring) { isDropMode = true }
             expand()
         }
-        let zone = DropZone.zone(atNormalizedX: x, shelfAvailable: isShelfAvailable)
+        let zone = DropZone.zone(atNormalizedX: x, zones: dropZones)
         if zone != hoveredDropZone {
             if hoveredDropZone != nil { Haptics.play(.snap) }
             withAnimation(.snappy(duration: 0.2)) { hoveredDropZone = zone }
@@ -364,6 +390,7 @@ final class NotchViewModel {
     }
 
     func fileDragEnded() {
+        directDropTarget = nil
         guard isDropMode else { return }
         withAnimation(NotchLayout.spring) {
             isDropMode = false
@@ -374,7 +401,12 @@ final class NotchViewModel {
 
     func dropFiles(_ urls: [URL], normalizedX x: CGFloat) {
         guard !isScreenLocked else { return }
-        let zone = DropZone.zone(atNormalizedX: x, shelfAvailable: isShelfAvailable)
+        if let target = directDropTarget {
+            directDropTarget = nil
+            directDropHandler(urls, target)
+            return
+        }
+        let zone = DropZone.zone(atNormalizedX: x, zones: dropZones)
         withAnimation(NotchLayout.spring) {
             isDropMode = false
             hoveredDropZone = nil

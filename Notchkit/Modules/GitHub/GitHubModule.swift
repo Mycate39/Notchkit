@@ -226,6 +226,7 @@ struct GitHubSettingsView: View {
                     token = ""
                 }
                 .disabled(token.isEmpty)
+                .buttonStyle(.borderedProminent)
             }
             Text("Créez un jeton gratuit sur GitHub (Settings › Developer settings › Personal access tokens), avec l'accès en lecture aux dépôts. Il est gardé dans le trousseau de macOS.")
                 .font(.caption)

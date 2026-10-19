@@ -82,11 +82,14 @@ struct SystemHUDExpandedView: View {
 
     private func tabButton(_ value: Tab, symbol: String, help: LocalizedStringKey) -> some View {
         Button { tab = value } label: {
+            // Onglet sur toute sa part de largeur : facile à viser.
             Image(systemName: symbol)
-                .font(.system(size: 10, weight: .semibold))
-                .frame(width: 28, height: 18)
+                .font(.system(size: 11, weight: .semibold))
+                .frame(maxWidth: .infinity)
+                .frame(height: NotchLayout.audioTabHeight)
                 .background(tab == value ? StandBy.surface : .clear, in: Capsule())
                 .foregroundStyle(.white.opacity(tab == value ? 1 : 0.5))
+                .contentShape(Capsule())
         }
         .buttonStyle(.notch)
         .help(Text(help))
@@ -154,8 +157,8 @@ struct AudioDeviceList: View {
                                     Image(systemName: "checkmark").font(.system(size: 10, weight: .bold)).foregroundStyle(.tint)
                                 }
                             }
-                            .padding(.horizontal, 7)
-                            .padding(.vertical, 4)
+                            .padding(.horizontal, 8)
+                            .frame(minHeight: NotchLayout.audioRowHeight)
                             .background(device.id == selected ? StandBy.surface : .clear, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
                             .contentShape(Rectangle())
                         }

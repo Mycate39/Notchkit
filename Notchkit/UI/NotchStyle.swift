@@ -143,8 +143,9 @@ struct StandByBar: View {
     }
 }
 
-/// Curseur StandBy : une pilule épaisse qu'on remplit en glissant (sans bouton rond),
-/// comme les curseurs du centre de contrôle de l'iPhone.
+/// Curseur StandBy : une pilule épaisse qu'on remplit en glissant, comme les curseurs du centre de contrôle
+/// de l'iPhone. Sur macOS 26, rail en Liquid Glass et loupe de verre au survol et pendant le glissement.
+/// La zone cliquable est plus haute que la barre (`NotchLayout.sliderHitHeight`) sans changer la mise en page.
 struct StandBySlider: View {
     @Binding var value: Double
     var height: CGFloat = 26
@@ -152,11 +153,15 @@ struct StandBySlider: View {
 
     @Environment(\.isEnabled) private var isEnabled
     @State private var isDragging = false
+    @State private var isHovering = false
 
     var body: some View {
+        let hitHeight = NotchLayout.sliderHitHeight(for: height)
         GeometryReader { proxy in
-            StandByBar(value: value, height: height)
-                .contentShape(Capsule())
+            track(width: proxy.size.width)
+                .frame(height: height)
+                .frame(maxHeight: .infinity)
+                .contentShape(Rectangle())
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged { drag in
@@ -166,9 +171,12 @@ struct StandBySlider: View {
                         .onEnded { _ in isDragging = false }
                 )
         }
-        .frame(height: height)
-        .scaleEffect(y: isDragging ? 1.08 : 1)
+        .frame(height: hitHeight)
+        // Zone cliquable agrandie, encombrement inchangé.
+        .padding(.vertical, -(hitHeight - height) / 2)
+        .onHover { isHovering = $0 }
         .animation(.spring(duration: 0.25, bounce: 0.2), value: isDragging)
+        .animation(.spring(duration: 0.3, bounce: 0.15), value: isHovering)
         .opacity(isEnabled ? 1 : 0.4)
         .accessibilityElement()
         .accessibilityValue(Text(value.formatted(.percent.precision(.fractionLength(0)))))
@@ -181,6 +189,17 @@ struct StandBySlider: View {
         }
     }
 
+    @ViewBuilder
+    private func track(width: CGFloat) -> some View {
+        if #available(macOS 26.0, *) {
+            LiquidGlassTrack(value: value, height: height, width: width,
+                             showsKnob: isEnabled && (isDragging || isHovering), isDragging: isDragging)
+        } else {
+            StandByBar(value: value, height: height)
+                .scaleEffect(y: isDragging ? 1.08 : 1)
+        }
+    }
+
     private func set(_ newValue: Double) {
         let clamped = min(max(newValue, 0), 1)
         guard clamped != value else { return }
@@ -188,6 +207,46 @@ struct StandBySlider: View {
         if clamped == 0 || clamped == 1 { Haptics.play(.snap) }
         value = clamped
         onChange(clamped)
+    }
+}
+
+/// Rail Liquid Glass : verre sombre, remplissage teinté avec reflet, loupe de verre au bout du remplissage.
+@available(macOS 26.0, *)
+struct LiquidGlassTrack: View {
+    var value: Double
+    var height: CGFloat
+    var width: CGFloat
+    var showsKnob: Bool
+    var isDragging: Bool
+
+    var body: some View {
+        let fraction = min(max(value, 0), 1)
+        let knob = NotchLayout.sliderKnobSize(for: height, isDragging: isDragging)
+        let fillWidth = fraction > 0 ? max(height, width * fraction) : 0
+        ZStack(alignment: .leading) {
+            Capsule()
+                .fill(.white.opacity(0.06))
+                .glassEffect(.regular.tint(.white.opacity(0.04)), in: Capsule())
+            Capsule()
+                .fill(.tint)
+                .overlay {
+                    // Reflet du verre sur le haut du remplissage.
+                    Capsule()
+                        .fill(LinearGradient(colors: [.white.opacity(0.35), .white.opacity(0)],
+                                             startPoint: .top, endPoint: .center))
+                        .padding(.horizontal, height * 0.15)
+                        .padding(.top, 1)
+                }
+                .frame(width: fillWidth)
+            if showsKnob {
+                Capsule()
+                    .fill(.white.opacity(isDragging ? 0.08 : 0.9))
+                    .glassEffect(.regular.interactive(), in: Capsule())
+                    .frame(width: knob.width, height: knob.height)
+                    .offset(x: NotchLayout.sliderKnobOffset(fraction: fraction, trackWidth: width, knobWidth: knob.width))
+                    .transition(.scale(scale: 0.4).combined(with: .opacity))
+            }
+        }
     }
 }
 

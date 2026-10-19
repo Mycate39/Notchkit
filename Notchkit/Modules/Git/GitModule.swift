@@ -269,7 +269,7 @@ struct GitSettingsView: View {
                     Image(systemName: "folder")
                     Text((path as NSString).abbreviatingWithTildeInPath).lineLimit(1).truncationMode(.middle)
                     Spacer()
-                    Button("Retirer") { module.removeFolder(path) }.buttonStyle(.link)
+                    Button("Retirer", role: .destructive) { module.removeFolder(path) }.controlSize(.small)
                 }
             }
             Button("Ajouter un dossier…", action: module.addFolder)

@@ -177,6 +177,33 @@ enum NotchLayout {
     static let pageIndicatorLinger: Duration = .milliseconds(1200)
     /// Ressort de l'indicateur de pages : la pastille glisse d'une page à l'autre avec un léger rebond.
     static let pageIndicatorSpring = Animation.spring(duration: 0.4, bounce: 0.3)
+
+    // MARK: Centre du son
+
+    /// Onglets et lignes d'appareils : assez hauts pour être visés sans précision.
+    static let audioTabHeight: CGFloat = 24
+    static let audioRowHeight: CGFloat = 26
+
+    // MARK: Curseurs
+
+    /// Hauteur minimale de la zone cliquable d'un curseur, quelle que soit l'épaisseur de la barre.
+    static let sliderMinimumHitHeight: CGFloat = 24
+
+    static func sliderHitHeight(for barHeight: CGFloat) -> CGFloat {
+        max(barHeight, sliderMinimumHitHeight)
+    }
+
+    /// Loupe de verre : un peu plus haute que la barre, et plus grosse pendant le glissement.
+    static func sliderKnobSize(for barHeight: CGFloat, isDragging: Bool) -> CGSize {
+        let height = isDragging ? min(barHeight + 10, barHeight * 1.6) : barHeight + 4
+        return CGSize(width: height * 1.6, height: height)
+    }
+
+    /// Position de la loupe : centrée sur le bout du remplissage, sans sortir du rail.
+    static func sliderKnobOffset(fraction: Double, trackWidth: CGFloat, knobWidth: CGFloat) -> CGFloat {
+        let centered = trackWidth * CGFloat(min(max(fraction, 0), 1)) - knobWidth / 2
+        return min(max(centered, 0), max(0, trackWidth - knobWidth))
+    }
     /// Temps laissé à l'animation de repli avant de réduire la fenêtre.
     @MainActor static var shrinkDelay: Duration {
         .milliseconds(500) * animationSlowdown

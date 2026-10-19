@@ -64,7 +64,6 @@ struct PermissionRow: View {
         switch state {
         case .granted:
             Button("Gérer…", action: openSettings)
-                .buttonStyle(.link)
         case .notDetermined:
             Button("Autoriser…", action: request)
         case .denied, .onFirstUse:

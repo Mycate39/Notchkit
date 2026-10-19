@@ -140,8 +140,8 @@ struct DashboardSettingsView: View {
                         .frame(width: 18, height: 18)
                     Text(FileManager.default.displayName(atPath: app.url.path))
                     Spacer()
-                    Button("Retirer") { module.remove(app.id) }
-                        .buttonStyle(.link)
+                    Button("Retirer", role: .destructive) { module.remove(app.id) }
+                        .controlSize(.small)
                 }
             }
             Button("Ajouter une app…", action: module.addApp)

@@ -323,6 +323,7 @@ struct ClaudeSettingsView: View {
                     Button("Mettre à jour l'intégration", action: module.installHooks)
                 case .notInstalled:
                     Button("Installer l'intégration…") { confirmInstall = true }
+                        .buttonStyle(.borderedProminent)
                 }
             }
 

@@ -267,10 +267,13 @@ struct VideoDownloadSettingsView: View {
             }
 
             LabeledContent("Dossier de destination") {
-                Button(module.directory.path) { module.chooseDirectory() }
-                    .buttonStyle(.link)
-                    .lineLimit(1)
-                    .truncationMode(.middle)
+                HStack(spacing: 8) {
+                    Text((module.directory.path as NSString).abbreviatingWithTildeInPath)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                        .truncationMode(.middle)
+                    Button("Choisir…") { module.chooseDirectory() }
+                }
             }
 
             Text("Respectez les droits d'auteur : les conditions d'utilisation de YouTube interdisent de télécharger des vidéos sans autorisation. Réservez ce module à vos propres vidéos, aux contenus sous licence libre ou téléchargés avec l'accord de leurs auteurs.")

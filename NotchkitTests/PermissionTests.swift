@@ -27,3 +27,19 @@ struct PermissionTests {
         }
     }
 }
+
+struct SliderLayoutTests {
+    @Test func zoneCliquableJamaisPlusFineQueLeMinimum() {
+        #expect(NotchLayout.sliderHitHeight(for: 14) == NotchLayout.sliderMinimumHitHeight)
+        #expect(NotchLayout.sliderHitHeight(for: 26) == 26)
+    }
+
+    @Test func loupeResteDansLeRail() {
+        #expect(NotchLayout.sliderKnobOffset(fraction: 0, trackWidth: 200, knobWidth: 40) == 0)
+        #expect(NotchLayout.sliderKnobOffset(fraction: 1, trackWidth: 200, knobWidth: 40) == 160)
+        #expect(NotchLayout.sliderKnobOffset(fraction: 0.5, trackWidth: 200, knobWidth: 40) == 80)
+        let resting = NotchLayout.sliderKnobSize(for: 26, isDragging: false)
+        let dragging = NotchLayout.sliderKnobSize(for: 26, isDragging: true)
+        #expect(dragging.height > resting.height)
+    }
+}

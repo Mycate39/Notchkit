@@ -230,6 +230,7 @@ struct ServiceKeyRow: View {
                         key = ""
                     }
                     .disabled(key.trimmingCharacters(in: .whitespaces).isEmpty)
+                    .buttonStyle(.borderedProminent)
                 }
             }
         }

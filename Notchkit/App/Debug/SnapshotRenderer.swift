@@ -171,6 +171,17 @@ enum SnapshotRenderer {
             .tint(StandBy.amber),
              to: directory.appendingPathComponent("standby-controles.png"))
 
+        // Curseurs Liquid Glass : repos, survol (loupe), glissement (grosse loupe).
+        if #available(macOS 26.0, *) {
+            save(VStack(alignment: .leading, spacing: 22) {
+                LiquidGlassTrack(value: 0.45, height: 26, width: 240, showsKnob: false, isDragging: false).frame(width: 240, height: 26)
+                LiquidGlassTrack(value: 0.6, height: 26, width: 240, showsKnob: true, isDragging: false).frame(width: 240, height: 26)
+                LiquidGlassTrack(value: 0.3, height: 26, width: 240, showsKnob: true, isDragging: true).frame(width: 240, height: 26)
+            }
+            .padding(24).background(.black).environment(\.colorScheme, .dark).tint(StandBy.amber),
+                 to: directory.appendingPathComponent("curseurs-verre.png"))
+        }
+
         // Icônes au trait et jauge de batterie en charge.
         save(HStack(spacing: 18) {
                 LineGlyph(shape: BoltShape()).frame(width: 40, height: 40)

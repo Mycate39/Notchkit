@@ -442,7 +442,6 @@ private struct AboutSettingsView: View {
             Button("Licences des composants tiers") {
                 showsLicenses = true
             }
-            .buttonStyle(.link)
             .padding(.top, 8)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

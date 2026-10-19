@@ -216,6 +216,7 @@ struct AssistantSettingsView: View {
                         keyDraft = ""
                     }
                     .disabled(keyDraft.trimmingCharacters(in: .whitespaces).isEmpty)
+                    .buttonStyle(.borderedProminent)
                     if module.hasKey {
                         Button("Supprimer", role: .destructive, action: module.deleteKey)
                     }

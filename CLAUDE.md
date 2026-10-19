@@ -25,6 +25,7 @@ App de barre des menus (`LSUIElement`), distribuée hors Mac App Store, non sand
 
 - **Pas de code GPL** (ex. Boring Notch, FaceMac) : inspiration uniquement, jamais de copie.
 - **API publiques uniquement**, sauf les API privées déjà acceptées : MediaRemote (via MediaRemoteAdapter), DisplayServices (luminosité de l'écran intégré) et SkyLight (`LockScreenSpace` : espace de niveau supérieur qui garde l'encoche au-dessus de tous les bureaux, du plein écran et de l'écran verrouillé). Demander avant d'ajouter toute autre API privée.
+- **Glisser-déposer** : le serveur de fenêtres ne livre pas le glisser à une fenêtre de l'espace SkyLight, qui passerait aussi devant l'image du fichier glissé. `DropCatcher` (fenêtre invisible du bureau ordinaire, même cadre que l'encoche) reçoit le glisser et héberge le contenu de l'encoche le temps du glisser. Déplacer la fenêtre vers le bureau courant (`SLSGetActiveSpace`) n'a aucun effet visible : ne pas réessayer.
 - **Pas de HomeKit** (`HMHomeManager` n'est pas disponible sur macOS natif). La domotique, si un jour, passe par l'app Raccourcis (`shortcuts run`).
 - **Ne jamais lancer l'app dans Xcode à la place du propriétaire** (pas d'AppleScript sur Xcode) : il lance lui-même avec ⌘R et teste. Pour un changement visible en usage réel (survol, bureaux, écran verrouillé), lui demander de tester avant de committer.
 - **Ne jamais tuer tous les processus Notchkit** (`pkill -x Notchkit`) : le propriétaire fait tourner une instance depuis Xcode. N'arrêter que les instances de test sous `build.noindex/DerivedData/Build/Products`.
@@ -42,14 +43,16 @@ Notchkit/
     Modules/      Protocole NotchModule, ModuleDescriptor, ModuleManager, ModuleRegistry (liste des modules)
     State/        NotchViewModel (dépliage/repliage, survol, bulles), NotchLayout (toutes les tailles et ressorts), NotchAlert
     Window/       NotchPanel, NotchWindowController, NotchHostingView (zones de survol), ScreenLocator, MenuBarAvoidance,
-                  LockScreenSpace (espace SkyLight au-dessus des bureaux)
+                  LockScreenSpace (espace SkyLight au-dessus des bureaux), DropCatcher (réception du glisser-déposer)
+    Permissions/  PermissionCenter (état et demande des 7 autorisations macOS)
     Layout/       WidgetLayout (pages, tailles), LayoutPresets
     Settings/     AppSettings, NotchAppearance, SettingsStore (décodage tolérant), LaunchAtLogin
     Drop/ Licensing/ Utilities/ (AutomatedRun, Haptics, ObservationTracking)
   Modules/<Nom>/  Un dossier par module : <Nom>Module.swift (+ <Nom>Views.swift, utilitaires)
-  UI/             NotchContainerView, NotchShape, NotchStyle (boutons StandBy, barres, curseur, cartes),
-                  Glyphs, ModuleIcon, Settings/ (fenêtre des réglages : Général, Apparence, Disposition,
-                  Widgets = liste de tous les modules avec page de détail et bouton retour, À propos)
+  UI/             NotchContainerView, NotchShape, NotchStyle (boutons StandBy, barres, curseur Liquid Glass, cartes),
+                  Glyphs, ModuleIcon, FlowLayout, Mascot/ (33 mascottes, mouvements, réactions au clic, sons synthétisés),
+                  Settings/ (fenêtre des réglages : Général, Apparence, Disposition, Widgets = liste de tous les modules
+                  avec page de détail et bouton retour, Autorisations, À propos)
   Resources/      Localizable.xcstrings, InfoPlist.xcstrings, Assets.xcassets (AppIcon), entitlements,
                   Info.plist (généré depuis project.yml)
 NotchkitTests/    Suites Swift Testing, un fichier par domaine
@@ -113,7 +116,7 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 
 **Bêta** : même procédure, avec `MARKETING_VERSION` `x.y.z-beta.N` (le build augmente normalement), tag `vx.y.z-beta.N`, `gh release create … --prerelease --latest=false`, et **sans** étape `appcast.xml` : les utilisateurs actuels ne la reçoivent pas automatiquement.
 
-## État (18 octobre 2026 : 1.0.6 publiée, 2.0.0 beta 1 en préversion)
+## État (19 octobre 2026 : 1.0.6 publiée, 2.0.0 beta 1 en préversion)
 
 ### Fonctionne
 - Fenêtre d'encoche sur n'importe quel écran : vraie encoche, encoche simulée ou pilule flottante ; reste en place à travers les Spaces ; se décale à droite pour ne jamais masquer les menus de l'app active (nécessite l'autorisation Accessibilité).
@@ -127,7 +130,14 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 - Publié dans la beta 1 (`v2.0.0-beta.1`, préversion GitHub, hors appcast) : tutoriel d'accueil au premier lancement (rejouable par « Revoir le tutoriel… » ; `AppSettings.onboardingCompleted`, vrai par défaut pour un ancien fichier de réglages), onglet Widgets unique dans les réglages, indicateur de pages visible seulement pendant un balayage, engrenage sans pastille.
 - Fait depuis : barres de l'égaliseur arrondies aux deux bouts (animation de hauteur, plus d'échelle), indicateur de pages animé (pastille qui glisse avec `NotchLayout.pageIndicatorSpring`, icônes qui se précisent, apparition en fondu).
 - Fait depuis la beta 1 : encoche gardée en permanence dans l'espace SkyLight de niveau 400 (niveaux connus : 100 assistant de configuration, 300 écran verrouillé, 400 centre de notifications sur l'écran verrouillé ; l'ancien niveau 100 restait sous l'écran verrouillé). Elle s'affiche à l'écran verrouillé (vérifié le 18/10/2026 sur macOS 27) et ne doit plus disparaître ni se redimensionner en changeant de bureau ; au verrouillage, la fenêtre passe aussi au-dessus du bouclier (`NotchPanel.lockedLevel`) avec `canBecomeVisibleWithoutLogin`. Écran verrouillé sans interaction. Égaliseur : animations relancées au changement de bureau, retour à l'animation simple si le flux audio s'interrompt, hauteurs en direct posées sans animation.
-- Reste à faire avant la 2.0.0 : mentionner le tutoriel dans le README, publier en version finale (avec appcast).
+- Fait depuis (19/10/2026) :
+  - Page Agents (`Modules/Agents`, pleine page, `fullPage`) inspirée de coucou : mascotte choisie parmi 33 (Réglages > Apparence, aussi dans l'encoche repliée), étapes de Claude Code, éditeur et terminal en direct, autorisations et questions de Claude Code répondues depuis l'encoche (hooks version 4), discussion avec Apple Intelligence (FoundationModels, lié en faible) ou Claude, services GitHub / Vercel / Stripe (clés en Keychain). Widgets Claude Code et Ollama retirés.
+  - Mascotte interactive : réactions au clic, attitudes en discussion (écoute, réflexion, parole), sons synthétisés (`MascotSounds`, aucun fichier, transposés d'une quarte vers le grave), réglables dans Apparence.
+  - Mode jeu (`Modules/GameMode`) : encoche discrète et statistiques CPU/GPU/température, automatique ou manuel.
+  - Centre du son dans le panneau du volume : sortie, micro, apps qui jouent (repli sur l'app « À l'écoute », les navigateurs ne signalant pas toujours leur sortie), volume par app par interception Core Audio (macOS 14.2+).
+  - Onglet Autorisations et synthèse dans le tutoriel ; curseurs Liquid Glass (macOS 26+) ; zones cliquables agrandies ; boutons natifs dans les réglages.
+  - Convertisseur (`Modules/Converter`, widget temporaire) : images, audio (afconvert), vidéo (AVFoundation, GIF), documents (CoreText) et PDF ; zones de dépôt toujours proposées : étagère, Convertir, AirDrop ; dépôt direct sur sa page ouverte.
+- Reste à faire avant la 2.0.0 : mentionner le tutoriel et les nouveautés dans le README, publier en version finale (avec appcast).
 
 ### Vidéo de présentation
 - Projet HyperFrames hors du dépôt : `~/Documents/Projets/Notchkit-video` (16:9 de 45 s à la racine, 9:16 de 30 s dans `vertical/`, textes `en.json` / `fr.json`, design calqué sur le code de l'app dans `design.md`). Rendus dans `renders/`.
@@ -142,6 +152,7 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 - Les barres de l'égaliseur se figent parfois après un changement de bureau (encoche dans l'espace SkyLight) alors que les niveaux continuent d'arriver : non résolu, abandonné pour l'instant (réafficher l'espace et supprimer les animations implicites n'ont rien changé).
 - Sauvegardes à faire hors de ce Mac : certificat « Notchkit Self-Signed » (export .p12) et clé Sparkle (`generate_keys -x`).
 - Le module assistant IA est masqué (code conservé dans `Modules/Assistant`).
+- Convertisseur : pas de sortie MP3 (aucun encodeur dans macOS) ; un document converti en PDF garde le texte et ses styles, pas les images intégrées.
 
 ### Pistes après la 1.0
 1. Performance : signposts autour du dépliage/repliage, Instruments (SwiftUI, Animation Hitches, Energy).

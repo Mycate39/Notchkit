@@ -17,7 +17,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
     private lazy var onboardingWindow = OnboardingWindowController(
         settings: settings, manager: moduleManager,
-        openLayoutSettings: { [unowned self] in self.showSettings(tab: .layout) }
+        openSettings: { [unowned self] tab in self.showSettings(tab: tab) }
     )
 
     func applicationDidFinishLaunching(_ notification: Notification) {

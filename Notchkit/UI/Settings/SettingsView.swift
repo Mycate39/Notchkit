@@ -9,6 +9,7 @@ enum SettingsTab: Hashable {
     case widgets
     /// Page d'un module (identifiant du module), ouverte depuis la liste des widgets.
     case module(String)
+    case permissions
     case about
 }
 
@@ -24,6 +25,7 @@ struct SettingsView: View {
     let settings: SettingsStore
     let manager: ModuleManager
     @Bindable var router: SettingsRouter
+    @State private var permissions = PermissionCenter()
 
     var body: some View {
         NavigationSplitView {
@@ -35,6 +37,7 @@ struct SettingsView: View {
                     sidebarRow("Widgets", symbol: "square.grid.2x2.fill", color: .orange).tag(SettingsTab.widgets)
                 }
                 Section {
+                    sidebarRow("Autorisations", symbol: "hand.raised.fill", color: .blue).tag(SettingsTab.permissions)
                     sidebarRow("À propos", symbol: "info.circle.fill", color: .secondary).tag(SettingsTab.about)
                 }
             }
@@ -53,6 +56,7 @@ struct SettingsView: View {
         case .appearance: AppearanceSettingsView(settings: settings).navigationTitle("Apparence")
         case .layout: LayoutSettingsView(manager: manager).navigationTitle("Disposition")
         case .widgets, .module: WidgetsSettingsView(manager: manager, router: router)
+        case .permissions: PermissionsSettingsView(center: permissions).navigationTitle("Autorisations")
         case .about: AboutSettingsView().navigationTitle("À propos")
         }
     }

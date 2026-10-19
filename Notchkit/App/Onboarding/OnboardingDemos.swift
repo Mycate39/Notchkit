@@ -240,3 +240,35 @@ struct SymbolDemo: View {
         }
     }
 }
+
+/// Synthèse des autorisations : chacune avec son état en direct, sur l'écran de démonstration.
+struct PermissionsDemo: View {
+    let center: PermissionCenter
+
+    var body: some View {
+        DemoScreen {
+            LazyVGrid(columns: [GridItem(.flexible(), spacing: 6), GridItem(.flexible(), spacing: 6)], spacing: 5) {
+                ForEach(AppPermission.allCases) { permission in
+                    let state = center.state(of: permission)
+                    HStack(spacing: 6) {
+                        PermissionIcon(permission: permission, size: 18)
+                        Text(permission.shortTitle)
+                            .font(.system(size: 10, weight: .semibold))
+                            .foregroundStyle(.white)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.8)
+                        Spacer(minLength: 2)
+                        Circle()
+                            .fill(state == .granted ? Color.green : state == .denied ? Color.red : Color.white.opacity(0.35))
+                            .frame(width: 6, height: 6)
+                    }
+                    .padding(.horizontal, 6)
+                    .frame(height: 26)
+                    .background(.black.opacity(0.28), in: RoundedRectangle(cornerRadius: 7, style: .continuous))
+                }
+            }
+            .padding(.horizontal, 12)
+            .padding(.top, OnboardingDemoLayout.menuBarHeight + 8)
+        }
+    }
+}

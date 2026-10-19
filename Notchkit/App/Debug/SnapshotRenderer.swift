@@ -109,7 +109,7 @@ enum SnapshotRenderer {
 
         // Tutoriel de bienvenue : une image par étape.
         for step in OnboardingStep.allCases {
-            save(OnboardingView(manager: manager, openLayoutSettings: {}, finish: {}, startAt: step)
+            save(OnboardingView(manager: manager, openSettings: { _ in }, finish: {}, startAt: step)
                     .environment(\.colorScheme, .dark),
                  to: directory.appendingPathComponent("tutoriel-\(step.rawValue + 1).png"))
         }
@@ -336,7 +336,7 @@ enum SnapshotRenderer {
 
         // Fenêtre de réglages, onglet Widgets puis page d'un module (contrôles AppKit : rendu en fenêtre).
         let router = SettingsRouter()
-        for (tab, name) in [(SettingsTab.widgets, "reglages-widgets"), (.module(MusicModule.descriptor.id), "reglages-widget-musique"), (.appearance, "reglages-apparence")] {
+        for (tab, name) in [(SettingsTab.widgets, "reglages-widgets"), (.module(MusicModule.descriptor.id), "reglages-widget-musique"), (.appearance, "reglages-apparence"), (.permissions, "reglages-autorisations")] {
             router.tab = tab
             saveWindow(SettingsView(settings: settings, manager: manager, router: router),
                        size: CGSize(width: 820, height: tab == .appearance ? 1300 : 620),

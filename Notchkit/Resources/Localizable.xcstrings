@@ -1,182 +1,6 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
-    "Micro" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Microphone"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Micro"
-          }
-        }
-      }
-    },
-    "Apps qui jouent du son" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apps playing sound"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apps qui jouent du son"
-          }
-        }
-      }
-    },
-    "Aucune app ne joue de son en ce moment." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No app is playing sound right now."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucune app ne joue de son en ce moment."
-          }
-        }
-      }
-    },
-    "La liste des apps qui jouent du son demande macOS 14.2 ou plus récent." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The list of apps playing sound requires macOS 14.2 or later."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La liste des apps qui jouent du son demande macOS 14.2 ou plus récent."
-          }
-        }
-      }
-    },
-    "Volume de %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ volume"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Volume de %@"
-          }
-        }
-      }
-    },
-    "Mode jeu" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Game Mode"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mode jeu"
-          }
-        }
-      }
-    },
-    "Pendant une partie, l'encoche se fait discrète et affiche la charge du processeur, de la carte graphique et l'état thermique." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "During a game, the notch stays out of the way and shows CPU and GPU load and the thermal state."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pendant une partie, l'encoche se fait discrète et affiche la charge du processeur, de la carte graphique et l'état thermique."
-          }
-        }
-      }
-    },
-    "S'activer quand un jeu est au premier plan" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Turn on when a game is in front"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "S'activer quand un jeu est au premier plan"
-          }
-        }
-      }
-    },
-    "Les jeux sont reconnus à leur catégorie App Store et aux jeux Steam. Vous pouvez aussi l'activer ou le couper depuis l'icône de Notchkit dans la barre des menus." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Games are recognized by their App Store category and Steam games. You can also turn it on or off from the Notchkit icon in the menu bar."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Les jeux sont reconnus à leur catégorie App Store et aux jeux Steam. Vous pouvez aussi l'activer ou le couper depuis l'icône de Notchkit dans la barre des menus."
-          }
-        }
-      }
-    },
-    "Afficher la charge du processeur et de la carte graphique" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show CPU and GPU load"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Afficher la charge du processeur et de la carte graphique"
-          }
-        }
-      }
-    },
-    "Pendant une partie, l'encoche ne s'ouvre plus au survol et les alertes et bulles sont mises en pause." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "During a game, the notch no longer opens on hover and alerts and bubbles are paused."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pendant une partie, l'encoche ne s'ouvre plus au survol et les alertes et bulles sont mises en pause."
-          }
-        }
-      }
-    },
     "" : {
 
     },
@@ -1164,6 +988,22 @@
         }
       }
     },
+    "Afficher la charge du processeur et de la carte graphique" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show CPU and GPU load"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher la charge du processeur et de la carte graphique"
+          }
+        }
+      }
+    },
     "Afficher la température quand l'encoche est repliée" : {
       "localizations" : {
         "en" : {
@@ -2049,6 +1889,22 @@
         }
       }
     },
+    "Apps qui jouent du son" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apps playing sound"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apps qui jouent du son"
+          }
+        }
+      }
+    },
     "Après chaque réponse de Claude, vous pouvez encore lui écrire depuis l'encoche pendant ce délai : il repart aussitôt. Pendant ce temps, Claude Code l'affiche comme « en cours » (Échap pour arrêter)." : {
       "localizations" : {
         "en" : {
@@ -2371,6 +2227,22 @@
         }
       }
     },
+    "Aucune app ne joue de son en ce moment." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No app is playing sound right now."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune app ne joue de son en ce moment."
+          }
+        }
+      }
+    },
     "Aucune batterie détectée" : {
       "localizations" : {
         "en" : {
@@ -2515,6 +2387,22 @@
         }
       }
     },
+    "Audio du système" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System Audio"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Audio du système"
+          }
+        }
+      }
+    },
     "aujourd'hui" : {
       "localizations" : {
         "en" : {
@@ -2547,6 +2435,22 @@
         }
       }
     },
+    "Automatisation" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automation"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatisation"
+          }
+        }
+      }
+    },
     "Autorisation Accessibilité nécessaire" : {
       "localizations" : {
         "en" : {
@@ -2575,6 +2479,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Autorisation demandée"
+          }
+        }
+      }
+    },
+    "Autorisations" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permissions"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorisations"
           }
         }
       }
@@ -2767,6 +2687,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Averses de neige"
+          }
+        }
+      }
+    },
+    "Barres de l'égaliseur au rythme de la musique et volume par app. Le son n'est jamais enregistré." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Equalizer bars that follow the music, and per-app volume. Audio is never recorded."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Barres de l'égaliseur au rythme de la musique et volume par app. Le son n'est jamais enregistré."
           }
         }
       }
@@ -3079,6 +3015,38 @@
         }
       }
     },
+    "Calendriers" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calendars"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calendriers"
+          }
+        }
+      }
+    },
+    "Caméra" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Camera"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caméra"
+          }
+        }
+      }
+    },
     "Capture" : {
       "localizations" : {
         "en" : {
@@ -3187,6 +3155,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cette vidéo nécessite ffmpeg pour assembler l'image et le son : installez-le dans le Terminal avec « brew install ffmpeg »."
+          }
+        }
+      }
+    },
+    "Chaque autorisation est facultative : sans elle, seule la fonction indiquée est désactivée. Vous pouvez la retirer à tout moment dans les Réglages Système." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every permission is optional: without it, only the feature listed is turned off. You can revoke it at any time in System Settings."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chaque autorisation est facultative : sans elle, seule la fonction indiquée est désactivée. Vous pouvez la retirer à tout moment dans les Réglages Système."
           }
         }
       }
@@ -3717,6 +3701,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Commande"
+          }
+        }
+      }
+    },
+    "Commandes de Musique et Spotify, mode sombre (System Events) et dossier ouvert dans le Terminal." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Music and Spotify controls, Dark Mode (System Events) and the folder open in Terminal."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commandes de Musique et Spotify, mode sombre (System Events) et dossier ouvert dans le Terminal."
           }
         }
       }
@@ -4476,6 +4476,22 @@
         }
       }
     },
+    "Demandée à la première utilisation" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Requested on first use"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Demandée à la première utilisation"
+          }
+        }
+      }
+    },
     "Demander quelque chose…" : {
       "localizations" : {
         "en" : {
@@ -4648,6 +4664,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Désinstaller"
+          }
+        }
+      }
+    },
+    "Détail des autorisations…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permission details…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Détail des autorisations…"
           }
         }
       }
@@ -5292,6 +5324,22 @@
         }
       }
     },
+    "Enregistrement audio du système" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System Audio Recording"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrement audio du système"
+          }
+        }
+      }
+    },
     "Enregistrer" : {
       "localizations" : {
         "en" : {
@@ -5534,6 +5582,7 @@
       }
     },
     "Facultative, modifiable à tout moment" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5900,6 +5949,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Général"
+          }
+        }
+      }
+    },
+    "Gérer…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manage…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gérer…"
           }
         }
       }
@@ -6706,6 +6771,7 @@
       }
     },
     "L'autorisation Accessibilité permet d'afficher le volume et la luminosité quand vous utilisez les touches du clavier, et d'éviter que l'encoche cache les menus. Elle est facultative." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6801,6 +6867,22 @@
         }
       }
     },
+    "La liste des apps qui jouent du son demande macOS 14.2 ou plus récent." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The list of apps playing sound requires macOS 14.2 or later."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La liste des apps qui jouent du son demande macOS 14.2 ou plus récent."
+          }
+        }
+      }
+    },
     "La recherche a échoué. Vérifiez votre connexion." : {
       "localizations" : {
         "en" : {
@@ -6845,6 +6927,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lance un agent"
+          }
+        }
+      }
+    },
+    "Lancer à l'ouverture de session" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open at login"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lancer à l'ouverture de session"
           }
         }
       }
@@ -7171,6 +7269,22 @@
         }
       }
     },
+    "Les jeux sont reconnus à leur catégorie App Store et aux jeux Steam. Vous pouvez aussi l'activer ou le couper depuis l'icône de Notchkit dans la barre des menus." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Games are recognized by their App Store category and Steam games. You can also turn it on or off from the Notchkit icon in the menu bar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les jeux sont reconnus à leur catégorie App Store et aux jeux Steam. Vous pouvez aussi l'activer ou le couper depuis l'icône de Notchkit dans la barre des menus."
+          }
+        }
+      }
+    },
     "Les mises à jour automatiques ne sont disponibles que dans les versions publiées." : {
       "localizations" : {
         "en" : {
@@ -7251,6 +7365,22 @@
         }
       }
     },
+    "Liste de rappels : les cocher ou en ajouter." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your reminders list: check them off or add new ones."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liste de rappels : les cocher ou en ajouter."
+          }
+        }
+      }
+    },
     "Lit %@" : {
       "localizations" : {
         "en" : {
@@ -7263,6 +7393,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lit %@"
+          }
+        }
+      }
+    },
+    "Localisation" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Localisation"
           }
         }
       }
@@ -7572,6 +7718,22 @@
         }
       }
     },
+    "Météo locale, à partir d'une position approximative." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Local weather, from an approximate location."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Météo locale, à partir d'une position approximative."
+          }
+        }
+      }
+    },
     "Mettez à jour l'intégration" : {
       "localizations" : {
         "en" : {
@@ -7600,6 +7762,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mettre à jour l'intégration"
+          }
+        }
+      }
+    },
+    "Micro" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Microphone"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Micro"
           }
         }
       }
@@ -7652,6 +7830,22 @@
         }
       }
     },
+    "Miroir de la webcam, seulement pendant que le widget est ouvert. Rien n'est enregistré." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A webcam mirror, only while the widget is open. Nothing is recorded."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Miroir de la webcam, seulement pendant que le widget est ouvert. Rien n'est enregistré."
+          }
+        }
+      }
+    },
     "Mise à jour de l'intégration nécessaire" : {
       "localizations" : {
         "en" : {
@@ -7696,6 +7890,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mode"
+          }
+        }
+      }
+    },
+    "Mode jeu" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game Mode"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mode jeu"
           }
         }
       }
@@ -8241,6 +8451,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notchkit liste les captures et enregistrements d'écran faits depuis le démarrage du Mac ou l'ouverture de votre session, où qu'ils soient enregistrés. S'ils sont sur le Bureau, macOS demandera une fois l'accès à ce dossier pour afficher les aperçus."
+          }
+        }
+      }
+    },
+    "Notchkit ne demande une autorisation que lorsqu'une fonction en a besoin, et toutes sont facultatives. L'Accessibilité est la plus utile : donnez-la dès maintenant." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit only asks for a permission when a feature needs it, and every one is optional. Accessibility is the most useful: grant it now."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit ne demande une autorisation que lorsqu'une fonction en a besoin, et toutes sont facultatives. L'Accessibilité est la plus utile : donnez-la dès maintenant."
           }
         }
       }
@@ -8840,6 +9066,22 @@
         }
       }
     },
+    "Pas encore demandée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not requested yet"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas encore demandée"
+          }
+        }
+      }
+    },
     "Passer le tutoriel" : {
       "localizations" : {
         "en" : {
@@ -8884,6 +9126,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pauses : %lld/%lld"
+          }
+        }
+      }
+    },
+    "Pendant une partie, l'encoche ne s'ouvre plus au survol et les alertes et bulles sont mises en pause." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "During a game, the notch no longer opens on hover and alerts and bubbles are paused."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pendant une partie, l'encoche ne s'ouvre plus au survol et les alertes et bulles sont mises en pause."
+          }
+        }
+      }
+    },
+    "Pendant une partie, l'encoche se fait discrète et affiche la charge du processeur, de la carte graphique et l'état thermique." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "During a game, the notch stays out of the way and shows CPU and GPU load and the thermal state."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pendant une partie, l'encoche se fait discrète et affiche la charge du processeur, de la carte graphique et l'état thermique."
           }
         }
       }
@@ -9320,6 +9594,22 @@
         }
       }
     },
+    "Prochains événements dans l'encoche et rappel quelques minutes avant." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upcoming events in the notch, with a heads-up a few minutes before."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prochains événements dans l'encoche et rappel quelques minutes avant."
+          }
+        }
+      }
+    },
     "Prochains événements et rappel avant un rendez-vous." : {
       "localizations" : {
         "en" : {
@@ -9656,6 +9946,22 @@
         }
       }
     },
+    "Recommandée : touches du clavier et menus" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recommended: keyboard keys and menus"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recommandée : touches du clavier et menus"
+          }
+        }
+      }
+    },
     "Réessayer" : {
       "localizations" : {
         "en" : {
@@ -9668,6 +9974,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Réessayer"
+          }
+        }
+      }
+    },
+    "Refusée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Denied"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Refusée"
           }
         }
       }
@@ -10214,6 +10536,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "s"
+          }
+        }
+      }
+    },
+    "S'activer quand un jeu est au premier plan" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn on when a game is in front"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "S'activer quand un jeu est au premier plan"
           }
         }
       }
@@ -11728,6 +12066,22 @@
         }
       }
     },
+    "Volume de %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ volume"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volume de %@"
+          }
+        }
+      }
+    },
     "Volume et luminosité" : {
       "localizations" : {
         "en" : {
@@ -11740,6 +12094,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Volume et luminosité"
+          }
+        }
+      }
+    },
+    "Volume et luminosité aux touches du clavier, encoche qui évite les menus, ancrage des fenêtres, traduction de la sélection, verrouillage du clavier, projet Git du Terminal." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volume and brightness from the keyboard keys, a notch that stays clear of menus, window snapping, translating the selection, keyboard lock, and the Git project open in Terminal."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volume et luminosité aux touches du clavier, encoche qui évite les menus, ancrage des fenêtres, traduction de la sélection, verrouillage du clavier, projet Git du Terminal."
           }
         }
       }

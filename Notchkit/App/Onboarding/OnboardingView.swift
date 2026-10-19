@@ -9,19 +9,19 @@ final class OnboardingWindowController: NSObject, NSWindowDelegate {
     private var window: NSWindow?
     private let settings: SettingsStore
     private let manager: ModuleManager
-    private let openLayoutSettings: @MainActor () -> Void
+    private let openSettings: @MainActor (SettingsTab) -> Void
 
-    init(settings: SettingsStore, manager: ModuleManager, openLayoutSettings: @escaping @MainActor () -> Void) {
+    init(settings: SettingsStore, manager: ModuleManager, openSettings: @escaping @MainActor (SettingsTab) -> Void) {
         self.settings = settings
         self.manager = manager
-        self.openLayoutSettings = openLayoutSettings
+        self.openSettings = openSettings
     }
 
     func show() {
         if window == nil {
             let view = OnboardingView(
                 manager: manager,
-                openLayoutSettings: { [weak self] in self?.openLayoutSettings() },
+                openSettings: { [weak self] tab in self?.openSettings(tab) },
                 finish: { [weak self] in self?.window?.close() }
             )
             let window = NSWindow(contentViewController: NSHostingController(rootView: view))
@@ -50,17 +50,18 @@ final class OnboardingWindowController: NSObject, NSWindowDelegate {
 /// Contenu du tutoriel : démonstration, texte, contrôles de l'étape, navigation.
 struct OnboardingView: View {
     let manager: ModuleManager
-    let openLayoutSettings: () -> Void
+    let openSettings: (SettingsTab) -> Void
     let finish: () -> Void
 
     @State private var step: OnboardingStep
+    @State private var permissions = PermissionCenter()
     /// Avance (vers la droite) ou recule : sens de la transition entre étapes.
     @State private var isForward = true
 
-    init(manager: ModuleManager, openLayoutSettings: @escaping () -> Void, finish: @escaping () -> Void,
+    init(manager: ModuleManager, openSettings: @escaping (SettingsTab) -> Void, finish: @escaping () -> Void,
          startAt step: OnboardingStep = .welcome) {
         self.manager = manager
-        self.openLayoutSettings = openLayoutSettings
+        self.openSettings = openSettings
         self.finish = finish
         _step = State(initialValue: step)
     }
@@ -108,7 +109,7 @@ struct OnboardingView: View {
         case .activities: ActivitiesDemo()
         case .files: FilesDemo()
         case .widgets: SymbolDemo(symbol: "square.grid.2x2.fill", tint: StandBy.amber)
-        case .permissions: SymbolDemo(symbol: "hand.raised.fill", tint: .blue)
+        case .permissions: PermissionsDemo(center: permissions)
         case .done: SymbolDemo(symbol: "checkmark.circle.fill", tint: .green)
         }
     }
@@ -118,8 +119,8 @@ struct OnboardingView: View {
     @ViewBuilder
     private var controls: some View {
         switch step {
-        case .widgets: OnboardingPresets(manager: manager, openLayoutSettings: openLayoutSettings)
-        case .permissions: OnboardingPermissions()
+        case .widgets: OnboardingPresets(manager: manager, openLayoutSettings: { openSettings(.layout) })
+        case .permissions: OnboardingPermissions(center: permissions, openDetails: { openSettings(.permissions) })
         default: EmptyView()
         }
     }
@@ -219,40 +220,52 @@ private struct OnboardingPresets: View {
 
 // MARK: - Autorisations
 
-/// Accessibilité (état mis à jour en direct) et lancement à l'ouverture de session.
+/// Accessibilité (la plus utile, à donner tout de suite), lien vers le détail et lancement à l'ouverture de session.
 private struct OnboardingPermissions: View {
-    @State private var isTrusted = AXIsProcessTrusted()
+    let center: PermissionCenter
+    let openDetails: () -> Void
     @State private var launchAtLogin = LaunchAtLogin.isEnabled
     @State private var launchError: String?
+
+    private var isTrusted: Bool { center.state(of: .accessibility) == .granted }
 
     var body: some View {
         VStack(spacing: 10) {
             HStack(spacing: 10) {
-                Image(systemName: isTrusted ? "checkmark.circle.fill" : "hand.raised.fill")
-                    .font(.system(size: 18))
-                    .foregroundStyle(isTrusted ? .green : .blue)
+                PermissionIcon(permission: .accessibility, size: 22)
                 VStack(alignment: .leading, spacing: 1) {
                     Text("Accessibilité")
                         .font(.system(size: 13, weight: .semibold))
-                    Text(isTrusted ? "Autorisée" : "Facultative, modifiable à tout moment")
+                    Text(isTrusted ? "Autorisée" : "Recommandée : touches du clavier et menus")
                         .font(.system(size: 11))
                         .foregroundStyle(.secondary)
                 }
                 Spacer()
-                if !isTrusted {
-                    Button("Autoriser…", action: requestAccessibility)
+                if isTrusted {
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.system(size: 18))
+                        .foregroundStyle(.green)
+                } else {
+                    Button("Autoriser…") { center.request(.accessibility) }
                         .buttonStyle(.standBy(.small))
                 }
             }
-            .padding(12)
+            .padding(10)
             .background(.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
 
-            Toggle(isOn: Binding(get: { launchAtLogin }, set: setLaunchAtLogin)) {
-                Text("Lancer Notchkit à l'ouverture de session")
-                    .font(.system(size: 13))
+            HStack {
+                Toggle(isOn: Binding(get: { launchAtLogin }, set: setLaunchAtLogin)) {
+                    Text("Lancer à l'ouverture de session")
+                        .font(.system(size: 12))
+                }
+                .toggleStyle(.switch)
+                .controlSize(.small)
+                Spacer()
+                Button("Détail des autorisations…", action: openDetails)
+                    .buttonStyle(.link)
+                    .font(.system(size: 12))
             }
-            .toggleStyle(.switch)
-            .padding(.horizontal, 12)
+            .padding(.horizontal, 10)
 
             if let launchError {
                 Text(launchError)
@@ -260,20 +273,14 @@ private struct OnboardingPermissions: View {
                     .foregroundStyle(.red)
             }
         }
-        .frame(maxWidth: 420)
-        // L'autorisation se donne dans les Réglages Système : on suit son état en direct.
+        .frame(maxWidth: 440)
+        // Les autorisations se donnent dans les Réglages Système : on suit leur état en direct.
         .task {
             while !Task.isCancelled {
+                center.refresh()
                 try? await Task.sleep(for: .seconds(1))
-                let trusted = AXIsProcessTrusted()
-                if trusted != isTrusted { withAnimation(.snappy) { isTrusted = trusted } }
             }
         }
-    }
-
-    private func requestAccessibility() {
-        MediaKeyTap.requestTrust()
-        MediaKeyTap.openAccessibilitySettings()
     }
 
     private func setLaunchAtLogin(_ enabled: Bool) {

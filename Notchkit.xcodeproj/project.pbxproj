@@ -155,6 +155,7 @@
 		A4E4BA4B21EBC058DDC75DF4 /* ServicesViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80663A85CF05888B948AA24F /* ServicesViews.swift */; };
 		A56A56BB6242B685DE85A1A9 /* SystemHUDModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13612A2C0214BDCDDBF00C6C /* SystemHUDModule.swift */; };
 		A6596D02BBF2A11F995B9CF5 /* SystemControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE7398DD9F8BB31AAAC295D /* SystemControls.swift */; };
+		A6F605C9057DE7C49215268B /* PermissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE86DB6076C7D573D4DDA25 /* PermissionTests.swift */; };
 		A7A432CCFD9E85A7069F6DF1 /* OpenMeteoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E812AE3C1D2CCF46FF79A3 /* OpenMeteoClient.swift */; };
 		A82ADE0CE71C07E58C944C16 /* now_playing.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBB0A65EC51EF3F4A67EB2F /* now_playing.m */; };
 		AB56A68BD40C4A5C39C4ED1E /* ClaudeHooksInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F59B743A5CB9C111DD7BEB /* ClaudeHooksInstaller.swift */; };
@@ -163,6 +164,7 @@
 		B065278DF2DA2018030030EE /* NotchAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB3060B718647EFCAAA46CA /* NotchAppearance.swift */; };
 		B136E4FC26610A03D60D8ED3 /* NotchContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD303760BD8B274346EBC38 /* NotchContainerView.swift */; };
 		B3C4DCC598F1A9070B3F668A /* helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF7506AC056617E590D6805 /* helpers.m */; };
+		B66FFBB9EF011C74B9167149 /* PermissionsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE8A78792D0A7D64B5E40B /* PermissionsSettingsView.swift */; };
 		B68AEC6CDDBBD448132693E8 /* LockScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20084FD98CCD7BB5C7346A16 /* LockScreenTests.swift */; };
 		B8634B6DA020098358A78C4C /* env.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F0FA5356B3066E849853ED /* env.m */; };
 		B8AA4FB13AB3DF2D55CDA147 /* MediaRemoteAdapter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7A5B978655390BC3A5CD3350 /* MediaRemoteAdapter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -207,6 +209,7 @@
 		F49705A9A1C38568C414F8F7 /* ClaudeUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C529029D5145492C0C2626F /* ClaudeUsage.swift */; };
 		F5543C69BD99F610B097FB7C /* BatteryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3050DD5E00E81450E55B9 /* BatteryState.swift */; };
 		F5B442D4B8F92CE48A597EE0 /* VideoDownloadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D110312DA9149C3CEA954F /* VideoDownloadViews.swift */; };
+		F72F50D66C0FEF01A91ED954 /* PermissionCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878A72C1D109163EC22FDB6 /* PermissionCenter.swift */; };
 		FD5123957AEBF3C31011FDEC /* TogglesViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF6A4512EA9FCF3875409E0 /* TogglesViews.swift */; };
 		FE1DCA399CB2B0AD60F96FB4 /* WebAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BC44BD9A37D42A775568EA /* WebAssistant.swift */; };
 		FE84A29BB41889B5AC1BD36D /* WeatherViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAED0DCFD7BDF1DF1BDCDFFB /* WeatherViews.swift */; };
@@ -298,6 +301,7 @@
 		3E5200FEB865B8DCA4D43E73 /* WidgetLayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetLayoutTests.swift; sourceTree = "<group>"; };
 		3F9E3D7C9C763F9153C29C4C /* NotchWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchWindowController.swift; sourceTree = "<group>"; };
 		41C3050DD5E00E81450E55B9 /* BatteryState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryState.swift; sourceTree = "<group>"; };
+		45FE8A78792D0A7D64B5E40B /* PermissionsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsSettingsView.swift; sourceTree = "<group>"; };
 		46804D5EC7EFC5FEF7FAE1B0 /* stream.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = stream.m; sourceTree = "<group>"; };
 		48A13404708F6715E62455A7 /* Updater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Updater.swift; sourceTree = "<group>"; };
 		48E812AE3C1D2CCF46FF79A3 /* OpenMeteoClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenMeteoClient.swift; sourceTree = "<group>"; };
@@ -420,6 +424,7 @@
 		D5F6A4C1A5E799024B51A751 /* NotchPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchPanel.swift; sourceTree = "<group>"; };
 		D66674969F092062C29D4F74 /* UnlockModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockModule.swift; sourceTree = "<group>"; };
 		D7490954D53A50041640281D /* BluetoothBattery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothBattery.swift; sourceTree = "<group>"; };
+		D878A72C1D109163EC22FDB6 /* PermissionCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionCenter.swift; sourceTree = "<group>"; };
 		D87D32299F6B58A261AA0D12 /* get.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = get.h; sourceTree = "<group>"; };
 		DB25FBA895731ACD6329CB6F /* LayoutPresets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPresets.swift; sourceTree = "<group>"; };
 		DBA8D3B1EA83E4A1C07F1F13 /* NotchkitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotchkitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -440,6 +445,7 @@
 		E9F9740079B75CA6BAFEB2B7 /* MusicModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicModule.swift; sourceTree = "<group>"; };
 		EA785DE3AC695C0AF583A476 /* ClipboardViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardViews.swift; sourceTree = "<group>"; };
 		EAA7229611A368126FFE3BB4 /* ActivityClock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityClock.swift; sourceTree = "<group>"; };
+		EAE86DB6076C7D573D4DDA25 /* PermissionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionTests.swift; sourceTree = "<group>"; };
 		EAED0DCFD7BDF1DF1BDCDFFB /* WeatherViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViews.swift; sourceTree = "<group>"; };
 		EBC003A2AFD9DF19423FCE75 /* GitHubAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAPI.swift; sourceTree = "<group>"; };
 		EE9D3F695623AF356C363ADE /* LayoutSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutSettingsView.swift; sourceTree = "<group>"; };
@@ -544,6 +550,7 @@
 				C2C5A87DB129504ADDB120AF /* MascotMotionTests.swift */,
 				FC306A7DAC40B0ECC5A20A71 /* ModuleManagerTests.swift */,
 				DE6111A0CC43713D888AAAB4 /* MusicTests.swift */,
+				EAE86DB6076C7D573D4DDA25 /* PermissionTests.swift */,
 				A097E4F52274645DD920E62C /* ShelfTests.swift */,
 				82E32A0CD723246EBCF3F295 /* SpectrumTests.swift */,
 				1540EC4F1FC0F674F96EB7CE /* SystemHUDTests.swift */,
@@ -614,10 +621,19 @@
 			children = (
 				3D264AF1EE80180C7CCB9778 /* AppearanceSettingsView.swift */,
 				EE9D3F695623AF356C363ADE /* LayoutSettingsView.swift */,
+				45FE8A78792D0A7D64B5E40B /* PermissionsSettingsView.swift */,
 				C4B90EDE60261A06FD92A08E /* SettingsView.swift */,
 				6CE100D153781049292573AA /* SettingsWindowController.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		2B8B6F1AF8254DD146A0848D /* Permissions */ = {
+			isa = PBXGroup;
+			children = (
+				D878A72C1D109163EC22FDB6 /* PermissionCenter.swift */,
+			);
+			path = Permissions;
 			sourceTree = "<group>";
 		};
 		2FF7B1083BD3D846923E8E5E /* Onboarding */ = {
@@ -1083,6 +1099,7 @@
 				96B4B76E71C0F50640CAFAA0 /* Layout */,
 				B8796CCD9B4BF844F90B33D6 /* Licensing */,
 				B380B3D4930B5A176B1AA7DD /* Modules */,
+				2B8B6F1AF8254DD146A0848D /* Permissions */,
 				9469C7A29AF49541033E5D3C /* Settings */,
 				F565BF38A9D0E8744ED4E0B3 /* State */,
 				B5E768E5B6D8CE6930ADF8A3 /* Utilities */,
@@ -1451,6 +1468,8 @@
 				743DF3635CD73F1F95DF92FC /* OnboardingStep.swift in Sources */,
 				0D8F43C59112452F0B59F026 /* OnboardingView.swift in Sources */,
 				A7A432CCFD9E85A7069F6DF1 /* OpenMeteoClient.swift in Sources */,
+				F72F50D66C0FEF01A91ED954 /* PermissionCenter.swift in Sources */,
+				B66FFBB9EF011C74B9167149 /* PermissionsSettingsView.swift in Sources */,
 				CF7166A65434F3E4E1E01E77 /* PowerSourceMonitor.swift in Sources */,
 				8470D79901C001C16067AFC0 /* ProjectDetector.swift in Sources */,
 				E38E6D1F1CE0969164BCA220 /* PromoSnapshots.swift in Sources */,
@@ -1520,6 +1539,7 @@
 				ACC2691B6DB872770EDE7CA0 /* MascotMotionTests.swift in Sources */,
 				601D9B8C8D44ED81CC990946 /* ModuleManagerTests.swift in Sources */,
 				E954032D743568B2082B51F8 /* MusicTests.swift in Sources */,
+				A6F605C9057DE7C49215268B /* PermissionTests.swift in Sources */,
 				AC7269EC36E5FC05D7BD7336 /* ShelfTests.swift in Sources */,
 				0CE35712354CA83AF734444A /* SpectrumTests.swift in Sources */,
 				5745C9E89B5256A77822D3EF /* SystemHUDTests.swift in Sources */,

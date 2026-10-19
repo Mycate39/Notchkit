@@ -45,7 +45,7 @@ enum OnboardingStep: Int, CaseIterable, Identifiable, Sendable {
         case .widgets:
             "Commencez avec une disposition prête à l'emploi. Vous pourrez ensuite ajouter, retirer et redimensionner chaque widget dans les réglages."
         case .permissions:
-            "L'autorisation Accessibilité permet d'afficher le volume et la luminosité quand vous utilisez les touches du clavier, et d'éviter que l'encoche cache les menus. Elle est facultative."
+            "Notchkit ne demande une autorisation que lorsqu'une fonction en a besoin, et toutes sont facultatives. L'Accessibilité est la plus utile : donnez-la dès maintenant."
         case .done:
             "Notchkit est prêt. Vous retrouverez les réglages et ce tutoriel dans le menu Notchkit de la barre des menus."
         }

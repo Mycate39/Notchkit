@@ -44,7 +44,7 @@ Notchkit/
     State/        NotchViewModel (dépliage/repliage, survol, bulles), NotchLayout (toutes les tailles et ressorts), NotchAlert
     Window/       NotchPanel, NotchWindowController, NotchHostingView (zones de survol), ScreenLocator, MenuBarAvoidance,
                   LockScreenSpace (espace SkyLight au-dessus des bureaux), DropCatcher (réception du glisser-déposer)
-    Permissions/  PermissionCenter (état et demande des 7 autorisations macOS)
+    Permissions/  PermissionCenter (état et demande des 8 autorisations macOS)
     Layout/       WidgetLayout (pages, tailles), LayoutPresets
     Settings/     AppSettings, NotchAppearance, SettingsStore (décodage tolérant), LaunchAtLogin
     Drop/ Licensing/ Utilities/ (AutomatedRun, Haptics, ObservationTracking)
@@ -116,11 +116,11 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 
 **Bêta** : même procédure, avec `MARKETING_VERSION` `x.y.z-beta.N` (le build augmente normalement), tag `vx.y.z-beta.N`, `gh release create … --prerelease --latest=false`, et **sans** étape `appcast.xml` : les utilisateurs actuels ne la reçoivent pas automatiquement.
 
-## État (19 octobre 2026 : 1.0.6 publiée, 2.0.0 beta 1 en préversion)
+## État (20 octobre 2026 : 1.0.6 publiée, 2.0.0 beta 2 en préversion)
 
 ### Fonctionne
 - Fenêtre d'encoche sur n'importe quel écran : vraie encoche, encoche simulée ou pilule flottante ; reste en place à travers les Spaces ; se décale à droite pour ne jamais masquer les menus de l'app active (nécessite l'autorisation Accessibilité).
-- Activités compactes, mini-encoches, menu empilé, zones de survol séparées, contour style Dynamic Island.
+- Activités compactes, mini-encoches, menu empilé, zones de survol séparées, contour style Dynamic Island. Une bulle qui a des commandes (`bubbleControls()`, ex. la musique) s'allonge vers la droite au survol au lieu d'ouvrir l'encoche ; `bubblePriority` garde la bulle de la musique en pause.
 - Encoche dépliée avec pages et widgets en quatre tailles, éditeur de disposition, dispositions prêtes à l'emploi, taille d'encoche personnalisée, contrôles style StandBy, couleur d'accent, fond Liquid Glass (macOS 26). Réglages groupés par catégorie.
 - Modules historiques : Musique, Horloge, Batterie, Calendrier, Météo, Claude Code, Étagère + AirDrop, AirPods/Bluetooth, Activités en direct, Presse-papiers, HUD volume/luminosité (aussi Touch Bar et Centre de contrôle), Déverrouillage, Téléchargements vidéo.
 - Ajouts de la 1.0 (masqués par défaut) : Captures d'écran (contextuel), Étagère contextuelle avec texte déposé et actions (ZIP, conversion, iCloud Drive), Commutateurs rapides (mode sombre, anti-veille, icônes du bureau, verrouillage clavier), Webcam, Journée, Notes, chronomètre/alarmes/Pomodoro, Rappels (EventKit), Moniteur système (échantillonneur partagé `SystemSampler`, actif seulement si une carte est visible), Dashboard, Temps d'écran et Santé (mesurés localement), Traduction (framework Translation, macOS 15+), Ancrage des fenêtres.
@@ -133,7 +133,8 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 - Fait depuis (19/10/2026) :
   - Page Agents (`Modules/Agents`, pleine page, `fullPage`) inspirée de coucou : mascotte choisie parmi 33 (Réglages > Apparence, aussi dans l'encoche repliée), étapes de Claude Code, éditeur et terminal en direct, autorisations et questions de Claude Code répondues depuis l'encoche (hooks version 4 ; pendant une question, le panneau prend toute la page). Widgets Claude Code et Ollama retirés ; Claude Code n'est plus un module à part dans les réglages : c'est le moteur de la page Agents (`companionOf: "agents"`, activé avec elle), dont seule l'intégration (hooks) reste réglable, dans la page du widget Agents. Délai pour répondre depuis l'encoche supprimé. Widgets Git et GitHub, et services Vercel / Stripe, supprimés (19/10/2026). La discussion avec la mascotte (Apple Intelligence ou Claude, avec outils façon Siri) a été essayée puis abandonnée le 19/10/2026 : trop limitée face au nouveau Siri, ne pas la refaire.
   - Mascotte interactive : réactions au clic, sons synthétisés (`MascotSounds`, aucun fichier, transposés d'une quarte vers le grave), réglables dans Apparence.
-  - Mode jeu (`Modules/GameMode`) : encoche discrète et statistiques CPU/GPU/température, automatique ou manuel.
+  - Publié dans la beta 2 (`v2.0.0-beta.2`, 19/10/2026) : tous les points de cette liste, sauf le compteur d'images par seconde du mode jeu et les commandes de la bulle de la musique (20/10/2026).
+  - Mode jeu (`Modules/GameMode`) : encoche discrète et images par seconde seulement (`FrameRateMeter` : ScreenCaptureKit compte les images complètes de l'app au premier plan, autorisation Enregistrement de l'écran). S'active comme le mode jeu de macOS (jeu en plein écran au premier plan, `FullScreenDetector`), ou à la main.
   - Centre du son dans le panneau du volume : sortie, micro, apps qui jouent (repli sur l'app « À l'écoute », les navigateurs ne signalant pas toujours leur sortie), volume par app par interception Core Audio (macOS 14.2+).
   - Onglet Autorisations et synthèse dans le tutoriel ; curseurs Liquid Glass (macOS 26+) ; zones cliquables agrandies ; boutons natifs dans les réglages.
   - Convertisseur (`Modules/Converter`, widget temporaire) : images, audio (afconvert), vidéo (AVFoundation, GIF), documents (CoreText) et PDF ; zones de dépôt toujours proposées : étagère, Convertir, AirDrop ; dépôt direct sur sa page ouverte.

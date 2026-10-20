@@ -78,9 +78,9 @@ final class ModuleManager {
     var secondaryCompactModules: [any NotchModule] {
         guard let primary = compactModule else { return [] }
         let others = displayedModules.filter {
-            $0.moduleID != primary.moduleID && $0.compactPriority >= .normal && $0.compactLeading() != nil
+            $0.moduleID != primary.moduleID && $0.bubblePriority >= .normal && $0.compactLeading() != nil
         }
-        return Array(others.sorted { $0.compactPriority > $1.compactPriority }.prefix(NotchLayout.maxBubbles))
+        return Array(others.sorted { $0.bubblePriority > $1.bubblePriority }.prefix(NotchLayout.maxBubbles))
     }
 
     // MARK: - Disposition des widgets

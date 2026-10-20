@@ -73,6 +73,12 @@ enum NotchLayout {
     static let bubbleGap: CGFloat = 6
     /// Décalage du menu déroulé sous le bord de l'écran, en mode encoche.
     static let bubbleMenuTopInset: CGFloat = 4
+    /// Commandes d'une bulle (musique) : elles sortent peu après l'arrivée de la souris
+    /// et rentrent un peu après son départ (passer de la bulle aux commandes ne les referme pas).
+    static let bubbleControlsOpenDelay: TimeInterval = 0.12
+    static let bubbleControlsCloseDelay: TimeInterval = 0.3
+    /// Largeur gagnée par la bulle qui montre ses commandes (trois boutons).
+    static let bubbleControlsContentWidth: CGFloat = 100
 
     /// Forme noire dessinée ? (fonction pure, testée). Sur une encoche matérielle au repos, une
     /// forme par-dessus serait un peu plus large (congés) et ses coins ne tomberaient pas

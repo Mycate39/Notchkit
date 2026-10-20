@@ -122,6 +122,7 @@ final class NotchViewModel {
         hoverTask?.cancel()
         bubbleHoverTask?.cancel()
         bubbleMenuRequested = false
+        closeBubbleControls()
         if isHovering { withAnimation(.easeOut(duration: 0.18)) { isHovering = false } }
         alertTask?.cancel()
         if currentAlert != nil { withAnimation(NotchLayout.spring) { currentAlert = nil } }
@@ -140,6 +141,7 @@ final class NotchViewModel {
             bubbleHoverTask?.cancel()
             holdReasons.removeAll()
             bubbleMenuRequested = false
+            closeBubbleControls()
             isHovering = false
             if isDropMode {
                 isDropMode = false
@@ -164,7 +166,42 @@ final class NotchViewModel {
     /// Ouvre ou ferme le menu des bulles (souris sur la pile).
     func setBubbleMenuOpen(_ open: Bool) {
         guard open != bubbleMenuRequested, !(open && isScreenLocked) else { return }
+        if !open { closeBubbleControls() }
         withAnimation(NotchLayout.spring) { bubbleMenuRequested = open }
+    }
+
+    /// Bulle allongée pour montrer ses commandes (souris dessus).
+    private var bubbleControlsRequested: String?
+    var bubbleControlsID: String? {
+        guard let id = bubbleControlsRequested, bubbleModules.contains(where: { $0.moduleID == id }) else { return nil }
+        return id
+    }
+    @ObservationIgnored private var bubbleControlsTask: Task<Void, Never>?
+    /// Parties survolées : la bulle et ses commandes (l'ordre des entrées et sorties n'est pas garanti).
+    @ObservationIgnored private var hoveredControlParts: Set<BubbleControlPart> = []
+
+    enum BubbleControlPart: Hashable { case bubble, controls }
+
+    /// Survol d'une bulle qui a des commandes : elles sortent à droite, l'encoche reste repliée.
+    func hoverBubbleControls(_ moduleID: String, part: BubbleControlPart, inside: Bool) {
+        if inside { hoveredControlParts.insert(part) } else { hoveredControlParts.remove(part) }
+        guard !isScreenLocked, !isQuiet else { return }
+        let target = hoveredControlParts.isEmpty ? nil : moduleID
+        bubbleControlsTask?.cancel()
+        guard target != bubbleControlsRequested else { return }
+        let delay = target != nil ? NotchLayout.bubbleControlsOpenDelay : NotchLayout.bubbleControlsCloseDelay
+        bubbleControlsTask = Task { [weak self] in
+            try? await Task.sleep(for: .seconds(delay))
+            guard !Task.isCancelled, let self else { return }
+            if target != nil { Haptics.play(.step) }
+            withAnimation(NotchLayout.spring) { self.bubbleControlsRequested = target }
+        }
+    }
+
+    private func closeBubbleControls() {
+        bubbleControlsTask?.cancel()
+        hoveredControlParts.removeAll()
+        bubbleControlsRequested = nil
     }
 
     /// Les bulles sont une zone à part : les survoler n'active pas la grande encoche.
@@ -241,7 +278,9 @@ final class NotchViewModel {
                               island: isIsland)
         // Place autour de la forme pour que l'ombre (survol ou encoche dépliée) ne soit pas coupée.
         // Bulles à droite : la fenêtre s'élargit des deux côtés pour garder l'encoche centrée.
-        let bubbles = NotchLayout.bubblesWidth(count: bubbleModules.count, geometry: geometry, island: isIsland)
+        var bubbles = NotchLayout.bubblesWidth(count: bubbleModules.count, geometry: geometry, island: isIsland)
+        // Commandes sorties d'une bulle : place à droite (et autant à gauche, pour rester centré).
+        if bubbleControlsID != nil { bubbles += NotchLayout.bubbleControlsContentWidth }
         let margin = isExpanded ? NotchLayout.expandedShadowMargin : (showsHoverShadow ? NotchLayout.hoverShadowMargin : 0)
         guard margin > 0 || bubbles > 0 else { return size }
         var height = size.height + margin
@@ -303,6 +342,7 @@ final class NotchViewModel {
         // Le menu des bulles se referme : l'encoche dépliée prend le relais.
         bubbleMenuRequested = false
         bubbleHoverTask?.cancel()
+        closeBubbleControls()
         Haptics.play(.tap)
         settleTask?.cancel()
         withAnimation(NotchLayout.spring) {

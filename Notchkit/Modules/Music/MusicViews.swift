@@ -281,6 +281,8 @@ private struct PlaybackControls: View {
     /// Grands glyphes (sinon taille intermédiaire, pour les cartes basses).
     var large = true
     var spacing: CGFloat = 34
+    /// Retour haptique du trackpad à chaque appui (commandes de la bulle).
+    var haptics = false
 
     // Glyphes blancs pleins, sans fond ; lecture/pause plus grand que précédent/suivant.
     var body: some View {
@@ -298,13 +300,26 @@ private struct PlaybackControls: View {
 
     private func control(_ symbol: String, size: CGFloat, help: LocalizedStringKey,
                          action: @escaping () -> Void) -> some View {
-        Button(action: action) {
+        Button {
+            if haptics { Haptics.play(.tap) }
+            action()
+        } label: {
             Image(systemName: symbol)
                 .font(.system(size: size, weight: .bold))
                 .contentTransition(.symbolEffect(.replace))
         }
         .buttonStyle(GlyphButtonStyle())
         .help(help)
+    }
+}
+
+/// Commandes sorties à droite de la bulle de la musique, au survol.
+struct BubblePlaybackControls: View {
+    let module: MusicModule
+    let isPlaying: Bool
+
+    var body: some View {
+        PlaybackControls(module: module, isPlaying: isPlaying, compact: true, haptics: true)
     }
 }
 

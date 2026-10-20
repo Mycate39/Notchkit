@@ -235,6 +235,11 @@ final class MusicModule: NotchModule {
         showInCompact && nowPlaying?.isPlaying == true ? .normal : .none
     }
 
+    /// En pause, la bulle reste (pour relancer la lecture depuis ses commandes).
+    var bubblePriority: ModulePriority {
+        showInCompact && nowPlaying != nil ? .normal : .none
+    }
+
     var expandedWidthWeight: CGFloat { 2 }
 
     /// Affichage replié façon Dynamic Island : pochette à gauche, barres teintées à droite.
@@ -254,6 +259,11 @@ final class MusicModule: NotchModule {
                 .frame(width: 26)
                 .padding(.vertical, 1)
         )
+    }
+
+    func bubbleControls() -> AnyView? {
+        guard let nowPlaying else { return nil }
+        return AnyView(BubblePlaybackControls(module: self, isPlaying: nowPlaying.isPlaying))
     }
 
     func expandedView() -> AnyView {

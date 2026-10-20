@@ -108,14 +108,14 @@ private struct CompactBubbles: View {
         let resting: AnyShape = geometry.style == .notch
             ? AnyShape(NotchShape(earRadius: NotchLayout.earRadius, topCornerRadius: 0,
                                   bottomCornerRadius: min(10, diameter / 3)))
-            : AnyShape(Circle())
+            : AnyShape(Capsule())
 
         Group {
             if ids.count >= 2 {
                 stack(ids, diameter: diameter, width: width, resting: resting)
             } else if let id = ids.first {
                 bubble(id, diameter: diameter, width: width, shape: resting)
-                    .onHover { viewModel.hoverBubble(id, inside: $0) }
+                    .onHover { hover(id, inside: $0) }
                     .transition(.scale(scale: 0.4).combined(with: .opacity))
             }
         }
@@ -132,10 +132,10 @@ private struct CompactBubbles: View {
         VStack(spacing: NotchLayout.bubbleGap) {
             if isOpen {
                 ForEach(Array(ids.enumerated()), id: \.element) { index, id in
-                    bubble(id, diameter: diameter, width: diameter, shape: AnyShape(Circle()))
+                    bubble(id, diameter: diameter, width: diameter, shape: AnyShape(Capsule()))
                         // La première bulle naît de la pile (même emplacement, la forme s'arrondit).
                         .matchedGeometryEffect(id: index == 0 ? "pile" : id, in: namespace)
-                        .onHover { viewModel.hoverBubble(id, inside: $0) }
+                        .onHover { hover(id, inside: $0) }
                         // Les suivantes tombent l'une après l'autre, avec un léger décalage.
                         .transition(index == 0 ? .opacity : .asymmetric(
                             insertion: .scale(scale: 0.5, anchor: .top)
@@ -155,21 +155,32 @@ private struct CompactBubbles: View {
         .padding(.top, isOpen && viewModel.geometry.style == .notch ? NotchLayout.bubbleMenuTopInset : 0)
         .frame(width: width, alignment: .top)
         .contentShape(Rectangle())
-        .onHover { inside in
-            closeTask?.cancel()
-            if inside {
-                viewModel.setBubbleMenuOpen(true)
-            } else {
-                // Petit délai : passer d'une bulle à l'autre ne referme pas le menu.
-                closeTask = Task { @MainActor in
-                    try? await Task.sleep(for: .milliseconds(250))
-                    guard !Task.isCancelled else { return }
-                    viewModel.setBubbleMenuOpen(false)
-                }
-            }
-        }
+        .onHover { hoverMenu($0) }
         .animation(NotchLayout.spring, value: isOpen)
         .transition(.scale(scale: 0.4).combined(with: .opacity))
+    }
+
+    private func hoverMenu(_ inside: Bool) {
+        closeTask?.cancel()
+        if inside {
+            viewModel.setBubbleMenuOpen(true)
+        } else {
+            // Petit délai : passer d'une bulle à l'autre (ou à ses commandes) ne referme pas le menu.
+            closeTask = Task { @MainActor in
+                try? await Task.sleep(for: .milliseconds(250))
+                guard !Task.isCancelled else { return }
+                viewModel.setBubbleMenuOpen(false)
+            }
+        }
+    }
+
+    /// Survol d'une bulle : elle s'allonge vers la droite avec ses commandes si elle en a, sinon l'encoche s'ouvre sur sa page.
+    private func hover(_ id: String, inside: Bool) {
+        if viewModel.manager.module(for: id)?.bubbleControls() != nil {
+            viewModel.hoverBubbleControls(id, part: .bubble, inside: inside)
+        } else {
+            viewModel.hoverBubble(id, inside: inside)
+        }
     }
 
     /// Pile repliée : l'activité la plus importante et le nombre d'activités rangées.
@@ -189,12 +200,26 @@ private struct CompactBubbles: View {
 
     // MARK: Bulle
 
+    /// Une bulle. Survolée, une bulle qui a des commandes (musique) s'allonge vers la droite pour
+    /// les montrer ; sa place dans la mise en page ne change pas (elle déborde à droite).
     private func bubble(_ id: String, diameter: CGFloat, width: CGFloat, shape: AnyShape) -> some View {
         Group {
             if let module = viewModel.manager.module(for: id), let content = module.compactLeading() {
-                content
-                    .frame(width: diameter * 0.62, height: diameter * 0.62)
-                    .frame(width: width, height: diameter)
+                let controls = viewModel.bubbleControlsID == id ? module.bubbleControls() : nil
+                HStack(spacing: 0) {
+                    content
+                        .frame(width: diameter * 0.62, height: diameter * 0.62)
+                        .frame(width: width, height: diameter)
+                        .contentShape(Rectangle())
+                        .onTapGesture { viewModel.expand(showing: id) }
+                    if let controls {
+                        controls
+                            // Mode encoche : les commandes restent à l'écart du congé de droite.
+                            .frame(width: NotchLayout.bubbleControlsContentWidth, height: diameter)
+                            .padding(.trailing, viewModel.geometry.style == .notch ? NotchLayout.earRadius : 0)
+                            .transition(.opacity.combined(with: .scale(scale: 0.6, anchor: .leading)))
+                    }
+                }
                     .notchBackground(viewModel.appearance, style: viewModel.geometry.style, shape: shape)
                     .overlay {
                         // Même fin contour que l'île : pastille flottante, menu déroulé, barre sombre.
@@ -210,10 +235,10 @@ private struct CompactBubbles: View {
                     // (1 pt) reste, au lieu d'un trait de 2 pt rogné par le bord de la fenêtre.
                     .clipShape(shape)
                     .contentShape(shape)
-                    .onTapGesture { viewModel.expand(showing: id) }
                     .help(Text(type(of: module).descriptor.name))
             }
         }
+        .frame(width: width, height: diameter, alignment: .leading)
     }
 }
 

@@ -84,6 +84,12 @@ protocol NotchModule: AnyObject, Observable {
     /// Largeur de chaque côté de l'encoche repliée : juste la place du contenu le plus long
     /// (fixe, pour que la forme ne saute pas quand un chiffre change).
     var compactSideWidth: CGFloat { get }
+    /// Priorité en bulle (activité secondaire, à droite de l'encoche) ; `compactPriority` par défaut.
+    /// Ex. la musique en pause garde sa bulle pour pouvoir la relancer, sans occuper l'encoche.
+    var bubblePriority: ModulePriority { get }
+    /// Commandes qui sortent à droite de sa bulle au survol, sans déplier l'encoche
+    /// (ex. précédent, lecture/pause, suivant pour la musique). `nil` : le survol ouvre sa page.
+    func bubbleControls() -> AnyView?
     /// Contenu affiché quand l'encoche est dépliée.
     func expandedView() -> AnyView
     /// Largeur relative de la carte dans l'encoche dépliée (1 = normale, 2 = double).
@@ -104,6 +110,8 @@ extension NotchModule {
     func stop() {}
     func compactLeading() -> AnyView? { nil }
     func compactTrailing() -> AnyView? { nil }
+    func bubbleControls() -> AnyView? { nil }
+    var bubblePriority: ModulePriority { compactPriority }
     var compactIsland: Bool { false }
     var compactSideWidth: CGFloat { NotchLayout.activitySideWidth }
     func settingsView() -> AnyView? { nil }

@@ -32,11 +32,13 @@ struct MediaKeyTests {
         #expect(state.symbol == "sun.min.fill")
     }
 
-    @Test func alerteLargeElargitLEncoche() {
-        let geometry = NotchGeometry(style: .notch, closedSize: CGSize(width: 185, height: 32), screenFrame: .zero, centerX: 0)
-        let normal = NotchLayout.shapeSize(for: geometry, isExpanded: false, hasCompactContent: true)
-        let wide = NotchLayout.shapeSize(for: geometry, isExpanded: false, hasCompactContent: true, sideWidth: 112)
-        #expect(wide.width - normal.width == (112 - NotchLayout.compactSideWidth) * 2)
+    @Test @MainActor func alertesALaLargeurDeLaMusique() {
+        let settings = SettingsStore(defaults: UserDefaults(suiteName: "notchkit.tests.\(UUID().uuidString)")!)
+        let manager = ModuleManager(settings: settings, entitlements: EntitlementManager(), availableModules: [])
+        let viewModel = NotchViewModel(manager: manager, settings: settings)
+        viewModel.present(NotchAlert(duration: .seconds(5)))
+        #expect(viewModel.compactSideWidth == NotchLayout.activitySideWidth)
+        #expect(NotchLayout.compactSideWidth == NotchLayout.activitySideWidth)
     }
 }
 

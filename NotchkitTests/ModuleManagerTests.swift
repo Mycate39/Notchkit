@@ -276,8 +276,8 @@ struct NotchLayoutTests {
         let settings = SettingsStore(defaults: UserDefaults(suiteName: "notchkit.tests.\(UUID().uuidString)")!)
         let manager = ModuleManager(settings: settings, entitlements: EntitlementManager(), availableModules: [])
         let viewModel = NotchViewModel(manager: manager, settings: settings)
-        viewModel.menuLimitedSideWidth = 40
-        #expect(viewModel.compactSideWidth == 40)
+        viewModel.menuLimitedSideWidth = 30
+        #expect(viewModel.compactSideWidth == 30)
         viewModel.menuLimitedSideWidth = 0
         #expect(viewModel.compactSideWidth == NotchLayout.compactSideWidth)
         viewModel.menuLimitedSideWidth = nil

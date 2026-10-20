@@ -72,8 +72,7 @@ final class SystemHUDModule: NotchModule {
         var alert = NotchAlert(
             leading: AnyView(HUDIcon(state: hud)),
             trailing: AnyView(HUDLevelBar(state: hud)),
-            duration: .seconds(1.6),
-            sideWidth: 112
+            duration: .seconds(1.6)
         )
         // Survoler l'indicateur ouvre le centre du son.
         alert.openModuleID = Self.descriptor.id

@@ -121,7 +121,7 @@ enum PromoSnapshots {
         let hud = SystemHUDModule(context: context)
         hud.debugShow(.volume, level: 0.62)
         if let alert = lastAlert() {
-            save(compact(alert.leading, alert.trailing, sideWidth: alert.sideWidth), to: file("09-volume"))
+            save(compact(alert.leading, alert.trailing, sideWidth: nil), to: file("09-volume"))
         }
 
         // Modules de la 1.0 (cartes de vérification).

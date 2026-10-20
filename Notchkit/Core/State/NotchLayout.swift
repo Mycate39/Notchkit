@@ -34,11 +34,10 @@ struct NotchGeometry: Equatable, Sendable {
 enum NotchLayout {
     /// Rayon des petits « congés » concaves qui raccordent l'encoche au bord de l'écran.
     static let earRadius: CGFloat = 8
-    /// Largeur ajoutée de chaque côté de l'encoche pour le contenu compact.
-    /// Largeur de chaque côté pour une activité (musique, minuteur, Claude…) : la même pour toutes,
-    /// celle de la pochette et des barres de la musique. Les alertes gardent `compactSideWidth`.
+    /// Largeur ajoutée de chaque côté de l'encoche repliée : la même pour toutes les activités et
+    /// alertes (musique, minuteur, chargeur, volume…), celle de la pochette et des barres de la musique.
     static let activitySideWidth: CGFloat = 38
-    static let compactSideWidth: CGFloat = 72
+    static let compactSideWidth: CGFloat = activitySideWidth
     /// Taille de l'encoche dépliée.
     /// Apparence en vigueur (mise à jour par l'AppDelegate quand les réglages changent ;
     /// lue et écrite uniquement sur le thread principal).

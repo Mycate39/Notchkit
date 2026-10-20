@@ -143,3 +143,12 @@ struct ChargeTimeTests {
         #expect(priority(nil) == .none)
     }
 }
+
+/// Icône de batterie façon macOS 27 : pourcentage dans la jauge.
+struct BatteryGlyphTests {
+    @Test func pourcentageDansLaJauge() {
+        #expect(BatteryGlyph.percentage(for: 0.714) == 71)
+        #expect(BatteryGlyph.percentage(for: 1.2) == 100)
+        #expect(BatteryGlyph.percentage(for: -0.1) == 0)
+    }
+}

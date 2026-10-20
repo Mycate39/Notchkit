@@ -174,11 +174,8 @@ final class BatteryModule: NotchModule {
                     .help(Text("Temps restant avant la charge complète"))
             )
         }
-        return AnyView(
-            Text("\(state.level) %")
-                .monospacedDigit()
-                .foregroundStyle(BatteryStyle.textColor(for: state, isLowPowerMode: isLowPowerMode))
-        )
+        // Le pourcentage est déjà dans l'icône (comme sur macOS 27).
+        return nil
     }
 
     func miniView() -> AnyView {
@@ -188,10 +185,11 @@ final class BatteryModule: NotchModule {
             })
         }
         return AnyView(
-            MiniWidget(value: "\(state.level) %", caption: miniCaption(for: state),
+            // Le pourcentage est dans la jauge : pas de valeur en dessous.
+            MiniWidget(value: nil, caption: miniCaption(for: state),
                        tint: BatteryStyle.textColor(for: state, isLowPowerMode: isLowPowerMode),
                        keepsCaption: state.status == .charging && state.minutesToFull != nil) {
-                BatteryGlyph(state: state, isLowPowerMode: isLowPowerMode, size: CGSize(width: 36, height: 17))
+                BatteryGlyph(state: state, isLowPowerMode: isLowPowerMode, size: CGSize(width: 44, height: 21))
             }
         )
     }

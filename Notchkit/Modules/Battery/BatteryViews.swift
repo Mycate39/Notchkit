@@ -20,21 +20,24 @@ enum BatteryStyle {
 
 // MARK: - Jauge
 
-/// Icône de batterie dessinée à la main : contour, remplissage proportionnel et éclair si branchée.
+/// Icône de batterie de macOS 27 : capsule grise remplie de blanc (ou de la couleur d'état) selon
+/// le niveau, pourcentage évidé au centre, éclair évidé à côté pendant la charge, petite borne à droite.
 struct BatteryGlyph: View {
     var level: Double
     var color: Color
     var showsBolt: Bool
-    var size = CGSize(width: 24, height: 11.5)
+    var size: CGSize
 
-    init(level: Double, color: Color, showsBolt: Bool, size: CGSize = CGSize(width: 24, height: 11.5)) {
+    static let defaultSize = CGSize(width: 25, height: 12)
+
+    init(level: Double, color: Color, showsBolt: Bool, size: CGSize = BatteryGlyph.defaultSize) {
         self.level = level
         self.color = color
         self.showsBolt = showsBolt
         self.size = size
     }
 
-    init(state: BatteryState, isLowPowerMode: Bool, size: CGSize = CGSize(width: 24, height: 11.5)) {
+    init(state: BatteryState, isLowPowerMode: Bool, size: CGSize = BatteryGlyph.defaultSize) {
         self.init(
             level: state.fraction,
             color: BatteryStyle.fillColor(for: state, isLowPowerMode: isLowPowerMode),
@@ -43,45 +46,50 @@ struct BatteryGlyph: View {
         )
     }
 
-    var body: some View {
-        // Proportions reprises de l'icône batterie d'Apple : contour fin et translucide,
-        // jauge séparée du contour par un liseré vide, borne en demi-capsule.
-        let height = size.height
-        let radius = height * 0.3
-        let stroke = max(1, height * 0.08)
-        let inset = stroke + max(1, height * 0.1)
-        let capWidth = max(1.5, height * 0.13)
+    /// Pourcentage affiché dans la jauge (fonction pure, testée).
+    static func percentage(for level: Double) -> Int {
+        Int((min(max(level, 0), 1) * 100).rounded())
+    }
 
-        HStack(spacing: max(0.75, height * 0.06)) {
+    var body: some View {
+        let height = size.height
+        let capsule = RoundedRectangle(cornerRadius: height * 0.36, style: .continuous)
+        let capWidth = max(1.5, height * 0.12)
+        let fraction = min(max(level, 0), 1)
+
+        HStack(spacing: max(0.75, height * 0.07)) {
             ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: radius, style: .continuous)
-                    .strokeBorder(.white.opacity(0.4), lineWidth: stroke)
-                RoundedRectangle(cornerRadius: max(1, radius - inset * 0.75), style: .continuous)
+                capsule.fill(.white.opacity(0.38))
+                // Remplissage à bord droit, découpé par la capsule.
+                Rectangle()
                     .fill(color)
-                    .frame(width: max(0, (size.width - inset * 2) * min(max(level, 0), 1)))
-                    .padding(inset)
-            }
-            .frame(width: size.width, height: size.height)
-            .overlay {
-                if showsBolt {
-                    // Éclair plein, détouré dans la jauge et le contour (comme sur iOS et macOS).
-                    ZStack {
+                    .frame(width: size.width * fraction)
+                // Chiffres (et éclair) évidés : on voit le fond de l'encoche à travers.
+                HStack(spacing: height * 0.04) {
+                    Text(verbatim: "\(Self.percentage(for: level))")
+                        .font(.system(size: height * 0.76, weight: .bold).monospacedDigit())
+                        .contentTransition(.numericText(value: fraction))
+                    if showsBolt {
                         BatteryBoltShape()
-                            .stroke(style: StrokeStyle(lineWidth: height * 0.13, lineJoin: .round))
-                            .blendMode(.destinationOut)
-                        BatteryBoltShape()
-                            .fill(.white)
+                            .frame(width: height * 0.36, height: height * 0.62)
+                            .transition(.scale.combined(with: .opacity))
                     }
-                    .frame(width: height * 0.5, height: height * 0.82)
-                    .transition(.scale.combined(with: .opacity))
                 }
+                .tracking(-0.3)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+                .padding(.horizontal, height * 0.12)
+                .frame(width: size.width, height: height)
+                .blendMode(.destinationOut)
             }
+            .frame(width: size.width, height: height)
+            .clipShape(capsule)
             .compositingGroup()
 
             // Borne de la batterie
             UnevenRoundedRectangle(bottomTrailingRadius: capWidth, topTrailingRadius: capWidth, style: .continuous)
-                .fill(.white.opacity(0.4))
-                .frame(width: capWidth, height: height * 0.36)
+                .fill(.white.opacity(0.38))
+                .frame(width: capWidth, height: height * 0.38)
         }
     }
 }
@@ -99,11 +107,6 @@ enum BatteryAlertFactory {
 
         return NotchAlert(
             leading: AnyView(BatteryAlertGlyph(level: state.fraction, color: color, isPluggedIn: event == .pluggedIn)),
-            trailing: AnyView(
-                Text("\(state.level) %")
-                    .monospacedDigit()
-                    .foregroundStyle(color)
-            ),
             duration: .seconds(event == .pluggedIn ? 3 : 2.5)
         )
     }
@@ -143,16 +146,12 @@ struct BatteryExpandedView: View {
 
     var body: some View {
         if let state = module.state, size != .small {
-            // Moyen ou grand : jauge à gauche, informations à droite.
+            // Moyen ou grand : grande jauge (pourcentage inclus) à gauche, informations à droite.
             HStack(spacing: 14) {
-                BatteryGlyph(state: state, isLowPowerMode: module.isLowPowerMode, size: CGSize(width: 54, height: 26))
+                BatteryGlyph(state: state, isLowPowerMode: module.isLowPowerMode, size: CGSize(width: 76, height: 36))
                 VStack(alignment: .leading, spacing: 3) {
-                    Text("\(state.level) %")
-                        .font(.system(size: 26, weight: .semibold, design: .rounded))
-                        .monospacedDigit()
-                        .foregroundStyle(BatteryStyle.textColor(for: state, isLowPowerMode: module.isLowPowerMode))
                     Text(statusText(state))
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.system(size: 13, weight: .semibold))
                     if let detail = detailText(state) {
                         Text(detail)
                             .font(.system(size: 11))
@@ -177,12 +176,9 @@ struct BatteryExpandedView: View {
         } else if let state = module.state {
             // Disposition verticale : la carte est étroite (une part de largeur).
             VStack(spacing: 4) {
-                BatteryGlyph(state: state, isLowPowerMode: module.isLowPowerMode, size: CGSize(width: 46, height: 22))
-                    .padding(.bottom, 2)
-                Text("\(state.level) %")
-                    .font(.system(size: 22, weight: .semibold, design: .rounded))
-                    .monospacedDigit()
-                    .foregroundStyle(BatteryStyle.textColor(for: state, isLowPowerMode: module.isLowPowerMode))
+                // Grande jauge : le pourcentage est dedans (comme sur macOS 27).
+                BatteryGlyph(state: state, isLowPowerMode: module.isLowPowerMode, size: CGSize(width: 76, height: 36))
+                    .padding(.bottom, 4)
                 Text(statusText(state))
                     .font(.system(size: 11, weight: .medium))
                 if let detail = detailText(state) {

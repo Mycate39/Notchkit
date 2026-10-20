@@ -196,12 +196,12 @@ enum SnapshotRenderer {
 
         // Jauges de batterie : niveaux, couleurs et tailles (encoche, carte, alerte).
         save(VStack(alignment: .leading, spacing: 14) {
-                ForEach([CGSize(width: 24, height: 11.5), CGSize(width: 36, height: 17), CGSize(width: 54, height: 26)],
+                ForEach([CGSize(width: 25, height: 12), CGSize(width: 36, height: 17), CGSize(width: 54, height: 26)],
                         id: \.width) { size in
                     HStack(spacing: 18) {
                         BatteryGlyph(level: 0.98, color: .green, showsBolt: true, size: size)
                         BatteryGlyph(level: 0.45, color: .green, showsBolt: true, size: size)
-                        BatteryGlyph(level: 0.8, color: .white, showsBolt: false, size: size)
+                        BatteryGlyph(level: 0.71, color: .white, showsBolt: false, size: size)
                         BatteryGlyph(level: 0.6, color: .white, showsBolt: true, size: size)
                         BatteryGlyph(level: 0.5, color: .yellow, showsBolt: false, size: size)
                         BatteryGlyph(level: 0.08, color: .red, showsBolt: false, size: size)

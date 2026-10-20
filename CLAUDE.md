@@ -62,6 +62,41 @@ appcast.xml       Flux de mises à jour Sparkle (lu par l'app depuis la branche 
 build.noindex/    Sortie de build, ignorée par git ; « .noindex » empêche Spotlight de lister l'app Debug
 ```
 
+## Où trouver quoi
+
+Carte pour aller droit au bon fichier (chercher ensuite le symbole avec `grep -n`). Un changement d'apparence ou de taille passe presque toujours par `NotchLayout` (valeurs) et `NotchContainerView` (rendu).
+
+**Démarrage et câblage**
+- `App/AppDelegate.swift` : crée `SettingsStore`, `ModuleManager`, `NotchViewModel` et `NotchWindowController`, puis les relie (alertes, réglages, maintien ouvert, mode jeu, zones de dépôt et ce que fait chaque dépôt). Lance aussi les modes `NOTCHKIT_STRESS` / `NOTCHKIT_SNAPSHOT`.
+- `App/MenuBarContent.swift` : menu de l'icône de la barre des menus (dont la bascule du mode jeu et le menu Débogage).
+
+**Encoche : état, tailles, rendu**
+- `Core/State/NotchViewModel.swift` : dépliage/repliage (`expand`, `collapse`, `expand(showing:)`), survol (`hoverChanged`, délais), bulles (`bubbleModules`, `hoverBubble`, menu empilé, commandes `hoverBubbleControls`), largeur repliée (`compactSideWidth`), tailles de la forme et de la fenêtre (`shapeSize`, `panelSize`), alertes (`present`), glisser-déposer, mode jeu (`setQuiet`), écran verrouillé (`setScreenLocked`).
+- `Core/State/NotchLayout.swift` : toutes les constantes et fonctions de taille, d'espacement et d'animation (largeur des activités `activitySideWidth`, bulles, ombres, ressort `spring`, curseurs, `shapeSize`, pagination).
+- `UI/NotchContainerView.swift` : le rendu. `CompactNotchView` (activité repliée gauche/droite, `compactRow`, île), `CompactBubbles` (bulles, pile, bulle allongée avec commandes), `ExpandedNotchView` (en-tête, onglets de pages, indicateur, pages de widgets), `PageView` (cartes), `WidgetContextMenu` (clic droit sur un widget).
+- `Core/State/NotchAlert.swift` : alerte temporaire (gauche/droite, ou contenu agrandi sous l'encoche avec `expandedSize`).
+- `UI/NotchShape.swift` : la forme (congés, coins). `Core/Settings/NotchAppearance.swift` : `notchBackground` (noir, couleur, Liquid Glass), tailles d'encoche dépliée, couleur d'accent (`accentColor`, `onAccentColor`).
+- `UI/NotchStyle.swift` : composants du style StandBy (boutons `.standBy`, `StandByBar`, curseur `StandBySlider`/`SliderTrack`/`SliderKnob`, `.notchCard()`, couleurs `StandBy.*`, `\.onAccent`, `\.sliderTint`).
+
+**Fenêtre et système**
+- `Core/Window/NotchWindowController.swift` : la fenêtre (taille animée, écran choisi, bureaux, verrouillage, évitement des menus, diagnostic). `NotchPanel` (niveau de fenêtre), `NotchHostingView` (souris et glisser-déposer reçus par AppKit), `DropCatcher`, `LockScreenSpace` (SkyLight), `ScreenLocator` (quel écran, encoche réelle ou non), `MenuBarAvoidance`.
+
+**Modules**
+- `Core/Modules/NotchModule.swift` : le protocole (`compactLeading/Trailing`, `compactPriority`, `bubblePriority`, `bubbleControls`, `expandedView`, `miniView`, `settingsView`, `widgetModuleID`) et `ModuleContext` (services offerts aux modules : alertes, `showModule`, `holdExpanded`, `otherModule`, `setQuietMode`…). Ajouter un service = un champ ici + son branchement dans `ModuleManager.makeContext` et l'AppDelegate.
+- `Core/Modules/ModuleDescriptor.swift` : identité et drapeaux d'un module. `ModuleRegistry.swift` : la liste des modules. `ModuleManager.swift` : activation, activité principale (`compactModule`) et bulles (`secondaryCompactModules`), pages et tailles des widgets.
+- `Modules/<Nom>/` : un dossier par module. Les plus gros : Music (sources MediaRemote et apps scriptables dans `Sources/`, égaliseur et analyse audio dans `Spectrum/`), Claude (serveur de hooks, installation, suivi des sessions) + Agents (page pleine), SystemHUD (touches, volume/luminosité, centre du son `AudioCenter`), LiveActivities (minuteurs, téléchargements), VideoDownload (yt-dlp), Converter.
+
+**Réglages, disposition, divers**
+- `Core/Settings/AppSettings.swift` : réglages généraux (délais de survol, écran, haptique, mascotte…) ; un réglage propre à un module vit plutôt dans le module (`UserDefaults`, clé `module.<id>.<nom>`).
+- `UI/Settings/` : `SettingsView.swift` (fenêtre, onglets `SettingsTab`, Général, liste des widgets et page de détail, À propos), `AppearanceSettingsView`, `LayoutSettingsView` (éditeur de disposition), `PermissionsSettingsView`.
+- `Core/Layout/WidgetLayout.swift` : tailles de widget et calcul des pages ; `LayoutPresets` : dispositions prêtes à l'emploi.
+- `Core/Permissions/PermissionCenter.swift` : les autorisations (ajouter un cas = titre, usage, icône, couleur, ancre des Réglages Système, état, demande).
+- `App/Onboarding/` : étapes du tutoriel (`OnboardingStep`), fenêtre et démonstrations animées.
+- `UI/Mascot/` : dessins des mascottes (`MascotDesigns`, `RobotMascots`, `FaceIDMascots`), mouvements et réactions (`MascotMotion`), sons (`MascotSounds`).
+- `Core/Utilities/Haptics.swift` : vibrations du trackpad (`Haptics.play(.tap/.step/.snap)`).
+- `App/Debug/` : captures (`SnapshotRenderer`, `PromoSnapshots`) et rendu vidéo des mascottes.
+- Tests : `NotchkitTests/<Domaine>Tests.swift` ; la mise en page de l'encoche et les bulles sont dans `ModuleManagerTests` (`NotchLayoutTests`) et `BubbleControlsTests`.
+
 ## Conventions de code
 
 - **Modules** : une classe `<Nom>Module` conforme à `NotchModule`, avec un `descriptor` statique (`id` en minuscules comme `"music"`, `"activities"`), `compactPriority`, `compactLeading()/compactTrailing()`, `expandedView()`, `miniView()`, `settingsView()`. L'enregistrer dans `ModuleRegistry.allModules`. Les vues s'appellent `<Nom>ExpandedView`, `<Nom>MiniView`, `<Nom>SettingsView`. Un module sans widget (arrière-plan seulement) met `descriptor.providesWidget = false`. Un module qui doit rester utilisable widget masqué met `descriptor.contextual = true` et implémente `var hasContextualContent` (ex. Étagère, Captures) : il tourne toujours, et s'affiche en dernière page, hors de la disposition, tant qu'il a du contenu (`ModuleManager.contextualIDs`, `layoutPageIDs` pour l'éditeur). Un module dont les animations viennent du système (branchement du chargeur, AirPods, touches de volume) met `descriptor.backgroundEvents = true` : widget désactivé, il tourne quand même pour ses alertes, sans carte ni activité repliée (`ModuleManager.backgroundIDs`) ; c'est le cas de Batterie, AirPods et HUD. Les nouveaux widgets sont masqués par défaut (`defaultEnabled: false`).

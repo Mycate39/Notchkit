@@ -1,6 +1,7 @@
 import AVFoundation
 import CoreLocation
 import EventKit
+import SwiftUI
 import Testing
 @testable import Notchkit
 
@@ -43,5 +44,20 @@ struct SliderLayoutTests {
         let dragging = NotchLayout.sliderKnobSize(for: 26, isDragging: true)
         #expect(dragging.height > resting.height)
         #expect(NotchLayout.sliderTrackThickness(for: 26) < resting.height)
+    }
+}
+
+/// Couleur d'accent par défaut (bleu de macOS) et texte lisible posé dessus.
+struct AccentColorTests {
+    @Test func accentBleuParDefautAvecTexteBlanc() {
+        #expect(NotchAppearance().accent == nil)
+        #expect(StandBy.onAccent(for: StandBy.defaultAccent) == .white)
+    }
+
+    @Test func texteSombreSurUneCouleurClaire() {
+        #expect(StandBy.onAccent(for: StoredColor(red: 1, green: 0.62, blue: 0.16)) == StandBy.onAccent)  // ambre
+        #expect(StandBy.onAccent(for: StoredColor(red: 1, green: 0.84, blue: 0)) == StandBy.onAccent)     // jaune
+        #expect(StandBy.onAccent(for: StoredColor(red: 0.6, green: 0.2, blue: 0.9)) == .white)           // violet
+        #expect(StoredColor(red: 1, green: 1, blue: 1).luminance == 1)
     }
 }

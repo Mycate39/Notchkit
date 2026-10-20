@@ -170,7 +170,7 @@ enum PromoSnapshots {
         .foregroundStyle(.white)
         .background(NotchShape(earRadius: ear, topCornerRadius: radii.top, bottomCornerRadius: radii.bottom).fill(.black))
         .environment(\.colorScheme, .dark)
-        .tint(StandBy.amber)
+        .tint(StandBy.defaultAccent.color)
     }
 
     /// Île flottante (Mac sans encoche).
@@ -188,7 +188,7 @@ enum PromoSnapshots {
         .foregroundStyle(.white)
         .background(Capsule().fill(.black))
         .environment(\.colorScheme, .dark)
-        .tint(StandBy.amber)
+        .tint(StandBy.defaultAccent.color)
     }
 
     /// Une carte de l'encoche dépliée, à sa taille réelle.
@@ -201,7 +201,7 @@ enum PromoSnapshots {
             .background(.black, in: RoundedRectangle(cornerRadius: 26, style: .continuous))
             .foregroundStyle(.white)
             .environment(\.colorScheme, .dark)
-            .tint(StandBy.amber)
+            .tint(StandBy.defaultAccent.color)
     }
 
     /// Encoche dépliée : panneau noir aux coins du bas arrondis, cartes côte à côte.
@@ -221,7 +221,7 @@ enum PromoSnapshots {
                                            style: .continuous).fill(.black))
         .foregroundStyle(.white)
         .environment(\.colorScheme, .dark)
-        .tint(StandBy.amber)
+        .tint(StandBy.defaultAccent.color)
     }
 
     private static func size(for weight: CGFloat) -> WidgetSize {

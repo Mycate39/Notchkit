@@ -72,6 +72,7 @@ struct NotchContainerView: View {
         }
         .foregroundStyle(.white)
         .tint(viewModel.appearance.accentColor)
+        .environment(\.onAccent, viewModel.appearance.onAccentColor)
         .environment(\.sliderTint, viewModel.appearance.sliderColor?.color)
         .environment(\.colorScheme, .dark)
         // Écran verrouillé : activités visibles, mais aucun bouton ni bulle cliquable.
@@ -95,6 +96,7 @@ struct NotchContainerView: View {
 /// Survoler (ou cliquer) une bulle ouvre l'encoche sur la page de son activité.
 private struct CompactBubbles: View {
     let viewModel: NotchViewModel
+    @Environment(\.onAccent) private var onAccent
     @Namespace private var namespace
     @State private var closeTask: Task<Void, Never>?
 
@@ -190,7 +192,7 @@ private struct CompactBubbles: View {
                 Text(verbatim: "\(ids.count)")
                     .font(.system(size: 8, weight: .bold, design: .rounded))
                     .monospacedDigit()
-                    .foregroundStyle(StandBy.onAccent)
+                    .foregroundStyle(onAccent)
                     .frame(minWidth: 12, minHeight: 12)
                     .background(.tint, in: Capsule())
                     .offset(x: viewModel.geometry.style == .notch ? -NotchLayout.earRadius - 2 : 2, y: 1)
@@ -206,17 +208,22 @@ private struct CompactBubbles: View {
         Group {
             if let module = viewModel.manager.module(for: id), let content = module.compactLeading() {
                 let controls = viewModel.bubbleControlsID == id ? module.bubbleControls() : nil
+                let icon = diameter * 0.62
+                let ear = viewModel.geometry.style == .notch ? NotchLayout.earRadius : 0
+                // Allongée : la pochette ne bouge pas, et les commandes se centrent entre elle et le bord droit.
+                let iconEnd = (width + icon) / 2
                 HStack(spacing: 0) {
                     content
-                        .frame(width: diameter * 0.62, height: diameter * 0.62)
-                        .frame(width: width, height: diameter)
+                        .frame(width: icon, height: icon)
+                        .frame(width: controls == nil ? width : iconEnd, height: diameter,
+                               alignment: controls == nil ? .center : .trailing)
                         .contentShape(Rectangle())
                         .onTapGesture { viewModel.expand(showing: id) }
                     if let controls {
                         controls
+                            .frame(width: width + NotchLayout.bubbleControlsContentWidth - iconEnd - ear, height: diameter)
                             // Mode encoche : les commandes restent à l'écart du congé de droite.
-                            .frame(width: NotchLayout.bubbleControlsContentWidth, height: diameter)
-                            .padding(.trailing, viewModel.geometry.style == .notch ? NotchLayout.earRadius : 0)
+                            .padding(.trailing, ear)
                             .transition(.opacity.combined(with: .scale(scale: 0.6, anchor: .leading)))
                     }
                 }
@@ -318,6 +325,7 @@ private struct CompactNotchView: View {
 /// Contenu de l'encoche dépliée : barre d'en-tête puis les vues étendues des modules actifs.
 private struct ExpandedNotchView: View {
     let viewModel: NotchViewModel
+    @Environment(\.onAccent) private var onAccent
     /// La pastille de la page affichée glisse d'un point à l'autre.
     @Namespace private var pageIndicator
     /// L'indicateur de pages n'apparaît que pendant un balayage, puis s'efface.
@@ -429,12 +437,12 @@ private struct ExpandedNotchView: View {
             .padding(.horizontal, 11)
             .padding(.vertical, 5)
             .background {
-                // Onglet choisi : pilule ambre, icônes en noir chaud (style StandBy).
+                // Onglet choisi : pilule de la couleur d'accent (style StandBy).
                 Capsule()
                     .fill(.tint)
                     .matchedGeometryEffect(id: "pastille", in: pageIndicator)
             }
-            .foregroundStyle(StandBy.onAccent)
+            .foregroundStyle(onAccent)
         } else {
             Circle()
                 .fill(.white.opacity(0.35))

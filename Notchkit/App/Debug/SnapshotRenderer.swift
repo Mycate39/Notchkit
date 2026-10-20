@@ -132,7 +132,7 @@ enum SnapshotRenderer {
                     .frame(width: 420, height: 142)
                     .notchCard()
                     .padding(14).background(.black).foregroundStyle(.white).environment(\.colorScheme, .dark)
-                    .tint(StandBy.amber),
+                    .tint(StandBy.defaultAccent.color),
                  to: directory.appendingPathComponent("musique-grande.png"))
             // Carte moyenne et carte basse (petite taille d'encoche) : la disposition se resserre.
             for (name, widgetSize, cardSize) in [("musique-moyenne", WidgetSize.medium, CGSize(width: 310, height: 142)),
@@ -142,7 +142,7 @@ enum SnapshotRenderer {
                         .frame(width: cardSize.width, height: cardSize.height)
                         .notchCard()
                         .padding(14).background(.black).foregroundStyle(.white).environment(\.colorScheme, .dark)
-                        .tint(StandBy.amber),
+                        .tint(StandBy.defaultAccent.color),
                      to: directory.appendingPathComponent("\(name).png"))
             }
             music.debugSetNowPlaying(nil)
@@ -168,7 +168,7 @@ enum SnapshotRenderer {
                 }
             }
             .padding(16).background(.black).foregroundStyle(.white).environment(\.colorScheme, .dark)
-            .tint(StandBy.amber),
+            .tint(StandBy.defaultAccent.color),
              to: directory.appendingPathComponent("standby-controles.png"))
 
         // Curseurs façon iOS : repos, glissement (loupe), couleur personnalisée, petite taille.
@@ -178,7 +178,7 @@ enum SnapshotRenderer {
             SliderTrack(value: 0.7, height: 26, width: 240, isDragging: false).environment(\.sliderTint, .blue)
             SliderTrack(value: 0.3, height: 14, width: 240, isDragging: false)
         }
-        .padding(24).background(.black).environment(\.colorScheme, .dark).tint(StandBy.amber),
+        .padding(24).background(.black).environment(\.colorScheme, .dark).tint(StandBy.defaultAccent.color),
              to: directory.appendingPathComponent("curseurs-verre.png"))
 
         // Icônes au trait et jauge de batterie en charge.
@@ -241,7 +241,7 @@ enum SnapshotRenderer {
                         .frame(width: cardSize.width, height: cardSize.height)
                         .notchCard()
                         .padding(14).background(.black).foregroundStyle(.white).environment(\.colorScheme, .dark)
-                        .tint(StandBy.amber),
+                        .tint(StandBy.defaultAccent.color),
                      to: directory.appendingPathComponent("\(name)\(suffix).png"))
             }
         }

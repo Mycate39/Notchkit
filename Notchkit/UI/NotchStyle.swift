@@ -28,13 +28,37 @@ extension ButtonStyle where Self == NotchPressStyle {
 /// Palette inspirée du mode Nuit de StandBy (iPhone) : noir OLED, pilules gris très sombre,
 /// ambre chaleureux pour ce qui est actif (bouton principal, progression, onglet choisi).
 enum StandBy {
-    /// Ambre par défaut des états actifs (remplaçable par la couleur d'accent des réglages).
+    /// Ambre des états qui demandent l'attention (agent en attente, alertes…).
     static let amber = Color(red: 1.0, green: 0.62, blue: 0.16)
+    /// Couleur d'accent par défaut : le bleu des commandes de macOS (version sombre de `systemBlue`).
+    static let defaultAccent = StoredColor(red: 0.04, green: 0.52, blue: 1.0)
     /// Pilule au repos : gris très sombre sur le noir. Blanc translucide plutôt qu'un gris opaque :
     /// identique sur fond noir, mais il laisse transparaître le Liquid Glass au lieu de faire tache.
     static let surface = Color.white.opacity(0.15)
     /// Texte et symboles posés sur l'ambre : noir chaud, lisible sans éblouir.
     static let onAccent = Color(red: 0.12, green: 0.07, blue: 0.0)
+
+    /// Luminance relative (sRGB) au-delà de laquelle un texte sombre se lit mieux qu'un blanc.
+    static let lightAccentLuminance = 0.35
+
+    /// Texte posé sur une couleur d'accent (fonction pure, testée) : noir chaud sur une couleur
+    /// claire (ambre, jaune), blanc sur une couleur foncée (bleu, violet).
+    static func onAccent(for color: StoredColor) -> Color {
+        color.luminance > lightAccentLuminance ? onAccent : .white
+    }
+}
+
+extension StoredColor {
+    /// Luminance relative (WCAG), de 0 (noir) à 1 (blanc).
+    var luminance: Double {
+        func linear(_ c: Double) -> Double { c <= 0.04045 ? c / 12.92 : pow((c + 0.055) / 1.055, 2.4) }
+        return 0.2126 * linear(red) + 0.7152 * linear(green) + 0.0722 * linear(blue)
+    }
+}
+
+extension EnvironmentValues {
+    /// Texte et symboles posés sur la couleur d'accent (`.tint`).
+    @Entry var onAccent: Color = StandBy.onAccent(for: StandBy.defaultAccent)
 }
 
 /// Bouton StandBy : pilule (ou cercle) épaisse et tactile.
@@ -83,6 +107,7 @@ private struct StandByButtonBody: View {
     let isActive: Bool
     let isCircle: Bool
     @Environment(\.isEnabled) private var isEnabled
+    @Environment(\.onAccent) private var onAccent
     @State private var isHovering = false
 
     /// Bouton rond secondaire (« + », « × », réglages…) : le symbole seul, sans fond ni contour.
@@ -94,7 +119,7 @@ private struct StandByButtonBody: View {
         configuration.label
             .font(.system(size: isBare ? size.fontSize + 3 : size.fontSize, weight: .semibold, design: .rounded))
             .lineLimit(1)
-            .foregroundStyle(isActive ? AnyShapeStyle(StandBy.onAccent)
+            .foregroundStyle(isActive ? AnyShapeStyle(onAccent)
                                       : AnyShapeStyle(.white.opacity(isBare && !isHovering ? 0.8 : 1)))
             .padding(.horizontal, isCircle ? 0 : size.horizontalPadding)
             .frame(width: isCircle ? size.height : nil, height: size.height)

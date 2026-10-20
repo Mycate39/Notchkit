@@ -144,7 +144,9 @@ struct NotchAppearance: Codable, Equatable, Sendable {
     }
 
     /// Couleur d'accent effective.
-    var accentColor: Color { accent?.color ?? StandBy.amber }
+    var accentColor: Color { (accent ?? StandBy.defaultAccent).color }
+    /// Texte posé sur la couleur d'accent.
+    var onAccentColor: Color { StandBy.onAccent(for: accent ?? StandBy.defaultAccent) }
 }
 
 extension View {

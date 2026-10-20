@@ -96,7 +96,7 @@ struct OnboardingView: View {
         }
         .frame(width: 560, height: 560)
         .background(Color(white: 0.08))
-        .tint(StandBy.amber)
+        .tint(StandBy.defaultAccent.color)
     }
 
     // MARK: Illustration
@@ -108,7 +108,7 @@ struct OnboardingView: View {
         case .hover: HoverDemo()
         case .activities: ActivitiesDemo()
         case .files: FilesDemo()
-        case .widgets: SymbolDemo(symbol: "square.grid.2x2.fill", tint: StandBy.amber)
+        case .widgets: SymbolDemo(symbol: "square.grid.2x2.fill", tint: StandBy.defaultAccent.color)
         case .permissions: PermissionsDemo(center: permissions)
         case .done: SymbolDemo(symbol: "checkmark.circle.fill", tint: .green)
         }

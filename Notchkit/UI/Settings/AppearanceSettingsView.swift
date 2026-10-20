@@ -118,9 +118,9 @@ struct AppearanceSettingsView: View {
 
                 Toggle("Couleur personnalisée (onglets, barres de progression)", isOn: Binding(
                     get: { settings.settings.appearance.accent != nil },
-                    set: { settings.settings.appearance.accent = $0 ? StoredColor(.orange) : nil }
+                    set: { settings.settings.appearance.accent = $0 ? StandBy.defaultAccent : nil }
                 ))
-                Text("Par défaut : ambre, comme le mode Nuit de StandBy sur iPhone.")
+                Text("Par défaut : bleu, comme les commandes de macOS.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 if settings.settings.appearance.accent != nil {

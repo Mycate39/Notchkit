@@ -10006,6 +10006,7 @@
       }
     },
     "Par défaut : ambre, comme le mode Nuit de StandBy sur iPhone." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10017,6 +10018,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Par défaut : ambre, comme le mode Nuit de StandBy sur iPhone."
+          }
+        }
+      }
+    },
+    "Par défaut : bleu, comme les commandes de macOS." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Default: blue, like macOS controls."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Par défaut : bleu, comme les commandes de macOS."
           }
         }
       }

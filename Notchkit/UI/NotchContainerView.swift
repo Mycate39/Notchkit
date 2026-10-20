@@ -331,6 +331,8 @@ private struct ExpandedNotchView: View {
     /// L'indicateur de pages n'apparaît que pendant un balayage, puis s'efface.
     @State private var showsPageIndicator = false
     @State private var hidePageIndicatorTask: Task<Void, Never>?
+    /// Balayage des pages au trackpad.
+    @State private var swiper = PageSwiper()
 
     var body: some View {
         let ear = viewModel.geometry.style == .notch ? NotchLayout.earRadius : 0
@@ -480,44 +482,41 @@ private struct ExpandedNotchView: View {
                     .foregroundStyle(.white.opacity(0.6))
             }
         } else {
-            // Pages défilantes : balayage horizontal au trackpad, ou clic sur les onglets.
+            // Pages côte à côte : balayage au trackpad (`PageSwiper`) ou clic sur les onglets.
             GeometryReader { proxy in
-                ScrollViewReader { reader in
-                    ScrollView(.horizontal) {
-                        HStack(spacing: 0) {
-                            ForEach(pages) { page in
-                                PageView(page: page, viewModel: viewModel)
-                                    .padding(.horizontal, horizontalPadding)
-                                    .frame(width: proxy.size.width, height: proxy.size.height)
-                                    .id(page.id)
-                            }
-                        }
-                        .scrollTargetLayout()
-                    }
-                    .scrollIndicators(.never)
-                    .scrollTargetBehavior(.paging)
-                    .scrollPosition(id: Binding(
-                        get: { min(viewModel.selectedPage, pages.count - 1) },
-                        set: {
-                            guard let page = $0 else { return }
-                            guard page != viewModel.selectedPage else { return }
-                            revealPageIndicator()
-                            // La pastille glisse vers la nouvelle page au lieu de sauter.
-                            withAnimation(NotchLayout.pageIndicatorSpring) { viewModel.selectedPage = page }
-                        }
-                    ))
-                    .modifier(ScrollPhaseObserver { isScrolling in
-                        // Fin de balayage : on lance seulement l'effacement de l'indicateur déjà visible.
-                        if isScrolling || showsPageIndicator { revealPageIndicator(holding: isScrolling) }
-                    })
-                    .onAppear {
-                        // La vue est recréée à chaque ouverture : on replace explicitement le défilement
-                        // sur la page mémorisée (la position initiale n'est pas toujours appliquée).
-                        reader.scrollTo(min(viewModel.selectedPage, pages.count - 1), anchor: .leading)
+                let width = proxy.size.width
+                let current = min(viewModel.selectedPage, pages.count - 1)
+                HStack(spacing: 0) {
+                    ForEach(pages) { page in
+                        PageView(page: page, viewModel: viewModel)
+                            .padding(.horizontal, horizontalPadding)
+                            .frame(width: width, height: proxy.size.height)
                     }
                 }
+                .offset(x: -CGFloat(current) * width + swiper.swipe.offset(page: current, pageCount: pages.count))
+                .frame(width: width, height: proxy.size.height, alignment: .leading)
+                .clipped()
+                .contentShape(Rectangle())
+                .onAppear { swiper.pageWidth = width }
+                .onChange(of: width) { _, new in swiper.pageWidth = new }
             }
+            .onAppear { startSwiping() }
+            .onDisappear { swiper.stop() }
         }
+    }
+
+    /// Branche le balayage : les pages suivent les doigts, puis se calent au relâchement.
+    private func startSwiping() {
+        swiper.start(
+            pageCount: { pages.count },
+            currentPage: { min(viewModel.selectedPage, max(0, pages.count - 1)) },
+            onTrackingChange: { tracking in revealPageIndicator(holding: tracking) },
+            onEnd: { target in
+                withAnimation(NotchLayout.spring) { swiper.settle() }
+                guard target != viewModel.selectedPage else { return }
+                withAnimation(NotchLayout.spring) { viewModel.selectedPage = target }
+            }
+        )
     }
 }
 
@@ -536,24 +535,67 @@ private struct PageIconsEntrance: ViewModifier {
     }
 }
 
-/// Suit le balayage des pages (macOS 15+) : `true` dès que le défilement commence, `false` à l'arrêt.
-/// Sur macOS 14, seul le changement de page révèle l'indicateur.
-private struct ScrollPhaseObserver: ViewModifier {
-    let onChange: (Bool) -> Void
+/// Reçoit les gestes du trackpad au-dessus de l'encoche (moniteur d'événements local : le panneau
+/// n'est jamais la fenêtre active, mais le défilement va toujours à la fenêtre sous le pointeur).
+@MainActor
+@Observable
+final class PageSwiper {
+    private(set) var swipe = PageSwipe()
+    @ObservationIgnored var pageWidth: CGFloat = 0
+    @ObservationIgnored private var monitor: Any?
+    /// Le dernier geste était pour les pages : son inertie est ignorée aussi.
+    @ObservationIgnored private var lastGestureWasPaging = false
 
-    func body(content: Content) -> some View {
-        if #available(macOS 15, *) {
-            content.onScrollPhaseChange { oldPhase, newPhase in
-                // Ignore les défilements programmés (placement initial sur la page mémorisée).
-                if newPhase.isScrolling {
-                    if newPhase == .interacting || oldPhase == .interacting { onChange(true) }
-                } else if oldPhase.isScrolling {
-                    onChange(false)
-                }
+    func start(pageCount: @escaping @MainActor () -> Int, currentPage: @escaping @MainActor () -> Int,
+               onTrackingChange: @escaping @MainActor (Bool) -> Void, onEnd: @escaping @MainActor (Int) -> Void) {
+        stop()
+        monitor = NSEvent.addLocalMonitorForEvents(matching: .scrollWheel) { [weak self] event in
+            let consumed = MainActor.assumeIsolated {
+                guard let self, event.window is NotchPanel else { return false }
+                return self.handle(event, pageCount: pageCount(), currentPage: currentPage(),
+                                   onTrackingChange: onTrackingChange, onEnd: onEnd)
             }
-        } else {
-            content
+            return consumed ? nil : event
         }
+    }
+
+    func stop() {
+        if let monitor { NSEvent.removeMonitor(monitor) }
+        monitor = nil
+        swipe.begin()
+    }
+
+    /// Remet les pages en place après le calage (appelé dans une animation).
+    func settle() { swipe.begin() }
+
+    /// Renvoie `true` si l'événement est consommé par le balayage des pages.
+    private func handle(_ event: NSEvent, pageCount: Int, currentPage: Int,
+                        onTrackingChange: (Bool) -> Void, onEnd: (Int) -> Void) -> Bool {
+        // Inertie après le relâchement : une page par geste.
+        if !event.momentumPhase.isEmpty { return lastGestureWasPaging }
+        // Molette de souris (sans phase) : laissée aux vues.
+        guard !event.phase.isEmpty, event.hasPreciseScrollingDeltas else { return false }
+        if event.phase.contains(.began) {
+            swipe.begin()
+            lastGestureWasPaging = false
+        }
+        if event.phase.contains(.ended) || event.phase.contains(.cancelled) {
+            guard swipe.isTracking else { return false }
+            var final = swipe
+            let target = final.end(page: currentPage, pageCount: pageCount, pageWidth: pageWidth)
+            onTrackingChange(false)
+            onEnd(target)
+            return true
+        }
+        guard event.phase.contains(.began) || event.phase.contains(.changed) else { return false }
+        let wasTracking = swipe.isTracking
+        guard pageCount > 1 || swipe.isTracking else { return false }
+        let consumed = swipe.move(dx: event.scrollingDeltaX, dy: event.scrollingDeltaY)
+        if swipe.isTracking {
+            lastGestureWasPaging = true
+            if !wasTracking { onTrackingChange(true) }
+        }
+        return consumed
     }
 }
 

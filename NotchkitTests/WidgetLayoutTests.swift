@@ -205,3 +205,44 @@ struct FlowLayoutTests {
         #expect(arrange([], maxWidth: 200).size == .zero)
     }
 }
+
+/// Balayage des pages au trackpad : les pages suivent les doigts et se calent au relâchement.
+struct PageSwipeTests {
+    @Test func balayageHorizontalChangeDePage() {
+        var swipe = PageSwipe()
+        swipe.begin()
+        let undecided = swipe.move(dx: -3, dy: 0.5)   // pas encore décidé : gardé pour les pages
+        let horizontal = swipe.move(dx: -40, dy: 2)
+        #expect(undecided && horizontal)
+        #expect(swipe.isTracking)
+        #expect(swipe.offset(page: 1, pageCount: 3) == -43)
+        #expect(swipe.end(page: 1, pageCount: 3, pageWidth: 300) == 2)
+        #expect(!swipe.isTracking)
+    }
+
+    @Test func petitBalayageRevientSurPlace() {
+        var swipe = PageSwipe()
+        swipe.begin()
+        _ = swipe.move(dx: 20, dy: 0)
+        #expect(swipe.end(page: 1, pageCount: 3, pageWidth: 300) == 1)
+    }
+
+    @Test func resistanceAuxExtremitesSansDepasser() {
+        var swipe = PageSwipe()
+        swipe.begin()
+        _ = swipe.move(dx: 100, dy: 0)
+        #expect(swipe.offset(page: 0, pageCount: 3) == 100 * PageSwipe.edgeResistance)
+        #expect(swipe.end(page: 0, pageCount: 3, pageWidth: 300) == 0)
+    }
+
+    @Test func gesteVerticalLaisseALaVue() {
+        var swipe = PageSwipe()
+        swipe.begin()
+        _ = swipe.move(dx: 1, dy: -2)
+        let vertical = swipe.move(dx: 1, dy: -6)
+        let later = swipe.move(dx: -50, dy: 0)
+        #expect(!vertical && !later)
+        #expect(!swipe.isTracking)
+        #expect(swipe.end(page: 1, pageCount: 3, pageWidth: 300) == 1)
+    }
+}

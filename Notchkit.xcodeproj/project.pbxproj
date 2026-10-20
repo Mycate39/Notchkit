@@ -129,6 +129,7 @@
 		9187885142C293D5A677A428 /* OnboardingDemos.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E2C6CB6BF950202D8E77F3 /* OnboardingDemos.swift */; };
 		94BF7B6108A44400EABE42EE /* ClipboardViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA785DE3AC695C0AF583A476 /* ClipboardViews.swift */; };
 		9534909608C6D366FB3BCE9F /* mediaremote-adapter.pl in Resources */ = {isa = PBXBuildFile; fileRef = E343FA5573A1C385029263CF /* mediaremote-adapter.pl */; };
+		9714F77BB0EE98E7548323E1 /* PageSwipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5B4279F0EFAB5857E955E7 /* PageSwipe.swift */; };
 		980B366CCDFB9D04BCACFB5C /* MenuBarAvoidance.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEF22AF6E1341357C1F0E58 /* MenuBarAvoidance.swift */; };
 		98776D4DF39E4E21CDB0167E /* WidgetLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986BDF5C03AFD85D9ABE4BC /* WidgetLayout.swift */; };
 		98CFC677C4F819D9E12E5F3D /* GameModeModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718D8C35BF144DF3790C8896 /* GameModeModule.swift */; };
@@ -341,6 +342,7 @@
 		6D79AFE5C1AEE52840020061 /* ScriptablePlayerSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptablePlayerSource.swift; sourceTree = "<group>"; };
 		6E67B71BB43A4F2B68A88A78 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
 		6F1D357738A1DF21BA08CC18 /* DayProgressModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayProgressModule.swift; sourceTree = "<group>"; };
+		6F5B4279F0EFAB5857E955E7 /* PageSwipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageSwipe.swift; sourceTree = "<group>"; };
 		718D8C35BF144DF3790C8896 /* GameModeModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModeModule.swift; sourceTree = "<group>"; };
 		72F1D7838B0087D64BCCB9AE /* AgentPanels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentPanels.swift; sourceTree = "<group>"; };
 		77C38E58910B7C41117212E1 /* NotchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchViewModel.swift; sourceTree = "<group>"; };
@@ -1172,6 +1174,7 @@
 				E2A73B719641636FD8ABD372 /* NotchAlert.swift */,
 				140868E51134AF3924DFBEF3 /* NotchLayout.swift */,
 				77C38E58910B7C41117212E1 /* NotchViewModel.swift */,
+				6F5B4279F0EFAB5857E955E7 /* PageSwipe.swift */,
 			);
 			path = State;
 			sourceTree = "<group>";
@@ -1456,6 +1459,7 @@
 				743DF3635CD73F1F95DF92FC /* OnboardingStep.swift in Sources */,
 				0D8F43C59112452F0B59F026 /* OnboardingView.swift in Sources */,
 				A7A432CCFD9E85A7069F6DF1 /* OpenMeteoClient.swift in Sources */,
+				9714F77BB0EE98E7548323E1 /* PageSwipe.swift in Sources */,
 				F72F50D66C0FEF01A91ED954 /* PermissionCenter.swift in Sources */,
 				B66FFBB9EF011C74B9167149 /* PermissionsSettingsView.swift in Sources */,
 				CF7166A65434F3E4E1E01E77 /* PowerSourceMonitor.swift in Sources */,

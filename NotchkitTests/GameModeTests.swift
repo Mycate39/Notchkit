@@ -12,6 +12,27 @@ struct GameModeTests {
         #expect(GameDetector.isGame(category: nil, path: "/Users/moi/Library/Application Support/Steam/steamapps/common/Hades/Hades.app"))
         #expect(!GameDetector.isGame(category: "public.app-category.productivity", path: "/Applications/Notes.app"))
         #expect(!GameDetector.isGame(category: nil, path: nil))
+        #expect(GameDetector.isGame(category: nil, path: "/Applications/Jeu.app", supportsGameMode: true))
+    }
+
+    @Test func pleinEcranCommeLeModeJeuDeMacOS() {
+        let display = CGRect(x: 0, y: 0, width: 1512, height: 982)
+        let second = CGRect(x: 1512, y: 0, width: 1920, height: 1080)
+        // Plein écran, y compris sous l'encoche pour une app qui ne l'utilise pas.
+        #expect(FullScreenDetector.isFullScreen(windows: [display], displays: [display, second]))
+        #expect(FullScreenDetector.isFullScreen(windows: [CGRect(x: 0, y: 32, width: 1512, height: 950)], displays: [display]))
+        #expect(FullScreenDetector.isFullScreen(windows: [second], displays: [display, second]))
+        // Fenêtre simplement agrandie (sous la barre des menus et au-dessus du Dock), ou plus petite.
+        #expect(!FullScreenDetector.isFullScreen(windows: [CGRect(x: 0, y: 33, width: 1512, height: 870)], displays: [display]))
+        #expect(!FullScreenDetector.isFullScreen(windows: [CGRect(x: 100, y: 100, width: 800, height: 600)], displays: [display]))
+        #expect(!FullScreenDetector.isFullScreen(windows: [], displays: [display]))
+    }
+
+    @Test func imagesParSecondeSurLaDerniereSeconde() {
+        let frames = (0..<180).map { 10 + Double($0) / 60 }  // 3 s à 60 images par seconde
+        #expect(FrameRateMeter.fps(frameTimes: frames, now: 12.99) == 60)
+        #expect(FrameRateMeter.fps(frameTimes: frames, now: 20) == 0)
+        #expect(FrameRateMeter.fps(frameTimes: [], now: 1) == 0)
     }
 
     @Test func activationAutomatiqueOuManuelle() {

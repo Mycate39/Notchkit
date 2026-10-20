@@ -1150,6 +1150,7 @@
       }
     },
     "Afficher la charge du processeur et de la carte graphique" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1241,6 +1242,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Afficher les icônes du bureau"
+          }
+        }
+      }
+    },
+    "Afficher les images par seconde" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show frames per second"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher les images par seconde"
           }
         }
       }
@@ -4136,6 +4153,22 @@
         }
       }
     },
+    "Comme le mode jeu de macOS : quand un jeu passe en plein écran au premier plan. Vous pouvez aussi l'activer ou le couper depuis l'icône de Notchkit dans la barre des menus." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Like macOS Game Mode: when a game in front goes full screen. You can also turn it on or off from the Notchkit icon in the menu bar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comme le mode jeu de macOS : quand un jeu passe en plein écran au premier plan. Vous pouvez aussi l'activer ou le couper depuis l'icône de Notchkit dans la barre des menus."
+          }
+        }
+      }
+    },
     "Commencer" : {
       "localizations" : {
         "en" : {
@@ -5958,6 +5991,22 @@
         }
       }
     },
+    "Enregistrement de l'écran" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Screen Recording"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrement de l'écran"
+          }
+        }
+      }
+    },
     "Enregistrer" : {
       "localizations" : {
         "en" : {
@@ -6993,6 +7042,22 @@
         }
       }
     },
+    "Images par seconde du jeu en cours, en mode jeu. L'écran n'est jamais enregistré." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Frame rate of the game you're playing, in Game Mode. Your screen is never recorded."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Images par seconde du jeu en cours, en mode jeu. L'écran n'est jamais enregistré."
+          }
+        }
+      }
+    },
     "Impossible d'ajouter le rappel." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -7807,6 +7872,22 @@
         }
       }
     },
+    "Le compteur a besoin de l'autorisation Enregistrement de l'écran. L'écran n'est jamais enregistré : Notchkit compte seulement les images affichées." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The counter needs the Screen Recording permission. Your screen is never recorded: Notchkit only counts the frames shown."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le compteur a besoin de l'autorisation Enregistrement de l'écran. L'écran n'est jamais enregistré : Notchkit compte seulement les images affichées."
+          }
+        }
+      }
+    },
     "Le fichier ~/.claude/settings.json n'est pas un JSON valide. Corrigez-le ou supprimez-le, puis réessayez." : {
       "localizations" : {
         "en" : {
@@ -8083,6 +8164,7 @@
       }
     },
     "Les jeux sont reconnus à leur catégorie App Store et aux jeux Steam. Vous pouvez aussi l'activer ou le couper depuis l'icône de Notchkit dans la barre des menus." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10068,6 +10150,7 @@
       }
     },
     "Pendant une partie, l'encoche se fait discrète et affiche la charge du processeur, de la carte graphique et l'état thermique." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10595,6 +10678,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pull requests"
+          }
+        }
+      }
+    },
+    "Quand un jeu passe en plein écran, comme le mode jeu de macOS, l'encoche se fait discrète et affiche les images par seconde." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When a game goes full screen, like macOS Game Mode, the notch stays discreet and shows the frame rate."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quand un jeu passe en plein écran, comme le mode jeu de macOS, l'encoche se fait discrète et affiche les images par seconde."
           }
         }
       }
@@ -11501,7 +11600,24 @@
         }
       }
     },
+    "S'activer avec le mode jeu de macOS" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn on with macOS Game Mode"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "S'activer avec le mode jeu de macOS"
+          }
+        }
+      }
+    },
     "S'activer quand un jeu est au premier plan" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

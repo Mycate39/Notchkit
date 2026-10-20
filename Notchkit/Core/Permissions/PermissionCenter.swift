@@ -15,6 +15,7 @@ enum AppPermission: String, CaseIterable, Identifiable, Sendable {
     case reminders
     case camera
     case location
+    case screenRecording
 
     var id: String { rawValue }
 
@@ -27,6 +28,7 @@ enum AppPermission: String, CaseIterable, Identifiable, Sendable {
         case .reminders: "Rappels"
         case .camera: "Caméra"
         case .location: "Localisation"
+        case .screenRecording: "Enregistrement de l'écran"
         }
     }
 
@@ -52,6 +54,8 @@ enum AppPermission: String, CaseIterable, Identifiable, Sendable {
             "Miroir de la webcam, seulement pendant que le widget est ouvert. Rien n'est enregistré."
         case .location:
             "Météo locale, à partir d'une position approximative."
+        case .screenRecording:
+            "Images par seconde du jeu en cours, en mode jeu. L'écran n'est jamais enregistré."
         }
     }
 
@@ -64,6 +68,7 @@ enum AppPermission: String, CaseIterable, Identifiable, Sendable {
         case .reminders: "checklist"
         case .camera: "camera.fill"
         case .location: "location.fill"
+        case .screenRecording: "record.circle"
         }
     }
 
@@ -76,6 +81,7 @@ enum AppPermission: String, CaseIterable, Identifiable, Sendable {
         case .reminders: .orange
         case .camera: .green
         case .location: .cyan
+        case .screenRecording: .purple
         }
     }
 
@@ -89,6 +95,7 @@ enum AppPermission: String, CaseIterable, Identifiable, Sendable {
         case .reminders: "Privacy_Reminders"
         case .camera: "Privacy_Camera"
         case .location: "Privacy_LocationServices"
+        case .screenRecording: "Privacy_ScreenCapture"
         }
         return URL(string: "x-apple.systempreferences:com.apple.preference.security?\(anchor)")
     }
@@ -180,6 +187,7 @@ final class PermissionCenter {
         case .reminders: .from(EKEventStore.authorizationStatus(for: .reminder))
         case .camera: .from(AVCaptureDevice.authorizationStatus(for: .video))
         case .location: .from(location.status)
+        case .screenRecording: CGPreflightScreenCaptureAccess() ? .granted : .notDetermined
         }
     }
 
@@ -207,12 +215,18 @@ final class PermissionCenter {
             }
         case .location:
             location.requestAuthorization()
+        case .screenRecording:
+            if !CGRequestScreenCaptureAccess() { openSettings(permission) }
         case .systemAudio, .automation:
             openSettings(permission)
         }
     }
 
     func openSettings(_ permission: AppPermission) {
+        Self.open(permission)
+    }
+
+    static func open(_ permission: AppPermission) {
         if let url = permission.settingsURL { NSWorkspace.shared.open(url) }
     }
 }

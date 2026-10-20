@@ -151,7 +151,7 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 
 **Bêta** : même procédure, avec `MARKETING_VERSION` `x.y.z-beta.N` (le build augmente normalement), tag `vx.y.z-beta.N`, `gh release create … --prerelease --latest=false`, et **sans** étape `appcast.xml` : les utilisateurs actuels ne la reçoivent pas automatiquement.
 
-## État (20 octobre 2026 : 1.0.6 publiée, 2.0.0 beta 2 en préversion)
+## État (20 octobre 2026 : 1.0.6 publiée, 2.0.0 beta 3 en préversion)
 
 ### Fonctionne
 - Fenêtre d'encoche sur n'importe quel écran : vraie encoche, encoche simulée ou pilule flottante ; reste en place à travers les Spaces ; se décale à droite pour ne jamais masquer les menus de l'app active (nécessite l'autorisation Accessibilité).
@@ -169,6 +169,7 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
   - Page Agents (`Modules/Agents`, pleine page, `fullPage`) inspirée de coucou : mascotte choisie parmi 33 (Réglages > Apparence, aussi dans l'encoche repliée), étapes de Claude Code, éditeur et terminal en direct, autorisations et questions de Claude Code répondues depuis l'encoche (hooks version 4 ; pendant une question, le panneau prend toute la page). Widgets Claude Code et Ollama retirés ; Claude Code n'est plus un module à part dans les réglages : c'est le moteur de la page Agents (`companionOf: "agents"`, activé avec elle), dont seule l'intégration (hooks) reste réglable, dans la page du widget Agents. Délai pour répondre depuis l'encoche supprimé. Widgets Git et GitHub, et services Vercel / Stripe, supprimés (19/10/2026). La discussion avec la mascotte (Apple Intelligence ou Claude, avec outils façon Siri) a été essayée puis abandonnée le 19/10/2026 : trop limitée face au nouveau Siri, ne pas la refaire.
   - Mascotte interactive : réactions au clic, sons synthétisés (`MascotSounds`, aucun fichier, transposés d'une quarte vers le grave), réglables dans Apparence.
   - Publié dans la beta 2 (`v2.0.0-beta.2`, 19/10/2026) : tous les points de cette liste, sauf le compteur d'images par seconde du mode jeu et les commandes de la bulle de la musique (20/10/2026).
+  - Publié dans la beta 3 (`v2.0.0-beta.3`, 20/10/2026) : commandes dans les bulles (musique, minuteur), mode jeu aux images par seconde, icône de batterie de macOS 27, balayage des pages géré à la main, bulles qui descendent du haut, points de la pile, largeurs uniformes, accent bleu par défaut.
   - Mode jeu (`Modules/GameMode`) : encoche discrète et images par seconde seulement (`FrameRateMeter` : ScreenCaptureKit compte les images complètes de l'app au premier plan, autorisation Enregistrement de l'écran). S'active comme le mode jeu de macOS (jeu en plein écran au premier plan, `FullScreenDetector`), ou à la main.
   - Centre du son dans le panneau du volume : sortie, micro, apps qui jouent (repli sur l'app « À l'écoute », les navigateurs ne signalant pas toujours leur sortie), volume par app par interception Core Audio (macOS 14.2+).
   - Onglet Autorisations et synthèse dans le tutoriel ; curseurs Liquid Glass (macOS 26+) ; zones cliquables agrandies ; boutons natifs dans les réglages.

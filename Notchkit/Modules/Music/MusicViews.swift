@@ -323,18 +323,6 @@ struct BubblePlaybackControls: View {
     }
 }
 
-/// Bouton réduit à son glyphe blanc : s'assombrit et rétrécit légèrement quand on appuie.
-private struct GlyphButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .foregroundStyle(.white.opacity(configuration.isPressed ? 0.5 : 1))
-            .scaleEffect(configuration.isPressed ? 0.88 : 1)
-            .padding(4)
-            .contentShape(Rectangle())
-            .animation(.smooth(duration: 0.15), value: configuration.isPressed)
-    }
-}
-
 /// Bouton AirPlay de macOS (choix de la sortie audio), via `AVRoutePickerView` (API publique).
 private struct AirPlayButton: NSViewRepresentable {
     func makeNSView(context: Context) -> AVRoutePickerView {

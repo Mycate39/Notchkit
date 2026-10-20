@@ -90,6 +90,8 @@ protocol NotchModule: AnyObject, Observable {
     /// Commandes qui sortent à droite de sa bulle au survol, sans déplier l'encoche
     /// (ex. précédent, lecture/pause, suivant pour la musique). `nil` : le survol ouvre sa page.
     func bubbleControls() -> AnyView?
+    /// Largeur gagnée par la bulle quand elle montre ses commandes.
+    var bubbleControlsWidth: CGFloat { get }
     /// Contenu affiché quand l'encoche est dépliée.
     func expandedView() -> AnyView
     /// Largeur relative de la carte dans l'encoche dépliée (1 = normale, 2 = double).
@@ -111,6 +113,7 @@ extension NotchModule {
     func compactLeading() -> AnyView? { nil }
     func compactTrailing() -> AnyView? { nil }
     func bubbleControls() -> AnyView? { nil }
+    var bubbleControlsWidth: CGFloat { NotchLayout.bubbleControlsContentWidth }
     var bubblePriority: ModulePriority { compactPriority }
     var compactIsland: Bool { false }
     var compactSideWidth: CGFloat { NotchLayout.activitySideWidth }

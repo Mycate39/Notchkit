@@ -502,3 +502,44 @@ struct LiveActivitiesMiniView: View {
         }
     }
 }
+
+/// Commandes du minuteur dans sa bulle : pause (ou reprise) en orange, arrêt en gris, comme la
+/// Dynamic Island d'iOS. Un minuteur qui sonne n'a que l'arrêt.
+struct TimerBubbleControls: View {
+    let module: LiveActivitiesModule
+    let activity: LiveActivity
+
+    var body: some View {
+        // Espaces égaux entre l'icône de la bulle, les boutons et le bord.
+        HStack(spacing: 0) {
+            Spacer(minLength: 0)
+            if !activity.isFinished {
+                control(activity.isPaused ? "play.fill" : "pause.fill", tint: .orange,
+                        help: activity.isPaused ? "Reprendre" : "Pause") {
+                    module.togglePause(activity.id)
+                }
+                Spacer(minLength: 0)
+            }
+            control("xmark", tint: .white, help: "Arrêter") { module.remove(activity.id) }
+            Spacer(minLength: 0)
+        }
+    }
+
+    private func control(_ symbol: String, tint: Color, help: LocalizedStringKey,
+                         action: @escaping () -> Void) -> some View {
+        Button {
+            Haptics.play(.tap)
+            action()
+        } label: {
+            Image(systemName: symbol)
+                .font(.system(size: 11, weight: .bold))
+                .foregroundStyle(tint)
+                .contentTransition(.symbolEffect(.replace))
+                .frame(width: 22, height: 22)
+                .background(tint.opacity(0.22), in: Circle())
+                .contentShape(Circle())
+        }
+        .buttonStyle(.notch)
+        .help(help)
+    }
+}

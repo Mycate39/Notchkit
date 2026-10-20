@@ -280,7 +280,7 @@ final class NotchViewModel {
         // Bulles à droite : la fenêtre s'élargit des deux côtés pour garder l'encoche centrée.
         var bubbles = NotchLayout.bubblesWidth(count: bubbleModules.count, geometry: geometry, island: isIsland)
         // Commandes sorties d'une bulle : place à droite (et autant à gauche, pour rester centré).
-        if bubbleControlsID != nil { bubbles += NotchLayout.bubbleControlsContentWidth }
+        if let id = bubbleControlsID, let module = manager.module(for: id) { bubbles += module.bubbleControlsWidth }
         let margin = isExpanded ? NotchLayout.expandedShadowMargin : (showsHoverShadow ? NotchLayout.hoverShadowMargin : 0)
         guard margin > 0 || bubbles > 0 else { return size }
         var height = size.height + margin

@@ -78,6 +78,21 @@ struct BubbleControlsTests {
         viewModel.collapse()
     }
 
+    @Test func minuteurAvecPauseEtArret() {
+        let module = LiveActivitiesModule(context: ModuleContext(presentAlert: { _ in }, openSettings: {}, holdExpanded: { _ in }))
+        #expect(module.bubbleControls() == nil)
+        module.startTimer(minutes: 5)
+        #expect(module.bubbleControls() != nil)
+        #expect(module.bubbleControlsWidth == NotchLayout.timerBubbleControlsWidth)
+        let id = try! #require(module.mostRelevant?.id)
+        module.togglePause(id)
+        // En pause : la bulle et ses commandes restent (pour reprendre).
+        #expect(module.compactPriority == .normal)
+        #expect(module.bubbleControls() != nil)
+        module.remove(id)
+        #expect(module.compactPriority == .none)
+    }
+
     @Test func musiqueEnPauseGardeSaBulle() {
         let music = MusicModule(context: ModuleContext(presentAlert: { _ in }, openSettings: {}, holdExpanded: { _ in }))
         music.debugSetNowPlaying(NowPlayingInfo(origin: .mediaRemote, title: "Get Lucky", isPlaying: false))

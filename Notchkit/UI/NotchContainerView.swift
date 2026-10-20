@@ -68,7 +68,9 @@ struct NotchContainerView: View {
         // Autres activités en cours : petites bulles à droite, comme sur iPhone.
         .overlay(alignment: .topTrailing) {
             CompactBubbles(viewModel: viewModel)
-                .offset(x: NotchLayout.bubblesWidth(count: viewModel.bubbleModules.count, geometry: geometry, island: island))
+                // Décalage fixe (pas selon le nombre de bulles) : une bulle qui rentre sous l'encoche
+                // ne doit pas glisser deux fois.
+                .offset(x: NotchLayout.bubblesWidth(count: 1, geometry: geometry, island: island))
         }
         .foregroundStyle(.white)
         .tint(viewModel.appearance.accentColor)
@@ -96,7 +98,6 @@ struct NotchContainerView: View {
 /// Survoler (ou cliquer) une bulle ouvre l'encoche sur la page de son activité.
 private struct CompactBubbles: View {
     let viewModel: NotchViewModel
-    @Environment(\.onAccent) private var onAccent
     @Namespace private var namespace
     @State private var closeTask: Task<Void, Never>?
 
@@ -112,13 +113,21 @@ private struct CompactBubbles: View {
                                   bottomCornerRadius: min(10, diameter / 3)))
             : AnyShape(Capsule())
 
-        Group {
-            if ids.count >= 2 {
-                stack(ids, diameter: diameter, width: width, resting: resting)
-            } else if let id = ids.first {
-                bubble(id, diameter: diameter, width: width, shape: resting)
-                    .onHover { hover(id, inside: $0) }
-                    .transition(.scale(scale: 0.4).combined(with: .opacity))
+        ZStack(alignment: .topLeading) {
+            if !ids.isEmpty {
+                Group {
+                    if ids.count >= 2 {
+                        stack(ids, diameter: diameter, width: width, resting: resting)
+                    } else if let id = ids.first {
+                        bubble(id, diameter: diameter, width: width, shape: resting)
+                            .onHover { hover(id, inside: $0) }
+                    }
+                }
+                // Comme la Dynamic Island : la bulle sort de sous l'encoche en glissant vers la droite,
+                // et y rentre en disparaissant.
+                .transition(.offset(x: -(width + NotchLayout.bubbleGap))
+                    .combined(with: .scale(scale: 0.6, anchor: .leading))
+                    .combined(with: .opacity))
             }
         }
         .padding(.leading, NotchLayout.bubbleGap)
@@ -134,7 +143,10 @@ private struct CompactBubbles: View {
         VStack(spacing: NotchLayout.bubbleGap) {
             if isOpen {
                 ForEach(Array(ids.enumerated()), id: \.element) { index, id in
-                    bubble(id, diameter: diameter, width: diameter, shape: AnyShape(Capsule()))
+                    // La première reste suspendue au bord de l'écran, comme au repos ; les suivantes
+                    // descendent en dessous, rondes.
+                    bubble(id, diameter: diameter, width: index == 0 ? width : diameter,
+                           shape: index == 0 ? resting : AnyShape(Capsule()), hanging: index == 0)
                         // La première bulle naît de la pile (même emplacement, la forme s'arrondit).
                         .matchedGeometryEffect(id: index == 0 ? "pile" : id, in: namespace)
                         .onHover { hover(id, inside: $0) }
@@ -153,13 +165,10 @@ private struct CompactBubbles: View {
                     .transition(.opacity)
             }
         }
-        // En mode encoche, le menu se détache légèrement du bord de l'écran.
-        .padding(.top, isOpen && viewModel.geometry.style == .notch ? NotchLayout.bubbleMenuTopInset : 0)
         .frame(width: width, alignment: .top)
         .contentShape(Rectangle())
         .onHover { hoverMenu($0) }
         .animation(NotchLayout.spring, value: isOpen)
-        .transition(.scale(scale: 0.4).combined(with: .opacity))
     }
 
     private func hoverMenu(_ inside: Bool) {
@@ -185,17 +194,20 @@ private struct CompactBubbles: View {
         }
     }
 
-    /// Pile repliée : l'activité la plus importante et le nombre d'activités rangées.
+    /// Pile repliée : l'activité la plus importante, et une colonne de points (un par activité,
+    /// le premier plus marqué) le long de son bord gauche.
     private func pile(_ ids: [String], diameter: CGFloat, width: CGFloat, shape: AnyShape) -> some View {
         bubble(ids[0], diameter: diameter, width: width, shape: shape)
-            .overlay(alignment: .bottomTrailing) {
-                Text(verbatim: "\(ids.count)")
-                    .font(.system(size: 8, weight: .bold, design: .rounded))
-                    .monospacedDigit()
-                    .foregroundStyle(onAccent)
-                    .frame(minWidth: 12, minHeight: 12)
-                    .background(.tint, in: Capsule())
-                    .offset(x: viewModel.geometry.style == .notch ? -NotchLayout.earRadius - 2 : 2, y: 1)
+            .overlay(alignment: .leading) {
+                VStack(spacing: NotchLayout.bubbleDotSpacing) {
+                    ForEach(ids.indices, id: \.self) { index in
+                        Circle()
+                            .fill(.white.opacity(index == 0 ? 0.9 : 0.35))
+                            .frame(width: NotchLayout.bubbleDotSize, height: NotchLayout.bubbleDotSize)
+                    }
+                }
+                .padding(.leading, viewModel.geometry.style == .notch ? NotchLayout.earRadius + 5 : 5)
+                .allowsHitTesting(false)
             }
             .help(Text("\(ids.count) activités en cours"))
     }
@@ -204,7 +216,9 @@ private struct CompactBubbles: View {
 
     /// Une bulle. Survolée, une bulle qui a des commandes (musique) s'allonge vers la droite pour
     /// les montrer ; sa place dans la mise en page ne change pas (elle déborde à droite).
-    private func bubble(_ id: String, diameter: CGFloat, width: CGFloat, shape: AnyShape) -> some View {
+    /// `hanging` : bulle suspendue au bord de l'écran (mini-encoche), sans contour en haut.
+    private func bubble(_ id: String, diameter: CGFloat, width: CGFloat, shape: AnyShape,
+                        hanging: Bool = true) -> some View {
         Group {
             if let module = viewModel.manager.module(for: id), let content = module.compactLeading() {
                 let controls = viewModel.bubbleControlsID == id ? module.bubbleControls() : nil
@@ -221,7 +235,7 @@ private struct CompactBubbles: View {
                         .onTapGesture { viewModel.expand(showing: id) }
                     if let controls {
                         controls
-                            .frame(width: width + NotchLayout.bubbleControlsContentWidth - iconEnd - ear, height: diameter)
+                            .frame(width: width + module.bubbleControlsWidth - iconEnd - ear, height: diameter)
                             // Mode encoche : les commandes restent à l'écart du congé de droite.
                             .padding(.trailing, ear)
                             .transition(.opacity.combined(with: .scale(scale: 0.6, anchor: .leading)))
@@ -233,8 +247,7 @@ private struct CompactBubbles: View {
                         if viewModel.geometry.style == .pill || viewModel.isBubbleMenuOpen || viewModel.showsOutline {
                             shape.stroke(.white.opacity(0.22), lineWidth: 2)
                                 .mask(alignment: .top) {
-                                    Rectangle().padding(.top, viewModel.geometry.style == .notch
-                                                        && !viewModel.isBubbleMenuOpen ? 2 : 0)
+                                    Rectangle().padding(.top, viewModel.geometry.style == .notch && hanging ? 2 : 0)
                                 }
                         }
                     }

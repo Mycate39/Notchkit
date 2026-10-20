@@ -23,6 +23,18 @@ extension ButtonStyle where Self == NotchPressStyle {
     static var notch: NotchPressStyle { NotchPressStyle() }
 }
 
+/// Bouton réduit à son glyphe blanc : s'assombrit et rétrécit légèrement quand on appuie.
+struct GlyphButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .foregroundStyle(.white.opacity(configuration.isPressed ? 0.5 : 1))
+            .scaleEffect(configuration.isPressed ? 0.88 : 1)
+            .padding(4)
+            .contentShape(Rectangle())
+            .animation(.smooth(duration: 0.15), value: configuration.isPressed)
+    }
+}
+
 // MARK: - Style StandBy
 
 /// Palette inspirée du mode Nuit de StandBy (iPhone) : noir OLED, pilules gris très sombre,

@@ -70,14 +70,17 @@ enum NotchLayout {
     /// rangées dans une pile qui se déroule au survol (au plus `maxBubbles` bulles).
     static let maxBubbles = 4
     static let bubbleGap: CGFloat = 6
-    /// Décalage du menu déroulé sous le bord de l'écran, en mode encoche.
-    static let bubbleMenuTopInset: CGFloat = 4
+    /// Points de la pile (un par activité), en colonne le long du bord gauche de la bulle.
+    static let bubbleDotSize: CGFloat = 3
+    static let bubbleDotSpacing: CGFloat = 2.5
     /// Commandes d'une bulle (musique) : elles sortent peu après l'arrivée de la souris
     /// et rentrent un peu après son départ (passer de la bulle aux commandes ne les referme pas).
     static let bubbleControlsOpenDelay: TimeInterval = 0.12
     static let bubbleControlsCloseDelay: TimeInterval = 0.3
-    /// Largeur gagnée par la bulle qui montre ses commandes (trois boutons).
+    /// Largeur gagnée par la bulle qui montre ses commandes : trois boutons (musique) par défaut,
+    /// deux pour un minuteur.
     static let bubbleControlsContentWidth: CGFloat = 100
+    static let timerBubbleControlsWidth: CGFloat = 72
 
     /// Forme noire dessinée ? (fonction pure, testée). Sur une encoche matérielle au repos, une
     /// forme par-dessus serait un peu plus large (congés) et ses coins ne tomberaient pas
@@ -142,13 +145,12 @@ enum NotchLayout {
         isExpanded || isOverNotch(dx: dx, fromTop: fromTop, shapeSize: shapeSize, style: style)
     }
 
-    /// Hauteur du menu déroulé : `count` bulles rondes empilées (décalage du haut compris).
+    /// Hauteur du menu déroulé : la première bulle suspendue au bord, les autres rondes en dessous.
     static func bubbleMenuHeight(count: Int, geometry: NotchGeometry, island: Bool = false) -> CGFloat {
         let count = min(max(0, count), maxBubbles)
         guard count > 0 else { return 0 }
         let diameter = bubbleDiameter(for: geometry, island: island)
-        let top = geometry.style == .notch ? bubbleMenuTopInset : 0
-        return top + CGFloat(count) * diameter + CGFloat(count - 1) * bubbleGap
+        return CGFloat(count) * diameter + CGFloat(count - 1) * bubbleGap
     }
 
     /// Rayon des coins en mode déplié.

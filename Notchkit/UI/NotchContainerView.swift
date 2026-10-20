@@ -68,8 +68,8 @@ struct NotchContainerView: View {
         // Autres activités en cours : petites bulles à droite, comme sur iPhone.
         .overlay(alignment: .topTrailing) {
             CompactBubbles(viewModel: viewModel)
-                // Décalage fixe (pas selon le nombre de bulles) : une bulle qui rentre sous l'encoche
-                // ne doit pas glisser deux fois.
+                // Décalage fixe (pas selon le nombre de bulles) : une bulle qui remonte ne doit pas
+                // aussi glisser de côté.
                 .offset(x: NotchLayout.bubblesWidth(count: 1, geometry: geometry, island: island))
         }
         .foregroundStyle(.white)
@@ -123,11 +123,9 @@ private struct CompactBubbles: View {
                             .onHover { hover(id, inside: $0) }
                     }
                 }
-                // Comme la Dynamic Island : la bulle sort de sous l'encoche en glissant vers la droite,
-                // et y rentre en disparaissant.
-                .transition(.offset(x: -(width + NotchLayout.bubbleGap))
-                    .combined(with: .scale(scale: 0.6, anchor: .leading))
-                    .combined(with: .opacity))
+                // La bulle descend du haut de l'écran et y remonte en disparaissant (le bord de la
+                // fenêtre, collé en haut de l'écran, la masque au-dessus).
+                .transition(.offset(y: -(diameter + NotchLayout.topInset(for: geometry.style) + 2)))
             }
         }
         .padding(.leading, NotchLayout.bubbleGap)

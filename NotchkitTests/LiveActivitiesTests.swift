@@ -116,3 +116,19 @@ struct ChronoAlarmePomodoroTests {
         #expect(LiveActivity.pomodoro(.rest, now: t0).duration == 5 * 60)
     }
 }
+
+/// Règle du minuteur façon iOS.
+struct TimerRulerTests {
+    @Test func doigtsVersLaGaucheAllongentLaDuree() {
+        #expect(TimerRulerMath.minutes(from: 15, translation: -TimerRulerMath.tickSpacing * 5) == 20)
+        #expect(TimerRulerMath.minutes(from: 15, translation: TimerRulerMath.tickSpacing * 3) == 12)
+        // Bornes : au moins une minute, au plus trois heures.
+        #expect(TimerRulerMath.minutes(from: 2, translation: 500) == 1)
+        #expect(TimerRulerMath.minutes(from: 170, translation: -500) == 180)
+    }
+
+    @Test func dureeAfficheeEnGrand() {
+        #expect(TimerRulerMath.label(minutes: 15) == "15:00")
+        #expect(TimerRulerMath.label(minutes: 75) == "1:15:00")
+    }
+}

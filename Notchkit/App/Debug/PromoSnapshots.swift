@@ -73,6 +73,8 @@ enum PromoSnapshots {
         let plugged = BatteryAlertFactory.alert(for: .pluggedIn, state: charging)
         save(compact(plugged.leading, plugged.trailing), to: file("05-batterie-alerte"))
         save(card(battery.expandedView(), weight: 1), to: file("05-batterie-carte"))
+        // Minuteur à régler à la règle (aucune activité en cours).
+        save(card(LiveActivitiesModule(context: context).expandedView(), weight: 2), to: file("02-minuteur-regle"))
         // En charge : activité du temps restant et carte moyenne avec l'heure prévue.
         battery.debugSetState(BatteryState(level: 62, isCharging: true, isCharged: false, powerSource: .ac,
                                            minutesToFull: 75))

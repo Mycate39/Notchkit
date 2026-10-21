@@ -109,9 +109,8 @@ struct LiveActivitiesExpandedView: View {
             } else {
                 VStack(alignment: .leading, spacing: 6) {
                     if module.activities.isEmpty {
-                        Text("Aucune activité en cours")
-                            .font(.system(size: 11, weight: .medium))
-                            .foregroundStyle(.white.opacity(0.6))
+                        // Rien en cours : réglage d'un minuteur à la règle, façon iOS.
+                        TimerRulerSetupView(module: module, extras: AnyView(extraButtons))
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                     } else {
                         ScrollView {
@@ -123,7 +122,7 @@ struct LiveActivitiesExpandedView: View {
                         }
                         .scrollIndicators(.never)
                     }
-                    timerLauncher
+                    if !module.activities.isEmpty { timerLauncher }
                 }
             }
         }
@@ -139,6 +138,22 @@ struct LiveActivitiesExpandedView: View {
             launcherRow(presets: [5, 25], extras: true)
             launcherRow(presets: [5], extras: true)
             launcherRow(presets: [5], extras: false)
+        }
+    }
+
+    /// Chronomètre, alarme et Pomodoro, à côté de « Démarrer » quand la place le permet.
+    private var extraButtons: some View {
+        ViewThatFits(in: .horizontal) {
+            HStack(spacing: 5) {
+                Button(action: module.startStopwatch) { Image(systemName: "stopwatch") }
+                    .help("Chronomètre")
+                Button { isPickingAlarm = true } label: { Image(systemName: "alarm") }
+                    .help("Alarme")
+                Button(action: module.startPomodoro) { Image(systemName: "brain.head.profile") }
+                    .help("Pomodoro (25 min de travail, 5 min de pause)")
+            }
+            .buttonStyle(.standBy(.small, circle: true))
+            EmptyView()
         }
     }
 

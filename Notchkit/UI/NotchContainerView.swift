@@ -556,6 +556,14 @@ final class PageSwiper {
     @ObservationIgnored private var monitor: Any?
     /// Le dernier geste était pour les pages : son inertie est ignorée aussi.
     @ObservationIgnored private var lastGestureWasPaging = false
+    /// Le geste en cours a commencé sur une vue qui défile elle-même à l'horizontale.
+    @ObservationIgnored private var gestureBelongsToView = false
+
+    private static func isOverScrollCatcher(_ event: NSEvent) -> Bool {
+        guard let content = event.window?.contentView else { return false }
+        let point = content.superview?.convert(event.locationInWindow, from: nil) ?? event.locationInWindow
+        return content.hitTest(point) is ScrollCatcherView
+    }
 
     func start(pageCount: @escaping @MainActor () -> Int, currentPage: @escaping @MainActor () -> Int,
                onTrackingChange: @escaping @MainActor (Bool) -> Void, onEnd: @escaping @MainActor (Int) -> Void) {
@@ -589,7 +597,10 @@ final class PageSwiper {
         if event.phase.contains(.began) {
             swipe.begin()
             lastGestureWasPaging = false
+            // Geste commencé sur une vue qui défile à l'horizontale (règle du minuteur) : il est pour elle.
+            gestureBelongsToView = Self.isOverScrollCatcher(event)
         }
+        if gestureBelongsToView { return false }
         if event.phase.contains(.ended) || event.phase.contains(.cancelled) {
             guard swipe.isTracking else { return false }
             var final = swipe

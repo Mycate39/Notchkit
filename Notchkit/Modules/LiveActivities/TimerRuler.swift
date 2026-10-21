@@ -13,6 +13,22 @@ enum TimerRulerMath {
         min(max(start - Double(translation / tickSpacing), range.lowerBound), range.upperBound)
     }
 
+    /// Marge au bout de la règle (en minutes) : la graduation 0 et son chiffre restent lisibles.
+    static let edgeInset: Double = 1.2
+
+    /// Première minute visible à gauche (fonction pure, testée). La règle se centre sur la durée,
+    /// mais bute à ses deux bouts comme une vraie règle : elle remplit toujours toute la largeur,
+    /// et c'est alors le repère qui se déplace.
+    static func windowStart(value: Double, visibleMinutes: Double) -> Double {
+        let lowest = range.lowerBound - 1 - edgeInset
+        let highest = range.upperBound + edgeInset - visibleMinutes
+        return min(max(value - visibleMinutes / 2, lowest), max(lowest, highest))
+    }
+
+    /// Format le plus large, dont la place est toujours réservée, et tailles de police essayées.
+    static let widestLabel = "0:00:00"
+    static let labelSizes: [CGFloat] = [38, 32, 27, 22]
+
     /// Durée affichée en grand : « 15:00 » ou « 1:15:00 ».
     static func label(minutes: Int) -> String {
         minutes >= 60 ? String(format: "%d:%02d:00", minutes / 60, minutes % 60) : String(format: "%d:00", minutes)
@@ -53,29 +69,52 @@ struct TimerRulerSetupView: View {
                 .keyboardShortcut(.defaultAction)
                 extras
                 Spacer(minLength: 4)
-                Text(TimerRulerMath.label(minutes: minutes))
-                    .font(.system(size: 38, weight: .light))
-                    .monospacedDigit()
-                    .foregroundStyle(.orange)
-                    .contentTransition(.numericText(value: Double(minutes)))
-                    .animation(.snappy(duration: 0.2), value: minutes)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.6)
+                // Taille fixe, choisie pour que le format le plus long (« 3:00:00 ») tienne : passer
+                // d'une durée en minutes à une durée en heures ne change ni la police ni la disposition.
+                ViewThatFits(in: .horizontal) {
+                    ForEach(TimerRulerMath.labelSizes, id: \.self) { size in
+                        durationLabel(size: size)
+                    }
+                }
             }
         }
         .onAppear { value = Double(storedMinutes) }
     }
 
+    private func durationLabel(size: CGFloat) -> some View {
+        let font = Font.system(size: size, weight: .light).monospacedDigit()
+        return ZStack(alignment: .trailing) {
+            Text(verbatim: TimerRulerMath.widestLabel).font(font).hidden()
+            Text(TimerRulerMath.label(minutes: minutes))
+                .font(font)
+                .foregroundStyle(.orange)
+                .contentTransition(.numericText(value: Double(minutes)))
+                .animation(.snappy(duration: 0.2), value: minutes)
+        }
+        .lineLimit(1)
+        .fixedSize()
+    }
+
     private var ruler: some View {
         Canvas { context, size in
-            let center = size.width / 2
+            let spacing = TimerRulerMath.tickSpacing
+            let visible = Double(size.width / spacing)
+            let start = TimerRulerMath.windowStart(value: value, visibleMinutes: visible)
+            let fadeWidth = size.width * 0.18
+            // Les graduations s'estompent vers un bord seulement si la règle continue au-delà.
+            let moreLeft = start > TimerRulerMath.range.lowerBound - 1 - TimerRulerMath.edgeInset + 0.01
+            let moreRight = start + visible < TimerRulerMath.range.upperBound + TimerRulerMath.edgeInset - 0.01
             let tickTop: CGFloat = 18
-            let first = Int((value - Double(center / TimerRulerMath.tickSpacing)).rounded(.down)) - 1
-            let last = Int((value + Double(center / TimerRulerMath.tickSpacing)).rounded(.up)) + 1
-            for minute in max(0, first)...max(0, last) where Double(minute) <= TimerRulerMath.range.upperBound {
-                let x = center + CGFloat(Double(minute) - value) * TimerRulerMath.tickSpacing
+            let first = max(0, Int(start.rounded(.down)))
+            let last = min(Int(TimerRulerMath.range.upperBound), Int((start + visible).rounded(.up)))
+            for minute in first...max(first, last) {
+                let x = CGFloat(Double(minute) - start) * spacing
+                var fade = 1.0
+                if moreLeft { fade = min(fade, Double(x / fadeWidth)) }
+                if moreRight { fade = min(fade, Double((size.width - x) / fadeWidth)) }
+                guard fade > 0 else { continue }
                 let chosen = Double(minute) <= value + 0.001
-                let color = Color.orange.opacity(chosen ? 1 : 0.35)
+                let color = Color.orange.opacity((chosen ? 1 : 0.35) * fade)
                 let tick = Path(roundedRect: CGRect(x: x - 1, y: tickTop, width: 2, height: size.height - tickTop - 10),
                                 cornerRadius: 1)
                 context.fill(tick, with: .color(color))
@@ -86,23 +125,17 @@ struct TimerRulerSetupView: View {
                     context.draw(text, at: CGPoint(x: x, y: 7))
                 }
             }
-            // Repère central : triangle aux coins arrondis (tracé épais à jointures rondes).
+            // Repère sous la durée choisie : triangle aux coins arrondis (tracé épais à jointures rondes).
+            let marker = CGFloat(value - start) * spacing
             let corner: CGFloat = 1.2
             var triangle = Path()
-            triangle.move(to: CGPoint(x: center, y: size.height - 8 + corner))
-            triangle.addLine(to: CGPoint(x: center + 5.5 - corner, y: size.height - corner))
-            triangle.addLine(to: CGPoint(x: center - 5.5 + corner, y: size.height - corner))
+            triangle.move(to: CGPoint(x: marker, y: size.height - 8 + corner))
+            triangle.addLine(to: CGPoint(x: marker + 5.5 - corner, y: size.height - corner))
+            triangle.addLine(to: CGPoint(x: marker - 5.5 + corner, y: size.height - corner))
             triangle.closeSubpath()
             context.fill(triangle, with: .color(.orange))
             context.stroke(triangle, with: .color(.orange), style: StrokeStyle(lineWidth: corner * 2, lineJoin: .round))
         }
-        // Graduations qui s'estompent vers les bords.
-        .mask(LinearGradient(stops: [
-            .init(color: .clear, location: 0),
-            .init(color: .black, location: 0.18),
-            .init(color: .black, location: 0.82),
-            .init(color: .clear, location: 1),
-        ], startPoint: .leading, endPoint: .trailing))
     }
 
     private func scroll(_ translation: CGFloat) {
@@ -149,22 +182,45 @@ final class ScrollCatcherView: NSView {
 
     override func acceptsFirstMouse(for event: NSEvent?) -> Bool { true }
 
+    /// Un geste à deux doigts commencé sur la règle est en cours (inertie comprise).
+    private var isTracking = false
+    /// Fin du geste différée : l'inertie du trackpad commence juste après le relâchement.
+    private var pendingEnd: DispatchWorkItem?
+
     override func scrollWheel(with event: NSEvent) {
-        // Pas d'inertie : la règle s'arrête sous les doigts, puis se cale.
-        guard event.momentumPhase.isEmpty else { return }
         // Molette de souris : chaque cran fait avancer d'une minute.
-        guard !event.phase.isEmpty else {
+        guard !event.phase.isEmpty || !event.momentumPhase.isEmpty else {
             onChange?(event.scrollingDeltaY * (event.hasPreciseScrollingDeltas ? 1 : TimerRulerMath.tickSpacing))
             onEnd?()
             return
         }
-        if event.phase.contains(.began) { translation = 0 }
+        if event.phase.contains(.began) {
+            pendingEnd?.cancel()
+            translation = 0
+            isTracking = true
+        }
+        // Défilement cinétique : la règle continue sur sa lancée après le relâchement.
+        if event.momentumPhase.contains(.began) { pendingEnd?.cancel() }
+        guard isTracking else { return }
         translation += abs(event.scrollingDeltaX) >= abs(event.scrollingDeltaY) ? event.scrollingDeltaX : event.scrollingDeltaY
         onChange?(translation)
-        if event.phase.contains(.ended) || event.phase.contains(.cancelled) {
-            translation = 0
-            onEnd?()
+        if event.momentumPhase.contains(.ended) || event.momentumPhase.contains(.cancelled) {
+            finish()
+        } else if event.phase.contains(.ended) || event.phase.contains(.cancelled) {
+            // Sans inertie (doigts arrêtés avant de se lever), aucun événement ne suit : on termine.
+            let end = DispatchWorkItem { [weak self] in self?.finish() }
+            pendingEnd = end
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.08, execute: end)
         }
+    }
+
+    private func finish() {
+        pendingEnd?.cancel()
+        pendingEnd = nil
+        guard isTracking else { return }
+        isTracking = false
+        translation = 0
+        onEnd?()
     }
 
     override func mouseDown(with event: NSEvent) {

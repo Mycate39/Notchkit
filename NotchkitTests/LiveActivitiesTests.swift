@@ -132,3 +132,17 @@ struct TimerRulerTests {
         #expect(TimerRulerMath.label(minutes: 75) == "1:15:00")
     }
 }
+
+/// La règle remplit toujours sa largeur : elle bute à 0 et à 180 min, c'est le repère qui bouge.
+struct TimerRulerWindowTests {
+    @Test func regleButeAuxDeuxBouts() {
+        // Au milieu : centrée sur la durée.
+        #expect(TimerRulerMath.windowStart(value: 60, visibleMinutes: 30) == 45)
+        // Petite durée : la règle commence juste avant 0, sans vide à gauche.
+        let low = TimerRulerMath.windowStart(value: 1, visibleMinutes: 30)
+        #expect(low == -TimerRulerMath.edgeInset)
+        #expect(TimerRulerMath.windowStart(value: 3, visibleMinutes: 30) == low)
+        // Grande durée : elle s'arrête juste après 180.
+        #expect(TimerRulerMath.windowStart(value: 180, visibleMinutes: 30) == 180 + TimerRulerMath.edgeInset - 30)
+    }
+}

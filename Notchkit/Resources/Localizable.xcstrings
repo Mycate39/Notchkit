@@ -1,6 +1,22 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "Chronomètre, alarme, Pomodoro" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stopwatch, alarm, Pomodoro"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chronomètre, alarme, Pomodoro"
+          }
+        }
+      }
+    },
     "Retirer les fichiers après 5 minutes" : {
       "localizations" : {
         "en" : {

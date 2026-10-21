@@ -141,20 +141,26 @@ struct LiveActivitiesExpandedView: View {
         }
     }
 
-    /// Chronomètre, alarme et Pomodoro, à côté de « Démarrer » quand la place le permet.
+    /// Chronomètre, alarme et Pomodoro, regroupés dans un bouton « … » à côté de « Démarrer » :
+    /// la durée garde toute la place pour rester grande.
     private var extraButtons: some View {
-        ViewThatFits(in: .horizontal) {
-            HStack(spacing: 5) {
-                Button(action: module.startStopwatch) { Image(systemName: "stopwatch") }
-                    .help("Chronomètre")
-                Button { isPickingAlarm = true } label: { Image(systemName: "alarm") }
-                    .help("Alarme")
-                Button(action: module.startPomodoro) { Image(systemName: "brain.head.profile") }
-                    .help("Pomodoro (25 min de travail, 5 min de pause)")
-            }
-            .buttonStyle(.standBy(.small, circle: true))
-            EmptyView()
+        Menu {
+            Button("Chronomètre", systemImage: "stopwatch", action: module.startStopwatch)
+            Button("Alarme", systemImage: "alarm") { isPickingAlarm = true }
+            Button("Pomodoro (25 min de travail, 5 min de pause)", systemImage: "brain.head.profile",
+                   action: module.startPomodoro)
+        } label: {
+            Image(systemName: "ellipsis")
+                .font(.system(size: 13, weight: .bold))
+                .foregroundStyle(.white.opacity(0.85))
+                .frame(width: 30, height: 30)
+                .background(StandBy.surface, in: Circle())
         }
+        .menuStyle(.button)
+        .buttonStyle(.plain)
+        .menuIndicator(.hidden)
+        .fixedSize()
+        .help("Chronomètre, alarme, Pomodoro")
     }
 
     private func launcherRow(presets: [Int], extras: Bool) -> some View {

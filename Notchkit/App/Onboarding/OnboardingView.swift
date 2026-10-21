@@ -246,7 +246,7 @@ private struct OnboardingPermissions: View {
                         .font(.system(size: 18))
                         .foregroundStyle(.green)
                 } else {
-                    Button("Autoriser…") { center.request(.accessibility) }
+                    Button("Demander l'accès…") { center.request(.accessibility) }
                         .buttonStyle(.standBy(.small))
                 }
             }

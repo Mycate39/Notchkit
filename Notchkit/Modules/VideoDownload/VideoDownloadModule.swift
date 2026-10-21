@@ -421,6 +421,8 @@ final class VideoDownloadModule: NotchModule {
 
     var compactPriority: ModulePriority { activeDownload != nil ? .normal : .none }
 
+    var keyLineColor: Color? { activeDownload != nil ? .red : nil }
+
     var expandedWidthWeight: CGFloat { 2 }
 
 

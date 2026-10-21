@@ -73,7 +73,7 @@ struct TouchIDUnlockView: View {
 struct TouchIDPromptView: View {
     var body: some View {
         VStack(spacing: 8) {
-            TimelineView(.animation) { context in
+            TimelineView(.animation(paused: NotchAccessibility.reduceMotion)) { context in
                 let time = context.date.timeIntervalSinceReferenceDate
                 ZStack {
                     ForEach(0..<3) { index in

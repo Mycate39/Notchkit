@@ -356,4 +356,10 @@ enum NotchAccessibility {
     static var reduceTransparency: Bool {
         NSWorkspace.shared.accessibilityDisplayShouldReduceTransparency
     }
+
+    /// « Réduire les animations » : les animations décoratives en boucle s'arrêtent (mascotte au repos,
+    /// ondes, égaliseur simulé). Les indicateurs d'activité et ce qui suit un contenu réel restent.
+    static var reduceMotion: Bool {
+        NSWorkspace.shared.accessibilityDisplayShouldReduceMotion
+    }
 }

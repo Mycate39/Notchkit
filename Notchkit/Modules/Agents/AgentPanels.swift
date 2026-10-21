@@ -105,7 +105,7 @@ struct AgentEditorPanel: View {
             Spacer(minLength: 6)
             Text(shortPath)
                 .font(.system(size: 10, design: .monospaced))
-                .foregroundStyle(.white.opacity(0.35))
+                .foregroundStyle(.white.opacity(0.55))
                 .lineLimit(1)
                 .truncationMode(.head)
         }
@@ -163,7 +163,7 @@ private struct DiffLine: View {
     var body: some View {
         HStack(alignment: .firstTextBaseline, spacing: 6) {
             Text(number.map(String.init) ?? "")
-                .foregroundStyle(.white.opacity(0.3))
+                .foregroundStyle(.white.opacity(0.55))
                 .frame(width: 26, alignment: .trailing)
             Text(marker).foregroundStyle(color)
             // Curseur de frappe collé au dernier caractère, la ligne passe à la ligne si elle est longue.
@@ -279,7 +279,7 @@ struct AgentPermissionPanel: View {
             }
             Text("Répondez dans le terminal de Claude Code.")
                 .font(.system(size: 11))
-                .foregroundStyle(.white.opacity(0.4))
+                .foregroundStyle(.white.opacity(0.55))
             Spacer(minLength: 0)
         }
         .padding(10)
@@ -369,7 +369,7 @@ struct AgentQuestionPanel: View {
                 if prompt.questions.count > 1 {
                     Text(verbatim: "\(index + 1)/\(prompt.questions.count)")
                         .font(.system(size: 10, weight: .semibold).monospacedDigit())
-                        .foregroundStyle(.white.opacity(0.4))
+                        .foregroundStyle(.white.opacity(0.55))
                 }
                 Spacer(minLength: 0)
                 Button("Terminal", action: onTerminal)
@@ -393,6 +393,7 @@ struct AgentQuestionPanel: View {
                                 .buttonStyle(.standBy(.small, active: true, circle: true))
                                 .disabled(selections[question.question, default: []].isEmpty)
                                 .help("Valider")
+                                .accessibilityLabel(Text("Valider"))
                         }
                     }
                 }

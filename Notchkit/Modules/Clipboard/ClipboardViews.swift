@@ -16,7 +16,7 @@ struct ClipboardExpandedView: View {
         VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: 6) {
                 Image(systemName: "magnifyingglass")
-                    .font(.system(size: 9, weight: .semibold))
+                    .font(.system(size: 10, weight: .semibold))
                     .foregroundStyle(.white.opacity(0.5))
                 TextField("Rechercher", text: $search)
                     .textFieldStyle(.plain)
@@ -25,9 +25,10 @@ struct ClipboardExpandedView: View {
                 if !module.items.isEmpty {
                     Button { module.clearUnpinned() } label: { Image(systemName: "trash") }
                         .buttonStyle(.notch)
-                        .font(.system(size: 9))
+                        .font(.system(size: 10))
                         .foregroundStyle(.white.opacity(0.6))
                         .help("Effacer l'historique (sauf les éléments épinglés)")
+                        .accessibilityLabel(Text("Effacer l'historique (sauf les éléments épinglés)"))
                 }
             }
             .padding(.horizontal, 9)
@@ -73,8 +74,8 @@ private struct ClipboardRow: View {
                     .font(.system(size: 10, weight: .medium))
                     .lineLimit(1)
                 Text(subtitle)
-                    .font(.system(size: 8))
-                    .foregroundStyle(.white.opacity(0.45))
+                    .font(.system(size: 10))
+                    .foregroundStyle(.white.opacity(0.55))
                     .lineLimit(1)
             }
             Spacer(minLength: 4)
@@ -83,7 +84,7 @@ private struct ClipboardRow: View {
                     Image(systemName: item.isPinned ? "pin.fill" : "pin")
                 }
                 .buttonStyle(.notch)
-                .font(.system(size: 9))
+                .font(.system(size: 10))
                 .foregroundStyle(item.isPinned ? AnyShapeStyle(.tint) : AnyShapeStyle(.white.opacity(0.6)))
                 .help(item.isPinned ? "Désépingler" : "Épingler")
             }

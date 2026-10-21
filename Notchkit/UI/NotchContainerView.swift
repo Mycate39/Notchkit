@@ -46,7 +46,8 @@ struct NotchContainerView: View {
         // Fin contour gris, comme la Dynamic Island : pour l'île, et quand la barre des menus est
         // sombre (l'encoche noire s'y confondrait). Collée au bord de l'écran, pas de trait en haut.
         .overlay {
-            shape.stroke(.white.opacity((island && geometry.style == .pill) || viewModel.showsOutline ? 0.22 : 0),
+            shape.stroke(NotchLayout.keyLine(viewModel.keyLineColor)
+                            .opacity((island && geometry.style == .pill) || viewModel.showsOutline ? 1 : 0),
                          lineWidth: 2)
                 .mask(alignment: .top) {
                     Rectangle().padding(.top, geometry.style == .notch ? 2 : 0)
@@ -243,7 +244,7 @@ private struct CompactBubbles: View {
                     .overlay {
                         // Même fin contour que l'île : pastille flottante, menu déroulé, barre sombre.
                         if viewModel.geometry.style == .pill || viewModel.isBubbleMenuOpen || viewModel.showsOutline {
-                            shape.stroke(.white.opacity(0.22), lineWidth: 2)
+                            shape.stroke(NotchLayout.keyLine(module.keyLineColor), lineWidth: 2)
                                 .mask(alignment: .top) {
                                     Rectangle().padding(.top, viewModel.geometry.style == .notch && hanging ? 2 : 0)
                                 }
@@ -254,6 +255,7 @@ private struct CompactBubbles: View {
                     .clipShape(shape)
                     .contentShape(shape)
                     .help(Text(type(of: module).descriptor.name))
+                    .accessibilityLabel(Text(type(of: module).descriptor.name))
             }
         }
         .frame(width: width, height: diameter, alignment: .leading)
@@ -431,6 +433,7 @@ private struct ExpandedNotchView: View {
             }
             .buttonStyle(.notch)
             .help("Réglages")
+            .accessibilityLabel(Text("Réglages"))
         }
     }
 

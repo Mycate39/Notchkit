@@ -344,7 +344,7 @@ private struct ModuleDetailView: View {
                             Text(descriptor.name).font(.title2.bold())
                             if descriptor.tier == .pro {
                                 Text("PRO")
-                                    .font(.system(size: 9, weight: .bold))
+                                    .font(.system(size: 10, weight: .bold))
                                     .padding(.horizontal, 5).padding(.vertical, 1)
                                     .background(.tint, in: Capsule())
                                     .foregroundStyle(.white)
@@ -481,12 +481,19 @@ private struct GeneralSettingsView: View {
 
             Section("Retour haptique") {
                 Toggle("Retour haptique du trackpad", isOn: $settings.settings.hapticsEnabled)
-                Text("Un léger clic à l'ouverture de l'encoche, au changement de page, aux alertes et à chaque cran de volume (trackpad Force Touch).")
+                Text("Un léger clic quand vous ouvrez l'encoche, changez de page, réglez le volume ou le minuteur, ou touchez une commande (trackpad Force Touch).")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
 
             Section("Système") {
+                Toggle("Afficher Notchkit dans la barre des menus", isOn: $settings.settings.showsMenuBarIcon)
+                if !settings.settings.showsMenuBarIcon {
+                    Text("Pour revenir aux réglages : roue dentée de l'encoche dépliée, ou relancez Notchkit depuis le Finder.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
                 Toggle("Lancer Notchkit à l'ouverture de session", isOn: $launchAtLogin)
                     .onChange(of: launchAtLogin) { _, newValue in
                         launchError = LaunchAtLogin.setEnabled(newValue)

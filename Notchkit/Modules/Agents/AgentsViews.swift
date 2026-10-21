@@ -115,7 +115,7 @@ struct AgentsHomeView: View {
                 } else {
                     Text(session == nil ? "Les étapes de l'agent s'afficheront ici." : "Pas encore d'étape.")
                         .font(.system(size: 12))
-                        .foregroundStyle(.white.opacity(0.4))
+                        .foregroundStyle(.white.opacity(0.55))
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)

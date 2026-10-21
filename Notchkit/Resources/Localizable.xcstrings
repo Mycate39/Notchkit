@@ -2991,70 +2991,6 @@
         }
       }
     },
-    "Autoriser l'accès" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow Access"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Autoriser l'accès"
-          }
-        }
-      }
-    },
-    "Autoriser l'accès aux calendriers…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow Calendar Access…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Autoriser l'accès aux calendriers…"
-          }
-        }
-      }
-    },
-    "Autoriser la localisation…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow Location…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Autoriser la localisation…"
-          }
-        }
-      }
-    },
-    "Autoriser…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Autoriser…"
-          }
-        }
-      }
-    },
     "Autorisez l'accès aux rappels pour les voir ici." : {
       "localizations" : {
         "en" : {
@@ -4250,22 +4186,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Commande"
-          }
-        }
-      }
-    },
-    "Commandes de Musique et Spotify, mode sombre (System Events) et dossier ouvert dans le Terminal." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Music and Spotify controls, Dark Mode (System Events) and the folder open in Terminal."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Commandes de Musique et Spotify, mode sombre (System Events) et dossier ouvert dans le Terminal."
           }
         }
       }
@@ -12959,22 +12879,6 @@
         }
       }
     },
-    "Un léger clic à l'ouverture de l'encoche, au changement de page, aux alertes et à chaque cran de volume (trackpad Force Touch)." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "A light click when the notch opens, when changing pages, on alerts, and at each volume step (Force Touch trackpad)."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Un léger clic à l'ouverture de l'encoche, au changement de page, aux alertes et à chaque cran de volume (trackpad Force Touch)."
-          }
-        }
-      }
-    },
     "Un miroir rapide pour vérifier votre allure avant une réunion." : {
       "localizations" : {
         "en" : {
@@ -13376,22 +13280,6 @@
         }
       }
     },
-    "Volume et luminosité aux touches du clavier, encoche qui évite les menus, ancrage des fenêtres, traduction de la sélection, verrouillage du clavier, projet Git du Terminal." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Volume and brightness from the keyboard keys, a notch that stays clear of menus, window snapping, translating the selection, keyboard lock, and the Git project open in Terminal."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Volume et luminosité aux touches du clavier, encoche qui évite les menus, ancrage des fenêtres, traduction de la sélection, verrouillage du clavier, projet Git du Terminal."
-          }
-        }
-      }
-    },
     "Volume, luminosité, volume des apps… Sinon, ils prennent la couleur d'accent." : {
       "localizations" : {
         "en" : {
@@ -13646,6 +13534,150 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "yt-dlp non installé"
+          }
+        }
+      }
+    },
+    "À propos de Notchkit" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About Notchkit"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À propos de Notchkit"
+          }
+        }
+      }
+    },
+    "Afficher Notchkit dans la barre des menus" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Notchkit in the menu bar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher Notchkit dans la barre des menus"
+          }
+        }
+      }
+    },
+    "Commandes de Musique et Spotify, et mode sombre (System Events)." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Music and Spotify controls, and Dark Mode (System Events)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commandes de Musique et Spotify, et mode sombre (System Events)."
+          }
+        }
+      }
+    },
+    "Demander l'accès à la localisation…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Request Location Access…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Demander l'accès à la localisation…"
+          }
+        }
+      }
+    },
+    "Demander l'accès aux calendriers…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Request Calendar Access…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Demander l'accès aux calendriers…"
+          }
+        }
+      }
+    },
+    "Demander l'accès…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Request Access…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Demander l'accès…"
+          }
+        }
+      }
+    },
+    "Pour revenir aux réglages : roue dentée de l'encoche dépliée, ou relancez Notchkit depuis le Finder." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To get back to Settings, use the gear in the expanded notch, or open Notchkit again from the Finder."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pour revenir aux réglages : roue dentée de l'encoche dépliée, ou relancez Notchkit depuis le Finder."
+          }
+        }
+      }
+    },
+    "Un léger clic quand vous ouvrez l'encoche, changez de page, réglez le volume ou le minuteur, ou touchez une commande (trackpad Force Touch)." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A light click when you open the notch, change pages, adjust the volume or the timer, or press a control (Force Touch trackpad)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un léger clic quand vous ouvrez l'encoche, changez de page, réglez le volume ou le minuteur, ou touchez une commande (trackpad Force Touch)."
+          }
+        }
+      }
+    },
+    "Volume et luminosité aux touches du clavier, encoche qui évite les menus, ancrage des fenêtres, traduction de la sélection, verrouillage du clavier." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volume and brightness keys, a notch that stays clear of menus, window snapping, translating the selection, and keyboard lock."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volume et luminosité aux touches du clavier, encoche qui évite les menus, ancrage des fenêtres, traduction de la sélection, verrouillage du clavier."
           }
         }
       }

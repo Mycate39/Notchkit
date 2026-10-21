@@ -8,7 +8,12 @@ struct NotchkitApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 
     var body: some Scene {
-        MenuBarExtra("Notchkit", systemImage: "rectangle.topthird.inset.filled") {
+        // L'icône peut être masquée dans les réglages (ou retirée de la barre avec ⌘ + glisser).
+        MenuBarExtra("Notchkit", systemImage: "rectangle.topthird.inset.filled", isInserted: Binding(
+            get: { appDelegate.settings.settings.showsMenuBarIcon },
+            // N'écrire que si la valeur change : sinon enregistrement → nouvelle évaluation de la scène → boucle.
+            set: { if appDelegate.settings.settings.showsMenuBarIcon != $0 { appDelegate.settings.settings.showsMenuBarIcon = $0 } }
+        )) {
             MenuBarContent(appDelegate: appDelegate)
         }
     }

@@ -86,7 +86,7 @@ targets:
         SUPublicEDKey: "5pRDy/Edy8EfI4FCrd/7zb8sScxLjOiV6ElIFyrSoCs="
         SUEnableAutomaticChecks: true
         SUScheduledCheckInterval: 86400
-        NSAppleEventsUsageDescription: "Notchkit controls playback in Music and Spotify, switches Dark Mode with System Events, and reads the folder open in Terminal for the Git widget."
+        NSAppleEventsUsageDescription: "Notchkit controls playback in Music and Spotify and switches Dark Mode with System Events."
         NSCameraUsageDescription: "Notchkit shows a mirror view of your camera in the notch, only while the Webcam widget is open. Nothing is recorded."
         NSRemindersFullAccessUsageDescription: "Notchkit shows your reminders in the notch and lets you check them off or add new ones."
         NSRemindersUsageDescription: "Notchkit shows your reminders in the notch and lets you check them off or add new ones."

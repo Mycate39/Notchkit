@@ -193,7 +193,7 @@ struct HealthExpandedView: View {
                 row(color: StandBy.amber, text: "Actif : \(ScreenTimeFormat.duration(module.activeSeconds))")
                 if let start = module.streakStart {
                     Text("Sans pause depuis \(ScreenTimeFormat.duration(Date().timeIntervalSince(start)))")
-                        .font(.system(size: 9))
+                        .font(.system(size: 10))
                         .foregroundStyle(.white.opacity(0.5))
                 }
                 Button(action: module.drankGlass) {

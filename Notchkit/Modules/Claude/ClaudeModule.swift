@@ -406,6 +406,11 @@ final class ClaudeModule: NotchModule {
 
     // MARK: Affichage
 
+    /// Contour ambre quand une session attend une réponse.
+    var keyLineColor: Color? {
+        displayedSession?.state == .waitingForPermission ? StandBy.amber : nil
+    }
+
     var compactPriority: ModulePriority {
         guard showInCompact, let session = displayedSession else { return .none }
         switch session.state {

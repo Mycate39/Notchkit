@@ -79,6 +79,10 @@ protocol NotchModule: AnyObject, Observable {
     func compactLeading() -> AnyView?
     /// Contenu affiché à droite de l'encoche quand elle est repliée.
     func compactTrailing() -> AnyView?
+    /// Couleur du contour de l'encoche (et de la bulle) pendant l'activité, comme la « key line »
+    /// de la Dynamic Island (HIG, Live Activities) : orange pour un minuteur, teinte de la pochette
+    /// pour la musique… `nil` : gris clair.
+    var keyLineColor: Color? { get }
     /// Affichage replié façon « Dynamic Island » : capsule un peu plus haute, avec contour.
     var compactIsland: Bool { get }
     /// Largeur de chaque côté de l'encoche repliée : juste la place du contenu le plus long
@@ -115,6 +119,7 @@ extension NotchModule {
     func bubbleControls() -> AnyView? { nil }
     var bubbleControlsWidth: CGFloat { NotchLayout.bubbleControlsContentWidth }
     var bubblePriority: ModulePriority { compactPriority }
+    var keyLineColor: Color? { nil }
     var compactIsland: Bool { false }
     var compactSideWidth: CGFloat { NotchLayout.activitySideWidth }
     func settingsView() -> AnyView? { nil }

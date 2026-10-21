@@ -32,13 +32,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notchkit controls playback in Music and Spotify, switches Dark Mode with System Events, and reads the folder open in Terminal for the Git widget."
+            "value" : "Notchkit controls playback in Music and Spotify and switches Dark Mode with System Events."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notchkit pilote la lecture de Music et Spotify, bascule le mode sombre avec System Events et lit le dossier ouvert dans le Terminal pour le widget Git."
+            "value" : "Notchkit pilote la lecture de Musique et Spotify et bascule le mode sombre avec System Events."
           }
         }
       }

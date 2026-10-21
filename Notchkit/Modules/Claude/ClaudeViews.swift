@@ -80,7 +80,7 @@ struct ClaudeExpandedView: View {
             if let project = session?.projectName {
                 Text(project)
                     .font(.system(size: 10, weight: .medium))
-                    .foregroundStyle(.white.opacity(0.45))
+                    .foregroundStyle(.white.opacity(0.55))
             }
             // Quand une session est affichée, la place manque en bas : l'utilisation passe en badge.
             if session != nil, let line = usageLines.first {
@@ -93,7 +93,7 @@ struct ClaudeExpandedView: View {
     private func usageBadge(_ line: UsageLine) -> some View {
         HStack(spacing: 3) {
             Image(systemName: "gauge.with.dots.needle.33percent")
-                .font(.system(size: 9, weight: .semibold))
+                .font(.system(size: 10, weight: .semibold))
             Text(verbatim: (line.isEstimate ? "≈ " : "") + line.fraction.formatted(.percent.precision(.fractionLength(0))))
                 .font(.system(size: 12, weight: .bold, design: .rounded))
                 .monospacedDigit()
@@ -171,7 +171,7 @@ struct ClaudeExpandedView: View {
                 Text(session.state == .finished
                      ? "Message en attente : il sera remis avec votre prochaine demande dans Claude Code."
                      : "Message en attente : remis à la prochaine étape de Claude.")
-                    .font(.system(size: 9))
+                    .font(.system(size: 10))
                     .foregroundStyle(Color(nsColor: ClaudeSparkView.color))
                     .lineLimit(1)
                     .minimumScaleFactor(0.85)
@@ -214,7 +214,7 @@ struct ClaudeExpandedView: View {
                                 .font(.system(size: 10, weight: .semibold))
                             if let reset = line.resetAt {
                                 Text(Self.resetText(reset))
-                                    .font(.system(size: 8, weight: .medium))
+                                    .font(.system(size: 10, weight: .medium))
                                     .foregroundStyle(.white.opacity(0.5))
                             }
                         }
@@ -244,8 +244,8 @@ struct ClaudeExpandedView: View {
                 }
                 if lines.contains(where: \.isEstimate) {
                     Text("Estimation locale : installez l'intégration (barre d'état) pour les chiffres réels.")
-                        .font(.system(size: 8))
-                        .foregroundStyle(.white.opacity(0.4))
+                        .font(.system(size: 10))
+                        .foregroundStyle(.white.opacity(0.55))
                         .lineLimit(1)
                         .minimumScaleFactor(0.8)
                 }
@@ -378,7 +378,7 @@ struct ClaudeConversationView: View {
                     // Ce que Claude fait en ce moment, sous le dernier message.
                     if session.state == .working, let action = session.currentAction {
                         Label(action.text, systemImage: action.symbol)
-                            .font(.system(size: 9.5))
+                            .font(.system(size: 10))
                             .foregroundStyle(.white.opacity(0.45))
                             .lineLimit(1)
                             .id("action")

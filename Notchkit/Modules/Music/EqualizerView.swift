@@ -233,6 +233,8 @@ final class EqualizerNSView: NSView {
     }
 
     private func startLoopAnimations(_ animating: Bool) {
+        // « Réduire les animations » : barres simulées immobiles (le spectre réel, lui, reste animé).
+        let animating = animating && !NotchAccessibility.reduceMotion
         for (index, bar) in bars.enumerated() {
             if animating {
                 guard bar.animation(forKey: Self.animationKey) == nil else { continue }

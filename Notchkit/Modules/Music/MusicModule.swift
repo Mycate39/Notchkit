@@ -240,6 +240,13 @@ final class MusicModule: NotchModule {
         showInCompact && nowPlaying != nil ? .normal : .none
     }
 
+    /// Contour teinté par la pochette (gris clair sans pochette).
+    var keyLineColor: Color? {
+        guard let nowPlaying else { return nil }
+        let tint = ArtworkTint.color(for: nowPlaying)
+        return tint == .white ? nil : Color(nsColor: tint)
+    }
+
     var expandedWidthWeight: CGFloat { 2 }
 
     /// Affichage replié façon Dynamic Island : pochette à gauche, barres teintées à droite.

@@ -44,7 +44,7 @@ struct WeatherExpandedView: View {
                 ForEach(snapshot.hours.prefix(size == .large ? 6 : 5)) { hour in
                     VStack(spacing: 3) {
                         Text(hour.date, format: .dateTime.hour())
-                            .font(.system(size: 9, weight: .medium))
+                            .font(.system(size: 10, weight: .medium))
                             .foregroundStyle(.white.opacity(0.5))
                         Image(systemName: WeatherCondition.symbol(code: hour.code, isDay: hour.isDay))
                             .symbolRenderingMode(.multicolor)
@@ -181,7 +181,7 @@ struct WeatherSettingsView: View {
                 .font(.caption)
                 .foregroundStyle(.secondary)
         case .notDetermined:
-            Button("Autoriser la localisation…", action: module.requestLocationAccess)
+            Button("Demander l'accès à la localisation…", action: module.requestLocationAccess)
         default:
             Text("Localisation refusée : la ville choisie ci-dessous est utilisée. Vous pouvez l'autoriser dans Réglages Système > Confidentialité et sécurité > Service de localisation.")
                 .font(.caption)

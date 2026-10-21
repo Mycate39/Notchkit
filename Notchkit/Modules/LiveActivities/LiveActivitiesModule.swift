@@ -287,6 +287,8 @@ final class LiveActivitiesModule: NotchModule {
         return activity.isFinished ? .low : .normal
     }
 
+    var keyLineColor: Color? { mostRelevant?.tint }
+
     var expandedWidthWeight: CGFloat { 2 }
 
 

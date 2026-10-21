@@ -33,7 +33,7 @@ struct CalendarExpandedView: View {
             case .notDetermined:
                 permissionPrompt(
                     message: "Notchkit a besoin d'accéder à vos calendriers pour afficher vos événements.",
-                    button: "Autoriser l'accès",
+                    button: "Demander l'accès…",
                     action: module.requestAccess
                 )
             default:
@@ -140,7 +140,7 @@ struct CalendarSettingsView: View {
             Toggle("Rappel dans l'encoche 10 minutes avant un événement", isOn: $module.showReminder)
             Toggle("Afficher les événements « journée entière »", isOn: $module.showAllDay)
             if module.authorization != .fullAccess {
-                Button("Autoriser l'accès aux calendriers…") {
+                Button("Demander l'accès aux calendriers…") {
                     module.authorization == .notDetermined ? module.requestAccess() : module.openPrivacySettings()
                 }
             }

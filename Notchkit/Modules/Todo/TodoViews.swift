@@ -11,7 +11,7 @@ struct TodoExpandedView: View {
             case .fullAccess:
                 list
             case .notDetermined:
-                prompt(text: "Autorisez l'accès aux rappels pour les voir ici.", button: "Autoriser…",
+                prompt(text: "Autorisez l'accès aux rappels pour les voir ici.", button: "Demander l'accès…",
                        action: module.requestAccess)
             default:
                 prompt(text: "L'accès aux rappels est refusé.", button: "Ouvrir les réglages…",
@@ -97,13 +97,14 @@ private struct TodoRow: View {
             }
             .buttonStyle(.plain)
             .help("Marquer comme fait")
+            .accessibilityLabel(Text("Marquer comme fait"))
             VStack(alignment: .leading, spacing: 1) {
                 Text(item.title)
                     .font(.system(size: 11, weight: .medium))
                     .lineLimit(1)
                 if let due = item.due {
                     Text(due, format: .dateTime.weekday(.abbreviated).day().hour().minute())
-                        .font(.system(size: 9, weight: .medium))
+                        .font(.system(size: 10, weight: .medium))
                         .foregroundStyle(TodoOrdering.isOverdue(item) ? .red : .white.opacity(0.5))
                 }
             }

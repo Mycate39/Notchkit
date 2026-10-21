@@ -50,10 +50,12 @@ struct ScreenshotsExpandedView: View {
                     Image(systemName: "dot.radiowaves.left.and.right")
                 }
                 .help("Tout envoyer par AirDrop")
+                .accessibilityLabel(Text("Tout envoyer par AirDrop"))
                 Button { module.reveal(module.items) } label: {
                     Image(systemName: "folder")
                 }
                 .help("Afficher dans le Finder")
+                .accessibilityLabel(Text("Afficher dans le Finder"))
             }
         }
         .buttonStyle(.standBy(.small, circle: true))
@@ -71,7 +73,7 @@ private struct ScreenshotItemView: View {
             ScreenshotThumbnail(item: item, module: module,
                                 size: compact ? CGSize(width: 54, height: 36) : CGSize(width: 72, height: 46))
             Text(item.date, format: .dateTime.hour().minute())
-                .font(.system(size: 9, weight: .medium).monospacedDigit())
+                .font(.system(size: 10, weight: .medium).monospacedDigit())
                 .foregroundStyle(.white.opacity(0.7))
         }
         .padding(4)

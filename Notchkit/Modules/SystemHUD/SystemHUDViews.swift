@@ -86,6 +86,7 @@ struct SystemHUDExpandedView: View {
         }
         .buttonStyle(.notch)
         .help(Text(help))
+        .accessibilityLabel(Text(help))
     }
 
     private var levels: some View {
@@ -103,7 +104,7 @@ struct SystemHUDExpandedView: View {
             }
             if !SystemVolume.isAdjustable {
                 Text("Cette sortie audio n'a pas de volume réglable.")
-                    .font(.system(size: 9))
+                    .font(.system(size: 10))
                     .foregroundStyle(.white.opacity(0.5))
             }
         }
@@ -187,7 +188,7 @@ struct AudioAppList: View {
         if audio.playingApps.isEmpty {
             Text(availabilityText)
                 .font(.system(size: 11))
-                .foregroundStyle(.white.opacity(0.45))
+                .foregroundStyle(.white.opacity(0.55))
                 .fixedSize(horizontal: false, vertical: true)
         } else {
             ScrollView {
@@ -196,7 +197,7 @@ struct AudioAppList: View {
                         AudioAppRow(audio: audio, app: app)
                     }
                     if let error = audio.appVolumeError {
-                        Text(error).font(.system(size: 9)).foregroundStyle(Color(red: 1, green: 0.45, blue: 0.4))
+                        Text(error).font(.system(size: 10)).foregroundStyle(Color(red: 1, green: 0.45, blue: 0.4))
                     }
                 }
             }
@@ -230,7 +231,7 @@ struct SystemHUDSettingsView: View {
                             .font(.caption)
                             .foregroundStyle(.orange)
                         Spacer()
-                        Button("Autoriser…", action: module.requestAccessibility)
+                        Button("Demander l'accès…", action: module.requestAccessibility)
                     }
                 }
             }

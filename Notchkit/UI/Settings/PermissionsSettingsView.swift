@@ -65,7 +65,7 @@ struct PermissionRow: View {
         case .granted:
             Button("Gérer…", action: openSettings)
         case .notDetermined:
-            Button("Autoriser…", action: request)
+            Button("Demander l'accès…", action: request)
         case .denied, .onFirstUse:
             Button("Ouvrir les réglages…", action: openSettings)
         }

@@ -77,6 +77,11 @@ enum NotchLayout {
     /// et rentrent un peu après son départ (passer de la bulle aux commandes ne les referme pas).
     static let bubbleControlsOpenDelay: TimeInterval = 0.12
     static let bubbleControlsCloseDelay: TimeInterval = 0.3
+    /// Contour de l'encoche et des bulles : teinte de l'activité, ou gris clair par défaut.
+    static func keyLine(_ tint: Color?) -> Color {
+        tint?.opacity(0.55) ?? .white.opacity(0.22)
+    }
+
     /// Largeur gagnée par la bulle qui montre ses commandes : trois boutons (musique) par défaut,
     /// deux pour un minuteur.
     static let bubbleControlsContentWidth: CGFloat = 100

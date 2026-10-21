@@ -150,7 +150,7 @@ struct MusicExpandedView: View {
                     .font(.system(size: 11, weight: .semibold))
                 if let artist = info.artist {
                     Text(artist)
-                        .font(.system(size: 9))
+                        .font(.system(size: 10))
                         .foregroundStyle(.white.opacity(0.6))
                 }
             }
@@ -315,6 +315,7 @@ private struct PlaybackControls: View {
         }
         .buttonStyle(GlyphButtonStyle())
         .help(help)
+        .accessibilityLabel(Text(help))
     }
 }
 

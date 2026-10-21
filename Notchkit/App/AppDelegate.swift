@@ -197,6 +197,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    /// App relancée depuis le Finder alors qu'elle tourne déjà : on ouvre les réglages (seul moyen
+    /// d'y revenir quand l'icône de la barre des menus est masquée, avec la roue dentée de l'encoche).
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        // Tests et captures : jamais de fenêtre (le lanceur des tests attendrait indéfiniment).
+        guard !AutomatedRun.isActive else { return false }
+        showSettings()
+        return false
+    }
+
     func applicationWillTerminate(_ notification: Notification) {
         moduleManager.stopAll()
     }

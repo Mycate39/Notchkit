@@ -75,6 +75,7 @@ struct ConverterExpandedView: View {
             }
             Button(action: module.chooseFiles) { Image(systemName: "plus") }
                 .help("Choisir des fichiers…")
+                .accessibilityLabel(Text("Choisir des fichiers…"))
                 .disabled(module.isConverting)
         }
         .buttonStyle(.standBy(.small, circle: true))
@@ -136,13 +137,13 @@ struct ConverterExpandedView: View {
                         .lineLimit(1)
                         .truncationMode(.middle)
                     Text(file.pathExtension.uppercased())
-                        .font(.system(size: 9.5, weight: .semibold))
+                        .font(.system(size: 10, weight: .semibold))
                         .foregroundStyle(.white.opacity(0.5))
                 } else {
                     Text("\(module.files.count) fichiers")
                         .font(.system(size: 12, weight: .medium))
                     Text(module.files.map(\.lastPathComponent).joined(separator: ", "))
-                        .font(.system(size: 9.5))
+                        .font(.system(size: 10))
                         .foregroundStyle(.white.opacity(0.5))
                         .lineLimit(1)
                 }
@@ -187,7 +188,7 @@ struct ConverterExpandedView: View {
                     }
                     if module.failures > 0 {
                         Text("\(module.failures) échec(s)")
-                            .font(.system(size: 9.5))
+                            .font(.system(size: 10))
                             .foregroundStyle(Color(red: 1, green: 0.45, blue: 0.4))
                     }
                 }

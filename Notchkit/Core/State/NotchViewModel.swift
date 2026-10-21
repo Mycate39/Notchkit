@@ -16,7 +16,8 @@ final class NotchViewModel {
     private(set) var currentAlert: NotchAlert?
     /// Page affichée dans l'encoche dépliée (conservée d'une ouverture à l'autre).
     var selectedPage = 0 {
-        didSet { if selectedPage != oldValue && isExpanded { Haptics.play(.step) } }
+        // Motif « alignement » : la page se cale à sa place (HIG, retour haptique sur macOS).
+        didSet { if selectedPage != oldValue && isExpanded { Haptics.play(.snap) } }
     }
     /// Apparence en vigueur (observée : tailles et couleurs se mettent à jour à chaque changement).
     private(set) var appearance = NotchAppearance()
@@ -155,6 +156,12 @@ final class NotchViewModel {
     /// en cours (musique, minuteur, alerte…) et quand l'encoche est dépliée. Au repos, l'encoche
     /// repliée reste une simple découpe noire.
     var showsOutline: Bool { hasCompactContent || isExpanded }
+
+    /// Teinte du contour : celle de l'activité repliée affichée (pas pendant une alerte ni dépliée).
+    var keyLineColor: Color? {
+        guard !isExpanded, currentAlert == nil else { return nil }
+        return manager.compactModule?.keyLineColor
+    }
 
     /// Au moins deux activités secondaires : rangées dans une pile qui se déroule au survol.
     var showsBubbleStack: Bool { bubbleModules.count >= 2 }
@@ -470,8 +477,9 @@ final class NotchViewModel {
         alertTask?.cancel()
         // Même alerte déjà affichée (ex. indicateur de volume) : on prolonge seulement sa durée,
         // son contenu se met à jour de lui-même.
+        // Pas de vibration : une alerte ne vient pas d'un geste sur le trackpad (HIG : une vibration
+        // doit répondre à une action de la personne).
         if currentAlert?.id != alert.id {
-            Haptics.play(.tap)
             withAnimation(NotchLayout.spring) { currentAlert = alert }
         }
         alertTask = Task { [weak self] in

@@ -54,6 +54,9 @@ struct AppSettings: Codable, Equatable, Sendable {
     /// Sons de la mascotte (clic, humeurs, discussion, événements) et leur volume (0…1).
     var mascotSounds = true
     var mascotSoundVolume = 0.5
+    /// Icône de Notchkit dans la barre des menus (HIG : c'est à la personne de choisir).
+    /// Masquée, les réglages restent accessibles par la roue dentée de l'encoche ou en relançant l'app.
+    var showsMenuBarIcon = true
 
     init() {}
 
@@ -79,5 +82,6 @@ struct AppSettings: Codable, Equatable, Sendable {
         mascot = (try? c.decodeIfPresent(MascotDesign.self, forKey: .mascot)) ?? d.mascot
         mascotSounds = try c.decodeIfPresent(Bool.self, forKey: .mascotSounds) ?? d.mascotSounds
         mascotSoundVolume = try c.decodeIfPresent(Double.self, forKey: .mascotSoundVolume) ?? d.mascotSoundVolume
+        showsMenuBarIcon = try c.decodeIfPresent(Bool.self, forKey: .showsMenuBarIcon) ?? d.showsMenuBarIcon
     }
 }

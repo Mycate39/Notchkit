@@ -149,7 +149,7 @@ struct LiveMascotView: View {
     @State private var reactionStart: Date?
 
     var body: some View {
-        TimelineView(.animation(minimumInterval: 1.0 / 60)) { context in
+        TimelineView(.animation(minimumInterval: 1.0 / 60, paused: NotchAccessibility.reduceMotion && reactionStart == nil)) { context in
             let elapsed = context.date.timeIntervalSince(moodStart)
             var pose = MascotMotion.pose(at: elapsed, mood: mood)
             let sinceTap = reactionStart.map { context.date.timeIntervalSince($0) }
@@ -165,7 +165,7 @@ struct LiveMascotView: View {
             reaction = reaction.next
             reactionStart = Date()
             MascotSounds.shared.play(.tap)
-            Haptics.play(.snap)
+            Haptics.play(.tap)
         }
         .allowsHitTesting(reactsToTap)
         .onChange(of: mood) { moodStart = Date() }

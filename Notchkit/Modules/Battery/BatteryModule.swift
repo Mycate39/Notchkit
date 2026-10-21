@@ -138,6 +138,13 @@ final class BatteryModule: NotchModule {
 
     // MARK: Affichage
 
+    /// Contour vert en charge, rouge si la batterie est faible (couleurs de la jauge).
+    var keyLineColor: Color? {
+        guard let state, compactPriority >= .normal else { return nil }
+        let fill = BatteryStyle.fillColor(for: state, isLowPowerMode: isLowPowerMode)
+        return fill == .white ? nil : fill
+    }
+
     var compactPriority: ModulePriority {
         Self.compactPriority(for: state, showInCompact: showInCompact, lowBatteryAlert: lowBatteryAlert,
                              chargingActivity: chargingActivity)

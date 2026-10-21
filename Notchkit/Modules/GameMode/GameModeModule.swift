@@ -243,7 +243,7 @@ private struct GameModeSettingsView: View {
         Toggle("Afficher les images par seconde", isOn: $module.showsFPS)
         if module.showsFPS && !canMeasure {
             LabeledContent {
-                Button("Autoriser…") {
+                Button("Demander l'accès…") {
                     module.requestScreenCapture()
                     canMeasure = GameModeModule.canMeasure
                 }

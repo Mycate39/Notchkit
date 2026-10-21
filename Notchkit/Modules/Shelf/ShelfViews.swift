@@ -65,10 +65,12 @@ struct ShelfExpandedView: View {
                     Image(systemName: "dot.radiowaves.left.and.right")
                 }
                 .help("Tout envoyer par AirDrop")
+                .accessibilityLabel(Text("Tout envoyer par AirDrop"))
                 Button { module.clear() } label: {
                     Image(systemName: "trash")
                 }
                 .help("Vider l'étagère")
+                .accessibilityLabel(Text("Vider l'étagère"))
             }
         }
         .buttonStyle(.standBy(.small, circle: true))
@@ -99,7 +101,7 @@ private struct ShelfItemView: View {
             .frame(width: compact ? 34 : 44, height: compact ? 34 : 44)
 
             Text(item.name)
-                .font(.system(size: 9, weight: .medium))
+                .font(.system(size: 10, weight: .medium))
                 .lineLimit(2)
                 .multilineTextAlignment(.center)
                 .truncationMode(.middle)
@@ -249,7 +251,7 @@ private struct AirDropWaves: View {
     let color: Color
 
     var body: some View {
-        TimelineView(.animation(paused: !isActive)) { context in
+        TimelineView(.animation(paused: !isActive || NotchAccessibility.reduceMotion)) { context in
             let time = context.date.timeIntervalSinceReferenceDate
             ZStack {
                 ForEach(0..<3) { index in

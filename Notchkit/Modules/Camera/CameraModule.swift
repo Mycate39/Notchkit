@@ -63,7 +63,7 @@ struct CameraExpandedView: View {
                 }
             case .notDetermined:
                 prompt(symbol: "web.camera", text: "Autorisez la caméra pour voir votre miroir.",
-                       button: "Autoriser…", action: module.requestAccess)
+                       button: "Demander l'accès…", action: module.requestAccess)
             default:
                 prompt(symbol: "video.slash", text: "L'accès à la caméra est refusé.",
                        button: "Ouvrir les réglages…", action: module.openPrivacySettings)

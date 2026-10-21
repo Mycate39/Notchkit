@@ -143,7 +143,10 @@ struct TimerRulerSetupView: View {
         gestureStart = start
         let previous = minutes
         value = TimerRulerMath.minutes(from: start, translation: translation)
-        if minutes != previous { Haptics.play(.step) }
+        guard minutes != previous else { return }
+        // Cran par minute ; « alignement » quand la règle bute à l'un de ses bouts.
+        let atEnd = Double(minutes) == TimerRulerMath.range.lowerBound || Double(minutes) == TimerRulerMath.range.upperBound
+        Haptics.play(atEnd ? .snap : .step)
     }
 
     /// Fin du geste (inertie comprise) : la règle se cale sur la minute la plus proche.

@@ -17,7 +17,7 @@ struct VideoDownloadExpandedView: View {
                     Button("Installer…") { module.openSettings() }
                         .controlSize(.small)
                     Text("Réglages > Modules > Vidéos")
-                        .font(.system(size: 9))
+                        .font(.system(size: 10))
                         .foregroundStyle(.white.opacity(0.5))
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -55,7 +55,7 @@ struct VideoDownloadExpandedView: View {
             // Petit widget : pas d'icône, toute la place pour le texte.
             if size != .small {
                 Image(systemName: "link")
-                    .font(.system(size: 9, weight: .semibold))
+                    .font(.system(size: 10, weight: .semibold))
                     .foregroundStyle(.white.opacity(0.5))
             }
             TextField(size == .small ? "Lien de vidéo" : "Coller un lien de vidéo", text: $link)
@@ -71,6 +71,7 @@ struct VideoDownloadExpandedView: View {
             .buttonStyle(.notch)
             .disabled(!YTDLP.isValidLink(link))
             .help("Télécharger")
+            .accessibilityLabel(Text("Télécharger"))
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 6)
@@ -176,7 +177,7 @@ private struct DownloadRow: View {
                     .rotationEffect(.degrees(-90))
                     .animation(.linear(duration: 0.3), value: download.progress)
                 Image(systemName: download.format.isAudio ? "music.note" : "film")
-                    .font(.system(size: 9, weight: .bold))
+                    .font(.system(size: 10, weight: .bold))
                     .foregroundStyle(tint)
             }
             .frame(width: 24, height: 24)
@@ -186,7 +187,7 @@ private struct DownloadRow: View {
                     .font(.system(size: 10, weight: .semibold))
                     .lineLimit(1)
                 Text(subtitle)
-                    .font(.system(size: 8, weight: .medium).monospacedDigit())
+                    .font(.system(size: 10, weight: .medium).monospacedDigit())
                     .foregroundStyle(isError ? .red : .white.opacity(0.55))
                     .lineLimit(1)
             }
@@ -197,8 +198,10 @@ private struct DownloadRow: View {
             } else {
                 Button { module.reveal(download) } label: { Image(systemName: "magnifyingglass") }
                     .help("Afficher dans le Finder")
+                    .accessibilityLabel(Text("Afficher dans le Finder"))
                 Button { module.remove(download.id) } label: { Image(systemName: "trash") }
                     .help("Retirer de la liste")
+                    .accessibilityLabel(Text("Retirer de la liste"))
             }
         }
         .buttonStyle(.standBy(.small, circle: true))

@@ -58,7 +58,7 @@ struct ActivityCompactValue: View {
                                      ? activity.tint : .white)
                 if extraCount > 0 {
                     Text("+\(extraCount)")
-                        .font(.system(size: 9, weight: .bold))
+                        .font(.system(size: 10, weight: .bold))
                         .foregroundStyle(.white.opacity(0.5))
                 }
             }
@@ -181,10 +181,13 @@ struct LiveActivitiesExpandedView: View {
                 Spacer(minLength: 6)
                 Button(action: module.startStopwatch) { Image(systemName: "stopwatch") }
                     .help("Chronomètre")
+                    .accessibilityLabel(Text("Chronomètre"))
                 Button { isPickingAlarm = true } label: { Image(systemName: "alarm") }
                     .help("Alarme")
+                    .accessibilityLabel(Text("Alarme"))
                 Button(action: module.startPomodoro) { Image(systemName: "brain.head.profile") }
                     .help("Pomodoro (25 min de travail, 5 min de pause)")
+                    .accessibilityLabel(Text("Pomodoro (25 min de travail, 5 min de pause)"))
             }
         }
         .buttonStyle(.standBy(.small, circle: true))
@@ -405,7 +408,7 @@ private struct ActivityRow: View {
                     .truncationMode(.middle)
                 TimelineView(.periodic(from: .now, by: 1)) { context in
                     Text(subtitle(at: context.date))
-                        .font(.system(size: 9, weight: .medium).monospacedDigit())
+                        .font(.system(size: 10, weight: .medium).monospacedDigit())
                         .foregroundStyle(activity.isFinished ? activity.tint : .white.opacity(0.55))
                         .lineLimit(1)
                 }
@@ -562,5 +565,6 @@ struct TimerBubbleControls: View {
         }
         .buttonStyle(.notch)
         .help(help)
+        .accessibilityLabel(Text(help))
     }
 }

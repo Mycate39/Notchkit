@@ -120,7 +120,7 @@ struct DashboardExpandedView: View {
                 Spacer(minLength: 4)
                 Text(SystemFormat.percent(value)).monospacedDigit()
             }
-            .font(.system(size: 9, weight: .medium))
+            .font(.system(size: 10, weight: .medium))
             .foregroundStyle(.white.opacity(0.7))
             .lineLimit(1)
             StandByBar(value: value, height: 4)

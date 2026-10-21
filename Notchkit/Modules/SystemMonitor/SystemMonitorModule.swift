@@ -116,7 +116,7 @@ struct SystemMonitorExpandedView: View {
                 Spacer(minLength: 4)
                 Text(value).monospacedDigit().lineLimit(1).minimumScaleFactor(0.7)
             }
-            .font(.system(size: 9, weight: .medium))
+            .font(.system(size: 10, weight: .medium))
             .foregroundStyle(.white.opacity(0.7))
             StandByBar(value: fraction, height: 5)
         }

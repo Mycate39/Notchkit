@@ -80,7 +80,7 @@ struct NotesExpandedView: View {
             if module.text.isEmpty {
                 Text("Une idée ? Notez-la ici…")
                     .font(.system(size: 12))
-                    .foregroundStyle(.white.opacity(0.35))
+                    .foregroundStyle(.white.opacity(0.55))
                     .padding(.leading, 5)
                     .allowsHitTesting(false)
             }

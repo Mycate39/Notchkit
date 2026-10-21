@@ -53,11 +53,12 @@ Notchkit/
                   Glyphs, ModuleIcon, FlowLayout, Mascot/ (33 mascottes, mouvements, réactions au clic, sons synthétisés),
                   Settings/ (fenêtre des réglages : Général, Apparence, Disposition, Widgets = liste de tous les modules
                   avec page de détail, Autorisations, À propos ; flèches Précédent / Suivant)
-  Resources/      Localizable.xcstrings, InfoPlist.xcstrings, Assets.xcassets (AppIcon), entitlements,
+  Resources/      Localizable.xcstrings, InfoPlist.xcstrings, AppIcon.icon (icône à couches Icon Composer : verre,
+                  variantes sombre / transparente / teintée faites par macOS), Assets.xcassets, entitlements,
                   Info.plist (généré depuis project.yml)
 NotchkitTests/    Suites Swift Testing, un fichier par domaine
 ThirdParty/       MediaRemoteAdapter (voir PROVENANCE.md)
-scripts/          AppIcon.swift (dessine l'icône), make-dmg.sh, add-to-appcast.sh
+scripts/          AppIconLayers.swift (dessine les couches PNG de AppIcon.icon/Assets), make-dmg.sh, add-to-appcast.sh
 appcast.xml       Flux de mises à jour Sparkle (lu par l'app depuis la branche main)
 build.noindex/    Sortie de build, ignorée par git ; « .noindex » empêche Spotlight de lister l'app Debug
 ```
@@ -68,7 +69,7 @@ Carte pour aller droit au bon fichier (chercher ensuite le symbole avec `grep -n
 
 **Démarrage et câblage**
 - `App/AppDelegate.swift` : crée `SettingsStore`, `ModuleManager`, `NotchViewModel` et `NotchWindowController`, puis les relie (alertes, réglages, maintien ouvert, mode jeu, zones de dépôt et ce que fait chaque dépôt). Lance aussi les modes `NOTCHKIT_STRESS` / `NOTCHKIT_SNAPSHOT`.
-- `App/MenuBarContent.swift` : menu de l'icône de la barre des menus (dont la bascule du mode jeu et le menu Débogage).
+- `App/MenuBarContent.swift` : menu de l'icône de la barre des menus (dont la bascule du mode jeu et le menu Débogage). L'icône peut être masquée (`AppSettings.showsMenuBarIcon`, `MenuBarExtra(isInserted:)` dans `NotchkitApp`) ; relancer l'app depuis le Finder ouvre alors les réglages (`applicationShouldHandleReopen`, ignoré si `AutomatedRun.isActive`).
 
 **Encoche : état, tailles, rendu**
 - `Core/State/NotchViewModel.swift` : dépliage/repliage (`expand`, `collapse`, `expand(showing:)`), survol (`hoverChanged`, délais), bulles (`bubbleModules`, `hoverBubble`, menu empilé, commandes `hoverBubbleControls`), largeur repliée (`compactSideWidth`), tailles de la forme et de la fenêtre (`shapeSize`, `panelSize`), alertes (`present`), glisser-déposer, mode jeu (`setQuiet`), écran verrouillé (`setScreenLocked`).
@@ -93,7 +94,9 @@ Carte pour aller droit au bon fichier (chercher ensuite le symbole avec `grep -n
 - `Core/Permissions/PermissionCenter.swift` : les autorisations (ajouter un cas = titre, usage, icône, couleur, ancre des Réglages Système, état, demande).
 - `App/Onboarding/` : étapes du tutoriel (`OnboardingStep`), fenêtre et démonstrations animées.
 - `UI/Mascot/` : dessins des mascottes (`MascotDesigns`, `RobotMascots`, `FaceIDMascots`), mouvements et réactions (`MascotMotion`), sons (`MascotSounds`).
-- `Core/Utilities/Haptics.swift` : vibrations du trackpad (`Haptics.play(.tap/.step/.snap)`).
+- `Core/Utilities/Haptics.swift` : vibrations du trackpad, selon les règles d'Apple : `.tap` (geste ou commande), `.step` (cran : volume, minutes de la règle), `.snap` (alignement : page, zone de dépôt, bout de la règle). Les alertes ne vibrent pas.
+- Accessibilité (HIG) : texte de 10 pt au moins, opacité 0,55 au moins sur fond noir, `.accessibilityLabel` sur chaque bouton à icône seule, boucles décoratives arrêtées si `NotchAccessibility.reduceMotion` (`UI/NotchStyle.swift`). Les boutons qui précèdent une demande d'autorisation système s'appellent « Demander l'accès… ».
+- Contour de l'encoche et des bulles (style Live Activities) : `NotchModule.keyLineColor` (couleur de l'activité, `nil` = gris neutre), dessiné avec `NotchLayout.keyLine`.
 - `App/Debug/` : captures (`SnapshotRenderer`, `PromoSnapshots`) et rendu vidéo des mascottes.
 - Tests : `NotchkitTests/<Domaine>Tests.swift` ; la mise en page de l'encoche et les bulles sont dans `ModuleManagerTests` (`NotchLayoutTests`) et `BubbleControlsTests`.
 

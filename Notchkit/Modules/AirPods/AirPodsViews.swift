@@ -99,7 +99,7 @@ struct AirPodsExpandedView: View {
                         }
                     }
                 }
-                .font(.system(size: 9, weight: .semibold).monospacedDigit())
+                .font(.system(size: 10, weight: .semibold).monospacedDigit())
                 .foregroundStyle(.white.opacity(0.75))
             }
         }
@@ -120,7 +120,7 @@ private struct BatteryLevelsView: View {
             if let right = battery.right { level(String(localized: "D", comment: "Écouteur droit (Right)"), right) }
             if let caseLevel = battery.caseLevel { level(String(localized: "Boîtier"), caseLevel) }
         }
-        .font(.system(size: 9, weight: .semibold).monospacedDigit())
+        .font(.system(size: 10, weight: .semibold).monospacedDigit())
     }
 
     private func level(_ label: String, _ value: Int) -> some View {

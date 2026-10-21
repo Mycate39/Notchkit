@@ -36,7 +36,7 @@
 	<key>LSUIElement</key>
 	<true/>
 	<key>NSAppleEventsUsageDescription</key>
-	<string>Notchkit controls playback in Music and Spotify, switches Dark Mode with System Events, and reads the folder open in Terminal for the Git widget.</string>
+	<string>Notchkit controls playback in Music and Spotify and switches Dark Mode with System Events.</string>
 	<key>NSAudioCaptureUsageDescription</key>
 	<string>Notchkit analyzes the sound playing on your Mac to animate the equalizer bars in real time. Audio is never recorded or sent anywhere.</string>
 	<key>NSCalendarsFullAccessUsageDescription</key>

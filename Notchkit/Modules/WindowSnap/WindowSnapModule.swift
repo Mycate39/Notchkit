@@ -63,7 +63,7 @@ struct WindowSnapSettingsView: View {
                     Label("Autorisation Accessibilité nécessaire", systemImage: "exclamationmark.triangle")
                         .foregroundStyle(.orange)
                     Spacer()
-                    Button("Autoriser…", action: module.requestAccessibility)
+                    Button("Demander l'accès…", action: module.requestAccessibility)
                 }
             }
         }

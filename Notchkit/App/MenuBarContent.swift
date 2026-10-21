@@ -13,6 +13,8 @@ struct MenuBarContent: View {
             Toggle("Mode jeu", isOn: Binding(get: { gameMode.isActive }, set: { gameMode.setManual($0) }))
         }
 
+        Divider()
+
         Button("Réglages…") {
             appDelegate.showSettings()
         }
@@ -26,6 +28,12 @@ struct MenuBarContent: View {
             Updater.shared.checkForUpdates()
         }
         .disabled(!Updater.shared.isAvailable)
+
+        Divider()
+
+        Button("À propos de Notchkit") {
+            appDelegate.showSettings(tab: .about)
+        }
 
         Button("Copier les informations de diagnostic") {
             appDelegate.copyDiagnostics()

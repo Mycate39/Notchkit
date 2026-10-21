@@ -188,7 +188,7 @@ struct BatteryExpandedView: View {
                 }
                 if module.isLowPowerMode {
                     Label("Économie d'énergie", systemImage: "leaf.fill")
-                        .font(.system(size: 9, weight: .medium))
+                        .font(.system(size: 10, weight: .medium))
                         .foregroundStyle(.yellow)
                 }
             }

@@ -206,6 +206,7 @@
 		ED5BE3842572CB8E3454C102 /* AirPodsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A426D361B19F11D7BD531E6 /* AirPodsTests.swift */; };
 		ED68E3C0FB4C750D9D4480B1 /* ShelfModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DD4B3B5A025276532608BF /* ShelfModule.swift */; };
 		F2100BE0648F4CF477DDD020 /* SystemToggles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496A0F2264DB47A62C01089E /* SystemToggles.swift */; };
+		F2DAB17E27C19DD5B31D86C6 /* TimerRuler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1A7E0FF8916B5C5CE89281 /* TimerRuler.swift */; };
 		F49705A9A1C38568C414F8F7 /* ClaudeUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C529029D5145492C0C2626F /* ClaudeUsage.swift */; };
 		F5543C69BD99F610B097FB7C /* BatteryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3050DD5E00E81450E55B9 /* BatteryState.swift */; };
 		F5B442D4B8F92CE48A597EE0 /* VideoDownloadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D110312DA9149C3CEA954F /* VideoDownloadViews.swift */; };
@@ -293,6 +294,7 @@
 		38A70194D570981FFAA6853D /* ModuleRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleRegistry.swift; sourceTree = "<group>"; };
 		39CD37F30EF339C02ECF8FDC /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		39D9454F2B90F4202312E9B9 /* SpectrumAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumAnalyzer.swift; sourceTree = "<group>"; };
+		3A1A7E0FF8916B5C5CE89281 /* TimerRuler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerRuler.swift; sourceTree = "<group>"; };
 		3A3B538A66C6B3FB6E49A96A /* AirPodsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPodsModule.swift; sourceTree = "<group>"; };
 		3B74A16BD010E4F43063F37C /* TodoModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModule.swift; sourceTree = "<group>"; };
 		3C7676B52E8B648F97985269 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
@@ -805,6 +807,7 @@
 				BEB45AC94D29F371CA2C5934 /* LiveActivitiesModule.swift */,
 				3381C5D65450BE4DF9D533F2 /* LiveActivitiesViews.swift */,
 				79F1ED02F37A1EDCA8B3F577 /* LiveActivity.swift */,
+				3A1A7E0FF8916B5C5CE89281 /* TimerRuler.swift */,
 			);
 			path = LiveActivities;
 			sourceTree = "<group>";
@@ -1489,6 +1492,7 @@
 				3D27935556AEC14D64004E2B /* SystemMonitorModule.swift in Sources */,
 				1947BE534B1F19266B413D56 /* SystemSampler.swift in Sources */,
 				F2100BE0648F4CF477DDD020 /* SystemToggles.swift in Sources */,
+				F2DAB17E27C19DD5B31D86C6 /* TimerRuler.swift in Sources */,
 				D191E53D4E00A42215A9F880 /* TodoModule.swift in Sources */,
 				1FB0D7D9DF060DE328A65ACD /* TodoViews.swift in Sources */,
 				462973951D8FA880BC007AB9 /* TogglesModule.swift in Sources */,

@@ -19,7 +19,7 @@ enum AuthPrompt: Equatable, Sendable {
     }
 }
 
-/// Module Déverrouillage : animations façon Face ID.
+/// Module Déverrouillage : animations façon Touch ID.
 /// - au déverrouillage du Mac (macOS ne dit pas si c'était Touch ID ou le mot de passe :
 ///   une seule animation, jouée juste après, car rien ne peut s'afficher sur l'écran verrouillé) ;
 /// - pendant une demande Touch ID ;
@@ -31,7 +31,7 @@ final class UnlockModule: NotchModule {
     static let descriptor = ModuleDescriptor(
         id: "unlock",
         name: "Déverrouillage",
-        summary: "Animations façon Face ID au déverrouillage, pendant Touch ID et pendant la saisie d'un mot de passe.",
+        summary: "Animations façon Touch ID au déverrouillage, pendant une demande Touch ID et pendant la saisie d'un mot de passe.",
         systemImage: "faceid",
         category: .system,
         tier: .free,

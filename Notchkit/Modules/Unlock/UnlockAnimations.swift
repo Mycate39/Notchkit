@@ -6,7 +6,7 @@ enum UnlockAnimations {
 
     @MainActor
     static func unlocked() -> NotchAlert {
-        NotchAlert(duration: .seconds(2.2), expandedContent: AnyView(FaceIDUnlockView()), expandedSize: size)
+        NotchAlert(duration: .seconds(2.2), expandedContent: AnyView(TouchIDUnlockView()), expandedSize: size)
     }
 
     @MainActor
@@ -20,49 +20,51 @@ enum UnlockAnimations {
     }
 }
 
-/// Déverrouillage façon Face ID : le visage est « scanné », le cadenas s'ouvre, puis une coche verte.
-struct FaceIDUnlockView: View {
+/// Déverrouillage façon Touch ID : l'empreinte se remplit de bas en haut (lecture du doigt),
+/// le cadenas s'ouvre, puis une coche verte.
+struct TouchIDUnlockView: View {
     private enum Phase { case scanning, unlocked, done }
     @State private var phase: Phase = .scanning
-    @State private var scan = false
+    @State private var fill: CGFloat = 0
 
     var body: some View {
         VStack(spacing: 8) {
             ZStack {
-                // Anneau de balayage pendant le « scan ».
-                Circle()
-                    .trim(from: 0, to: 0.3)
-                    .stroke(.white.opacity(phase == .scanning ? 0.8 : 0), style: StrokeStyle(lineWidth: 2, lineCap: .round))
-                    .frame(width: 54, height: 54)
-                    .rotationEffect(.degrees(scan ? 360 : 0))
-
-                Image(systemName: symbol)
-                    .font(.system(size: 34, weight: .regular))
-                    .foregroundStyle(phase == .done ? .green : .white)
-                    .contentTransition(.symbolEffect(.replace))
-                    .scaleEffect(phase == .done ? 1.1 : 1)
+                if phase == .scanning {
+                    ZStack {
+                        Image(systemName: "touchid")
+                            .foregroundStyle(.white.opacity(0.25))
+                        // Les sillons s'allument du bas vers le haut.
+                        Image(systemName: "touchid")
+                            .foregroundStyle(TouchIDPromptView.pink)
+                            .mask(alignment: .bottom) {
+                                Rectangle().frame(height: 40 * fill)
+                            }
+                    }
+                    .transition(.scale(scale: 0.8).combined(with: .opacity))
+                } else {
+                    Image(systemName: phase == .done ? "checkmark.circle.fill" : "lock.open.fill")
+                        .foregroundStyle(phase == .done ? .green : .white)
+                        .contentTransition(.symbolEffect(.replace))
+                        .scaleEffect(phase == .done ? 1.1 : 1)
+                        .transition(.scale(scale: 0.6).combined(with: .opacity))
+                }
             }
+            .font(.system(size: 34, weight: .regular))
+            .frame(width: 40, height: 40)
             .frame(height: 56)
 
-            Text(phase == .scanning ? "Face ID" : "Déverrouillé")
+            Text(phase == .scanning ? "Touch ID" : "Déverrouillé")
                 .font(.system(size: 12, weight: .semibold))
                 .foregroundStyle(phase == .done ? .green : .white.opacity(0.8))
                 .contentTransition(.opacity)
         }
         .task {
-            withAnimation(.linear(duration: 0.7).repeatForever(autoreverses: false)) { scan = true }
-            try? await Task.sleep(for: .milliseconds(650))
+            withAnimation(.easeInOut(duration: 0.6)) { fill = 1 }
+            try? await Task.sleep(for: .milliseconds(700))
             withAnimation(.spring(duration: 0.35, bounce: 0.4)) { phase = .unlocked }
             try? await Task.sleep(for: .milliseconds(450))
             withAnimation(.spring(duration: 0.4, bounce: 0.5)) { phase = .done }
-        }
-    }
-
-    private var symbol: String {
-        switch phase {
-        case .scanning: "faceid"
-        case .unlocked: "lock.open.fill"
-        case .done: "checkmark.circle.fill"
         }
     }
 }
@@ -129,7 +131,7 @@ struct UnlockExpandedView: View {
 
     var body: some View {
         VStack(spacing: 6) {
-            Image(systemName: "faceid")
+            Image(systemName: "touchid")
                 .font(.system(size: 26))
             Text("Animations de déverrouillage actives")
                 .font(.system(size: 10, weight: .medium))
@@ -146,10 +148,10 @@ struct UnlockSettingsView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Toggle("Animation Face ID au déverrouillage du Mac", isOn: $module.animateUnlock)
+            Toggle("Animation Touch ID au déverrouillage du Mac", isOn: $module.animateUnlock)
             Toggle("Animation pendant une demande Touch ID", isOn: $module.animateTouchID)
             Toggle("Animation pendant une demande de mot de passe", isOn: $module.animatePassword)
-            Text("Animations visuelles uniquement : aucune reconnaissance faciale. macOS n'indique pas comment la session a été déverrouillée et rien ne peut s'afficher sur l'écran verrouillé : l'animation Face ID se joue juste après le déverrouillage.")
+            Text("Animations visuelles uniquement : Notchkit ne lit pas votre empreinte. macOS n'indique pas comment la session a été déverrouillée et rien ne peut s'afficher sur l'écran verrouillé : l'animation Touch ID se joue juste après le déverrouillage.")
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)

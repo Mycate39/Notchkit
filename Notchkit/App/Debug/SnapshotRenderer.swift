@@ -65,7 +65,7 @@ enum SnapshotRenderer {
                         Color.clear.frame(height: 30)
                         Group {
                             switch index {
-                            case 0: FaceIDUnlockView()
+                            case 0: TouchIDUnlockView()
                             case 1: TouchIDPromptView()
                             default: PasswordPromptView()
                             }

@@ -1702,6 +1702,7 @@
       }
     },
     "Animation Face ID au déverrouillage du Mac" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1745,6 +1746,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Animation pendant une demande Touch ID"
+          }
+        }
+      }
+    },
+    "Animation Touch ID au déverrouillage du Mac" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Touch ID animation when the Mac unlocks"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animation Touch ID au déverrouillage du Mac"
           }
         }
       }
@@ -1799,6 +1816,7 @@
       }
     },
     "Animations façon Face ID au déverrouillage, pendant Touch ID et pendant la saisie d'un mot de passe." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1814,7 +1832,24 @@
         }
       }
     },
+    "Animations façon Touch ID au déverrouillage, pendant une demande Touch ID et pendant la saisie d'un mot de passe." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Touch ID–style animations when unlocking, during a Touch ID request and while typing a password."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animations façon Touch ID au déverrouillage, pendant une demande Touch ID et pendant la saisie d'un mot de passe."
+          }
+        }
+      }
+    },
     "Animations visuelles uniquement : aucune reconnaissance faciale. macOS n'indique pas comment la session a été déverrouillée et rien ne peut s'afficher sur l'écran verrouillé : l'animation Face ID se joue juste après le déverrouillage." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1826,6 +1861,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Animations visuelles uniquement : aucune reconnaissance faciale. macOS n'indique pas comment la session a été déverrouillée et rien ne peut s'afficher sur l'écran verrouillé : l'animation Face ID se joue juste après le déverrouillage."
+          }
+        }
+      }
+    },
+    "Animations visuelles uniquement : Notchkit ne lit pas votre empreinte. macOS n'indique pas comment la session a été déverrouillée et rien ne peut s'afficher sur l'écran verrouillé : l'animation Touch ID se joue juste après le déverrouillage." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visual animations only: Notchkit doesn't read your fingerprint. macOS doesn't say how the session was unlocked and nothing can be shown on the lock screen, so the Touch ID animation plays right after unlocking."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animations visuelles uniquement : Notchkit ne lit pas votre empreinte. macOS n'indique pas comment la session a été déverrouillée et rien ne peut s'afficher sur l'écran verrouillé : l'animation Touch ID se joue juste après le déverrouillage."
           }
         }
       }
@@ -1941,6 +1992,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aperçu : déverrouillage Face ID"
+          }
+        }
+      }
+    },
+    "Aperçu : déverrouillage Touch ID" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preview: Touch ID unlock"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aperçu : déverrouillage Touch ID"
           }
         }
       }
@@ -6234,6 +6302,7 @@
       }
     },
     "Face ID" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

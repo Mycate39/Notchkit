@@ -123,3 +123,41 @@ struct TranslationDirectionTests {
         #expect(TranslationDirection.languages(for: "Hello, how are you doing today?") == ("en", "fr"))
     }
 }
+
+/// Flèches Précédent / Suivant de la fenêtre des réglages.
+@MainActor
+struct SettingsHistoryTests {
+    @Test func precedentEtSuivantCommeLesReglagesSysteme() {
+        let router = SettingsRouter()
+        #expect(!router.canGoBack && !router.canGoForward)
+        router.tab = .widgets
+        router.tab = .module("music")
+        router.goBack()
+        #expect(router.tab == .widgets)
+        router.goBack()
+        #expect(router.tab == .general)
+        #expect(!router.canGoBack)
+        router.goForward()
+        #expect(router.tab == .widgets)
+        // Une nouvelle page efface la suite de l'historique.
+        router.tab = .about
+        #expect(!router.canGoForward)
+        router.goBack()
+        #expect(router.tab == .widgets)
+    }
+}
+
+/// Icônes des réglages au style d'icônes de macOS.
+struct SystemIconStyleTests {
+    @Test func styleLuDansLesPreferencesDeMacOS() {
+        #expect(SystemIconStyle.from(theme: nil, systemIsDark: true) == .standard)
+        #expect(SystemIconStyle.from(theme: "", systemIsDark: true) == .standard)
+        #expect(SystemIconStyle.from(theme: "RegularDark", systemIsDark: false) == .dark)
+        #expect(SystemIconStyle.from(theme: "RegularAutomatic", systemIsDark: true) == .dark)
+        #expect(SystemIconStyle.from(theme: "RegularAutomatic", systemIsDark: false) == .standard)
+        #expect(SystemIconStyle.from(theme: "ClearLight", systemIsDark: true) == .clear(dark: false))
+        #expect(SystemIconStyle.from(theme: "ClearDark", systemIsDark: false) == .clear(dark: true))
+        // Teinté : icônes normales.
+        #expect(SystemIconStyle.from(theme: "TintedDark", systemIsDark: true) == .standard)
+    }
+}

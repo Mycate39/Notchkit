@@ -77,15 +77,9 @@ struct PermissionIcon: View {
     let permission: AppPermission
     var size: CGFloat = 26
 
+    /// Même icône que la barre latérale : elle suit le style d'icônes de macOS.
     var body: some View {
-        Image(systemName: permission.symbol)
-            .resizable()
-            .fontWeight(.semibold)
-            .scaledToFit()
-            .frame(width: size * 0.62, height: size * 0.56)
-            .foregroundStyle(.white)
-            .frame(width: size, height: size)
-            .background(permission.color.gradient, in: RoundedRectangle(cornerRadius: size * 0.25, style: .continuous))
+        SidebarIcon(symbol: permission.symbol, color: permission.color, size: size)
     }
 }
 

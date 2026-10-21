@@ -17,7 +17,56 @@ enum SettingsTab: Hashable {
 @MainActor
 @Observable
 final class SettingsRouter {
-    var tab: SettingsTab = .general
+    var tab: SettingsTab = .general {
+        didSet {
+            guard !isTravelling, tab != oldValue else { return }
+            backStack.append(oldValue)
+            forwardStack.removeAll()
+        }
+    }
+    /// Historique des pages, comme les flèches Précédent / Suivant des Réglages Système.
+    private(set) var backStack: [SettingsTab] = []
+    private(set) var forwardStack: [SettingsTab] = []
+    @ObservationIgnored private var isTravelling = false
+
+    var canGoBack: Bool { !backStack.isEmpty }
+    var canGoForward: Bool { !forwardStack.isEmpty }
+
+    func goBack() {
+        guard let previous = backStack.popLast() else { return }
+        travel(to: previous) { forwardStack.append($0) }
+    }
+
+    func goForward() {
+        guard let next = forwardStack.popLast() else { return }
+        travel(to: next) { backStack.append($0) }
+    }
+
+    private func travel(to destination: SettingsTab, keeping current: (SettingsTab) -> Void) {
+        current(tab)
+        isTravelling = true
+        tab = destination
+        isTravelling = false
+    }
+}
+
+extension View {
+    /// Flèches Précédent / Suivant groupées dans une capsule, comme dans les Réglages Système.
+    func settingsHistory(_ router: SettingsRouter) -> some View {
+        toolbar {
+            ToolbarItem(placement: .navigation) {
+                ControlGroup {
+                    Button { router.goBack() } label: { Label("Précédent", systemImage: "chevron.left") }
+                        .disabled(!router.canGoBack)
+                        .keyboardShortcut("[", modifiers: .command)
+                    Button { router.goForward() } label: { Label("Suivant", systemImage: "chevron.right") }
+                        .disabled(!router.canGoForward)
+                        .keyboardShortcut("]", modifiers: .command)
+                }
+                .controlGroupStyle(.navigation)
+            }
+        }
+    }
 }
 
 /// Fenêtre de réglages façon Réglages Système : barre latérale à gauche, contenu à droite.
@@ -42,6 +91,11 @@ struct SettingsView: View {
                 }
             }
             .navigationSplitViewColumnWidth(min: 200, ideal: 220, max: 280)
+            // Style des icônes de macOS : relu à l'ouverture et au retour des Réglages Système.
+            .onAppear { SystemIconAppearance.shared.refresh() }
+            .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
+                SystemIconAppearance.shared.refresh()
+            }
         } detail: {
             detail
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -52,12 +106,14 @@ struct SettingsView: View {
     @ViewBuilder
     private var detail: some View {
         switch router.tab {
-        case .general: GeneralSettingsView(settings: settings).navigationTitle("Général")
-        case .appearance: AppearanceSettingsView(settings: settings).navigationTitle("Apparence")
-        case .layout: LayoutSettingsView(manager: manager).navigationTitle("Disposition")
+        case .general: GeneralSettingsView(settings: settings).navigationTitle("Général").settingsHistory(router)
+        case .appearance: AppearanceSettingsView(settings: settings).navigationTitle("Apparence").settingsHistory(router)
+        case .layout: LayoutSettingsView(manager: manager).navigationTitle("Disposition").settingsHistory(router)
+        // La liste des widgets a sa propre pile de navigation, qui remplace la barre d'outils :
+        // elle pose les flèches sur chacune de ses pages.
         case .widgets, .module: WidgetsSettingsView(manager: manager, router: router)
-        case .permissions: PermissionsSettingsView(center: permissions).navigationTitle("Autorisations")
-        case .about: AboutSettingsView().navigationTitle("À propos")
+        case .permissions: PermissionsSettingsView(center: permissions).navigationTitle("Autorisations").settingsHistory(router)
+        case .about: AboutSettingsView().navigationTitle("À propos").settingsHistory(router)
         }
     }
 
@@ -71,19 +127,66 @@ struct SettingsView: View {
 }
 
 /// Icône carrée colorée, comme dans les Réglages Système.
-private struct SidebarIcon: View {
+/// Style des icônes choisi dans Réglages Système › Apparence (« Style des icônes et widgets »),
+/// lu dans les préférences globales (`AppleIconAppearanceTheme`, clé non documentée) :
+/// aucune valeur = Par défaut, `RegularDark` = Sombre, `ClearLight` / `ClearDark` = Transparent,
+/// `…Automatic` = selon le mode clair ou sombre. Le style teinté garde les icônes normales.
+enum SystemIconStyle: Equatable {
+    case standard
+    case dark
+    case clear(dark: Bool)
+
+    static let defaultsKey = "AppleIconAppearanceTheme"
+
+    /// Fonction pure, testée.
+    static func from(theme: String?, systemIsDark: Bool) -> SystemIconStyle {
+        guard let theme, !theme.isEmpty else { return .standard }
+        let automatic = theme.hasSuffix("Automatic")
+        let dark = theme.hasSuffix("Dark") || (automatic && systemIsDark)
+        if theme.hasPrefix("Clear") { return .clear(dark: dark) }
+        if theme.hasPrefix("Regular") { return dark ? .dark : .standard }
+        return .standard
+    }
+}
+
+/// Valeur en vigueur du style d'icônes de macOS, relue quand Notchkit repasse au premier plan
+/// (on revient des Réglages Système).
+@MainActor
+@Observable
+final class SystemIconAppearance {
+    static let shared = SystemIconAppearance()
+    private(set) var theme: String?
+
+    private init() { refresh() }
+
+    func refresh() {
+        let value = UserDefaults.standard.string(forKey: SystemIconStyle.defaultsKey)
+        if value != theme { theme = value }
+    }
+}
+
+/// Icône carrée des réglages (barre latérale, widgets, autorisations), au style d'icônes de macOS
+/// (par défaut, sombre ou transparent).
+struct SidebarIcon: View {
     let symbol: String
     let color: Color
     var size: CGFloat = 20
+    @Environment(\.colorScheme) private var colorScheme
+
+    private var style: SystemIconStyle {
+        SystemIconStyle.from(theme: SystemIconAppearance.shared.theme, systemIsDark: colorScheme == .dark)
+    }
 
     var body: some View {
+        let shape = RoundedRectangle(cornerRadius: size * 0.25, style: .continuous)
         if symbol == ClaudeMark.symbolName {
-            // Étoile de Claude en terre cuite sur fond crème.
+            // Étoile de Claude en terre cuite sur fond crème (sombre ou transparent selon le style).
             ClaudeMarkShape()
                 .fill(ClaudeMark.color)
                 .padding(size * 0.16)
                 .frame(width: size, height: size)
-                .background(ClaudeMark.background, in: RoundedRectangle(cornerRadius: size * 0.25, style: .continuous))
+                .background(background(ClaudeMark.background), in: shape)
+                .overlay { outline(shape) }
         } else {
             // Symbole ajusté dans une boîte fixe : les symboles larges (batterie, traduction)
             // ne débordent plus du carré et les compacts ne paraissent plus minuscules.
@@ -92,9 +195,37 @@ private struct SidebarIcon: View {
                 .fontWeight(.semibold)
                 .scaledToFit()
                 .frame(width: size * 0.7, height: size * 0.6)
-                .foregroundStyle(.white)
+                .foregroundStyle(glyph)
                 .frame(width: size, height: size)
-                .background(color.gradient, in: RoundedRectangle(cornerRadius: size * 0.25, style: .continuous))
+                .background(background(color), in: shape)
+                .overlay { outline(shape) }
+        }
+    }
+
+    /// Fond : couleur pleine par défaut, gris très sombre en mode sombre, verre en transparent.
+    private func background(_ base: Color) -> AnyShapeStyle {
+        switch style {
+        case .standard: AnyShapeStyle(base.gradient)
+        case .dark: AnyShapeStyle(LinearGradient(colors: [Color(white: 0.24), Color(white: 0.11)],
+                                                 startPoint: .top, endPoint: .bottom))
+        case .clear(let dark): AnyShapeStyle(.white.opacity(dark ? 0.1 : 0.4))
+        }
+    }
+
+    /// Symbole : blanc par défaut, de la couleur de l'icône en sombre, blanc adouci en transparent.
+    private var glyph: AnyShapeStyle {
+        switch style {
+        case .standard: AnyShapeStyle(.white)
+        case .dark: AnyShapeStyle(color.gradient)
+        case .clear(let dark): AnyShapeStyle(.white.opacity(dark ? 0.85 : 0.95))
+        }
+    }
+
+    /// Fin liseré clair des icônes sombres et transparentes.
+    @ViewBuilder
+    private func outline(_ shape: RoundedRectangle) -> some View {
+        if style != .standard {
+            shape.strokeBorder(.white.opacity(style == .dark ? 0.12 : 0.3), lineWidth: 0.5)
         }
     }
 }
@@ -138,25 +269,14 @@ struct WidgetsSettingsView: View {
             }
             .formStyle(.grouped)
             .navigationTitle("Widgets")
+            .settingsHistory(router)
             .navigationDestination(for: String.self) { id in
                 if let descriptor = manager.orderedDescriptors.first(where: { $0.id == id }) {
                     ModuleDetailView(descriptor: descriptor, manager: manager)
                         .navigationTitle(Text(descriptor.name))
-                        // La barre d'outils de la fenêtre n'affiche pas de bouton retour : on en pose un en haut.
-                        .safeAreaInset(edge: .top, spacing: 0) {
-                            HStack {
-                                Button {
-                                    router.tab = .widgets
-                                } label: {
-                                    Label("Widgets", systemImage: "chevron.left")
-                                }
-                                .buttonStyle(.borderless)
-                                .keyboardShortcut("[", modifiers: .command)
-                                Spacer()
-                            }
-                            .padding(.horizontal, 20)
-                            .padding(.top, 10)
-                        }
+                        // Retour à la liste : flèche Précédent de la barre d'outils (⌘[).
+                        .navigationBarBackButtonHidden(true)
+                        .settingsHistory(router)
                 }
             }
         }
@@ -345,6 +465,17 @@ private struct GeneralSettingsView: View {
                             .frame(width: 36, alignment: .trailing)
                         Text("s")
                     }
+                }
+                // Valeurs d'origine (celles d'un fichier de réglages neuf).
+                let defaults = AppSettings()
+                HStack {
+                    Spacer()
+                    Button("Rétablir les valeurs par défaut") {
+                        settings.settings.hoverOpenDelay = defaults.hoverOpenDelay
+                        settings.settings.hoverCloseDelay = defaults.hoverCloseDelay
+                    }
+                    .disabled(settings.settings.hoverOpenDelay == defaults.hoverOpenDelay
+                              && settings.settings.hoverCloseDelay == defaults.hoverCloseDelay)
                 }
             }
 

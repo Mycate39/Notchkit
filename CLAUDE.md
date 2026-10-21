@@ -52,7 +52,7 @@ Notchkit/
   UI/             NotchContainerView, NotchShape, NotchStyle (boutons StandBy, barres, curseur Liquid Glass, cartes),
                   Glyphs, ModuleIcon, FlowLayout, Mascot/ (33 mascottes, mouvements, réactions au clic, sons synthétisés),
                   Settings/ (fenêtre des réglages : Général, Apparence, Disposition, Widgets = liste de tous les modules
-                  avec page de détail et bouton retour, Autorisations, À propos)
+                  avec page de détail, Autorisations, À propos ; flèches Précédent / Suivant)
   Resources/      Localizable.xcstrings, InfoPlist.xcstrings, Assets.xcassets (AppIcon), entitlements,
                   Info.plist (généré depuis project.yml)
 NotchkitTests/    Suites Swift Testing, un fichier par domaine
@@ -88,7 +88,7 @@ Carte pour aller droit au bon fichier (chercher ensuite le symbole avec `grep -n
 
 **Réglages, disposition, divers**
 - `Core/Settings/AppSettings.swift` : réglages généraux (délais de survol, écran, haptique, mascotte…) ; un réglage propre à un module vit plutôt dans le module (`UserDefaults`, clé `module.<id>.<nom>`).
-- `UI/Settings/` : `SettingsView.swift` (fenêtre, onglets `SettingsTab`, Général, liste des widgets et page de détail, À propos), `AppearanceSettingsView`, `LayoutSettingsView` (éditeur de disposition), `PermissionsSettingsView`.
+- `UI/Settings/` : `SettingsView.swift` (fenêtre, onglets `SettingsTab`, historique Précédent / Suivant dans `SettingsRouter` posé sur chaque page par `.settingsHistory`, Général, liste des widgets et page de détail, À propos, icônes `SidebarIcon` au style d'icônes de macOS lu dans la clé non documentée `AppleIconAppearanceTheme` : aucune valeur = Par défaut, `RegularDark`, `ClearLight`/`ClearDark`, `…Automatic`), `AppearanceSettingsView`, `LayoutSettingsView` (éditeur de disposition), `PermissionsSettingsView`.
 - `Core/Layout/WidgetLayout.swift` : tailles de widget et calcul des pages ; `LayoutPresets` : dispositions prêtes à l'emploi.
 - `Core/Permissions/PermissionCenter.swift` : les autorisations (ajouter un cas = titre, usage, icône, couleur, ancre des Réglages Système, état, demande).
 - `App/Onboarding/` : étapes du tutoriel (`OnboardingStep`), fenêtre et démonstrations animées.

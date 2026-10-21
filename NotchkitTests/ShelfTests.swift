@@ -107,3 +107,23 @@ struct FileActionsTests {
         #expect(jpeg.lastPathComponent == "carre.jpg")
     }
 }
+
+/// Étagère : cinq minutes pour récupérer un fichier, fichiers montrés dans la bulle.
+struct ShelfRetentionTests {
+    @Test func fichiersRetiresApresCinqMinutes() throws {
+        let file = FileManager.default.temporaryDirectory.appendingPathComponent("\(UUID().uuidString).txt")
+        try Data("x".utf8).write(to: file)
+        defer { try? FileManager.default.removeItem(at: file) }
+        let start = Date()
+        let old = try #require(ShelfItem(url: file, date: start.addingTimeInterval(-ShelfModule.retention - 1)))
+        let recent = try #require(ShelfItem(url: file, date: start.addingTimeInterval(-60)))
+        #expect(ShelfModule.expired([old, recent], at: start) == [old])
+        #expect(ShelfModule.expired([recent], at: start.addingTimeInterval(4 * 60)) == [recent])
+    }
+
+    @Test func largeurDeLaBulleSelonLeNombreDeFichiers() {
+        #expect(ShelfBubbleFiles.width(count: 1) < ShelfBubbleFiles.width(count: 3))
+        // Au-delà de trois fichiers, seul « +N » s'ajoute.
+        #expect(ShelfBubbleFiles.width(count: 9) == ShelfBubbleFiles.width(count: 4))
+    }
+}

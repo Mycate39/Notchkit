@@ -141,6 +141,61 @@ private struct ShelfItemView: View {
     }
 }
 
+// MARK: - Bulle de l'étagère
+
+/// Fichiers montrés dans la bulle de l'étagère au survol : les trois derniers, à faire glisser
+/// vers le Finder ou une autre app, et le nombre des autres.
+struct ShelfBubbleFiles: View {
+    let module: ShelfModule
+
+    static let maxShown = 3
+    static let fileSide: CGFloat = 22
+    static let spacing: CGFloat = 5
+
+    /// Largeur gagnée par la bulle (fonction pure, testée).
+    static func width(count: Int) -> CGFloat {
+        let shown = CGFloat(min(count, maxShown))
+        return shown * fileSide + max(0, shown - 1) * spacing + (count > maxShown ? 24 : 0) + 14
+    }
+
+    var body: some View {
+        HStack(spacing: Self.spacing) {
+            ForEach(module.items.prefix(Self.maxShown)) { item in
+                let url = item.resolvedURL()
+                Group {
+                    if let url {
+                        Image(nsImage: module.thumbnails.image(for: url))
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                    } else {
+                        Image(systemName: "questionmark.folder").foregroundStyle(.white.opacity(0.4))
+                    }
+                }
+                .frame(width: Self.fileSide, height: Self.fileSide)
+                .contentShape(Rectangle())
+                .help(item.name)
+                .onTapGesture(count: 2) { module.open(item) }
+                .onDrag {
+                    guard let url else { return NSItemProvider() }
+                    return NSItemProvider(contentsOf: url) ?? NSItemProvider()
+                }
+                .contextMenu {
+                    Button("Ouvrir") { module.open(item) }.disabled(url == nil)
+                    Button("Afficher dans le Finder") { module.reveal(item) }.disabled(url == nil)
+                    Divider()
+                    Button("Retirer de l'étagère") { module.remove(item) }
+                }
+            }
+            if module.items.count > Self.maxShown {
+                Text(verbatim: "+\(module.items.count - Self.maxShown)")
+                    .font(.system(size: 10, weight: .semibold).monospacedDigit())
+                    .foregroundStyle(.white.opacity(0.7))
+                    .fixedSize()
+            }
+        }
+    }
+}
+
 // MARK: - Zones de dépôt (fichiers glissés sur l'encoche)
 
 /// Affichées à la place des widgets quand on glisse des fichiers sur l'encoche.
@@ -215,7 +270,14 @@ struct ShelfSettingsView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Toggle("Afficher le nombre de fichiers quand l'encoche est repliée", isOn: $module.showInCompact)
+            Toggle("Retirer les fichiers après 5 minutes", isOn: $module.autoClear)
+            Text("Le temps de récupérer un fichier : l'étagère s'affiche alors comme une activité en cours, et ses fichiers apparaissent au survol de sa bulle. Retirer un fichier de l'étagère ne le supprime pas.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+            if !module.autoClear {
+                Toggle("Afficher le nombre de fichiers quand l'encoche est repliée", isOn: $module.showInCompact)
+            }
             Text("Faites glisser des fichiers sur l'encoche : à gauche pour les garder ici, à droite pour les envoyer par AirDrop. Les fichiers ne sont ni copiés ni déplacés, l'étagère garde seulement un lien vers eux.")
                 .font(.caption)
                 .foregroundStyle(.secondary)

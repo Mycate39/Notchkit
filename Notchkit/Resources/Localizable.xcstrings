@@ -1,6 +1,38 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "Retirer les fichiers après 5 minutes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove files after 5 minutes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retirer les fichiers après 5 minutes"
+          }
+        }
+      }
+    },
+    "Le temps de récupérer un fichier : l'étagère s'affiche alors comme une activité en cours, et ses fichiers apparaissent au survol de sa bulle. Retirer un fichier de l'étagère ne le supprime pas." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time to pick up a file: the shelf then shows as a live activity, and its files appear when you hover its bubble. Removing a file from the shelf doesn't delete it."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le temps de récupérer un fichier : l'étagère s'affiche alors comme une activité en cours, et ses fichiers apparaissent au survol de sa bulle. Retirer un fichier de l'étagère ne le supprime pas."
+          }
+        }
+      }
+    },
     "" : {
 
     },

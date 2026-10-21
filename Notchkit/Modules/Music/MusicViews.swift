@@ -258,18 +258,23 @@ private struct ProgressLine: View {
     var value: Double
     var height: CGFloat = 5
 
+    /// Dessinée d'un bloc (`Canvas`) : sa largeur ne doit suivre aucune animation venue d'ailleurs.
+    /// Avec des cadres SwiftUI, le ressort « rebondissant » du changement de page étirait la partie
+    /// écoulée en revenant sur la page Musique. Elle avance d'une fraction de pour cent par seconde :
+    /// pas besoin de l'animer.
     var body: some View {
-        GeometryReader { proxy in
+        Canvas { context, size in
             let fraction = min(max(value, 0), 1)
-            ZStack(alignment: .leading) {
-                Capsule().fill(.white.opacity(0.18))
-                Capsule().fill(.white.opacity(0.8))
-                    // Jamais plus étroite qu'un cercle, pour garder des bouts arrondis.
-                    .frame(width: fraction > 0 ? max(height, proxy.size.width * fraction) : 0)
-            }
+            let track = Path(roundedRect: CGRect(origin: .zero, size: size), cornerRadius: size.height / 2)
+            context.fill(track, with: .color(.white.opacity(0.18)))
+            guard fraction > 0 else { return }
+            // Jamais plus étroite qu'un cercle, pour garder des bouts arrondis.
+            let width = max(size.height, size.width * fraction)
+            let elapsed = Path(roundedRect: CGRect(x: 0, y: 0, width: width, height: size.height),
+                               cornerRadius: size.height / 2)
+            context.fill(elapsed, with: .color(.white.opacity(0.8)))
         }
         .frame(height: height)
-        .animation(.smooth, value: value)
     }
 }
 

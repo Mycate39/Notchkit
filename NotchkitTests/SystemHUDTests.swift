@@ -40,6 +40,17 @@ struct MediaKeyTests {
         #expect(viewModel.compactSideWidth == NotchLayout.activitySideWidth)
         #expect(NotchLayout.compactSideWidth == NotchLayout.activitySideWidth)
     }
+
+    @Test @MainActor func indicateurDeVolumePlusLarge() {
+        let settings = SettingsStore(defaults: UserDefaults(suiteName: "notchkit.tests.\(UUID().uuidString)")!)
+        let manager = ModuleManager(settings: settings, entitlements: EntitlementManager(), availableModules: [])
+        let viewModel = NotchViewModel(manager: manager, settings: settings)
+        var alert = NotchAlert(duration: .seconds(5))
+        alert.sideWidth = NotchLayout.levelIndicatorSideWidth
+        viewModel.present(alert)
+        #expect(viewModel.compactSideWidth == NotchLayout.levelIndicatorSideWidth)
+        #expect(NotchLayout.levelIndicatorSideWidth > NotchLayout.activitySideWidth)
+    }
 }
 
 @MainActor

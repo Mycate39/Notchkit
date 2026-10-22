@@ -14,12 +14,12 @@ struct HUDIcon: View {
     }
 }
 
-/// Barre de niveau de l'indicateur (courte : l'indicateur a la largeur de la musique).
+/// Barre de niveau de l'indicateur (seule alerte plus large que la musique, pour rester lisible).
 struct HUDLevelBar: View {
     let state: HUDState
 
     var body: some View {
-        StandByBar(value: CGFloat(state.isMuted ? 0 : state.level), height: 6)
+        StandByBar(value: CGFloat(state.isMuted ? 0 : state.level), height: 8)
     }
 }
 

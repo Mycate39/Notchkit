@@ -12,6 +12,8 @@ struct NotchAlert: Identifiable {
     var expandedSize: CGSize?
     /// Module ouvert si l'on survole l'encoche pendant l'alerte (ex. l'indicateur de volume mène au centre du son).
     var openModuleID: String?
+    /// Largeur de chaque côté de l'encoche (`nil` : celle de la musique, `NotchLayout.compactSideWidth`).
+    var sideWidth: CGFloat?
 
     init(leading: AnyView = AnyView(EmptyView()), trailing: AnyView = AnyView(EmptyView()),
          duration: Duration = .seconds(2.5),

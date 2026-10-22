@@ -76,6 +76,7 @@ final class SystemHUDModule: NotchModule {
         )
         // Survoler l'indicateur ouvre le centre du son.
         alert.openModuleID = Self.descriptor.id
+        alert.sideWidth = NotchLayout.levelIndicatorSideWidth
         return alert
     }()
 

@@ -38,6 +38,8 @@ enum NotchLayout {
     /// alertes (musique, minuteur, chargeur, volume…), celle de la pochette et des barres de la musique.
     static let activitySideWidth: CGFloat = 38
     static let compactSideWidth: CGFloat = activitySideWidth
+    /// Exception : l'indicateur de volume et de luminosité, dont la barre serait illisible à la largeur de la musique.
+    static let levelIndicatorSideWidth: CGFloat = 80
     /// Taille de l'encoche dépliée.
     /// Apparence en vigueur (mise à jour par l'AppDelegate quand les réglages changent ;
     /// lue et écrite uniquement sur le thread principal).

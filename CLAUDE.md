@@ -152,9 +152,9 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 5. `git push`, `git tag -a vx.y.z`, pousser le tag, `gh release create vx.y.z <dmg> --latest --notes-file <notes.md>` (les versions 1.x ne sont plus des préversions), puis pousser `appcast.xml`.
    L'URL du flux est `https://raw.githubusercontent.com/Mycate39/Notchkit/main/appcast.xml`.
 
-**Bêta** : même procédure, avec `MARKETING_VERSION` `x.y.z-beta.N` (le build augmente normalement), tag `vx.y.z-beta.N`, `gh release create … --prerelease --latest=false`, et **sans** étape `appcast.xml` : les utilisateurs actuels ne la reçoivent pas automatiquement.
+**Bêta / RC** : même procédure, avec `MARKETING_VERSION` `x.y.z-beta.N` (ou `x.y.z-rc.N`, candidate à la version finale, comme sur iOS) (le build augmente normalement), tag `vx.y.z-beta.N`, `gh release create … --prerelease --latest=false`, et **sans** étape `appcast.xml` : les utilisateurs actuels ne la reçoivent pas automatiquement.
 
-## État (21 octobre 2026 : 1.0.6 publiée, 2.0.0 beta 4 en préversion)
+## État (22 octobre 2026 : 1.0.6 publiée, 2.0.0 RC 1 en préversion)
 
 ### Fonctionne
 - Fenêtre d'encoche sur n'importe quel écran : vraie encoche, encoche simulée ou pilule flottante ; reste en place à travers les Spaces ; se décale à droite pour ne jamais masquer les menus de l'app active (nécessite l'autorisation Accessibilité).
@@ -174,6 +174,7 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
   - Publié dans la beta 2 (`v2.0.0-beta.2`, 19/10/2026) : tous les points de cette liste, sauf le compteur d'images par seconde du mode jeu et les commandes de la bulle de la musique (20/10/2026).
   - Publié dans la beta 3 (`v2.0.0-beta.3`, 20/10/2026) : commandes dans les bulles (musique, minuteur), mode jeu aux images par seconde, icône de batterie de macOS 27, balayage des pages géré à la main, bulles qui descendent du haut, points de la pile, largeurs uniformes, accent bleu par défaut.
   - Publié dans la beta 4 (`v2.0.0-beta.4`, 21/10/2026) : minuteur à la règle, étagère en activité de 5 minutes, animation Touch ID au déverrouillage, Précédent / Suivant et icônes au style de macOS dans les réglages, bouton Rétablir des délais de survol, barre de progression de la musique stable en mode rebondissant.
+  - Publié dans la RC 1 (`v2.0.0-rc.1`, 22/10/2026, candidate à la version finale) : règle du minuteur à disposition stable et défilement cinétique, audit des règles d'Apple (accessibilité, vibrations, icône de barre des menus masquable, textes des autorisations, contour coloré, icône Icon Composer). L'intégration à Siri (App Intents) a été essayée puis abandonnée le 21/10/2026.
   - Mode jeu (`Modules/GameMode`) : encoche discrète et images par seconde seulement (`FrameRateMeter` : ScreenCaptureKit compte les images complètes de l'app au premier plan, autorisation Enregistrement de l'écran). S'active comme le mode jeu de macOS (jeu en plein écran au premier plan, `FullScreenDetector`), ou à la main.
   - Centre du son dans le panneau du volume : sortie, micro, apps qui jouent (repli sur l'app « À l'écoute », les navigateurs ne signalant pas toujours leur sortie), volume par app par interception Core Audio (macOS 14.2+).
   - Onglet Autorisations et synthèse dans le tutoriel ; curseurs Liquid Glass (macOS 26+) ; zones cliquables agrandies ; boutons natifs dans les réglages.

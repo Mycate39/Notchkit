@@ -237,6 +237,10 @@ private struct CompactBubbles: View {
                             .frame(width: width + module.bubbleControlsWidth - iconEnd - ear, height: diameter)
                             // Mode encoche : les commandes restent à l'écart du congé de droite.
                             .padding(.trailing, ear)
+                            // Les commandes débordent du cadre de la bulle : leur survol compte aussi, sinon
+                            // elles se refermeraient avant qu'on atteigne le dernier bouton (×).
+                            .contentShape(Rectangle())
+                            .onHover { viewModel.hoverBubbleControls(id, part: .controls, inside: $0) }
                             .transition(.opacity.combined(with: .scale(scale: 0.6, anchor: .leading)))
                     }
                 }

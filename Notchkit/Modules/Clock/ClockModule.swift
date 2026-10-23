@@ -16,7 +16,7 @@ final class ClockModule: NotchModule {
         defaultEnabled: true
     )
 
-    /// Affiche l'heure quand l'encoche est repliée.
+    /// Affiche l'heure quand l'encoche est repliée (désactivé par défaut).
     var showInCompact: Bool {
         didSet { UserDefaults.standard.set(showInCompact, forKey: Keys.showInCompact) }
     }
@@ -51,7 +51,7 @@ final class ClockModule: NotchModule {
     ]
 
     init(context: ModuleContext) {
-        showInCompact = UserDefaults.standard.object(forKey: Keys.showInCompact) as? Bool ?? true
+        showInCompact = UserDefaults.standard.object(forKey: Keys.showInCompact) as? Bool ?? false
         secondaryTimeZoneID = UserDefaults.standard.string(forKey: Keys.secondaryTimeZone)
     }
 

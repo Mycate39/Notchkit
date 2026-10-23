@@ -96,6 +96,10 @@ protocol NotchModule: AnyObject, Observable {
     func bubbleControls() -> AnyView?
     /// Largeur gagnée par la bulle quand elle montre ses commandes.
     var bubbleControlsWidth: CGFloat { get }
+    /// Écran verrouillé : version élargie et cliquable de l'activité (ex. lecteur de musique), à la
+    /// place de `compactLeading/Trailing`. `nil` : l'activité reste affichée sans interaction.
+    func lockScreenLeading() -> AnyView?
+    func lockScreenTrailing() -> AnyView?
     /// Contenu affiché quand l'encoche est dépliée.
     func expandedView() -> AnyView
     /// Largeur relative de la carte dans l'encoche dépliée (1 = normale, 2 = double).
@@ -118,6 +122,8 @@ extension NotchModule {
     func compactTrailing() -> AnyView? { nil }
     func bubbleControls() -> AnyView? { nil }
     var bubbleControlsWidth: CGFloat { NotchLayout.bubbleControlsContentWidth }
+    func lockScreenLeading() -> AnyView? { nil }
+    func lockScreenTrailing() -> AnyView? { nil }
     var bubblePriority: ModulePriority { compactPriority }
     var keyLineColor: Color? { nil }
     var compactIsland: Bool { false }

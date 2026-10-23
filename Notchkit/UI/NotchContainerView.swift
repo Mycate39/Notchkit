@@ -80,8 +80,9 @@ struct NotchContainerView: View {
         .environment(\.onAccent, viewModel.appearance.onAccentColor)
         .environment(\.sliderTint, viewModel.appearance.sliderColor?.color)
         .environment(\.colorScheme, .dark)
-        // Écran verrouillé : activités visibles, mais aucun bouton ni bulle cliquable.
-        .allowsHitTesting(!viewModel.isScreenLocked)
+        // Écran verrouillé : activités visibles, mais aucun bouton ni bulle cliquable, sauf le lecteur
+        // de l'écran verrouillé (bulles coupées à part, dans `CompactBubbles`).
+        .allowsHitTesting(!viewModel.isScreenLocked || viewModel.lockScreenModule != nil)
         .padding(.top, NotchLayout.topInset(for: geometry.style))
         // La fenêtre peut être plus grande que la forme (pendant le repli) : on reste centré en haut.
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
@@ -134,6 +135,7 @@ private struct CompactBubbles: View {
         .padding(.leading, NotchLayout.bubbleGap)
         .foregroundStyle(.white)
         .font(.system(size: 11, weight: .semibold))
+        .allowsHitTesting(!viewModel.isScreenLocked)
     }
 
     // MARK: Pile et menu déroulant
@@ -334,6 +336,9 @@ private struct CompactNotchView: View {
     private var content: (AnyView?, AnyView?) {
         if let alert = viewModel.currentAlert {
             return (alert.leading, alert.trailing)
+        }
+        if let module = viewModel.lockScreenModule {
+            return (module.lockScreenLeading(), module.lockScreenTrailing())
         }
         if let module = viewModel.manager.compactModule {
             return (module.compactLeading(), module.compactTrailing())

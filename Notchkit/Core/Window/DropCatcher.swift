@@ -1,5 +1,8 @@
 import AppKit
 
+/// Source de glisser interne à Notchkit que l'encoche accepte quand même (fichier d'essai du tutoriel).
+protocol AcceptedInternalDragSource: AnyObject {}
+
 /// Fenêtre invisible qui reçoit les fichiers glissés sur l'encoche.
 ///
 /// L'encoche vit dans un espace SkyLight au-dessus des bureaux (`LockScreenSpace`) : le serveur de
@@ -19,6 +22,11 @@ final class DropCatcher {
     var onDragStart: () -> Void = {}
     var onDragEnd: () -> Void = {}
     private var isDragging = false
+    private var internalDragObserver: NSObjectProtocol?
+
+    /// Glisser parti de Notchkit même (fichier d'essai du tutoriel) : le moniteur global ne voit que
+    /// les autres apps, la vue qui lance le glisser le signale donc elle-même.
+    static let internalDragDidStart = Notification.Name("NotchkitInternalDragDidStart")
 
     init(forwardingTo target: NSView) {
         panel = NSPanel(contentRect: .zero, styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: false)
@@ -45,6 +53,11 @@ final class DropCatcher {
         monitor = NSEvent.addGlobalMonitorForEvents(matching: .leftMouseDragged) { _ in
             MainActor.assumeIsolated { [weak self] in self?.dragMoved() }
         }
+        internalDragObserver = NotificationCenter.default.addObserver(
+            forName: Self.internalDragDidStart, object: nil, queue: .main
+        ) { _ in
+            MainActor.assumeIsolated { [weak self] in self?.beginDrag() }
+        }
     }
 
     /// Accueille le contenu de l'encoche pendant un glisser (même cadre : rien ne bouge à l'écran).
@@ -65,6 +78,10 @@ final class DropCatcher {
         guard pasteboard.changeCount != dragChangeCount else { return }
         dragChangeCount = pasteboard.changeCount
         guard Self.isDroppable(pasteboard.types ?? []) else { return }
+        beginDrag()
+    }
+
+    private func beginDrag() {
         panel.ignoresMouseEvents = false
         if !isDragging {
             isDragging = true

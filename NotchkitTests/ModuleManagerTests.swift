@@ -402,10 +402,16 @@ struct OnboardingTests {
         #expect(OnboardingStep.welcome.isFirst)
         #expect(OnboardingStep.welcome.next == .hover)
         #expect(OnboardingStep.done.isLast)
-        #expect(OnboardingStep.done.previous == .permissions)
+        #expect(OnboardingStep.done.previous == .tryIt)
         // On peut parcourir toutes les étapes en avançant depuis la première.
         var visited: [OnboardingStep] = [.welcome]
         while let next = visited.last?.next { visited.append(next) }
         #expect(visited == OnboardingStep.allCases)
+    }
+
+    @Test func essaiSansLesGestesImpossibles() {
+        #expect(OnboardingTrialTask.available(pageCount: 3, hasShelf: true, hasTimers: true) == OnboardingTrialTask.allCases)
+        #expect(OnboardingTrialTask.available(pageCount: 1, hasShelf: false, hasTimers: true) == [.open, .pause])
+        #expect(OnboardingTrialTask.available(pageCount: 2, hasShelf: true, hasTimers: false) == [.open, .swipe, .drop])
     }
 }

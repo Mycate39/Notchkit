@@ -16,7 +16,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         AnyView(SettingsView(settings: settings, manager: moduleManager, router: settingsRouter))
     }
     private lazy var onboardingWindow = OnboardingWindowController(
-        settings: settings, manager: moduleManager,
+        settings: settings, manager: moduleManager, viewModel: viewModel,
         openSettings: { [unowned self] tab in self.showSettings(tab: tab) }
     )
 

@@ -145,38 +145,65 @@ struct HoverDemo: View {
     }
 }
 
-/// Activités : la musique s'affiche autour de l'encoche, puis un minuteur devient une bulle.
+/// Activités : la musique s'installe autour de l'encoche (contour à sa couleur), un minuteur devient
+/// une bulle, puis le pointeur survole la bulle, qui s'allonge et montre ses commandes.
 struct ActivitiesDemo: View {
-    private enum Phase: CaseIterable { case idle, music, bubble }
+    private enum Phase: CaseIterable { case idle, music, bubble, controls }
 
     var body: some View {
         DemoScreen {
             PhaseAnimator(Phase.allCases) { phase in
                 let compact = phase != .idle
                 let width = compact ? OnboardingDemoLayout.compact.width : OnboardingDemoLayout.idle.width
-                HStack(spacing: 5) {
-                    DemoNotch(size: CGSize(width: width, height: OnboardingDemoLayout.idle.height)) {
-                        DemoMusicActivity().opacity(compact ? 1 : 0)
-                    }
-                    // Bulle d'une seconde activité, comme sur l'iPhone.
-                    DemoNotch(size: CGSize(width: 26, height: OnboardingDemoLayout.idle.height)) {
-                        Image(systemName: "timer")
-                            .font(.system(size: 8, weight: .bold))
-                            .foregroundStyle(.orange)
-                    }
-                    .opacity(phase == .bubble ? 1 : 0)
-                    .scaleEffect(phase == .bubble ? 1 : 0.4, anchor: .top)
+                DemoNotch(size: CGSize(width: width, height: OnboardingDemoLayout.idle.height)) {
+                    DemoMusicActivity().opacity(compact ? 1 : 0)
                 }
-                // La bulle occupe sa place même invisible : décalage fixe pour garder l'encoche au centre.
-                .offset(x: (26 + 5) / 2)
+                .overlay {
+                    // Contour à la couleur de l'activité, comme les Live Activities.
+                    NotchShape(earRadius: 4, topCornerRadius: 4, bottomCornerRadius: 6)
+                        .stroke(.pink.opacity(compact ? 0.7 : 0), lineWidth: 1)
+                }
+                // Bulle accrochée à droite de l'encoche, qui reste ainsi centrée.
+                .overlay(alignment: .topTrailing) {
+                    bubble(phase).alignmentGuide(.trailing) { $0[.leading] - 5 }
+                }
             } animation: { phase in
-                .spring(duration: 0.6, bounce: 0.25).delay(phase == .idle ? 0.6 : 1.3)
+                switch phase {
+                case .idle: .spring(duration: 0.6, bounce: 0.25).delay(0.6)
+                case .music, .bubble: .spring(duration: 0.6, bounce: 0.25).delay(1.3)
+                case .controls: .spring(duration: 0.5, bounce: 0.2).delay(0.9)
+                }
             }
         }
     }
+
+    /// Bulle du minuteur ; au survol, elle s'allonge avec ses commandes (pause, arrêt).
+    private func bubble(_ phase: Phase) -> some View {
+        let visible = phase == .bubble || phase == .controls
+        return DemoNotch(size: CGSize(width: phase == .controls ? 66 : 26, height: OnboardingDemoLayout.idle.height)) {
+            HStack(spacing: 8) {
+                Image(systemName: "timer").foregroundStyle(.orange)
+                if phase == .controls {
+                    Image(systemName: "pause.fill").foregroundStyle(.white)
+                    Image(systemName: "xmark").foregroundStyle(.white)
+                }
+            }
+            .font(.system(size: 8, weight: .bold))
+        }
+        .overlay(alignment: .topLeading) {
+            Image(systemName: "cursorarrow")
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundStyle(.white)
+                .shadow(radius: 2)
+                .offset(phase == .controls ? CGSize(width: 8, height: 6) : CGSize(width: 60, height: 100))
+                .opacity(visible ? 1 : 0)
+        }
+        .opacity(visible ? 1 : 0)
+        .scaleEffect(visible ? 1 : 0.4, anchor: .top)
+    }
 }
 
-/// Fichiers : un document glisse vers l'encoche, qui propose l'étagère et AirDrop.
+/// Fichiers : un document glisse vers l'encoche, qui propose l'étagère, la conversion et AirDrop.
 struct FilesDemo: View {
     private enum Phase: CaseIterable { case start, dragging, dropped }
 
@@ -186,8 +213,9 @@ struct FilesDemo: View {
                 let isOpen = phase != .start
                 ZStack(alignment: .top) {
                     DemoNotch(size: isOpen ? OnboardingDemoLayout.expanded : OnboardingDemoLayout.idle, isExpanded: isOpen) {
-                        HStack(spacing: 10) {
+                        HStack(spacing: 8) {
                             zone("tray.and.arrow.down.fill", color: .green, highlighted: phase == .dropped)
+                            zone("arrow.triangle.2.circlepath", color: .purple, highlighted: false)
                             zone("dot.radiowaves.left.and.right", color: .blue, highlighted: false)
                         }
                         .padding(.top, 22)
@@ -214,15 +242,86 @@ struct FilesDemo: View {
     private func documentOffset(_ phase: Phase) -> CGSize {
         switch phase {
         case .start: CGSize(width: -130, height: 100)
-        case .dragging, .dropped: CGSize(width: -58, height: 44)
+        case .dragging, .dropped: CGSize(width: -84, height: 44)
         }
     }
 
     private func zone(_ symbol: String, color: Color, highlighted: Bool) -> some View {
         RoundedRectangle(cornerRadius: 10, style: .continuous)
             .fill(color.opacity(highlighted ? 0.45 : 0.2))
-            .frame(width: 112, height: 56)
-            .overlay(Image(systemName: symbol).font(.system(size: 20, weight: .semibold)).foregroundStyle(color))
+            .frame(width: 76, height: 56)
+            .overlay(Image(systemName: symbol).font(.system(size: 18, weight: .semibold)).foregroundStyle(color))
+    }
+}
+
+/// Agents : la mascotte travaille, puis Claude Code demande une autorisation, à laquelle on répond dans l'encoche.
+struct AgentsDemo: View {
+    let mascot: MascotDesign
+    private enum Phase: CaseIterable { case working, asking, answered }
+
+    var body: some View {
+        DemoScreen {
+            PhaseAnimator(Phase.allCases) { phase in
+                DemoNotch(size: OnboardingDemoLayout.expanded, isExpanded: true) {
+                    HStack(spacing: 12) {
+                        MascotView(design: mascot, mood: mood(phase), size: 44, showsBadge: false)
+                            .frame(width: 60)
+                        VStack(alignment: .leading, spacing: 5) {
+                            if phase == .asking {
+                                Text(verbatim: "Bash · npm test")
+                                    .font(.system(size: 10, weight: .semibold, design: .monospaced))
+                                    .foregroundStyle(.white)
+                                HStack(spacing: 5) {
+                                    Capsule().fill(.white.opacity(0.15)).frame(width: 52, height: 16)
+                                        .overlay(Image(systemName: "xmark").font(.system(size: 8, weight: .bold)).foregroundStyle(.white))
+                                    Capsule().fill(StandBy.defaultAccent.color).frame(width: 52, height: 16)
+                                        .overlay(Image(systemName: "checkmark").font(.system(size: 8, weight: .bold)).foregroundStyle(.white))
+                                }
+                            } else {
+                                ForEach(0..<3, id: \.self) { index in
+                                    HStack(spacing: 5) {
+                                        Image(systemName: index < (phase == .answered ? 3 : 2) ? "checkmark.circle.fill" : "circle.dotted")
+                                            .foregroundStyle(index < (phase == .answered ? 3 : 2) ? .green : .white.opacity(0.6))
+                                        Capsule().fill(.white.opacity(0.35)).frame(width: CGFloat(70 - index * 14), height: 4)
+                                    }
+                                    .font(.system(size: 9))
+                                }
+                            }
+                        }
+                        .frame(width: 140, alignment: .leading)
+                    }
+                    .padding(.top, 18)
+                }
+            } animation: { _ in .spring(duration: 0.5, bounce: 0.2).delay(1.6) }
+        }
+    }
+
+    private func mood(_ phase: Phase) -> MascotMood {
+        switch phase {
+        case .working: .working
+        case .asking: .waiting
+        case .answered: .happy
+        }
+    }
+}
+
+/// Essai : flèche qui montre la vraie encoche, en haut de l'écran.
+struct TryItDemo: View {
+    var body: some View {
+        DemoScreen {
+            VStack(spacing: 10) {
+                DemoNotch(size: OnboardingDemoLayout.idle) { Color.clear }
+                PhaseAnimator([false, true]) { up in
+                    Image(systemName: "arrow.up")
+                        .font(.system(size: 30, weight: .bold))
+                        .foregroundStyle(.white)
+                        .offset(y: up ? -6 : 6)
+                } animation: { _ in .easeInOut(duration: 0.7) }
+                Image(systemName: "hand.point.up.left.fill")
+                    .font(.system(size: 26))
+                    .foregroundStyle(.white.opacity(0.85))
+            }
+        }
     }
 }
 

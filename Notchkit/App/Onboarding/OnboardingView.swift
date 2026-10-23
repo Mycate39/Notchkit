@@ -9,11 +9,14 @@ final class OnboardingWindowController: NSObject, NSWindowDelegate {
     private var window: NSWindow?
     private let settings: SettingsStore
     private let manager: ModuleManager
+    private let viewModel: NotchViewModel
     private let openSettings: @MainActor (SettingsTab) -> Void
 
-    init(settings: SettingsStore, manager: ModuleManager, openSettings: @escaping @MainActor (SettingsTab) -> Void) {
+    init(settings: SettingsStore, manager: ModuleManager, viewModel: NotchViewModel,
+         openSettings: @escaping @MainActor (SettingsTab) -> Void) {
         self.settings = settings
         self.manager = manager
+        self.viewModel = viewModel
         self.openSettings = openSettings
     }
 
@@ -21,6 +24,8 @@ final class OnboardingWindowController: NSObject, NSWindowDelegate {
         if window == nil {
             let view = OnboardingView(
                 manager: manager,
+                viewModel: viewModel,
+                mascot: settings.settings.mascot,
                 openSettings: { [weak self] tab in self?.openSettings(tab) },
                 finish: { [weak self] in self?.window?.close() }
             )
@@ -50,6 +55,8 @@ final class OnboardingWindowController: NSObject, NSWindowDelegate {
 /// Contenu du tutoriel : démonstration, texte, contrôles de l'étape, navigation.
 struct OnboardingView: View {
     let manager: ModuleManager
+    let viewModel: NotchViewModel
+    let mascot: MascotDesign
     let openSettings: (SettingsTab) -> Void
     let finish: () -> Void
 
@@ -58,9 +65,12 @@ struct OnboardingView: View {
     /// Avance (vers la droite) ou recule : sens de la transition entre étapes.
     @State private var isForward = true
 
-    init(manager: ModuleManager, openSettings: @escaping (SettingsTab) -> Void, finish: @escaping () -> Void,
+    init(manager: ModuleManager, viewModel: NotchViewModel, mascot: MascotDesign,
+         openSettings: @escaping (SettingsTab) -> Void, finish: @escaping () -> Void,
          startAt step: OnboardingStep = .welcome) {
         self.manager = manager
+        self.viewModel = viewModel
+        self.mascot = mascot
         self.openSettings = openSettings
         self.finish = finish
         _step = State(initialValue: step)
@@ -108,8 +118,10 @@ struct OnboardingView: View {
         case .hover: HoverDemo()
         case .activities: ActivitiesDemo()
         case .files: FilesDemo()
+        case .agents: AgentsDemo(mascot: mascot)
         case .widgets: SymbolDemo(symbol: "square.grid.2x2.fill", tint: StandBy.defaultAccent.color)
         case .permissions: PermissionsDemo(center: permissions)
+        case .tryIt: TryItDemo()
         case .done: SymbolDemo(symbol: "checkmark.circle.fill", tint: .green)
         }
     }
@@ -120,7 +132,9 @@ struct OnboardingView: View {
     private var controls: some View {
         switch step {
         case .widgets: OnboardingPresets(manager: manager, openLayoutSettings: { openSettings(.layout) })
+        case .agents: OnboardingAgents(manager: manager)
         case .permissions: OnboardingPermissions(center: permissions, openDetails: { openSettings(.permissions) })
+        case .tryIt: OnboardingTrial(viewModel: viewModel, manager: manager)
         default: EmptyView()
         }
     }
@@ -286,5 +300,183 @@ private struct OnboardingPermissions: View {
     private func setLaunchAtLogin(_ enabled: Bool) {
         launchError = LaunchAtLogin.setEnabled(enabled)
         launchAtLogin = LaunchAtLogin.isEnabled
+    }
+}
+
+// MARK: - Agents
+
+/// Affiche la page Agents (masquée par défaut) d'un clic.
+private struct OnboardingAgents: View {
+    let manager: ModuleManager
+
+    private var isShown: Bool { manager.isEnabled(AgentsModule.descriptor.id) }
+
+    var body: some View {
+        if isShown {
+            Label("Page Agents affichée", systemImage: "checkmark.circle.fill")
+                .font(.system(size: 12, weight: .semibold))
+                .foregroundStyle(.green)
+        } else {
+            Button("Afficher la page Agents") {
+                withAnimation(.snappy) { manager.setEnabled(true, for: AgentsModule.descriptor.id) }
+            }
+            .buttonStyle(.standBy(.small, active: true))
+        }
+    }
+}
+
+// MARK: - Essai guidé
+
+/// Essai guidé : gestes à faire sur la vraie encoche, cochés dès qu'ils sont détectés.
+private struct OnboardingTrial: View {
+    let viewModel: NotchViewModel
+    let manager: ModuleManager
+
+    @State private var done: Set<OnboardingTrialTask> = []
+    /// Minuteur d'essai lancé depuis le tutoriel (retiré en quittant l'étape).
+    @State private var timerID: String?
+    @State private var sampleFile: URL?
+
+    private var shelf: ShelfModule? { manager.module(for: ShelfModule.descriptor.id) as? ShelfModule }
+    private var timers: LiveActivitiesModule? { manager.module(for: LiveActivitiesModule.descriptor.id) as? LiveActivitiesModule }
+    private var tasks: [OnboardingTrialTask] {
+        OnboardingTrialTask.available(pageCount: ModulePage.pages(from: manager).count,
+                                      hasShelf: shelf != nil, hasTimers: timers != nil)
+    }
+    private var trialTimer: LiveActivity? { timers?.activities.first { $0.id == timerID } }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            ForEach(tasks) { task in row(task) }
+            if tasks.allSatisfy(done.contains) {
+                Label("Bravo, vous savez tout faire !", systemImage: "party.popper.fill")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(.green)
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 2)
+                    .transition(.opacity)
+            }
+        }
+        .frame(maxWidth: 440)
+        .onChange(of: viewModel.isExpanded) { _, open in if open { mark(.open) } }
+        .onChange(of: viewModel.selectedPage) { _, _ in if viewModel.isExpanded { mark(.swipe) } }
+        .onChange(of: shelf?.items.count ?? 0) { old, new in if new > old { mark(.drop) } }
+        .onChange(of: trialTimer?.isPaused ?? false) { _, paused in if paused { mark(.pause) } }
+        .onChange(of: trialTimer == nil) { _, gone in if gone { timerID = nil } }
+        .onDisappear {
+            if let timerID { timers?.remove(timerID) }
+        }
+    }
+
+    private func row(_ task: OnboardingTrialTask) -> some View {
+        let isDone = done.contains(task)
+        return HStack(spacing: 10) {
+            Image(systemName: isDone ? "checkmark.circle.fill" : "circle")
+                .font(.system(size: 18))
+                .foregroundStyle(isDone ? Color.green : Color.white.opacity(0.4))
+                .contentTransition(.symbolEffect(.replace))
+            VStack(alignment: .leading, spacing: 1) {
+                Text(task.title)
+                    .font(.system(size: 13, weight: .semibold))
+                    .strikethrough(isDone, color: .white.opacity(0.5))
+                Text(task.hint)
+                    .font(.system(size: 11))
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            Spacer(minLength: 8)
+            if !isDone { accessory(task) }
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 6)
+        .frame(minHeight: 40)
+        .background(.white.opacity(isDone ? 0.03 : 0.06), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .accessibilityElement(children: .combine)
+        .accessibilityValue(isDone ? Text("Fait") : Text("À faire"))
+    }
+
+    @ViewBuilder
+    private func accessory(_ task: OnboardingTrialTask) -> some View {
+        switch task {
+        case .drop:
+            // Fichier d'essai à faire glisser sur l'encoche.
+            HStack(spacing: 4) {
+                Image(systemName: "doc.text.fill").foregroundStyle(.white)
+                Text(verbatim: sampleName).font(.system(size: 10, weight: .medium)).lineLimit(1)
+            }
+            .padding(.horizontal, 8)
+            .frame(height: 24)
+            .background(.white.opacity(0.12), in: Capsule())
+            .overlay { FileDragSource(file: makeSampleFile) }
+            .help(Text("Faites glisser ce fichier sur l'encoche"))
+        case .pause where timerID == nil:
+            Button("Lancer") {
+                guard let timers else { return }
+                timers.startTimer(minutes: 2, title: String(localized: "Essai"))
+                timerID = timers.activities.last?.id
+            }
+            .buttonStyle(.standBy(.small, active: true))
+        default:
+            EmptyView()
+        }
+    }
+
+    private var sampleName: String { String(localized: "Essai Notchkit.txt") }
+
+    /// Fichier texte créé dans le dossier temporaire, au premier glisser.
+    private func makeSampleFile() -> URL {
+        if let sampleFile { return sampleFile }
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent(sampleName)
+        try? String(localized: "Ce fichier vient du tutoriel de Notchkit. Vous pouvez le supprimer.")
+            .write(to: url, atomically: true, encoding: .utf8)
+        sampleFile = url
+        return url
+    }
+
+    private func mark(_ task: OnboardingTrialTask) {
+        guard tasks.contains(task), !done.contains(task) else { return }
+        withAnimation(.snappy) { _ = done.insert(task) }
+        Haptics.play(.tap)
+    }
+}
+
+/// Source de glisser AppKit pour un fichier : publie son URL comme le Finder, et se déclare acceptée
+/// par l'encoche, qui refuse sinon les glissers venus de Notchkit.
+private struct FileDragSource: NSViewRepresentable {
+    let file: () -> URL
+
+    func makeNSView(context: Context) -> FileDragSourceView {
+        let view = FileDragSourceView()
+        view.file = file
+        return view
+    }
+
+    func updateNSView(_ view: FileDragSourceView, context: Context) {
+        view.file = file
+    }
+}
+
+private final class FileDragSourceView: NSView, NSDraggingSource, AcceptedInternalDragSource {
+    var file: (() -> URL)?
+    private var mouseDownEvent: NSEvent?
+
+    override func acceptsFirstMouse(for event: NSEvent?) -> Bool { true }
+    override func mouseDown(with event: NSEvent) { mouseDownEvent = event }
+
+    override func mouseDragged(with event: NSEvent) {
+        guard let start = mouseDownEvent, let url = file?() else { return }
+        mouseDownEvent = nil
+        let item = NSDraggingItem(pasteboardWriter: url as NSURL)
+        let icon = NSWorkspace.shared.icon(forFile: url.path)
+        let origin = convert(start.locationInWindow, from: nil)
+        item.setDraggingFrame(NSRect(x: origin.x - 16, y: origin.y - 16, width: 32, height: 32), contents: icon)
+        beginDraggingSession(with: [item], event: start, source: self)
+        // Glisser parti de Notchkit : le moniteur global de DropCatcher ne le voit pas.
+        NotificationCenter.default.post(name: DropCatcher.internalDragDidStart, object: nil)
+    }
+
+    func draggingSession(_ session: NSDraggingSession,
+                         sourceOperationMaskFor context: NSDraggingContext) -> NSDragOperation {
+        context == .outsideApplication ? .copy : [.copy, .generic]
     }
 }

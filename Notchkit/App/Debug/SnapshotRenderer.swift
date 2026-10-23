@@ -109,7 +109,8 @@ enum SnapshotRenderer {
 
         // Tutoriel de bienvenue : une image par étape.
         for step in OnboardingStep.allCases {
-            save(OnboardingView(manager: manager, openSettings: { _ in }, finish: {}, startAt: step)
+            save(OnboardingView(manager: manager, viewModel: viewModel, mascot: settings.settings.mascot,
+                                openSettings: { _ in }, finish: {}, startAt: step)
                     .environment(\.colorScheme, .dark),
                  to: directory.appendingPathComponent("tutoriel-\(step.rawValue + 1).png"))
         }

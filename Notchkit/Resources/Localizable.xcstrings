@@ -1,6 +1,374 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "Suivez Claude Code depuis l'encoche" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Follow Claude Code from the notch"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suivez Claude Code depuis l'encoche"
+          }
+        }
+      }
+    },
+    "À vous d'essayer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your turn"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À vous d'essayer"
+          }
+        }
+      }
+    },
+    "Placez le pointeur sur l'encoche : elle se déplie et affiche vos widgets. Balayez avec deux doigts sur le trackpad pour changer de page. Éloignez le pointeur pour la refermer." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Move the pointer over the notch: it opens and shows your widgets. Swipe with two fingers on the trackpad to change page. Move the pointer away to close it."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Placez le pointeur sur l'encoche : elle se déplie et affiche vos widgets. Balayez avec deux doigts sur le trackpad pour changer de page. Éloignez le pointeur pour la refermer."
+          }
+        }
+      }
+    },
+    "Musique, minuteur, téléchargement : l'activité en cours s'affiche autour de l'encoche, entourée de sa couleur. Les autres deviennent des bulles. Survolez une bulle pour la commander sans ouvrir l'encoche : pause, morceau suivant, arrêt du minuteur." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Music, timers, downloads: the current activity shows around the notch, outlined in its color. Other activities become bubbles. Hover a bubble to control it without opening the notch: pause, next track, stop the timer."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Musique, minuteur, téléchargement : l'activité en cours s'affiche autour de l'encoche, entourée de sa couleur. Les autres deviennent des bulles. Survolez une bulle pour la commander sans ouvrir l'encoche : pause, morceau suivant, arrêt du minuteur."
+          }
+        }
+      }
+    },
+    "Faites glisser des fichiers sur l'encoche. L'étagère les garde 5 minutes, le temps de les déposer ailleurs ; Convertir change leur format ; AirDrop les envoie à un appareil proche." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag files onto the notch. The shelf keeps them for 5 minutes, so you can drop them somewhere else; Convert changes their format; AirDrop sends them to a nearby device."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faites glisser des fichiers sur l'encoche. L'étagère les garde 5 minutes, le temps de les déposer ailleurs ; Convertir change leur format ; AirDrop les envoie à un appareil proche."
+          }
+        }
+      }
+    },
+    "La page Agents montre le travail de Claude Code : ses étapes, le fichier modifié, le terminal. Quand il demande une autorisation ou pose une question, répondez dans l'encoche. Une mascotte, à choisir parmi 33, l'accompagne." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Agents page shows what Claude Code is doing: its steps, the file it edits, the terminal. When it asks for permission or asks a question, answer in the notch. A mascot, chosen among 33, keeps it company."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La page Agents montre le travail de Claude Code : ses étapes, le fichier modifié, le terminal. Quand il demande une autorisation ou pose une question, répondez dans l'encoche. Une mascotte, à choisir parmi 33, l'accompagne."
+          }
+        }
+      }
+    },
+    "Faites ces gestes sur la vraie encoche, en haut de l'écran. Chacun se coche tout seul." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try these gestures on the real notch, at the top of the screen. Each one checks itself off."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faites ces gestes sur la vraie encoche, en haut de l'écran. Chacun se coche tout seul."
+          }
+        }
+      }
+    },
+    "Ouvrez l'encoche" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open the notch"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrez l'encoche"
+          }
+        }
+      }
+    },
+    "Changez de page" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change page"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Changez de page"
+          }
+        }
+      }
+    },
+    "Déposez un fichier sur l'étagère" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drop a file on the shelf"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déposez un fichier sur l'étagère"
+          }
+        }
+      }
+    },
+    "Mettez un minuteur en pause" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pause a timer"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mettez un minuteur en pause"
+          }
+        }
+      }
+    },
+    "Placez le pointeur dessus." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Move the pointer over it."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Placez le pointeur dessus."
+          }
+        }
+      }
+    },
+    "Encoche ouverte, balayez avec deux doigts." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "With the notch open, swipe with two fingers."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encoche ouverte, balayez avec deux doigts."
+          }
+        }
+      }
+    },
+    "Page Agents affichée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agents page shown"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Page Agents affichée"
+          }
+        }
+      }
+    },
+    "Afficher la page Agents" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show the Agents page"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher la page Agents"
+          }
+        }
+      }
+    },
+    "Bravo, vous savez tout faire !" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Well done, you know it all!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bravo, vous savez tout faire !"
+          }
+        }
+      }
+    },
+    "Fait" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fait"
+          }
+        }
+      }
+    },
+    "À faire" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To do"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À faire"
+          }
+        }
+      }
+    },
+    "Faites glisser ce fichier sur l'encoche" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag this file onto the notch"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faites glisser ce fichier sur l'encoche"
+          }
+        }
+      }
+    },
+    "Lancer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lancer"
+          }
+        }
+      }
+    },
+    "Essai" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Test"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Essai"
+          }
+        }
+      }
+    },
+    "Essai Notchkit.txt" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit Sample.txt"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Essai Notchkit.txt"
+          }
+        }
+      }
+    },
+    "Ce fichier vient du tutoriel de Notchkit. Vous pouvez le supprimer." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This file comes from the Notchkit tutorial. You can delete it."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce fichier vient du tutoriel de Notchkit. Vous pouvez le supprimer."
+          }
+        }
+      }
+    },
     "Chronomètre, alarme, Pomodoro" : {
       "localizations" : {
         "en" : {
@@ -6320,22 +6688,6 @@
         }
       }
     },
-    "Faites glisser des fichiers sur l'encoche : déposez-les sur l'étagère pour les garder sous la main, ou sur AirDrop pour les envoyer à un appareil proche." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Drag files onto the notch: drop them on the shelf to keep them at hand, or on AirDrop to send them to a nearby device."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Faites glisser des fichiers sur l'encoche : déposez-les sur l'étagère pour les garder sous la main, ou sur AirDrop pour les envoyer à un appareil proche."
-          }
-        }
-      }
-    },
     "Faites glisser une fenêtre par sa barre de titre vers le haut de l'écran : des zones apparaissent sous l'encoche. Relâchez sur une zone pour y ranger la fenêtre." : {
       "localizations" : {
         "en" : {
@@ -10317,22 +10669,6 @@
         }
       }
     },
-    "Placez le pointeur sur l'encoche : elle se déplie et affiche vos widgets. Balayez avec deux doigts ou cliquez sur les onglets pour changer de page. Éloignez le pointeur pour la refermer." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Move the pointer over the notch: it opens and shows your widgets. Swipe with two fingers or click the tabs to change pages. Move the pointer away to close it."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Placez le pointeur sur l'encoche : elle se déplie et affiche vos widgets. Balayez avec deux doigts ou cliquez sur les onglets pour changer de page. Éloignez le pointeur pour la refermer."
-          }
-        }
-      }
-    },
     "Pleine dans %@" : {
       "localizations" : {
         "en" : {
@@ -10765,22 +11101,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quand un jeu passe en plein écran, comme le mode jeu de macOS, l'encoche se fait discrète et affiche les images par seconde."
-          }
-        }
-      }
-    },
-    "Quand une musique joue, qu'un minuteur tourne ou que Claude Code travaille, l'activité s'affiche de part et d'autre de l'encoche. S'il y en a plusieurs, les autres deviennent des bulles : cliquez dessus pour les ouvrir." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When music plays, a timer runs or Claude Code is working, the activity shows on both sides of the notch. When there are several, the others become bubbles: click one to open it."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quand une musique joue, qu'un minuteur tourne ou que Claude Code travaille, l'activité s'affiche de part et d'autre de l'encoche. S'il y en a plusieurs, les autres deviennent des bulles : cliquez dessus pour les ouvrir."
           }
         }
       }
@@ -13678,6 +13998,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Volume et luminosité aux touches du clavier, encoche qui évite les menus, ancrage des fenêtres, traduction de la sélection, verrouillage du clavier."
+          }
+        }
+      }
+    },
+    "Faites glisser ce fichier sur l'encoche, puis sur Étagère." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag this file onto the notch, then onto Shelf."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faites glisser ce fichier sur l'encoche, puis sur Étagère."
+          }
+        }
+      }
+    },
+    "Lancez-en un, puis survolez-le ou ouvrez l'encoche." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start one, then hover it or open the notch."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lancez-en un, puis survolez-le ou ouvrez l'encoche."
           }
         }
       }

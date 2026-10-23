@@ -30,7 +30,7 @@ final class NotchHostingView<Content: View>: NSHostingView<Content> {
     /// Fichiers glissés depuis une autre app. Les glissements partis de Notchkit (ex. un fichier
     /// sorti de l'étagère) sont ignorés : l'encoche ne doit pas passer en mode dépôt sous le curseur.
     private func fileURLs(from info: NSDraggingInfo) -> [URL] {
-        guard info.draggingSource == nil else { return [] }
+        guard Self.acceptsSource(info.draggingSource) else { return [] }
         return info.draggingPasteboard.readObjects(
             forClasses: [NSURL.self],
             options: [.urlReadingFileURLsOnly: true]
@@ -39,9 +39,15 @@ final class NotchHostingView<Content: View>: NSHostingView<Content> {
 
     /// Texte glissé (sélection d'une page web, d'un document…), quand il n'y a pas de fichier.
     private func droppedText(from info: NSDraggingInfo) -> String? {
-        guard info.draggingSource == nil else { return nil }
+        guard Self.acceptsSource(info.draggingSource) else { return nil }
         let text = info.draggingPasteboard.string(forType: .string)?.trimmingCharacters(in: .whitespacesAndNewlines)
         return text?.isEmpty == false ? text : nil
+    }
+
+    /// Les glissers venus de Notchkit (fichiers de l'étagère…) sont refusés, sauf ceux d'une source
+    /// qui se déclare acceptée (fichier d'essai du tutoriel).
+    private static func acceptsSource(_ source: Any?) -> Bool {
+        source == nil || source is AcceptedInternalDragSource
     }
 
     private func hasDroppableContent(_ info: NSDraggingInfo) -> Bool {

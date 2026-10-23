@@ -165,7 +165,10 @@ private struct CompactBubbles: View {
             }
         }
         .frame(width: width, alignment: .top)
-        .contentShape(Rectangle())
+        // Les espaces entre les bulles comptent pour le survol. En arrière-plan et non en
+        // `contentShape` de la colonne : celui-ci limiterait aussi les clics à la largeur d'une bulle,
+        // et les commandes qui débordent à droite (pause, ×) ne recevraient plus rien.
+        .background { Color.clear.contentShape(Rectangle()) }
         .onHover { hoverMenu($0) }
         .animation(NotchLayout.spring, value: isOpen)
     }

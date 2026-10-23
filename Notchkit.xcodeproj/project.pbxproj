@@ -106,6 +106,7 @@
 		743DF3635CD73F1F95DF92FC /* OnboardingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D442EFB00C038F7698DF0C8 /* OnboardingStep.swift */; };
 		7598C45B17C1F42E1305FD85 /* AgentPanels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F1D7838B0087D64BCCB9AE /* AgentPanels.swift */; };
 		7605FF09B1B6548E2F21D2A4 /* AssistantFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6362B40DDA569D43BB37B057 /* AssistantFace.swift */; };
+		7671D438517BD5C0C1A211F9 /* WindowActivation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AEED1C73A0E0D69EC82693 /* WindowActivation.swift */; };
 		77A69D7A8DBAA12139814133 /* MascotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7ECF822A5C4B46DA1E8023 /* MascotView.swift */; };
 		78F19EC00241A52E7E494A0E /* get.h in Headers */ = {isa = PBXBuildFile; fileRef = D87D32299F6B58A261AA0D12 /* get.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		79537FE908D19E626C018946 /* ModuleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69908874CE7985E60953470 /* ModuleManager.swift */; };
@@ -362,6 +363,7 @@
 		7EE518DE63D2C25D9F6E87F4 /* ClaudeModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeModule.swift; sourceTree = "<group>"; };
 		7FEAFA82740815C08DAF101F /* UnlockAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockAnimations.swift; sourceTree = "<group>"; };
 		810675008E358236974A7C3B /* ScreenshotSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotSession.swift; sourceTree = "<group>"; };
+		81AEED1C73A0E0D69EC82693 /* WindowActivation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowActivation.swift; sourceTree = "<group>"; };
 		82317F3A93FC9B78D9981F5A /* helpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = helpers.h; sourceTree = "<group>"; };
 		82E32A0CD723246EBCF3F295 /* SpectrumTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumTests.swift; sourceTree = "<group>"; };
 		865FBBD206E6548CD19B74CE /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
@@ -1000,6 +1002,7 @@
 				CD9CBF25534335CB0D5FB2F1 /* AutomatedRun.swift */,
 				FE5BEC21D18119A5A2679832 /* Haptics.swift */,
 				F0BF3D614D5CC62B9E68FF35 /* ObservationTracking.swift */,
+				81AEED1C73A0E0D69EC82693 /* WindowActivation.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1512,6 +1515,7 @@
 				FE84A29BB41889B5AC1BD36D /* WeatherViews.swift in Sources */,
 				FE1DCA399CB2B0AD60F96FB4 /* WebAssistant.swift in Sources */,
 				98776D4DF39E4E21CDB0167E /* WidgetLayout.swift in Sources */,
+				7671D438517BD5C0C1A211F9 /* WindowActivation.swift in Sources */,
 				55DF6AA97A51D2D944A7EB94 /* WindowSnapModule.swift in Sources */,
 				63C5D8045E1D5313785D30BB /* WindowSnapper.swift in Sources */,
 				20F19EFE650862129A9C102F /* YTDLP.swift in Sources */,

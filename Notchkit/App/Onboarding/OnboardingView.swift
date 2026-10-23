@@ -41,8 +41,7 @@ final class OnboardingWindowController: NSObject, NSWindowDelegate {
             window.center()
             self.window = window
         }
-        NSApp.activate()
-        window?.makeKeyAndOrderFront(nil)
+        if let window { WindowActivation.bringToFront(window) }
     }
 
     func windowWillClose(_ notification: Notification) {

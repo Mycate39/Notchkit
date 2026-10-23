@@ -24,7 +24,6 @@ final class SettingsWindowController {
             window.center()
             self.window = window
         }
-        NSApp.activate()
-        window?.makeKeyAndOrderFront(nil)
+        if let window { WindowActivation.bringToFront(window) }
     }
 }

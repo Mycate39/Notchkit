@@ -89,7 +89,8 @@ final class NotchViewModel {
     var isExpanded: Bool { state == .expanded }
 
     var hasCompactContent: Bool {
-        currentAlert != nil || (!isSettlingAfterCollapse && manager.compactModule != nil && menuLimitedSideWidth != 0)
+        currentAlert != nil || (!isSettlingAfterCollapse && menuLimitedSideWidth != 0
+                                && (manager.compactModule != nil || lockScreenModule != nil))
     }
 
     /// Repli en cours : l'encoche se referme d'abord jusqu'à sa taille de repos, puis l'activité
@@ -268,9 +269,21 @@ final class NotchViewModel {
         expand()
     }
 
+    /// Écran verrouillé : module dont l'activité devient un lecteur cliquable (`lockScreenLeading`).
+    /// L'activité principale si elle en a un ; sinon, encoche libre, un module qui en propose un
+    /// sans être l'activité principale (la musique en pause, pour pouvoir la relancer).
+    var lockScreenModule: (any NotchModule)? {
+        guard isScreenLocked, currentAlert == nil else { return nil }
+        if let module = manager.compactModule {
+            return module.lockScreenLeading() != nil ? module : nil
+        }
+        return manager.activeModules.first { $0.lockScreenLeading() != nil }
+    }
+
     /// Largeur de chaque côté de l'encoche repliée (une alerte peut demander plus de place).
     var compactSideWidth: CGFloat {
         if let currentAlert { return currentAlert.sideWidth ?? NotchLayout.compactSideWidth }
+        if lockScreenModule != nil { return NotchLayout.lockScreenSideWidth }
         let moduleWidth = manager.compactModule?.compactSideWidth ?? NotchLayout.compactSideWidth
         guard let menuLimitedSideWidth, menuLimitedSideWidth > 0 else { return moduleWidth }
         return min(moduleWidth, menuLimitedSideWidth)

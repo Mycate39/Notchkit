@@ -20,6 +20,7 @@
 		0D8F43C59112452F0B59F026 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209EAFCB5E9FD69E8678E39C /* OnboardingView.swift */; };
 		0DAD6BA93A36E4EC90345619 /* SystemAudioTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7777E6515F511E3753C72A /* SystemAudioTap.swift */; };
 		0DE3A6F31820693836DDC753 /* globals.h in Headers */ = {isa = PBXBuildFile; fileRef = 3497CA2593D7F55A480C1EC3 /* globals.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0EC8A056A6C0B642F88F399A /* LockScreenPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40561A7AAFECC83486E1C957 /* LockScreenPlayerTests.swift */; };
 		0F5ED439E2F5648E15B3C072 /* LayoutSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9D3F695623AF356C363ADE /* LayoutSettingsView.swift */; };
 		104E80908062F310B5609902 /* ScriptablePlayerSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D79AFE5C1AEE52840020061 /* ScriptablePlayerSource.swift */; };
 		1101C84B606905D7ED45F9BC /* AirPodsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3B538A66C6B3FB6E49A96A /* AirPodsModule.swift */; };
@@ -74,6 +75,7 @@
 		506C40B02FC95301118B3117 /* MascotDesigns.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE11A66058CB54565C8EE2BD /* MascotDesigns.swift */; };
 		511B45FE6AA1A39FCE772EA7 /* LockScreenSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CB4D7C58B160007048AF25 /* LockScreenSpace.swift */; };
 		51B5BB1B342B747110C0A0C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6704D0B10B983BEF736F0E06 /* Assets.xcassets */; };
+		52B3FB50D7B85C93340E564B /* LockScreenPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7540FAFEADC3843D6B03ABBB /* LockScreenPlayer.swift */; };
 		52B8567D96E53EBF58A2FBA1 /* ModuleRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A70194D570981FFAA6853D /* ModuleRegistry.swift */; };
 		52D69B31DEA6FFF27CB7922E /* ActivityClock.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA7229611A368126FFE3BB4 /* ActivityClock.swift */; };
 		52F60B725AB35D8D0408E14F /* CalendarViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E2A367001574FD5301B5C5 /* CalendarViews.swift */; };
@@ -310,6 +312,7 @@
 		3DF83BF34AFE3B80D8068FFA /* NowPlayingTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NowPlayingTest.h; sourceTree = "<group>"; };
 		3E5200FEB865B8DCA4D43E73 /* WidgetLayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetLayoutTests.swift; sourceTree = "<group>"; };
 		3F9E3D7C9C763F9153C29C4C /* NotchWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchWindowController.swift; sourceTree = "<group>"; };
+		40561A7AAFECC83486E1C957 /* LockScreenPlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenPlayerTests.swift; sourceTree = "<group>"; };
 		41C3050DD5E00E81450E55B9 /* BatteryState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryState.swift; sourceTree = "<group>"; };
 		45FE8A78792D0A7D64B5E40B /* PermissionsSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsSettingsView.swift; sourceTree = "<group>"; };
 		46804D5EC7EFC5FEF7FAE1B0 /* stream.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = stream.m; sourceTree = "<group>"; };
@@ -352,6 +355,7 @@
 		6F5B4279F0EFAB5857E955E7 /* PageSwipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageSwipe.swift; sourceTree = "<group>"; };
 		718D8C35BF144DF3790C8896 /* GameModeModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModeModule.swift; sourceTree = "<group>"; };
 		72F1D7838B0087D64BCCB9AE /* AgentPanels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentPanels.swift; sourceTree = "<group>"; };
+		7540FAFEADC3843D6B03ABBB /* LockScreenPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenPlayer.swift; sourceTree = "<group>"; };
 		77C38E58910B7C41117212E1 /* NotchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchViewModel.swift; sourceTree = "<group>"; };
 		780FDFC3683479C675E3E0ED /* LocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationTests.swift; sourceTree = "<group>"; };
 		7986BDF5C03AFD85D9ABE4BC /* WidgetLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetLayout.swift; sourceTree = "<group>"; };
@@ -554,6 +558,7 @@
 				4A9FD59D95E343130C0E1E1B /* HealthTests.swift */,
 				B974952A590C9D987A413C84 /* LiveActivitiesTests.swift */,
 				780FDFC3683479C675E3E0ED /* LocalizationTests.swift */,
+				40561A7AAFECC83486E1C957 /* LockScreenPlayerTests.swift */,
 				20084FD98CCD7BB5C7346A16 /* LockScreenTests.swift */,
 				15CDEBF9BDC26B398B100738 /* MascotInteractionTests.swift */,
 				C2C5A87DB129504ADDB120AF /* MascotMotionTests.swift */,
@@ -706,6 +711,7 @@
 			isa = PBXGroup;
 			children = (
 				CE9868E6BCDAB5B7301961AC /* EqualizerView.swift */,
+				7540FAFEADC3843D6B03ABBB /* LockScreenPlayer.swift */,
 				E9F9740079B75CA6BAFEB2B7 /* MusicModule.swift */,
 				D0F33792FD3837BD07B60F6A /* MusicViews.swift */,
 				D2E0D029C5A9A33532D79DA9 /* NowPlayingInfo.swift */,
@@ -1438,6 +1444,7 @@
 				7DA7D78F529F69DF127E508D /* LiveActivitiesViews.swift in Sources */,
 				A48F76AE210F36AA7349FE22 /* LiveActivity.swift in Sources */,
 				8BCDCE6F6E2F54D141980CF1 /* LocationProvider.swift in Sources */,
+				52B3FB50D7B85C93340E564B /* LockScreenPlayer.swift in Sources */,
 				511B45FE6AA1A39FCE772EA7 /* LockScreenSpace.swift in Sources */,
 				506C40B02FC95301118B3117 /* MascotDesigns.swift in Sources */,
 				55834FC0F261A9F9836CC482 /* MascotMotion.swift in Sources */,
@@ -1542,6 +1549,7 @@
 				298AFA51FF2003E59BE324CA /* HealthTests.swift in Sources */,
 				057BC6EE471679C2A814157C /* LiveActivitiesTests.swift in Sources */,
 				0C5C1320E8DA35AB26BD3E2A /* LocalizationTests.swift in Sources */,
+				0EC8A056A6C0B642F88F399A /* LockScreenPlayerTests.swift in Sources */,
 				B68AEC6CDDBBD448132693E8 /* LockScreenTests.swift in Sources */,
 				AB0624D8DB6F97DE4AED120A /* MascotInteractionTests.swift in Sources */,
 				ACC2691B6DB872770EDE7CA0 /* MascotMotionTests.swift in Sources */,

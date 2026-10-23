@@ -355,6 +355,7 @@ struct MusicSettingsView: View {
         VStack(alignment: .leading, spacing: 6) {
             Toggle("Afficher le morceau quand l'encoche est repliée", isOn: $module.showInCompact)
             Toggle("Afficher l'icône de l'app sur la pochette", isOn: $module.showAppBadge)
+            LockScreenPlayerSetting()
             Toggle("Barres réactives au son (temps réel)", isOn: $module.reactiveEqualizer)
             Text("Analyse le son joué par le Mac pour animer les barres. macOS demande l'autorisation « Enregistrement audio du système » et affiche un indicateur pendant l'écoute. Le son n'est ni enregistré ni envoyé.")
                 .font(.caption)

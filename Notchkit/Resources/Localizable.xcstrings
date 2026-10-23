@@ -1,6 +1,54 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "Reprenez la lecture dans l'app après avoir déverrouillé le Mac" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resume playback in the app after unlocking your Mac"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reprenez la lecture dans l'app après avoir déverrouillé le Mac"
+          }
+        }
+      }
+    },
+    "Lecteur sur l'écran verrouillé" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Player on the lock screen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lecteur sur l'écran verrouillé"
+          }
+        }
+      }
+    },
+    "Quand le Mac est verrouillé, l'encoche s'élargit avec le morceau en cours et ses commandes. Ce sont les seuls boutons actifs de l'encoche verrouillée." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When your Mac is locked, the notch widens with the current song and its controls. They're the only buttons that work in the notch while it's locked."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quand le Mac est verrouillé, l'encoche s'élargit avec le morceau en cours et ses commandes. Ce sont les seuls boutons actifs de l'encoche verrouillée."
+          }
+        }
+      }
+    },
     "" : {
 
     },

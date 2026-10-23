@@ -1,12 +1,21 @@
+import AVFoundation
 import SwiftUI
 
 /// Alertes agrandies (façon Dynamic Island) pour le déverrouillage et l'authentification.
 enum UnlockAnimations {
     static let size = CGSize(width: 220, height: 118)
 
+    /// Carré façon Dynamic Island de l'animation Face ID : le cercle occupe 48 % de sa largeur, coins
+    /// du bas arrondis au cinquième du côté (proportions de l'animation d'origine).
+    static let faceIDSize = CGSize(width: 200, height: 200)
+
     @MainActor
     static func unlocked() -> NotchAlert {
-        NotchAlert(duration: .seconds(2.2), expandedContent: AnyView(TouchIDUnlockView()), expandedSize: size)
+        var alert = NotchAlert(duration: .seconds(2.1), expandedContent: AnyView(FaceIDUnlockView()),
+                               expandedSize: faceIDSize)
+        alert.centersExpandedContent = true
+        alert.expandedCornerRadius = faceIDSize.width / 5
+        return alert
     }
 
     @MainActor
@@ -20,51 +29,60 @@ enum UnlockAnimations {
     }
 }
 
-/// Déverrouillage façon Touch ID : l'empreinte se remplit de bas en haut (lecture du doigt),
-/// le cadenas s'ouvre, puis une coche verte.
-struct TouchIDUnlockView: View {
-    private enum Phase { case scanning, unlocked, done }
-    @State private var phase: Phase = .scanning
-    @State private var fill: CGFloat = 0
+/// Déverrouillage façon Face ID de la Dynamic Island : des anneaux verts tournent (le visage est lu),
+/// se rassemblent en un cercle, puis une coche s'y trace. Vidéo HEVC avec transparence
+/// (`FaceIDUnlock.mov`, 408 × 408 px, 2 s) rendue depuis une animation Lottie (moteur SVG, pour garder
+/// son flou de mouvement), épaisseurs d'origine,
+/// fond retiré (c'est l'encoche qui s'agrandit), recadrée sur le logo : le cercle en occupe 70,6 %.
+struct FaceIDUnlockView: View {
+    /// Taille de la vidéo, en points.
+    static let videoSize = CGSize(width: 136, height: 136)
+    /// Instant où la coche est entièrement tracée (image fixe si les animations sont réduites).
+    static let checkedTime = 1.45
 
     var body: some View {
-        VStack(spacing: 8) {
-            ZStack {
-                if phase == .scanning {
-                    ZStack {
-                        Image(systemName: "touchid")
-                            .foregroundStyle(.white.opacity(0.25))
-                        // Les sillons s'allument du bas vers le haut.
-                        Image(systemName: "touchid")
-                            .foregroundStyle(TouchIDPromptView.pink)
-                            .mask(alignment: .bottom) {
-                                Rectangle().frame(height: 40 * fill)
-                            }
-                    }
-                    .transition(.scale(scale: 0.8).combined(with: .opacity))
-                } else {
-                    Image(systemName: phase == .done ? "checkmark.circle.fill" : "lock.open.fill")
-                        .foregroundStyle(phase == .done ? .green : .white)
-                        .contentTransition(.symbolEffect(.replace))
-                        .scaleEffect(phase == .done ? 1.1 : 1)
-                        .transition(.scale(scale: 0.6).combined(with: .opacity))
-                }
-            }
-            .font(.system(size: 34, weight: .regular))
-            .frame(width: 40, height: 40)
-            .frame(height: 56)
+        TransparentVideo(resource: "FaceIDUnlock", stillAt: NotchAccessibility.reduceMotion ? Self.checkedTime : nil)
+            .frame(width: Self.videoSize.width, height: Self.videoSize.height)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .accessibilityElement()
+            .accessibilityLabel(Text("Déverrouillé"))
+    }
+}
 
-            Text(phase == .scanning ? "Touch ID" : "Déverrouillé")
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundStyle(phase == .done ? .green : .white.opacity(0.8))
-                .contentTransition(.opacity)
+/// Lecture unique d'une vidéo du paquet de l'app, transparence comprise (couche AVPlayerLayer non opaque).
+private struct TransparentVideo: NSViewRepresentable {
+    let resource: String
+    /// Instant à afficher sans lecture (`nil` : lecture normale).
+    var stillAt: Double?
+
+    func makeNSView(context: Context) -> NSView {
+        let view = NSView()
+        view.wantsLayer = true
+        guard let url = Bundle.main.url(forResource: resource, withExtension: "mov") else { return view }
+        let player = AVPlayer(url: url)
+        player.isMuted = true
+        // Vidéo sans piste audio : elle ne touche ni à la musique ni à « À l'écoute ».
+        player.preventsDisplaySleepDuringVideoPlayback = false
+        let layer = AVPlayerLayer(player: player)
+        layer.videoGravity = .resizeAspect
+        layer.isOpaque = false
+        layer.backgroundColor = .clear
+        layer.frame = view.bounds
+        layer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
+        view.layer?.addSublayer(layer)
+        if let stillAt {
+            player.seek(to: CMTime(seconds: stillAt, preferredTimescale: 600), toleranceBefore: .zero, toleranceAfter: .zero)
+        } else {
+            player.play()
         }
-        .task {
-            withAnimation(.easeInOut(duration: 0.6)) { fill = 1 }
-            try? await Task.sleep(for: .milliseconds(700))
-            withAnimation(.spring(duration: 0.35, bounce: 0.4)) { phase = .unlocked }
-            try? await Task.sleep(for: .milliseconds(450))
-            withAnimation(.spring(duration: 0.4, bounce: 0.5)) { phase = .done }
+        return view
+    }
+
+    func updateNSView(_ view: NSView, context: Context) {}
+
+    static func dismantleNSView(_ view: NSView, coordinator: ()) {
+        for layer in view.layer?.sublayers ?? [] {
+            (layer as? AVPlayerLayer)?.player?.pause()
         }
     }
 }

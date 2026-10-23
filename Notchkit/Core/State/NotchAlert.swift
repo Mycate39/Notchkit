@@ -14,6 +14,10 @@ struct NotchAlert: Identifiable {
     var openModuleID: String?
     /// Largeur de chaque côté de l'encoche (`nil` : celle de la musique, `NotchLayout.compactSideWidth`).
     var sideWidth: CGFloat?
+    /// Alerte agrandie : contenu centré dans toute la forme (hauteur de l'encoche comprise) plutôt
+    /// que sous l'encoche, et rayon des coins du bas (`nil` : celui de l'encoche repliée).
+    var centersExpandedContent = false
+    var expandedCornerRadius: CGFloat?
 
     init(leading: AnyView = AnyView(EmptyView()), trailing: AnyView = AnyView(EmptyView()),
          duration: Duration = .seconds(2.5),

@@ -54,7 +54,7 @@ struct MenuBarContent: View {
 
             Divider()
 
-            Button("Aperçu : déverrouillage Touch ID") { appDelegate.previewUnlock("unlock") }
+            Button("Aperçu : déverrouillage Face ID") { appDelegate.previewUnlock("unlock") }
             Button("Aperçu : demande Touch ID") { appDelegate.previewUnlock("touchID") }
             Button("Aperçu : demande de mot de passe") { appDelegate.previewUnlock("password") }
 

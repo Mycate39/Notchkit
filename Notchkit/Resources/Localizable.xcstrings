@@ -1,422 +1,6 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
-    "Suivez Claude Code depuis l'encoche" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Follow Claude Code from the notch"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Suivez Claude Code depuis l'encoche"
-          }
-        }
-      }
-    },
-    "À vous d'essayer" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your turn"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "À vous d'essayer"
-          }
-        }
-      }
-    },
-    "Placez le pointeur sur l'encoche : elle se déplie et affiche vos widgets. Balayez avec deux doigts sur le trackpad pour changer de page. Éloignez le pointeur pour la refermer." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Move the pointer over the notch: it opens and shows your widgets. Swipe with two fingers on the trackpad to change page. Move the pointer away to close it."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Placez le pointeur sur l'encoche : elle se déplie et affiche vos widgets. Balayez avec deux doigts sur le trackpad pour changer de page. Éloignez le pointeur pour la refermer."
-          }
-        }
-      }
-    },
-    "Musique, minuteur, téléchargement : l'activité en cours s'affiche autour de l'encoche, entourée de sa couleur. Les autres deviennent des bulles. Survolez une bulle pour la commander sans ouvrir l'encoche : pause, morceau suivant, arrêt du minuteur." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Music, timers, downloads: the current activity shows around the notch, outlined in its color. Other activities become bubbles. Hover a bubble to control it without opening the notch: pause, next track, stop the timer."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Musique, minuteur, téléchargement : l'activité en cours s'affiche autour de l'encoche, entourée de sa couleur. Les autres deviennent des bulles. Survolez une bulle pour la commander sans ouvrir l'encoche : pause, morceau suivant, arrêt du minuteur."
-          }
-        }
-      }
-    },
-    "Faites glisser des fichiers sur l'encoche. L'étagère les garde 5 minutes, le temps de les déposer ailleurs ; Convertir change leur format ; AirDrop les envoie à un appareil proche." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Drag files onto the notch. The shelf keeps them for 5 minutes, so you can drop them somewhere else; Convert changes their format; AirDrop sends them to a nearby device."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Faites glisser des fichiers sur l'encoche. L'étagère les garde 5 minutes, le temps de les déposer ailleurs ; Convertir change leur format ; AirDrop les envoie à un appareil proche."
-          }
-        }
-      }
-    },
-    "La page Agents montre le travail de Claude Code : ses étapes, le fichier modifié, le terminal. Quand il demande une autorisation ou pose une question, répondez dans l'encoche. Une mascotte, à choisir parmi 33, l'accompagne." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The Agents page shows what Claude Code is doing: its steps, the file it edits, the terminal. When it asks for permission or asks a question, answer in the notch. A mascot, chosen among 33, keeps it company."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La page Agents montre le travail de Claude Code : ses étapes, le fichier modifié, le terminal. Quand il demande une autorisation ou pose une question, répondez dans l'encoche. Une mascotte, à choisir parmi 33, l'accompagne."
-          }
-        }
-      }
-    },
-    "Faites ces gestes sur la vraie encoche, en haut de l'écran. Chacun se coche tout seul." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Try these gestures on the real notch, at the top of the screen. Each one checks itself off."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Faites ces gestes sur la vraie encoche, en haut de l'écran. Chacun se coche tout seul."
-          }
-        }
-      }
-    },
-    "Ouvrez l'encoche" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open the notch"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ouvrez l'encoche"
-          }
-        }
-      }
-    },
-    "Changez de page" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Change page"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Changez de page"
-          }
-        }
-      }
-    },
-    "Déposez un fichier sur l'étagère" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Drop a file on the shelf"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Déposez un fichier sur l'étagère"
-          }
-        }
-      }
-    },
-    "Mettez un minuteur en pause" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause a timer"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mettez un minuteur en pause"
-          }
-        }
-      }
-    },
-    "Placez le pointeur dessus." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Move the pointer over it."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Placez le pointeur dessus."
-          }
-        }
-      }
-    },
-    "Encoche ouverte, balayez avec deux doigts." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "With the notch open, swipe with two fingers."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Encoche ouverte, balayez avec deux doigts."
-          }
-        }
-      }
-    },
-    "Page Agents affichée" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Agents page shown"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Page Agents affichée"
-          }
-        }
-      }
-    },
-    "Afficher la page Agents" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show the Agents page"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Afficher la page Agents"
-          }
-        }
-      }
-    },
-    "Bravo, vous savez tout faire !" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Well done, you know it all!"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bravo, vous savez tout faire !"
-          }
-        }
-      }
-    },
-    "Fait" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Done"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fait"
-          }
-        }
-      }
-    },
-    "À faire" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "To do"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "À faire"
-          }
-        }
-      }
-    },
-    "Faites glisser ce fichier sur l'encoche" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Drag this file onto the notch"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Faites glisser ce fichier sur l'encoche"
-          }
-        }
-      }
-    },
-    "Lancer" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Start"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lancer"
-          }
-        }
-      }
-    },
-    "Essai" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Test"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Essai"
-          }
-        }
-      }
-    },
-    "Essai Notchkit.txt" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notchkit Sample.txt"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Essai Notchkit.txt"
-          }
-        }
-      }
-    },
-    "Ce fichier vient du tutoriel de Notchkit. Vous pouvez le supprimer." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This file comes from the Notchkit tutorial. You can delete it."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ce fichier vient du tutoriel de Notchkit. Vous pouvez le supprimer."
-          }
-        }
-      }
-    },
-    "Chronomètre, alarme, Pomodoro" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stopwatch, alarm, Pomodoro"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chronomètre, alarme, Pomodoro"
-          }
-        }
-      }
-    },
-    "Retirer les fichiers après 5 minutes" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remove files after 5 minutes"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Retirer les fichiers après 5 minutes"
-          }
-        }
-      }
-    },
-    "Le temps de récupérer un fichier : l'étagère s'affiche alors comme une activité en cours, et ses fichiers apparaissent au survol de sa bulle. Retirer un fichier de l'étagère ne le supprime pas." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Time to pick up a file: the shelf then shows as a live activity, and its files appear when you hover its bubble. Removing a file from the shelf doesn't delete it."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le temps de récupérer un fichier : l'étagère s'affiche alors comme une activité en cours, et ses fichiers apparaissent au survol de sa bulle. Retirer un fichier de l'étagère ne le supprime pas."
-          }
-        }
-      }
-    },
     "" : {
 
     },
@@ -1076,6 +660,22 @@
         }
       }
     },
+    "À faire" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To do"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À faire"
+          }
+        }
+      }
+    },
     "À propos" : {
       "localizations" : {
         "en" : {
@@ -1088,6 +688,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "À propos"
+          }
+        }
+      }
+    },
+    "À propos de Notchkit" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About Notchkit"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À propos de Notchkit"
+          }
+        }
+      }
+    },
+    "À vous d'essayer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your turn"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À vous d'essayer"
           }
         }
       }
@@ -1582,6 +1214,22 @@
         }
       }
     },
+    "Afficher la page Agents" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show the Agents page"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher la page Agents"
+          }
+        }
+      }
+    },
     "Afficher la température quand l'encoche est repliée" : {
       "localizations" : {
         "en" : {
@@ -1674,6 +1322,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Afficher les images par seconde"
+          }
+        }
+      }
+    },
+    "Afficher Notchkit dans la barre des menus" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Notchkit in the menu bar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher Notchkit dans la barre des menus"
           }
         }
       }
@@ -2408,23 +2072,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aperçu : déverrouillage Face ID"
-          }
-        }
-      }
-    },
-    "Aperçu : déverrouillage Touch ID" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preview: Touch ID unlock"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aperçu : déverrouillage Touch ID"
           }
         }
       }
@@ -3653,6 +3300,22 @@
         }
       }
     },
+    "Bravo, vous savez tout faire !" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Well done, you know it all!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bravo, vous savez tout faire !"
+          }
+        }
+      }
+    },
     "Brouillard" : {
       "localizations" : {
         "en" : {
@@ -3862,6 +3525,22 @@
         }
       }
     },
+    "Ce fichier vient du tutoriel de Notchkit. Vous pouvez le supprimer." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This file comes from the Notchkit tutorial. You can delete it."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce fichier vient du tutoriel de Notchkit. Vous pouvez le supprimer."
+          }
+        }
+      }
+    },
     "Ce Mac n'a pas de batterie." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -3940,6 +3619,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cette vidéo nécessite ffmpeg pour assembler l'image et le son : installez-le dans le Terminal avec « brew install ffmpeg »."
+          }
+        }
+      }
+    },
+    "Changez de page" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change page"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Changez de page"
           }
         }
       }
@@ -4164,6 +3859,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chronomètre"
+          }
+        }
+      }
+    },
+    "Chronomètre, alarme, Pomodoro" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stopwatch, alarm, Pomodoro"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chronomètre, alarme, Pomodoro"
           }
         }
       }
@@ -4554,6 +4265,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Commande"
+          }
+        }
+      }
+    },
+    "Commandes de Musique et Spotify, et mode sombre (System Events)." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Music and Spotify controls, and Dark Mode (System Events)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commandes de Musique et Spotify, et mode sombre (System Events)."
           }
         }
       }
@@ -5444,6 +5171,54 @@
         }
       }
     },
+    "Demander l'accès à la localisation…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Request Location Access…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Demander l'accès à la localisation…"
+          }
+        }
+      }
+    },
+    "Demander l'accès aux calendriers…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Request Calendar Access…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Demander l'accès aux calendriers…"
+          }
+        }
+      }
+    },
+    "Demander l'accès…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Request Access…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Demander l'accès…"
+          }
+        }
+      }
+    },
     "Demander quelque chose…" : {
       "localizations" : {
         "en" : {
@@ -5584,6 +5359,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Déposez des fichiers sur l'encoche pour les garder à portée de main ou les envoyer par AirDrop."
+          }
+        }
+      }
+    },
+    "Déposez un fichier sur l'étagère" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drop a file on the shelf"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déposez un fichier sur l'étagère"
           }
         }
       }
@@ -6332,6 +6123,22 @@
         }
       }
     },
+    "Encoche ouverte, balayez avec deux doigts." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "With the notch open, swipe with two fingers."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encoche ouverte, balayez avec deux doigts."
+          }
+        }
+      }
+    },
     "Encore %@" : {
       "localizations" : {
         "en" : {
@@ -6525,6 +6332,38 @@
         }
       }
     },
+    "Essai" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Test"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Essai"
+          }
+        }
+      }
+    },
+    "Essai Notchkit.txt" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit Sample.txt"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Essai Notchkit.txt"
+          }
+        }
+      }
+    },
     "Essentiel" : {
       "localizations" : {
         "en" : {
@@ -6672,6 +6511,70 @@
         }
       }
     },
+    "Fait" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fait"
+          }
+        }
+      }
+    },
+    "Faites ces gestes sur la vraie encoche, en haut de l'écran. Chacun se coche tout seul." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try these gestures on the real notch, at the top of the screen. Each one checks itself off."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faites ces gestes sur la vraie encoche, en haut de l'écran. Chacun se coche tout seul."
+          }
+        }
+      }
+    },
+    "Faites glisser ce fichier sur l'encoche" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag this file onto the notch"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faites glisser ce fichier sur l'encoche"
+          }
+        }
+      }
+    },
+    "Faites glisser ce fichier sur l'encoche, puis sur Étagère." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag this file onto the notch, then onto Shelf."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faites glisser ce fichier sur l'encoche, puis sur Étagère."
+          }
+        }
+      }
+    },
     "Faites glisser des fichiers sur l'encoche : à gauche pour les garder ici, à droite pour les envoyer par AirDrop. Les fichiers ne sont ni copiés ni déplacés, l'étagère garde seulement un lien vers eux." : {
       "localizations" : {
         "en" : {
@@ -6684,6 +6587,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Faites glisser des fichiers sur l'encoche : à gauche pour les garder ici, à droite pour les envoyer par AirDrop. Les fichiers ne sont ni copiés ni déplacés, l'étagère garde seulement un lien vers eux."
+          }
+        }
+      }
+    },
+    "Faites glisser des fichiers sur l'encoche. L'étagère les garde 5 minutes, le temps de les déposer ailleurs ; Convertir change leur format ; AirDrop les envoie à un appareil proche." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag files onto the notch. The shelf keeps them for 5 minutes, so you can drop them somewhere else; Convert changes their format; AirDrop sends them to a nearby device."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faites glisser des fichiers sur l'encoche. L'étagère les garde 5 minutes, le temps de les déposer ailleurs ; Convertir change leur format ; AirDrop les envoie à un appareil proche."
           }
         }
       }
@@ -8133,6 +8052,22 @@
         }
       }
     },
+    "La page Agents montre le travail de Claude Code : ses étapes, le fichier modifié, le terminal. Quand il demande une autorisation ou pose une question, répondez dans l'encoche. Une mascotte, à choisir parmi 33, l'accompagne." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Agents page shows what Claude Code is doing: its steps, the file it edits, the terminal. When it asks for permission or asks a question, answer in the notch. A mascot, chosen among 33, keeps it company."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La page Agents montre le travail de Claude Code : ses étapes, le fichier modifié, le terminal. Quand il demande une autorisation ou pose une question, répondez dans l'encoche. Une mascotte, à choisir parmi 33, l'accompagne."
+          }
+        }
+      }
+    },
     "La recherche a échoué. Vérifiez votre connexion." : {
       "localizations" : {
         "en" : {
@@ -8177,6 +8112,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lance un agent"
+          }
+        }
+      }
+    },
+    "Lancer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lancer"
           }
         }
       }
@@ -8242,6 +8193,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lancez une demande dans Claude Code : la mascotte suivra son travail ici."
+          }
+        }
+      }
+    },
+    "Lancez-en un, puis survolez-le ou ouvrez l'encoche." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start one, then hover it or open the notch."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lancez-en un, puis survolez-le ou ouvrez l'encoche."
           }
         }
       }
@@ -8421,6 +8388,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le temps d'écran apparaîtra ici au fil de la journée."
+          }
+        }
+      }
+    },
+    "Le temps de récupérer un fichier : l'étagère s'affiche alors comme une activité en cours, et ses fichiers apparaissent au survol de sa bulle. Retirer un fichier de l'étagère ne le supprime pas." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time to pick up a file: the shelf then shows as a live activity, and its files appear when you hover its bubble. Removing a file from the shelf doesn't delete it."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le temps de récupérer un fichier : l'étagère s'affiche alors comme une activité en cours, et ses fichiers apparaissent au survol de sa bulle. Retirer un fichier de l'étagère ne le supprime pas."
           }
         }
       }
@@ -9053,6 +9036,22 @@
         }
       }
     },
+    "Mettez un minuteur en pause" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pause a timer"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mettez un minuteur en pause"
+          }
+        }
+      }
+    },
     "Mettre à jour l'intégration" : {
       "localizations" : {
         "en" : {
@@ -9586,6 +9585,22 @@
         }
       }
     },
+    "Musique, minuteur, téléchargement : l'activité en cours s'affiche autour de l'encoche, entourée de sa couleur. Les autres deviennent des bulles. Survolez une bulle pour la commander sans ouvrir l'encoche : pause, morceau suivant, arrêt du minuteur." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Music, timers, downloads: the current activity shows around the notch, outlined in its color. Other activities become bubbles. Hover a bubble to control it without opening the notch: pause, next track, stop the timer."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Musique, minuteur, téléchargement : l'activité en cours s'affiche autour de l'encoche, entourée de sa couleur. Les autres deviennent des bulles. Survolez une bulle pour la commander sans ouvrir l'encoche : pause, morceau suivant, arrêt du minuteur."
+          }
+        }
+      }
+    },
     "Ne pas cacher les menus de l'app active" : {
       "localizations" : {
         "en" : {
@@ -10087,6 +10102,22 @@
         }
       }
     },
+    "Ouvrez l'encoche" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open the notch"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrez l'encoche"
+          }
+        }
+      }
+    },
     "Ouvrez un projet dans Xcode ou le Terminal, ou ajoutez un dossier dans les réglages." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -10326,6 +10357,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Page %1$lld, position %2$lld"
+          }
+        }
+      }
+    },
+    "Page Agents affichée" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agents page shown"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Page Agents affichée"
           }
         }
       }
@@ -10669,6 +10716,38 @@
         }
       }
     },
+    "Placez le pointeur dessus." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Move the pointer over it."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Placez le pointeur dessus."
+          }
+        }
+      }
+    },
+    "Placez le pointeur sur l'encoche : elle se déplie et affiche vos widgets. Balayez avec deux doigts sur le trackpad pour changer de page. Éloignez le pointeur pour la refermer." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Move the pointer over the notch: it opens and shows your widgets. Swipe with two fingers on the trackpad to change page. Move the pointer away to close it."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Placez le pointeur sur l'encoche : elle se déplie et affiche vos widgets. Balayez avec deux doigts sur le trackpad pour changer de page. Éloignez le pointeur pour la refermer."
+          }
+        }
+      }
+    },
     "Pleine dans %@" : {
       "localizations" : {
         "en" : {
@@ -10907,6 +10986,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Position nécessaire pour la météo"
+          }
+        }
+      }
+    },
+    "Pour revenir aux réglages : roue dentée de l'encoche dépliée, ou relancez Notchkit depuis le Finder." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To get back to Settings, use the gear in the expanded notch, or open Notchkit again from the Finder."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pour revenir aux réglages : roue dentée de l'encoche dépliée, ou relancez Notchkit depuis le Finder."
           }
         }
       }
@@ -11861,6 +11956,22 @@
         }
       }
     },
+    "Retirer les fichiers après 5 minutes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove files after 5 minutes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retirer les fichiers après 5 minutes"
+          }
+        }
+      }
+    },
     "Retour" : {
       "localizations" : {
         "en" : {
@@ -12488,6 +12599,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Suivant"
+          }
+        }
+      }
+    },
+    "Suivez Claude Code depuis l'encoche" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Follow Claude Code from the notch"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suivez Claude Code depuis l'encoche"
           }
         }
       }
@@ -13199,6 +13326,22 @@
         }
       }
     },
+    "Un léger clic quand vous ouvrez l'encoche, changez de page, réglez le volume ou le minuteur, ou touchez une commande (trackpad Force Touch)." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A light click when you open the notch, change pages, adjust the volume or the timer, or press a control (Force Touch trackpad)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un léger clic quand vous ouvrez l'encoche, changez de page, réglez le volume ou le minuteur, ou touchez une commande (trackpad Force Touch)."
+          }
+        }
+      }
+    },
     "Un miroir rapide pour vérifier votre allure avant une réunion." : {
       "localizations" : {
         "en" : {
@@ -13600,6 +13743,22 @@
         }
       }
     },
+    "Volume et luminosité aux touches du clavier, encoche qui évite les menus, ancrage des fenêtres, traduction de la sélection, verrouillage du clavier." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volume and brightness keys, a notch that stays clear of menus, window snapping, translating the selection, and keyboard lock."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volume et luminosité aux touches du clavier, encoche qui évite les menus, ancrage des fenêtres, traduction de la sélection, verrouillage du clavier."
+          }
+        }
+      }
+    },
     "Volume, luminosité, volume des apps… Sinon, ils prennent la couleur d'accent." : {
       "localizations" : {
         "en" : {
@@ -13854,182 +14013,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "yt-dlp non installé"
-          }
-        }
-      }
-    },
-    "À propos de Notchkit" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "About Notchkit"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "À propos de Notchkit"
-          }
-        }
-      }
-    },
-    "Afficher Notchkit dans la barre des menus" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Notchkit in the menu bar"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Afficher Notchkit dans la barre des menus"
-          }
-        }
-      }
-    },
-    "Commandes de Musique et Spotify, et mode sombre (System Events)." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Music and Spotify controls, and Dark Mode (System Events)."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Commandes de Musique et Spotify, et mode sombre (System Events)."
-          }
-        }
-      }
-    },
-    "Demander l'accès à la localisation…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Request Location Access…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Demander l'accès à la localisation…"
-          }
-        }
-      }
-    },
-    "Demander l'accès aux calendriers…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Request Calendar Access…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Demander l'accès aux calendriers…"
-          }
-        }
-      }
-    },
-    "Demander l'accès…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Request Access…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Demander l'accès…"
-          }
-        }
-      }
-    },
-    "Pour revenir aux réglages : roue dentée de l'encoche dépliée, ou relancez Notchkit depuis le Finder." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "To get back to Settings, use the gear in the expanded notch, or open Notchkit again from the Finder."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pour revenir aux réglages : roue dentée de l'encoche dépliée, ou relancez Notchkit depuis le Finder."
-          }
-        }
-      }
-    },
-    "Un léger clic quand vous ouvrez l'encoche, changez de page, réglez le volume ou le minuteur, ou touchez une commande (trackpad Force Touch)." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "A light click when you open the notch, change pages, adjust the volume or the timer, or press a control (Force Touch trackpad)."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Un léger clic quand vous ouvrez l'encoche, changez de page, réglez le volume ou le minuteur, ou touchez une commande (trackpad Force Touch)."
-          }
-        }
-      }
-    },
-    "Volume et luminosité aux touches du clavier, encoche qui évite les menus, ancrage des fenêtres, traduction de la sélection, verrouillage du clavier." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Volume and brightness keys, a notch that stays clear of menus, window snapping, translating the selection, and keyboard lock."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Volume et luminosité aux touches du clavier, encoche qui évite les menus, ancrage des fenêtres, traduction de la sélection, verrouillage du clavier."
-          }
-        }
-      }
-    },
-    "Faites glisser ce fichier sur l'encoche, puis sur Étagère." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Drag this file onto the notch, then onto Shelf."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Faites glisser ce fichier sur l'encoche, puis sur Étagère."
-          }
-        }
-      }
-    },
-    "Lancez-en un, puis survolez-le ou ouvrez l'encoche." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Start one, then hover it or open the notch."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lancez-en un, puis survolez-le ou ouvrez l'encoche."
           }
         }
       }

@@ -10,6 +10,7 @@
 		01049B46169B485CCCD6554D /* GameModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82DC6F2135BA865F1C5A085 /* GameModeTests.swift */; };
 		018D9AD0EB2549EDE8225838 /* MenuBarContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EED212AC944BD64489CD960D /* MenuBarContent.swift */; };
 		057BC6EE471679C2A814157C /* LiveActivitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B974952A590C9D987A413C84 /* LiveActivitiesTests.swift */; };
+		069589791FE7B1EF0985A744 /* FaceIDUnlock.mov in Resources */ = {isa = PBXBuildFile; fileRef = 233815ACFA9AD5DC5458CE5A /* FaceIDUnlock.mov */; };
 		0962405C73FD40EC1723FD54 /* AgentsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B037B66FDB492EA7754DD971 /* AgentsViews.swift */; };
 		09A63C00ADCB71C6BF4392D4 /* MediaRemoteSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD9DDAA93FE1736991AE761 /* MediaRemoteSource.swift */; };
 		0C5C1320E8DA35AB26BD3E2A /* LocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780FDFC3683479C675E3E0ED /* LocalizationTests.swift */; };
@@ -277,6 +278,7 @@
 		209EAFCB5E9FD69E8678E39C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		21F3AA5E7B3A040B33B93437 /* ClaudeHookServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeHookServer.swift; sourceTree = "<group>"; };
 		228A1FC0EA2ADCAB2798FEC3 /* SnapZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapZone.swift; sourceTree = "<group>"; };
+		233815ACFA9AD5DC5458CE5A /* FaceIDUnlock.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = FaceIDUnlock.mov; sourceTree = "<group>"; };
 		24EE9F8658125C2D9185EA96 /* LaunchAtLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLogin.swift; sourceTree = "<group>"; };
 		2862C19780750B5D32EC32D0 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = wrapper.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		28D7F4491917AC873CE7BC74 /* env.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = env.h; sourceTree = "<group>"; };
@@ -505,6 +507,7 @@
 			children = (
 				2862C19780750B5D32EC32D0 /* AppIcon.icon */,
 				6704D0B10B983BEF736F0E06 /* Assets.xcassets */,
+				233815ACFA9AD5DC5458CE5A /* FaceIDUnlock.mov */,
 				507E2940CE6F0CA716BF8DBB /* Info.plist */,
 				39CD37F30EF339C02ECF8FDC /* InfoPlist.xcstrings */,
 				98FB71F04AAECE1E8BD0926A /* Localizable.xcstrings */,
@@ -1334,6 +1337,7 @@
 			files = (
 				262F8FFA57EEE0F036FFAA8A /* AppIcon.icon in Resources */,
 				51B5BB1B342B747110C0A0C0 /* Assets.xcassets in Resources */,
+				069589791FE7B1EF0985A744 /* FaceIDUnlock.mov in Resources */,
 				193A99D444FE4A6B2A2FCBB7 /* InfoPlist.xcstrings in Resources */,
 				89645F2C235F1A1C71CD6FAE /* LICENSE.txt in Resources */,
 				A332BE0B606743A7032D6F14 /* Localizable.xcstrings in Resources */,

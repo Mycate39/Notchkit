@@ -17,10 +17,12 @@ struct NotchContainerView: View {
         let island = viewModel.isIsland
         let radii = NotchLayout.cornerRadii(for: geometry.style, isExpanded: viewModel.isExpanded, height: size.height,
                                             island: island)
+        // Alerte agrandie qui demande ses propres coins (carré Face ID).
+        let alertRadius = viewModel.isExpanded ? nil : viewModel.currentAlert?.expandedCornerRadius
         let shape = NotchShape(
             earRadius: geometry.style == .notch ? NotchLayout.earRadius : 0,
             topCornerRadius: radii.top,
-            bottomCornerRadius: radii.bottom
+            bottomCornerRadius: alertRadius ?? radii.bottom
         )
 
         // Contenu dans un cadre fixe et persistant, isolé par `geometryGroup` : pendant que la forme
@@ -277,10 +279,10 @@ private struct CompactNotchView: View {
         let ear = viewModel.geometry.style == .notch ? NotchLayout.earRadius : 0
         let (leading, trailing) = content
 
-        if let expanded = viewModel.currentAlert?.expandedContent {
-            // Alerte agrandie : contenu centré sous la hauteur de l'encoche.
+        if let alert = viewModel.currentAlert, let expanded = alert.expandedContent {
+            // Alerte agrandie : contenu centré sous la hauteur de l'encoche (ou dans toute la forme).
             VStack(spacing: 0) {
-                Color.clear.frame(height: viewModel.geometry.closedSize.height)
+                Color.clear.frame(height: alert.centersExpandedContent ? 0 : viewModel.geometry.closedSize.height)
                 expanded
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             }

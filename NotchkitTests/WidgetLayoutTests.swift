@@ -220,6 +220,16 @@ struct PageSwipeTests {
         #expect(!swipe.isTracking)
     }
 
+    @Test func pageViseeConnuePendantLeGeste() {
+        var swipe = PageSwipe()
+        swipe.begin()
+        _ = swipe.move(dx: -20, dy: 0)
+        #expect(swipe.target(page: 1, pageCount: 3, pageWidth: 300) == 1)   // sous le seuil (36)
+        _ = swipe.move(dx: -20, dy: 0)
+        #expect(swipe.target(page: 1, pageCount: 3, pageWidth: 300) == 2)   // seuil franchi : cran
+        #expect(swipe.isTracking)
+    }
+
     @Test func petitBalayageRevientSurPlace() {
         var swipe = PageSwipe()
         swipe.begin()

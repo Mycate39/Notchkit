@@ -63,13 +63,18 @@ struct PageSwipe: Equatable {
         return pastFirst || pastLast ? translation * Self.edgeResistance : translation
     }
 
-    /// Fin du geste : page sur laquelle se caler.
-    mutating func end(page: Int, pageCount: Int, pageWidth: CGFloat) -> Int {
-        defer { begin() }
+    /// Page sur laquelle le geste se calerait s'il finissait maintenant.
+    func target(page: Int, pageCount: Int, pageWidth: CGFloat) -> Int {
         guard isTracking, pageCount > 0, pageWidth > 0 else { return page }
         let threshold = pageWidth * Self.pageChangeFraction
         var target = page
         if translation <= -threshold { target += 1 } else if translation >= threshold { target -= 1 }
         return min(max(target, 0), pageCount - 1)
+    }
+
+    /// Fin du geste : page sur laquelle se caler.
+    mutating func end(page: Int, pageCount: Int, pageWidth: CGFloat) -> Int {
+        defer { begin() }
+        return target(page: page, pageCount: pageCount, pageWidth: pageWidth)
     }
 }

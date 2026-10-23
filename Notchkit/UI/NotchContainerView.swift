@@ -537,6 +537,8 @@ private struct ExpandedNotchView: View {
             onEnd: { target in
                 withAnimation(NotchLayout.spring) { swiper.settle() }
                 guard target != viewModel.selectedPage else { return }
+                // Le cran a déjà été joué pendant le geste.
+                viewModel.skipNextPageHaptic = true
                 withAnimation(NotchLayout.spring) { viewModel.selectedPage = target }
             }
         )
@@ -570,6 +572,8 @@ final class PageSwiper {
     @ObservationIgnored private var lastGestureWasPaging = false
     /// Le geste en cours a commencé sur une vue qui défile elle-même à l'horizontale.
     @ObservationIgnored private var gestureBelongsToView = false
+    /// Page visée lors du dernier cran haptique du geste en cours.
+    @ObservationIgnored private var hapticTarget: Int?
 
     private static func isOverScrollCatcher(_ event: NSEvent) -> Bool {
         guard let content = event.window?.contentView else { return false }
@@ -627,7 +631,17 @@ final class PageSwiper {
         let consumed = swipe.move(dx: event.scrollingDeltaX, dy: event.scrollingDeltaY)
         if swipe.isTracking {
             lastGestureWasPaging = true
-            if !wasTracking { onTrackingChange(true) }
+            if !wasTracking {
+                hapticTarget = currentPage
+                onTrackingChange(true)
+            }
+            // Cran haptique dès que le geste franchit le seuil de changement de page, doigts encore
+            // posés : au relâchement, le trackpad ne vibre plus (le doigt est déjà levé).
+            let target = swipe.target(page: currentPage, pageCount: pageCount, pageWidth: pageWidth)
+            if target != hapticTarget {
+                hapticTarget = target
+                Haptics.play(.snap)
+            }
         }
         return consumed
     }

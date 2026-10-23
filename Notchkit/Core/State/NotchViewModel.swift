@@ -17,8 +17,13 @@ final class NotchViewModel {
     /// Page affichée dans l'encoche dépliée (conservée d'une ouverture à l'autre).
     var selectedPage = 0 {
         // Motif « alignement » : la page se cale à sa place (HIG, retour haptique sur macOS).
-        didSet { if selectedPage != oldValue && isExpanded { Haptics.play(.snap) } }
+        didSet {
+            if selectedPage != oldValue && isExpanded && !skipNextPageHaptic { Haptics.play(.snap) }
+            skipNextPageHaptic = false
+        }
     }
+    /// Changement de page dont le cran haptique a déjà été joué (pendant le balayage au trackpad).
+    @ObservationIgnored var skipNextPageHaptic = false
     /// Apparence en vigueur (observée : tailles et couleurs se mettent à jour à chaque changement).
     private(set) var appearance = NotchAppearance()
 

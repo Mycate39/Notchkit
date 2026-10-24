@@ -58,7 +58,7 @@ struct AppSettings: Codable, Equatable, Sendable {
     /// Masquée, les réglages restent accessibles par la roue dentée de l'encoche ou en relançant l'app.
     var showsMenuBarIcon = true
     /// Encoche masquée pendant une vidéo en plein écran sur son écran (`FullScreenHiding`).
-    var hidesInFullScreen = false
+    var hidesInFullScreen = true
 
     init() {}
 

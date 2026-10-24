@@ -33,7 +33,7 @@ struct GameModeTests {
         let second = CGRect(x: 1512, y: 0, width: 1920, height: 1080)
         // Seul l'écran de l'encoche compte (réglage « Masquer l'encoche en plein écran »).
         #expect(!FullScreenDetector.isFullScreen(windows: [second], displays: [display]))
-        #expect(!AppSettings().hidesInFullScreen)
+        #expect(AppSettings().hidesInFullScreen)
     }
 
     @Test func videoReconnueAuMaintienDeLEcranAllume() {

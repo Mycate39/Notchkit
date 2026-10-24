@@ -155,7 +155,7 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 
 **Bêta / RC** : même procédure, avec `MARKETING_VERSION` `x.y.z-beta.N` (ou `x.y.z-rc.N`, candidate à la version finale, comme sur iOS) (le build augmente normalement), tag `vx.y.z-beta.N`, `gh release create … --prerelease --latest=false`, et **sans** étape `appcast.xml` : les utilisateurs actuels ne la reçoivent pas automatiquement.
 
-## État (24 octobre 2026 : 1.0.6 publiée, 2.0.0 RC 3 en préversion)
+## État (24 octobre 2026 : 2.0.0 publiée)
 
 ### Fonctionne
 - Fenêtre d'encoche sur n'importe quel écran : vraie encoche, encoche simulée ou pilule flottante ; reste en place à travers les Spaces ; se décale à droite pour ne jamais masquer les menus de l'app active (nécessite l'autorisation Accessibilité).
@@ -165,7 +165,7 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 - Ajouts de la 1.0 (masqués par défaut) : Captures d'écran (contextuel), Étagère contextuelle avec texte déposé et actions (ZIP, conversion, iCloud Drive) ; depuis la 2.0, chaque fichier y reste 5 minutes (`ShelfModule.retention`, réglable) et l'étagère s'affiche alors comme une activité en cours, Commutateurs rapides (mode sombre, anti-veille, icônes du bureau, verrouillage clavier), Webcam, Journée, Notes, chronomètre/alarmes/Pomodoro, Rappels (EventKit), Moniteur système (échantillonneur partagé `SystemSampler`, actif seulement si une carte est visible), Dashboard, Temps d'écran et Santé (mesurés localement), Traduction (framework Translation, macOS 15+). L'ancrage des fenêtres a été supprimé le 24/10/2026.
 - Anglais et français ; mises à jour Sparkle ; DMG signé avec le certificat auto-signé.
 
-### Version 2.0.0 (en cours)
+### Version 2.0.0 (publiée le 24/10/2026, `v2.0.0`, build 25, avec appcast)
 - Publié dans la beta 1 (`v2.0.0-beta.1`, préversion GitHub, hors appcast) : tutoriel d'accueil au premier lancement (rejouable par « Revoir le tutoriel… » ; `AppSettings.onboardingCompleted`, vrai par défaut pour un ancien fichier de réglages), onglet Widgets unique dans les réglages, indicateur de pages visible seulement pendant un balayage, engrenage sans pastille.
 - Fait depuis : barres de l'égaliseur arrondies aux deux bouts (animation de hauteur, plus d'échelle), indicateur de pages animé (pastille qui glisse avec `NotchLayout.pageIndicatorSpring`, icônes qui se précisent, apparition en fondu).
 - Fait depuis la beta 1 : encoche gardée en permanence dans l'espace SkyLight de niveau 400 (niveaux connus : 100 assistant de configuration, 300 écran verrouillé, 400 centre de notifications sur l'écran verrouillé ; l'ancien niveau 100 restait sous l'écran verrouillé). Elle s'affiche à l'écran verrouillé (vérifié le 18/10/2026 sur macOS 27) et ne doit plus disparaître ni se redimensionner en changeant de bureau ; au verrouillage, la fenêtre passe aussi au-dessus du bouclier (`NotchPanel.lockedLevel`) avec `canBecomeVisibleWithoutLogin`. Écran verrouillé sans interaction. Égaliseur : animations relancées au changement de bureau, retour à l'animation simple si le flux audio s'interrompt, hauteurs en direct posées sans animation.
@@ -182,7 +182,8 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
   - Centre du son dans le panneau du volume : sortie, micro, apps qui jouent (repli sur l'app « À l'écoute », les navigateurs ne signalant pas toujours leur sortie), volume par app par interception Core Audio (macOS 14.2+).
   - Onglet Autorisations et synthèse dans le tutoriel ; curseurs Liquid Glass (macOS 26+) ; zones cliquables agrandies ; boutons natifs dans les réglages.
   - Convertisseur (`Modules/Converter`, widget temporaire) : images, audio (afconvert), vidéo (AVFoundation, GIF), documents (CoreText) et PDF ; zones de dépôt toujours proposées : étagère, Convertir, AirDrop ; dépôt direct sur sa page ouverte.
-- Reste à faire avant la 2.0.0 : mentionner le tutoriel et les nouveautés dans le README, publier en version finale (avec appcast).
+- Publié dans la 2.0.0 finale (24/10/2026) : tout ce qui précède, plus la demande Touch ID (empreinte puis coche rouge), l'étagère repliée réduite à son icône (elle quitte l'encoche une fois ses fichiers récupérés) et la suppression de l'ancrage des fenêtres. README réécrit pour la 2.0.
+- Reste à faire : vérifier la licence des deux animations LottieFiles (Face ID, Touch ID) ; refaire la vidéo du README, qui montre encore la 1.0.
 
 ### Vidéo de présentation
 - Projet HyperFrames hors du dépôt : `~/Documents/Projets/Notchkit-video` (16:9 de 45 s à la racine, 9:16 de 30 s dans `vertical/`, textes `en.json` / `fr.json`, design calqué sur le code de l'app dans `design.md`). Rendus dans `renders/`.

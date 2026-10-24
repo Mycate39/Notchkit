@@ -100,7 +100,9 @@ enum FullScreenDetector {
         }
     }
 
-    static func isFullScreen(pid: pid_t) -> Bool {
+    /// `display` : seulement cet écran (cadre en coordonnées globales, origine en haut à gauche),
+    /// sinon n'importe lequel.
+    static func isFullScreen(pid: pid_t, display: CGRect? = nil) -> Bool {
         guard let info = CGWindowListCopyWindowInfo([.optionOnScreenOnly, .excludeDesktopElements], kCGNullWindowID)
             as? [[String: Any]] else { return false }
         let windows = info.compactMap { entry -> CGRect? in
@@ -110,6 +112,7 @@ enum FullScreenDetector {
             return CGRect(dictionaryRepresentation: bounds as CFDictionary)
         }
         guard !windows.isEmpty else { return false }
+        if let display { return isFullScreen(windows: windows, displays: [display]) }
         var count: UInt32 = 0
         CGGetActiveDisplayList(0, nil, &count)
         var ids = [CGDirectDisplayID](repeating: 0, count: Int(count))

@@ -139,6 +139,7 @@
 		98776D4DF39E4E21CDB0167E /* WidgetLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986BDF5C03AFD85D9ABE4BC /* WidgetLayout.swift */; };
 		98CFC677C4F819D9E12E5F3D /* GameModeModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718D8C35BF144DF3790C8896 /* GameModeModule.swift */; };
 		98D2E19AF44D1F7BEDE8C93B /* stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 46804D5EC7EFC5FEF7FAE1B0 /* stream.m */; };
+		99DD2CEAD22E7EF112AE609A /* FullScreenHiding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E36EF90018BFC440A0E9FD /* FullScreenHiding.swift */; };
 		9A90F1FF12025FADD79A74D1 /* BatteryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88A3C1DCE9F2BBAD2E4119B /* BatteryTests.swift */; };
 		9AD1C60ABE6957073E11AA30 /* SnapZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228A1FC0EA2ADCAB2798FEC3 /* SnapZone.swift */; };
 		9E5F1AAB2D6C98B155086961 /* ClipboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89908AA5686A7DBE051BD6EF /* ClipboardTests.swift */; };
@@ -299,6 +300,7 @@
 		37C474C3B54576120030842F /* NotchHostingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchHostingView.swift; sourceTree = "<group>"; };
 		37E7FA6BA5FFA9983A5E8344 /* AssistantModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantModule.swift; sourceTree = "<group>"; };
 		38A70194D570981FFAA6853D /* ModuleRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleRegistry.swift; sourceTree = "<group>"; };
+		38E36EF90018BFC440A0E9FD /* FullScreenHiding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenHiding.swift; sourceTree = "<group>"; };
 		39CD37F30EF339C02ECF8FDC /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		39D9454F2B90F4202312E9B9 /* SpectrumAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumAnalyzer.swift; sourceTree = "<group>"; };
 		3A1A7E0FF8916B5C5CE89281 /* TimerRuler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerRuler.swift; sourceTree = "<group>"; };
@@ -830,6 +832,7 @@
 			isa = PBXGroup;
 			children = (
 				5D29CFC859A1A429A95ED01A /* DropCatcher.swift */,
+				38E36EF90018BFC440A0E9FD /* FullScreenHiding.swift */,
 				E6CB4D7C58B160007048AF25 /* LockScreenSpace.swift */,
 				FCEF22AF6E1341357C1F0E58 /* MenuBarAvoidance.swift */,
 				37C474C3B54576120030842F /* NotchHostingView.swift */,
@@ -1432,6 +1435,7 @@
 				737AE13488421BFE48BBF76B /* FileConverter.swift in Sources */,
 				2D1C2E343A983DB9D039D0F8 /* FlowLayout.swift in Sources */,
 				293FC7248D2445914B911A44 /* FrameRateMeter.swift in Sources */,
+				99DD2CEAD22E7EF112AE609A /* FullScreenHiding.swift in Sources */,
 				98CFC677C4F819D9E12E5F3D /* GameModeModule.swift in Sources */,
 				90DF0E4039BA56420C4DCA10 /* Glyphs.swift in Sources */,
 				BB01149799C433BEF7982DD5 /* Haptics.swift in Sources */,

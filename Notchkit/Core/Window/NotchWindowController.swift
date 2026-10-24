@@ -25,6 +25,8 @@ final class NotchWindowController {
     private let hostingView: NotchHostingView<NotchContainerView>
     /// Reçoit le glisser-déposer à la place de l'encoche quand elle vit dans l'espace SkyLight.
     private var dropCatcher: DropCatcher?
+    /// Encoche masquée pendant le plein écran (réglage).
+    private var fullScreenHiding: FullScreenHiding?
     private let container = FlippedView()
 
     init(viewModel: NotchViewModel, settings: SettingsStore) {
@@ -96,6 +98,23 @@ final class NotchWindowController {
         }
         startObserving()
         scheduleMenuAvoidance()
+        let hiding = FullScreenHiding(
+            isEnabled: { [weak self] in self?.settings.settings.hidesInFullScreen ?? false },
+            screen: { [weak self] in self.flatMap { ScreenLocator.screen(for: $0.settings.settings.screenSelection) } },
+            onChange: { [weak self] hidden in self?.setHiddenForFullScreen(hidden) }
+        )
+        hiding.start()
+        fullScreenHiding = hiding
+    }
+
+    /// Plein écran : l'encoche s'efface et laisse passer la souris, puis revient en sortie.
+    private func setHiddenForFullScreen(_ hidden: Bool) {
+        if hidden { viewModel.collapse() }
+        panel.ignoresMouseEvents = hidden
+        NSAnimationContext.runAnimationGroup { context in
+            context.duration = 0.25
+            panel.animator().alphaValue = hidden ? 0 : 1
+        }
     }
 
     // MARK: - Observation

@@ -1,6 +1,38 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "Masquer l'encoche pendant une vidéo en plein écran" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide the notch during full-screen videos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Masquer l'encoche pendant une vidéo en plein écran"
+          }
+        }
+      }
+    },
+    "L'encoche disparaît tant qu'une vidéo (YouTube, Netflix, QuickTime…) est lue en plein écran sur son écran, puis revient." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The notch disappears while a video (YouTube, Netflix, QuickTime…) plays in full screen on its display, then comes back."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'encoche disparaît tant qu'une vidéo (YouTube, Netflix, QuickTime…) est lue en plein écran sur son écran, puis revient."
+          }
+        }
+      }
+    },
     "Reprenez la lecture dans l'app après avoir déverrouillé le Mac" : {
       "localizations" : {
         "en" : {

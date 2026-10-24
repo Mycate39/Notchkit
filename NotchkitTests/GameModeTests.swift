@@ -28,6 +28,23 @@ struct GameModeTests {
         #expect(!FullScreenDetector.isFullScreen(windows: [], displays: [display]))
     }
 
+    @Test func pleinEcranSurUnAutreEcranNeMasquePasLEncoche() {
+        let display = CGRect(x: 0, y: 0, width: 1512, height: 982)
+        let second = CGRect(x: 1512, y: 0, width: 1920, height: 1080)
+        // Seul l'écran de l'encoche compte (réglage « Masquer l'encoche en plein écran »).
+        #expect(!FullScreenDetector.isFullScreen(windows: [second], displays: [display]))
+        #expect(!AppSettings().hidesInFullScreen)
+    }
+
+    @Test func videoReconnueAuMaintienDeLEcranAllume() {
+        let video: [String: Any] = ["AssertType": "PreventUserIdleDisplaySleep", "AssertName": "Video Wake Lock"]
+        let music: [String: Any] = ["AssertType": "PreventUserIdleSystemSleep", "AssertName": "Electron"]
+        #expect(FullScreenHiding.isVideoPlaying(assertionsByProcess: [42: [video]], excluding: 7))
+        #expect(!FullScreenHiding.isVideoPlaying(assertionsByProcess: [42: [music]], excluding: 7))
+        // Notchkit elle-même (anti-veille des Commutateurs rapides) ne compte pas.
+        #expect(!FullScreenHiding.isVideoPlaying(assertionsByProcess: [7: [video]], excluding: 7))
+    }
+
     @Test func imagesParSecondeSurLaDerniereSeconde() {
         let frames = (0..<180).map { 10 + Double($0) / 60 }  // 3 s à 60 images par seconde
         #expect(FrameRateMeter.fps(frameTimes: frames, now: 12.99) == 60)

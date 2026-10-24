@@ -57,6 +57,8 @@ struct AppSettings: Codable, Equatable, Sendable {
     /// Icône de Notchkit dans la barre des menus (HIG : c'est à la personne de choisir).
     /// Masquée, les réglages restent accessibles par la roue dentée de l'encoche ou en relançant l'app.
     var showsMenuBarIcon = true
+    /// Encoche masquée pendant une vidéo en plein écran sur son écran (`FullScreenHiding`).
+    var hidesInFullScreen = false
 
     init() {}
 
@@ -83,5 +85,6 @@ struct AppSettings: Codable, Equatable, Sendable {
         mascotSounds = try c.decodeIfPresent(Bool.self, forKey: .mascotSounds) ?? d.mascotSounds
         mascotSoundVolume = try c.decodeIfPresent(Double.self, forKey: .mascotSoundVolume) ?? d.mascotSoundVolume
         showsMenuBarIcon = try c.decodeIfPresent(Bool.self, forKey: .showsMenuBarIcon) ?? d.showsMenuBarIcon
+        hidesInFullScreen = try c.decodeIfPresent(Bool.self, forKey: .hidesInFullScreen) ?? d.hidesInFullScreen
     }
 }

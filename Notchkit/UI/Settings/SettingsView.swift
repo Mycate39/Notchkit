@@ -440,6 +440,11 @@ private struct GeneralSettingsView: View {
                         Text("\(name) (débranché)").tag(settings.settings.screenSelection)
                     }
                 }
+                Toggle("Masquer l'encoche pendant une vidéo en plein écran", isOn: $settings.settings.hidesInFullScreen)
+                Text("L'encoche disparaît tant qu'une vidéo (YouTube, Netflix, QuickTime…) est lue en plein écran sur son écran, puis revient.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
                 Toggle("Ne pas cacher les menus de l'app active", isOn: $settings.settings.avoidAppMenus)
                 Text("Sur un écran sans encoche, l'encoche se décale vers la droite si elle couvre les menus de l'app au premier plan. Sur une vraie encoche, l'activité compacte se rétrécit, ou se masque, pour laisser les menus visibles. Nécessite l'autorisation Accessibilité (Réglages Système > Confidentialité et sécurité > Accessibilité).")
                     .font(.caption)

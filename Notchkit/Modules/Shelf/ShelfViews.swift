@@ -115,6 +115,7 @@ private struct ShelfItemView: View {
         // Glisser vers le Finder ou une autre app : le fichier y est copié.
         .onDrag {
             guard let url else { return NSItemProvider() }
+            module.markTaken(item)
             return NSItemProvider(contentsOf: url) ?? NSItemProvider()
         }
         .contextMenu {
@@ -179,6 +180,7 @@ struct ShelfBubbleFiles: View {
                 .onTapGesture(count: 2) { module.open(item) }
                 .onDrag {
                     guard let url else { return NSItemProvider() }
+                    module.markTaken(item)
                     return NSItemProvider(contentsOf: url) ?? NSItemProvider()
                 }
                 .contextMenu {

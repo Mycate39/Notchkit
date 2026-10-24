@@ -27,6 +27,11 @@ final class ShelfModule: NotchModule {
     nonisolated static let retention: TimeInterval = 5 * 60
 
     private(set) var items: [ShelfItem] = []
+    /// Fichiers déjà récupérés (glissés hors de l'étagère) : ils restent dans le widget, mais
+    /// l'étagère ne s'affiche plus comme activité en cours pour eux.
+    private(set) var takenIDs: Set<UUID> = []
+    /// Fichiers encore à récupérer.
+    var pendingItems: [ShelfItem] { items.filter { !takenIDs.contains($0.id) } }
     let thumbnails = ShelfThumbnails()
 
     /// Affiche le nombre de fichiers dans l'encoche repliée.
@@ -77,12 +82,6 @@ final class ShelfModule: NotchModule {
         items.filter { $0.addedAt.addingTimeInterval(retention) <= date }
     }
 
-    /// Moment où l'étagère sera vide (dernier fichier déposé + délai).
-    var emptiesAt: Date? {
-        guard autoClear, let latest = items.map(\.addedAt).max() else { return nil }
-        return latest.addingTimeInterval(Self.retention)
-    }
-
     /// Retire les fichiers dont le délai est écoulé, puis attend le prochain.
     private func removeExpired() {
         expiryTask?.cancel()
@@ -107,6 +106,11 @@ final class ShelfModule: NotchModule {
     @discardableResult
     func add(_ urls: [URL]) -> Int {
         let existing = Set(items.compactMap { $0.resolvedURL()?.standardizedFileURL })
+        // Un fichier déjà récupéré, redéposé : de nouveau à récupérer.
+        let dropped = Set(urls.map(\.standardizedFileURL))
+        for item in items where item.resolvedURL().map({ dropped.contains($0.standardizedFileURL) }) == true {
+            takenIDs.remove(item.id)
+        }
         let new = urls
             .filter { !existing.contains($0.standardizedFileURL) }
             .compactMap { ShelfItem(url: $0) }
@@ -117,6 +121,18 @@ final class ShelfModule: NotchModule {
         save()
         removeExpired()
         return new.count
+    }
+
+    /// Le fichier vient d'être glissé hors de l'étagère : il est récupéré au relâchement de la souris
+    /// (marqué plus tôt, la bulle disparaîtrait sous le curseur pendant le glisser).
+    func markTaken(_ item: ShelfItem) {
+        Task { [weak self] in
+            while NSEvent.pressedMouseButtons & 1 != 0 {
+                try? await Task.sleep(for: .milliseconds(100))
+            }
+            guard let self, self.items.contains(where: { $0.id == item.id }) else { return }
+            withAnimation(.snappy) { _ = self.takenIDs.insert(item.id) }
+        }
     }
 
     func remove(_ item: ShelfItem) {
@@ -202,7 +218,7 @@ final class ShelfModule: NotchModule {
     // MARK: Affichage
 
     var compactPriority: ModulePriority {
-        guard !items.isEmpty else { return .none }
+        guard !pendingItems.isEmpty else { return .none }
         // Fichiers à récupérer dans les 5 minutes : activité en cours.
         if autoClear { return .normal }
         return showInCompact ? .low : .none
@@ -212,19 +228,8 @@ final class ShelfModule: NotchModule {
 
 
     func compactLeading() -> AnyView? {
-        guard !items.isEmpty else { return nil }
+        guard !pendingItems.isEmpty else { return nil }
         return AnyView(Image(systemName: "tray.full.fill").foregroundStyle(.white.opacity(0.85)))
-    }
-
-    func compactTrailing() -> AnyView? {
-        guard !items.isEmpty else { return nil }
-        // Temps restant avant que l'étagère se vide.
-        if let emptiesAt {
-            return AnyView(Text(timerInterval: Date()...max(Date(), emptiesAt), countsDown: true)
-                .monospacedDigit()
-                .foregroundStyle(.white.opacity(0.85)))
-        }
-        return AnyView(Text("\(items.count)").monospacedDigit())
     }
 
     /// Bulle survolée : les derniers fichiers déposés, à faire glisser où l'on veut.

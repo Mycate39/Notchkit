@@ -103,47 +103,49 @@ struct MusicExpandedView: View {
     let module: MusicModule
     @Environment(\.widgetSize) private var size
 
+    /// Rien ne joue : le lecteur reste en place, vide, commandes grisées.
+    private static var emptyInfo: NowPlayingInfo {
+        NowPlayingInfo(origin: .mediaRemote, title: String(localized: "Aucune lecture en cours"), isPlaying: false)
+    }
+
     var body: some View {
-        if let info = module.nowPlaying, size == .small {
-            // Petit widget : pochette, titre et commandes empilés. Du plus complet au plus serré,
-            // selon la hauteur de la carte (taille de l'encoche).
-            ViewThatFits(in: .vertical) {
-                smallLayout(info, artworkSize: 52)
-                smallLayout(info, artworkSize: 36)
-                smallLayout(info, artworkSize: nil)
-            }
-            .padding(8)
-        } else if let info = module.nowPlaying {
-            // Moyen et grand : présentation façon Dynamic Island de l'iPhone, resserrée si la carte est basse.
-            ViewThatFits(in: .vertical) {
-                if size == .large {
-                    islandLayout(info, artworkSize: 60, showsProgress: true, largeControls: true)
+        let info = module.nowPlaying ?? Self.emptyInfo
+        let isEmpty = module.nowPlaying == nil
+        Group {
+            if size == .small {
+                // Petit widget : pochette, titre et commandes empilés. Du plus complet au plus serré,
+                // selon la hauteur de la carte (taille de l'encoche).
+                ViewThatFits(in: .vertical) {
+                    smallLayout(info, artworkSize: 52, isEmpty: isEmpty)
+                    smallLayout(info, artworkSize: 36, isEmpty: isEmpty)
+                    smallLayout(info, artworkSize: nil, isEmpty: isEmpty)
                 }
-                islandLayout(info, artworkSize: size == .large ? 50 : 46, showsProgress: true, largeControls: true)
-                islandLayout(info, artworkSize: 40, showsProgress: true, largeControls: false)
-                islandLayout(info, artworkSize: 36, showsProgress: false, largeControls: false)
+                .padding(8)
+            } else {
+                // Moyen et grand : présentation façon Dynamic Island de l'iPhone, resserrée si la carte est basse.
+                ViewThatFits(in: .vertical) {
+                    if size == .large {
+                        islandLayout(info, artworkSize: 60, showsProgress: true, largeControls: true, isEmpty: isEmpty)
+                    }
+                    islandLayout(info, artworkSize: size == .large ? 50 : 46, showsProgress: true, largeControls: true,
+                                 isEmpty: isEmpty)
+                    islandLayout(info, artworkSize: 40, showsProgress: true, largeControls: false, isEmpty: isEmpty)
+                    islandLayout(info, artworkSize: 36, showsProgress: false, largeControls: false, isEmpty: isEmpty)
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 10)
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 10)
-        } else {
-            VStack(spacing: 6) {
-                LineGlyph(shape: MusicNoteShape())
-                    .frame(width: 26, height: 26)
-                Text("Aucune lecture en cours")
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundStyle(.white.opacity(0.7))
-            }
-            .padding(12)
         }
     }
 
-    private func smallLayout(_ info: NowPlayingInfo, artworkSize: CGFloat?) -> some View {
+    private func smallLayout(_ info: NowPlayingInfo, artworkSize: CGFloat?, isEmpty: Bool) -> some View {
         VStack(spacing: 6) {
             if let artworkSize {
                 Button { module.openPlayerApp() } label: {
                     ArtworkView(info: info, size: artworkSize, cornerRadius: artworkSize * 0.2)
                 }
                 .buttonStyle(.notch)
+                .disabled(isEmpty)
             }
             VStack(spacing: 0) {
                 Text(info.title)
@@ -156,11 +158,12 @@ struct MusicExpandedView: View {
             }
             .lineLimit(1)
             PlaybackControls(module: module, isPlaying: info.isPlaying, compact: true)
+                .inactive(isEmpty)
         }
     }
 
     private func islandLayout(_ info: NowPlayingInfo, artworkSize: CGFloat, showsProgress: Bool,
-                              largeControls: Bool) -> some View {
+                              largeControls: Bool, isEmpty: Bool) -> some View {
         // Présentation des Live Activities de l'iPhone : pochette, titre en gras et barres en haut,
         // barre fine au milieu, glyphes blancs sans fond en bas.
         VStack(spacing: largeControls ? 10 : 6) {
@@ -180,6 +183,7 @@ struct MusicExpandedView: View {
                         }
                 }
                 .buttonStyle(.notch)
+                .disabled(isEmpty)
                 .help("Ouvrir l'app qui joue")
 
                 VStack(alignment: .leading, spacing: 1) {
@@ -215,6 +219,7 @@ struct MusicExpandedView: View {
                 Spacer(minLength: 4)
                 PlaybackControls(module: module, isPlaying: info.isPlaying, large: largeControls,
                                  spacing: size == .large ? 34 : 24)
+                    .inactive(isEmpty)
                 Spacer(minLength: 4)
                 AirPlayButton()
                     .frame(width: 22, height: 22)
@@ -222,6 +227,13 @@ struct MusicExpandedView: View {
                     .help("Sortie audio")
             }
         }
+    }
+}
+
+private extension View {
+    /// Commandes grisées et sans effet (aucun morceau à commander).
+    func inactive(_ inactive: Bool) -> some View {
+        disabled(inactive).opacity(inactive ? 0.35 : 1)
     }
 }
 

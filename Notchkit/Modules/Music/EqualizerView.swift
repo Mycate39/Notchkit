@@ -38,7 +38,10 @@ final class EqualizerNSView: NSView {
     private let bars: [CALayer] = (0..<SpectrumAnalyzer.defaultBandCount).map { _ in CALayer() }
     /// Durées différentes pour que les barres ne bougent pas à l'unisson (animation simple).
     private let durations: [CFTimeInterval] = [0.46, 0.62, 0.39, 0.54, 0.43, 0.58, 0.36]
+    /// Hauteur la plus basse des barres pendant la lecture.
     private static let restingScale: CGFloat = 0.3
+    /// Lecture arrêtée : barres aplaties en une ligne de points (hauteur = largeur, voir `height`).
+    private static let pausedScale: CGFloat = 0
     private static let animationKey = "equalizer"
     /// Les barres changent de hauteur (et non d'échelle) : un étirement vertical aplatirait
     /// leurs bouts arrondis.
@@ -60,7 +63,7 @@ final class EqualizerNSView: NSView {
     /// Hauteur maximale de chaque barre (1 partout, sauf en forme de cloche).
     private var maxScales: [CGFloat] = Array(repeating: 1, count: SpectrumAnalyzer.defaultBandCount)
     /// Hauteur actuelle de chaque barre, relative à la hauteur de la vue (valeur du modèle, hors animation en boucle).
-    private var scales: [CGFloat] = Array(repeating: restingScale, count: SpectrumAnalyzer.defaultBandCount)
+    private var scales: [CGFloat] = Array(repeating: pausedScale, count: SpectrumAnalyzer.defaultBandCount)
     private var barWidth: CGFloat = 0
 
     var barColor: NSColor = .white {
@@ -115,8 +118,7 @@ final class EqualizerNSView: NSView {
         guard spacingRatio != self.spacingRatio || scales != maxScales else { return }
         self.spacingRatio = spacingRatio
         maxScales = scales
-        // Au repos, les barres suivent aussi la forme de cloche.
-        if !isAnimating { self.scales = scales.map { $0 * Self.restingScale } }
+        if !isAnimating { self.scales = scales.map { $0 * Self.pausedScale } }
         needsLayout = true
         if isAnimating && !isLive {
             bars.forEach { $0.removeAnimation(forKey: Self.animationKey) }
@@ -221,10 +223,11 @@ final class EqualizerNSView: NSView {
         if !animating {
             isLive = false
             stopLiveWatchdog()
+            // Les barres s'aplatissent en points.
             CATransaction.begin()
-            CATransaction.setDisableActions(true)
+            CATransaction.setAnimationDuration(0.25)
             for (index, bar) in bars.enumerated() {
-                scales[index] = Self.restingScale * maxScales[index]
+                scales[index] = Self.pausedScale * maxScales[index]
                 bar.bounds.size.height = height(scales[index])
             }
             CATransaction.commit()

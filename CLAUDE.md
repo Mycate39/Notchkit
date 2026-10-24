@@ -162,7 +162,7 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 - Activités compactes, mini-encoches, menu empilé, zones de survol séparées, contour style Dynamic Island. Une bulle qui a des commandes (`bubbleControls()`, ex. la musique) s'allonge vers la droite au survol au lieu d'ouvrir l'encoche ; `bubblePriority` garde la bulle de la musique en pause.
 - Encoche dépliée avec pages et widgets en quatre tailles, éditeur de disposition, dispositions prêtes à l'emploi, taille d'encoche personnalisée, contrôles style StandBy, couleur d'accent, fond Liquid Glass (macOS 26). Réglages groupés par catégorie.
 - Modules historiques : Musique, Horloge, Batterie, Calendrier, Météo, Claude Code, Étagère + AirDrop, AirPods/Bluetooth, Activités en direct, Presse-papiers, HUD volume/luminosité (aussi Touch Bar et Centre de contrôle), Déverrouillage, Téléchargements vidéo.
-- Ajouts de la 1.0 (masqués par défaut) : Captures d'écran (contextuel), Étagère contextuelle avec texte déposé et actions (ZIP, conversion, iCloud Drive) ; depuis la 2.0, chaque fichier y reste 5 minutes (`ShelfModule.retention`, réglable) et l'étagère s'affiche alors comme une activité en cours, Commutateurs rapides (mode sombre, anti-veille, icônes du bureau, verrouillage clavier), Webcam, Journée, Notes, chronomètre/alarmes/Pomodoro, Rappels (EventKit), Moniteur système (échantillonneur partagé `SystemSampler`, actif seulement si une carte est visible), Dashboard, Temps d'écran et Santé (mesurés localement), Traduction (framework Translation, macOS 15+), Ancrage des fenêtres.
+- Ajouts de la 1.0 (masqués par défaut) : Captures d'écran (contextuel), Étagère contextuelle avec texte déposé et actions (ZIP, conversion, iCloud Drive) ; depuis la 2.0, chaque fichier y reste 5 minutes (`ShelfModule.retention`, réglable) et l'étagère s'affiche alors comme une activité en cours, Commutateurs rapides (mode sombre, anti-veille, icônes du bureau, verrouillage clavier), Webcam, Journée, Notes, chronomètre/alarmes/Pomodoro, Rappels (EventKit), Moniteur système (échantillonneur partagé `SystemSampler`, actif seulement si une carte est visible), Dashboard, Temps d'écran et Santé (mesurés localement), Traduction (framework Translation, macOS 15+). L'ancrage des fenêtres a été supprimé le 24/10/2026.
 - Anglais et français ; mises à jour Sparkle ; DMG signé avec le certificat auto-signé.
 
 ### Version 2.0.0 (en cours)
@@ -192,7 +192,7 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 
 ### Limites connues
 - Pas de suivi des téléversements des autres apps (aucune API publique) ; True Tone et notifications avec réponse abandonnés (API privées).
-- La lecture AX, le rendu Liquid Glass, l'ancrage des fenêtres et la détection de projet Terminal n'ont été vérifiés que par tests et captures, pas en usage réel sur une vraie encoche.
+- La lecture AX, le rendu Liquid Glass et la détection de projet Terminal n'ont été vérifiés que par tests et captures, pas en usage réel sur une vraie encoche.
 - L'app n'est pas notarisée (clic droit > Ouvrir la première fois).
 - Les barres de l'égaliseur se figent parfois après un changement de bureau (encoche dans l'espace SkyLight) alors que les niveaux continuent d'arriver : non résolu, abandonné pour l'instant (réafficher l'espace et supprimer les animations implicites n'ont rien changé).
 - Sauvegardes à faire hors de ce Mac : certificat « Notchkit Self-Signed » (export .p12) et clé Sparkle (`generate_keys -x`).

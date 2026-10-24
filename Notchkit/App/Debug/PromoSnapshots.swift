@@ -140,11 +140,6 @@ enum PromoSnapshots {
         save(card(DashboardModule(context: context).expandedView(), weight: 2), to: file("16-dashboard-carte"))
         save(card(ScreenTimeModule(context: context).expandedView(), weight: 2), to: file("17-temps-ecran-carte"))
         save(card(HealthModule(context: context).expandedView(), weight: 2), to: file("18-sante-carte"))
-        let snapModel = SnapPanelModel()
-        snapModel.isShown = true
-        snapModel.hovered = .leftHalf
-        save(SnapZonesView(model: snapModel).padding(20).background(Color(red: 0.25, green: 0.2, blue: 0.35)),
-             to: file("20-ancrage-zones"))
         multi.activities.map(\.id).forEach(multi.remove)
 
         activities.activities.map(\.id).forEach(activities.remove)

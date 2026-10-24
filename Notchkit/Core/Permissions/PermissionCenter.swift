@@ -41,7 +41,7 @@ enum AppPermission: String, CaseIterable, Identifiable, Sendable {
     var usage: LocalizedStringResource {
         switch self {
         case .accessibility:
-            "Volume et luminosité aux touches du clavier, encoche qui évite les menus, ancrage des fenêtres, traduction de la sélection, verrouillage du clavier."
+            "Volume et luminosité aux touches du clavier, encoche qui évite les menus, traduction de la sélection, verrouillage du clavier."
         case .systemAudio:
             "Barres de l'égaliseur au rythme de la musique et volume par app. Le son n'est jamais enregistré."
         case .automation:

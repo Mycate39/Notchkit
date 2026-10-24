@@ -13,7 +13,7 @@ enum Haptics {
         case tap
         /// Changement de niveau : cran de volume ou de luminosité, minute de la règle du minuteur.
         case step
-        /// Alignement : un élément se cale à sa place (page, zone de dépôt, ancrage, bout de la règle).
+        /// Alignement : un élément se cale à sa place (page, zone de dépôt, bout de la règle).
         case snap
     }
 

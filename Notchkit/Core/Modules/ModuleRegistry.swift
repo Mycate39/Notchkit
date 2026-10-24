@@ -25,7 +25,6 @@ enum ModuleRegistry {
         ScreenTimeModule.self,
         HealthModule.self,
         TranslationModule.self,
-        WindowSnapModule.self,
         AirPodsModule.self,
         LiveActivitiesModule.self,
         ClipboardModule.self,

@@ -24,7 +24,6 @@ https://github.com/user-attachments/assets/df1942ae-0d75-4228-bc36-690de7a0d2dc
 - **System Monitor**: CPU per core, GPU, memory, disk, network speed, battery health, and heavy processes.
 - **Battery**: percentage, time remaining, and while charging, the time left until full and
   when it will be full (optionally as a live activity next to the notch).
-- **Window Snapping**: drag a window toward the notch to snap it to a half, third, quarter or full screen.
 
 **Files and clipboard**
 - **Shelf and AirDrop**: drop files or text on the notch to keep them or send them, then

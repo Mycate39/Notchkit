@@ -155,7 +155,7 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 
 **Bêta / RC** : même procédure, avec `MARKETING_VERSION` `x.y.z-beta.N` (ou `x.y.z-rc.N`, candidate à la version finale, comme sur iOS) (le build augmente normalement), tag `vx.y.z-beta.N`, `gh release create … --prerelease --latest=false`, et **sans** étape `appcast.xml` : les utilisateurs actuels ne la reçoivent pas automatiquement.
 
-## État (23 octobre 2026 : 1.0.6 publiée, 2.0.0 RC 2 en préversion)
+## État (24 octobre 2026 : 1.0.6 publiée, 2.0.0 RC 3 en préversion)
 
 ### Fonctionne
 - Fenêtre d'encoche sur n'importe quel écran : vraie encoche, encoche simulée ou pilule flottante ; reste en place à travers les Spaces ; se décale à droite pour ne jamais masquer les menus de l'app active (nécessite l'autorisation Accessibilité).
@@ -177,6 +177,7 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
   - Publié dans la beta 4 (`v2.0.0-beta.4`, 21/10/2026) : minuteur à la règle, étagère en activité de 5 minutes, animation Touch ID au déverrouillage, Précédent / Suivant et icônes au style de macOS dans les réglages, bouton Rétablir des délais de survol, barre de progression de la musique stable en mode rebondissant.
   - Publié dans la RC 1 (`v2.0.0-rc.1`, 22/10/2026, candidate à la version finale) : règle du minuteur à disposition stable et défilement cinétique, audit des règles d'Apple (accessibilité, vibrations, icône de barre des menus masquable, textes des autorisations, contour coloré, icône Icon Composer). L'intégration à Siri (App Intents) a été essayée puis abandonnée le 21/10/2026.
   - Publié dans la RC 2 (`v2.0.0-rc.2`, 23/10/2026) : tutoriel refait avec les nouveautés et essai guidé sur la vraie encoche, indicateur de volume et de luminosité élargi (`NotchLayout.levelIndicatorSideWidth`, seule exception à la largeur de la musique), fenêtres des réglages et du tutoriel toujours au premier plan (`WindowActivation`), bouton × des bulles réparé (commandes qui débordent : la colonne des bulles ne doit pas avoir de `contentShape`, qui limiterait aussi leurs clics).
+  - Publié dans la RC 3 (`v2.0.0-rc.3`, 24/10/2026) : lecteur de musique sur l'écran verrouillé, encoche masquée pendant une vidéo en plein écran (`Core/Window/FullScreenHiding.swift`, activé par défaut : app au premier plan en plein écran sur l'écran de l'encoche ET un autre processus qui empêche la veille de l'écran ; l'anti-veille de Notchkit est ignorée), animation Face ID, cran haptique des pages pendant le balayage, lecteur vide dans le widget Musique, barres de son aplaties en points à l'arrêt, heure repliée désactivée par défaut.
   - Mode jeu (`Modules/GameMode`) : encoche discrète et images par seconde seulement (`FrameRateMeter` : ScreenCaptureKit compte les images complètes de l'app au premier plan, autorisation Enregistrement de l'écran). S'active comme le mode jeu de macOS (jeu en plein écran au premier plan, `FullScreenDetector`), ou à la main.
   - Centre du son dans le panneau du volume : sortie, micro, apps qui jouent (repli sur l'app « À l'écoute », les navigateurs ne signalant pas toujours leur sortie), volume par app par interception Core Audio (macOS 14.2+).
   - Onglet Autorisations et synthèse dans le tutoriel ; curseurs Liquid Glass (macOS 26+) ; zones cliquables agrandies ; boutons natifs dans les réglages.

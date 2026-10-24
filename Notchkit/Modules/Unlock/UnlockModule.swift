@@ -57,7 +57,7 @@ final class UnlockModule: NotchModule {
 
     @ObservationIgnored private let context: ModuleContext
     @ObservationIgnored private var observers: [(NotificationCenter, NSObjectProtocol)] = []
-    @ObservationIgnored private var activePrompt: (kind: AuthPrompt, alertID: UUID)?
+    @ObservationIgnored private var activePrompt: (kind: AuthPrompt, alertID: UUID, touchID: TouchIDPromptState?)?
 
     init(context: ModuleContext) {
         self.context = context
@@ -124,13 +124,19 @@ final class UnlockModule: NotchModule {
             if let front = NSWorkspace.shared.frontmostApplication?.bundleIdentifier,
                AuthPrompt(bundleIdentifier: front) == prompt { return }
             self.activePrompt = nil
+            // Touch ID : l'empreinte se transforme en coche avant que l'encoche se referme.
+            if let touchID = active.touchID {
+                touchID.finished = true
+                try? await Task.sleep(for: UnlockAnimations.touchIDFinishDuration)
+            }
             self.context.dismiss(alertID)
         }
     }
 
     private func showPrompt(_ prompt: AuthPrompt) {
-        let alert = prompt == .touchID ? UnlockAnimations.touchID() : UnlockAnimations.password()
-        activePrompt = (prompt, alert.id)
+        let touchID = prompt == .touchID ? TouchIDPromptState() : nil
+        let alert = touchID.map { UnlockAnimations.touchID(state: $0) } ?? UnlockAnimations.password()
+        activePrompt = (prompt, alert.id, touchID)
         context.presentAlert(alert)
     }
 
@@ -138,7 +144,14 @@ final class UnlockModule: NotchModule {
     /// Aperçu des animations (menu Débogage).
     func preview(_ kind: String) {
         switch kind {
-        case "touchID": context.presentAlert(UnlockAnimations.touchID(duration: .seconds(4)))
+        case "touchID":
+            // Demande simulée : le doigt est « reconnu » au bout de 3 s.
+            let state = TouchIDPromptState()
+            context.presentAlert(UnlockAnimations.touchID(state: state, duration: .seconds(4.4)))
+            Task { @MainActor in
+                try? await Task.sleep(for: .seconds(3))
+                state.finished = true
+            }
         case "password": context.presentAlert(UnlockAnimations.password(duration: .seconds(4)))
         default: context.presentAlert(UnlockAnimations.unlocked())
         }

@@ -56,6 +56,7 @@
 		36229702DCD121CC52D39711 /* EqualizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9868E6BCDAB5B7301961AC /* EqualizerView.swift */; };
 		36D461934D0D51DA37BA4592 /* NotchWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9E3D7C9C763F9153C29C4C /* NotchWindowController.swift */; };
 		3732327BD3D844134DA10512 /* LayoutPresets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB25FBA895731ACD6329CB6F /* LayoutPresets.swift */; };
+		39BEC2EFFC4542547FEC120B /* TouchIDPrompt.mov in Resources */ = {isa = PBXBuildFile; fileRef = 8A96E5F0AF7B581372164EA2 /* TouchIDPrompt.mov */; };
 		3B0444E0AA274FEE6FC3A91C /* ShelfItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0C124C4C4759A07017DB8D /* ShelfItem.swift */; };
 		3D27935556AEC14D64004E2B /* SystemMonitorModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E74D5E2811CD766DECAC50 /* SystemMonitorModule.swift */; };
 		3D65E40B050BAAC408A95957 /* repeat.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C6E3D4B63F646C8C9E6420 /* repeat.m */; };
@@ -379,6 +380,7 @@
 		8919AB6ED390FDA70C4B9EA7 /* AudioSpectrumMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSpectrumMonitor.swift; sourceTree = "<group>"; };
 		89908AA5686A7DBE051BD6EF /* ClipboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardTests.swift; sourceTree = "<group>"; };
 		8A426D361B19F11D7BD531E6 /* AirPodsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPodsTests.swift; sourceTree = "<group>"; };
+		8A96E5F0AF7B581372164EA2 /* TouchIDPrompt.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = TouchIDPrompt.mov; sourceTree = "<group>"; };
 		8B4D369EEE4621CABF42CF1F /* TogglesModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogglesModule.swift; sourceTree = "<group>"; };
 		8C3C0CDEA4B993CA2ECA8EEA /* test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = test.m; sourceTree = "<group>"; };
 		8C55985EC0A527176A3FFFB3 /* Notchkit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notchkit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -518,6 +520,7 @@
 				39CD37F30EF339C02ECF8FDC /* InfoPlist.xcstrings */,
 				98FB71F04AAECE1E8BD0926A /* Localizable.xcstrings */,
 				51C6F4A15A7C1F5EED24D94C /* Notchkit.entitlements */,
+				8A96E5F0AF7B581372164EA2 /* TouchIDPrompt.mov */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1350,6 +1353,7 @@
 				193A99D444FE4A6B2A2FCBB7 /* InfoPlist.xcstrings in Resources */,
 				89645F2C235F1A1C71CD6FAE /* LICENSE.txt in Resources */,
 				A332BE0B606743A7032D6F14 /* Localizable.xcstrings in Resources */,
+				39BEC2EFFC4542547FEC120B /* TouchIDPrompt.mov in Resources */,
 				9534909608C6D366FB3BCE9F /* mediaremote-adapter.pl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

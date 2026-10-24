@@ -18,10 +18,18 @@ enum UnlockAnimations {
         return alert
     }
 
+    /// Demande Touch ID : même carré que Face ID. `state` passe à « terminé » quand la demande se ferme.
     @MainActor
-    static func touchID(duration: Duration = .seconds(60)) -> NotchAlert {
-        NotchAlert(duration: duration, expandedContent: AnyView(TouchIDPromptView()), expandedSize: size)
+    static func touchID(state: TouchIDPromptState, duration: Duration = .seconds(60)) -> NotchAlert {
+        var alert = NotchAlert(duration: duration, expandedContent: AnyView(TouchIDPromptView(state: state)),
+                               expandedSize: faceIDSize)
+        alert.centersExpandedContent = true
+        alert.expandedCornerRadius = faceIDSize.width / 5
+        return alert
     }
+
+    /// Temps laissé à la fin de l'animation Touch ID (empreinte → cercle → coche) avant de refermer.
+    static let touchIDFinishDuration: Duration = .milliseconds(1300)
 
     @MainActor
     static func password(duration: Duration = .seconds(120)) -> NotchAlert {
@@ -87,33 +95,148 @@ private struct TransparentVideo: NSViewRepresentable {
     }
 }
 
-/// Demande Touch ID : empreinte rose avec des ondes qui s'élargissent.
+/// État partagé d'une demande Touch ID : la demande s'est fermée (doigt reconnu, le plus souvent).
+@MainActor
+@Observable
+final class TouchIDPromptState {
+    var finished = false
+}
+
+/// Demande Touch ID : l'empreinte apparaît et se remplit en rouge, puis reste affichée tant que macOS
+/// attend le doigt. Quand la demande se ferme, elle se transforme en cercle, et le cercle et la coche
+/// façon Face ID, en rouge, prennent le relais (dessinés ici, nets à toute taille).
+/// Vidéo `TouchIDPrompt.mov` (408 × 408 px, 60 i/s), rendue depuis une animation Lottie : de 0 à 2 s,
+/// apparition et remplissage ; de 2 à 2,77 s, transformation en cercle fin (cercle à 70,6 % du cadre).
 struct TouchIDPromptView: View {
+    let state: TouchIDPromptState
+
+    static let red = Color(red: 232 / 255, green: 76 / 255, blue: 81 / 255)
+    /// Pause sur l'empreinte pleine, pendant l'attente.
+    private static let holdTime = 2.0
+    /// Cercle final : même taille que celui de Face ID (48 % du carré).
+    private static let diameter: CGFloat = 96
+
+    @State private var showsCheck = false
+    /// Le cercle s'épaissit, du trait fin de la vidéo à celui de Face ID (6,5 % du diamètre).
+    @State private var ringWidth: CGFloat = 2
+    @State private var check: CGFloat = 0
+
     var body: some View {
-        VStack(spacing: 8) {
-            TimelineView(.animation(paused: NotchAccessibility.reduceMotion)) { context in
-                let time = context.date.timeIntervalSinceReferenceDate
-                ZStack {
-                    ForEach(0..<3) { index in
-                        let phase = (time / 1.5 + Double(index) / 3).truncatingRemainder(dividingBy: 1)
-                        Circle()
-                            .stroke(Self.pink.opacity((1 - phase) * 0.7), lineWidth: 1.5)
-                            .frame(width: 34 + phase * 34, height: 34 + phase * 34)
-                    }
-                    Image(systemName: "touchid")
-                        .font(.system(size: 32, weight: .regular))
-                        .foregroundStyle(Self.pink)
-                        .opacity(0.75 + 0.25 * sin(time * 4))
-                }
+        ZStack {
+            StagedVideo(resource: "TouchIDPrompt", holdAt: Self.holdTime, released: state.finished,
+                        stillOnly: NotchAccessibility.reduceMotion, onEnd: finish)
+                .frame(width: FaceIDUnlockView.videoSize.width, height: FaceIDUnlockView.videoSize.height)
+                .opacity(showsCheck ? 0 : 1)
+            if showsCheck {
+                Circle()
+                    .stroke(Self.red, lineWidth: ringWidth)
+                    .frame(width: Self.diameter - ringWidth, height: Self.diameter - ringWidth)
+                TouchIDCheck()
+                    .trim(from: 0, to: check)
+                    .stroke(Self.red, style: StrokeStyle(lineWidth: 6, lineCap: .round, lineJoin: .round))
+                    .frame(width: Self.diameter, height: Self.diameter)
             }
-            .frame(height: 60)
-            Text("Touch ID")
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundStyle(.white.opacity(0.85))
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .accessibilityElement()
+        .accessibilityLabel(Text("Touch ID"))
+        // Animations réduites : pas de vidéo jouée, la coche apparaît directement à la fin.
+        .onChange(of: state.finished) { _, finished in
+            if finished && NotchAccessibility.reduceMotion { finish() }
         }
     }
 
-    static let pink = Color(red: 1, green: 0.22, blue: 0.37)
+    private func finish() {
+        guard !showsCheck else { return }
+        showsCheck = true
+        withAnimation(.easeOut(duration: 0.3)) { ringWidth = Self.diameter * 0.065 }
+        withAnimation(.easeOut(duration: 0.35).delay(0.15)) { check = 1 }
+    }
+}
+
+/// Coche de Face ID, proportions relevées sur l'animation d'origine (cadre = cercle extérieur).
+private struct TouchIDCheck: Shape {
+    func path(in rect: CGRect) -> Path {
+        let r = rect.width / 2
+        let c = CGPoint(x: rect.midX, y: rect.midY)
+        var path = Path()
+        path.move(to: CGPoint(x: c.x - 0.367 * r, y: c.y + 0.033 * r))
+        path.addLine(to: CGPoint(x: c.x - 0.08 * r, y: c.y + 0.367 * r))
+        path.addLine(to: CGPoint(x: c.x + 0.367 * r, y: c.y - 0.28 * r))
+        return path
+    }
+}
+
+/// Vidéo transparente jouée jusqu'à `holdAt`, en pause tant que `released` est faux, puis jusqu'au
+/// bout (`onEnd`). `stillOnly` : image fixe à `holdAt`, sans lecture.
+private struct StagedVideo: NSViewRepresentable {
+    let resource: String
+    let holdAt: Double
+    let released: Bool
+    var stillOnly = false
+    let onEnd: () -> Void
+
+    @MainActor
+    final class Coordinator {
+        var player: AVPlayer?
+        var timeObservers: [Any] = []
+        var endObserver: NSObjectProtocol?
+        var released = false
+        var onEnd: () -> Void = {}
+    }
+
+    func makeCoordinator() -> Coordinator { Coordinator() }
+
+    func makeNSView(context: Context) -> NSView {
+        let view = NSView()
+        view.wantsLayer = true
+        guard let url = Bundle.main.url(forResource: resource, withExtension: "mov") else { return view }
+        let player = AVPlayer(url: url)
+        player.isMuted = true
+        player.preventsDisplaySleepDuringVideoPlayback = false
+        let layer = AVPlayerLayer(player: player)
+        layer.videoGravity = .resizeAspect
+        layer.isOpaque = false
+        layer.backgroundColor = .clear
+        layer.frame = view.bounds
+        layer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
+        view.layer?.addSublayer(layer)
+        let coordinator = context.coordinator
+        coordinator.player = player
+        coordinator.onEnd = onEnd
+        coordinator.released = released
+        let hold = CMTime(seconds: holdAt, preferredTimescale: 600)
+        if stillOnly {
+            player.seek(to: hold, toleranceBefore: .zero, toleranceAfter: .zero)
+            return view
+        }
+        coordinator.timeObservers.append(player.addBoundaryTimeObserver(forTimes: [NSValue(time: hold)], queue: .main) {
+            MainActor.assumeIsolated { if !coordinator.released { player.pause() } }
+        })
+        coordinator.endObserver = NotificationCenter.default.addObserver(
+            forName: .AVPlayerItemDidPlayToEndTime, object: player.currentItem, queue: .main
+        ) { _ in
+            MainActor.assumeIsolated { coordinator.onEnd() }
+        }
+        player.play()
+        return view
+    }
+
+    func updateNSView(_ view: NSView, context: Context) {
+        let coordinator = context.coordinator
+        coordinator.onEnd = onEnd
+        guard released, !coordinator.released else { return }
+        coordinator.released = true
+        if !stillOnly { coordinator.player?.play() }
+    }
+
+    static func dismantleNSView(_ view: NSView, coordinator: Coordinator) {
+        coordinator.player?.pause()
+        coordinator.timeObservers.forEach { coordinator.player?.removeTimeObserver($0) }
+        coordinator.timeObservers.removeAll()
+        if let endObserver = coordinator.endObserver { NotificationCenter.default.removeObserver(endObserver) }
+        coordinator.endObserver = nil
+    }
 }
 
 /// Demande de mot de passe : cadenas et points qui s'allument l'un après l'autre.
@@ -166,7 +289,7 @@ struct UnlockSettingsView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Toggle("Animation Touch ID au déverrouillage du Mac", isOn: $module.animateUnlock)
+            Toggle("Animation Face ID au déverrouillage du Mac", isOn: $module.animateUnlock)
             Toggle("Animation pendant une demande Touch ID", isOn: $module.animateTouchID)
             Toggle("Animation pendant une demande de mot de passe", isOn: $module.animatePassword)
             Text("Animations visuelles uniquement : Notchkit ne lit pas votre empreinte. macOS n'indique pas comment la session a été déverrouillée et rien ne peut s'afficher sur l'écran verrouillé : l'animation Touch ID se joue juste après le déverrouillage.")

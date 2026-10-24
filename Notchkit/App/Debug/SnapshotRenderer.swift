@@ -66,7 +66,7 @@ enum SnapshotRenderer {
                         Group {
                             switch index {
                             case 0: FaceIDUnlockView()
-                            case 1: TouchIDPromptView()
+                            case 1: TouchIDPromptView(state: TouchIDPromptState())
                             default: PasswordPromptView()
                             }
                         }

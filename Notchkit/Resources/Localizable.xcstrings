@@ -1862,12 +1862,11 @@
       }
     },
     "Animation Face ID au déverrouillage du Mac" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Face ID animation when unlocking the Mac"
+            "value" : "Face ID animation when your Mac unlocks"
           }
         },
         "fr" : {
@@ -1906,22 +1905,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Animation pendant une demande Touch ID"
-          }
-        }
-      }
-    },
-    "Animation Touch ID au déverrouillage du Mac" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Touch ID animation when the Mac unlocks"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Animation Touch ID au déverrouillage du Mac"
           }
         }
       }

@@ -183,12 +183,13 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
   - Onglet Autorisations et synthèse dans le tutoriel ; curseurs Liquid Glass (macOS 26+) ; zones cliquables agrandies ; boutons natifs dans les réglages.
   - Convertisseur (`Modules/Converter`, widget temporaire) : images, audio (afconvert), vidéo (AVFoundation, GIF), documents (CoreText) et PDF ; zones de dépôt toujours proposées : étagère, Convertir, AirDrop ; dépôt direct sur sa page ouverte.
 - Publié dans la 2.0.0 finale (24/10/2026) : tout ce qui précède, plus la demande Touch ID (empreinte puis coche rouge), l'étagère repliée réduite à son icône (elle quitte l'encoche une fois ses fichiers récupérés) et la suppression de l'ancrage des fenêtres. README réécrit pour la 2.0.
-- Reste à faire : vérifier la licence des deux animations LottieFiles (Face ID, Touch ID) ; refaire la vidéo du README, qui montre encore la 1.0.
+- Reste à faire : vérifier la licence des deux animations LottieFiles (Face ID, Touch ID).
 
 ### Vidéo de présentation
 - Projet HyperFrames hors du dépôt : `~/Documents/Projets/Notchkit-video` (16:9 de 45 s à la racine, 9:16 de 30 s dans `vertical/`, textes `en.json` / `fr.json`, design calqué sur le code de l'app dans `design.md`). Rendus dans `renders/`.
 - Musique de toutes les vidéos : `assets/music/danker.mp3` ; extraits calés pour que la montée à 24 s tombe à l'ouverture de l'encoche.
 - Chaque nouvelle vidéo va aussi dans le dossier Google Drive « NotchKit ».
+- Vidéos de la 2.0 (25/10/2026) : cinq films de 30 s en 16:9, anglais et français, dans `renders/Notchkit 2.0 (16-9)/` (moteur commun `assets/nk2-engine.js`, un dossier par film, rendus par `assets/render-all.py`). Le README montre « A Day with Notchkit 2.0 » (anglais).
 - La vidéo du README est un lien `github.com/user-attachments/assets/…` : on l'obtient en téléversant le fichier dans l'éditeur web du README sur GitHub (sans y enregistrer), puis on remplace le lien dans le README local.
 
 ### Limites connues

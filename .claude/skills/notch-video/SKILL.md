@@ -94,6 +94,14 @@ la fin) : rien ne change chez l'utilisateur.
    `FILMS` dans `assets/render-all.py` (titres, sous-titres, textes).
    Les avertissements de contraste sur la barre des menus transparente sont acceptés (fidèles à macOS).
 
+## 4. Miniatures (obligatoires)
+
+Chaque nouvelle vidéo a sa miniature YouTube, dans chaque langue : ajouter le film dans `THUMBS` de
+`assets/make-thumbs.py` (instant de la prise à montrer, décor `desktop` / `lock` / `video`, zoom, titre
+et sous-titre par langue, `big` pour un grand chiffre, `accent` pour le mot en ambre), puis
+`python3 assets/make-thumbs.py <film>`. Sortie : `renders/Miniature vidéos/<English|Français>/`
+(1920 × 1080, JPEG). Choisir une image de prise différente de celles des autres films.
+
 ## Règles
 
 - Jamais d'encoche redessinée quand une prise existe ; si une prise ne convient pas, on change le

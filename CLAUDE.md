@@ -198,12 +198,6 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 ### Limites connues
 - Pas de suivi des téléversements des autres apps (aucune API publique) ; True Tone et notifications avec réponse abandonnés (API privées).
 - La lecture AX, le rendu Liquid Glass et la détection de projet Terminal n'ont été vérifiés que par tests et captures, pas en usage réel sur une vraie encoche.
-- L'app n'est pas notarisée (clic droit > Ouvrir la première fois).
 - Les barres de l'égaliseur se figent parfois après un changement de bureau (encoche dans l'espace SkyLight) alors que les niveaux continuent d'arriver : non résolu, abandonné pour l'instant (réafficher l'espace et supprimer les animations implicites n'ont rien changé).
 - Le module assistant IA est masqué (code conservé dans `Modules/Assistant`).
 - Convertisseur : pas de sortie MP3 (aucun encodeur dans macOS) ; un document converti en PDF garde le texte et ses styles, pas les images intégrées.
-
-### Pistes après la 1.0
-1. Performance : signposts autour du dépliage/repliage, Instruments (SwiftUI, Animation Hitches, Energy).
-2. Widgets tiers déclaratifs (`widget.json` + scripts, rendus avec les composants StandBy).
-3. Domotique via l'app Raccourcis.

@@ -192,7 +192,7 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 - Projet HyperFrames hors du dépôt : `~/Documents/Projets/Notchkit-video` (16:9 de 45 s à la racine, 9:16 de 30 s dans `vertical/`, textes `en.json` / `fr.json`, design calqué sur le code de l'app dans `design.md`). Rendus dans `renders/`.
 - Musique de toutes les vidéos : `assets/music/danker.mp3` ; extraits calés pour que la montée à 24 s tombe à l'ouverture de l'encoche.
 - Chaque nouvelle vidéo va aussi dans le dossier Google Drive « NotchKit ».
-- Vidéos de la 2.0 (25/10/2026) : cinq films de 30 s en 16:9, anglais et français, dans `renders/Notchkit 2.0 (16-9)/` (moteur commun `assets/nk2-engine.js`, un dossier par film, rendus par `assets/render-all.py`). Le README montre « A Day with Notchkit 2.0 » (anglais). Depuis le 26/10/2026, les nouvelles vidéos utilisent la vraie encoche filmée par le mode démo (skill `notch-video`, pilote `decompte-reel/`).
+- Vidéos de la 2.0 (refaites le 26/10/2026 avec la vraie encoche filmée par le mode démo, skill `notch-video`) : cinq films de 30 s en 16:9, anglais et français, dans `renders/Vidéos 16-9/` ; logo, bannière et photo de profil YouTube dans `renders/Logo/`, miniatures dans `renders/Miniature vidéos/`. Un dossier `<film>-reel/` par film, prises dans `tournages/`, rendus par `assets/render-reel.py`. Le README montre « A Day with Notchkit 2.0 » (anglais, encoche réelle).
 - La vidéo du README est un lien `github.com/user-attachments/assets/…` : on l'obtient en téléversant le fichier dans l'éditeur web du README sur GitHub (sans y enregistrer), puis on remplace le lien dans le README local.
 
 ### Limites connues

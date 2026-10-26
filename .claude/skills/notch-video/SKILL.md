@@ -11,8 +11,8 @@ filme sa fenêtre seule, sur fond transparent. HyperFrames pose cette prise sur 
 mise en scène.
 
 Projet vidéo : `~/Documents/Projets/Notchkit-video` (hors du dépôt). Moteur commun :
-`assets/nk2-engine.js` ; page générée par `assets/make-index.py` ; exemple complet : `decompte-reel/`
-(film « 5 New Things in 30 Seconds », `film.js` + `make.sh`), prises dans `tournages/decompte/`.
+`assets/nk2-engine.js` ; page générée par `assets/make-index.py` ; films avec l'encoche réelle :
+`<film>-reel/` (ex. `decompte-reel/`, « 5 New Things in 30 Seconds »), prises dans `tournages/<film>/`.
 
 ## 1. Écrire le scénario
 
@@ -87,6 +87,11 @@ la fin) : rien ne change chez l'utilisateur.
    l'utilisateur) : extraire l'image, trouver le bouton, convertir en points depuis le centre de la zone
    (`x / scale − width / 2`, `y / scale`). Ex. `allowAt` dans `decompte-reel/make.sh`.
 5. `npx --yes hyperframes@0.8.170 check`, puis `snapshot --at …` aux moments clés, puis `render`.
+   Pour les cinq films existants (`journee`, `unplan`, `claude`, `decompte`, `notes`, dossiers `<film>-reel/`),
+   `python3 assets/render-reel.py [film…]` fait tout : lit l'écran de chaque prise, mesure le bouton
+   « Autoriser », écrit la page et rend l'anglais et le français dans `renders/Vidéos 16-9/`
+   (`--index en` écrit seulement les pages, pour les captures). Un nouveau film s'y ajoute en complétant
+   `FILMS` dans `assets/render-all.py` (titres, sous-titres, textes).
    Les avertissements de contraste sur la barre des menus transparente sont acceptés (fidèles à macOS).
 
 ## Règles

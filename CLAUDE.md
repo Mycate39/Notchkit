@@ -98,7 +98,7 @@ Carte pour aller droit au bon fichier (chercher ensuite le symbole avec `grep -n
 - `Core/Utilities/Haptics.swift` : vibrations du trackpad, selon les règles d'Apple : `.tap` (geste ou commande), `.step` (cran : volume, minutes de la règle), `.snap` (alignement : page, zone de dépôt, bout de la règle). Les alertes ne vibrent pas.
 - Accessibilité (HIG) : texte de 10 pt au moins, opacité 0,55 au moins sur fond noir, `.accessibilityLabel` sur chaque bouton à icône seule, boucles décoratives arrêtées si `NotchAccessibility.reduceMotion` (`UI/NotchStyle.swift`). Les boutons qui précèdent une demande d'autorisation système s'appellent « Demander l'accès… ».
 - Contour de l'encoche et des bulles (style Live Activities) : `NotchModule.keyLineColor` (couleur de l'activité, `nil` = gris neutre), dessiné avec `NotchLayout.keyLine`.
-- `App/Debug/` : captures (`SnapshotRenderer`, `PromoSnapshots`) et rendu vidéo des mascottes.
+- `App/Debug/` : captures (`SnapshotRenderer`, `PromoSnapshots`), rendu vidéo des mascottes, et mode démo (`Demo/`) : `NOTCHKIT_DEMO=scenario.json` joue un scénario minuté sur la vraie encoche (vrais chemins : aperçu du déverrouillage, minuteurs, hooks de Claude Code, `NotchViewModel`) et filme sa fenêtre seule sur fond transparent (ScreenCaptureKit, ProRes 4444), avec des réglages jetables (`DemoSettings`). Utilisé par la skill `.claude/skills/notch-video` pour les vidéos de présentation.
 - Tests : `NotchkitTests/<Domaine>Tests.swift` ; la mise en page de l'encoche et les bulles sont dans `ModuleManagerTests` (`NotchLayoutTests`) et `BubbleControlsTests`.
 
 ## Conventions de code
@@ -125,6 +125,9 @@ xcodebuild build -project Notchkit.xcodeproj -scheme Notchkit \
 
 xcodebuild test -project Notchkit.xcodeproj -scheme Notchkit \
   -derivedDataPath build.noindex/DerivedData -destination 'platform=macOS'   # chercher « TEST SUCCEEDED »
+
+# Tournage d'une vidéo avec la vraie encoche (Debug ; Notchkit quitté) : voir .claude/skills/notch-video
+sh .claude/skills/notch-video/scripts/record.sh ~/Documents/Projets/Notchkit-video/tournages/<film> en fr
 
 # Stress test (Debug uniquement) : 200 cycles dépliage/repliage, affiche STRESS-OK (raccourci : scripts/stress.sh)
 NOTCHKIT_STRESS=1 build.noindex/DerivedData/Build/Products/Debug/Notchkit.app/Contents/MacOS/Notchkit \
@@ -189,7 +192,7 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 - Projet HyperFrames hors du dépôt : `~/Documents/Projets/Notchkit-video` (16:9 de 45 s à la racine, 9:16 de 30 s dans `vertical/`, textes `en.json` / `fr.json`, design calqué sur le code de l'app dans `design.md`). Rendus dans `renders/`.
 - Musique de toutes les vidéos : `assets/music/danker.mp3` ; extraits calés pour que la montée à 24 s tombe à l'ouverture de l'encoche.
 - Chaque nouvelle vidéo va aussi dans le dossier Google Drive « NotchKit ».
-- Vidéos de la 2.0 (25/10/2026) : cinq films de 30 s en 16:9, anglais et français, dans `renders/Notchkit 2.0 (16-9)/` (moteur commun `assets/nk2-engine.js`, un dossier par film, rendus par `assets/render-all.py`). Le README montre « A Day with Notchkit 2.0 » (anglais).
+- Vidéos de la 2.0 (25/10/2026) : cinq films de 30 s en 16:9, anglais et français, dans `renders/Notchkit 2.0 (16-9)/` (moteur commun `assets/nk2-engine.js`, un dossier par film, rendus par `assets/render-all.py`). Le README montre « A Day with Notchkit 2.0 » (anglais). Depuis le 26/10/2026, les nouvelles vidéos utilisent la vraie encoche filmée par le mode démo (skill `notch-video`, pilote `decompte-reel/`).
 - La vidéo du README est un lien `github.com/user-attachments/assets/…` : on l'obtient en téléversant le fichier dans l'éditeur web du README sur GitHub (sans y enregistrer), puis on remplace le lien dans le README local.
 
 ### Limites connues

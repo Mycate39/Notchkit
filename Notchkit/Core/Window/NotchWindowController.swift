@@ -107,6 +107,16 @@ final class NotchWindowController {
         fullScreenHiding = hiding
     }
 
+    #if DEBUG
+    /// Tournage de démonstration : fenêtre de l'encoche (pour l'enregistrer) et masquage en plein écran
+    /// déclenché à la demande.
+    var debugPanel: NSWindow { panel }
+
+    func debugSetHiddenForFullScreen(_ hidden: Bool) {
+        setHiddenForFullScreen(hidden)
+    }
+    #endif
+
     /// Plein écran : l'encoche s'efface et laisse passer la souris, puis revient en sortie.
     private func setHiddenForFullScreen(_ hidden: Bool) {
         if hidden { viewModel.collapse() }

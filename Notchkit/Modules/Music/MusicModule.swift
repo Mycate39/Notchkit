@@ -160,6 +160,9 @@ final class MusicModule: NotchModule {
     }
 
     private func updateSelection() {
+        #if DEBUG
+        guard !debugPinned else { return }
+        #endif
         nowPlaying = NowPlayingArbiter.select(
             mediaRemote: useMediaRemote ? mediaRemoteInfo : nil,
             retained: useMediaRemote ? retainedInfo : nil,
@@ -226,6 +229,20 @@ final class MusicModule: NotchModule {
     /// Outil de captures : affiche un morceau fictif.
     func debugSetNowPlaying(_ info: NowPlayingInfo?) {
         nowPlaying = info
+    }
+
+    @ObservationIgnored private var debugPinned = false
+
+    /// Tournage de démonstration : morceau imposé (ou aucun), les vraies sources sont ignorées.
+    func debugPinNowPlaying(_ info: NowPlayingInfo?) {
+        debugPinned = true
+        nowPlaying = info
+    }
+
+    /// Fin du tournage : les vraies sources reprennent la main.
+    func debugUnpin() {
+        debugPinned = false
+        updateSelection()
     }
     #endif
 

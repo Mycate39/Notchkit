@@ -4,7 +4,7 @@ import SwiftUI
 /// Assemble les services de l'app et gère son cycle de vie.
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
-    let settings = SettingsStore()
+    let settings = SettingsStore(defaults: AutomatedRun.settingsDefaults)
     let entitlements = EntitlementManager()
     lazy var moduleManager = ModuleManager(settings: settings, entitlements: entitlements)
     lazy var viewModel = NotchViewModel(manager: moduleManager, settings: settings)
@@ -140,6 +140,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             Task { @MainActor in
                 MascotVideoRenderer.renderFrames(design: settings.settings.mascot,
                                                  to: URL(fileURLWithPath: directory))
+                NSApp.terminate(nil)
+            }
+        }
+        if let scenario = ProcessInfo.processInfo.environment["NOTCHKIT_DEMO"] {
+            // Tournage : joue le scénario sur la vraie encoche et l'enregistre (voir `DemoDirector`).
+            let output = ProcessInfo.processInfo.environment["NOTCHKIT_DEMO_OUTPUT"]
+                ?? URL(fileURLWithPath: scenario).deletingLastPathComponent().path
+            Task { @MainActor in
+                // Laisse l'encoche se placer et les modules démarrer.
+                try? await Task.sleep(for: .seconds(2))
+                await DemoDirector(scenarioURL: URL(fileURLWithPath: scenario), outputURL: URL(fileURLWithPath: output),
+                                   viewModel: viewModel, manager: moduleManager, window: controller).run()
+                DemoSettings.discard()
                 NSApp.terminate(nil)
             }
         }

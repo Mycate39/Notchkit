@@ -136,3 +136,6 @@ them; Notchkit then falls back to public interfaces.
 © 2026 Andéol Chenaux. All rights reserved: the source code is published for viewing only
 (see [LICENSE](LICENSE)). The app is free for personal use.
 Third-party components: [MediaRemoteAdapter](ThirdParty/MediaRemoteAdapter) (BSD 3-Clause).
+Unlock animations adapted from LottieFiles under the [Lottie Simple License](https://lottiefiles.com/page/license):
+[Apple Face ID](https://lottiefiles.com/free-animation/apple-face-id-g6sYZlc35d) by Mau Ali and
+[Fingerprint Touch ID](https://lottiefiles.com/free-animation/fingerprint-touch-id-Ew2IHCtl3g) by Himanshu Patel.

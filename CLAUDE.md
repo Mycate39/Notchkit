@@ -150,7 +150,7 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 2. Build universel :
    `xcodebuild -project Notchkit.xcodeproj -scheme Notchkit -configuration Release -derivedDataPath build.noindex/Release -destination 'generic/platform=macOS' ONLY_ACTIVE_ARCH=NO build`
 3. `scripts/make-dmg.sh build.noindex/Release/Build/Products/Release/Notchkit.app <dossier-sortie>`
-   Le build Release est signé avec « Notchkit Self-Signed » : vérifier `codesign -dvv <app>` (Authority=Notchkit Self-Signed). Ne jamais supprimer ce certificat du trousseau ni le remplacer : macOS ferait perdre aux utilisateurs leurs autorisations (Accessibilité) à la mise à jour suivante. Il doit exister une sauvegarde chiffrée (export .p12) hors de ce Mac : l'ancien certificat a été perdu avec l'ancien Mac. Aucun certificat payant n'est utilisé.
+   Le build Release est signé avec « Notchkit Self-Signed » : vérifier `codesign -dvv <app>` (Authority=Notchkit Self-Signed). Ne jamais supprimer ce certificat du trousseau ni le remplacer : macOS ferait perdre aux utilisateurs leurs autorisations (Accessibilité) à la mise à jour suivante. Sauvegarde faite le 26/10/2026 (l'ancien certificat avait été perdu avec l'ancien Mac) : image disque chiffrée `Notchkit-sauvegarde.dmg` (AES-256, certificat .p12 + clé Sparkle), dans iCloud Drive › NotchKit et à un second endroit hors de ce Mac ; mots de passe dans l'app Mots de passe. À refaire si le certificat ou la clé changent. Aucun certificat payant n'est utilisé.
    **Avant de publier, lancer l'app Release** (`<app>/Contents/MacOS/Notchkit`) et vérifier qu'elle tourne encore après quelques secondes : les tests et le stress test passent par le build Debug (signé ad hoc) et ne détectent pas un échec de chargement propre au build Release (1.0.1 et 1.0.2 ont été publiées dans cet état).
 4. `scripts/add-to-appcast.sh <dossier-sortie>/Notchkit-x.y.z.dmg <app> <notes.md>` — signe le DMG avec la clé privée EdDSA stockée dans le trousseau de session (« Private key for signing Sparkle updates » ; ne jamais la supprimer, sauvegarde via `generate_keys -x`) et ajoute l'entrée en tête de `appcast.xml`. La clé a été remplacée au build 12 (1.0.1) : le script marque chaque entrée comme informative (`sparkle:informationalUpdate`, `belowVersion` 12) pour que les builds 11 et antérieurs affichent un lien vers la release au lieu d'échouer. Committer `appcast.xml` seulement après la création de la release GitHub.
 5. `git push`, `git tag -a vx.y.z`, pousser le tag, `gh release create vx.y.z <dmg> --latest --notes-file <notes.md>` (les versions 1.x ne sont plus des préversions), puis pousser `appcast.xml`.
@@ -186,7 +186,7 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
   - Onglet Autorisations et synthèse dans le tutoriel ; curseurs Liquid Glass (macOS 26+) ; zones cliquables agrandies ; boutons natifs dans les réglages.
   - Convertisseur (`Modules/Converter`, widget temporaire) : images, audio (afconvert), vidéo (AVFoundation, GIF), documents (CoreText) et PDF ; zones de dépôt toujours proposées : étagère, Convertir, AirDrop ; dépôt direct sur sa page ouverte.
 - Publié dans la 2.0.0 finale (24/10/2026) : tout ce qui précède, plus la demande Touch ID (empreinte puis coche rouge), l'étagère repliée réduite à son icône (elle quitte l'encoche une fois ses fichiers récupérés) et la suppression de l'ancrage des fenêtres. README réécrit pour la 2.0.
-- Reste à faire : vérifier la licence des deux animations LottieFiles (Face ID, Touch ID).
+- Animations de déverrouillage : « Apple Face ID » (Mau Ali) et « Fingerprint Touch ID » (Himanshu Patel), gratuites sous la Lottie Simple License (usage commercial et modification permis, crédit facultatif ; vérifié le 26/10/2026), créditées dans le README.
 
 ### Vidéo de présentation
 - Projet HyperFrames hors du dépôt : `~/Documents/Projets/Notchkit-video` (16:9 de 45 s à la racine, 9:16 de 30 s dans `vertical/`, textes `en.json` / `fr.json`, design calqué sur le code de l'app dans `design.md`). Rendus dans `renders/`.
@@ -200,7 +200,6 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 - La lecture AX, le rendu Liquid Glass et la détection de projet Terminal n'ont été vérifiés que par tests et captures, pas en usage réel sur une vraie encoche.
 - L'app n'est pas notarisée (clic droit > Ouvrir la première fois).
 - Les barres de l'égaliseur se figent parfois après un changement de bureau (encoche dans l'espace SkyLight) alors que les niveaux continuent d'arriver : non résolu, abandonné pour l'instant (réafficher l'espace et supprimer les animations implicites n'ont rien changé).
-- Sauvegardes à faire hors de ce Mac : certificat « Notchkit Self-Signed » (export .p12) et clé Sparkle (`generate_keys -x`).
 - Le module assistant IA est masqué (code conservé dans `Modules/Assistant`).
 - Convertisseur : pas de sortie MP3 (aucun encodeur dans macOS) ; un document converti en PDF garde le texte et ses styles, pas les images intégrées.
 

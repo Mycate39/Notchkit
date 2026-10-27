@@ -180,9 +180,10 @@ struct NotchLayoutTests {
     )
 
     @Test func pageMusiqueSeuleALaTailleDuLecteurEnVerre() {
-        #expect(NotchLayout.pageSize(moduleIDs: ["music"], glass: true) == NotchLayout.glassMusicPlayerSize)
-        #expect(NotchLayout.pageSize(moduleIDs: ["music"], glass: false) == nil)
-        #expect(NotchLayout.pageSize(moduleIDs: ["music", "clock"], glass: true) == nil)
+        #expect(NotchLayout.pageSize(moduleIDs: ["music"], sizes: [.large], fullPage: false, glass: true)
+                == NotchLayout.glassMusicPlayerSize)
+        #expect(!NotchLayout.isMusicPlayerPage(moduleIDs: ["music"], glass: false))
+        #expect(!NotchLayout.isMusicPlayerPage(moduleIDs: ["music", "clock"], glass: true))
         let player = NotchLayout.shapeSize(for: notch, isExpanded: true, hasCompactContent: true,
                                            pageSize: NotchLayout.glassMusicPlayerSize)
         #expect(player.height == NotchLayout.glassMusicPlayerSize.height)
@@ -340,7 +341,7 @@ struct NotchLayoutTests {
         let shape = NotchLayout.shapeSize(for: pill, isExpanded: true, hasCompactContent: false)
         let panel = NotchLayout.panelSize(for: pill, isExpanded: true, hasCompactContent: false)
         #expect(panel.height == shape.height + NotchLayout.pillTopInset)
-        #expect(shape.width == NotchLayout.expandedSize.width)
+        #expect(shape.width == NotchLayout.defaultExpandedSize.width)
     }
 }
 

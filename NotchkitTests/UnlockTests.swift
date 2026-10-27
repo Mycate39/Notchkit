@@ -16,6 +16,6 @@ struct UnlockTests {
         #expect(size == UnlockAnimations.size)
         // Dépliée, l'encoche garde sa taille normale.
         let expanded = NotchLayout.shapeSize(for: geometry, isExpanded: true, hasCompactContent: true, alertSize: UnlockAnimations.size)
-        #expect(expanded.width == NotchLayout.expandedSize.width)
+        #expect(expanded.width == NotchLayout.defaultExpandedSize.width)
     }
 }

@@ -227,16 +227,13 @@ final class DemoDirector {
                                ClaudeHookServer.waitKey: true])
         case "claude.answer":
             claude?.answerQuestions(Self.sessionID, selections: [step.prompt ?? "?": [step.value ?? ""]])
-        case "settings.accent", "settings.background", "settings.size", "settings.mascot", "settings.layout",
-             "settings.animation", "settings.custom":
+        case "settings.accent", "settings.background", "settings.mascot", "settings.layout", "settings.animation":
             var setup = DemoScenario.Setup()
             switch step.action {
             case "settings.accent": setup.accent = step.value
             case "settings.background": setup.background = step.value
-            case "settings.size": setup.size = step.value
             case "settings.mascot": setup.mascot = step.value
             case "settings.animation": setup.animation = step.value
-            case "settings.custom": setup.customSize = step.value
             default: setup.pages = step.pages; setup.sizes = step.sizes
             }
             var updated = settings.settings

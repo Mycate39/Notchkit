@@ -110,14 +110,11 @@ struct ModuleManagerLayoutTests {
 
 @MainActor
 struct AppearanceTests {
-    @Test func tailleDeLEncocheEtCapacite() {
-        let saved = NotchLayout.appearance
-        defer { NotchLayout.appearance = saved }
-        var appearance = NotchAppearance()
-        appearance.size = .large
-        NotchLayout.appearance = appearance
-        #expect(NotchLayout.expandedSize.width == 760)
-        #expect(NotchLayout.pageCapacity == 5)
+    @Test func anciensReglagesAvecTailleSeChargentToujours() throws {
+        // Les versions précédentes enregistraient une taille d'encoche : elle est ignorée.
+        let json = #"{"size": "large", "customWidth": 800, "customHeight": 230, "background": "glass"}"#
+        let appearance = try JSONDecoder().decode(NotchAppearance.self, from: Data(json.utf8))
+        #expect(appearance.background == .glass)
     }
 
     @Test func apparenceEnregistreeEtTolerante() throws {
@@ -132,16 +129,32 @@ struct AppearanceTests {
     }
 }
 
-struct CustomSizeTests {
-    @Test func taillePersonnalisee() {
-        var appearance = NotchAppearance()
-        appearance.size = .custom
-        appearance.customWidth = 800
-        appearance.customHeight = 230
-        #expect(appearance.expandedSize == CGSize(width: 800, height: 230))
-        #expect(appearance.pageCapacity == 5)
-        appearance.customWidth = 480
-        #expect(appearance.pageCapacity == 3)
+struct PageSizeTests {
+    @Test func largeurSuitLesWidgetsDeLaPage() {
+        let one = NotchLayout.pageSize(moduleIDs: ["clock"], sizes: [.small], fullPage: false, glass: false)
+        let two = NotchLayout.pageSize(moduleIDs: ["clock", "weather"], sizes: [.small, .large], fullPage: false, glass: false)
+        let full = NotchLayout.pageSize(moduleIDs: ["a", "b", "c", "d"], sizes: [.small, .small, .small, .small],
+                                        fullPage: false, glass: false)
+        #expect(one.width == NotchLayout.minExpandedWidth)
+        #expect(one.width < two.width && two.width < full.width)
+        #expect(full == NotchLayout.defaultExpandedSize)
+        // Hauteur fixe : les widgets sont dessinés pour elle.
+        #expect(Set([one.height, two.height, full.height]) == [NotchLayout.expandedHeight])
+    }
+
+    @Test func deuxMiniEmpilesPrennentUneSeuleColonne() {
+        let pair = NotchLayout.pageSize(moduleIDs: ["a", "b", "c"], sizes: [.mini, .mini, .large], fullPage: false, glass: false)
+        let alone = NotchLayout.pageSize(moduleIDs: ["a", "c"], sizes: [.mini, .large], fullPage: false, glass: false)
+        #expect(pair == alone)
+    }
+
+    @Test func pagePleineEtVerreSontPlusLarges() {
+        let agents = NotchLayout.pageSize(moduleIDs: ["agents"], sizes: [.large], fullPage: true, glass: false)
+        #expect(agents == NotchLayout.defaultExpandedSize)
+        let glass = NotchLayout.pageSize(moduleIDs: ["a", "b"], sizes: [.small, .small], fullPage: false, glass: true)
+        let black = NotchLayout.pageSize(moduleIDs: ["a", "b"], sizes: [.small, .small], fullPage: false, glass: false)
+        #expect(glass.width > black.width)
+        #expect(NotchLayout.maxExpandedSize.width >= glass.width)
     }
 }
 

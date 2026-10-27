@@ -26,32 +26,6 @@ struct AppearanceSettingsView: View {
                     .listRowBackground(Color.clear)
             }
 
-            Section("Taille de l'encoche dépliée") {
-                Picker("Taille", selection: appearance.size) {
-                    ForEach(NotchAppearance.Size.allCases) { size in
-                        Text(size.title).tag(size)
-                    }
-                }
-                .pickerStyle(.segmented)
-                if settings.settings.appearance.size == .custom {
-                    LabeledContent("Largeur") {
-                        HStack {
-                            Slider(value: $settings.settings.appearance.customWidth, in: NotchAppearance.customWidthRange, step: 10)
-                            Text("\(Int(settings.settings.appearance.customWidth)) pt").monospacedDigit().frame(width: 56, alignment: .trailing)
-                        }
-                    }
-                    LabeledContent("Hauteur") {
-                        HStack {
-                            Slider(value: $settings.settings.appearance.customHeight, in: NotchAppearance.customHeightRange, step: 2)
-                            Text("\(Int(settings.settings.appearance.customHeight)) pt").monospacedDigit().frame(width: 56, alignment: .trailing)
-                        }
-                    }
-                }
-                Text("Une encoche plus grande accueille plus de widgets par page (\(settings.settings.appearance.pageCapacity.formatted()) unités de largeur).")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
-
             Section("Animations") {
                 // Liaison explicite : sur un Binding, « .animation » désigne une méthode de SwiftUI.
                 Picker("Style", selection: Binding(
@@ -157,7 +131,7 @@ private struct AppearancePreview: View {
     @State private var expanded = true
 
     var body: some View {
-        let size = appearance.expandedSize
+        let size = NotchLayout.defaultExpandedSize
         let scale: CGFloat = 0.62
         let style = appearance.animation.spring
 

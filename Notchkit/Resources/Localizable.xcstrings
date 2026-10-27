@@ -513,6 +513,7 @@
       }
     },
     "%lld pt" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4333,6 +4334,7 @@
       }
     },
     "Compacte" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7177,6 +7179,7 @@
       }
     },
     "Grande" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7209,6 +7212,7 @@
       }
     },
     "Hauteur" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8199,6 +8203,7 @@
       }
     },
     "Largeur" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10654,6 +10659,7 @@
       }
     },
     "Personnalisée" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -12605,6 +12611,7 @@
       }
     },
     "Standard" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -12830,6 +12837,7 @@
       }
     },
     "Taille de l'encoche dépliée" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -13440,6 +13448,7 @@
       }
     },
     "Une encoche plus grande accueille plus de widgets par page (%@ unités de largeur)." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

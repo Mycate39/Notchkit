@@ -326,7 +326,8 @@ final class NotchWindowController {
     /// Donne à la vue SwiftUI la plus grande taille possible de l'encoche, centrée en haut.
     private func layoutHostingView() {
         let geometry = viewModel.geometry
-        let expanded = NotchLayout.panelSize(for: geometry, isExpanded: true, hasCompactContent: true)
+        let expanded = NotchLayout.panelSize(for: geometry, isExpanded: true, hasCompactContent: true,
+                                             pageSize: NotchLayout.maxExpandedSize)
         let compact = NotchLayout.panelSize(for: geometry, isExpanded: false, hasCompactContent: true)
         // Plus la marge réservée à l'ombre de l'encoche dépliée.
         let margin = NotchLayout.expandedShadowMargin

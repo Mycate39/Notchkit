@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Banc d'essai visuel : filme la vraie encoche (mode démo, build Debug) dans toutes les combinaisons
-de widget, de taille de widget, de taille d'encoche et de style d'animation, puis prépare l'analyse.
+de widget, de taille de widget et de style d'animation, puis prépare l'analyse.
 
 Usage :
   python3 scripts/visual-matrix.py scenarios   # écrit les scénarios dans build.noindex/visual-matrix/
@@ -13,7 +13,7 @@ Usage :
   --only widget,widget…   (avec scenarios / record) : seulement ces widgets et les pages mélangées,
                           sans les styles d'animation (vérification rapide d'une correction)
 
-Une prise par taille d'encoche ; chacune enchaîne :
+Une seule prise (la largeur de l'encoche suit les widgets), qui enchaîne :
   1. chaque widget seul, dans chaque taille (Mini, Petit, Moyen, Grand) : ouverture, pause, fermeture ;
   2. des pages mélangées (tirage fixe) ;
   3. chaque style d'animation (Fluide, Rapide, Rebondissante, Aucune) : ouverture, pages, fermeture,
@@ -31,13 +31,8 @@ WIDGETS = ["music", "clock", "battery", "calendar", "weather", "activities", "cl
            "translation", "airpods", "systemhud", "videodownload"]
 SIZES = ["mini", "small", "medium", "large"]
 ANIMATIONS = ["fluid", "quick", "bouncy", "none"]
-NOTCHES = {
-    "compact": {"size": "compact"},
-    "standard": {"size": "standard"},
-    "large": {"size": "large"},
-    "custom-min": {"customSize": "480x150"},
-    "custom-max": {"customSize": "960x280"},
-}
+# Plus de taille d'encoche à choisir : sa largeur suit les widgets de la page. Une seule prise.
+NOTCHES = {"auto": {}}
 OTHER_MODULES = ["agents", "claude", "unlock", "gamemode"]
 
 # Données factices posées au début (aucune donnée réelle de l'utilisateur n'est filmée).

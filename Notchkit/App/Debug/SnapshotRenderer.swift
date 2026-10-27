@@ -15,7 +15,7 @@ enum SnapshotRenderer {
         // Encoche dépliée, page par page (contenu des cartes, hors zone défilante).
         for page in ModulePage.pages(from: manager) {
             save(PageView(page: page, viewModel: viewModel)
-                    .frame(width: NotchLayout.expandedSize.width - 36, height: 140)
+                    .frame(width: NotchLayout.defaultExpandedSize.width - 36, height: 140)
                     .padding(18)
                     .background(.black)
                     .foregroundStyle(.white)

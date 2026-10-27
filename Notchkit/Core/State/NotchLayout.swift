@@ -44,12 +44,38 @@ enum NotchLayout {
     static let lockScreenSideWidth: CGFloat = 150
     /// Hauteur du fondu au bas des listes défilantes des widgets (rappels, presse-papiers, téléchargements).
     static let scrollFadeLength: CGFloat = 14
-    /// Taille de l'encoche dépliée.
     /// Apparence en vigueur (mise à jour par l'AppDelegate quand les réglages changent ;
     /// lue et écrite uniquement sur le thread principal).
     nonisolated(unsafe) static var appearance = NotchAppearance()
 
-    static var expandedSize: CGSize { appearance.expandedSize }
+    /// Encoche ouverte : pas de taille à choisir. La hauteur est fixe (les widgets sont dessinés pour
+    /// elle) et la largeur suit les widgets de la page affichée (`expandedSize(columnWeights:glass:)`).
+    static let expandedHeight: CGFloat = 190
+    /// Largeur d'un widget Petit (une unité) ; Mini, Moyen et Grand en font 0,5, 1,5 et 2.
+    static let widgetUnitWidth: CGFloat = 140
+    /// Marge entre les widgets et le bord de l'encoche, en plus du congé.
+    static let pageSideMargin: CGFloat = 18
+    /// Encoche ouverte la plus étroite (onglets des pages et réglages dans l'en-tête).
+    static let minExpandedWidth: CGFloat = 360
+
+    /// Largeur et hauteur de l'encoche ouverte pour une page dont les colonnes ont ces poids (Petit = 1),
+    /// sans les congés de base que la forme ajoute de chaque côté (`shapeSize`).
+    static func expandedSize(columnWeights: [CGFloat], glass: Bool) -> CGSize {
+        let gap = widgetSpacing(onGlass: glass).columns
+        let content = columnWeights.reduce(0, +) * widgetUnitWidth + gap * CGFloat(max(0, columnWeights.count - 1))
+        let margins = 2 * (earRadius(glass: glass, isExpanded: true) + pageSideMargin) - 2 * earRadius
+        return CGSize(width: max(minExpandedWidth, (content + margins).rounded()), height: expandedHeight)
+    }
+
+    /// Page pleine (quatre widgets Petit) : page vide, zones de dépôt, éditeur de disposition.
+    static var defaultExpandedSize: CGSize { expandedSize(columnWeights: [1, 1, 1, 1], glass: false) }
+
+    /// Plus grande encoche ouverte possible (taille de la vue dans la fenêtre) : une page pleine de
+    /// colonnes de Mini, avec les écarts du verre, ou le lecteur de musique.
+    static var maxExpandedSize: CGSize {
+        let widest = expandedSize(columnWeights: Array(repeating: 0.5, count: Int(pageCapacity * 2)), glass: true)
+        return CGSize(width: widest.width, height: max(expandedHeight, glassMusicPlayerSize.height))
+    }
     /// Décalage de la pastille par rapport au haut de l'écran.
     static let pillTopInset: CGFloat = 3
     /// Hauteur ajoutée à la pastille en affichage « île » (lecture de musique).
@@ -184,9 +210,18 @@ enum NotchLayout {
     /// de l'iPhone (deux fois plus large que haute) ; elle s'agrandit en passant à une autre page.
     static let glassMusicPlayerSize = CGSize(width: 440, height: 222)
 
-    /// Taille de l'encoche ouverte propre à une page (`nil` : taille choisie dans les réglages).
-    static func pageSize(moduleIDs: [String], glass: Bool) -> CGSize? {
-        glass && moduleIDs == ["music"] ? glassMusicPlayerSize : nil
+    /// Page qui ne contient que la musique, en mode verre : présentée en lecteur (`glassMusicPlayerSize`).
+    static func isMusicPlayerPage(moduleIDs: [String], glass: Bool) -> Bool {
+        glass && moduleIDs == ["music"]
+    }
+
+    /// Taille de l'encoche ouverte pour une page : lecteur pour la musique seule en mode verre, page
+    /// pleine pour un widget pleine page (Agents), sinon d'après la largeur de ses colonnes de widgets.
+    static func pageSize(moduleIDs: [String], sizes: [WidgetSize], fullPage: Bool, glass: Bool) -> CGSize {
+        if isMusicPlayerPage(moduleIDs: moduleIDs, glass: glass) { return glassMusicPlayerSize }
+        if fullPage { return expandedSize(columnWeights: Array(repeating: 1, count: Int(pageCapacity)), glass: glass) }
+        let weights = WidgetColumns.make(sizes: sizes).map { sizes[$0[0]].weight }
+        return expandedSize(columnWeights: weights, glass: glass)
     }
 
     /// Congé qui raccorde l'encoche au haut de l'écran.
@@ -287,7 +322,7 @@ enum NotchLayout {
         }
 
         if isExpanded {
-            let target = pageSize ?? expandedSize
+            let target = pageSize ?? defaultExpandedSize
             let width = max(target.width, closed.width + compactSideWidth * 2)
             return CGSize(width: width + ears, height: max(target.height, closed.height))
         }
@@ -313,7 +348,7 @@ enum NotchLayout {
     }
 
     /// Largeur totale (en poids de cartes) d'une page de l'encoche dépliée.
-    static var pageCapacity: CGFloat { appearance.pageCapacity }
+    static let pageCapacity: CGFloat = 4
 
     /// Répartit les cartes en pages, dans l'ordre, sans dépasser `capacity` par page.
     /// Renvoie les indices des cartes de chaque page. Une carte trop large occupe une page seule.

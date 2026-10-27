@@ -305,11 +305,26 @@ final class NotchViewModel {
                               island: isIsland, pageSize: pageSize)
     }
 
-    /// Taille de l'encoche ouverte propre à la page affichée (lecteur de musique seul en mode verre).
+    /// Taille de l'encoche ouverte pour la page affichée : elle suit ses widgets et leurs tailles
+    /// (`nil` : page pleine, pendant un glisser-déposer ou sans page).
     var pageSize: CGSize? {
+        guard !isDropMode else { return nil }
         let pages = ModulePage.pages(from: manager)
         guard pages.indices.contains(selectedPage) else { return nil }
-        return NotchLayout.pageSize(moduleIDs: pages[selectedPage].modules.map(\.id), glass: appearance.usesGlassWidgets)
+        return pageSize(for: pages[selectedPage])
+    }
+
+    /// Taille de l'encoche ouverte sur une page donnée (chaque page est dessinée à sa propre taille).
+    func pageSize(for page: ModulePage) -> CGSize {
+        let modules = page.modules
+        return NotchLayout.pageSize(moduleIDs: modules.map(\.id), sizes: modules.map(\.size),
+                                    fullPage: modules.contains { type(of: $0.module).descriptor.fullPage },
+                                    glass: appearance.usesGlassWidgets)
+    }
+
+    /// Forme de l'encoche ouverte sur une page donnée.
+    func expandedShapeSize(for page: ModulePage) -> CGSize {
+        NotchLayout.shapeSize(for: geometry, isExpanded: true, hasCompactContent: true, pageSize: pageSize(for: page))
     }
 
     /// Forme de l'encoche ouverte sur la page affichée.

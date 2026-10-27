@@ -52,14 +52,12 @@ struct DemoScenario: Decodable {
         var modules: [String]?
         var pages: [[String]]?
         var sizes: [String: String]?
-        /// Couleur d'accent `#RRGGBB`, fond (`black`, `graphite`, `glass`), taille d'encoche, mascotte
+        /// Couleur d'accent `#RRGGBB`, fond (`black`, `graphite`, `glass`), mascotte
         var accent: String?
         var background: String?
-        var size: String?
         var mascot: String?
-        /// Style d'animation (`fluid`, `quick`, `bouncy`, `none`) et taille libre `LARGEURxHAUTEUR`
+        /// Style d'animation (`fluid`, `quick`, `bouncy`, `none`)
         var animation: String?
-        var customSize: String?
     }
 
     var duration: Double
@@ -127,15 +125,9 @@ enum DemoSettings {
         if let background = setup.background.flatMap(NotchAppearance.Background.init(rawValue:)) {
             settings.appearance.background = background
         }
-        if let size = setup.size.flatMap(NotchAppearance.Size.init(rawValue:)) { settings.appearance.size = size }
         if let mascot = setup.mascot.flatMap(MascotDesign.init(rawValue:)) { settings.mascot = mascot }
         if let animation = setup.animation.flatMap(NotchAppearance.AnimationStyle.init(rawValue:)) {
             settings.appearance.animation = animation
-        }
-        if let parts = setup.customSize?.split(separator: "x").compactMap({ Double($0) }), parts.count == 2 {
-            settings.appearance.size = .custom
-            settings.appearance.customWidth = parts[0]
-            settings.appearance.customHeight = parts[1]
         }
     }
 

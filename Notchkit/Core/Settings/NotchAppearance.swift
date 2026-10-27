@@ -25,46 +25,6 @@ struct StoredColor: Codable, Equatable, Sendable {
 
 /// Apparence de l'encoche choisie dans les réglages (onglet « Apparence »).
 struct NotchAppearance: Codable, Equatable, Sendable {
-    enum Size: String, Codable, CaseIterable, Identifiable, Sendable {
-        case compact, standard, large
-        /// Taille libre, réglée avec des curseurs.
-        case custom
-        var id: String { rawValue }
-
-        var title: LocalizedStringResource {
-            switch self {
-            case .compact: "Compacte"
-            case .standard: "Standard"
-            case .large: "Grande"
-            case .custom: "Personnalisée"
-            }
-        }
-
-        /// Taille de l'encoche dépliée (pour « Personnalisée », voir `NotchAppearance.expandedSize`).
-        var expandedSize: CGSize {
-            switch self {
-            case .compact: CGSize(width: 560, height: 176)
-            case .standard: CGSize(width: 640, height: 190)
-            case .large: CGSize(width: 760, height: 214)
-            case .custom: CGSize(width: 680, height: 200)
-            }
-        }
-
-        /// Largeur d'une page, en tailles de widget (Petit = 1).
-        var pageCapacity: CGFloat {
-            switch self {
-            case .compact: 3.5
-            case .standard: 4
-            case .large: 5
-            case .custom: 4
-            }
-        }
-    }
-
-    /// Bornes des curseurs de taille personnalisée.
-    static let customWidthRange: ClosedRange<Double> = 480...960
-    static let customHeightRange: ClosedRange<Double> = 150...280
-
     enum AnimationStyle: String, Codable, CaseIterable, Identifiable, Sendable {
         case fluid, quick, bouncy, none
         var id: String { rawValue }
@@ -105,9 +65,6 @@ struct NotchAppearance: Codable, Equatable, Sendable {
         }
     }
 
-    var size: Size = .standard
-    var customWidth: Double = 680
-    var customHeight: Double = 200
     var animation: AnimationStyle = .fluid
     var background: Background = .black
     var customBackground = StoredColor(red: 0.1, green: 0.1, blue: 0.18)
@@ -118,29 +75,16 @@ struct NotchAppearance: Codable, Equatable, Sendable {
 
     init() {}
 
-    // Décodage tolérant (nouveaux réglages ajoutés plus tard).
+    // Décodage tolérant (nouveaux réglages ajoutés plus tard ; la taille d'encoche des anciennes versions,
+    // remplacée par une taille qui suit les widgets, est ignorée).
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
         let d = NotchAppearance()
-        size = (try? c.decodeIfPresent(Size.self, forKey: .size)) ?? d.size
-        customWidth = (try? c.decodeIfPresent(Double.self, forKey: .customWidth)) ?? d.customWidth
-        customHeight = (try? c.decodeIfPresent(Double.self, forKey: .customHeight)) ?? d.customHeight
         animation = (try? c.decodeIfPresent(AnimationStyle.self, forKey: .animation)) ?? d.animation
         background = (try? c.decodeIfPresent(Background.self, forKey: .background)) ?? d.background
         customBackground = (try? c.decodeIfPresent(StoredColor.self, forKey: .customBackground)) ?? d.customBackground
         accent = try? c.decodeIfPresent(StoredColor.self, forKey: .accent)
         sliderColor = try? c.decodeIfPresent(StoredColor.self, forKey: .sliderColor)
-    }
-
-    /// Taille effective de l'encoche dépliée.
-    var expandedSize: CGSize {
-        size == .custom ? CGSize(width: customWidth.rounded(), height: customHeight.rounded()) : size.expandedSize
-    }
-
-    /// Largeur d'une page (en tailles de widget) : proportionnelle à la largeur pour la taille libre.
-    var pageCapacity: CGFloat {
-        guard size == .custom else { return size.pageCapacity }
-        return max(2.5, (CGFloat(customWidth) / 160 * 2).rounded(.down) / 2)
     }
 
     /// Couleur d'accent effective.

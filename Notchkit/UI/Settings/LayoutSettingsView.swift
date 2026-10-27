@@ -59,7 +59,7 @@ struct LayoutEditorContent: View {
 
 private struct PageEditor: View {
     /// Dimensions réelles de la zone des widgets dans l'encoche dépliée.
-    static let realWidth: CGFloat = NotchLayout.expandedSize.width - 36
+    static let realWidth: CGFloat = NotchLayout.defaultExpandedSize.width - 36
     static let realHeight: CGFloat = 140
 
     let manager: ModuleManager

@@ -58,12 +58,16 @@ struct SystemMonitorExpandedView: View {
         HStack(alignment: .top, spacing: 12) {
             VStack(alignment: .leading, spacing: 6) {
                 HStack(alignment: .firstTextBaseline, spacing: 6) {
+                    // Le pourcentage n'est jamais tronqué (« 20… ») : c'est le libellé qui cède la place.
                     Text(SystemFormat.percent(s.cpuTotal))
                         .font(.system(size: 24, weight: .bold, design: .rounded).monospacedDigit())
                         .foregroundStyle(.tint)
+                        .fixedSize()
                     Text("Processeur")
                         .font(.system(size: 10, weight: .medium))
                         .foregroundStyle(.white.opacity(0.6))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
                 }
                 CoreBars(values: s.cpuCores)
                     .frame(height: 18)

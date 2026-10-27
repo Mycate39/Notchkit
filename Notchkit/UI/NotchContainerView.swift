@@ -516,23 +516,30 @@ private struct ExpandedNotchView: View {
                     .foregroundStyle(.white.opacity(0.6))
             }
         } else {
-            // Pages côte à côte : balayage au trackpad (`PageSwiper`) ou clic sur les onglets.
+            // Pages côte à côte : balayage au trackpad (`PageSwiper`) ou clic sur les onglets. Chaque page
+            // est dessinée à sa propre taille (`pageSize(for:)`), une fois pour toutes : quand l'encoche
+            // s'élargit ou se resserre en changeant de page, les pages glissent sans que leur contenu se
+            // réorganise en chemin.
+            let header = max(viewModel.geometry.closedSize.height, 28)
+            let sizes = pages.map { viewModel.expandedShapeSize(for: $0) }
+            let widths = sizes.map(\.width)
+            // Hauteur de la zone des widgets : forme, moins l'en-tête et les marges du haut et du bas.
+            let heights = sizes.map { max(0, $0.height - header - 20) }
             GeometryReader { proxy in
-                let width = proxy.size.width
                 let current = min(viewModel.selectedPage, pages.count - 1)
-                HStack(spacing: 0) {
-                    ForEach(pages) { page in
+                HStack(alignment: .top, spacing: 0) {
+                    ForEach(Array(pages.enumerated()), id: \.element.id) { index, page in
                         PageView(page: page, viewModel: viewModel)
                             .padding(.horizontal, horizontalPadding)
-                            .frame(width: width, height: proxy.size.height)
+                            .frame(width: widths[index], height: heights[index])
                     }
                 }
-                .offset(x: -CGFloat(current) * width + swiper.swipe.offset(page: current, pageCount: pages.count))
-                .frame(width: width, height: proxy.size.height, alignment: .leading)
+                .offset(x: -widths.prefix(current).reduce(0, +) + swiper.swipe.offset(page: current, pageCount: pages.count))
+                .frame(width: proxy.size.width, height: proxy.size.height, alignment: .topLeading)
                 .clipped()
                 .contentShape(Rectangle())
-                .onAppear { swiper.pageWidth = width }
-                .onChange(of: width) { _, new in swiper.pageWidth = new }
+                .onAppear { swiper.pageWidth = widths[current] }
+                .onChange(of: widths[current]) { _, new in swiper.pageWidth = new }
             }
             .onAppear { startSwiping() }
             .onDisappear { swiper.stop() }
@@ -667,7 +674,7 @@ struct PageView: View {
     var body: some View {
         GeometryReader { proxy in
             let gaps = NotchLayout.widgetSpacing(onGlass: onGlass)
-            let ownsSize = NotchLayout.pageSize(moduleIDs: page.modules.map(\.id), glass: onGlass) != nil
+            let ownsSize = NotchLayout.isMusicPlayerPage(moduleIDs: page.modules.map(\.id), glass: onGlass)
             let spacing = gaps.columns
             let columns = WidgetColumns.make(sizes: page.modules.map(\.size))
             let columnWeights = columns.map { page.modules[$0[0]].size.weight }

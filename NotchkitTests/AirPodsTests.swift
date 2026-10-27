@@ -46,3 +46,13 @@ struct AirPodsTests {
         #expect(BluetoothInventory.parse(Data("pas du json".utf8)).isEmpty)
     }
 }
+
+@MainActor
+struct TextAlertTests {
+    @Test func alertesTexteElargiesPourNePasCouperLeMot() {
+        let device = HeadphoneDevice(id: 1, uid: "test", name: "AirPods", isDefaultOutput: false)
+        #expect(AirPodsAlerts.disconnected(device).sideWidth == NotchLayout.textAlertSideWidth)
+        #expect(HealthAlerts.drinkWater().sideWidth == NotchLayout.phraseAlertSideWidth)
+        #expect(NotchLayout.textAlertSideWidth > NotchLayout.compactSideWidth)
+    }
+}

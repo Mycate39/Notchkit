@@ -406,7 +406,7 @@ struct BubblePlaybackControls: View {
 /// Bouton AirPlay de macOS (choix de la sortie audio), via `AVRoutePickerView` (API publique).
 struct AirPlayButton: NSViewRepresentable {
     func makeNSView(context: Context) -> AVRoutePickerView {
-        let picker = AVRoutePickerView()
+        let picker = FirstClickRoutePicker()
         picker.isRoutePickerButtonBordered = false
         picker.setRoutePickerButtonColor(.white.withAlphaComponent(0.55), for: .normal)
         picker.setRoutePickerButtonColor(.white, for: .normalHighlighted)
@@ -418,6 +418,36 @@ struct AirPlayButton: NSViewRepresentable {
     }
 
     func updateNSView(_ view: AVRoutePickerView, context: Context) {}
+}
+
+/// Bouton AirPlay qui répond au premier clic. Dans une fenêtre qui n'est pas au premier plan (grand
+/// lecteur de l'écran verrouillé), le bouton interne de macOS ne servait qu'à activer la fenêtre : un
+/// clic sur deux était perdu, et un double clic ouvrait puis refermait aussitôt le menu des sorties.
+private final class FirstClickRoutePicker: AVRoutePickerView {
+    override func acceptsFirstMouse(for event: NSEvent?) -> Bool { true }
+
+    // Le clic arrive ici plutôt qu'au bouton interne, qui refuse le premier clic.
+    override func hitTest(_ point: NSPoint) -> NSView? {
+        super.hitTest(point) == nil ? nil : self
+    }
+
+    override func mouseDown(with event: NSEvent) {
+        // Second clic d'un double clic : le menu est déjà ouvert, on ne le referme pas.
+        guard event.clickCount == 1 else { return }
+        if let button = Self.button(in: self) {
+            button.performClick(nil)
+        } else {
+            super.mouseDown(with: event)
+        }
+    }
+
+    private static func button(in view: NSView) -> NSButton? {
+        for subview in view.subviews {
+            if let button = subview as? NSButton { return button }
+            if let button = button(in: subview) { return button }
+        }
+        return nil
+    }
 }
 
 // MARK: - Réglages

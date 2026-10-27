@@ -19,6 +19,13 @@ struct NotchAlert: Identifiable {
     var centersExpandedContent = false
     var expandedCornerRadius: CGFloat?
 
+    /// Même alerte, avec les côtés élargis pour le texte de droite (`NotchLayout.textAlertSideWidth`).
+    func withTextSides(_ width: CGFloat = NotchLayout.textAlertSideWidth) -> NotchAlert {
+        var alert = self
+        alert.sideWidth = width
+        return alert
+    }
+
     init(leading: AnyView = AnyView(EmptyView()), trailing: AnyView = AnyView(EmptyView()),
          duration: Duration = .seconds(2.5),
          expandedContent: AnyView? = nil, expandedSize: CGSize? = nil) {

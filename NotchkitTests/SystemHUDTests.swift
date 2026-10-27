@@ -76,3 +76,15 @@ struct VolumeTouchBarTests {
         #expect(SystemHUDModule.isNewVolumeChange(shown: state(.brightness, level: 0.5, muted: false), level: 0.5, muted: false))
     }
 }
+
+struct LevelRampTests {
+    @Test func glissementProgressifJusquAuNiveauVise() {
+        #expect(LevelRamp.value(from: 0.5, to: 0.5625, progress: 0) == 0.5)
+        #expect(LevelRamp.value(from: 0.5, to: 0.5625, progress: 1) == 0.5625)
+        let middle = LevelRamp.value(from: 0, to: 1, progress: 0.5)
+        // Ralentit à l'arrivée : plus de la moitié du chemin à mi-temps, sans dépasser.
+        #expect(middle > 0.5 && middle < 1)
+        #expect(LevelRamp.value(from: 0, to: 1, progress: 2) == 1)
+        #expect(LevelRamp.clamped(1.06) == 1 && LevelRamp.clamped(-0.06) == 0)
+    }
+}

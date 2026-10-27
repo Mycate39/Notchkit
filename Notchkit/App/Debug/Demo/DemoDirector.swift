@@ -161,11 +161,15 @@ final class DemoDirector {
         case "airpods.connect":
             guard let airPods else { break }
             let device = HeadphoneDevice(id: 1, uid: "demo-airpods", name: step.title ?? "AirPods Pro", isDefaultOutput: true)
-            airPods.debugSetDevices([device], bluetooth: [
+            // `"value": "sans-batterie"` : batterie inconnue, l'alerte affiche « Connectés ».
+            airPods.debugSetDevices([device], bluetooth: step.value == "sans-batterie" ? [] : [
                 BluetoothDeviceInfo(name: device.name, address: "", minorType: "Headphones",
                                     battery: BluetoothBattery(left: 92, right: 88, caseLevel: 64, main: nil)),
             ])
             viewModel.present(AirPodsAlerts.connected(device, module: airPods))
+        case "alert":
+            // Toutes les alertes simples, une par nom (`value`), pour le banc d'essai visuel.
+            if let alert = demoAlert(step.value ?? "") { viewModel.present(alert) }
         case "battery.plug":
             battery?.debugSetState(BatteryState(level: Int(step.level ?? 62), isCharging: true, isCharged: false,
                                                 powerSource: .ac, minutesToFull: 75))
@@ -292,6 +296,30 @@ final class DemoDirector {
 
     private var lastTimerID: String? {
         activities?.activities.last(where: { $0.kind == .timer })?.id
+    }
+
+    /// Alerte du nom donné (action `alert`), construite par la fabrique du module concerné.
+    private func demoAlert(_ name: String) -> NotchAlert? {
+        let headphones = HeadphoneDevice(id: 1, uid: "demo-airpods", name: "AirPods Pro", isDefaultOutput: true)
+        let mascot = DemoSettings.defaults.data(forKey: DemoSettings.storageKey)
+            .flatMap { try? JSONDecoder().decode(AppSettings.self, from: $0) }?.mascot ?? MascotDesign.allCases[0]
+        switch name {
+        case "airpods.disconnected": return AirPodsAlerts.disconnected(headphones)
+        case "timer.finished": return LiveActivityAlerts.timerFinished(LiveActivity.timer(duration: 60))
+        case "pomodoro.work": return LiveActivityAlerts.pomodoroPhase(.work)
+        case "pomodoro.break": return LiveActivityAlerts.pomodoroPhase(.rest)
+        case "download.finished": return LiveActivityAlerts.downloadFinished()
+        case "video.finished": return VideoDownloadAlerts.finished()
+        case "claude.finished": return ClaudeAlerts.finished(mascot: mascot)
+        case "converter.failed": return ConverterAlerts.finished(count: 1, succeeded: false)
+        case "shelf.added": return ShelfAlerts.added(3)
+        case "shelf.done": return ShelfAlerts.actionFinished(symbol: "doc.zipper", succeeded: true)
+        case "shelf.failed": return ShelfAlerts.actionFinished(symbol: "doc.zipper", succeeded: false)
+        case "health.break": return HealthAlerts.takeBreak()
+        case "health.water": return HealthAlerts.drinkWater()
+        case "clipboard.copied": return ClipboardAlerts.copied()
+        default: return nil
+        }
     }
 
     private var music: MusicModule? { manager.module(for: MusicModule.descriptor.id) as? MusicModule }

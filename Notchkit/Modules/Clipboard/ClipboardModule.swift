@@ -110,11 +110,7 @@ final class ClipboardModule: NotchModule {
         lastChangeCount = ownChangeCount ?? lastChangeCount
         // Remonte en tête de l'historique.
         add(ClipboardItem(content: item.content, sourceApp: item.sourceApp))
-        context.presentAlert(NotchAlert(
-            leading: AnyView(Image(systemName: "doc.on.clipboard.fill").foregroundStyle(.white)),
-            trailing: AnyView(Text("Copié").foregroundStyle(.green)),
-            duration: .seconds(1.5)
-        ))
+        context.presentAlert(ClipboardAlerts.copied())
     }
 
     /// Garde l'encoche ouverte pendant une recherche.
@@ -207,3 +203,15 @@ extension ClipboardModule {
     }
 }
 #endif
+
+enum ClipboardAlerts {
+    /// Élément de l'historique recopié dans le presse-papiers.
+    @MainActor
+    static func copied() -> NotchAlert {
+        NotchAlert(
+            leading: AnyView(Image(systemName: "doc.on.clipboard.fill").foregroundStyle(.white)),
+            trailing: AnyView(Text("Copié").foregroundStyle(.green)),
+            duration: .seconds(1.5)
+        ).withTextSides()
+    }
+}

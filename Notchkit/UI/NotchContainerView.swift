@@ -340,7 +340,9 @@ private struct CompactNotchView: View {
     /// Une alerte en cours passe avant le module compact.
     private var content: (AnyView?, AnyView?) {
         if let alert = viewModel.currentAlert {
-            return (alert.leading, alert.trailing)
+            // Identité propre à chaque alerte : deux alertes de suite du même module (branchement puis
+            // batterie faible) ne réutilisent pas l'état animé de la précédente (niveau, éclair).
+            return (AnyView(alert.leading.id(alert.id)), AnyView(alert.trailing.id(alert.id)))
         }
         if let module = viewModel.lockScreenModule {
             return (module.lockScreenLeading(), module.lockScreenTrailing())

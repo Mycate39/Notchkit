@@ -40,6 +40,11 @@ enum NotchLayout {
     static let compactSideWidth: CGFloat = activitySideWidth
     /// Exception : l'indicateur de volume et de luminosité, dont la barre serait illisible à la largeur de la musique.
     static let levelIndicatorSideWidth: CGFloat = 80
+    /// Autre exception : une alerte qui écrit un mot à droite (« Connectés », « Terminé », « Copié »…),
+    /// qui serait sinon coupé (« Co… ») à la largeur de la musique.
+    static let textAlertSideWidth: CGFloat = 90
+    /// Alerte à phrase courte (rappels de Santé : « Faites une pause »), sinon réduite et peu lisible.
+    static let phraseAlertSideWidth: CGFloat = 120
     /// Lecteur de l'écran verrouillé (pochette et titre, commandes) : l'encoche s'élargit sans descendre.
     static let lockScreenSideWidth: CGFloat = 150
     /// Grand lecteur de l'écran verrouillé, sous l'heure de macOS : pochette carrée puis panneau en verre.

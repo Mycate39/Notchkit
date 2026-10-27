@@ -141,7 +141,7 @@ enum HealthAlerts {
             leading: AnyView(Image(systemName: "figure.walk").foregroundStyle(.green)),
             trailing: AnyView(Text("Faites une pause").foregroundStyle(.green).minimumScaleFactor(0.7)),
             duration: .seconds(6)
-        )
+        ).withTextSides(NotchLayout.phraseAlertSideWidth)
     }
 
     @MainActor
@@ -150,7 +150,7 @@ enum HealthAlerts {
             leading: AnyView(Image(systemName: "drop.fill").foregroundStyle(.cyan)),
             trailing: AnyView(Text("Un verre d'eau ?").foregroundStyle(.cyan).minimumScaleFactor(0.7)),
             duration: .seconds(6)
-        )
+        ).withTextSides(NotchLayout.phraseAlertSideWidth)
     }
 }
 

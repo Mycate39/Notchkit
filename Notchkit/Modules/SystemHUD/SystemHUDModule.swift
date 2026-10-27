@@ -65,6 +65,9 @@ final class SystemHUDModule: NotchModule {
     @ObservationIgnored private let context: ModuleContext
     @ObservationIgnored private let tap = MediaKeyTap()
     @ObservationIgnored private let volumeObserver = VolumeObserver()
+    /// Volume et luminosité glissent vers leur nouveau niveau, comme avec macOS, au lieu de sauter.
+    @ObservationIgnored private let volumeRamp = LevelRamp { SystemVolume.volume = $0 }
+    @ObservationIgnored private let brightnessRamp = LevelRamp { DisplayBrightness.brightness = $0 }
     @ObservationIgnored private var trustPolling: Task<Void, Never>?
     @ObservationIgnored private var isStarted = false
     /// Alerte unique, réaffichée à chaque appui (même identifiant : prolongée, pas recréée).
@@ -156,8 +159,11 @@ final class SystemHUDModule: NotchModule {
         case .volumeUp, .volumeDown:
             guard SystemVolume.isAdjustable else { return false }
             if SystemVolume.isMuted { SystemVolume.isMuted = false }
-            SystemVolume.volume += key == .volumeUp ? step : -step
-            show(.volume, level: SystemVolume.volume, muted: SystemVolume.volume == 0)
+            // Appuis rapprochés : le cran part du niveau visé, pas du niveau atteint en cours de glissement.
+            let current = volumeRamp.target ?? SystemVolume.volume
+            let level = LevelRamp.clamped(current + (key == .volumeUp ? step : -step))
+            volumeRamp.move(from: SystemVolume.volume, to: level)
+            show(.volume, level: level, muted: level == 0)
             return true
         case .mute:
             guard SystemVolume.isAdjustable else { return false }
@@ -166,14 +172,17 @@ final class SystemHUDModule: NotchModule {
             return true
         case .brightnessUp, .brightnessDown:
             guard DisplayBrightness.isAvailable, let current = DisplayBrightness.brightness else { return false }
-            DisplayBrightness.brightness = current + (key == .brightnessUp ? step : -step)
-            show(.brightness, level: DisplayBrightness.brightness ?? current, muted: false)
+            let level = LevelRamp.clamped((brightnessRamp.target ?? current) + (key == .brightnessUp ? step : -step))
+            brightnessRamp.move(from: current, to: level)
+            show(.brightness, level: level, muted: false)
             return true
         }
     }
 
     /// Volume changé hors du clavier (Touch Bar, Centre de contrôle…).
     private func volumeDidChange() {
+        // Pendant le glissement lancé par une touche, les niveaux intermédiaires ne sont pas affichés.
+        guard !volumeRamp.isRunning else { return }
         let level = SystemVolume.volume
         let muted = SystemVolume.isMuted || level == 0
         guard Self.isNewVolumeChange(shown: hud, level: level, muted: muted) else { return }
@@ -227,3 +236,59 @@ extension SystemHUDModule {
     }
 }
 #endif
+
+/// Passage progressif d'un niveau à un autre (volume, luminosité) : macOS fait glisser le niveau
+/// à chaque cran au lieu de le changer d'un coup. Chaque nouvel appui repart du niveau atteint.
+@MainActor
+final class LevelRamp {
+    /// Durée d'un glissement.
+    static let duration: TimeInterval = 0.2
+
+    private let apply: (Float) -> Void
+    /// Niveau visé pendant un glissement (`nil` au repos).
+    private(set) var target: Float?
+    private var start: Float = 0
+    private var current: Float = 0
+    private var startDate = Date()
+    private var timer: Timer?
+
+    var isRunning: Bool { timer != nil }
+
+    init(apply: @escaping (Float) -> Void) {
+        self.apply = apply
+    }
+
+    nonisolated static func clamped(_ level: Float) -> Float { min(1, max(0, level)) }
+
+    /// Niveau après la fraction `progress` (0…1) du glissement, avec ralentissement à l'arrivée.
+    nonisolated static func value(from start: Float, to end: Float, progress: Double) -> Float {
+        let t = Float(min(1, max(0, progress)))
+        let eased = 1 - (1 - t) * (1 - t)
+        return start + (end - start) * eased
+    }
+
+    func move(from level: Float, to newTarget: Float) {
+        start = isRunning ? current : level
+        current = start
+        target = newTarget
+        startDate = Date()
+        guard timer == nil else { return }
+        let timer = Timer(timeInterval: 1.0 / 60, repeats: true) { [weak self] _ in
+            MainActor.assumeIsolated { self?.tick() }
+        }
+        RunLoop.main.add(timer, forMode: .common)
+        self.timer = timer
+    }
+
+    private func tick() {
+        guard let target else { return }
+        let progress = Date().timeIntervalSince(startDate) / Self.duration
+        current = Self.value(from: start, to: target, progress: progress)
+        apply(current)
+        if progress >= 1 {
+            timer?.invalidate()
+            timer = nil
+            self.target = nil
+        }
+    }
+}

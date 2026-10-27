@@ -166,7 +166,7 @@ enum AirPodsAlerts {
             leading: AnyView(ConnectedHeadphonesIcon(symbol: device.kind.symbol)),
             trailing: AnyView(ConnectedBatteryLabel(module: module, device: device)),
             duration: .seconds(4)
-        )
+        ).withTextSides()
     }
 
     @MainActor
@@ -175,7 +175,7 @@ enum AirPodsAlerts {
             leading: AnyView(Image(systemName: device.kind.symbol).foregroundStyle(.white.opacity(0.6))),
             trailing: AnyView(Text("Déconnectés").foregroundStyle(.white.opacity(0.6)).minimumScaleFactor(0.7)),
             duration: .seconds(2)
-        )
+        ).withTextSides()
     }
 }
 

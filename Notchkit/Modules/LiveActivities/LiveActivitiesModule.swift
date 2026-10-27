@@ -342,7 +342,7 @@ enum LiveActivityAlerts {
             leading: AnyView(RingingBell()),
             trailing: AnyView(Text("Terminé").foregroundStyle(.orange)),
             duration: .seconds(5)
-        )
+        ).withTextSides()
     }
 
     @MainActor
@@ -352,7 +352,7 @@ enum LiveActivityAlerts {
                 .foregroundStyle(.orange)),
             trailing: AnyView(Text(phase == .work ? "Au travail" : "Pause").foregroundStyle(.orange)),
             duration: .seconds(4)
-        )
+        ).withTextSides()
     }
 
     @MainActor

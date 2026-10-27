@@ -177,7 +177,7 @@ enum ScreenshotAlerts {
                     .minimumScaleFactor(0.7)
             ),
             duration: .seconds(2.5)
-        )
+        ).withTextSides()
     }
 }
 

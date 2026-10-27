@@ -295,11 +295,7 @@ final class VideoDownloadModule: NotchModule {
                 item.progress = 1
                 item.detail = ""
             }
-            context.presentAlert(NotchAlert(
-                leading: AnyView(Image(systemName: "arrow.down.to.line.circle.fill").foregroundStyle(.red)),
-                trailing: AnyView(Image(systemName: "checkmark").foregroundStyle(.green)),
-                duration: .seconds(2.5)
-            ))
+            context.presentAlert(VideoDownloadAlerts.finished())
         } else {
             update(id) { item in
                 let message = item.detail.isEmpty ? String(localized: "Échec du téléchargement") : item.detail
@@ -384,11 +380,7 @@ final class VideoDownloadModule: NotchModule {
             item.progress = 1
             item.detail = ""
         }
-        context.presentAlert(NotchAlert(
-            leading: AnyView(Image(systemName: "arrow.down.to.line.circle.fill").foregroundStyle(.red)),
-            trailing: AnyView(Image(systemName: "checkmark").foregroundStyle(.green)),
-            duration: .seconds(2.5)
-        ))
+        context.presentAlert(VideoDownloadAlerts.finished())
     }
 
     private func update(_ id: UUID, _ change: (inout VideoDownload) -> Void) {
@@ -477,6 +469,18 @@ private final class OutputLineBuffer {
             data.removeSubrange(data.startIndex...newline)
         }
         return lines
+    }
+}
+
+enum VideoDownloadAlerts {
+    /// Vidéo téléchargée.
+    @MainActor
+    static func finished() -> NotchAlert {
+        NotchAlert(
+            leading: AnyView(Image(systemName: "arrow.down.to.line.circle.fill").foregroundStyle(.red)),
+            trailing: AnyView(Image(systemName: "checkmark").foregroundStyle(.green)),
+            duration: .seconds(2.5)
+        )
     }
 }
 

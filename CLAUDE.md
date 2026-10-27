@@ -195,6 +195,9 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 - Vidéos de la 2.0 (refaites le 26/10/2026 avec la vraie encoche filmée par le mode démo, skill `notch-video`) : cinq films de 30 s en 16:9, anglais et français, dans `renders/Vidéos 16-9/` ; logo, bannière et photo de profil YouTube dans `renders/Logo/`, miniatures dans `renders/Miniature vidéos/`. Un dossier `<film>-reel/` par film, prises dans `tournages/`, rendus par `assets/render-reel.py`. Le README montre « A Day with Notchkit 2.0 » (anglais, encoche réelle).
 - La vidéo du README est un lien `github.com/user-attachments/assets/…` : on l'obtient en téléversant le fichier dans l'éditeur web du README sur GitHub (sans y enregistrer), puis on remplace le lien dans le README local.
 
+### Version 3.0.0 (en cours, gratuite ; l'abonnement viendra plus tard)
+- Publié dans la beta 1 (`v3.0.0-beta.1`, 27/10/2026, préversion GitHub, hors appcast, build 26) : design « Verre », encoche à la taille de ses widgets (plus de réglage « Taille »), fonds Noir et Verre seulement, corrections d'affichage des widgets et des animations au changement de bureau, ombre de lisibilité en mode verre, engrenage toujours visible. Banc d'essai visuel : `scripts/visual-matrix.py` (dont `glass`).
+
 ### Design « Verre » (27/10/2026)
 - Fond « Verre » façon lecteur de l'iPhone : noir sur le haut, long dégradé vers un verre clair (Liquid Glass `.clear`), grands congés (20 pt) et coins (36 pt), sans contour ; widgets posés sur le verre, sans carte, écart agrandi. La page qui ne contient que la musique ouvre l'encoche en lecteur de 440 × 222 pt (présentation dédiée du widget Musique), qui s'agrandit en changeant de page.
 - À faire : revoir certains widgets pour ce mode (pensés pour une carte noire : textes sombres, éléments qui débordent, contrastes).

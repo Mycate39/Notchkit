@@ -94,16 +94,11 @@ struct DashboardExpandedView: View {
                 }
             }
             if size == .large {
-                let s = sampler.snapshot
-                VStack(alignment: .leading, spacing: 6) {
-                    gauge("cpu", String(localized: "Processeur"), s.cpuTotal)
-                    gauge("memorychip", String(localized: "Mémoire"),
-                          s.memoryTotal > 0 ? Double(s.memoryUsed) / Double(s.memoryTotal) : 0)
-                    gauge("internaldrive", String(localized: "Disque"),
-                          s.diskTotal > 0 ? 1 - Double(s.diskFree) / Double(s.diskTotal) : 0)
-                    Label(SystemMath.formattedRate(s.networkIn), systemImage: "arrow.down")
-                        .font(.system(size: 10, weight: .medium).monospacedDigit())
-                        .foregroundStyle(.white.opacity(0.7))
+                // Encoche basse : le réseau, puis le disque, cèdent la place plutôt que d'être coupés.
+                ViewThatFits(in: .vertical) {
+                    gauges(count: 4)
+                    gauges(count: 3)
+                    gauges(count: 2)
                 }
                 .frame(maxWidth: .infinity)
                 .samplesSystem()
@@ -111,6 +106,24 @@ struct DashboardExpandedView: View {
         }
         .padding(10)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private func gauges(count: Int) -> some View {
+        let s = sampler.snapshot
+        return VStack(alignment: .leading, spacing: 6) {
+            gauge("cpu", String(localized: "Processeur"), s.cpuTotal)
+            gauge("memorychip", String(localized: "Mémoire"),
+                  s.memoryTotal > 0 ? Double(s.memoryUsed) / Double(s.memoryTotal) : 0)
+            if count >= 3 {
+                gauge("internaldrive", String(localized: "Disque"),
+                      s.diskTotal > 0 ? 1 - Double(s.diskFree) / Double(s.diskTotal) : 0)
+            }
+            if count >= 4 {
+                Label(SystemMath.formattedRate(s.networkIn), systemImage: "arrow.down")
+                    .font(.system(size: 10, weight: .medium).monospacedDigit())
+                    .foregroundStyle(.white.opacity(0.7))
+            }
+        }
     }
 
     private func gauge(_ symbol: String, _ title: String, _ value: Double) -> some View {

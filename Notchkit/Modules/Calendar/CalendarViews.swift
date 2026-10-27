@@ -61,8 +61,8 @@ struct CalendarExpandedView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         } else {
             TimelineView(.everyMinute) { context in
-                VStack(alignment: .leading, spacing: 8) {
-                    ForEach(module.events.prefix(size == .small ? 2 : CalendarModule.maxEvents)) { event in
+                VStack(alignment: .leading, spacing: 0) {
+                    FittingRows(items: Array(module.events.prefix(size == .small ? 2 : CalendarModule.maxEvents))) { event in
                         EventRow(event: event, now: context.date)
                     }
                     Spacer(minLength: 0)

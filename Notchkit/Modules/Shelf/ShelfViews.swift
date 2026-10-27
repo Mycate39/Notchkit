@@ -100,9 +100,11 @@ private struct ShelfItemView: View {
             }
             .frame(width: compact ? 34 : 44, height: compact ? 34 : 44)
 
+            // Une ligne, coupée au milieu (« Moc…pdf ») : sur deux lignes, un nom sans espace se
+            // cassait en plein mot (« Mockup.p / df »).
             Text(item.name)
                 .font(.system(size: 10, weight: .medium))
-                .lineLimit(2)
+                .lineLimit(1)
                 .multilineTextAlignment(.center)
                 .truncationMode(.middle)
                 .foregroundStyle(url == nil ? .white.opacity(0.4) : .white.opacity(0.85))

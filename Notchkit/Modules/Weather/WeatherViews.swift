@@ -16,7 +16,19 @@ struct WeatherExpandedView: View {
         .padding(12)
     }
 
+    /// Contenu complet si la hauteur le permet ; sinon la ligne de détail, puis les prévisions par
+    /// heure, disparaissent plutôt que d'être coupées par le bas de la carte (encoche basse).
     private func content(_ snapshot: WeatherSnapshot) -> some View {
+        ViewThatFits(in: .vertical) {
+            content(snapshot, detail: true, hours: size != .small)
+            content(snapshot, detail: false, hours: size != .small)
+            content(snapshot, detail: true, hours: false)
+            content(snapshot, detail: false, hours: false)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+    }
+
+    private func content(_ snapshot: WeatherSnapshot, detail: Bool, hours: Bool) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: 8) {
                 Image(systemName: WeatherCondition.symbol(code: snapshot.code, isDay: snapshot.isDay))
@@ -34,30 +46,31 @@ struct WeatherExpandedView: View {
             .lineLimit(1)
             .minimumScaleFactor(0.8)
 
-            Text(detailLine(snapshot))
-                .font(.system(size: 10))
-                .foregroundStyle(.white.opacity(0.55))
-                .lineLimit(1)
+            if detail {
+                Text(detailLine(snapshot))
+                    .font(.system(size: 10))
+                    .foregroundStyle(.white.opacity(0.55))
+                    .lineLimit(1)
+            }
 
-            if size != .small {
-            HStack(spacing: 0) {
-                ForEach(snapshot.hours.prefix(size == .large ? 6 : 5)) { hour in
-                    VStack(spacing: 3) {
-                        Text(hour.date, format: .dateTime.hour())
-                            .font(.system(size: 10, weight: .medium))
-                            .foregroundStyle(.white.opacity(0.5))
-                        Image(systemName: WeatherCondition.symbol(code: hour.code, isDay: hour.isDay))
-                            .symbolRenderingMode(.multicolor)
-                            .font(.system(size: 11))
-                            .frame(height: 13)
-                        Text(TemperatureFormat.string(hour.temperature))
-                            .font(.system(size: 10, weight: .medium).monospacedDigit())
+            if hours {
+                HStack(spacing: 0) {
+                    ForEach(snapshot.hours.prefix(size == .large ? 6 : 5)) { hour in
+                        VStack(spacing: 3) {
+                            Text(hour.date, format: .dateTime.hour())
+                                .font(.system(size: 10, weight: .medium))
+                                .foregroundStyle(.white.opacity(0.5))
+                            Image(systemName: WeatherCondition.symbol(code: hour.code, isDay: hour.isDay))
+                                .symbolRenderingMode(.multicolor)
+                                .font(.system(size: 11))
+                                .frame(height: 13)
+                            Text(TemperatureFormat.string(hour.temperature))
+                                .font(.system(size: 10, weight: .medium).monospacedDigit())
+                        }
+                        .frame(maxWidth: .infinity)
                     }
-                    .frame(maxWidth: .infinity)
                 }
             }
-            }
-            Spacer(minLength: 0)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }

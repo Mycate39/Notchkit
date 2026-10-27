@@ -42,6 +42,7 @@ struct VideoDownloadExpandedView: View {
                         }
                     }
                     .scrollIndicators(.never)
+                    .scrollEdgeFade()
                 }
             }
         }

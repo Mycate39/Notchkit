@@ -349,6 +349,40 @@ extension AnyTransition {
     }
 }
 
+// MARK: - Contenu qui doit tenir dans sa carte
+
+extension View {
+    /// Liste défilante : fondu sur le bord bas au lieu d'une ligne coupée net (la ligne entamée
+    /// signale qu'il y a une suite).
+    func scrollEdgeFade(_ length: CGFloat = NotchLayout.scrollFadeLength) -> some View {
+        mask {
+            VStack(spacing: 0) {
+                Rectangle()
+                LinearGradient(colors: [.black, .clear], startPoint: .top, endPoint: .bottom)
+                    .frame(height: length)
+            }
+        }
+    }
+}
+
+/// Lignes empilées, réduites aux premières qui tiennent entières dans la hauteur offerte : jamais de
+/// ligne coupée par le bas de la carte (encoche basse, petite taille de widget).
+struct FittingRows<Item: Identifiable, Row: View>: View {
+    let items: [Item]
+    var spacing: CGFloat = 8
+    @ViewBuilder let row: (Item) -> Row
+
+    var body: some View {
+        ViewThatFits(in: .vertical) {
+            ForEach(Array(stride(from: items.count, through: 1, by: -1)), id: \.self) { count in
+                VStack(alignment: .leading, spacing: spacing) {
+                    ForEach(items.prefix(count)) { row($0) }
+                }
+            }
+        }
+    }
+}
+
 // MARK: - Accessibilité
 
 enum NotchAccessibility {

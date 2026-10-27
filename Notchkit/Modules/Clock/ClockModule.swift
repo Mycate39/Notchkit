@@ -122,7 +122,8 @@ private struct ClockExpandedView: View {
                 }
             }
             .lineLimit(1)
-            .minimumScaleFactor(0.8)
+            // L'heure se réduit plutôt que d'être tronquée (« 18:1… ») dans une carte étroite.
+            .minimumScaleFactor(0.5)
             .padding(12)
         }
     }
@@ -174,15 +175,18 @@ private struct ClockMiniView: View {
                         Text("\(hour):\(minute)")
                             .font(.system(size: min(width * 0.3, height * 0.4), weight: .bold, design: .rounded))
                     } else {
+                        // La date suit la taille des chiffres : sur une carte très large, elle ne doit
+                        // pas devenir plus grande que l'heure.
+                        let digits = min(width * 0.46, height * 0.26)
                         VStack(spacing: -height * 0.03) {
                             Text(hour)
                             Text(minute)
                             Text(context.date, format: .dateTime.weekday(.abbreviated).day())
-                                .font(.system(size: max(8, width * 0.14), weight: .medium))
+                                .font(.system(size: max(10, digits * 0.4), weight: .medium))
                                 .foregroundStyle(.white.opacity(0.55))
                                 .padding(.top, height * 0.05)
                         }
-                        .font(.system(size: min(width * 0.46, height * 0.26), weight: .bold, design: .rounded))
+                        .font(.system(size: digits, weight: .bold, design: .rounded))
                     }
                 }
                 .monospacedDigit()

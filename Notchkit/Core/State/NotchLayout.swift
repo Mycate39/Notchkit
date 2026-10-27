@@ -42,6 +42,8 @@ enum NotchLayout {
     static let levelIndicatorSideWidth: CGFloat = 80
     /// Lecteur de l'écran verrouillé (pochette et titre, commandes) : l'encoche s'élargit sans descendre.
     static let lockScreenSideWidth: CGFloat = 150
+    /// Hauteur du fondu au bas des listes défilantes des widgets (rappels, presse-papiers, téléchargements).
+    static let scrollFadeLength: CGFloat = 14
     /// Taille de l'encoche dépliée.
     /// Apparence en vigueur (mise à jour par l'AppDelegate quand les réglages changent ;
     /// lue et écrite uniquement sur le thread principal).
@@ -236,6 +238,10 @@ enum NotchLayout {
         guard travel > 0 else { return x >= trackWidth / 2 ? 1 : 0 }
         return Double(min(max((x - knobWidth / 2) / travel, 0), 1))
     }
+    /// Gel de l'affichage de l'encoche pendant un changement de bureau au trackpad, mesuré sur les prises
+    /// du diagnostic : une alerte affichée est prolongée d'autant.
+    static let spaceTransition: Duration = .milliseconds(1100)
+
     /// Temps laissé à l'animation de repli avant de réduire la fenêtre.
     @MainActor static var shrinkDelay: Duration {
         .milliseconds(500) * animationSlowdown

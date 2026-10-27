@@ -50,6 +50,7 @@ struct ClipboardExpandedView: View {
                     }
                 }
                 .scrollIndicators(.never)
+                .scrollEdgeFade()
             }
         }
         .padding(10)

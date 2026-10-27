@@ -89,16 +89,25 @@ struct SystemHUDExpandedView: View {
         .accessibilityLabel(Text(help))
     }
 
+    /// Encoche basse : rangées resserrées et boutons plus petits pour que la luminosité reste visible.
     private var levels: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            row(symbol: isMuted ? "speaker.slash.fill" : "speaker.wave.2.fill", value: $volume, enabled: SystemVolume.isAdjustable) {
+        ViewThatFits(in: .vertical) {
+            levels(spacing: 10, button: .regular)
+            levels(spacing: 4, button: .small)
+        }
+    }
+
+    private func levels(spacing: CGFloat, button: StandByButtonStyle.Size) -> some View {
+        VStack(alignment: .leading, spacing: spacing) {
+            row(symbol: isMuted ? "speaker.slash.fill" : "speaker.wave.2.fill", value: $volume, enabled: SystemVolume.isAdjustable,
+                button: button) {
                 SystemVolume.volume = $0
             } onSymbolTap: {
                 SystemVolume.isMuted.toggle()
                 isMuted = SystemVolume.isMuted
             }
             if DisplayBrightness.isAvailable {
-                row(symbol: "sun.max.fill", value: $brightness, enabled: true) {
+                row(symbol: "sun.max.fill", value: $brightness, enabled: true, button: button) {
                     DisplayBrightness.brightness = $0
                 } onSymbolTap: {}
             }
@@ -110,7 +119,7 @@ struct SystemHUDExpandedView: View {
         }
     }
 
-    private func row(symbol: String, value: Binding<Float>, enabled: Bool,
+    private func row(symbol: String, value: Binding<Float>, enabled: Bool, button: StandByButtonStyle.Size,
                      onChange: @escaping (Float) -> Void, onSymbolTap: @escaping () -> Void) -> some View {
         // Style StandBy : symbole dans un cercle sombre, curseur en pilule épaisse ambre.
         HStack(spacing: 8) {
@@ -118,7 +127,7 @@ struct SystemHUDExpandedView: View {
                 Image(systemName: symbol)
                     .contentTransition(.symbolEffect(.replace))
             }
-            .buttonStyle(.standBy(.regular, circle: true))
+            .buttonStyle(.standBy(button, circle: true))
             StandBySlider(value: Binding(get: { Double(value.wrappedValue) }, set: { value.wrappedValue = Float($0) })) {
                 onChange(Float($0))
             }

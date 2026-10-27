@@ -85,10 +85,12 @@ struct DayProgressExpandedView: View {
 
             VStack(alignment: .leading, spacing: 8) {
                 HStack(alignment: .firstTextBaseline) {
+                    // Le pourcentage n'est jamais tronqué (« 100… ») : c'est le libellé qui cède la place.
                     Text(fraction.formatted(.percent.precision(.fractionLength(0))))
                         .font(.system(size: 30, weight: .bold, design: .rounded).monospacedDigit())
                         .foregroundStyle(.tint)
-                    Spacer()
+                        .fixedSize()
+                    Spacer(minLength: 6)
                     Group {
                         if fraction >= 1 {
                             Text("Journée terminée")
@@ -100,6 +102,8 @@ struct DayProgressExpandedView: View {
                     }
                     .font(.system(size: 11, weight: .medium))
                     .foregroundStyle(.white.opacity(0.7))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
                 }
                 StandByBar(value: fraction, height: 10)
                 HStack {

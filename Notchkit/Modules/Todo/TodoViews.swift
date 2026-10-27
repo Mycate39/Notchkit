@@ -52,6 +52,7 @@ struct TodoExpandedView: View {
                     }
                 }
                 .scrollIndicators(.never)
+                .scrollEdgeFade()
             }
             HStack(spacing: 6) {
                 Image(systemName: "plus.circle.fill").foregroundStyle(.tint)

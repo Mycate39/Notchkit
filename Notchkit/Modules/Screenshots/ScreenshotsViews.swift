@@ -20,18 +20,27 @@ struct ScreenshotsExpandedView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
-                ScrollView(.horizontal) {
-                    HStack(spacing: 8) {
-                        ForEach(module.items) { item in
-                            ScreenshotItemView(module: module, item: item, compact: size == .small)
-                        }
-                    }
-                    .padding(.vertical, 2)
+                // Encoche basse : vignettes plus petites, puis sans l'heure, plutôt que coupées.
+                ViewThatFits(in: .vertical) {
+                    strip(compact: size == .small, showsTime: true)
+                    strip(compact: true, showsTime: true)
+                    strip(compact: true, showsTime: false)
                 }
-                .scrollIndicators(.never)
             }
         }
         .padding(10)
+    }
+
+    private func strip(compact: Bool, showsTime: Bool) -> some View {
+        ScrollView(.horizontal) {
+            HStack(spacing: 8) {
+                ForEach(module.items) { item in
+                    ScreenshotItemView(module: module, item: item, compact: compact, showsTime: showsTime)
+                }
+            }
+            .padding(.vertical, 2)
+        }
+        .scrollIndicators(.never)
     }
 
     private var header: some View {
@@ -67,14 +76,17 @@ private struct ScreenshotItemView: View {
     let module: ScreenshotsModule
     let item: Screenshot
     let compact: Bool
+    var showsTime = true
 
     var body: some View {
         VStack(spacing: 3) {
             ScreenshotThumbnail(item: item, module: module,
                                 size: compact ? CGSize(width: 54, height: 36) : CGSize(width: 72, height: 46))
-            Text(item.date, format: .dateTime.hour().minute())
-                .font(.system(size: 10, weight: .medium).monospacedDigit())
-                .foregroundStyle(.white.opacity(0.7))
+            if showsTime {
+                Text(item.date, format: .dateTime.hour().minute())
+                    .font(.system(size: 10, weight: .medium).monospacedDigit())
+                    .foregroundStyle(.white.opacity(0.7))
+            }
         }
         .padding(4)
         .contentShape(RoundedRectangle(cornerRadius: 8))

@@ -135,11 +135,19 @@ struct PageSizeTests {
         let two = NotchLayout.pageSize(moduleIDs: ["clock", "weather"], sizes: [.small, .large], fullPage: false, glass: false)
         let full = NotchLayout.pageSize(moduleIDs: ["a", "b", "c", "d"], sizes: [.small, .small, .small, .small],
                                         fullPage: false, glass: false)
-        #expect(one.width == NotchLayout.minExpandedWidth)
         #expect(one.width < two.width && two.width < full.width)
         #expect(full == NotchLayout.defaultExpandedSize)
-        // Hauteur fixe : les widgets sont dessinés pour elle.
-        #expect(Set([one.height, two.height, full.height]) == [NotchLayout.expandedHeight])
+    }
+
+    @Test func hauteurSuitLePlusGrandWidget() {
+        #expect(NotchLayout.expandedHeight(sizes: [.mini, .mini]) == NotchLayout.miniExpandedHeight)
+        #expect(NotchLayout.expandedHeight(sizes: [.mini, .small]) == NotchLayout.expandedHeight)
+        #expect(NotchLayout.expandedHeight(sizes: [.medium]) == NotchLayout.expandedHeight)
+        #expect(NotchLayout.expandedHeight(sizes: [.small, .large]) == NotchLayout.largeExpandedHeight)
+        let mini = NotchLayout.pageSize(moduleIDs: ["clock"], sizes: [.mini], fullPage: false, glass: false)
+        let small = NotchLayout.pageSize(moduleIDs: ["clock"], sizes: [.small], fullPage: false, glass: false)
+        #expect(mini.height < small.height)
+        #expect(mini.width <= small.width)
     }
 
     @Test func deuxMiniEmpilesPrennentUneSeuleColonne() {
@@ -150,7 +158,8 @@ struct PageSizeTests {
 
     @Test func pagePleineEtVerreSontPlusLarges() {
         let agents = NotchLayout.pageSize(moduleIDs: ["agents"], sizes: [.large], fullPage: true, glass: false)
-        #expect(agents == NotchLayout.defaultExpandedSize)
+        #expect(agents.width == NotchLayout.defaultExpandedSize.width)
+        #expect(agents.height == NotchLayout.largeExpandedHeight)
         let glass = NotchLayout.pageSize(moduleIDs: ["a", "b"], sizes: [.small, .small], fullPage: false, glass: true)
         let black = NotchLayout.pageSize(moduleIDs: ["a", "b"], sizes: [.small, .small], fullPage: false, glass: false)
         #expect(glass.width > black.width)

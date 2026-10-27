@@ -89,8 +89,10 @@ final class NotchViewModel {
     var isExpanded: Bool { state == .expanded }
 
     var hasCompactContent: Bool {
-        currentAlert != nil || (!isSettlingAfterCollapse && menuLimitedSideWidth != 0
-                                && (manager.compactModule != nil || lockScreenModule != nil))
+        // Grand lecteur de l'écran verrouillé : l'activité de son module ne reste pas autour de l'encoche.
+        let compact = manager.compactModule.map { $0.moduleID != lockScreenMediaModule?.moduleID } ?? false
+        return currentAlert != nil || (!isSettlingAfterCollapse && menuLimitedSideWidth != 0
+                                       && (compact || lockScreenModule != nil))
     }
 
     /// Repli en cours : l'encoche se referme d'abord jusqu'à sa taille de repos, puis l'activité
@@ -287,6 +289,12 @@ final class NotchViewModel {
             return module.lockScreenLeading() != nil ? module : nil
         }
         return manager.activeModules.first { $0.lockScreenLeading() != nil }
+    }
+
+    /// Écran verrouillé : module qui affiche son grand lecteur au milieu de l'écran (`lockScreenMedia`).
+    var lockScreenMediaModule: (any NotchModule)? {
+        guard isScreenLocked else { return nil }
+        return manager.activeModules.first { $0.lockScreenMedia() != nil }
     }
 
     /// Largeur de chaque côté de l'encoche repliée (une alerte peut demander plus de place).

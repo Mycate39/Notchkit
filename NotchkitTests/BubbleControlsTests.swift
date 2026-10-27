@@ -83,7 +83,9 @@ struct BubbleControlsTests {
         #expect(module.bubbleControls() == nil)
         module.startTimer(minutes: 5)
         #expect(module.bubbleControls() != nil)
-        #expect(module.bubbleControlsWidth == NotchLayout.timerBubbleControlsWidth)
+        // Deux boutons et le temps restant (moins d'une heure : « 4:59 »).
+        #expect(module.bubbleControlsWidth == NotchLayout.timerBubbleControlsWidth(showsHours: false))
+        #expect(NotchLayout.timerBubbleControlsWidth(showsHours: true) > module.bubbleControlsWidth)
         let id = try! #require(module.mostRelevant?.id)
         module.togglePause(id)
         // En pause : la bulle et ses commandes restent (pour reprendre).
@@ -102,5 +104,15 @@ struct BubbleControlsTests {
         #expect(music.bubbleControls() != nil)
         music.debugSetNowPlaying(nil)
         #expect(music.bubblePriority == .none)
+    }
+
+    @Test func musiqueEnLecturePasseDevantLesActivites() {
+        let music = MusicModule(context: ModuleContext(presentAlert: { _ in }, openSettings: {}, holdExpanded: { _ in }))
+        music.debugSetNowPlaying(NowPlayingInfo(origin: .mediaRemote, title: "Get Lucky", isPlaying: true))
+        // Devant Claude Code qui travaille et les minuteurs, derrière une information urgente.
+        #expect(music.compactPriority > .elevated)
+        #expect(music.compactPriority < .high)
+        #expect(music.bubblePriority == music.compactPriority)
+        music.debugSetNowPlaying(nil)
     }
 }

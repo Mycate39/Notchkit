@@ -132,6 +132,21 @@ struct AppearanceTests {
     }
 }
 
+struct LockScreenMediaTests {
+    @Test func lecteurSousLHeureEtCentre() {
+        let screen = CGRect(x: 0, y: 0, width: 1800, height: 1169)
+        let layout = NotchLayout.lockScreenMedia(screen: screen)
+        #expect(layout.frame.midX == screen.midX)
+        // Sous l'heure de macOS : le haut de la pochette est sous le premier quart de l'écran.
+        #expect(layout.frame.maxY - layout.margin < screen.maxY - screen.height * 0.25)
+        #expect(layout.frame.height == layout.artwork + layout.gap + layout.panel.height + layout.margin * 2)
+        // Pochette rentrée dans le panneau : le panneau agrandi tient toujours dans la fenêtre.
+        #expect(layout.compactPanelHeight > layout.panel.height)
+        #expect(layout.compactPanelHeight < layout.artwork + layout.gap + layout.panel.height)
+        #expect(layout.smallArtwork < layout.compactPanelHeight / 2)
+    }
+}
+
 struct PageSizeTests {
     @Test func largeurSuitLesWidgetsDeLaPage() {
         let one = NotchLayout.pageSize(moduleIDs: ["clock"], sizes: [.small], fullPage: false, glass: false)

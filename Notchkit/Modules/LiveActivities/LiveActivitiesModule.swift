@@ -306,13 +306,16 @@ final class LiveActivitiesModule: NotchModule {
         return AnyView(ActivityRing(activity: activity, size: 18))
     }
 
-    /// Bulle survolée : pause/reprise et arrêt du minuteur ou du chronomètre (comme sur iPhone).
+    /// Bulle survolée : temps restant, pause/reprise et arrêt du minuteur ou du chronomètre (comme sur iPhone).
     func bubbleControls() -> AnyView? {
         guard let activity = mostRelevant, activity.kind == .timer || activity.kind == .stopwatch else { return nil }
         return AnyView(TimerBubbleControls(module: self, activity: activity))
     }
 
-    var bubbleControlsWidth: CGFloat { NotchLayout.timerBubbleControlsWidth }
+    var bubbleControlsWidth: CGFloat {
+        let seconds = mostRelevant.flatMap { $0.remaining() ?? $0.elapsed() } ?? 0
+        return NotchLayout.timerBubbleControlsWidth(showsHours: seconds >= 3600)
+    }
 
     func compactTrailing() -> AnyView? {
         guard let activity = mostRelevant else { return nil }

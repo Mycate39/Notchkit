@@ -76,6 +76,8 @@ extension EnvironmentValues {
     /// Le widget est seul sur une page qui a sa propre taille d'encoche (`NotchLayout.pageSize`) : il
     /// prend la présentation faite pour cette taille (lecteur de musique).
     @Entry var widgetOwnsNotchSize = false
+    /// Grand lecteur de l'écran verrouillé : tailles calculées pour l'écran de l'encoche.
+    @Entry var lockScreenMedia = NotchLayout.lockScreenMedia(screen: CGRect(x: 0, y: 0, width: 1512, height: 982))
 }
 
 /// Bouton StandBy : pilule (ou cercle) épaisse et tactile.

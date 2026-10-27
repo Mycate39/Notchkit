@@ -21,6 +21,8 @@ final class NotchWindowController {
     private var spaceTask: Task<Void, Never>?
     private var shrinkTask: Task<Void, Never>?
     /// Espace au-dessus de tous les bureaux et de l'écran verrouillé (API privée SkyLight, `nil` si indisponible).
+    /// Grand lecteur de l'écran verrouillé (fenêtre à part, au milieu de l'écran).
+    private lazy var lockScreenMedia = LockScreenMediaWindow(viewModel: viewModel)
     private lazy var lockScreenSpace: LockScreenSpace? =
         AutomatedRun.isActive && !AutomatedRun.isDiagnostic ? nil : LockScreenSpace()
     private let hostingView: NotchHostingView<NotchContainerView>
@@ -223,6 +225,18 @@ final class NotchWindowController {
         }, perform: { [weak self] in
             self?.applyPanelSize()
         })
+
+        // Grand lecteur de l'écran verrouillé : affiché tant que le Mac est verrouillé et qu'un module en propose un.
+        trackChanges(of: { [weak self] in
+            _ = self?.viewModel.lockScreenMediaModule?.moduleID
+        }, perform: { [weak self] in
+            self?.updateLockScreenMedia()
+        })
+    }
+
+    private func updateLockScreenMedia() {
+        lockScreenMedia.update(screen: ScreenLocator.screen(for: settings.settings.screenSelection),
+                               level: panel.level, space: lockScreenSpace)
     }
 
     private func screenLockChanged(locked: Bool) {
@@ -238,6 +252,7 @@ final class NotchWindowController {
             panel.level = NotchPanel.normalLevel
             reassertOnActiveSpace()
         }
+        updateLockScreenMedia()
     }
 
     /// Remet l'encoche à sa place sur le bureau qui vient de s'afficher.

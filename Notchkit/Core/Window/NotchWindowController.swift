@@ -21,7 +21,8 @@ final class NotchWindowController {
     private var spaceTask: Task<Void, Never>?
     private var shrinkTask: Task<Void, Never>?
     /// Espace au-dessus de tous les bureaux et de l'écran verrouillé (API privée SkyLight, `nil` si indisponible).
-    private lazy var lockScreenSpace: LockScreenSpace? = AutomatedRun.isActive ? nil : LockScreenSpace()
+    private lazy var lockScreenSpace: LockScreenSpace? =
+        AutomatedRun.isActive && !AutomatedRun.isDiagnostic ? nil : LockScreenSpace()
     private let hostingView: NotchHostingView<NotchContainerView>
     /// Reçoit le glisser-déposer à la place de l'encoche quand elle vit dans l'espace SkyLight.
     private var dropCatcher: DropCatcher?
@@ -97,6 +98,23 @@ final class NotchWindowController {
             dropCatcher = catcher
         }
         startObserving()
+        #if DEBUG
+        if AutomatedRun.isDiagnostic {
+            // Diagnostic des bureaux : visibilité de la fenêtre et changements de bureau, horodatés.
+            let start = Date()
+            func diag(_ text: String) {
+                FileHandle.standardError.write(Data(String(format: "DEMO-DIAG %.2f %@\n", Date().timeIntervalSince(start), text).utf8))
+            }
+            NotificationCenter.default.addObserver(forName: NSWindow.didChangeOcclusionStateNotification, object: panel,
+                                                   queue: .main) { [weak self] _ in
+                MainActor.assumeIsolated {
+                    diag("fenêtre \(self?.panel.occlusionState.contains(.visible) == true ? "visible" : "masquée")")
+                }
+            }
+            NSWorkspace.shared.notificationCenter.addObserver(forName: NSWorkspace.activeSpaceDidChangeNotification,
+                                                              object: nil, queue: .main) { _ in diag("changement de bureau") }
+        }
+        #endif
         scheduleMenuAvoidance()
         let hiding = FullScreenHiding(
             isEnabled: { [weak self] in self?.settings.settings.hidesInFullScreen ?? false },
@@ -223,17 +241,32 @@ final class NotchWindowController {
     }
 
     /// Remet l'encoche à sa place sur le bureau qui vient de s'afficher.
+    ///
+    /// Dans l'espace SkyLight, le panneau reste affiché et immobile pendant la transition : le remettre
+    /// devant ou le replacer à ce moment-là casse l'animation en cours (encoche décalée pendant près
+    /// d'une seconde, ouverture sans animation). On ne le fait donc que s'il a disparu, et on ne le
+    /// replace que si la géométrie de l'écran a changé.
     private func reassertOnActiveSpace() {
-        // Pas de nouveau placement dans l'espace SkyLight ici : le panneau y est déjà.
-        panel.orderFrontRegardless()
+        viewModel.spaceDidChange()
+        let needsFront = { [weak self] in
+            guard let self else { return false }
+            return self.lockScreenSpace == nil || !self.panel.isVisible
+        }
+        if needsFront() { panel.orderFrontRegardless() }
         spaceTask?.cancel()
         spaceTask = Task { [weak self] in
             try? await Task.sleep(for: .milliseconds(450))
             guard !Task.isCancelled, let self else { return }
-            self.refreshGeometry()
-            self.panel.orderFrontRegardless()
+            if self.lockScreenSpace == nil || self.screenGeometryChanged { self.refreshGeometry() }
+            if needsFront() { self.panel.orderFrontRegardless() }
             self.updateMenuAvoidance()
         }
+    }
+
+    /// Vrai si l'écran de l'encoche n'a plus la géométrie connue (barre des menus, écran, résolution).
+    private var screenGeometryChanged: Bool {
+        guard let screen = ScreenLocator.screen(for: settings.settings.screenSelection) else { return false }
+        return ScreenLocator.geometry(for: screen, simulateNotch: settings.settings.simulateNotch) != viewModel.geometry
     }
 
     // MARK: - Menus de l'app active

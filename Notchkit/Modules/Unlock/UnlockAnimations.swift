@@ -64,20 +64,12 @@ private struct TransparentVideo: NSViewRepresentable {
     var stillAt: Double?
 
     func makeNSView(context: Context) -> NSView {
-        let view = NSView()
-        view.wantsLayer = true
-        guard let url = Bundle.main.url(forResource: resource, withExtension: "mov") else { return view }
+        guard let url = Bundle.main.url(forResource: resource, withExtension: "mov") else { return NSView() }
         let player = AVPlayer(url: url)
         player.isMuted = true
         // Vidéo sans piste audio : elle ne touche ni à la musique ni à « À l'écoute ».
         player.preventsDisplaySleepDuringVideoPlayback = false
-        let layer = AVPlayerLayer(player: player)
-        layer.videoGravity = .resizeAspect
-        layer.isOpaque = false
-        layer.backgroundColor = .clear
-        layer.frame = view.bounds
-        layer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
-        view.layer?.addSublayer(layer)
+        let view = VideoHostView(player: player)
         if let stillAt {
             player.seek(to: CMTime(seconds: stillAt, preferredTimescale: 600), toleranceBefore: .zero, toleranceAfter: .zero)
         } else {
@@ -89,9 +81,7 @@ private struct TransparentVideo: NSViewRepresentable {
     func updateNSView(_ view: NSView, context: Context) {}
 
     static func dismantleNSView(_ view: NSView, coordinator: ()) {
-        for layer in view.layer?.sublayers ?? [] {
-            (layer as? AVPlayerLayer)?.player?.pause()
-        }
+        (view as? VideoHostView)?.stop()
     }
 }
 
@@ -167,6 +157,91 @@ private struct TouchIDCheck: Shape {
     }
 }
 
+/// Vue d'une vidéo transparente : les images du lecteur sont posées une à une sur une couche ordinaire.
+///
+/// Pas d'AVPlayerLayer : un changement de bureau pendant la lecture décroche son affichage (la
+/// lecture va jusqu'au bout, mais l'écran garde l'image du moment : Face ID figé sur le cercle, sans
+/// la coche), et rien ne le raccroche de façon fiable. Les couches ordinaires, elles, continuent de
+/// s'afficher : à chaque rafraîchissement de l'écran, on y pose l'image courante de la vidéo.
+final class VideoHostView: NSView {
+    private let player: AVPlayer
+    private let output: AVPlayerItemVideoOutput
+    private let frameLayer = CALayer()
+    private var displayLink: CADisplayLink?
+    #if DEBUG
+    /// Diagnostic des bureaux : images posées, dernière image (temps de la vidéo), plus longue pause
+    /// entre deux rafraîchissements de l'écran.
+    private var framesShown = 0
+    private var lastFrameTime = 0.0
+    private var lastTick: CFTimeInterval = 0
+    private var longestGap: CFTimeInterval = 0
+    #endif
+
+    init(player: AVPlayer) {
+        self.player = player
+        // Images BGRA avec transparence, sur IOSurface : posées telles quelles dans la couche.
+        output = AVPlayerItemVideoOutput(pixelBufferAttributes: [
+            kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA,
+            kCVPixelBufferIOSurfacePropertiesKey as String: NSDictionary(),
+        ])
+        super.init(frame: .zero)
+        wantsLayer = true
+        frameLayer.contentsGravity = .resizeAspect
+        frameLayer.isOpaque = false
+        frameLayer.frame = bounds
+        frameLayer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
+        // Pas d'animation implicite d'une image à l'autre.
+        frameLayer.actions = ["contents": NSNull()]
+        layer?.addSublayer(frameLayer)
+        player.currentItem?.add(output)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) n'est pas utilisé")
+    }
+
+    override func viewDidMoveToWindow() {
+        super.viewDidMoveToWindow()
+        displayLink?.invalidate()
+        displayLink = nil
+        guard window != nil else { return }
+        let link = displayLink(target: self, selector: #selector(nextFrame))
+        link.add(to: .main, forMode: .common)
+        displayLink = link
+    }
+
+    /// Fin de l'affichage : lecture arrêtée, plus de rafraîchissement.
+    func stop() {
+        #if DEBUG
+        if AutomatedRun.isDiagnostic {
+            let line = String(format: "DEMO-DIAG vidéo : %d images posées · dernière à %.2f s · lecture à %.2f s · plus longue pause %.2f s\n",
+                              framesShown, lastFrameTime, player.currentTime().seconds, longestGap)
+            FileHandle.standardError.write(Data(line.utf8))
+        }
+        #endif
+        player.pause()
+        displayLink?.invalidate()
+        displayLink = nil
+    }
+
+    @objc private func nextFrame() {
+        #if DEBUG
+        let now = CACurrentMediaTime()
+        if lastTick > 0 { longestGap = max(longestGap, now - lastTick) }
+        lastTick = now
+        #endif
+        let time = output.itemTime(forHostTime: CACurrentMediaTime())
+        guard output.hasNewPixelBuffer(forItemTime: time),
+              let buffer = output.copyPixelBuffer(forItemTime: time, itemTimeForDisplay: nil) else { return }
+        frameLayer.contentsScale = window?.backingScaleFactor ?? 2
+        frameLayer.contents = buffer
+        #if DEBUG
+        framesShown += 1
+        lastFrameTime = time.seconds
+        #endif
+    }
+}
+
 /// Vidéo transparente jouée jusqu'à `holdAt`, en pause tant que `released` est faux, puis jusqu'au
 /// bout (`onEnd`). `stillOnly` : image fixe à `holdAt`, sans lecture.
 private struct StagedVideo: NSViewRepresentable {
@@ -188,19 +263,11 @@ private struct StagedVideo: NSViewRepresentable {
     func makeCoordinator() -> Coordinator { Coordinator() }
 
     func makeNSView(context: Context) -> NSView {
-        let view = NSView()
-        view.wantsLayer = true
-        guard let url = Bundle.main.url(forResource: resource, withExtension: "mov") else { return view }
+        guard let url = Bundle.main.url(forResource: resource, withExtension: "mov") else { return NSView() }
         let player = AVPlayer(url: url)
         player.isMuted = true
         player.preventsDisplaySleepDuringVideoPlayback = false
-        let layer = AVPlayerLayer(player: player)
-        layer.videoGravity = .resizeAspect
-        layer.isOpaque = false
-        layer.backgroundColor = .clear
-        layer.frame = view.bounds
-        layer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
-        view.layer?.addSublayer(layer)
+        let view = VideoHostView(player: player)
         let coordinator = context.coordinator
         coordinator.player = player
         coordinator.onEnd = onEnd
@@ -231,6 +298,7 @@ private struct StagedVideo: NSViewRepresentable {
     }
 
     static func dismantleNSView(_ view: NSView, coordinator: Coordinator) {
+        (view as? VideoHostView)?.stop()
         coordinator.player?.pause()
         coordinator.timeObservers.forEach { coordinator.player?.removeTimeObserver($0) }
         coordinator.timeObservers.removeAll()

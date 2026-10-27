@@ -260,6 +260,15 @@ final class NotchViewModel {
 
     /// Module à montrer à l'ouverture (bulle cliquée).
     @ObservationIgnored var requestedModuleID: String?
+    /// Temps ajouté à l'alerte affichée après un changement de bureau (voir `spaceDidChange`).
+    @ObservationIgnored private var alertDelay: Duration = .zero
+
+    /// Changement de bureau (appelé par la fenêtre ; macOS prévient à la fin de sa transition). Pendant
+    /// un balayage au trackpad, macOS gèle l'affichage de l'encoche : l'alerte affichée reste ouverte
+    /// un peu plus, pour qu'on la voie finir (la coche de Face ID, par exemple).
+    func spaceDidChange() {
+        if currentAlert != nil { alertDelay += NotchLayout.spaceTransition }
+    }
 
     /// Ouvre l'encoche sur la page d'un module (clic sur une bulle).
     func expand(showing moduleID: String) {
@@ -498,10 +507,17 @@ final class NotchViewModel {
         // Pas de vibration : une alerte ne vient pas d'un geste sur le trackpad (HIG : une vibration
         // doit répondre à une action de la personne).
         if currentAlert?.id != alert.id {
+            alertDelay = .zero
             withAnimation(NotchLayout.spring) { currentAlert = alert }
         }
         alertTask = Task { [weak self] in
             try? await Task.sleep(for: alert.duration)
+            // Changements de bureau pendant l'alerte : elle reste ouverte d'autant.
+            while let self, self.alertDelay > .zero, !Task.isCancelled {
+                let extra = self.alertDelay
+                self.alertDelay = .zero
+                try? await Task.sleep(for: extra)
+            }
             guard !Task.isCancelled, let self, self.currentAlert?.id == alert.id else { return }
             withAnimation(NotchLayout.spring) { self.currentAlert = nil }
         }

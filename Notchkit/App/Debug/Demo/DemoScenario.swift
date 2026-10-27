@@ -52,7 +52,7 @@ struct DemoScenario: Decodable {
         var modules: [String]?
         var pages: [[String]]?
         var sizes: [String: String]?
-        /// Couleur d'accent `#RRGGBB`, fond (`black`, `graphite`, `glass`), mascotte
+        /// Couleur d'accent `#RRGGBB`, fond (`black`, `glass`), mascotte
         var accent: String?
         var background: String?
         var mascot: String?

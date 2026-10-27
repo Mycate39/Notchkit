@@ -51,23 +51,22 @@ struct NotchAppearance: Codable, Equatable, Sendable {
         }
     }
 
+    /// Fond de l'encoche : noir ou verre (les fonds Graphite et Personnalisé des versions précédentes
+    /// ne se décodent plus et repassent au noir).
     enum Background: String, Codable, CaseIterable, Identifiable, Sendable {
-        case black, graphite, glass, custom
+        case black, glass
         var id: String { rawValue }
 
         var title: LocalizedStringResource {
             switch self {
             case .black: "Noir"
-            case .graphite: "Graphite"
             case .glass: "Verre"
-            case .custom: "Personnalisé"
             }
         }
     }
 
     var animation: AnimationStyle = .fluid
     var background: Background = .black
-    var customBackground = StoredColor(red: 0.1, green: 0.1, blue: 0.18)
     /// Couleur d'accent (onglets, liens, curseurs) ; `nil` = ambre du style StandBy.
     var accent: StoredColor?
     /// Couleur du remplissage des curseurs ; `nil` = couleur d'accent.
@@ -82,7 +81,6 @@ struct NotchAppearance: Codable, Equatable, Sendable {
         let d = NotchAppearance()
         animation = (try? c.decodeIfPresent(AnimationStyle.self, forKey: .animation)) ?? d.animation
         background = (try? c.decodeIfPresent(Background.self, forKey: .background)) ?? d.background
-        customBackground = (try? c.decodeIfPresent(StoredColor.self, forKey: .customBackground)) ?? d.customBackground
         accent = try? c.decodeIfPresent(StoredColor.self, forKey: .accent)
         sliderColor = try? c.decodeIfPresent(StoredColor.self, forKey: .sliderColor)
     }
@@ -171,7 +169,6 @@ struct NotchBackground: View {
     var body: some View {
         switch appearance.background {
         case .black: Color.black
-        case .graphite: Color(white: 0.13)
         case .glass:
             if NotchAccessibility.reduceTransparency {
                 // « Réduire la transparence » : verre remplacé par une surface opaque.
@@ -179,7 +176,6 @@ struct NotchBackground: View {
             } else {
                 Rectangle().fill(.ultraThinMaterial).environment(\.colorScheme, .dark)
             }
-        case .custom: appearance.customBackground.color
         }
     }
 }

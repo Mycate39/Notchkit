@@ -115,11 +115,14 @@ struct AppearanceTests {
         let json = #"{"size": "large", "customWidth": 800, "customHeight": 230, "background": "glass"}"#
         let appearance = try JSONDecoder().decode(NotchAppearance.self, from: Data(json.utf8))
         #expect(appearance.background == .glass)
+        // Fonds retirés (Graphite, Personnalisé) : retour au noir.
+        let old = try JSONDecoder().decode(NotchAppearance.self, from: Data(#"{"background": "graphite"}"#.utf8))
+        #expect(old.background == .black)
     }
 
     @Test func apparenceEnregistreeEtTolerante() throws {
         var settings = AppSettings()
-        settings.appearance.background = .custom
+        settings.appearance.background = .glass
         settings.appearance.accent = StoredColor(red: 1, green: 0.5, blue: 0)
         let decoded = try JSONDecoder().decode(AppSettings.self, from: JSONEncoder().encode(settings))
         #expect(decoded.appearance == settings.appearance)

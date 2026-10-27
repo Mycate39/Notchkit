@@ -1,6 +1,38 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "En mode encoche, le haut reste noir pour se fondre avec la découpe de l'écran ; avec « Verre », l'encoche ouverte passe au verre sous la découpe." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In notch mode, the top stays black to blend in with the screen cutout; with “Glass”, the open notch turns to glass below the cutout."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En mode encoche, le haut reste noir pour se fondre avec la découpe de l'écran ; avec « Verre », l'encoche ouverte passe au verre sous la découpe."
+          }
+        }
+      }
+    },
+    "« Verre » utilise le Liquid Glass de macOS 26 ; en mode encoche (réelle ou simulée), le haut reste noir pour se fondre avec la découpe de l'écran." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“Glass” uses the Liquid Glass of macOS 26; in notch mode (real or simulated), the top stays black to blend in with the screen cutout."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "« Verre » utilise le Liquid Glass de macOS 26 ; en mode encoche (réelle ou simulée), le haut reste noir pour se fondre avec la découpe de l'écran."
+          }
+        }
+      }
+    },
     "" : {
 
     },

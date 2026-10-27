@@ -62,27 +62,19 @@ struct AppearanceSettingsView: View {
             }
 
             Section("Couleurs") {
-                Group {
-                    Picker("Fond de l'encoche", selection: appearance.background) {
-                        ForEach(NotchAppearance.Background.allCases) { background in
-                            Text(background.title).tag(background)
-                        }
-                    }
-                    if settings.settings.appearance.background == .custom {
-                        ColorPicker("Couleur du fond", selection: Binding(
-                            get: { settings.settings.appearance.customBackground.color },
-                            set: { settings.settings.appearance.customBackground = StoredColor($0) }
-                        ), supportsOpacity: false)
+                Picker("Fond de l'encoche", selection: appearance.background) {
+                    ForEach(NotchAppearance.Background.allCases) { background in
+                        Text(background.title).tag(background)
                     }
                 }
                 if isNotchMode {
-                    Label("En mode encoche, le haut reste noir pour se fondre avec la découpe de l'écran. « Verre » s'applique aussi à l'encoche ouverte, sous la découpe ; les autres fonds ne s'appliquent qu'à la pastille flottante.",
+                    Label("En mode encoche, le haut reste noir pour se fondre avec la découpe de l'écran ; avec « Verre », l'encoche ouverte passe au verre sous la découpe.",
                           systemImage: "info.circle")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
-                } else if settings.settings.appearance.background != .black {
-                    Text("En mode encoche (réelle ou simulée), le haut reste noir pour se fondre avec la découpe de l'écran ; seul « Verre » s'applique aussi à l'encoche ouverte. « Verre » utilise le Liquid Glass de macOS 26.")
+                } else if settings.settings.appearance.background == .glass {
+                    Text("« Verre » utilise le Liquid Glass de macOS 26 ; en mode encoche (réelle ou simulée), le haut reste noir pour se fondre avec la découpe de l'écran.")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }

@@ -373,6 +373,24 @@ extension View {
     }
 }
 
+/// Fond « Verre » : ombre sous le contenu d'un widget, qui le détache d'un fond d'écran clair (comme les
+/// widgets de l'écran verrouillé de l'iPhone), sans assombrir le verre. Pas de voile derrière le widget :
+/// coupé par le bas de la zone des pages, il dessinait une barre d'ombre.
+struct GlassLegibility: ViewModifier {
+    let active: Bool
+
+    func body(content: Content) -> some View {
+        if active {
+            // Ombre serrée (contour sombre des textes fins) puis halo plus large.
+            content
+                .shadow(color: .black.opacity(NotchLayout.glassContentShadowOpacity), radius: 1.5, y: 0.5)
+                .shadow(color: .black.opacity(NotchLayout.glassContentShadowOpacity * 0.5), radius: 6)
+        } else {
+            content
+        }
+    }
+}
+
 /// Lignes empilées, réduites aux premières qui tiennent entières dans la hauteur offerte : jamais de
 /// ligne coupée par le bas de la carte (encoche basse, petite taille de widget).
 struct FittingRows<Item: Identifiable, Row: View>: View {

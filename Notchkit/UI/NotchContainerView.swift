@@ -371,7 +371,7 @@ private struct ExpandedNotchView: View {
             ? NotchLayout.earRadius(glass: viewModel.appearance.usesGlassWidgets, isExpanded: true) : 0
 
         VStack(spacing: 0) {
-            header
+            header(ear: ear)
                 .frame(height: max(viewModel.geometry.closedSize.height, 28))
                 .padding(.horizontal, ear + 18)
 
@@ -411,9 +411,14 @@ private struct ExpandedNotchView: View {
         ModulePage.pages(from: viewModel.manager)
     }
 
-    private var header: some View {
+    private func header(ear: CGFloat) -> some View {
         let pages = pages
-        return HStack {
+        // Vraie encoche : les onglets restent de leur côté de l'encoche matérielle (coupés au besoin),
+        // sans jamais pousser l'engrenage sous la caméra.
+        let width = viewModel.expandedShapeSize.width - 2 * (ear + 18)
+        let side = viewModel.geometry.style == .notch
+            ? max(0, (width - viewModel.geometry.closedSize.width) / 2 - 4) : .infinity
+        return HStack(spacing: 0) {
             if pages.count > 1 {
                 // Indicateur de pages : la page affichée en pastille avec ses icônes,
                 // les autres en petits points cliquables (reste compact même avec beaucoup de pages).
@@ -435,12 +440,14 @@ private struct ExpandedNotchView: View {
                 .scaleEffect(showsPageIndicator ? 1 : 0.8, anchor: .leading)
                 .blur(radius: showsPageIndicator ? 0 : 4)
                 .allowsHitTesting(showsPageIndicator)
+                .frame(maxWidth: side, alignment: .leading)
+                .clipped()
             } else {
                 Text("Notchkit")
                     .font(.system(size: 12, weight: .semibold))
                     .foregroundStyle(.white.opacity(0.6))
             }
-            Spacer()
+            Spacer(minLength: 0)
             Button {
                 viewModel.openSettings()
             } label: {
@@ -454,6 +461,7 @@ private struct ExpandedNotchView: View {
             .buttonStyle(.notch)
             .help("Réglages")
             .accessibilityLabel(Text("Réglages"))
+            .fixedSize()
         }
     }
 
@@ -702,6 +710,7 @@ struct PageView: View {
         .environment(\.widgetSize, box.size)
         .environment(\.miniStacked, stacked)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .modifier(GlassLegibility(active: onGlass))
         // Carte : fond discret, liseré éclairé par le haut.
         .notchCard(cornerRadius: stacked ? 12 : 16)
         .contentShape(RoundedRectangle(cornerRadius: 16, style: .continuous))

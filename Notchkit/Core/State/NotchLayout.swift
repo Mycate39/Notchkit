@@ -65,6 +65,11 @@ enum NotchLayout {
     static let widgetUnitWidth: CGFloat = 140
     /// Marge entre les widgets et le bord de l'encoche, en plus du congé.
     static let pageSideMargin: CGFloat = 18
+    /// Place gardée de chaque côté de l'encoche matérielle, dans l'en-tête de l'encoche ouverte : congé
+    /// et marge du verre, engrenage des réglages (22 pt) et un peu d'air.
+    static let expandedHeaderSideRoom: CGFloat = glassEarRadius + pageSideMargin + 28
+    /// Fond « Verre » : ombre fine des textes et halo sous le contenu des widgets (`GlassLegibility`).
+    static let glassContentShadowOpacity: Double = 0.9
     /// Encoche ouverte la plus étroite (onglets des pages et réglages dans l'en-tête) ; elle reste de
     /// toute façon au moins aussi large que l'encoche repliée avec ses activités (`shapeSize`).
     static let minExpandedWidth: CGFloat = 280
@@ -337,7 +342,10 @@ enum NotchLayout {
 
         if isExpanded {
             let target = pageSize ?? defaultExpandedSize
-            let width = max(target.width, closed.width + compactSideWidth * 2)
+            // Vraie encoche : l'en-tête est à sa hauteur ; il faut de la place de chaque côté de l'encoche
+            // matérielle pour les onglets et l'engrenage, sinon ils passent sous la caméra.
+            let side = geometry.style == .notch ? max(compactSideWidth, expandedHeaderSideRoom - earRadius) : compactSideWidth
+            let width = max(target.width, closed.width + side * 2)
             return CGSize(width: width + ears, height: max(target.height, closed.height))
         }
 

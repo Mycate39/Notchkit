@@ -46,7 +46,7 @@ SEED = [
 ]
 
 
-def scenario(notch, only=None):
+def scenario(notch, only=None, glass=False):
     steps, t = [], 0.5
     for seed in SEED:
         steps.append(dict(seed, at=round(t, 2)))
@@ -81,7 +81,7 @@ def scenario(notch, only=None):
 
     # 3. Styles d'animation, sur trois pages.
     pages = [["music", "weather", "calendar"], ["activities", "sysmon"], ["agents"]]
-    for anim in [] if only else ANIMATIONS:
+    for anim in [] if only or glass else ANIMATIONS:
         add(t, "settings.animation", value=anim)
         add(t + 0.1, "settings.layout", pages=pages, sizes={"music": "medium"})
         start = t + 0.5
@@ -98,6 +98,8 @@ def scenario(notch, only=None):
         t = start + 12.9
     add(t, "end")
     setup = dict(NOTCHES[notch], modules=WIDGETS + OTHER_MODULES, pages=[["music"]])
+    if glass:
+        setup["background"] = "glass"
     return {"duration": round(t + 0.5, 2), "region": {"width": 1100, "height": 360}, "fps": 60,
             "setup": setup, "steps": steps}, marks
 
@@ -463,6 +465,22 @@ if __name__ == "__main__":
     names = args[1:] or list(NOTCHES)
     if command == "scenarios":
         write_scenarios(only)
+    elif command == "glass":
+        # Fond « Verre » : le verre dépend de ce qu'il y a derrière l'encoche, que l'enregistrement de la
+        # fenêtre ne montre pas. Une vraie capture macOS par combinaison, assemblées en planches.
+        os.environ.setdefault("NOTCHKIT_SHOT_RECT", "480,0,840,260")
+        data, marks = scenario("auto", only, glass=True)
+        record_spaces("verre", data, [], shots=[m["still"] for m in marks], music=False)
+        folder = os.path.join(OUT, "verre")
+        json.dump(marks, open(os.path.join(folder, "marks.json"), "w"), indent=1)
+        sheet_tool = os.path.join(OUT, "contact-sheet")
+        subprocess.run(["swiftc", "-O", os.path.join(ROOT, "scripts", "contact-sheet.swift"), "-o", sheet_tool], check=True)
+        cells = [(os.path.join(folder, f"shot-{m['still']:05.1f}.png"), m["label"]) for m in marks]
+        cells = [c for c in cells if os.path.exists(c[0])]
+        for n in range(0, len(cells), 16):
+            args = [a for cell in cells[n:n + 16] for a in cell]
+            subprocess.run([sheet_tool, os.path.join(folder, f"planche-{n // 16 + 1}.png"), "4", "620", *args], check=True)
+        print(f"verre : {len(cells)} captures, planches dans {folder}")
     elif command == "record":
         write_scenarios(only)
         record(names)

@@ -24,6 +24,8 @@ final class ScreenTimeModule: NotchModule {
 
     @ObservationIgnored private var loop: Task<Void, Never>?
     @ObservationIgnored private var lastSave = Date.distantPast
+    /// Tournage de démonstration : le relevé affiché n'est jamais enregistré.
+    @ObservationIgnored private var savesDisabled = false
 
     static var fileURL: URL {
         FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
@@ -63,6 +65,7 @@ final class ScreenTimeModule: NotchModule {
     }
 
     private func save() {
+        guard !savesDisabled else { return }
         log.prune()
         let url = Self.fileURL
         try? FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
@@ -149,3 +152,13 @@ private struct AppUsageRow: View {
         }
     }
 }
+
+#if DEBUG
+extension ScreenTimeModule {
+    /// Relevé imposé (tournages de démonstration), jamais écrit dans `ScreenTime.json`.
+    func debugSetLog(_ log: ScreenTimeLog) {
+        savesDisabled = true
+        self.log = log
+    }
+}
+#endif

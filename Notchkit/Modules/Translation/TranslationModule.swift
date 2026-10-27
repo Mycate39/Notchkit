@@ -177,3 +177,13 @@ private struct TranslatorView: View {
         }
     }
 }
+
+#if DEBUG
+extension TranslationModule {
+    /// Traduction imposée (tournages de démonstration).
+    func debugSetResult(source: String, result: String) {
+        self.source = source
+        finish(result)
+    }
+}
+#endif

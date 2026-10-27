@@ -162,3 +162,14 @@ final class TodoModule: NotchModule {
         AnyView(TodoExpandedView(module: self))
     }
 }
+
+#if DEBUG
+extension TodoModule {
+    /// Rappels imposés (tournages de démonstration) : l'observation d'EventKit est coupée.
+    func debugSetItems(_ items: [TodoItem]) {
+        stop()
+        authorization = .fullAccess
+        withAnimation(.snappy) { self.items = items }
+    }
+}
+#endif

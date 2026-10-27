@@ -180,3 +180,14 @@ enum ScreenshotAlerts {
         )
     }
 }
+
+#if DEBUG
+extension ScreenshotsModule {
+    /// Nouvelle capture imposée (tournages de démonstration) : même alerte qu'une vraie capture.
+    func debugAdd(_ url: URL) {
+        let shot = Screenshot(url: url, date: Date(), isVideo: false)
+        withAnimation(.snappy) { items.insert(shot, at: 0) }
+        if alertOnCapture { context.presentAlert(ScreenshotAlerts.captured(shot, module: self)) }
+    }
+}
+#endif

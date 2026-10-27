@@ -213,3 +213,14 @@ struct HealthExpandedView: View {
         }
     }
 }
+
+#if DEBUG
+extension HealthModule {
+    /// Compteurs imposés (tournages de démonstration), sans enregistrement.
+    func debugSet(pauses: Int, glasses: Int, activeMinutes: Double) {
+        self.pauses = pauses
+        self.glasses = glasses
+        activeSeconds = activeMinutes * 60
+    }
+}
+#endif

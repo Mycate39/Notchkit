@@ -479,3 +479,23 @@ private final class OutputLineBuffer {
         return lines
     }
 }
+
+#if DEBUG
+extension VideoDownloadModule {
+    /// Téléchargement fictif (tournages de démonstration) : aucun appel à yt-dlp.
+    @discardableResult
+    func debugStart(title: String) -> UUID {
+        let download = VideoDownload(link: "https://example.com/video", format: .bestVideo, height: 1080, title: title)
+        withAnimation(.snappy) { downloads.insert(download, at: 0) }
+        return download.id
+    }
+
+    /// Avancement fictif ; à 1, le téléchargement est terminé.
+    func debugProgress(_ id: UUID, _ progress: Double) {
+        guard let index = downloads.firstIndex(where: { $0.id == id }) else { return }
+        downloads[index].progress = min(1, progress)
+        downloads[index].detail = "\(Int(min(1, progress) * 100)) %"
+        if progress >= 1 { downloads[index].state = .finished(path: nil) }
+    }
+}
+#endif

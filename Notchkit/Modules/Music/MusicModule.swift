@@ -193,7 +193,7 @@ final class MusicModule: NotchModule {
 
     /// Les lancements automatisés (test de charge, captures d'écran) ne doivent pas déclencher
     /// de demande d'autorisation audio.
-    private static var isStressTest: Bool { AutomatedRun.isActive }
+    private static var isStressTest: Bool { AutomatedRun.isActive && !AutomatedRun.isDiagnostic }
 
     // MARK: Commandes
 
@@ -237,6 +237,7 @@ final class MusicModule: NotchModule {
     func debugPinNowPlaying(_ info: NowPlayingInfo?) {
         debugPinned = true
         nowPlaying = info
+        updateSpectrumCapture()
     }
 
     /// Fin du tournage : les vraies sources reprennent la main.

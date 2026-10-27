@@ -14,6 +14,17 @@ enum AutomatedRun {
             || NSClassFromString("XCTestCase") != nil
     }
 
+    /// Tournage de diagnostic (`NOTCHKIT_DIAGNOSTIC`, avec `NOTCHKIT_DEMO`) : l'app se comporte comme
+    /// en usage réel là où les lancements automatisés s'en écartent. La capture du son reste active
+    /// (l'égaliseur suit les vrais niveaux) et l'encoche est placée dans l'espace SkyLight.
+    static var isDiagnostic: Bool {
+        #if DEBUG
+        ProcessInfo.processInfo.environment["NOTCHKIT_DIAGNOSTIC"] != nil
+        #else
+        false
+        #endif
+    }
+
     /// Réglages de l'app : ceux de l'utilisateur, sauf pendant un tournage de démonstration
     /// (`NOTCHKIT_DEMO`), qui travaille sur une copie jetable (`DemoSettings`).
     @MainActor static var settingsDefaults: UserDefaults {

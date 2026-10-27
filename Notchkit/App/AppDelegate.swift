@@ -151,7 +151,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 // Laisse l'encoche se placer et les modules démarrer.
                 try? await Task.sleep(for: .seconds(2))
                 await DemoDirector(scenarioURL: URL(fileURLWithPath: scenario), outputURL: URL(fileURLWithPath: output),
-                                   viewModel: viewModel, manager: moduleManager, window: controller).run()
+                                   viewModel: viewModel, manager: moduleManager, window: controller,
+                                   settings: settings).run()
                 DemoSettings.discard()
                 NSApp.terminate(nil)
             }

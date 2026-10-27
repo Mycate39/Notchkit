@@ -198,6 +198,9 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 ### Limites connues
 - Pas de suivi des téléversements des autres apps (aucune API publique) ; True Tone et notifications avec réponse abandonnés (API privées).
 - La lecture AX, le rendu Liquid Glass et la détection de projet Terminal n'ont été vérifiés que par tests et captures, pas en usage réel sur une vraie encoche.
-- Les barres de l'égaliseur se figent parfois après un changement de bureau (encoche dans l'espace SkyLight) alors que les niveaux continuent d'arriver : non résolu, abandonné pour l'instant (réafficher l'espace et supprimer les animations implicites n'ont rien changé).
+- Changement de bureau pendant une animation (diagnostic du 26/10/2026, `scripts/visual-matrix.py spaces | animations | during | faceid`, mode démo avec `NOTCHKIT_DIAGNOSTIC`) :
+  - Corrigé : Face ID / Touch ID figés sans la coche (une AVPlayerLayer décroche au changement de bureau ; `VideoHostView` pose désormais les images sur une couche ordinaire) ; encoche décalée et ouverture sans animation (remise au premier plan et replacement de la fenêtre au changement de bureau, désormais seulement si elle a disparu ou si l'écran a changé).
+  - Limite de macOS, non corrigeable : au balayage du trackpad, macOS gèle l'affichage de l'encoche environ 1 s alors que l'app continue de dessiner (toutes les images sont posées) ; l'animation saute ensuite. `activeSpaceDidChange` arrive à la FIN de la transition : impossible de mettre en pause au début. Le gel ne vient ni de l'espace SkyLight ni d'une fenêtre masquée (`occlusionState` reste visible), et `.stationary` est déjà posé. Une alerte affichée est prolongée de 1,1 s (`NotchViewModel.spaceDidChange`).
+  - Les barres de l'égaliseur ne se sont pas figées en 20 changements de bureau (Ctrl ←/→, son réel) : bug non reproduit.
 - Le module assistant IA est masqué (code conservé dans `Modules/Assistant`).
 - Convertisseur : pas de sortie MP3 (aucun encodeur dans macOS) ; un document converti en PDF garde le texte et ses styles, pas les images intégrées.

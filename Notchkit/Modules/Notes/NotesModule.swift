@@ -22,6 +22,8 @@ final class NotesModule: NotchModule {
 
     @ObservationIgnored private let context: ModuleContext
     @ObservationIgnored private var saveTask: Task<Void, Never>?
+    /// Tournage de démonstration : le texte affiché n'est jamais enregistré.
+    @ObservationIgnored private var savesDisabled = false
 
     static var fileURL: URL {
         FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
@@ -48,6 +50,7 @@ final class NotesModule: NotchModule {
     }
 
     private func saveNow() {
+        guard !savesDisabled else { return }
         let url = Self.fileURL
         try? FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
         try? text.write(to: url, atomically: true, encoding: .utf8)
@@ -91,3 +94,14 @@ struct NotesExpandedView: View {
         .onDisappear { module.holdExpanded(false) }
     }
 }
+
+#if DEBUG
+extension NotesModule {
+    /// Texte imposé (tournages de démonstration), jamais écrit dans `Notes.txt`.
+    func debugSetText(_ text: String) {
+        savesDisabled = true
+        saveTask?.cancel()
+        self.text = text
+    }
+}
+#endif

@@ -261,3 +261,14 @@ private struct GameModeSettingsView: View {
             .onAppear { canMeasure = GameModeModule.canMeasure }
     }
 }
+
+#if DEBUG
+extension GameModeModule {
+    /// Mode jeu imposé (tournages de démonstration), avec un compteur d'images fictif.
+    func debugSet(active: Bool, fps: Int?) {
+        isActive = active
+        context.setQuietMode(active)
+        self.fps = active ? fps : nil
+    }
+}
+#endif

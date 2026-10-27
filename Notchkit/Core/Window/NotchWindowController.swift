@@ -102,7 +102,7 @@ final class NotchWindowController {
         if AutomatedRun.isDiagnostic {
             // Diagnostic des bureaux : visibilité de la fenêtre et changements de bureau, horodatés.
             let start = Date()
-            func diag(_ text: String) {
+            let diag: @Sendable (String) -> Void = { text in
                 FileHandle.standardError.write(Data(String(format: "DEMO-DIAG %.2f %@\n", Date().timeIntervalSince(start), text).utf8))
             }
             NotificationCenter.default.addObserver(forName: NSWindow.didChangeOcclusionStateNotification, object: panel,

@@ -15,12 +15,13 @@ struct NotchContainerView: View {
         let geometry = viewModel.geometry
         let size = viewModel.shapeSize
         let island = viewModel.isIsland
+        let glass = viewModel.appearance.usesGlassWidgets
         let radii = NotchLayout.cornerRadii(for: geometry.style, isExpanded: viewModel.isExpanded, height: size.height,
-                                            island: island)
+                                            island: island, glass: glass)
         // Alerte agrandie qui demande ses propres coins (carré Face ID).
         let alertRadius = viewModel.isExpanded ? nil : viewModel.currentAlert?.expandedCornerRadius
         let shape = NotchShape(
-            earRadius: geometry.style == .notch ? NotchLayout.earRadius : 0,
+            earRadius: geometry.style == .notch ? NotchLayout.earRadius(glass: glass, isExpanded: viewModel.isExpanded) : 0,
             topCornerRadius: radii.top,
             bottomCornerRadius: alertRadius ?? radii.bottom
         )
@@ -29,7 +30,7 @@ struct NotchContainerView: View {
         // grandit (et dépasse, avec le ressort rebondissant), ce cadre reste centré sur l'encoche et la
         // forme le dévoile depuis le centre. Sans lui, le contenu inséré à l'ouverture suivait le bord
         // gauche de la forme animée.
-        let expanded = NotchLayout.shapeSize(for: geometry, isExpanded: true, hasCompactContent: true)
+        let expanded = viewModel.expandedShapeSize
         ZStack(alignment: .top) {
             if viewModel.isExpanded {
                 ExpandedNotchView(viewModel: viewModel)
@@ -44,12 +45,15 @@ struct NotchContainerView: View {
         .frame(width: max(expanded.width, size.width), height: max(expanded.height, size.height), alignment: .top)
         .geometryGroup()
         .frame(width: size.width, height: size.height, alignment: .top)
-        .notchBackground(viewModel.appearance, style: geometry.style, shape: shape)
+        .notchBackground(viewModel.appearance, style: geometry.style, shape: shape,
+                         notchHeight: geometry.closedSize.height, glassRevealed: viewModel.isExpanded)
         // Fin contour gris, comme la Dynamic Island : pour l'île, et quand la barre des menus est
         // sombre (l'encoche noire s'y confondrait). Collée au bord de l'écran, pas de trait en haut.
+        // Encoche ouverte en verre : aucun contour, seul le bord du verre.
         .overlay {
             shape.stroke(NotchLayout.keyLine(viewModel.keyLineColor)
-                            .opacity((island && geometry.style == .pill) || viewModel.showsOutline ? 1 : 0),
+                            .opacity(glass && viewModel.isExpanded ? 0
+                                     : (island && geometry.style == .pill) || viewModel.showsOutline ? 1 : 0),
                          lineWidth: 2)
                 .mask(alignment: .top) {
                     Rectangle().padding(.top, geometry.style == .notch ? 2 : 0)
@@ -78,6 +82,7 @@ struct NotchContainerView: View {
         .foregroundStyle(.white)
         .tint(viewModel.appearance.accentColor)
         .environment(\.onAccent, viewModel.appearance.onAccentColor)
+        .environment(\.widgetsOnGlass, viewModel.appearance.usesGlassWidgets)
         .environment(\.sliderTint, viewModel.appearance.sliderColor?.color)
         .environment(\.colorScheme, .dark)
         // Écran verrouillé : activités visibles, mais aucun bouton ni bulle cliquable, sauf le lecteur
@@ -362,7 +367,8 @@ private struct ExpandedNotchView: View {
     @State private var swiper = PageSwiper()
 
     var body: some View {
-        let ear = viewModel.geometry.style == .notch ? NotchLayout.earRadius : 0
+        let ear = viewModel.geometry.style == .notch
+            ? NotchLayout.earRadius(glass: viewModel.appearance.usesGlassWidgets, isExpanded: true) : 0
 
         VStack(spacing: 0) {
             header
@@ -656,10 +662,13 @@ final class PageSwiper {
 struct PageView: View {
     let page: ModulePage
     let viewModel: NotchViewModel
+    @Environment(\.widgetsOnGlass) private var onGlass
 
     var body: some View {
         GeometryReader { proxy in
-            let spacing: CGFloat = 10
+            let gaps = NotchLayout.widgetSpacing(onGlass: onGlass)
+            let ownsSize = NotchLayout.pageSize(moduleIDs: page.modules.map(\.id), glass: onGlass) != nil
+            let spacing = gaps.columns
             let columns = WidgetColumns.make(sizes: page.modules.map(\.size))
             let columnWeights = columns.map { page.modules[$0[0]].size.weight }
             let totalWeight = max(0.001, columnWeights.reduce(0, +))
@@ -667,9 +676,10 @@ struct PageView: View {
 
             HStack(spacing: spacing) {
                 ForEach(Array(columns.enumerated()), id: \.offset) { index, column in
-                    VStack(spacing: 8) {
+                    VStack(spacing: gaps.stacked) {
                         ForEach(column, id: \.self) { position in
                             card(page.modules[position], stacked: column.count == 2)
+                                .environment(\.widgetOwnsNotchSize, ownsSize)
                         }
                     }
                     .frame(width: max(0, available * columnWeights[index] / totalWeight))

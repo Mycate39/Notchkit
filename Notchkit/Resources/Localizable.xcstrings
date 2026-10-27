@@ -1,86 +1,6 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
-    "Masquer l'encoche pendant une vidéo en plein écran" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hide the notch during full-screen videos"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Masquer l'encoche pendant une vidéo en plein écran"
-          }
-        }
-      }
-    },
-    "L'encoche disparaît tant qu'une vidéo (YouTube, Netflix, QuickTime…) est lue en plein écran sur son écran, puis revient." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The notch disappears while a video (YouTube, Netflix, QuickTime…) plays in full screen on its display, then comes back."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "L'encoche disparaît tant qu'une vidéo (YouTube, Netflix, QuickTime…) est lue en plein écran sur son écran, puis revient."
-          }
-        }
-      }
-    },
-    "Reprenez la lecture dans l'app après avoir déverrouillé le Mac" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Resume playback in the app after unlocking your Mac"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reprenez la lecture dans l'app après avoir déverrouillé le Mac"
-          }
-        }
-      }
-    },
-    "Lecteur sur l'écran verrouillé" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Player on the lock screen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lecteur sur l'écran verrouillé"
-          }
-        }
-      }
-    },
-    "Quand le Mac est verrouillé, l'encoche s'élargit avec le morceau en cours et ses commandes. Ce sont les seuls boutons actifs de l'encoche verrouillée." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When your Mac is locked, the notch widens with the current song and its controls. They're the only buttons that work in the notch while it's locked."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quand le Mac est verrouillé, l'encoche s'élargit avec le morceau en cours et ses commandes. Ce sont les seuls boutons actifs de l'encoche verrouillée."
-          }
-        }
-      }
-    },
     "" : {
 
     },
@@ -6073,6 +5993,7 @@
       }
     },
     "En mode encoche (réelle ou simulée), le fond reste toujours noir pour se fondre avec la découpe de l'écran : ce choix s'applique à la pastille flottante. « Verre » utilise le Liquid Glass de macOS 26." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6088,7 +6009,24 @@
         }
       }
     },
+    "En mode encoche (réelle ou simulée), le haut reste noir pour se fondre avec la découpe de l'écran ; seul « Verre » s'applique aussi à l'encoche ouverte. « Verre » utilise le Liquid Glass de macOS 26." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In notch mode (real or simulated), the top stays black to blend in with the screen cutout; only “Glass” also applies to the open notch. “Glass” uses the Liquid Glass of macOS 26."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En mode encoche (réelle ou simulée), le haut reste noir pour se fondre avec la découpe de l'écran ; seul « Verre » s'applique aussi à l'encoche ouverte. « Verre » utilise le Liquid Glass de macOS 26."
+          }
+        }
+      }
+    },
     "En mode encoche, le fond reste noir pour se fondre avec la barre des menus, comme une vraie encoche. Le fond choisi s'applique à la pastille flottante : désactivez « Simuler une encoche » dans Général pour l'utiliser." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6100,6 +6038,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "En mode encoche, le fond reste noir pour se fondre avec la barre des menus, comme une vraie encoche. Le fond choisi s'applique à la pastille flottante : désactivez « Simuler une encoche » dans Général pour l'utiliser."
+          }
+        }
+      }
+    },
+    "En mode encoche, le haut reste noir pour se fondre avec la découpe de l'écran. « Verre » s'applique aussi à l'encoche ouverte, sous la découpe ; les autres fonds ne s'appliquent qu'à la pastille flottante." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In notch mode, the top stays black to blend in with the screen cutout. “Glass” also applies to the open notch, below the cutout; the other backgrounds only apply to the floating pill."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En mode encoche, le haut reste noir pour se fondre avec la découpe de l'écran. « Verre » s'applique aussi à l'encoche ouverte, sous la découpe ; les autres fonds ne s'appliquent qu'à la pastille flottante."
           }
         }
       }
@@ -7886,6 +7840,22 @@
         }
       }
     },
+    "L'encoche disparaît tant qu'une vidéo (YouTube, Netflix, QuickTime…) est lue en plein écran sur son écran, puis revient." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The notch disappears while a video (YouTube, Netflix, QuickTime…) plays in full screen on its display, then comes back."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'encoche disparaît tant qu'une vidéo (YouTube, Netflix, QuickTime…) est lue en plein écran sur son écran, puis revient."
+          }
+        }
+      }
+    },
     "L'installation a échoué : %@" : {
       "localizations" : {
         "en" : {
@@ -8455,6 +8425,22 @@
         }
       }
     },
+    "Lecteur sur l'écran verrouillé" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Player on the lock screen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lecteur sur l'écran verrouillé"
+          }
+        }
+      }
+    },
     "Lecture" : {
       "localizations" : {
         "en" : {
@@ -8837,6 +8823,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Masquer ce widget"
+          }
+        }
+      }
+    },
+    "Masquer l'encoche pendant une vidéo en plein écran" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide the notch during full-screen videos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Masquer l'encoche pendant une vidéo en plein écran"
           }
         }
       }
@@ -11199,6 +11201,22 @@
         }
       }
     },
+    "Quand le Mac est verrouillé, l'encoche s'élargit avec le morceau en cours et ses commandes. Ce sont les seuls boutons actifs de l'encoche verrouillée." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When your Mac is locked, the notch widens with the current song and its controls. They're the only buttons that work in the notch while it's locked."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quand le Mac est verrouillé, l'encoche s'élargit avec le morceau en cours et ses commandes. Ce sont les seuls boutons actifs de l'encoche verrouillée."
+          }
+        }
+      }
+    },
     "Quand un jeu passe en plein écran, comme le mode jeu de macOS, l'encoche se fait discrète et affiche les images par seconde." : {
       "localizations" : {
         "en" : {
@@ -11822,6 +11840,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reprendre"
+          }
+        }
+      }
+    },
+    "Reprenez la lecture dans l'app après avoir déverrouillé le Mac" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resume playback in the app after unlocking your Mac"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reprenez la lecture dans l'app après avoir déverrouillé le Mac"
           }
         }
       }
@@ -13758,6 +13792,22 @@
         }
       }
     },
+    "Volume et luminosité aux touches du clavier, encoche qui évite les menus, traduction de la sélection, verrouillage du clavier." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volume and brightness keys, a notch that stays clear of menus, translating the selection, and keyboard lock."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volume et luminosité aux touches du clavier, encoche qui évite les menus, traduction de la sélection, verrouillage du clavier."
+          }
+        }
+      }
+    },
     "Volume, luminosité, volume des apps… Sinon, ils prennent la couleur d'accent." : {
       "localizations" : {
         "en" : {
@@ -13873,6 +13923,7 @@
       }
     },
     "Votre écran a une encoche : le fond reste noir pour se fondre avec la découpe de l'écran (sinon elle resterait visible). Le fond choisi s'applique à la pastille affichée sur les autres écrans." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -14012,22 +14063,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "yt-dlp non installé"
-          }
-        }
-      }
-    },
-    "Volume et luminosité aux touches du clavier, encoche qui évite les menus, traduction de la sélection, verrouillage du clavier." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Volume and brightness keys, a notch that stays clear of menus, translating the selection, and keyboard lock."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Volume et luminosité aux touches du clavier, encoche qui évite les menus, traduction de la sélection, verrouillage du clavier."
           }
         }
       }

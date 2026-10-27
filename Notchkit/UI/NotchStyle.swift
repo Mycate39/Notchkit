@@ -71,6 +71,11 @@ extension StoredColor {
 extension EnvironmentValues {
     /// Texte et symboles posés sur la couleur d'accent (`.tint`).
     @Entry var onAccent: Color = StandBy.onAccent(for: StandBy.defaultAccent)
+    /// Fond « Verre » : les widgets sont posés directement sur le verre, sans carte.
+    @Entry var widgetsOnGlass = false
+    /// Le widget est seul sur une page qui a sa propre taille d'encoche (`NotchLayout.pageSize`) : il
+    /// prend la présentation faite pour cette taille (lecteur de musique).
+    @Entry var widgetOwnsNotchSize = false
 }
 
 /// Bouton StandBy : pilule (ou cercle) épaisse et tactile.
@@ -311,11 +316,14 @@ private struct SliderKnob: View {
 struct NotchCardSurface: ViewModifier {
     var cornerRadius: CGFloat
     @Environment(\.colorSchemeContrast) private var contrast
+    @Environment(\.widgetsOnGlass) private var onGlass
 
     func body(content: Content) -> some View {
         let shape = RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
         content
-            .background(.black, in: shape)
+            // Fond « Verre » : pas de carte, le widget est posé sur le verre (contour seulement avec
+            // « Augmenter le contraste », sinon il se confondrait avec le verre).
+            .background(onGlass ? .clear : .black, in: shape)
             .overlay {
                 if contrast == .increased {
                     shape.strokeBorder(.white.opacity(0.4), lineWidth: 1)

@@ -302,14 +302,26 @@ final class NotchViewModel {
         _ = appearance  // dépend de la taille choisie
         return NotchLayout.shapeSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent,
                               sideWidth: compactSideWidth, alertSize: currentAlert?.expandedSize,
-                              island: isIsland)
+                              island: isIsland, pageSize: pageSize)
+    }
+
+    /// Taille de l'encoche ouverte propre à la page affichée (lecteur de musique seul en mode verre).
+    var pageSize: CGSize? {
+        let pages = ModulePage.pages(from: manager)
+        guard pages.indices.contains(selectedPage) else { return nil }
+        return NotchLayout.pageSize(moduleIDs: pages[selectedPage].modules.map(\.id), glass: appearance.usesGlassWidgets)
+    }
+
+    /// Forme de l'encoche ouverte sur la page affichée.
+    var expandedShapeSize: CGSize {
+        NotchLayout.shapeSize(for: geometry, isExpanded: true, hasCompactContent: true, pageSize: pageSize)
     }
 
     var panelSize: CGSize {
         _ = appearance
         let size = NotchLayout.panelSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent,
                               sideWidth: compactSideWidth, alertSize: currentAlert?.expandedSize,
-                              island: isIsland)
+                              island: isIsland, pageSize: pageSize)
         // Place autour de la forme pour que l'ombre (survol ou encoche dépliée) ne soit pas coupée.
         // Bulles à droite : la fenêtre s'élargit des deux côtés pour garder l'encoche centrée.
         var bubbles = NotchLayout.bubblesWidth(count: bubbleModules.count, geometry: geometry, island: isIsland)

@@ -67,6 +67,16 @@ enum NotchLayout {
         var margin: CGFloat { (y + radius * 2).rounded(.up) }
     }
     static let hoverShadow = Shadow(opacity: 0.45, radius: 5, y: 2)
+    /// Fond « Verre » de l'encoche ouverte, façon lecteur de l'iPhone : noir plein sur le haut (au moins
+    /// l'encoche matérielle), long dégradé, puis verre clair où le fond d'écran reste visible, à peine
+    /// assombri en bas ; pas de contour, seul le bord du verre.
+    static let glassBlackFraction: CGFloat = 0.38
+    static let glassBottomDarkness: Double = 0.08
+    static let glassTint: Double = 0.05
+    /// Écart entre deux widgets : sans carte (fond « Verre »), seul le vide les sépare.
+    static func widgetSpacing(onGlass: Bool) -> (columns: CGFloat, stacked: CGFloat) {
+        onGlass ? (22, 14) : (10, 8)
+    }
     static let expandedShadow = Shadow(opacity: 0.5, radius: 16, y: 6)
     /// Marge de fenêtre réservée à l'ombre de survol (sur les côtés et en bas).
     static var hoverShadowMargin: CGFloat { hoverShadow.margin }
@@ -166,6 +176,23 @@ enum NotchLayout {
 
     /// Rayon des coins en mode déplié.
     static let expandedCornerRadius: CGFloat = 24
+    /// Fond « Verre », encoche ouverte : grands congés en haut et grands coins en bas, comme le lecteur
+    /// de l'iPhone.
+    static let glassEarRadius: CGFloat = 20
+    static let glassCornerRadius: CGFloat = 36
+    /// Fond « Verre » : une page qui ne contient que la musique ouvre l'encoche à la taille du lecteur
+    /// de l'iPhone (deux fois plus large que haute) ; elle s'agrandit en passant à une autre page.
+    static let glassMusicPlayerSize = CGSize(width: 440, height: 222)
+
+    /// Taille de l'encoche ouverte propre à une page (`nil` : taille choisie dans les réglages).
+    static func pageSize(moduleIDs: [String], glass: Bool) -> CGSize? {
+        glass && moduleIDs == ["music"] ? glassMusicPlayerSize : nil
+    }
+
+    /// Congé qui raccorde l'encoche au haut de l'écran.
+    static func earRadius(glass: Bool, isExpanded: Bool) -> CGFloat {
+        glass && isExpanded ? glassEarRadius : earRadius
+    }
 
     /// Facteur de ralentissement des animations (menu Débogage, pour observer un défaut).
     @MainActor static var animationSlowdown: Double = 1
@@ -250,7 +277,7 @@ enum NotchLayout {
     /// Taille de la forme noire selon l'état.
     static func shapeSize(for geometry: NotchGeometry, isExpanded: Bool, hasCompactContent: Bool,
                           sideWidth: CGFloat = compactSideWidth, alertSize: CGSize? = nil,
-                          island: Bool = false) -> CGSize {
+                          island: Bool = false, pageSize: CGSize? = nil) -> CGSize {
         let ears = geometry.style == .notch ? earRadius * 2 : 0
         let closed = geometry.closedSize
 
@@ -260,8 +287,9 @@ enum NotchLayout {
         }
 
         if isExpanded {
-            let width = max(expandedSize.width, closed.width + compactSideWidth * 2)
-            return CGSize(width: width + ears, height: max(expandedSize.height, closed.height))
+            let target = pageSize ?? expandedSize
+            let width = max(target.width, closed.width + compactSideWidth * 2)
+            return CGSize(width: width + ears, height: max(target.height, closed.height))
         }
 
         guard hasCompactContent else {
@@ -314,19 +342,20 @@ enum NotchLayout {
     /// Taille de la fenêtre nécessaire pour contenir la forme.
     static func panelSize(for geometry: NotchGeometry, isExpanded: Bool, hasCompactContent: Bool,
                           sideWidth: CGFloat = compactSideWidth, alertSize: CGSize? = nil,
-                          island: Bool = false) -> CGSize {
+                          island: Bool = false, pageSize: CGSize? = nil) -> CGSize {
         let shape = shapeSize(for: geometry, isExpanded: isExpanded, hasCompactContent: hasCompactContent,
-                              sideWidth: sideWidth, alertSize: alertSize, island: island)
+                              sideWidth: sideWidth, alertSize: alertSize, island: island, pageSize: pageSize)
         return CGSize(width: shape.width, height: shape.height + topInset(for: geometry.style))
     }
 
     /// Rayons des coins (haut, bas) de la forme.
     static func cornerRadii(for style: NotchStyle, isExpanded: Bool, height: CGFloat,
-                            island: Bool = false) -> (top: CGFloat, bottom: CGFloat) {
+                            island: Bool = false, glass: Bool = false) -> (top: CGFloat, bottom: CGFloat) {
         switch style {
         case .notch:
             if island && !isExpanded { return (0, height / 2) }
-            return (0, isExpanded ? expandedCornerRadius : min(10, height / 3))
+            if isExpanded { return (0, glass ? glassCornerRadius : expandedCornerRadius) }
+            return (0, min(10, height / 3))
         case .pill:
             let radius = isExpanded ? expandedCornerRadius : height / 2
             return (radius, radius)

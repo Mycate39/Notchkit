@@ -179,6 +179,15 @@ struct NotchLayoutTests {
         screenFrame: CGRect(x: 0, y: 0, width: 1440, height: 900), centerX: 720
     )
 
+    @Test func pageMusiqueSeuleALaTailleDuLecteurEnVerre() {
+        #expect(NotchLayout.pageSize(moduleIDs: ["music"], glass: true) == NotchLayout.glassMusicPlayerSize)
+        #expect(NotchLayout.pageSize(moduleIDs: ["music"], glass: false) == nil)
+        #expect(NotchLayout.pageSize(moduleIDs: ["music", "clock"], glass: true) == nil)
+        let player = NotchLayout.shapeSize(for: notch, isExpanded: true, hasCompactContent: true,
+                                           pageSize: NotchLayout.glassMusicPlayerSize)
+        #expect(player.height == NotchLayout.glassMusicPlayerSize.height)
+    }
+
     @Test func encocheRepliéeEpouseLEncochePhysique() {
         let size = NotchLayout.shapeSize(for: notch, isExpanded: false, hasCompactContent: false)
         #expect(size == CGSize(width: 185 + NotchLayout.earRadius * 2, height: 32))

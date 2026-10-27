@@ -10,11 +10,12 @@ struct NotchShape: Shape {
     var topCornerRadius: CGFloat
     var bottomCornerRadius: CGFloat
 
-    var animatableData: AnimatablePair<CGFloat, CGFloat> {
-        get { AnimatablePair(topCornerRadius, bottomCornerRadius) }
+    var animatableData: AnimatablePair<CGFloat, AnimatablePair<CGFloat, CGFloat>> {
+        get { AnimatablePair(earRadius, AnimatablePair(topCornerRadius, bottomCornerRadius)) }
         set {
-            topCornerRadius = newValue.first
-            bottomCornerRadius = newValue.second
+            earRadius = newValue.first
+            topCornerRadius = newValue.second.first
+            bottomCornerRadius = newValue.second.second
         }
     }
 

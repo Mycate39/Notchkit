@@ -102,6 +102,7 @@ enum AppIconCache {
 struct MusicExpandedView: View {
     let module: MusicModule
     @Environment(\.widgetSize) private var size
+    @Environment(\.widgetOwnsNotchSize) private var ownsNotchSize
 
     /// Rien ne joue : le lecteur reste en place, vide, commandes grisées.
     private static var emptyInfo: NowPlayingInfo {
@@ -112,7 +113,10 @@ struct MusicExpandedView: View {
         let info = module.nowPlaying ?? Self.emptyInfo
         let isEmpty = module.nowPlaying == nil
         Group {
-            if size == .small {
+            if ownsNotchSize {
+                // Seul sur sa page en mode verre : l'encoche a la taille du lecteur de l'iPhone.
+                playerLayout(info, isEmpty: isEmpty)
+            } else if size == .small {
                 // Petit widget : pochette, titre et commandes empilés. Du plus complet au plus serré,
                 // selon la hauteur de la carte (taille de l'encoche).
                 ViewThatFits(in: .vertical) {
@@ -136,6 +140,60 @@ struct MusicExpandedView: View {
                 .padding(.vertical, 10)
             }
         }
+    }
+
+    /// Lecteur de l'iPhone (encoche à la taille `NotchLayout.glassMusicPlayerSize`) : grande pochette,
+    /// titre et artiste en gros, barre et temps lisibles, gros glyphes largement espacés.
+    private func playerLayout(_ info: NowPlayingInfo, isEmpty: Bool) -> some View {
+        VStack(spacing: 0) {
+            HStack(spacing: 14) {
+                Button { module.openPlayerApp() } label: {
+                    ArtworkView(info: info, size: 64, cornerRadius: 64 * 0.22)
+                }
+                .buttonStyle(.notch)
+                .disabled(isEmpty)
+                .help("Ouvrir l'app qui joue")
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(info.title)
+                        .font(.system(size: 17, weight: .bold))
+                    if let artist = info.artist {
+                        Text(artist)
+                            .font(.system(size: 15, weight: .medium))
+                            .foregroundStyle(.white.opacity(0.55))
+                    }
+                }
+                .lineLimit(1)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .animation(.smooth, value: info.title)
+
+                EqualizerView(isAnimating: info.isPlaying, monitor: module.reactiveEqualizer ? module.spectrum : nil,
+                              color: ArtworkTint.color(for: info), spacingRatio: 1, bellShaped: true)
+                    .frame(width: 26, height: 20)
+                    .frame(maxHeight: .infinity, alignment: .top)
+                    .padding(.top, 6)
+            }
+            .frame(height: 64)
+
+            Spacer(minLength: 10)
+            if info.duration != nil {
+                PlaybackProgressView(info: info, fontSize: 12, barHeight: 6)
+            }
+            Spacer(minLength: 10)
+
+            HStack(spacing: 0) {
+                Color.clear.frame(width: 28, height: 1)
+                Spacer(minLength: 4)
+                PlaybackControls(module: module, isPlaying: info.isPlaying, spacing: 46, glyphs: (side: 26, main: 34))
+                    .inactive(isEmpty)
+                Spacer(minLength: 4)
+                AirPlayButton()
+                    .frame(width: 24, height: 24)
+                    .frame(width: 28, height: 28)
+                    .help("Sortie audio")
+            }
+        }
+        .padding(.vertical, 2)
     }
 
     private func smallLayout(_ info: NowPlayingInfo, artworkSize: CGFloat?, isEmpty: Bool) -> some View {
@@ -241,6 +299,8 @@ private extension View {
 /// Ne se rafraîchit qu'une fois par seconde, et seulement quand l'encoche est dépliée.
 private struct PlaybackProgressView: View {
     let info: NowPlayingInfo
+    var fontSize: CGFloat = 11
+    var barHeight: CGFloat = 5
 
     var body: some View {
         TimelineView(.periodic(from: .now, by: 1)) { context in
@@ -250,12 +310,12 @@ private struct PlaybackProgressView: View {
             HStack(spacing: 10) {
                 Text(elapsed.map(Self.format) ?? "–:––")
                     .frame(minWidth: 30, alignment: .leading)
-                ProgressLine(value: duration > 0 ? (elapsed ?? 0) / duration : 0)
+                ProgressLine(value: duration > 0 ? (elapsed ?? 0) / duration : 0, height: barHeight)
                     .opacity(elapsed == nil ? 0.4 : 1)
                 Text(elapsed.map { "-" + Self.format(max(0, duration - $0)) } ?? Self.format(duration))
                     .frame(minWidth: 34, alignment: .trailing)
             }
-            .font(.system(size: 11, weight: .medium).monospacedDigit())
+            .font(.system(size: fontSize, weight: .medium).monospacedDigit())
             .foregroundStyle(.white.opacity(0.5))
         }
     }
@@ -300,11 +360,13 @@ private struct PlaybackControls: View {
     var spacing: CGFloat = 34
     /// Retour haptique du trackpad à chaque appui (commandes de la bulle).
     var haptics = false
+    /// Tailles imposées des glyphes (lecteur de l'encoche en verre).
+    var glyphs: (side: CGFloat, main: CGFloat)?
 
     // Glyphes blancs pleins, sans fond ; lecture/pause plus grand que précédent/suivant.
     var body: some View {
-        let side: CGFloat = compact ? 13 : (large ? 22 : 17)
-        let main: CGFloat = compact ? 18 : (large ? 32 : 24)
+        let side: CGFloat = glyphs?.side ?? (compact ? 13 : (large ? 22 : 17))
+        let main: CGFloat = glyphs?.main ?? (compact ? 18 : (large ? 32 : 24))
         HStack(spacing: compact ? 12 : spacing) {
             control("backward.fill", size: side, help: "Morceau précédent") { module.send(.previousTrack) }
             control(isPlaying ? "pause.fill" : "play.fill", size: main, help: isPlaying ? "Pause" : "Lecture") {

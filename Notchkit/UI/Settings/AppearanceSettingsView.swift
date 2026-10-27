@@ -101,17 +101,14 @@ struct AppearanceSettingsView: View {
                         ), supportsOpacity: false)
                     }
                 }
-                .disabled(isNotchMode)
                 if isNotchMode {
-                    Label(settings.settings.simulateNotch
-                          ? "En mode encoche, le fond reste noir pour se fondre avec la barre des menus, comme une vraie encoche. Le fond choisi s'applique à la pastille flottante : désactivez « Simuler une encoche » dans Général pour l'utiliser."
-                          : "Votre écran a une encoche : le fond reste noir pour se fondre avec la découpe de l'écran (sinon elle resterait visible). Le fond choisi s'applique à la pastille affichée sur les autres écrans.",
+                    Label("En mode encoche, le haut reste noir pour se fondre avec la découpe de l'écran. « Verre » s'applique aussi à l'encoche ouverte, sous la découpe ; les autres fonds ne s'appliquent qu'à la pastille flottante.",
                           systemImage: "info.circle")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
                 } else if settings.settings.appearance.background != .black {
-                    Text("En mode encoche (réelle ou simulée), le fond reste toujours noir pour se fondre avec la découpe de l'écran : ce choix s'applique à la pastille flottante. « Verre » utilise le Liquid Glass de macOS 26.")
+                    Text("En mode encoche (réelle ou simulée), le haut reste noir pour se fondre avec la découpe de l'écran ; seul « Verre » s'applique aussi à l'encoche ouverte. « Verre » utilise le Liquid Glass de macOS 26.")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }

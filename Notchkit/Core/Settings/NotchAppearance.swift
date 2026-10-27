@@ -150,12 +150,18 @@ struct NotchAppearance: Codable, Equatable, Sendable {
 }
 
 extension View {
-    /// Fond de l'encoche. En mode encoche (réelle ou simulée), il reste noir quoi qu'il arrive,
-    /// pour se fondre avec la découpe de l'écran. « Verre » utilise le Liquid Glass de macOS 26.
+    /// Fond de l'encoche. En mode encoche (réelle ou simulée), il reste noir pour se fondre avec la
+    /// découpe de l'écran ; avec « Verre », l'encoche ouverte (`glassRevealed`) passe au verre sous la
+    /// hauteur de l'encoche matérielle (`notchHeight`). « Verre » utilise le Liquid Glass de macOS 26.
     @ViewBuilder
-    func notchBackground(_ appearance: NotchAppearance, style: NotchStyle, shape: some Shape) -> some View {
+    func notchBackground(_ appearance: NotchAppearance, style: NotchStyle, shape: some Shape,
+                         notchHeight: CGFloat = 0, glassRevealed: Bool = false) -> some View {
         if style == .notch {
-            background(Color.black)
+            if appearance.usesGlassWidgets {
+                background(GlassNotchBackground(notchHeight: notchHeight, revealed: glassRevealed, shape: AnyShape(shape)))
+            } else {
+                background(Color.black)
+            }
         } else if appearance.background == .glass, !NotchAccessibility.reduceTransparency {
             if #available(macOS 26.0, *) {
                 // Verre liquide : réfraction et reflets sur les bords, légèrement teinté pour la lisibilité.
@@ -165,6 +171,51 @@ extension View {
             }
         } else {
             background(NotchBackground(appearance: appearance))
+        }
+    }
+}
+
+extension NotchAppearance {
+    /// Fond « Verre » : widgets posés directement sur le verre, sans carte (sauf « Réduire la transparence »).
+    @MainActor var usesGlassWidgets: Bool {
+        background == .glass && !NotchAccessibility.reduceTransparency
+    }
+}
+
+/// Fond « Verre » d'une vraie encoche, façon lecteur de l'iPhone : noir plein sur le haut (la découpe
+/// de l'écran reste invisible), long dégradé, puis verre clair, sans contour. Repliée,
+/// l'encoche est entièrement noire ; le verre se dévoile avec le ressort de l'ouverture.
+struct GlassNotchBackground: View {
+    let notchHeight: CGFloat
+    let revealed: Bool
+    let shape: AnyShape
+
+    var body: some View {
+        GeometryReader { proxy in
+            let height = max(proxy.size.height, 1)
+            let fadeStart = min(1, max(notchHeight / height, NotchLayout.glassBlackFraction))
+            ZStack {
+                glass
+                LinearGradient(stops: [
+                    .init(color: .black, location: 0),
+                    .init(color: .black, location: fadeStart),
+                    .init(color: .black.opacity(NotchLayout.glassBottomDarkness), location: 1),
+                ], startPoint: .top, endPoint: .bottom)
+                Color.black.opacity(revealed ? 0 : 1)
+            }
+            .animation(NotchLayout.spring, value: revealed)
+        }
+    }
+
+    @ViewBuilder
+    private var glass: some View {
+        if #available(macOS 26.0, *) {
+            // Verre clair : le fond d'écran reste net derrière, seulement réfracté sur les bords.
+            Color.clear.glassEffect(.clear.tint(.black.opacity(NotchLayout.glassTint)), in: shape)
+        } else {
+            Rectangle().fill(.ultraThinMaterial)
+                .overlay(Color.black.opacity(NotchLayout.glassTint))
+                .environment(\.colorScheme, .dark)
         }
     }
 }

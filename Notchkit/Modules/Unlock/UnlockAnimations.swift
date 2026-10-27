@@ -182,7 +182,7 @@ final class VideoHostView: NSView {
         // Images BGRA avec transparence, sur IOSurface : posées telles quelles dans la couche.
         output = AVPlayerItemVideoOutput(pixelBufferAttributes: [
             kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA,
-            kCVPixelBufferIOSurfacePropertiesKey as String: NSDictionary(),
+            kCVPixelBufferIOSurfacePropertiesKey as String: [String: String](),
         ])
         super.init(frame: .zero)
         wantsLayer = true

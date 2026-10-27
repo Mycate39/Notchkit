@@ -258,7 +258,7 @@ def record_spaces(name="spaces", scenario=None, switches=None, duration=None, ex
         if wait > 0:
             time.sleep(wait)
         if kind == "shot":
-            subprocess.run(["screencapture", "-x", "-R", "600,0,600,220", os.path.join(folder, f"shot-{at:05.1f}.png")])
+            subprocess.run(["screencapture", "-x", "-R", os.environ.get("NOTCHKIT_SHOT_RECT", "600,0,600,220"), os.path.join(folder, f"shot-{at:05.1f}.png")])
             continue
         code = 124 if direction == "right" else 123
         subprocess.run(["osascript", "-e", f'tell application "System Events" to key code {code} using control down'])

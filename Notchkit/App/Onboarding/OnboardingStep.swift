@@ -49,7 +49,7 @@ enum OnboardingStep: Int, CaseIterable, Identifiable, Sendable {
         case .agents:
             "La page Agents montre le travail de Claude Code : ses étapes, le fichier modifié, le terminal. Quand il demande une autorisation ou pose une question, répondez dans l'encoche. Une mascotte, à choisir parmi 33, l'accompagne."
         case .widgets:
-            "Commencez avec une disposition prête à l'emploi. Vous pourrez ensuite ajouter, retirer et redimensionner chaque widget dans les réglages."
+            "Commencez avec une disposition prête à l'emploi. Vous pourrez ensuite ajouter, retirer et redimensionner chaque widget dans les réglages : l'encoche prend la taille de ses widgets. Dans Apparence, choisissez aussi son fond, noir ou en verre."
         case .permissions:
             "Notchkit ne demande une autorisation que lorsqu'une fonction en a besoin, et toutes sont facultatives. L'Accessibilité est la plus utile : donnez-la dès maintenant."
         case .tryIt:

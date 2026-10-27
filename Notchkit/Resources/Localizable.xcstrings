@@ -1,6 +1,22 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "Commencez avec une disposition prête à l'emploi. Vous pourrez ensuite ajouter, retirer et redimensionner chaque widget dans les réglages : l'encoche prend la taille de ses widgets. Dans Apparence, choisissez aussi son fond, noir ou en verre." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start with a ready-made layout. You can then add, remove and resize each widget in Settings: the notch takes the size of its widgets. In Appearance, also pick its background, black or glass."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commencez avec une disposition prête à l'emploi. Vous pourrez ensuite ajouter, retirer et redimensionner chaque widget dans les réglages : l'encoche prend la taille de ses widgets. Dans Apparence, choisissez aussi son fond, noir ou en verre."
+          }
+        }
+      }
+    },
     "" : {
 
     },

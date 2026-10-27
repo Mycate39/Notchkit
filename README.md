@@ -10,6 +10,15 @@ https://github.com/user-attachments/assets/e3e6bf6a-735d-4323-a4ff-8d78ff44c057
 
 ## Features
 
+**Design**
+- **Glass** (macOS 26): the open notch stays black at the top, where it meets the screen's
+  cutout, then fades into clear Liquid Glass with your wallpaper showing through, like the
+  iPhone's player. Widgets sit right on the glass. Or keep it all black.
+- **A notch that fits its widgets**: no size to pick. Each page opens the notch to the size of
+  its widgets: a single small widget opens a small notch, a full page a wide one, and a large
+  widget a taller one. The notch grows or shrinks as you switch pages. With Glass, the Music
+  widget alone on its page turns the notch into a full player.
+
 **Music and media**
 - **Music**: the current track (Apple Music, Spotify, Deezer, and most players, including in
   the browser), artwork, controls, and bars that react to the sound, in an iPhone Live Activity
@@ -68,9 +77,9 @@ https://github.com/user-attachments/assets/e3e6bf6a-735d-4323-a4ff-8d78ff44c057
 - **Face ID and Touch ID animations** when your Mac unlocks or asks for Touch ID, like the
   Dynamic Island.
 - **Trackpad haptics**, following Apple's guidelines.
-- **Customization**: widgets in several sizes, pages, ready-made layouts, notch size,
-  animations, colors, and background (including Liquid Glass on macOS 26). New widgets
-  are off by default: turn them on in Settings.
+- **Customization**: widgets in four sizes, pages, ready-made layouts, animations, accent
+  color, and a black or Glass background. New widgets are off by default: turn them on in
+  Settings.
 - **Made for the real notch**: it matches the hardware notch exactly, keeps the active app's
   menus visible around it, and stays out of the way when you move to the menu bar.
 - **Accessible**: readable text, VoiceOver labels, and calmer animations with Reduce Motion.

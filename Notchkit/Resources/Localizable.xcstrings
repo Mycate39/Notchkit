@@ -1,18 +1,34 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
-    "Commencez avec une disposition prête à l'emploi. Vous pourrez ensuite ajouter, retirer et redimensionner chaque widget dans les réglages : l'encoche prend la taille de ses widgets. Dans Apparence, choisissez aussi son fond, noir ou en verre." : {
+    "Réduire la pochette" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start with a ready-made layout. You can then add, remove and resize each widget in Settings: the notch takes the size of its widgets. In Appearance, also pick its background, black or glass."
+            "value" : "Shrink artwork"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Commencez avec une disposition prête à l'emploi. Vous pourrez ensuite ajouter, retirer et redimensionner chaque widget dans les réglages : l'encoche prend la taille de ses widgets. Dans Apparence, choisissez aussi son fond, noir ou en verre."
+            "value" : "Réduire la pochette"
+          }
+        }
+      }
+    },
+    "Agrandir la pochette" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enlarge artwork"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agrandir la pochette"
           }
         }
       }
@@ -4317,7 +4333,24 @@
         }
       }
     },
+    "Commencez avec une disposition prête à l'emploi. Vous pourrez ensuite ajouter, retirer et redimensionner chaque widget dans les réglages : l'encoche prend la taille de ses widgets. Dans Apparence, choisissez aussi son fond, noir ou en verre." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start with a ready-made layout. You can then add, remove and resize each widget in Settings: the notch takes the size of its widgets. In Appearance, also pick its background, black or glass."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commencez avec une disposition prête à l'emploi. Vous pourrez ensuite ajouter, retirer et redimensionner chaque widget dans les réglages : l'encoche prend la taille de ses widgets. Dans Apparence, choisissez aussi son fond, noir ou en verre."
+          }
+        }
+      }
+    },
     "Commencez avec une disposition prête à l'emploi. Vous pourrez ensuite ajouter, retirer et redimensionner chaque widget dans les réglages." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7225,6 +7258,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Grand"
+          }
+        }
+      }
+    },
+    "Grand lecteur" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Large player"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grand lecteur"
+          }
+        }
+      }
+    },
+    "Grand lecteur : la pochette et les commandes au milieu de l'écran verrouillé, sous l'heure. Dans l'encoche : l'encoche s'élargit avec le morceau en cours et ses commandes." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Large player: the artwork and controls in the middle of the lock screen, under the time. In the notch: the notch widens with the current song and its controls."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grand lecteur : la pochette et les commandes au milieu de l'écran verrouillé, sous l'heure. Dans l'encoche : l'encoche s'élargit avec le morceau en cours et ses commandes."
           }
         }
       }
@@ -11261,6 +11326,7 @@
       }
     },
     "Quand le Mac est verrouillé, l'encoche s'élargit avec le morceau en cours et ses commandes. Ce sont les seuls boutons actifs de l'encoche verrouillée." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

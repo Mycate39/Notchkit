@@ -297,7 +297,7 @@ private extension View {
 
 /// Barre de progression et temps écoulé/restant.
 /// Ne se rafraîchit qu'une fois par seconde, et seulement quand l'encoche est dépliée.
-private struct PlaybackProgressView: View {
+struct PlaybackProgressView: View {
     let info: NowPlayingInfo
     var fontSize: CGFloat = 11
     var barHeight: CGFloat = 5
@@ -350,7 +350,7 @@ private struct ProgressLine: View {
     }
 }
 
-private struct PlaybackControls: View {
+struct PlaybackControls: View {
     let module: MusicModule
     let isPlaying: Bool
     /// Petit widget : boutons serrés.
@@ -404,7 +404,7 @@ struct BubblePlaybackControls: View {
 }
 
 /// Bouton AirPlay de macOS (choix de la sortie audio), via `AVRoutePickerView` (API publique).
-private struct AirPlayButton: NSViewRepresentable {
+struct AirPlayButton: NSViewRepresentable {
     func makeNSView(context: Context) -> AVRoutePickerView {
         let picker = AVRoutePickerView()
         picker.isRoutePickerButtonBordered = false

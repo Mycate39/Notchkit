@@ -537,6 +537,12 @@ struct TimerBubbleControls: View {
         // Espaces égaux entre l'icône de la bulle, les boutons et le bord.
         HStack(spacing: 0) {
             Spacer(minLength: 0)
+            // Temps restant (temps écoulé pour un chronomètre), en orange comme dans la Dynamic Island.
+            ActivityCompactValue(activity: activity, extraCount: 0)
+                .font(.system(size: 14, weight: .semibold))
+                .lineLimit(1)
+                .fixedSize()
+            Spacer(minLength: 0)
             if !activity.isFinished {
                 control(activity.isPaused ? "play.fill" : "pause.fill", tint: .orange,
                         help: activity.isPaused ? "Reprendre" : "Pause") {

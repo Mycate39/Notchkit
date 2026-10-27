@@ -42,6 +42,45 @@ enum NotchLayout {
     static let levelIndicatorSideWidth: CGFloat = 80
     /// Lecteur de l'écran verrouillé (pochette et titre, commandes) : l'encoche s'élargit sans descendre.
     static let lockScreenSideWidth: CGFloat = 150
+    /// Grand lecteur de l'écran verrouillé, sous l'heure de macOS : pochette carrée puis panneau en verre.
+    struct LockScreenMedia: Equatable {
+        /// Cadre de la fenêtre (coordonnées de l'écran, origine en bas à gauche), marges d'ombre comprises.
+        var frame: CGRect
+        var artwork: CGFloat
+        var panel: CGSize
+        /// Panneau quand la pochette y est rentrée (petite pochette à côté du titre, façon iOS).
+        var compactPanelHeight: CGFloat = 0
+        /// Petite pochette rentrée dans le panneau.
+        var smallArtwork: CGFloat = 0
+        var gap: CGFloat
+        var margin: CGFloat
+    }
+
+    /// Arrondi du panneau en verre du grand lecteur.
+    static let lockScreenPanelRadius: CGFloat = 26
+
+    /// Délai minimal entre deux clics sur la pochette du grand lecteur (le second clic d'un double clic
+    /// est ignoré).
+    static let lockScreenArtworkToggleInterval: TimeInterval = 0.4
+
+    /// Arrondi de la pochette du grand lecteur selon sa taille (24 pt en grand, 8 pt au moins en petit).
+    static func lockScreenArtworkRadius(side: CGFloat) -> CGFloat { max(8, side * 0.057) }
+
+    /// Place du grand lecteur sur un écran : pochette de 36 % de la hauteur (420 pt au plus) dont le haut
+    /// est à 29 % de la hauteur, sous l'heure, puis le panneau.
+    static func lockScreenMedia(screen: CGRect) -> LockScreenMedia {
+        let artwork = min(420, (screen.height * 0.36).rounded())
+        let panel = CGSize(width: 340, height: 150)
+        let gap: CGFloat = 26
+        let margin: CGFloat = 40
+        let width = max(artwork, panel.width) + margin * 2
+        let height = artwork + gap + panel.height + margin * 2
+        let top = screen.maxY - (screen.height * 0.29).rounded() + margin
+        let frame = CGRect(x: (screen.midX - width / 2).rounded(), y: top - height, width: width, height: height)
+        return LockScreenMedia(frame: frame, artwork: artwork, panel: panel, compactPanelHeight: 168,
+                               smallArtwork: 52, gap: gap, margin: margin)
+    }
+
     /// Hauteur du fondu au bas des listes défilantes des widgets (rappels, presse-papiers, téléchargements).
     static let scrollFadeLength: CGFloat = 14
     /// Apparence en vigueur (mise à jour par l'AppDelegate quand les réglages changent ;
@@ -141,9 +180,15 @@ enum NotchLayout {
     }
 
     /// Largeur gagnée par la bulle qui montre ses commandes : trois boutons (musique) par défaut,
-    /// deux pour un minuteur.
+    /// deux pour un minuteur, plus son temps restant.
     static let bubbleControlsContentWidth: CGFloat = 100
     static let timerBubbleControlsWidth: CGFloat = 72
+
+    /// Bulle allongée d'un minuteur : deux boutons et le temps restant (« 4:32 », ou « 1:04:32 » à
+    /// partir d'une heure, plus large).
+    static func timerBubbleControlsWidth(showsHours: Bool) -> CGFloat {
+        timerBubbleControlsWidth + (showsHours ? 64 : 46)
+    }
 
     /// Forme noire dessinée ? (fonction pure, testée). Sur une encoche matérielle au repos, une
     /// forme par-dessus serait un peu plus large (congés) et ses coins ne tomberaient pas

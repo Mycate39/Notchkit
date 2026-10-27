@@ -8,10 +8,13 @@ enum ModulePriority: Int, Comparable, Sendable {
     case none = 0
     /// Information de fond (ex. l'heure).
     case low = 10
-    /// Activité en cours (ex. musique en lecture).
+    /// Activité en cours (ex. minuteur, téléchargement).
     case normal = 50
     /// Activité en cours plus importante (ex. Claude Code qui travaille).
     case elevated = 75
+    /// Musique en lecture : passe devant toutes les activités en cours, comme sur l'iPhone ; seule une
+    /// information urgente (`high`) la relègue dans une bulle.
+    case media = 90
     /// Information urgente (ex. minuteur qui se termine).
     case high = 100
 
@@ -100,6 +103,9 @@ protocol NotchModule: AnyObject, Observable {
     /// place de `compactLeading/Trailing`. `nil` : l'activité reste affichée sans interaction.
     func lockScreenLeading() -> AnyView?
     func lockScreenTrailing() -> AnyView?
+    /// Écran verrouillé : grand lecteur affiché au milieu de l'écran, sous l'heure de macOS (pochette et
+    /// panneau en verre), à la place de `lockScreenLeading/Trailing`. `nil` : pas de grand lecteur.
+    func lockScreenMedia() -> AnyView?
     /// Contenu affiché quand l'encoche est dépliée.
     func expandedView() -> AnyView
     /// Largeur relative de la carte dans l'encoche dépliée (1 = normale, 2 = double).
@@ -124,6 +130,7 @@ extension NotchModule {
     var bubbleControlsWidth: CGFloat { NotchLayout.bubbleControlsContentWidth }
     func lockScreenLeading() -> AnyView? { nil }
     func lockScreenTrailing() -> AnyView? { nil }
+    func lockScreenMedia() -> AnyView? { nil }
     var bubblePriority: ModulePriority { compactPriority }
     var keyLineColor: Color? { nil }
     var compactIsland: Bool { false }

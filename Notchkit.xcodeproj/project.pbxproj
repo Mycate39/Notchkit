@@ -71,6 +71,7 @@
 		48B09963CD8A874CEC291C6F /* speed.m in Sources */ = {isa = PBXBuildFile; fileRef = 578508F6730303155DAAC666 /* speed.m */; };
 		48C9A5EF686BB463FAF39CE4 /* LiveActivitiesModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB45AC94D29F371CA2C5934 /* LiveActivitiesModule.swift */; };
 		4938BC53B652E7BF0D8F67F8 /* ModuleIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A392BB245F4CD1284FD823DD /* ModuleIcon.swift */; };
+		4D035FE0AD11DE4E021FDE7B /* LockScreenMediaWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6BDE182AF60475FB5CD96D /* LockScreenMediaWindow.swift */; };
 		4DA7F19EF634F138BD5A42D5 /* SpectrumAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D9454F2B90F4202312E9B9 /* SpectrumAnalyzer.swift */; };
 		4F396C9C347E18A649275B67 /* LaunchAtLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EE9F8658125C2D9185EA96 /* LaunchAtLogin.swift */; };
 		506C40B02FC95301118B3117 /* MascotDesigns.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE11A66058CB54565C8EE2BD /* MascotDesigns.swift */; };
@@ -475,6 +476,7 @@
 		FA1FA58A222029EF8472F5FC /* ClaudeSparkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeSparkView.swift; sourceTree = "<group>"; };
 		FC306A7DAC40B0ECC5A20A71 /* ModuleManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleManagerTests.swift; sourceTree = "<group>"; };
 		FCEF22AF6E1341357C1F0E58 /* MenuBarAvoidance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarAvoidance.swift; sourceTree = "<group>"; };
+		FD6BDE182AF60475FB5CD96D /* LockScreenMediaWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenMediaWindow.swift; sourceTree = "<group>"; };
 		FE5BEC21D18119A5A2679832 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -835,6 +837,7 @@
 			children = (
 				5D29CFC859A1A429A95ED01A /* DropCatcher.swift */,
 				38E36EF90018BFC440A0E9FD /* FullScreenHiding.swift */,
+				FD6BDE182AF60475FB5CD96D /* LockScreenMediaWindow.swift */,
 				E6CB4D7C58B160007048AF25 /* LockScreenSpace.swift */,
 				FCEF22AF6E1341357C1F0E58 /* MenuBarAvoidance.swift */,
 				37C474C3B54576120030842F /* NotchHostingView.swift */,
@@ -1456,6 +1459,7 @@
 				7DA7D78F529F69DF127E508D /* LiveActivitiesViews.swift in Sources */,
 				A48F76AE210F36AA7349FE22 /* LiveActivity.swift in Sources */,
 				8BCDCE6F6E2F54D141980CF1 /* LocationProvider.swift in Sources */,
+				4D035FE0AD11DE4E021FDE7B /* LockScreenMediaWindow.swift in Sources */,
 				52B3FB50D7B85C93340E564B /* LockScreenPlayer.swift in Sources */,
 				511B45FE6AA1A39FCE772EA7 /* LockScreenSpace.swift in Sources */,
 				506C40B02FC95301118B3117 /* MascotDesigns.swift in Sources */,

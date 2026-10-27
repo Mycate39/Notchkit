@@ -108,6 +108,8 @@ final class DemoDirector {
             info.artwork = DemoData.artwork
             info.artworkHash = 1
             music?.debugPinNowPlaying(info)
+        case "music.artwork":
+            withAnimation(NotchLayout.spring) { music?.lockScreenArtworkExpanded.toggle() }
         case "timer.start":
             activities?.startTimer(minutes: step.minutes ?? 5)
         case "timer.pause":

@@ -249,13 +249,20 @@ final class MusicModule: NotchModule {
 
     // MARK: Affichage
 
+    /// Grand lecteur de l'écran verrouillé : grande pochette, ou pochette rentrée dans le panneau (clic
+    /// sur la pochette). Gardé ici pour survivre aux mises à jour de la fenêtre du lecteur.
+    var lockScreenArtworkExpanded = true
+
+    /// En lecture, la musique passe devant les autres activités en cours (`media`).
     var compactPriority: ModulePriority {
-        showInCompact && nowPlaying?.isPlaying == true ? .normal : .none
+        showInCompact && nowPlaying?.isPlaying == true ? .media : .none
     }
 
-    /// En pause, la bulle reste (pour relancer la lecture depuis ses commandes).
+    /// En pause, la bulle reste (pour relancer la lecture depuis ses commandes) ; en lecture, elle
+    /// passe en tête des bulles.
     var bubblePriority: ModulePriority {
-        showInCompact && nowPlaying != nil ? .normal : .none
+        guard showInCompact, let nowPlaying else { return .none }
+        return nowPlaying.isPlaying ? .media : .normal
     }
 
     /// Contour teinté par la pochette (gris clair sans pochette).

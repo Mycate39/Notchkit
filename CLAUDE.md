@@ -200,6 +200,7 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 
 ### Version 3.0.0 (en cours, gratuite ; l'abonnement viendra plus tard)
 - Publié dans la beta 1 (`v3.0.0-beta.1`, 27/10/2026, préversion GitHub, hors appcast, build 26) : design « Verre », encoche à la taille de ses widgets (plus de réglage « Taille »), fonds Noir et Verre seulement, corrections d'affichage des widgets et des animations au changement de bureau, ombre de lisibilité en mode verre, engrenage toujours visible. Banc d'essai visuel : `scripts/visual-matrix.py` (dont `glass`).
+- Publié dans la beta 2 (`v3.0.0-beta.2`, 28/10/2026, préversion GitHub, hors appcast, build 27) : grand lecteur de l'écran verrouillé (pochette qui se range dans le panneau au clic), musique en lecture devant les activités en cours, temps restant dans la bulle du minuteur, alertes à texte élargies, volume et luminosité qui glissent d'un cran à l'autre, verre toujours au rendu actif, AirPlay au premier clic sur l'écran verrouillé, indicateur de pages retiré.
 
 ### Design « Verre » (27/10/2026)
 - Fond « Verre » façon lecteur de l'iPhone : noir sur le haut, long dégradé vers un verre clair (Liquid Glass `.clear`), grands congés (20 pt) et coins (36 pt), sans contour ; widgets posés sur le verre, sans carte, écart agrandi. La page qui ne contient que la musique ouvre l'encoche en lecteur de 440 × 222 pt (présentation dédiée du widget Musique), qui s'agrandit en changeant de page.

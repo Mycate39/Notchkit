@@ -17,6 +17,9 @@ struct NotchAlert: Identifiable {
     /// Alerte agrandie : contenu centré dans toute la forme (hauteur de l'encoche comprise) plutôt
     /// que sous l'encoche, et rayon des coins du bas (`nil` : celui de l'encoche repliée).
     var centersExpandedContent = false
+    /// Alerte montrée même quand l'encoche est masquée pendant une vidéo en plein écran (volume,
+    /// luminosité : on règle souvent le son en regardant une vidéo).
+    var showsInFullScreen = false
     var expandedCornerRadius: CGFloat?
 
     /// Même alerte, avec les côtés élargis pour le texte de droite (`NotchLayout.textAlertSideWidth`).

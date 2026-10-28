@@ -30,6 +30,7 @@ final class NotchWindowController {
     private var dropCatcher: DropCatcher?
     /// Encoche masquée pendant le plein écran (réglage).
     private var fullScreenHiding: FullScreenHiding?
+    private var isHiddenForFullScreen = false
     private let container = FlippedView()
 
     init(viewModel: NotchViewModel, settings: SettingsStore) {
@@ -140,10 +141,19 @@ final class NotchWindowController {
     /// Plein écran : l'encoche s'efface et laisse passer la souris, puis revient en sortie.
     private func setHiddenForFullScreen(_ hidden: Bool) {
         if hidden { viewModel.collapse() }
-        panel.ignoresMouseEvents = hidden
+        isHiddenForFullScreen = hidden
+        updateFullScreenVisibility()
+    }
+
+    /// Encoche masquée en plein écran, sauf le temps d'une alerte qui doit rester visible (volume,
+    /// luminosité) ; elle laisse toujours passer la souris.
+    private func updateFullScreenVisibility() {
+        let visible = !isHiddenForFullScreen || viewModel.currentAlert?.showsInFullScreen == true
+        panel.ignoresMouseEvents = isHiddenForFullScreen
+        guard panel.alphaValue != (visible ? 1 : 0) else { return }
         NSAnimationContext.runAnimationGroup { context in
-            context.duration = 0.25
-            panel.animator().alphaValue = hidden ? 0 : 1
+            context.duration = visible && isHiddenForFullScreen ? 0.15 : 0.25
+            panel.animator().alphaValue = visible ? 1 : 0
         }
     }
 
@@ -224,6 +234,14 @@ final class NotchWindowController {
             _ = self?.viewModel.panelSize
         }, perform: { [weak self] in
             self?.applyPanelSize()
+        })
+
+        // Plein écran : l'indicateur de volume et de luminosité apparaît quand même.
+        trackChanges(of: { [weak self] in
+            _ = self?.viewModel.currentAlert?.id
+        }, perform: { [weak self] in
+            guard let self, self.isHiddenForFullScreen else { return }
+            self.updateFullScreenVisibility()
         })
 
         // Grand lecteur de l'écran verrouillé : affiché tant que le Mac est verrouillé et qu'un module en propose un.

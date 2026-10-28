@@ -85,6 +85,9 @@ struct NotchContainerView: View {
         .environment(\.widgetsOnGlass, viewModel.appearance.usesGlassWidgets)
         .environment(\.sliderTint, viewModel.appearance.sliderColor?.color)
         .environment(\.colorScheme, .dark)
+        // Le panneau n'est presque jamais la fenêtre active : le verre de macOS prendrait alors son
+        // rendu « inactif » (flou terne, sans le fond d'écran) jusqu'au premier clic dans l'encoche.
+        .environment(\.controlActiveState, .key)
         // Écran verrouillé : activités visibles, mais aucun bouton ni bulle cliquable, sauf le lecteur
         // de l'écran verrouillé (bulles coupées à part, dans `CompactBubbles`).
         .allowsHitTesting(!viewModel.isScreenLocked || viewModel.lockScreenModule != nil)

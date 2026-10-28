@@ -362,12 +362,6 @@ private struct CompactNotchView: View {
 /// Contenu de l'encoche dépliée : barre d'en-tête puis les vues étendues des modules actifs.
 private struct ExpandedNotchView: View {
     let viewModel: NotchViewModel
-    @Environment(\.onAccent) private var onAccent
-    /// La pastille de la page affichée glisse d'un point à l'autre.
-    @Namespace private var pageIndicator
-    /// L'indicateur de pages n'apparaît que pendant un balayage, puis s'efface.
-    @State private var showsPageIndicator = false
-    @State private var hidePageIndicatorTask: Task<Void, Never>?
     /// Balayage des pages au trackpad.
     @State private var swiper = PageSwiper()
 
@@ -417,37 +411,10 @@ private struct ExpandedNotchView: View {
     }
 
     private func header(ear: CGFloat) -> some View {
-        let pages = pages
-        // Vraie encoche : les onglets restent de leur côté de l'encoche matérielle (coupés au besoin),
-        // sans jamais pousser l'engrenage sous la caméra.
-        let width = viewModel.expandedShapeSize.width - 2 * (ear + 18)
-        let side = viewModel.geometry.style == .notch
-            ? max(0, (width - viewModel.geometry.closedSize.width) / 2 - 4) : .infinity
-        return HStack(spacing: 0) {
-            if pages.count > 1 {
-                // Indicateur de pages : la page affichée en pastille avec ses icônes,
-                // les autres en petits points cliquables (reste compact même avec beaucoup de pages).
-                HStack(spacing: 5) {
-                    ForEach(pages) { page in
-                        let isSelected = viewModel.selectedPage == page.id
-                        Button {
-                            withAnimation(NotchLayout.pageIndicatorSpring) { viewModel.selectedPage = page.id }
-                        } label: {
-                            pageTab(page, isSelected: isSelected)
-                            .contentShape(Capsule())
-                        }
-                        .buttonStyle(.notch)
-                        .help(Text(page.modules.map { String(localized: type(of: $0.module).descriptor.name) }.joined(separator: ", ")))
-                    }
-                }
-                // Apparition depuis la gauche : légère croissance, flou qui se dissipe.
-                .opacity(showsPageIndicator ? 1 : 0)
-                .scaleEffect(showsPageIndicator ? 1 : 0.8, anchor: .leading)
-                .blur(radius: showsPageIndicator ? 0 : 4)
-                .allowsHitTesting(showsPageIndicator)
-                .frame(maxWidth: side, alignment: .leading)
-                .clipped()
-            } else {
+        // Pas d'indicateur de pages (retiré le 28/10/2026) : sur une page étroite, il n'avait pas la place
+        // à côté de la caméra et finissait coupé ou par-dessus les widgets. Ne pas le remettre.
+        HStack(spacing: 0) {
+            if pages.count <= 1 {
                 Text("Notchkit")
                     .font(.system(size: 12, weight: .semibold))
                     .foregroundStyle(.white.opacity(0.6))
@@ -470,51 +437,6 @@ private struct ExpandedNotchView: View {
         }
     }
 
-    /// Onglet d'une page : la pastille ambre avec ses icônes pour la page affichée, un point sinon.
-    @ViewBuilder
-    private func pageTab(_ page: ModulePage, isSelected: Bool) -> some View {
-        if isSelected {
-            HStack(spacing: 6) {
-                ForEach(page.modules.prefix(5)) { box in
-                    ModuleIcon(symbol: box.systemImage)
-                        .frame(height: 11)
-                }
-            }
-            // Les icônes de la page arrivent floues et grossissent pendant que la pastille glisse.
-            .modifier(PageIconsEntrance())
-            .font(.system(size: 10, weight: .semibold))
-            .padding(.horizontal, 11)
-            .padding(.vertical, 5)
-            .background {
-                // Onglet choisi : pilule de la couleur d'accent (style StandBy).
-                Capsule()
-                    .fill(.tint)
-                    .matchedGeometryEffect(id: "pastille", in: pageIndicator)
-            }
-            .foregroundStyle(onAccent)
-        } else {
-            Circle()
-                .fill(.white.opacity(0.35))
-                .frame(width: 6, height: 6)
-                .padding(5)
-                .transition(.scale(scale: 0.3).combined(with: .opacity))
-        }
-    }
-
-    /// Montre l'indicateur de pages ; il s'efface peu après, sauf tant que `holding` (doigts sur le trackpad).
-    private func revealPageIndicator(holding: Bool = false) {
-        hidePageIndicatorTask?.cancel()
-        if !showsPageIndicator {
-            withAnimation(NotchLayout.pageIndicatorSpring) { showsPageIndicator = true }
-        }
-        guard !holding else { return }
-        hidePageIndicatorTask = Task {
-            try? await Task.sleep(for: NotchLayout.pageIndicatorLinger)
-            guard !Task.isCancelled else { return }
-            withAnimation(.easeInOut(duration: 0.35)) { showsPageIndicator = false }
-        }
-    }
-
     @ViewBuilder
     private func modules(horizontalPadding: CGFloat) -> some View {
         let pages = pages
@@ -529,7 +451,7 @@ private struct ExpandedNotchView: View {
                     .foregroundStyle(.white.opacity(0.6))
             }
         } else {
-            // Pages côte à côte : balayage au trackpad (`PageSwiper`) ou clic sur les onglets. Chaque page
+            // Pages côte à côte : balayage au trackpad (`PageSwiper`) ou bulle cliquée. Chaque page
             // est dessinée à sa propre taille (`pageSize(for:)`), une fois pour toutes : quand l'encoche
             // s'élargit ou se resserre en changeant de page, les pages glissent sans que leur contenu se
             // réorganise en chemin.
@@ -564,7 +486,6 @@ private struct ExpandedNotchView: View {
         swiper.start(
             pageCount: { pages.count },
             currentPage: { min(viewModel.selectedPage, max(0, pages.count - 1)) },
-            onTrackingChange: { tracking in revealPageIndicator(holding: tracking) },
             onEnd: { target in
                 withAnimation(NotchLayout.spring) { swiper.settle() }
                 guard target != viewModel.selectedPage else { return }
@@ -573,21 +494,6 @@ private struct ExpandedNotchView: View {
                 withAnimation(NotchLayout.spring) { viewModel.selectedPage = target }
             }
         )
-    }
-}
-
-/// Entrée des icônes de la pastille : floues et réduites, elles se précisent avec un ressort.
-private struct PageIconsEntrance: ViewModifier {
-    @State private var appeared = false
-
-    func body(content: Content) -> some View {
-        content
-            .scaleEffect(appeared ? 1 : 0.6)
-            .blur(radius: appeared ? 0 : 3)
-            .opacity(appeared ? 1 : 0)
-            .onAppear {
-                withAnimation(NotchLayout.pageIndicatorSpring.delay(0.05)) { appeared = true }
-            }
     }
 }
 
@@ -613,13 +519,13 @@ final class PageSwiper {
     }
 
     func start(pageCount: @escaping @MainActor () -> Int, currentPage: @escaping @MainActor () -> Int,
-               onTrackingChange: @escaping @MainActor (Bool) -> Void, onEnd: @escaping @MainActor (Int) -> Void) {
+               onEnd: @escaping @MainActor (Int) -> Void) {
         stop()
         monitor = NSEvent.addLocalMonitorForEvents(matching: .scrollWheel) { [weak self] event in
             let consumed = MainActor.assumeIsolated {
                 guard let self, event.window is NotchPanel else { return false }
                 return self.handle(event, pageCount: pageCount(), currentPage: currentPage(),
-                                   onTrackingChange: onTrackingChange, onEnd: onEnd)
+                                   onEnd: onEnd)
             }
             return consumed ? nil : event
         }
@@ -636,7 +542,7 @@ final class PageSwiper {
 
     /// Renvoie `true` si l'événement est consommé par le balayage des pages.
     private func handle(_ event: NSEvent, pageCount: Int, currentPage: Int,
-                        onTrackingChange: (Bool) -> Void, onEnd: (Int) -> Void) -> Bool {
+                        onEnd: (Int) -> Void) -> Bool {
         // Inertie après le relâchement : une page par geste.
         if !event.momentumPhase.isEmpty { return lastGestureWasPaging }
         // Molette de souris (sans phase) : laissée aux vues.
@@ -652,7 +558,6 @@ final class PageSwiper {
             guard swipe.isTracking else { return false }
             var final = swipe
             let target = final.end(page: currentPage, pageCount: pageCount, pageWidth: pageWidth)
-            onTrackingChange(false)
             onEnd(target)
             return true
         }
@@ -662,10 +567,7 @@ final class PageSwiper {
         let consumed = swipe.move(dx: event.scrollingDeltaX, dy: event.scrollingDeltaY)
         if swipe.isTracking {
             lastGestureWasPaging = true
-            if !wasTracking {
-                hapticTarget = currentPage
-                onTrackingChange(true)
-            }
+            if !wasTracking { hapticTarget = currentPage }
             // Cran haptique dès que le geste franchit le seuil de changement de page, doigts encore
             // posés : au relâchement, le trackpad ne vibre plus (le doigt est déjà levé).
             let target = swipe.target(page: currentPage, pageCount: pageCount, pageWidth: pageWidth)

@@ -14,8 +14,8 @@ struct AgentPhaseList: View {
             row(.run, title: "Commande", symbol: "terminal")
             doneRow
         }
-        .animation(NotchLayout.pageIndicatorSpring, value: session.currentPhase)
-        .animation(NotchLayout.pageIndicatorSpring, value: session.phases)
+        .animation(NotchLayout.selectionSpring, value: session.currentPhase)
+        .animation(NotchLayout.selectionSpring, value: session.phases)
     }
 
     private func row(_ phase: ClaudePhase, title: LocalizedStringKey, symbol: String) -> some View {
@@ -403,7 +403,7 @@ struct AgentQuestionPanel: View {
         .padding(8)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color.white.opacity(0.05), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
-        .animation(NotchLayout.pageIndicatorSpring, value: index)
+        .animation(NotchLayout.selectionSpring, value: index)
     }
 
     @ViewBuilder

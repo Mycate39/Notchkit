@@ -325,10 +325,8 @@ enum NotchLayout {
         let collapse = reduceMotion ? 0.18 : appearance.animation.spring.duration
         return .milliseconds(Int(collapse * collapseSettleFraction * 1000 * animationSlowdown))
     }
-    /// Durée pendant laquelle l'indicateur de pages reste visible après un balayage.
-    static let pageIndicatorLinger: Duration = .milliseconds(1200)
-    /// Ressort de l'indicateur de pages : la pastille glisse d'une page à l'autre avec un léger rebond.
-    static let pageIndicatorSpring = Animation.spring(duration: 0.4, bounce: 0.3)
+    /// Ressort d'une sélection qui glisse d'un élément à l'autre (onglets, étapes), avec un léger rebond.
+    static let selectionSpring = Animation.spring(duration: 0.4, bounce: 0.3)
 
     // MARK: Centre du son
 

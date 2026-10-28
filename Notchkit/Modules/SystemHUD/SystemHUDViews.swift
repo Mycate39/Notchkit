@@ -52,7 +52,7 @@ struct SystemHUDExpandedView: View {
             .transition(.opacity)
         }
         .padding(10)
-        .animation(NotchLayout.pageIndicatorSpring, value: tab)
+        .animation(NotchLayout.selectionSpring, value: tab)
         .onAppear {
             volume = SystemVolume.volume
             brightness = DisplayBrightness.brightness ?? 0

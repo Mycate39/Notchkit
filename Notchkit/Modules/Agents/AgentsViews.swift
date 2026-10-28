@@ -121,15 +121,15 @@ struct AgentsHomeView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             .transition(.opacity.combined(with: .scale(scale: 0.98)))
         }
-        .animation(NotchLayout.pageIndicatorSpring, value: session?.lastEditAt)
-        .animation(NotchLayout.pageIndicatorSpring, value: session?.lastCommandAt)
+        .animation(NotchLayout.selectionSpring, value: session?.lastEditAt)
+        .animation(NotchLayout.selectionSpring, value: session?.lastCommandAt)
     }
 
     private var sessionPills: some View {
         HStack(spacing: 6) {
             ForEach(sessions.prefix(4)) { item in
                 Button {
-                    withAnimation(NotchLayout.pageIndicatorSpring) { selectedID = item.id }
+                    withAnimation(NotchLayout.selectionSpring) { selectedID = item.id }
                 } label: {
                     HStack(spacing: 5) {
                         Circle().fill(AgentStateLabel.color(for: item.state)).frame(width: 6, height: 6)

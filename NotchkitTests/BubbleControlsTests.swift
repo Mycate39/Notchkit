@@ -30,13 +30,27 @@ final class MockControlsModule: NotchModule {
     func expandedView() -> AnyView { AnyView(EmptyView()) }
 }
 
+@MainActor
+@Observable
+final class MockClickOnlyModule: NotchModule {
+    static let descriptor = ModuleDescriptor(
+        id: "mock.click", name: "K", summary: "", systemImage: "k.circle",
+        category: .widgets, tier: .free, defaultEnabled: false
+    )
+    var compactPriority: ModulePriority { .normal }
+    var bubbleOpensOnHover: Bool { false }
+    init(context: ModuleContext) {}
+    func compactLeading() -> AnyView? { AnyView(Text(verbatim: "K")) }
+    func expandedView() -> AnyView { AnyView(EmptyView()) }
+}
+
 /// Commandes qui sortent à droite d'une bulle (musique) au survol, sans déplier l'encoche.
 @MainActor
 struct BubbleControlsTests {
     private func makeViewModel() -> NotchViewModel {
         let settings = SettingsStore(defaults: UserDefaults(suiteName: "notchkit.tests.\(UUID().uuidString)")!)
         let manager = ModuleManager(settings: settings, entitlements: EntitlementManager(),
-                                    availableModules: [MockPrimaryModule.self, MockControlsModule.self])
+                                    availableModules: [MockPrimaryModule.self, MockControlsModule.self, MockClickOnlyModule.self])
         manager.reload()
         return NotchViewModel(manager: manager, settings: settings)
     }
@@ -113,6 +127,18 @@ struct BubbleControlsTests {
         #expect(music.compactPriority > .elevated)
         #expect(music.compactPriority < .high)
         #expect(music.bubblePriority == music.compactPriority)
+        // Claude Code qui attend une autorisation reste dans une bulle à côté de la musique en lecture.
+        #expect(music.compactPriority > .urgentActivity && ModulePriority.urgentActivity > .elevated)
         music.debugSetNowPlaying(nil)
+    }
+
+    @Test func bulleQuiNeSOuvreQuAuClic() async {
+        let viewModel = makeViewModel()
+        viewModel.manager.setEnabled(true, for: "mock.click")
+        viewModel.hoverBubble("mock.click", inside: true)
+        // Bien au-delà du délai d'ouverture au survol.
+        try? await Task.sleep(for: .seconds(1.5))
+        #expect(!viewModel.isExpanded)
+        viewModel.hoverBubble("mock.click", inside: false)
     }
 }

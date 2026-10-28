@@ -437,3 +437,41 @@ private struct ClaudeChatBubble: View {
     }
 }
 
+/// Réponse à une demande d'autorisation depuis la bulle de Claude Code : Autoriser en vert,
+/// Refuser en gris, comme les commandes de la bulle du minuteur.
+struct ClaudeBubbleControls: View {
+    let module: ClaudeModule
+    let sessionID: String
+
+    var body: some View {
+        HStack(spacing: 0) {
+            Spacer(minLength: 0)
+            control("checkmark", tint: .green, help: "Autoriser") {
+                module.decidePermission(sessionID, allow: true)
+            }
+            Spacer(minLength: 0)
+            control("xmark", tint: .white, help: "Refuser") {
+                module.decidePermission(sessionID, allow: false)
+            }
+            Spacer(minLength: 0)
+        }
+    }
+
+    private func control(_ symbol: String, tint: Color, help: LocalizedStringKey,
+                         action: @escaping () -> Void) -> some View {
+        Button {
+            Haptics.play(.tap)
+            action()
+        } label: {
+            Image(systemName: symbol)
+                .font(.system(size: 11, weight: .bold))
+                .foregroundStyle(tint)
+                .frame(width: 22, height: 22)
+                .background(tint.opacity(0.22), in: Circle())
+                .contentShape(Circle())
+        }
+        .buttonStyle(.notch)
+        .help(help)
+        .accessibilityLabel(Text(help))
+    }
+}

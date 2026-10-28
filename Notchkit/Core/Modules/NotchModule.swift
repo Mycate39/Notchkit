@@ -12,6 +12,9 @@ enum ModulePriority: Int, Comparable, Sendable {
     case normal = 50
     /// Activité en cours plus importante (ex. Claude Code qui travaille).
     case elevated = 75
+    /// Activité qui attend une réponse (Claude Code demande une autorisation) : devant toutes les
+    /// activités en cours, sauf la musique en lecture, qui la laisse dans une bulle.
+    case urgentActivity = 80
     /// Musique en lecture : passe devant toutes les activités en cours, comme sur l'iPhone ; seule une
     /// information urgente (`high`) la relègue dans une bulle.
     case media = 90
@@ -99,6 +102,9 @@ protocol NotchModule: AnyObject, Observable {
     func bubbleControls() -> AnyView?
     /// Largeur gagnée par la bulle quand elle montre ses commandes.
     var bubbleControlsWidth: CGFloat { get }
+    /// Le survol de sa bulle (sans commandes) ouvre sa page ; faux : seulement un clic (ex. Claude Code,
+    /// dont la bulle reste longtemps à côté de la musique et s'ouvrait au moindre passage).
+    var bubbleOpensOnHover: Bool { get }
     /// Écran verrouillé : version élargie et cliquable de l'activité (ex. lecteur de musique), à la
     /// place de `compactLeading/Trailing`. `nil` : l'activité reste affichée sans interaction.
     func lockScreenLeading() -> AnyView?
@@ -128,6 +134,7 @@ extension NotchModule {
     func compactTrailing() -> AnyView? { nil }
     func bubbleControls() -> AnyView? { nil }
     var bubbleControlsWidth: CGFloat { NotchLayout.bubbleControlsContentWidth }
+    var bubbleOpensOnHover: Bool { true }
     func lockScreenLeading() -> AnyView? { nil }
     func lockScreenTrailing() -> AnyView? { nil }
     func lockScreenMedia() -> AnyView? { nil }

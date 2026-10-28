@@ -411,10 +411,24 @@ final class ClaudeModule: NotchModule {
         displayedSession?.state == .waitingForPermission ? StandBy.amber : nil
     }
 
+    /// Bulle de l'agent : elle ne s'ouvre qu'au clic.
+    var bubbleOpensOnHover: Bool { false }
+
+    /// Autorisation demandée : Autoriser et Refuser sortent de la bulle au survol, sans ouvrir la page.
+    func bubbleControls() -> AnyView? {
+        guard let session = displayedSession, session.state == .waitingForPermission,
+              session.permissionPrompt != nil else { return nil }
+        return AnyView(ClaudeBubbleControls(module: self, sessionID: session.id))
+    }
+
+    var bubbleControlsWidth: CGFloat { NotchLayout.claudeBubbleControlsWidth }
+
+    /// Une demande d'autorisation passe devant Claude au travail, mais laisse la musique en lecture à sa
+    /// place : elle se signale par sa bulle cerclée d'ambre, où l'on répond au survol.
     var compactPriority: ModulePriority {
         guard showInCompact, let session = displayedSession else { return .none }
         switch session.state {
-        case .waitingForPermission: return .high
+        case .waitingForPermission: return .urgentActivity
         case .working: return .elevated
         case .finished: return .none
         }

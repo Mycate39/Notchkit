@@ -226,6 +226,8 @@ final class NotchViewModel {
     func hoverBubble(_ moduleID: String, inside: Bool) {
         bubbleHoverTask?.cancel()
         guard !isScreenLocked, !isQuiet else { return }
+        // Bulle qui ne s'ouvre qu'au clic (`bubbleOpensOnHover`).
+        if inside, manager.module(for: moduleID)?.bubbleOpensOnHover == false { return }
         if inside {
             requestedModuleID = moduleID
             let delay = settings.settings.hoverOpenDelay

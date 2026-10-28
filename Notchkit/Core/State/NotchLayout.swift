@@ -188,6 +188,8 @@ enum NotchLayout {
     /// deux pour un minuteur, plus son temps restant.
     static let bubbleControlsContentWidth: CGFloat = 100
     static let timerBubbleControlsWidth: CGFloat = 72
+    /// Bulle de Claude Code qui demande une autorisation : Autoriser et Refuser.
+    static let claudeBubbleControlsWidth: CGFloat = 72
 
     /// Bulle allongée d'un minuteur : deux boutons et le temps restant (« 4:32 », ou « 1:04:32 » à
     /// partir d'une heure, plus large).

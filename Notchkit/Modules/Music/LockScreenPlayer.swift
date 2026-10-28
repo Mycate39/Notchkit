@@ -214,7 +214,7 @@ struct LockScreenMediaView: View {
         return VStack(spacing: 10) {
             header
             if info.duration != nil {
-                PlaybackProgressView(info: info, fontSize: 10, barHeight: 5)
+                PlaybackProgressView(info: info, fontSize: 10, barHeight: 5) { module.send(.seek($0)) }
             }
             HStack(spacing: 0) {
                 // Emplacement vide de la largeur du bouton AirPlay : les commandes restent centrées.

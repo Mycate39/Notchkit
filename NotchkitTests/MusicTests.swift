@@ -151,3 +151,12 @@ struct MediaRemoteOrphelinsTests {
         #expect(MediaRemoteSource.orphanAdapterPIDs(psOutput: "n'importe quoi\n  12").isEmpty)
     }
 }
+
+struct PlaybackScrubTests {
+    @Test func positionSousLePointeurBorneeALaBarre() {
+        #expect(PlaybackProgressView.fraction(x: 50, width: 200) == 0.25)
+        #expect(PlaybackProgressView.fraction(x: -10, width: 200) == 0)
+        #expect(PlaybackProgressView.fraction(x: 260, width: 200) == 1)
+        #expect(PlaybackProgressView.fraction(x: 10, width: 0) == 0)
+    }
+}

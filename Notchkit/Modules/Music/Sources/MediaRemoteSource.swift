@@ -73,15 +73,17 @@ final class MediaRemoteSource {
     /// Envoie une commande au lecteur actif (processus court, sans attendre la fin).
     func send(_ command: PlaybackCommand) {
         guard let resources = Self.resources else { return }
-        // Identifiants des commandes MediaRemote (voir la documentation de mediaremote-adapter).
-        let id = switch command {
-        case .togglePlayPause: "2"
-        case .nextTrack: "4"
-        case .previousTrack: "5"
+        // Identifiants des commandes MediaRemote (voir la documentation de mediaremote-adapter) ;
+        // la position se donne en microsecondes.
+        let arguments = switch command {
+        case .togglePlayPause: ["send", "2"]
+        case .nextTrack: ["send", "4"]
+        case .previousTrack: ["send", "5"]
+        case let .seek(position): ["seek", String(Int(max(0, position) * 1_000_000))]
         }
         let task = Process()
         task.executableURL = Self.perl
-        task.arguments = [resources.script, resources.framework, "send", id]
+        task.arguments = [resources.script, resources.framework] + arguments
         task.standardOutput = FileHandle.nullDevice
         task.standardError = FileHandle.nullDevice
         try? task.run()

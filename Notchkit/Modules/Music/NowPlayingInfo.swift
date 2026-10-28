@@ -1,10 +1,12 @@
 import AppKit
 
 /// Commandes de lecture envoyées au lecteur actif.
-enum PlaybackCommand: Sendable {
+enum PlaybackCommand: Equatable, Sendable {
     case togglePlayPause
     case nextTrack
     case previousTrack
+    /// Aller à cette position du morceau, en secondes (barre de lecture glissée).
+    case seek(TimeInterval)
 }
 
 /// Morceau en cours, quelle que soit la source qui l'a fourni.

@@ -59,6 +59,7 @@ final class ScriptablePlayerSource {
         case .togglePlayPause: "playpause"
         case .nextTrack: "next track"
         case .previousTrack: "previous track"
+        case let .seek(position): "set player position to \(max(0, position))"
         }
         let source = "tell application id \"\(player.bundleIdentifier)\" to \(verb)"
         // AppleScript est bloquant : on l'exécute hors du thread principal.

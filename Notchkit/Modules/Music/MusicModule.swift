@@ -204,9 +204,11 @@ final class MusicModule: NotchModule {
             openPlayerApp()
             return
         }
-        switch current.origin {
-        case .mediaRemote: mediaRemote.send(command)
-        case .appleMusic, .spotify: publicSources[current.origin]?.send(command)
+        if !isDemoTrack {
+            switch current.origin {
+            case .mediaRemote: mediaRemote.send(command)
+            case .appleMusic, .spotify: publicSources[current.origin]?.send(command)
+            }
         }
         // Retour visuel immédiat ; la source confirmera (ou corrigera) dans un instant.
         if command == .togglePlayPause {
@@ -215,6 +217,19 @@ final class MusicModule: NotchModule {
             nowPlaying?.isPlaying.toggle()
             updateSpectrumCapture()
         }
+        if case let .seek(position) = command {
+            nowPlaying?.elapsed = position
+            nowPlaying?.timestamp = Date()
+        }
+    }
+
+    /// Morceau fictif d'un tournage de démonstration : les commandes n'atteignent aucun vrai lecteur.
+    private var isDemoTrack: Bool {
+        #if DEBUG
+        debugPinned
+        #else
+        false
+        #endif
     }
 
     /// Met au premier plan l'app qui joue.

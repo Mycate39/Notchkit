@@ -177,7 +177,7 @@ struct MusicExpandedView: View {
 
             Spacer(minLength: 10)
             if info.duration != nil {
-                PlaybackProgressView(info: info, fontSize: 12, barHeight: 6)
+                PlaybackProgressView(info: info, fontSize: 12, barHeight: 6) { module.send(.seek($0)) }
             }
             Spacer(minLength: 10)
 
@@ -267,7 +267,7 @@ struct MusicExpandedView: View {
             .frame(height: artworkSize)
 
             if showsProgress, info.duration != nil {
-                PlaybackProgressView(info: info)
+                PlaybackProgressView(info: info) { module.send(.seek($0)) }
             }
 
             // Commandes centrées, AirPlay à droite : un emplacement vide de même largeur à gauche
@@ -301,23 +301,62 @@ struct PlaybackProgressView: View {
     let info: NowPlayingInfo
     var fontSize: CGFloat = 11
     var barHeight: CGFloat = 5
+    /// Glisser la barre change le moment du morceau (comme sur l'iPhone) ; `nil` : barre figée.
+    var onSeek: ((TimeInterval) -> Void)?
+
+    /// Position suivie pendant le glissement (fraction du morceau), `nil` au repos.
+    @State private var scrub: Double?
 
     var body: some View {
-        TimelineView(.periodic(from: .now, by: 1)) { context in
+        // Barre continue pendant la lecture (et pendant un glissement), à l'arrêt rien ne bouge.
+        TimelineView(.animation(minimumInterval: 1.0 / 30, paused: !info.isPlaying && scrub == nil)) { context in
             let duration = info.duration ?? 0
-            let elapsed = info.elapsed(at: context.date)
+            let elapsed = scrub.map { $0 * duration } ?? info.elapsed(at: context.date)
 
             HStack(spacing: 10) {
                 Text(elapsed.map(Self.format) ?? "–:––")
                     .frame(minWidth: 30, alignment: .leading)
-                ProgressLine(value: duration > 0 ? (elapsed ?? 0) / duration : 0, height: barHeight)
+                ProgressLine(value: duration > 0 ? (elapsed ?? 0) / duration : 0, height: barHeight,
+                             isScrubbing: scrub != nil)
                     .opacity(elapsed == nil ? 0.4 : 1)
+                    .overlay { scrubArea(duration: duration) }
                 Text(elapsed.map { "-" + Self.format(max(0, duration - $0)) } ?? Self.format(duration))
                     .frame(minWidth: 34, alignment: .trailing)
             }
             .font(.system(size: fontSize, weight: .medium).monospacedDigit())
-            .foregroundStyle(.white.opacity(0.5))
+            .foregroundStyle(.white.opacity(scrub == nil ? 0.5 : 0.85))
         }
+    }
+
+    /// Zone de glissement : plus haute que la barre, pour la viser sans précision.
+    @ViewBuilder
+    private func scrubArea(duration: TimeInterval) -> some View {
+        if let onSeek, duration > 0, !info.resumesInApp {
+            GeometryReader { proxy in
+                Color.clear
+                    .contentShape(Rectangle())
+                    .gesture(
+                        DragGesture(minimumDistance: 0)
+                            .onChanged { value in
+                                let fraction = Self.fraction(x: value.location.x, width: proxy.size.width)
+                                withAnimation(.snappy(duration: 0.2)) { scrub = fraction }
+                            }
+                            .onEnded { value in
+                                let fraction = Self.fraction(x: value.location.x, width: proxy.size.width)
+                                onSeek(fraction * duration)
+                                withAnimation(.snappy(duration: 0.2)) { scrub = nil }
+                            }
+                    )
+            }
+            .frame(height: max(barHeight, 22))
+            .accessibilityLabel(Text("Position dans le morceau"))
+        }
+    }
+
+    /// Fraction du morceau sous le pointeur, bornée à la barre.
+    nonisolated static func fraction(x: CGFloat, width: CGFloat) -> Double {
+        guard width > 0 else { return 0 }
+        return Double(min(max(x / width, 0), 1))
     }
 
     private static func format(_ seconds: TimeInterval) -> String {
@@ -326,14 +365,15 @@ struct PlaybackProgressView: View {
 }
 
 /// Barre de progression fine : partie écoulée claire sur fond gris sombre, comme sur l'iPhone.
+/// Pendant un glissement, elle s'épaissit et passe au blanc.
 private struct ProgressLine: View {
     var value: Double
     var height: CGFloat = 5
+    var isScrubbing = false
 
     /// Dessinée d'un bloc (`Canvas`) : sa largeur ne doit suivre aucune animation venue d'ailleurs.
     /// Avec des cadres SwiftUI, le ressort « rebondissant » du changement de page étirait la partie
-    /// écoulée en revenant sur la page Musique. Elle avance d'une fraction de pour cent par seconde :
-    /// pas besoin de l'animer.
+    /// écoulée en revenant sur la page Musique.
     var body: some View {
         Canvas { context, size in
             let fraction = min(max(value, 0), 1)
@@ -344,9 +384,11 @@ private struct ProgressLine: View {
             let width = max(size.height, size.width * fraction)
             let elapsed = Path(roundedRect: CGRect(x: 0, y: 0, width: width, height: size.height),
                                cornerRadius: size.height / 2)
-            context.fill(elapsed, with: .color(.white.opacity(0.8)))
+            context.fill(elapsed, with: .color(.white.opacity(isScrubbing ? 1 : 0.8)))
         }
         .frame(height: height)
+        // Épaissie sans changer la mise en page autour.
+        .scaleEffect(x: 1, y: isScrubbing ? 1.8 : 1)
     }
 }
 

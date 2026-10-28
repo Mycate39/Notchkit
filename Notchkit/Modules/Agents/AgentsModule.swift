@@ -61,7 +61,8 @@ final class AgentsModule: NotchModule {
         isRunning = false
     }
 
-    /// Suit les sessions : nouvelle demande d'accord → l'encoche s'ouvre ; tâche finie → fête.
+    /// Suit les sessions : nouvelle demande d'accord → son de la mascotte (l'encoche ne s'ouvre plus d'elle-même :
+    /// on répond depuis la bulle cerclée d'ambre, ou en cliquant dessus) ; tâche finie → fête.
     private func observeSessions() {
         trackChanges(of: { [weak self] in
             guard let self, self.isRunning else { return }
@@ -78,7 +79,6 @@ final class AgentsModule: NotchModule {
         let waiting = Set(sessions.filter { $0.state == .waitingForPermission }.map(\.id))
         let working = Set(sessions.filter { $0.state == .working }.map(\.id))
         if !waiting.subtracting(knownWaiting).isEmpty {
-            context.showModule()
             MascotSounds.shared.play(.question)
         } else if !working.subtracting(knownWorking).subtracting(knownWaiting).isEmpty {
             // Un agent se met au travail (pas une simple reprise après un accord).

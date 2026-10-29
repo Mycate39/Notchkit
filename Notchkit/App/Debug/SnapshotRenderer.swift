@@ -357,10 +357,10 @@ enum SnapshotRenderer {
 
         // Fenêtre de réglages, onglet Widgets puis page d'un module (contrôles AppKit : rendu en fenêtre).
         let router = SettingsRouter()
-        for (tab, name) in [(SettingsTab.widgets, "reglages-widgets"), (.module(MusicModule.descriptor.id), "reglages-widget-musique"), (.appearance, "reglages-apparence"), (.permissions, "reglages-autorisations"), (.module(AgentsModule.descriptor.id), "reglages-widget-agents")] {
+        for (tab, name) in [(SettingsTab.general, "reglages-general"), (.widgets, "reglages-widgets"), (.module(MusicModule.descriptor.id), "reglages-widget-musique"), (.appearance, "reglages-apparence"), (.permissions, "reglages-autorisations"), (.module(AgentsModule.descriptor.id), "reglages-widget-agents")] {
             router.tab = tab
             saveWindow(SettingsView(settings: settings, manager: manager, router: router),
-                       size: CGSize(width: 820, height: tab == .appearance ? 1300 : 620),
+                       size: CGSize(width: 820, height: tab == .appearance || tab == .general ? 1300 : 620),
                        to: directory.appendingPathComponent("\(name).png"))
         }
     }

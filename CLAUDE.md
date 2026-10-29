@@ -159,7 +159,7 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 5. `git push`, `git tag -a vx.y.z`, pousser le tag, `gh release create vx.y.z <dmg> --latest --notes-file <notes.md>` (les versions 1.x ne sont plus des préversions), puis pousser `appcast.xml`.
    L'URL du flux est `https://raw.githubusercontent.com/Mycate39/Notchkit/main/appcast.xml`.
 
-**Bêta / RC** : même procédure, avec `MARKETING_VERSION` `x.y.z-beta.N` (ou `x.y.z-rc.N`, candidate à la version finale, comme sur iOS) (le build augmente normalement), tag `vx.y.z-beta.N`, `gh release create … --prerelease --latest=false`, et **sans** étape `appcast.xml` : les utilisateurs actuels ne la reçoivent pas automatiquement.
+**Bêta / RC** : même procédure, avec `MARKETING_VERSION` `x.y.z-beta.N` (ou `x.y.z-rc.N`, candidate à la version finale, comme sur iOS) (le build augmente normalement), tag `vx.y.z-beta.N`, `gh release create … --prerelease --latest=false`. Depuis le 29/10/2026, l'étape `appcast.xml` se fait aussi : `add-to-appcast.sh` met une bêta ou une RC dans le canal Sparkle « beta » (`<sparkle:channel>beta</sparkle:channel>`), proposé seulement à qui a activé « Recevoir les versions bêta » (Réglages > Général ; activé d'office sur une bêta installée, `Updater.allowedChannels`). Les versions finales, sans canal, vont à tout le monde. Les versions sans ce réglage (3.0.0-beta.3 et antérieures) ne voient jamais les bêtas de l'appcast : il faut installer la première bêta qui l'a à la main.
 
 ## État (24 octobre 2026 : 2.0.0 publiée)
 

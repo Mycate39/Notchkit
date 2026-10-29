@@ -1,6 +1,8 @@
 #!/bin/sh
 # Ajoute une version en tête de appcast.xml (liste lue par Sparkle pour les mises à jour).
 # Le .dmg est signé avec la clé EdDSA privée rangée dans le trousseau (créée par generate_keys).
+# Une bêta ou une RC (« 3.0.0-beta.4 », « 3.0.0-rc.1 ») va dans le canal « beta » : seules les personnes
+# qui ont activé « Recevoir les versions bêta » la reçoivent.
 # Usage : scripts/add-to-appcast.sh <Notchkit-x.y.z.dmg> <chemin/Notchkit.app> <notes.md> [appcast.xml] [url du .dmg]
 set -eu
 
@@ -42,12 +44,13 @@ for line in open(notes, encoding="utf-8").read().splitlines():
     if text.startswith("## "): body.append(f"<h3>{text[3:]}</h3>")
     elif text: body.append(f"<p>{text}</p>")
 if in_list: body.append("</ul>")
+channel = "\n      <sparkle:channel>beta</sparkle:channel>" if ("-beta" in version or "-rc" in version) else ""
 item = f"""    <item>
       <title>Notchkit {version}</title>
       <pubDate>{email.utils.formatdate(usegmt=True)}</pubDate>
       <sparkle:version>{build}</sparkle:version>
       <sparkle:shortVersionString>{version}</sparkle:shortVersionString>
-      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>{channel}
       <link>{page}</link>
       <sparkle:informationalUpdate>
         <sparkle:belowVersion>{rotation}</sparkle:belowVersion>
@@ -71,3 +74,4 @@ else:
 open(appcast, "w", encoding="utf-8").write(text)
 PY
 echo "appcast : $VERSION ($BUILD) → $URL"
+case "$VERSION" in *-beta*|*-rc*) echo "canal : beta (réservé aux personnes qui reçoivent les bêtas)";; esac

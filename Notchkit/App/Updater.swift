@@ -7,10 +7,15 @@ import Sparkle
 /// `.dmg` de la nouvelle version, vérifie sa signature EdDSA (clé publique `SUPublicEDKey` dans
 /// l'Info.plist, clé privée dans le trousseau du développeur), remplace l'app puis la relance.
 ///
+/// Versions bêta : les entrées de l'appcast marquées `<sparkle:channel>beta</sparkle:channel>` ne
+/// sont proposées qu'aux personnes qui ont activé « Recevoir les versions bêta » (activé d'office
+/// quand la version installée est elle-même une bêta ou une RC). Les autres ne voient que les
+/// versions finales.
+///
 /// Désactivé dans les versions de développement et les lancements automatisés : une version Debug
 /// ne doit pas se remplacer par la version publiée.
 @MainActor
-final class Updater: NSObject, SPUStandardUserDriverDelegate {
+final class Updater: NSObject, SPUStandardUserDriverDelegate, SPUUpdaterDelegate {
     static let shared = Updater()
 
     private var controller: SPUStandardUpdaterController?
@@ -23,7 +28,7 @@ final class Updater: NSObject, SPUStandardUserDriverDelegate {
         return
         #else
         guard controller == nil, !AutomatedRun.isActive else { return }
-        controller = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: self)
+        controller = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: self, userDriverDelegate: self)
         #endif
     }
 
@@ -35,6 +40,43 @@ final class Updater: NSObject, SPUStandardUserDriverDelegate {
     var automaticallyChecks: Bool {
         get { controller?.updater.automaticallyChecksForUpdates ?? false }
         set { controller?.updater.automaticallyChecksForUpdates = newValue }
+    }
+
+    // MARK: Versions bêta
+
+    nonisolated static let betaChannel = "beta"
+    nonisolated static let receivesBetasKey = "updates.receiveBetas"
+
+    /// Version installée : bêta ou candidate (« 3.0.0-beta.4 », « 3.0.0-rc.1 »).
+    nonisolated static func isPrerelease(_ version: String) -> Bool {
+        version.contains("-beta") || version.contains("-rc")
+    }
+
+    /// Réglage choisi, sinon activé si la version installée est une bêta.
+    nonisolated static func receivesBetas(stored: Bool?, installedVersion: String) -> Bool {
+        stored ?? isPrerelease(installedVersion)
+    }
+
+    /// Recevoir les versions bêta (Réglages > Général > Mises à jour).
+    var receivesBetas: Bool {
+        get { Self.receivesBetas(stored: UserDefaults.standard.object(forKey: Self.receivesBetasKey) as? Bool,
+                                 installedVersion: Self.installedVersion) }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Self.receivesBetasKey)
+            // Nouvelle recherche au prochain cycle, avec le canal à jour.
+            controller?.updater.resetUpdateCycleAfterShortDelay()
+        }
+    }
+
+    nonisolated private static var installedVersion: String {
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
+    }
+
+    // MARK: SPUUpdaterDelegate
+
+    nonisolated func allowedChannels(for updater: SPUUpdater) -> Set<String> {
+        let stored = UserDefaults.standard.object(forKey: Self.receivesBetasKey) as? Bool
+        return Self.receivesBetas(stored: stored, installedVersion: Self.installedVersion) ? [Self.betaChannel] : []
     }
 
     // MARK: SPUStandardUserDriverDelegate

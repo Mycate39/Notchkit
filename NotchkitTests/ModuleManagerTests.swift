@@ -425,3 +425,20 @@ struct OnboardingTests {
         #expect(OnboardingTrialTask.available(pageCount: 2, hasShelf: true, hasTimers: false) == [.open, .swipe, .drop])
     }
 }
+
+struct BetaUpdatesTests {
+    @Test func versionsBetaReconnues() {
+        #expect(Updater.isPrerelease("3.0.0-beta.4"))
+        #expect(Updater.isPrerelease("3.0.0-rc.1"))
+        #expect(!Updater.isPrerelease("3.0.0"))
+    }
+
+    @Test func betasActiveesDOfficeSurUneBeta() {
+        // Sans choix enregistré : oui pour une bêta installée, non pour une version finale.
+        #expect(Updater.receivesBetas(stored: nil, installedVersion: "3.0.0-beta.4"))
+        #expect(!Updater.receivesBetas(stored: nil, installedVersion: "3.0.0"))
+        // Le choix de la personne l'emporte toujours.
+        #expect(!Updater.receivesBetas(stored: false, installedVersion: "3.0.0-beta.4"))
+        #expect(Updater.receivesBetas(stored: true, installedVersion: "3.0.0"))
+    }
+}

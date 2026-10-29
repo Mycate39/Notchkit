@@ -425,6 +425,7 @@ private struct GeneralSettingsView: View {
     @State private var launchAtLogin = LaunchAtLogin.isEnabled
     @State private var launchError: String?
     @State private var autoUpdate = Updater.shared.automaticallyChecks
+    @State private var receivesBetas = Updater.shared.receivesBetas
 
     var body: some View {
         Form {
@@ -515,10 +516,13 @@ private struct GeneralSettingsView: View {
                 Toggle("Rechercher automatiquement les mises à jour", isOn: $autoUpdate)
                     .onChange(of: autoUpdate) { _, newValue in Updater.shared.automaticallyChecks = newValue }
                     .disabled(!Updater.shared.isAvailable)
+                Toggle("Recevoir les versions bêta", isOn: $receivesBetas)
+                    .onChange(of: receivesBetas) { _, newValue in Updater.shared.receivesBetas = newValue }
+                    .disabled(!Updater.shared.isAvailable)
                 Button("Rechercher maintenant…") { Updater.shared.checkForUpdates() }
                     .disabled(!Updater.shared.isAvailable)
                 Text(Updater.shared.isAvailable
-                     ? "Notchkit vérifie une fois par jour si une nouvelle version est disponible sur GitHub, puis l'installe et redémarre après votre accord."
+                     ? "Notchkit vérifie une fois par jour si une nouvelle version est disponible sur GitHub, puis l'installe et redémarre après votre accord. Les versions bêta arrivent plus tôt avec les nouveautés, mais peuvent contenir des défauts."
                      : "Les mises à jour automatiques ne sont disponibles que dans les versions publiées.")
                     .font(.caption)
                     .foregroundStyle(.secondary)

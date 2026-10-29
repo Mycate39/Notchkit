@@ -1,54 +1,6 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
-    "Position dans le morceau" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Position in the track"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Position dans le morceau"
-          }
-        }
-      }
-    },
-    "Réduire la pochette" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Shrink artwork"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Réduire la pochette"
-          }
-        }
-      }
-    },
-    "Agrandir la pochette" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enlarge artwork"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Agrandir la pochette"
-          }
-        }
-      }
-    },
     "" : {
 
     },
@@ -1484,6 +1436,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Agents IA, activités, presse-papiers et étagère."
+          }
+        }
+      }
+    },
+    "Agrandir la pochette" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enlarge artwork"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agrandir la pochette"
           }
         }
       }
@@ -10045,6 +10013,7 @@
       }
     },
     "Notchkit vérifie une fois par jour si une nouvelle version est disponible sur GitHub, puis l'installe et redémarre après votre accord." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10056,6 +10025,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notchkit vérifie une fois par jour si une nouvelle version est disponible sur GitHub, puis l'installe et redémarre après votre accord."
+          }
+        }
+      }
+    },
+    "Notchkit vérifie une fois par jour si une nouvelle version est disponible sur GitHub, puis l'installe et redémarre après votre accord. Les versions bêta arrivent plus tôt avec les nouveautés, mais peuvent contenir des défauts." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit checks GitHub once a day for a new version, then installs it and restarts once you agree. Beta versions bring new features earlier, but may contain bugs."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit vérifie une fois par jour si une nouvelle version est disponible sur GitHub, puis l'installe et redémarre après votre accord. Les versions bêta arrivent plus tôt avec les nouveautés, mais peuvent contenir des défauts."
           }
         }
       }
@@ -11131,6 +11116,22 @@
         }
       }
     },
+    "Position dans le morceau" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Position in the track"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Position dans le morceau"
+          }
+        }
+      }
+    },
     "Position nécessaire pour la météo" : {
       "localizations" : {
         "en" : {
@@ -11520,6 +11521,22 @@
         }
       }
     },
+    "Recevoir les versions bêta" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Receive beta versions"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recevoir les versions bêta"
+          }
+        }
+      }
+    },
     "Recharger" : {
       "localizations" : {
         "en" : {
@@ -11676,6 +11693,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Recommandée : touches du clavier et menus"
+          }
+        }
+      }
+    },
+    "Réduire la pochette" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shrink artwork"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réduire la pochette"
           }
         }
       }

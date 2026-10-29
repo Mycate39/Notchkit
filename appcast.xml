@@ -3,6 +3,20 @@
   <channel>
     <title>Notchkit</title>
     <item>
+      <title>Notchkit 3.0.0-beta.4</title>
+      <pubDate>Thu, 29 Oct 2026 21:58:36 GMT</pubDate>
+      <sparkle:version>29</sparkle:version>
+      <sparkle:shortVersionString>3.0.0-beta.4</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <sparkle:channel>beta</sparkle:channel>
+      <link>https://github.com/Mycate39/Notchkit/releases/tag/v3.0.0-beta.4</link>
+      <sparkle:informationalUpdate>
+        <sparkle:belowVersion>12</sparkle:belowVersion>
+      </sparkle:informationalUpdate>
+      <description><![CDATA[<p>Fourth beta of Notchkit 3.0, and the first one that can update itself to the next betas.</p><h3>New</h3><ul><li><b>Beta updates</b>: *Settings &gt; General &gt; Updates* now has a *Receive beta versions* switch. With it on, Notchkit offers new betas through its usual updates, like the final versions. It is on by default when a beta is installed; turn it off to get only the final versions.</li></ul><h3>Install</h3><p>This beta has to be installed by hand once: earlier versions don&#x27;t know about beta updates. Download the DMG, drag Notchkit to Applications, then open it. The app is not notarized: the first time, right-click it and choose *Open*, or go to *System Settings &gt; Privacy &amp; Security* and click *Open Anyway*.</p><p>From now on, the next betas arrive through *Check for Updates…*.</p><h3>Known issue</h3><ul><li>When you swipe between Spaces with the trackpad, macOS freezes the notch for about a second, then the animation resumes.</li></ul><p>Please report anything odd in the *Issues* tab.</p>]]></description>
+      <enclosure url="https://github.com/Mycate39/Notchkit/releases/download/v3.0.0-beta.4/Notchkit-3.0.0-beta.4.dmg" sparkle:edSignature="RshjVxksdpdIZCezhYBUzRXhtg4KNZh4VI0YzcYOHH9QrT4TJER8jpWsKk7eEO2XxkjHKoRY+Al8x/YzaCUoAQ==" length="10998502" type="application/octet-stream"/>
+    </item>
+    <item>
       <title>Notchkit 2.0.0</title>
       <pubDate>Sat, 24 Oct 2026 20:05:07 GMT</pubDate>
       <sparkle:version>25</sparkle:version>

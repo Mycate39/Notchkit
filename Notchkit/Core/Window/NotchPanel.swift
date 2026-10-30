@@ -15,6 +15,9 @@ final class NotchPanel: NSPanel {
             defer: false
         )
         isFloatingPanel = true
+        // Fenêtre clé seulement pour un champ de texte (traducteur, notes) : un clic sur un bouton (roue
+        // dentée) la rendait clé, et la fenêtre des réglages ouverte ensuite restait grisée.
+        becomesKeyOnlyIfNeeded = true
         level = Self.normalLevel
         collectionBehavior = [.canJoinAllSpaces, .stationary, .fullScreenAuxiliary, .ignoresCycle]
         backgroundColor = .clear

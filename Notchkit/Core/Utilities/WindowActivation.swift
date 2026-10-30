@@ -9,7 +9,7 @@ import AppKit
 /// Tant qu'une de ces fenêtres est ouverte, Notchkit devient donc une app ordinaire (icône dans le
 /// Dock, choix du propriétaire le 30/10/2026), que macOS laisse passer au premier plan ; elle redevient
 /// discrète à la fermeture de la dernière.
-/// On vérifie encore l'activation et on insiste ; si macOS refuse toujours, la fenêtre flotte au-dessus
+/// On vérifie l'activation et que la fenêtre est bien la fenêtre clé, et on insiste ; si macOS refuse toujours, la fenêtre flotte au-dessus
 /// des autres jusqu'à ce que Notchkit devienne active (un clic dessus suffit).
 /// La fenêtre suit le bureau courant (et s'affiche au-dessus d'une app en plein écran) : sinon elle
 /// restait sur le bureau où elle avait été ouverte la première fois, et « Réglages… » choisi depuis un
@@ -24,10 +24,13 @@ enum WindowActivation {
         window.makeKeyAndOrderFront(nil)
         window.orderFrontRegardless()
         Task { @MainActor in
+            // L'app active ne suffit pas : après un clic sur la roue dentée, le panneau de l'encoche
+            // restait la fenêtre clé et les réglages, au premier plan, restaient grisés.
             for _ in 0..<10 {
                 try? await Task.sleep(for: .milliseconds(150))
-                if NSApp.isActive { break }
+                if NSApp.isActive && window.isKeyWindow { break }
                 NSApp.activate()
+                window.makeKeyAndOrderFront(nil)
             }
             guard window.isVisible else { return }
             window.makeKeyAndOrderFront(nil)

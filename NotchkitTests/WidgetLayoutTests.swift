@@ -31,6 +31,16 @@ struct WidgetLayoutEngineTests {
         #expect(WidgetLayoutEngine.move("a", toPage: 0, index: 2, in: layout).pages == [["b", "a", "c"]])
     }
 
+    @Test func deplacerUnePageEntiere() {
+        let pages = [["a"], ["b", "c"], ["d"]]
+        #expect(WidgetLayoutEngine.movePage(from: 2, to: 0, in: pages) == [["d"], ["a"], ["b", "c"]])
+        #expect(WidgetLayoutEngine.movePage(from: 0, to: 2, in: pages) == [["b", "c"], ["d"], ["a"]])
+        #expect(WidgetLayoutEngine.movePage(from: 1, to: 9, in: pages) == [["a"], ["d"], ["b", "c"]])
+        #expect(WidgetLayoutEngine.movePage(from: 5, to: 0, in: pages) == pages)
+        #expect(PageDrag.pageIndex(PageDrag.payload(3)) == 3)
+        #expect(PageDrag.pageIndex("music") == nil)
+    }
+
     @Test func deplacerVersUneAutrePageOuUneNouvelle() {
         let layout = WidgetLayout(pages: [["a", "b"], ["c"]])
         #expect(WidgetLayoutEngine.move("a", toPage: 1, index: 0, in: layout).pages == [["b"], ["a", "c"]])

@@ -90,7 +90,7 @@ Carte pour aller droit au bon fichier (chercher ensuite le symbole avec `grep -n
 **Réglages, disposition, divers**
 - `Core/Settings/AppSettings.swift` : réglages généraux (délais de survol, écran, haptique, mascotte…) ; un réglage propre à un module vit plutôt dans le module (`UserDefaults`, clé `module.<id>.<nom>`).
 - `UI/Settings/` : `SettingsView.swift` (fenêtre, onglets `SettingsTab`, historique Précédent / Suivant dans `SettingsRouter` posé sur chaque page par `.settingsHistory`, Général, liste des widgets et page de détail, À propos, icônes `SidebarIcon` au style d'icônes de macOS lu dans la clé non documentée `AppleIconAppearanceTheme` : aucune valeur = Par défaut, `RegularDark`, `ClearLight`/`ClearDark`, `…Automatic`), `AppearanceSettingsView`, `LayoutSettingsView` (éditeur de disposition), `PermissionsSettingsView`.
-- `Core/Layout/WidgetLayout.swift` : tailles de widget et calcul des pages ; `LayoutPresets` : dispositions prêtes à l'emploi.
+- `Core/Layout/WidgetLayout.swift` : tailles de widget et calcul des pages ; `LayoutPresets` : dispositions prêtes à l'emploi. Dans l'éditeur, une page se déplace entière avec sa poignée ou ses flèches (`WidgetLayoutEngine.movePage`, contenu glissé `PageDrag`).
 - `Core/Permissions/PermissionCenter.swift` : les autorisations (ajouter un cas = titre, usage, icône, couleur, ancre des Réglages Système, état, demande).
 - `App/Onboarding/` : étapes du tutoriel (`OnboardingStep`), fenêtre et démonstrations animées. Avant-dernière étape : essai guidé sur la vraie encoche (`OnboardingTrialTask`, gestes cochés en observant `NotchViewModel`, l'étagère et le minuteur d'essai). Le fichier d'essai se glisse par une source AppKit `AcceptedInternalDragSource` : l'encoche refuse sinon tout glisser venu de Notchkit, et `DropCatcher` ne voit les glissers internes que par `internalDragDidStart`.
 - Déverrouillage (`Modules/Unlock`) : animation Face ID façon Dynamic Island, vidéo HEVC transparente `Resources/FaceIDUnlock.mov` rendue depuis une animation Lottie (moteur SVG de lottie-web pour garder son flou, fond retiré, recadrée : cercle à 48 % d'un carré de 200 pt, coins de 40 pt via `NotchAlert.centersExpandedContent` / `expandedCornerRadius`). Demande Touch ID dans le même carré : vidéo `Resources/TouchIDPrompt.mov` (empreinte, en pause à 2 s pendant l'attente via `TouchIDPromptState`, puis transformation en cercle quand la demande se ferme), relayée par le cercle et la coche Face ID en rouge dessinés en SwiftUI.
@@ -206,6 +206,7 @@ NOTCHKIT_SNAPSHOT=/chemin/vers/dossier build.noindex/DerivedData/Build/Products/
 
 ### Design « Verre » (27/10/2026)
 - Fond « Verre » façon lecteur de l'iPhone : noir sur le haut, long dégradé vers un verre clair (Liquid Glass `.clear`), grands congés (20 pt) et coins (36 pt), sans contour ; widgets posés sur le verre, sans carte, écart agrandi. La page qui ne contient que la musique ouvre l'encoche en lecteur de 440 × 222 pt (présentation dédiée du widget Musique), qui s'agrandit en changeant de page.
+- Depuis le 30/10/2026, l'encoche ouverte sur fond noir a les mêmes grands congés et coins que le Verre (`NotchLayout.earRadius` / `cornerRadii`), et garde son contour.
 - À faire : revoir certains widgets pour ce mode (pensés pour une carte noire : textes sombres, éléments qui débordent, contrastes).
 
 ### Limites connues

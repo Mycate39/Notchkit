@@ -3,7 +3,8 @@ import SwiftUI
 /// Éditeur de disposition : chaque page de l'encoche est dessinée en miniature.
 /// - glisser un widget le déplace (dans la page, vers une autre page, ou vers une nouvelle page) ;
 /// - cliquer sur un widget permet de changer sa taille ou de le masquer ;
-/// - glisser un widget masqué dans une page l'active.
+/// - glisser un widget masqué dans une page l'active ;
+/// - glisser une page par sa poignée (ou ses flèches) la change de place, avec tous ses widgets.
 struct LayoutSettingsView: View {
     let manager: ModuleManager
 
@@ -31,13 +32,13 @@ struct LayoutEditorContent: View {
             VStack(alignment: .leading, spacing: 18) {
                 PresetGallery(manager: manager)
 
-                Text("Glissez les widgets pour les réordonner ou les changer de page. Cliquez sur un widget pour changer sa taille. Astuce : un clic droit sur un widget dans l'encoche offre les mêmes options.")
+                Text("Glissez les widgets pour les réordonner ou les changer de page, et une page par sa poignée pour la déplacer avec ses widgets. Cliquez sur un widget pour changer sa taille. Astuce : un clic droit sur un widget dans l'encoche offre les mêmes options.")
                     .font(.callout)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
 
                 ForEach(Array(pages.enumerated()), id: \.offset) { index, ids in
-                    PageEditor(manager: manager, pageIndex: index, ids: ids, descriptors: descriptors)
+                    PageEditor(manager: manager, pageIndex: index, pageCount: pages.count, ids: ids, descriptors: descriptors)
                 }
 
                 NewPageDropZone(manager: manager, pageCount: pages.count)
@@ -64,6 +65,7 @@ private struct PageEditor: View {
 
     let manager: ModuleManager
     let pageIndex: Int
+    let pageCount: Int
     let ids: [String]
     let descriptors: [String: ModuleDescriptor]
 
@@ -74,9 +76,39 @@ private struct PageEditor: View {
         let capacity = NotchLayout.pageCapacity
 
         VStack(alignment: .leading, spacing: 6) {
-            HStack {
+            HStack(spacing: 6) {
+                // Poignée : glisser la page sur une autre la met à sa place.
+                Image(systemName: "line.3.horizontal")
+                    .foregroundStyle(.secondary)
+                    .frame(width: 18, height: 18)
+                    .contentShape(Rectangle())
+                    .draggable(PageDrag.payload(pageIndex)) {
+                        Label { Text("Page \(pageIndex + 1)") } icon: { Image(systemName: "rectangle.stack") }
+                            .padding(8)
+                            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+                    }
+                    .help("Glissez pour déplacer la page")
+                    .accessibilityHidden(true)
                 Text("Page \(pageIndex + 1)")
                     .font(.headline)
+                Button {
+                    movePage(to: pageIndex - 1)
+                } label: {
+                    Image(systemName: "chevron.up")
+                }
+                .buttonStyle(.borderless)
+                .disabled(pageIndex == 0)
+                .help("Monter la page")
+                .accessibilityLabel(Text("Monter la page"))
+                Button {
+                    movePage(to: pageIndex + 1)
+                } label: {
+                    Image(systemName: "chevron.down")
+                }
+                .buttonStyle(.borderless)
+                .disabled(pageIndex >= pageCount - 1)
+                .help("Descendre la page")
+                .accessibilityLabel(Text("Descendre la page"))
                 Spacer()
                 Text("\(Double(used).formatted(.number.precision(.fractionLength(0...1)))) / \(Int(capacity)) de largeur")
                     .font(.caption)
@@ -119,13 +151,22 @@ private struct PageEditor: View {
                 }
             }
             .aspectRatio((Self.realWidth + 16) / (Self.realHeight + 16), contentMode: .fit)
-            // Déposer sur l'espace libre de la page : le widget va en dernière position.
+            // Déposer sur l'espace libre de la page : le widget va en dernière position ; une page
+            // déposée prend la place de celle-ci.
             .dropDestination(for: String.self) { items, _ in
-                guard let id = items.first else { return false }
-                place(id, page: pageIndex, index: ids.count)
+                guard let item = items.first else { return false }
+                if let source = PageDrag.pageIndex(item) {
+                    withAnimation(.snappy) { manager.movePage(from: source, to: pageIndex) }
+                    return true
+                }
+                place(item, page: pageIndex, index: ids.count)
                 return true
             } isTargeted: { isTargeted = $0 }
         }
+    }
+
+    private func movePage(to destination: Int) {
+        withAnimation(.snappy) { manager.movePage(from: pageIndex, to: destination) }
     }
 
     private func place(_ id: String, page: Int, index: Int) {
@@ -136,6 +177,16 @@ private struct PageEditor: View {
                 manager.enable(id, atPage: page, index: index)
             }
         }
+    }
+}
+
+/// Contenu glissé pour une page entière (« page:2 ») : les zones de dépôt des widgets l'ignorent.
+enum PageDrag {
+    static func payload(_ index: Int) -> String { "page:\(index)" }
+
+    static func pageIndex(_ item: String) -> Int? {
+        guard item.hasPrefix("page:") else { return nil }
+        return Int(item.dropFirst(5))
     }
 }
 
@@ -208,6 +259,11 @@ private struct WidgetTile: View {
         }
         .dropDestination(for: String.self) { items, location in
             guard let id = items.first else { return false }
+            // Page lâchée sur un widget : elle prend la place de la page de ce widget.
+            if let source = PageDrag.pageIndex(id) {
+                withAnimation(.snappy) { manager.movePage(from: source, to: pageIndex) }
+                return true
+            }
             // Moitié gauche : avant ce widget ; moitié droite : après.
             let target = location.x < tileWidth / 2 ? index : index + 1
             withAnimation(.snappy) {
@@ -271,7 +327,7 @@ private struct NewPageDropZone: View {
                     .foregroundStyle(isTargeted ? Color.accentColor : .secondary.opacity(0.5))
             }
             .dropDestination(for: String.self) { items, _ in
-                guard let id = items.first else { return false }
+                guard let id = items.first, PageDrag.pageIndex(id) == nil else { return false }
                 withAnimation(.snappy) {
                     if manager.isEnabled(id) {
                         manager.move(id, toPage: pageCount, index: 0)

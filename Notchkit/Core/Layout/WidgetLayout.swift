@@ -156,6 +156,15 @@ enum WidgetLayoutEngine {
         return result
     }
 
+    /// Change une page entière de place, avec tous ses widgets : elle finit au rang `destination`.
+    static func movePage(from source: Int, to destination: Int, in pages: [[String]]) -> [[String]] {
+        guard pages.indices.contains(source) else { return pages }
+        var result = pages
+        let page = result.remove(at: source)
+        result.insert(page, at: max(0, min(destination, result.count)))
+        return result
+    }
+
     /// Retire un widget de la disposition (ex. module masqué).
     static func remove(_ id: String, from layout: WidgetLayout) -> WidgetLayout {
         var result = layout

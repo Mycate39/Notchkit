@@ -161,6 +161,13 @@ final class ModuleManager {
         settings.settings.widgetLayout = WidgetLayoutEngine.move(id, toPage: page, index: index, in: editableLayout)
     }
 
+    /// Change une page de place dans la disposition, sans toucher à ses widgets.
+    func movePage(from source: Int, to destination: Int) {
+        var layout = editableLayout
+        layout.pages = WidgetLayoutEngine.movePage(from: source, to: destination, in: layoutPageIDs)
+        settings.settings.widgetLayout = layout
+    }
+
     /// Position actuelle d'un widget (page, rang).
     func position(of id: String) -> (page: Int, index: Int)? {
         for (page, ids) in layoutPageIDs.enumerated() {

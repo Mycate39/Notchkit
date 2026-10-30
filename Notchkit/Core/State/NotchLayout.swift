@@ -270,8 +270,8 @@ enum NotchLayout {
 
     /// Rayon des coins en mode déplié.
     static let expandedCornerRadius: CGFloat = 24
-    /// Fond « Verre », encoche ouverte : grands congés en haut et grands coins en bas, comme le lecteur
-    /// de l'iPhone.
+    /// Encoche ouverte, fond noir comme fond « Verre » (depuis le 30/10/2026) : grands congés en haut et
+    /// grands coins en bas, comme le lecteur de l'iPhone. Le fond noir garde son contour.
     static let glassEarRadius: CGFloat = 20
     static let glassCornerRadius: CGFloat = 36
     /// Fond « Verre » : une page qui ne contient que la musique ouvre l'encoche à la taille du lecteur
@@ -295,9 +295,9 @@ enum NotchLayout {
         return expandedSize(columnWeights: weights, glass: glass, height: height)
     }
 
-    /// Congé qui raccorde l'encoche au haut de l'écran.
+    /// Congé qui raccorde l'encoche au haut de l'écran : grand une fois ouverte, quel que soit le fond.
     static func earRadius(glass: Bool, isExpanded: Bool) -> CGFloat {
-        glass && isExpanded ? glassEarRadius : earRadius
+        isExpanded ? glassEarRadius : earRadius
     }
 
     /// Facteur de ralentissement des animations (menu Débogage, pour observer un défaut).
@@ -461,7 +461,8 @@ enum NotchLayout {
         switch style {
         case .notch:
             if island && !isExpanded { return (0, height / 2) }
-            if isExpanded { return (0, glass ? glassCornerRadius : expandedCornerRadius) }
+            // Ouverte : mêmes grands coins avec les deux fonds.
+            if isExpanded { return (0, glassCornerRadius) }
             return (0, min(10, height / 3))
         case .pill:
             let radius = isExpanded ? expandedCornerRadius : height / 2

@@ -132,10 +132,12 @@ final class ModuleManager {
         )
     }
 
-    /// Pages affichées dans l'encoche dépliée (identifiants des modules actifs). Les modules en
-    /// contexte s'ajoutent sur une dernière page, sans modifier la disposition.
+    /// Pages affichées dans l'encoche dépliée (identifiants des modules actifs). Le lecteur de la
+    /// musique passe toujours en premier, sur sa propre page ; les modules en contexte s'ajoutent sur
+    /// une dernière page. Ni l'un ni l'autre ne modifie la disposition.
     var pageIDs: [[String]] {
-        let pages = layoutPageIDs
+        let players = displayedModules.filter { type(of: $0).descriptor.playerPage }.map { [$0.moduleID] }
+        let pages = players + layoutPageIDs
         let contextual = activeModules
             .filter { contextualIDs.contains($0.moduleID) && $0.hasContextualContent }
             .map(\.moduleID)

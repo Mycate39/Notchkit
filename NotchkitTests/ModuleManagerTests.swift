@@ -63,6 +63,19 @@ final class MockBackgroundModule: NotchModule {
     func expandedView() -> AnyView { AnyView(EmptyView()) }
 }
 
+@MainActor
+@Observable
+final class MockPlayerModule: NotchModule {
+    static let descriptor = ModuleDescriptor(
+        id: "mock.player", name: "L", summary: "", systemImage: "music.note",
+        category: .media, tier: .free, defaultEnabled: true, providesWidget: false, playerPage: true
+    )
+    var compactPriority: ModulePriority = .none
+
+    init(context: ModuleContext) {}
+    func expandedView() -> AnyView { AnyView(EmptyView()) }
+}
+
 // MARK: - Tests
 
 @MainActor
@@ -75,6 +88,16 @@ struct ModuleManagerTests {
             entitlements: EntitlementManager(),
             availableModules: [MockModuleA.self, MockModuleB.self]
         )
+    }
+
+    @Test func lecteurToujoursEnPremierePageHorsDisposition() {
+        let manager = ModuleManager(settings: settings, entitlements: EntitlementManager(),
+                                    availableModules: [MockModuleA.self, MockPlayerModule.self])
+        manager.reload()
+        // Le lecteur ouvre l'encoche, mais l'éditeur de disposition ne le voit pas.
+        #expect(manager.pageIDs.first == ["mock.player"])
+        #expect(!manager.layoutPageIDs.flatMap { $0 }.contains("mock.player"))
+        #expect(manager.pageIDs.dropFirst().flatMap { $0 } == ["mock.a"])
     }
 
     @Test func chargeUniquementLesModulesActivesParDefaut() {
@@ -179,14 +202,18 @@ struct NotchLayoutTests {
         screenFrame: CGRect(x: 0, y: 0, width: 1440, height: 900), centerX: 720
     )
 
-    @Test func pageMusiqueSeuleALaTailleDuLecteurEnVerre() {
+    @Test func pageMusiqueSeuleALaTailleDuLecteur() {
         #expect(NotchLayout.pageSize(moduleIDs: ["music"], sizes: [.large], fullPage: false, glass: true)
-                == NotchLayout.glassMusicPlayerSize)
-        #expect(!NotchLayout.isMusicPlayerPage(moduleIDs: ["music"], glass: false))
+                == NotchLayout.musicPlayerSize)
+        #expect(NotchLayout.pageSize(moduleIDs: ["music"], sizes: [.large], fullPage: false, glass: false)
+                == NotchLayout.musicPlayerSize)
+        // Grand par défaut, compact environ 20 % plus petit.
+        #expect(MusicPlayerStyle.large.size.width > MusicPlayerStyle.compact.size.width)
+        #expect(MusicPlayerStyle.large.size == CGSize(width: 456, height: 200))
         #expect(!NotchLayout.isMusicPlayerPage(moduleIDs: ["music", "clock"], glass: true))
         let player = NotchLayout.shapeSize(for: notch, isExpanded: true, hasCompactContent: true,
-                                           pageSize: NotchLayout.glassMusicPlayerSize)
-        #expect(player.height == NotchLayout.glassMusicPlayerSize.height)
+                                           pageSize: NotchLayout.musicPlayerSize)
+        #expect(player.height == NotchLayout.musicPlayerSize.height)
     }
 
     @Test func encocheRepliéeEpouseLEncochePhysique() {

@@ -52,6 +52,9 @@ struct ModuleDescriptor: Identifiable, Sendable {
     var backgroundEvents = false
     /// Widget pleine page : il occupe toujours une page entière à lui seul, en une seule taille.
     var fullPage = false
+    /// Lecteur (la musique) : pas un widget de la disposition, mais toujours la première page de
+    /// l'encoche ouverte, même quand rien ne joue. Va avec `providesWidget = false`.
+    var playerPage = false
     /// Moteur d'un autre module (son identifiant) : il tourne quand celui-ci est activé et n'apparaît
     /// pas dans les réglages (ex. Claude Code, moteur de la page Agents).
     var companionOf: String?

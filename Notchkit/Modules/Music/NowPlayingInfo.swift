@@ -7,6 +7,9 @@ enum PlaybackCommand: Equatable, Sendable {
     case previousTrack
     /// Aller à cette position du morceau, en secondes (barre de lecture glissée).
     case seek(TimeInterval)
+    /// Lecture aléatoire, répétition : activées ou coupées par le lecteur.
+    case toggleShuffle
+    case toggleRepeat
 }
 
 /// Morceau en cours, quelle que soit la source qui l'a fourni.

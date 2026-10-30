@@ -19,7 +19,10 @@ final class MusicModule: NotchModule {
         systemImage: "music.note",
         category: .media,
         tier: .free,
-        defaultEnabled: true
+        defaultEnabled: true,
+        // Le lecteur n'est plus un widget à placer : il ouvre toujours l'encoche en première page.
+        providesWidget: false,
+        playerPage: true
     )
 
     private(set) var nowPlaying: NowPlayingInfo?

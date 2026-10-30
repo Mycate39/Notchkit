@@ -399,6 +399,11 @@ private struct ModuleDetailView: View {
                             LabeledContent("Emplacement", value: String(localized: "Page \(position.page + 1), position \(position.index + 1)"))
                         }
                     }
+                } else if descriptor.playerPage {
+                    Section {
+                        Text("Le lecteur ouvre toujours l'encoche en première page, même quand rien ne joue ; il ne se place pas dans la disposition.")
+                            .foregroundStyle(.secondary)
+                    }
                 } else {
                     Section {
                         Text("Ce module fonctionne en arrière-plan, sans carte dans l'encoche.")

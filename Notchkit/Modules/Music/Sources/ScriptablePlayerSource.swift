@@ -60,8 +60,14 @@ final class ScriptablePlayerSource {
         case .nextTrack: "next track"
         case .previousTrack: "previous track"
         case let .seek(position): "set player position to \(max(0, position))"
+        // Music et Spotify n'ont pas le même vocabulaire pour l'aléatoire et la répétition.
+        case .toggleShuffle: player.bundleIdentifier == "com.spotify.client"
+            ? "set shuffling to not shuffling" : "set shuffle enabled to not shuffle enabled"
+        case .toggleRepeat: player.bundleIdentifier == "com.spotify.client"
+            ? "set repeating to not repeating"
+            : "if song repeat is off then\nset song repeat to all\nelse\nset song repeat to off\nend if"
         }
-        let source = "tell application id \"\(player.bundleIdentifier)\" to \(verb)"
+        let source = "tell application id \"\(player.bundleIdentifier)\"\n\(verb)\nend tell"
         // AppleScript est bloquant : on l'exécute hors du thread principal.
         DispatchQueue.global(qos: .userInitiated).async {
             var error: NSDictionary?

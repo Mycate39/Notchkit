@@ -17,39 +17,39 @@ struct LayoutPreset: Identifiable, Sendable {
         LayoutPreset(
             id: "essential", name: "Essentiel", summary: "Musique, heure et batterie, rien de plus.",
             symbol: "circle.grid.2x1",
-            pages: [["music", "clock", "battery"]],
-            sizes: ["music": .large, "clock": .small, "battery": .small]
+            pages: [["clock", "battery"]],
+            sizes: ["clock": .small, "battery": .small]
         ),
         LayoutPreset(
             id: "music", name: "Musique", summary: "Lecture en grand, casque et volume à portée de main.",
             symbol: "music.note.list",
-            pages: [["music", "airpods", "systemhud"], ["shelf", "clock", "battery"]],
-            sizes: ["music": .large, "airpods": .small, "systemhud": .small, "shelf": .large, "clock": .mini, "battery": .mini]
+            pages: [["airpods", "systemhud"], ["shelf", "clock", "battery"]],
+            sizes: ["airpods": .small, "systemhud": .small, "shelf": .large, "clock": .mini, "battery": .mini]
         ),
         LayoutPreset(
             id: "productivity", name: "Productivité", summary: "Agenda, minuteurs, presse-papiers et étagère.",
             symbol: "calendar.badge.clock",
-            pages: [["calendar", "activities"], ["clipboard", "shelf"], ["weather", "clock", "battery", "music"]],
+            pages: [["calendar", "activities"], ["clipboard", "shelf"], ["weather", "clock", "battery"]],
             sizes: ["calendar": .large, "activities": .large, "clipboard": .large, "shelf": .large,
-                    "weather": .small, "clock": .mini, "battery": .mini, "music": .medium]
+                    "weather": .small, "clock": .mini, "battery": .mini]
         ),
         LayoutPreset(
             id: "developer", name: "Développeur", summary: "Agents IA, activités, presse-papiers et étagère.",
             symbol: "chevron.left.forwardslash.chevron.right",
-            pages: [["agents"], ["activities", "shelf"], ["clipboard", "music"], ["clock", "battery"]],
+            pages: [["agents"], ["activities", "shelf"], ["clipboard"], ["clock", "battery"]],
             sizes: ["agents": .large, "activities": .large, "clipboard": .large, "shelf": .large,
-                    "music": .large, "clock": .mini, "battery": .mini]
+                    "clock": .mini, "battery": .mini]
         ),
         LayoutPreset(
             id: "everything", name: "Tout-en-un", summary: "Tous les modules, en version Mini quand c'est possible.",
             symbol: "square.grid.3x3.fill",
             pages: [
-                ["music", "clock", "battery", "weather", "calendar"],
+                ["clock", "battery", "weather", "calendar"],
                 ["agents"],
                 ["activities", "shelf"],
                 ["clipboard", "airpods", "systemhud", "videodownload"],
             ],
-            sizes: ["music": .large, "clock": .mini, "battery": .mini, "weather": .mini, "calendar": .mini,
+            sizes: ["clock": .mini, "battery": .mini, "weather": .mini, "calendar": .mini,
                     "agents": .large, "activities": .large, "shelf": .large,
                     "clipboard": .medium, "airpods": .mini, "systemhud": .mini, "videodownload": .mini]
         ),

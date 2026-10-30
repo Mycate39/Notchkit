@@ -103,6 +103,7 @@ struct MusicExpandedView: View {
     let module: MusicModule
     @Environment(\.widgetSize) private var size
     @Environment(\.widgetOwnsNotchSize) private var ownsNotchSize
+    @AppStorage(MusicPlayerStyle.key) private var playerStyle = MusicPlayerStyle.large.rawValue
 
     /// Rien ne joue : le lecteur reste en place, vide, commandes grisées.
     private static var emptyInfo: NowPlayingInfo {
@@ -114,8 +115,8 @@ struct MusicExpandedView: View {
         let isEmpty = module.nowPlaying == nil
         Group {
             if ownsNotchSize {
-                // Seul sur sa page en mode verre : l'encoche a la taille du lecteur de l'iPhone.
-                playerLayout(info, isEmpty: isEmpty)
+                // Seul sur sa page : l'encoche s'ouvre en petit lecteur serré autour de la caméra.
+                compactPlayerLayout(info, isEmpty: isEmpty)
             } else if size == .small {
                 // Petit widget : pochette, titre et commandes empilés. Du plus complet au plus serré,
                 // selon la hauteur de la carte (taille de l'encoche).
@@ -142,7 +143,70 @@ struct MusicExpandedView: View {
         }
     }
 
-    /// Lecteur de l'iPhone (encoche à la taille `NotchLayout.glassMusicPlayerSize`) : grande pochette,
+    /// Petit lecteur (encoche à la taille `NotchLayout.musicPlayerSize`), sur trois lignes : petite
+    /// pochette, titre et artiste, barres de son ; barre de lecture fine entre ses deux temps ;
+    /// aléatoire, précédent, lecture, suivant et répétition.
+    private func compactPlayerLayout(_ info: NowPlayingInfo, isEmpty: Bool) -> some View {
+        // Mêmes éléments aux deux tailles, à l'échelle du réglage (`MusicPlayerStyle.scale`).
+        let k = (MusicPlayerStyle(rawValue: playerStyle) ?? .large).scale
+        return VStack(spacing: 7 * k) {
+            HStack(spacing: 8 * k) {
+                Button { module.openPlayerApp() } label: {
+                    ArtworkView(info: info, size: 26 * k, cornerRadius: 6 * k)
+                }
+                .buttonStyle(.notch)
+                .disabled(isEmpty)
+                .help("Ouvrir l'app qui joue")
+
+                VStack(alignment: .leading, spacing: 0) {
+                    Text(info.title)
+                        .font(.system(size: 11 * k, weight: .semibold))
+                    if let artist = info.artist {
+                        Text(artist)
+                            .font(.system(size: 10 * k, weight: .medium))
+                            .foregroundStyle(.white.opacity(0.55))
+                    }
+                }
+                .lineLimit(1)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .animation(.smooth, value: info.title)
+
+                EqualizerView(isAnimating: info.isPlaying, monitor: module.reactiveEqualizer ? module.spectrum : nil,
+                              color: ArtworkTint.color(for: info), spacingRatio: 1, bellShaped: true)
+                    .frame(width: 18 * k, height: 12 * k)
+            }
+
+            if info.duration != nil {
+                PlaybackProgressView(info: info, fontSize: 10 * k, barHeight: 3 * k) { module.send(.seek($0)) }
+            }
+
+            HStack(spacing: 0) {
+                modeButton("shuffle", scale: k, help: "Lecture aléatoire") { module.send(.toggleShuffle) }
+                Spacer(minLength: 4)
+                PlaybackControls(module: module, isPlaying: info.isPlaying, spacing: 22 * k,
+                                 glyphs: (side: 15 * k, main: 19 * k))
+                Spacer(minLength: 4)
+                modeButton("repeat", scale: k, help: "Répéter") { module.send(.toggleRepeat) }
+            }
+            .inactive(isEmpty)
+        }
+    }
+
+    private func modeButton(_ symbol: String, scale k: CGFloat, help: LocalizedStringKey,
+                            action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: symbol)
+                .font(.system(size: 12 * k, weight: .semibold))
+                .foregroundStyle(.white.opacity(0.7))
+                .frame(width: 22 * k, height: 22 * k)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(GlyphButtonStyle())
+        .help(help)
+        .accessibilityLabel(Text(help))
+    }
+
+    /// Lecteur de l'iPhone (ancienne présentation en grand, 440 × 222 pt) : grande pochette,
     /// titre et artiste en gros, barre et temps lisibles, gros glyphes largement espacés.
     private func playerLayout(_ info: NowPlayingInfo, isEmpty: Bool) -> some View {
         VStack(spacing: 0) {
@@ -501,6 +565,7 @@ struct MusicSettingsView: View {
         VStack(alignment: .leading, spacing: 6) {
             Toggle("Afficher le morceau quand l'encoche est repliée", isOn: $module.showInCompact)
             Toggle("Afficher l'icône de l'app sur la pochette", isOn: $module.showAppBadge)
+            MusicPlayerStyleSetting()
             LockScreenPlayerSetting()
             Toggle("Barres réactives au son (temps réel)", isOn: $module.reactiveEqualizer)
             Text("Analyse le son joué par le Mac pour animer les barres. macOS demande l'autorisation « Enregistrement audio du système » et affiche un indicateur pendant l'écoute. Le son n'est ni enregistré ni envoyé.")
@@ -582,5 +647,17 @@ struct MusicMiniView: View {
                 LineGlyph(shape: MusicNoteShape())
             }
         }
+    }
+}
+
+/// Taille du petit lecteur ouvert sur la page de la musique seule.
+struct MusicPlayerStyleSetting: View {
+    @AppStorage(MusicPlayerStyle.key) private var style = MusicPlayerStyle.large.rawValue
+
+    var body: some View {
+        Picker("Taille du lecteur", selection: $style) {
+            ForEach(MusicPlayerStyle.allCases) { Text($0.title).tag($0.rawValue) }
+        }
+        .pickerStyle(.segmented)
     }
 }

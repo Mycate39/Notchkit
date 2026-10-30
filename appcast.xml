@@ -3,6 +3,20 @@
   <channel>
     <title>Notchkit</title>
     <item>
+      <title>Notchkit 3.0.0-beta.6</title>
+      <pubDate>Fri, 30 Oct 2026 22:25:51 GMT</pubDate>
+      <sparkle:version>31</sparkle:version>
+      <sparkle:shortVersionString>3.0.0-beta.6</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <sparkle:channel>beta</sparkle:channel>
+      <link>https://github.com/Mycate39/Notchkit/releases/tag/v3.0.0-beta.6</link>
+      <sparkle:informationalUpdate>
+        <sparkle:belowVersion>12</sparkle:belowVersion>
+      </sparkle:informationalUpdate>
+      <description><![CDATA[<p>Sixth beta of Notchkit 3.0. If you have *Receive beta versions* on, it arrives through *Check for Updates…*.</p><h3>Fixed</h3><ul><li><b>Sharp glass</b>: the notch now shows macOS&#x27;s Liquid Glass as soon as it opens, instead of a dull blur until you clicked it. While the notch is open it receives the keyboard, then gives it back to your app when it closes.</li><li><b>Settings always in front</b>: Settings and the welcome tour now open in front and focused, on the current Space, whether you open them from the menu bar or from the notch&#x27;s gear. While one of them is open, Notchkit shows an icon in the Dock.</li><li><b>Settings no longer greyed out</b>: after clicking the notch&#x27;s gear, the Settings window stays the active window.</li></ul><h3>Known issue</h3><ul><li>When you swipe between Spaces with the trackpad, macOS freezes the notch for about a second, then the animation resumes.</li></ul><h3>Install</h3><p>Download the DMG, drag Notchkit to Applications, then open it. The app is not notarized: the first time, right-click it and choose *Open*, or go to *System Settings &gt; Privacy &amp; Security* and click *Open Anyway*.</p><p>Please report anything odd in the *Issues* tab.</p>]]></description>
+      <enclosure url="https://github.com/Mycate39/Notchkit/releases/download/v3.0.0-beta.6/Notchkit-3.0.0-beta.6.dmg" sparkle:edSignature="KhVnPs6UzmQSB5BJnkk6VV6PeKz+ILW1I7/K8KY/msI4hK2w8eV6CwCXX9Aj5lB8NAALu3XXEy56DBbzhoINCw==" length="11638430" type="application/octet-stream"/>
+    </item>
+    <item>
       <title>Notchkit 3.0.0-beta.5</title>
       <pubDate>Fri, 30 Oct 2026 16:06:51 GMT</pubDate>
       <sparkle:version>30</sparkle:version>

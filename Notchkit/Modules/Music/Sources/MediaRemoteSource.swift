@@ -79,6 +79,8 @@ final class MediaRemoteSource {
         case .togglePlayPause: ["send", "2"]
         case .nextTrack: ["send", "4"]
         case .previousTrack: ["send", "5"]
+        case .toggleShuffle: ["send", "6"]
+        case .toggleRepeat: ["send", "7"]
         case let .seek(position): ["seek", String(Int(max(0, position) * 1_000_000))]
         }
         let task = Process()

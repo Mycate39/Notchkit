@@ -373,6 +373,11 @@ private struct ExpandedNotchView: View {
             header(ear: ear)
                 .frame(height: max(viewModel.geometry.closedSize.height, 28))
                 .padding(.horizontal, ear + 18)
+                // Petit lecteur de la musique : rien à côté de la caméra, comme sur l'iPhone (les réglages
+                // restent dans la barre des menus et au clic droit).
+                .opacity(isOnMusicPlayer ? 0 : 1)
+                .allowsHitTesting(!isOnMusicPlayer)
+                .animation(NotchLayout.spring, value: isOnMusicPlayer)
 
             Group {
                 if viewModel.isDropMode {
@@ -408,6 +413,13 @@ private struct ExpandedNotchView: View {
 
     private var pages: [ModulePage] {
         ModulePage.pages(from: viewModel.manager)
+    }
+
+    /// Page affichée : la musique seule, présentée en petit lecteur.
+    private var isOnMusicPlayer: Bool {
+        let pages = pages
+        guard pages.indices.contains(viewModel.selectedPage) else { return false }
+        return NotchLayout.isMusicPlayerPage(moduleIDs: pages[viewModel.selectedPage].modules.map(\.id), glass: false)
     }
 
     private func header(ear: CGFloat) -> some View {

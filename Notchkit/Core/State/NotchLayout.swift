@@ -274,19 +274,20 @@ enum NotchLayout {
     /// grands coins en bas, comme le lecteur de l'iPhone. Le fond noir garde son contour.
     static let glassEarRadius: CGFloat = 20
     static let glassCornerRadius: CGFloat = 36
-    /// Fond « Verre » : une page qui ne contient que la musique ouvre l'encoche à la taille du lecteur
-    /// de l'iPhone (deux fois plus large que haute) ; elle s'agrandit en passant à une autre page.
-    static let glassMusicPlayerSize = CGSize(width: 440, height: largeExpandedHeight)
+    /// Page qui ne contient que la musique : l'encoche s'ouvre en petit lecteur serré autour de la caméra
+    /// (pochette, titre, barre et commandes sur trois lignes), avec les deux fonds ; elle s'agrandit en
+    /// passant à une autre page.
+    static var musicPlayerSize: CGSize { MusicPlayerStyle.current.size }
 
-    /// Page qui ne contient que la musique, en mode verre : présentée en lecteur (`glassMusicPlayerSize`).
+    /// Page qui ne contient que la musique : présentée en petit lecteur (`musicPlayerSize`).
     static func isMusicPlayerPage(moduleIDs: [String], glass: Bool) -> Bool {
-        glass && moduleIDs == ["music"]
+        moduleIDs == ["music"]
     }
 
     /// Taille de l'encoche ouverte pour une page : lecteur pour la musique seule en mode verre, page
     /// pleine pour un widget pleine page (Agents), sinon d'après la largeur de ses colonnes de widgets.
     static func pageSize(moduleIDs: [String], sizes: [WidgetSize], fullPage: Bool, glass: Bool) -> CGSize {
-        if isMusicPlayerPage(moduleIDs: moduleIDs, glass: glass) { return glassMusicPlayerSize }
+        if isMusicPlayerPage(moduleIDs: moduleIDs, glass: glass) { return musicPlayerSize }
         let height = expandedHeight(sizes: sizes)
         if fullPage {
             return expandedSize(columnWeights: Array(repeating: 1, count: Int(pageCapacity)), glass: glass, height: height)
@@ -468,5 +469,41 @@ enum NotchLayout {
             let radius = isExpanded ? expandedCornerRadius : height / 2
             return (radius, radius)
         }
+    }
+}
+
+/// Taille du petit lecteur de la musique (Réglages > Widgets > Musique) : grand par défaut.
+enum MusicPlayerStyle: String, CaseIterable, Identifiable, Sendable {
+    case compact, large
+    var id: String { rawValue }
+
+    static let key = "module.music.playerStyle"
+
+    var title: LocalizedStringResource {
+        switch self {
+        case .compact: "Compact"
+        case .large: "Grand"
+        }
+    }
+
+    /// Échelle des éléments du lecteur (pochette, textes, boutons) par rapport à ses dimensions de base.
+    var scale: CGFloat {
+        switch self {
+        case .compact: 1.2
+        case .large: 1.44
+        }
+    }
+
+    /// Taille de l'encoche ouverte sur le lecteur.
+    var size: CGSize {
+        switch self {
+        case .compact: CGSize(width: 384, height: 168)
+        case .large: CGSize(width: 456, height: 200)
+        }
+    }
+
+    /// Réglage enregistré (lu sur le thread principal).
+    static var current: MusicPlayerStyle {
+        UserDefaults.standard.string(forKey: key).flatMap(MusicPlayerStyle.init(rawValue:)) ?? .large
     }
 }

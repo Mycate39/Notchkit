@@ -239,6 +239,15 @@ final class NotchWindowController {
             self?.applyPanelSize()
         })
 
+        // Encoche ouverte : fenêtre clé, pour que le Liquid Glass ait son rendu net (macOS ne l'affiche
+        // ainsi que dans la fenêtre clé ; sinon flou terne jusqu'à un clic). Le clavier va à l'encoche
+        // tant qu'elle est ouverte, puis revient à la fenêtre qui l'avait (choix du propriétaire, 30/10/2026).
+        trackChanges(of: { [weak self] in
+            _ = self?.viewModel.isExpanded
+        }, perform: { [weak self] in
+            self?.updateKeyStatus()
+        })
+
         // Plein écran : l'indicateur de volume et de luminosité apparaît quand même.
         trackChanges(of: { [weak self] in
             _ = self?.viewModel.currentAlert?.id
@@ -253,6 +262,19 @@ final class NotchWindowController {
         }, perform: { [weak self] in
             self?.updateLockScreenMedia()
         })
+    }
+
+    private func updateKeyStatus() {
+        if viewModel.isExpanded, !viewModel.isScreenLocked {
+            if !panel.isKeyWindow { panel.makeKey() }
+        } else if panel.isKeyWindow {
+            panel.resignKey()
+            // Notchkit au premier plan (réglages ouverts) : la fenêtre de devant reprend le clavier.
+            if NSApp.isActive,
+               let window = NSApp.orderedWindows.first(where: { $0 !== panel && $0.isVisible && $0.canBecomeKey }) {
+                window.makeKey()
+            }
+        }
     }
 
     private func updateLockScreenMedia() {

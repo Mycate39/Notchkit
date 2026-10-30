@@ -15,9 +15,6 @@ final class NotchPanel: NSPanel {
             defer: false
         )
         isFloatingPanel = true
-        // Fenêtre clé seulement pour un champ de texte (traducteur, notes) : un clic sur un bouton (roue
-        // dentée) la rendait clé, et la fenêtre des réglages ouverte ensuite restait grisée.
-        becomesKeyOnlyIfNeeded = true
         level = Self.normalLevel
         collectionBehavior = [.canJoinAllSpaces, .stationary, .fullScreenAuxiliary, .ignoresCycle]
         backgroundColor = .clear
@@ -36,7 +33,9 @@ final class NotchPanel: NSPanel {
     /// Niveau à l'écran verrouillé : au-dessus du « bouclier » qui masque les fenêtres pendant le verrouillage.
     static let lockedLevel = NSWindow.Level(rawValue: Int(CGShieldingWindowLevel()) + 1)
 
-    // Peut devenir « key » (utile plus tard pour les champs de texte), jamais fenêtre principale.
+    // Peut devenir « key » (champs de texte), jamais fenêtre principale. Ne pas poser
+    // `becomesKeyOnlyIfNeeded` : le Liquid Glass n'a son rendu net que si le panneau est la fenêtre
+    // clé, et c'est le clic dans l'encoche qui la rend clé (essayé le 30/10/2026 : verre flou même au clic).
     override var canBecomeKey: Bool { true }
     override var canBecomeMain: Bool { false }
 

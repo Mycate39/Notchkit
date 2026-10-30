@@ -26,7 +26,8 @@ OUT = os.path.join(ROOT, "build.noindex", "visual-matrix")
 APP = os.path.join(ROOT, "build.noindex/DerivedData/Build/Products/Debug/Notchkit.app/Contents/MacOS/Notchkit")
 
 # Widgets de la disposition (la webcam est écartée : elle allumerait la caméra pendant le tournage).
-WIDGETS = ["music", "clock", "battery", "calendar", "weather", "activities", "clipboard", "shelf", "screenshots",
+# La musique n'est plus un widget (30/10/2026) : son lecteur est toujours la première page.
+WIDGETS = ["clock", "battery", "calendar", "weather", "activities", "clipboard", "shelf", "screenshots",
            "converter", "toggles", "dayprogress", "notes", "todo", "sysmon", "dashboard", "screentime", "health",
            "translation", "airpods", "systemhud", "videodownload"]
 SIZES = ["mini", "small", "medium", "large"]
@@ -80,15 +81,17 @@ def scenario(notch, only=None, glass=False):
         combo("mix/" + "+".join(f"{w}:{sizes[w]}" for w in chosen), [chosen], sizes)
 
     # 3. Styles d'animation, sur trois pages.
-    pages = [["music", "weather", "calendar"], ["activities", "sysmon"], ["agents"]]
+    # Pages de la disposition, après le lecteur de musique (première page).
+    pages = [["weather", "calendar"], ["activities", "sysmon"], ["agents"]]
     for anim in [] if only or glass else ANIMATIONS:
         add(t, "settings.animation", value=anim)
-        add(t + 0.1, "settings.layout", pages=pages, sizes={"music": "medium"})
+        add(t + 0.1, "settings.layout", pages=pages, sizes={"weather": "medium"})
         start = t + 0.5
         add(start, "expand", module="music")
         add(start + 1.3, "page", page=1)
         add(start + 2.3, "page", page=2)
-        add(start + 3.3, "page", page=0)
+        add(start + 3.3, "page", page=3)
+        add(start + 3.8, "page", page=0)
         add(start + 4.3, "collapse")
         add(start + 5.3, "bubble.hover")
         add(start + 6.6, "bubble.leave")
@@ -97,7 +100,7 @@ def scenario(notch, only=None, glass=False):
         marks.append({"label": f"anim/{anim}", "start": round(start, 2), "end": round(start + 12.4, 2)})
         t = start + 12.9
     add(t, "end")
-    setup = dict(NOTCHES[notch], modules=WIDGETS + OTHER_MODULES, pages=[["music"]])
+    setup = dict(NOTCHES[notch], modules=WIDGETS + OTHER_MODULES + ["music"], pages=[["clock"]])
     if glass:
         setup["background"] = "glass"
     return {"duration": round(t + 0.5, 2), "region": {"width": 1100, "height": 360}, "fps": 60,

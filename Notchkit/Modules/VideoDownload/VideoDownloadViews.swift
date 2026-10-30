@@ -184,13 +184,19 @@ private struct DownloadRow: View {
             .frame(width: 24, height: 24)
 
             VStack(alignment: .leading, spacing: 1) {
+                // Carte étroite : titre sur deux lignes et sous-titre réduit au pourcentage, plutôt que
+                // « Notchk… » et « 1080p… ».
                 Text(download.title)
                     .font(.system(size: 10, weight: .semibold))
-                    .lineLimit(1)
-                Text(subtitle)
-                    .font(.system(size: 10, weight: .medium).monospacedDigit())
-                    .foregroundStyle(isError ? .red : .white.opacity(0.55))
-                    .lineLimit(1)
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
+                ViewThatFits(in: .horizontal) {
+                    ForEach(subtitles, id: \.self) { text in
+                        Text(text).fixedSize()
+                    }
+                }
+                .font(.system(size: 10, weight: .medium).monospacedDigit())
+                .foregroundStyle(isError ? .red : .white.opacity(0.55))
             }
             Spacer(minLength: 4)
             if download.isRunning {
@@ -221,12 +227,20 @@ private struct DownloadRow: View {
         return false
     }
 
+    /// Sous-titres du plus complet au plus court ; le premier qui tient est affiché.
+    private var subtitles: [String] {
+        guard case .running = download.state else { return [subtitle] }
+        let percent = download.progress.formatted(.percent.precision(.fractionLength(0)))
+        let height = download.height.map(YTDLP.label(height:))
+        let detail = download.detail.isEmpty ? nil : download.detail
+        return [[height, percent, detail], [height, percent], [percent]]
+            .map { $0.compactMap { $0 }.joined(separator: " · ") }
+    }
+
     private var subtitle: String {
         switch download.state {
         case .running:
-            let percent = download.progress.formatted(.percent.precision(.fractionLength(0)))
-            let parts = [download.height.map(YTDLP.label(height:)), percent, download.detail.isEmpty ? nil : download.detail]
-            return parts.compactMap { $0 }.joined(separator: " · ")
+            return subtitles[0]
         case .finished:
             // Note éventuelle (conversion impossible), sinon « Terminé » et la résolution.
             if !download.detail.isEmpty { return download.detail }

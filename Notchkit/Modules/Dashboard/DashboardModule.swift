@@ -129,13 +129,17 @@ struct DashboardExpandedView: View {
     private func gauge(_ symbol: String, _ title: String, _ value: Double) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             HStack {
-                Label(title, systemImage: symbol)
+                // Nom de la jauge, ou son icône seule si la place manque (« Proce… »).
+                ViewThatFits(in: .horizontal) {
+                    Label(title, systemImage: symbol).fixedSize()
+                    Image(systemName: symbol).accessibilityLabel(Text(title))
+                }
+                .help(title)
                 Spacer(minLength: 4)
-                Text(SystemFormat.percent(value)).monospacedDigit()
+                Text(SystemFormat.percent(value)).monospacedDigit().fixedSize()
             }
             .font(.system(size: 10, weight: .medium))
             .foregroundStyle(.white.opacity(0.7))
-            .lineLimit(1)
             StandByBar(value: value, height: 4)
         }
     }

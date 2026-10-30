@@ -51,6 +51,20 @@ struct CalendarScheduleTests {
     }
 }
 
+/// Ligne de détail de la météo : raccourcie plutôt que coupée sur une carte étroite.
+struct WeatherDetailLineTests {
+    @Test @MainActor func versionsDeLaPlusCompleteALaPlusCourte() {
+        let lines = WeatherExpandedView.detailLines(name: "Paris", high: 24, low: 14, rain: 5)
+        #expect(lines.count == 5)
+        #expect(lines.first?.contains("Paris") == true && lines.first?.contains("5 %") == true)
+        #expect(lines.last == "Paris")
+        // Sans pluie, pas de doublon.
+        let dry = WeatherExpandedView.detailLines(name: "Paris", high: 24, low: 14, rain: 0)
+        #expect(dry.count == Set(dry).count)
+        #expect(!dry.contains { $0.contains("☂︎") })
+    }
+}
+
 struct WeatherDecodingTests {
     let json = """
     {"utc_offset_seconds":7200,

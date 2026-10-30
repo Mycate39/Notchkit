@@ -111,7 +111,8 @@ private struct ShelfItemView: View {
                 .truncationMode(.middle)
                 .foregroundStyle(url == nil ? .white.opacity(0.4) : .white.opacity(0.85))
         }
-        .frame(width: compact ? 52 : 64)
+        // Même largeur en petit : à 52 pt, un nom court était déjà coupé (« Moc….pdf »).
+        .frame(width: 64)
         .padding(4)
         .contentShape(RoundedRectangle(cornerRadius: 8))
         .help(url == nil ? "Fichier introuvable (déplacé ou supprimé)" : "Glissez pour récupérer le fichier · double-clic pour l'ouvrir")

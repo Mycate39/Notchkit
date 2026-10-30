@@ -47,10 +47,14 @@ struct WeatherExpandedView: View {
             .minimumScaleFactor(0.8)
 
             if detail {
-                Text(detailLine(snapshot))
-                    .font(.system(size: 10))
-                    .foregroundStyle(.white.opacity(0.55))
-                    .lineLimit(1)
+                // Ligne raccourcie plutôt que coupée (« ↓14°C ·… ») sur une carte étroite.
+                ViewThatFits(in: .horizontal) {
+                    ForEach(detailLines(snapshot), id: \.self) { line in
+                        Text(line).fixedSize()
+                    }
+                }
+                .font(.system(size: 10))
+                .foregroundStyle(.white.opacity(0.55))
             }
 
             if hours {
@@ -75,17 +79,23 @@ struct WeatherExpandedView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    /// Ex. « Villers-les-Bois · ↑24° ↓11° · 💧20 % ».
-    private func detailLine(_ snapshot: WeatherSnapshot) -> String {
-        var parts: [String] = []
-        if let name = snapshot.locationName { parts.append(name) }
-        if let high = snapshot.high, let low = snapshot.low {
-            parts.append("↑\(TemperatureFormat.string(high)) ↓\(TemperatureFormat.string(low))")
+    /// Ex. « Villers-les-Bois · ↑24° ↓11° · ☂︎ 20 % », puis des versions plus courtes : sans la pluie,
+    /// sans la ville, températures seules (fonction pure, testée).
+    static func detailLines(name: String?, high: Double?, low: Double?, rain: Int?) -> [String] {
+        let range = high.flatMap { high in low.map { "↑\(TemperatureFormat.string(high)) ↓\(TemperatureFormat.string($0))" } }
+        let rainText = rain.flatMap { $0 > 0 ? "☂︎ \($0) %" : nil }
+        let variants: [[String?]] = [[name, range, rainText], [name, range], [range, rainText], [range], [name]]
+        var lines: [String] = []
+        for parts in variants {
+            let line = parts.compactMap { $0 }.joined(separator: " · ")
+            if !line.isEmpty, !lines.contains(line) { lines.append(line) }
         }
-        if let rain = snapshot.precipitationChance, rain > 0 {
-            parts.append("☂︎ \(rain) %")
-        }
-        return parts.joined(separator: " · ")
+        return lines
+    }
+
+    private func detailLines(_ snapshot: WeatherSnapshot) -> [String] {
+        Self.detailLines(name: snapshot.locationName, high: snapshot.high, low: snapshot.low,
+                         rain: snapshot.precipitationChance)
     }
 
     @ViewBuilder

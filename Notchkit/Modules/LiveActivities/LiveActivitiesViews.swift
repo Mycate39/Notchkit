@@ -204,44 +204,17 @@ private struct TimerHeroView: View {
     let compact: Bool
 
     var body: some View {
-        HStack(spacing: compact ? 8 : 14) {
-            HStack(spacing: 8) {
-                if timer.isFinished {
-                    RoundButton(symbol: "arrow.counterclockwise", isActive: true, compact: compact) {
-                        module.remove(timer.id)
-                        module.startTimer(seconds: timer.duration, title: timer.title)
-                    }
-                    .help("Relancer")
-                } else {
-                    RoundButton(symbol: timer.isPaused ? "play.fill" : "pause.fill", isActive: true, compact: compact) {
-                        module.togglePause(timer.id)
-                    }
-                    .help(timer.isPaused ? "Reprendre" : "Pause")
-                }
-                RoundButton(symbol: "xmark", isActive: false, compact: compact) {
-                    module.remove(timer.id)
-                }
-                .help("Arrêter")
+        // Carte étroite (Petit, à côté d'autres widgets) : le décompte passe au-dessus des boutons au
+        // lieu d'être coupé (« 20… »).
+        ViewThatFits(in: .horizontal) {
+            HStack(spacing: compact ? 8 : 14) {
+                buttons
+                Spacer(minLength: 0)
+                countdown(alignment: .trailing)
             }
-
-            Spacer(minLength: 0)
-
-            VStack(alignment: .trailing, spacing: 0) {
-                Text(timer.isFinished ? "Terminé" : (timer.isPaused ? "En pause" : "Minuteur"))
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(.tint)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.7)
-                TimelineView(.periodic(from: .now, by: 1)) { context in
-                    Text(LiveActivityFormat.countdown(timer.remaining(at: context.date) ?? 0))
-                        .font(.system(size: compact ? 28 : 40, weight: .regular, design: .rounded))
-                        .monospacedDigit()
-                        .foregroundStyle(.tint.opacity(timer.isPaused ? 0.6 : 1))
-                        .contentTransition(.numericText(countsDown: true))
-                        .animation(.snappy, value: timer.remaining(at: context.date))
-                }
-                .lineLimit(1)
-                .minimumScaleFactor(0.6)
+            VStack(spacing: 6) {
+                countdown(alignment: .center)
+                buttons
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -249,6 +222,46 @@ private struct TimerHeroView: View {
             Button("Ajouter une minute") { module.extend(timer.id, by: 60) }
             Button("Ajouter cinq minutes") { module.extend(timer.id, by: 300) }
         }
+    }
+
+    private var buttons: some View {
+        HStack(spacing: 8) {
+            if timer.isFinished {
+                RoundButton(symbol: "arrow.counterclockwise", isActive: true, compact: compact) {
+                    module.remove(timer.id)
+                    module.startTimer(seconds: timer.duration, title: timer.title)
+                }
+                .help("Relancer")
+            } else {
+                RoundButton(symbol: timer.isPaused ? "play.fill" : "pause.fill", isActive: true, compact: compact) {
+                    module.togglePause(timer.id)
+                }
+                .help(timer.isPaused ? "Reprendre" : "Pause")
+            }
+            RoundButton(symbol: "xmark", isActive: false, compact: compact) {
+                module.remove(timer.id)
+            }
+            .help("Arrêter")
+        }
+    }
+
+    /// Titre et décompte, à leur taille naturelle (jamais coupés).
+    private func countdown(alignment: HorizontalAlignment) -> some View {
+        VStack(alignment: alignment, spacing: 0) {
+            Text(timer.isFinished ? "Terminé" : (timer.isPaused ? "En pause" : "Minuteur"))
+                .font(.system(size: 11, weight: .semibold))
+                .foregroundStyle(.tint)
+            TimelineView(.periodic(from: .now, by: 1)) { context in
+                Text(LiveActivityFormat.countdown(timer.remaining(at: context.date) ?? 0))
+                    .font(.system(size: compact ? 28 : 40, weight: .regular, design: .rounded))
+                    .monospacedDigit()
+                    .foregroundStyle(.tint.opacity(timer.isPaused ? 0.6 : 1))
+                    .contentTransition(.numericText(countsDown: true))
+                    .animation(.snappy, value: timer.remaining(at: context.date))
+            }
+        }
+        .lineLimit(1)
+        .fixedSize()
     }
 }
 

@@ -100,9 +100,10 @@ private struct EventRow: View {
                 .fill(event.color)
                 .frame(width: 3)
             VStack(alignment: .leading, spacing: 1) {
+                // Deux lignes : sur une carte étroite, « Déjeuner avec… » perdait la fin du titre.
                 Text(event.title)
                     .font(.system(size: 12, weight: .semibold))
-                    .lineLimit(1)
+                    .lineLimit(2)
                 Text(timeDescription)
                     .font(.system(size: 10))
                     .foregroundStyle(event.isOngoing(at: now) ? event.color : .white.opacity(0.55))

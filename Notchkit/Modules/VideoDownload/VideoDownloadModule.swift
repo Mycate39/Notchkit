@@ -498,7 +498,8 @@ extension VideoDownloadModule {
     func debugProgress(_ id: UUID, _ progress: Double) {
         guard let index = downloads.firstIndex(where: { $0.id == id }) else { return }
         downloads[index].progress = min(1, progress)
-        downloads[index].detail = "\(Int(min(1, progress) * 100)) %"
+        // Comme yt-dlp : vitesse et temps restant (le pourcentage est affiché à part).
+        downloads[index].detail = "4.2MiB/s · \(String(localized: "reste")) 00:\(String(format: "%02d", Int((1 - min(1, progress)) * 40)))"
         if progress >= 1 { downloads[index].state = .finished(path: nil) }
     }
 }

@@ -45,9 +45,14 @@ struct ScreenshotsExpandedView: View {
 
     private var header: some View {
         HStack(spacing: 8) {
-            Text("Captures d'écran")
-                .font(.system(size: 12, weight: .semibold))
-                .lineLimit(1)
+            // Carte étroite : titre raccourci, puis icône seule, plutôt que « Ca… ».
+            ViewThatFits(in: .horizontal) {
+                Text("Captures d'écran").fixedSize()
+                Text("Captures").fixedSize()
+                Image(systemName: "camera.viewfinder")
+                    .accessibilityLabel(Text("Captures d'écran"))
+            }
+            .font(.system(size: 12, weight: .semibold))
             if !module.items.isEmpty {
                 Text("\(module.items.count)")
                     .font(.system(size: 10, weight: .semibold).monospacedDigit())

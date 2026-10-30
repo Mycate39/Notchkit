@@ -100,9 +100,11 @@ private struct TodoRow: View {
             .help("Marquer comme fait")
             .accessibilityLabel(Text("Marquer comme fait"))
             VStack(alignment: .leading, spacing: 1) {
+                // Deux lignes plutôt qu'un titre coupé (« Tourner la vidéo de lance… »).
                 Text(item.title)
                     .font(.system(size: 11, weight: .medium))
-                    .lineLimit(1)
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
                 if let due = item.due {
                     Text(due, format: .dateTime.weekday(.abbreviated).day().hour().minute())
                         .font(.system(size: 10, weight: .medium))

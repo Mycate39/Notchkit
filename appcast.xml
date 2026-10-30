@@ -3,6 +3,20 @@
   <channel>
     <title>Notchkit</title>
     <item>
+      <title>Notchkit 3.0.0-beta.5</title>
+      <pubDate>Fri, 30 Oct 2026 16:06:51 GMT</pubDate>
+      <sparkle:version>30</sparkle:version>
+      <sparkle:shortVersionString>3.0.0-beta.5</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <sparkle:channel>beta</sparkle:channel>
+      <link>https://github.com/Mycate39/Notchkit/releases/tag/v3.0.0-beta.5</link>
+      <sparkle:informationalUpdate>
+        <sparkle:belowVersion>12</sparkle:belowVersion>
+      </sparkle:informationalUpdate>
+      <description><![CDATA[<p>Fifth beta of Notchkit 3.0. If you installed beta 4 with *Receive beta versions* on, it arrives through *Check for Updates…*.</p><h3>New</h3><ul><li><b>Music player as the first page</b>: the notch always opens on a compact, iPhone-style player — artwork, title, a draggable playback bar, shuffle, previous, play/pause, next and repeat — even when nothing is playing. Choose *Large* (default) or *Compact* in *Settings &gt; Widgets &gt; Music*. Music is no longer a widget in the layout.</li><li><b>Built-in translator</b>: the Translation widget now translates what you type, with automatic language detection, a language menu for each side, swap, copy and clear. It can still translate the current selection.</li><li><b>Move whole pages</b>: in the layout editor, drag a page by its handle (or use its arrows) to move it with all its widgets.</li></ul><h3>Improved</h3><ul><li><b>Black notch</b>: the open notch on the black background now has the same large rounded corners as the glass one, and keeps its outline.</li><li><b>Shelf and converter</b>: converted iPhone photos keep their orientation and metadata; SVG files convert; Markdown is laid out in PDF and Word; new FLAC output; long conversions show their progress and no longer freeze the notch. Dropping on *Convert* now opens the converter and stays open, unsupported files show an alert, and files dragged out of the notch keep their real name in the Finder. The shelf&#x27;s *Convert to* menu offers every format.</li><li><b>Settings</b>: each widget option has its own row, the window opens with the page title and remembers its size, the Appearance preview matches the real notch, and *About* shows the app icon and all third-party licenses.</li><li><b>Welcome tour</b>: rebuilt for 3.0, with demos that follow your background and show the music player, bubbles and widgets.</li><li><b>No more cut-off text</b>: every widget was checked in every size; the timer, weather, calendar, reminders, downloads, screenshots, shelf, dashboard and system monitor now fit their text instead of ending it with &quot;…&quot;.</li></ul><h3>Known issue</h3><ul><li>When you swipe between Spaces with the trackpad, macOS freezes the notch for about a second, then the animation resumes.</li></ul><h3>Install</h3><p>Download the DMG, drag Notchkit to Applications, then open it. The app is not notarized: the first time, right-click it and choose *Open*, or go to *System Settings &gt; Privacy &amp; Security* and click *Open Anyway*.</p><p>Please report anything odd in the *Issues* tab.</p>]]></description>
+      <enclosure url="https://github.com/Mycate39/Notchkit/releases/download/v3.0.0-beta.5/Notchkit-3.0.0-beta.5.dmg" sparkle:edSignature="0SMA2RKfukI2Saj/R6z1/6TE3VjCfDVeOuT6ul1AXONUy2ey0MpVgXHKvl2KZAbYna2aB9CrsYb/eoHNFNVJDg==" length="11633552" type="application/octet-stream"/>
+    </item>
+    <item>
       <title>Notchkit 3.0.0-beta.4</title>
       <pubDate>Thu, 29 Oct 2026 21:58:36 GMT</pubDate>
       <sparkle:version>29</sparkle:version>

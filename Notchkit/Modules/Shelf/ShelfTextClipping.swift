@@ -15,8 +15,23 @@ enum ShelfTextClipping {
             .replacingOccurrences(of: "/", with: "-")
             .replacingOccurrences(of: ":", with: "-")
             .trimmingCharacters(in: .whitespacesAndNewlines)
+            // Un nom qui commence par un point serait un fichier caché du Finder.
+            .drop(while: { $0 == "." || $0.isWhitespace })
         let base = cleaned.isEmpty ? String(localized: "Texte") : String(cleaned.prefix(maxLength))
         return base + ".txt"
+    }
+
+    /// Le fichier est un texte déposé, enregistré par Notchkit dans `folder` (fonction pure, testée).
+    static func isClipping(_ url: URL, in folder: URL = folder) -> Bool {
+        url.standardizedFileURL.deletingLastPathComponent().path == folder.standardizedFileURL.path
+    }
+
+    /// Efface les textes déposés parmi ces fichiers (ils ont quitté l'étagère) ; les autres fichiers
+    /// ne sont jamais touchés.
+    static func discard(_ urls: [URL]) {
+        for url in urls where isClipping(url) {
+            try? FileManager.default.removeItem(at: url)
+        }
     }
 
     static func save(_ text: String) -> URL? {

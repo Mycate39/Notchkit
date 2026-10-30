@@ -1,24 +1,8 @@
-import AVFoundation
 import Foundation
-import ImageIO
-import UniformTypeIdentifiers
 
-/// Actions sur les fichiers de l'étagère : ZIP, conversion d'images et de vidéos, copie vers
-/// iCloud Drive. Tout est fait sur le Mac, avec les outils du système (gratuit).
+/// Actions sur les fichiers de l'étagère : ZIP et copie vers iCloud Drive. Tout est fait sur le Mac,
+/// avec les outils du système (gratuit). Les conversions passent par `FileConverter`.
 enum FileActions {
-    enum ImageFormat: String, CaseIterable, Sendable {
-        case jpeg, png, heic
-        var type: UTType { switch self { case .jpeg: .jpeg; case .png: .png; case .heic: .heic } }
-        var fileExtension: String { switch self { case .jpeg: "jpg"; case .png: "png"; case .heic: "heic" } }
-    }
-
-    static func isImage(_ url: URL) -> Bool { type(of: url)?.conforms(to: .image) ?? false }
-    static func isVideo(_ url: URL) -> Bool { type(of: url)?.conforms(to: .movie) ?? false }
-
-    private static func type(of url: URL) -> UTType? {
-        (try? url.resourceValues(forKeys: [.contentTypeKey]))?.contentType ?? UTType(filenameExtension: url.pathExtension)
-    }
-
     /// Dossier de sortie : celui de l'original s'il est modifiable, sinon Téléchargements.
     static func outputFolder(for url: URL) -> URL {
         let folder = url.deletingLastPathComponent()
@@ -38,57 +22,69 @@ enum FileActions {
         return candidate
     }
 
+    /// Nom d'un fichier sans son extension ; un dossier garde son nom entier (« Projet.v2 »).
+    static func baseName(of url: URL) -> String {
+        let isFolder = (try? url.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory == true
+        return isFolder ? url.lastPathComponent : url.deletingPathExtension().lastPathComponent
+    }
+
+    /// Noms des fichiers dans l'archive : deux fichiers de même nom (venus de dossiers différents)
+    /// deviennent « Nom.ext » et « Nom 2.ext » (fonction pure, testée).
+    static func archiveNames(for urls: [URL]) -> [String] {
+        var taken = Set<String>()
+        return urls.map { url in
+            let ext = url.pathExtension
+            let base = ext.isEmpty ? url.lastPathComponent : url.deletingPathExtension().lastPathComponent
+            var name = url.lastPathComponent
+            var index = 2
+            // Le système de fichiers du Mac ne distingue pas les majuscules.
+            while taken.contains(name.lowercased()) {
+                name = ext.isEmpty ? "\(base) \(index)" : "\(base) \(index).\(ext)"
+                index += 1
+            }
+            taken.insert(name.lowercased())
+            return name
+        }
+    }
+
     /// Archive ZIP (outil `ditto` du Mac, comme « Compresser » dans le Finder).
     static func zip(_ urls: [URL]) async -> URL? {
         guard let first = urls.first else { return nil }
-        let base = urls.count == 1 ? first.deletingPathExtension().lastPathComponent : String(localized: "Archive")
+        let base = urls.count == 1 ? baseName(of: first) : String(localized: "Archive")
         let destination = uniqueURL(named: base, extension: "zip", in: outputFolder(for: first))
         return await Task.detached(priority: .userInitiated) { () -> URL? in
+            let manager = FileManager.default
+            var source = first
+            var staging: URL?
+            if urls.count > 1 {
+                // Plusieurs fichiers : rassemblés dans un dossier temporaire (copies instantanées sur APFS),
+                // puis archivés ensemble. Le dossier est effacé ensuite.
+                let parent = manager.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+                let folder = parent.appendingPathComponent(base)
+                staging = parent
+                do {
+                    try manager.createDirectory(at: folder, withIntermediateDirectories: true)
+                    for (url, name) in Swift.zip(urls, archiveNames(for: urls)) {
+                        try manager.copyItem(at: url, to: folder.appendingPathComponent(name))
+                    }
+                } catch {
+                    try? manager.removeItem(at: parent)
+                    return nil
+                }
+                source = folder
+            }
+            defer { if let staging { try? manager.removeItem(at: staging) } }
             let process = Process()
             process.executableURL = URL(fileURLWithPath: "/usr/bin/ditto")
-            if urls.count == 1 {
-                process.arguments = ["-c", "-k", "--sequesterRsrc", "--keepParent", first.path, destination.path]
-            } else {
-                // Plusieurs fichiers : copiés dans un dossier temporaire, puis archivés ensemble.
-                let staging = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
-                    .appendingPathComponent(base)
-                try? FileManager.default.createDirectory(at: staging, withIntermediateDirectories: true)
-                for url in urls { try? FileManager.default.copyItem(at: url, to: staging.appendingPathComponent(url.lastPathComponent)) }
-                process.arguments = ["-c", "-k", "--sequesterRsrc", "--keepParent", staging.path, destination.path]
-            }
+            process.arguments = ["-c", "-k", "--sequesterRsrc", "--keepParent", source.path, destination.path]
             do { try process.run() } catch { return nil }
             process.waitUntilExit()
-            return process.terminationStatus == 0 ? destination : nil
-        }.value
-    }
-
-    /// Conversion d'image (ImageIO).
-    static func convertImage(_ url: URL, to format: ImageFormat) async -> URL? {
-        let destination = uniqueURL(named: url.deletingPathExtension().lastPathComponent, extension: format.fileExtension,
-                                    in: outputFolder(for: url))
-        return await Task.detached(priority: .userInitiated) { () -> URL? in
-            guard let source = CGImageSourceCreateWithURL(url as CFURL, nil),
-                  let image = CGImageSourceCreateImageAtIndex(source, 0, nil),
-                  let output = CGImageDestinationCreateWithURL(destination as CFURL, format.type.identifier as CFString, 1, nil)
-            else { return nil }
-            let options = [kCGImageDestinationLossyCompressionQuality: 0.9] as CFDictionary
-            CGImageDestinationAddImage(output, image, options)
-            return CGImageDestinationFinalize(output) ? destination : nil
-        }.value
-    }
-
-    /// Conversion de vidéo en MP4 (H.264, AVFoundation).
-    static func convertVideoToMP4(_ url: URL) async -> URL? {
-        let destination = uniqueURL(named: url.deletingPathExtension().lastPathComponent, extension: "mp4",
-                                    in: outputFolder(for: url))
-        let asset = AVURLAsset(url: url)
-        guard let session = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetHighestQuality) else { return nil }
-        do {
-            try await session.export(to: destination, as: .mp4)
+            guard process.terminationStatus == 0 else {
+                try? manager.removeItem(at: destination)
+                return nil
+            }
             return destination
-        } catch {
-            return nil
-        }
+        }.value
     }
 
     /// Dossier « Notchkit » d'iCloud Drive (`nil` si iCloud Drive n'est pas activé).
@@ -105,8 +101,10 @@ enum FileActions {
         return await Task.detached(priority: .userInitiated) { () -> [URL] in
             try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
             return urls.compactMap { url in
-                let destination = uniqueURL(named: url.deletingPathExtension().lastPathComponent,
-                                            extension: url.pathExtension, in: folder)
+                // Un dossier garde son nom entier (pas d'extension à remettre).
+                let base = baseName(of: url)
+                let ext = base == url.lastPathComponent ? "" : url.pathExtension
+                let destination = uniqueURL(named: base, extension: ext, in: folder)
                 return (try? FileManager.default.copyItem(at: url, to: destination)) != nil ? destination : nil
             }
         }.value

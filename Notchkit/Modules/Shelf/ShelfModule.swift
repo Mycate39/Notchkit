@@ -22,7 +22,7 @@ final class ShelfModule: NotchModule {
     )
 
     /// Nombre maximal de fichiers conservés (les plus anciens sont retirés au-delà).
-    static let maxItems = 40
+    nonisolated static let maxItems = 40
     /// Temps laissé pour récupérer un fichier déposé, quand l'étagère se vide d'elle-même.
     nonisolated static let retention: TimeInterval = 5 * 60
 
@@ -88,10 +88,7 @@ final class ShelfModule: NotchModule {
         expiryTask = nil
         guard autoClear else { return }
         let gone = Set(Self.expired(items, at: Date()).map(\.id))
-        if !gone.isEmpty {
-            withAnimation(.snappy) { items.removeAll { gone.contains($0.id) } }
-            save()
-        }
+        if !gone.isEmpty { replaceItems(items.filter { !gone.contains($0.id) }) }
         guard let next = items.map({ $0.addedAt.addingTimeInterval(Self.retention) }).min() else { return }
         expiryTask = Task { [weak self] in
             try? await Task.sleep(for: .seconds(max(0.1, next.timeIntervalSinceNow)))
@@ -102,25 +99,39 @@ final class ShelfModule: NotchModule {
 
     // MARK: Actions
 
-    /// Ajoute des fichiers (les doublons sont ignorés). Renvoie le nombre de fichiers ajoutés.
+    /// Ajoute des fichiers. Un fichier déjà sur l'étagère, redéposé, repasse en tête avec 5 nouvelles
+    /// minutes. Renvoie le nombre de fichiers ajoutés ou remis en tête.
     @discardableResult
     func add(_ urls: [URL]) -> Int {
-        let existing = Set(items.compactMap { $0.resolvedURL()?.standardizedFileURL })
-        // Un fichier déjà récupéré, redéposé : de nouveau à récupérer.
-        let dropped = Set(urls.map(\.standardizedFileURL))
-        for item in items where item.resolvedURL().map({ dropped.contains($0.standardizedFileURL) }) == true {
-            takenIDs.remove(item.id)
-        }
-        let new = urls
-            .filter { !existing.contains($0.standardizedFileURL) }
-            .compactMap { ShelfItem(url: $0) }
-        guard !new.isEmpty else { return 0 }
-        withAnimation(.snappy) {
-            items = Array((new + items).prefix(Self.maxItems))
-        }
-        save()
+        let drop = Self.dropped(urls, onto: items, at: Date()) { $0.resolvedURL() }
+        guard drop.count > 0 else { return 0 }
+        replaceItems(drop.items)
+        // Fichier déjà récupéré, redéposé : de nouveau à récupérer.
+        takenIDs.subtract(drop.again)
         removeExpired()
-        return new.count
+        return drop.count
+    }
+
+    /// Étagère après un dépôt (fonction pure, testée) : les nouveaux fichiers en tête, puis ceux déjà
+    /// là et redéposés (date remise à `date`), puis les autres ; au plus `maxItems`. `again` : fichiers
+    /// redéposés ; `count` : nouveaux et redéposés.
+    nonisolated static func dropped(_ urls: [URL], onto items: [ShelfItem], at date: Date,
+                                    location: (ShelfItem) -> URL?) -> (items: [ShelfItem], again: Set<UUID>, count: Int) {
+        var existing: [URL: UUID] = [:]
+        for item in items { if let url = location(item)?.standardizedFileURL { existing[url] = item.id } }
+        var seen = Set<URL>()
+        var again = Set<UUID>()
+        var new: [ShelfItem] = []
+        for url in urls.map(\.standardizedFileURL) where seen.insert(url).inserted {
+            if let id = existing[url] {
+                again.insert(id)
+            } else if let item = ShelfItem(url: url, date: date) {
+                new.append(item)
+            }
+        }
+        let moved = items.filter { again.contains($0.id) }.map { $0.added(at: date) }
+        let rest = items.filter { !again.contains($0.id) }
+        return (Array((new + moved + rest).prefix(maxItems)), again, new.count + moved.count)
     }
 
     /// Le fichier vient d'être glissé hors de l'étagère : il est récupéré au relâchement de la souris
@@ -136,15 +147,26 @@ final class ShelfModule: NotchModule {
     }
 
     func remove(_ item: ShelfItem) {
-        withAnimation(.snappy) { items.removeAll { $0.id == item.id } }
-        save()
+        replaceItems(items.filter { $0.id != item.id })
         removeExpired()
     }
 
     func clear() {
-        withAnimation(.snappy) { items.removeAll() }
-        save()
+        replaceItems([])
         removeExpired()
+    }
+
+    /// Nouveau contenu de l'étagère. Les fichiers qui la quittent sont oubliés ; un texte déposé
+    /// (fichier créé par Notchkit, que personne d'autre ne connaît) est effacé avec eux.
+    private func replaceItems(_ newItems: [ShelfItem]) {
+        let kept = Set(newItems.map(\.id))
+        let leaving = items.filter { !kept.contains($0.id) }
+        withAnimation(.snappy) {
+            items = newItems
+            takenIDs.formIntersection(kept)
+        }
+        ShelfTextClipping.discard(leaving.compactMap { $0.resolvedURL() })
+        save()
     }
 
     func open(_ item: ShelfItem) {
@@ -182,14 +204,12 @@ final class ShelfModule: NotchModule {
         perform(symbol: "doc.zipper") { await FileActions.zip(items.compactMap { $0.resolvedURL() }).map { [$0] } ?? [] }
     }
 
-    func convertImage(_ item: ShelfItem, to format: FileActions.ImageFormat) {
+    /// Conversion par le moteur du convertisseur ; le fichier créé rejoint l'étagère.
+    func convert(_ item: ShelfItem, to format: ConversionFormat) {
         guard let url = item.resolvedURL() else { return }
-        perform(symbol: "photo") { await FileActions.convertImage(url, to: format).map { [$0] } ?? [] }
-    }
-
-    func convertVideo(_ item: ShelfItem) {
-        guard let url = item.resolvedURL() else { return }
-        perform(symbol: "film") { await FileActions.convertVideoToMP4(url).map { [$0] } ?? [] }
+        perform(symbol: ConversionKind.of(url)?.symbol ?? "arrow.triangle.2.circlepath") {
+            (try? await FileConverter.convert(url, to: format)).map { [$0] } ?? []
+        }
     }
 
     func copyToICloud(_ items: [ShelfItem]) {

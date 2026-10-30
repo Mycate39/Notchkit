@@ -70,6 +70,16 @@ struct ShelfTextClippingTests {
         #expect(ShelfTextClipping.fileName(for: "Idée : une app\nsuite du texte") == "Idée - une app.txt")
         #expect(ShelfTextClipping.fileName(for: "a/b") == "a-b.txt")
         #expect(ShelfTextClipping.fileName(for: String(repeating: "x", count: 100)).count == 44)
+        // Pas de fichier caché : le point du début est retiré.
+        #expect(ShelfTextClipping.fileName(for: ".bashrc") == "bashrc.txt")
+        #expect(ShelfTextClipping.fileName(for: "...") == "Texte.txt")
+    }
+
+    @Test func seulsLesTextesDeposesSontEffaces() {
+        let folder = URL(fileURLWithPath: "/Users/x/Library/Application Support/Notchkit/Shelf", isDirectory: true)
+        #expect(ShelfTextClipping.isClipping(folder.appendingPathComponent("Idée.txt"), in: folder))
+        #expect(!ShelfTextClipping.isClipping(URL(fileURLWithPath: "/Users/x/Documents/Idée.txt"), in: folder))
+        #expect(!ShelfTextClipping.isClipping(folder.appendingPathComponent("sous/Idée.txt"), in: folder))
     }
 }
 
@@ -89,22 +99,66 @@ struct FileActionsTests {
         let a = folder.appendingPathComponent("a.txt"), b = folder.appendingPathComponent("b.txt")
         try "un".write(to: a, atomically: true, encoding: .utf8)
         try "deux".write(to: b, atomically: true, encoding: .utf8)
-        let archive = try #require(await FileActions.zip([a, b]))
+        // Un fichier de même nom, venu d'un autre dossier : les deux sont dans l'archive.
+        let other = folder.appendingPathComponent("autre", isDirectory: true)
+        try FileManager.default.createDirectory(at: other, withIntermediateDirectories: true)
+        let homonym = other.appendingPathComponent("a.txt")
+        try "trois".write(to: homonym, atomically: true, encoding: .utf8)
+        let archive = try #require(await FileActions.zip([a, b, homonym]))
         #expect(archive.pathExtension == "zip")
         #expect(FileManager.default.fileExists(atPath: archive.path))
+        let listing = Process()
+        listing.executableURL = URL(fileURLWithPath: "/usr/bin/zipinfo")
+        listing.arguments = ["-1", archive.path]
+        let pipe = Pipe()
+        listing.standardOutput = pipe
+        try listing.run()
+        listing.waitUntilExit()
+        let names = String(decoding: pipe.fileHandleForReading.readDataToEndOfFile(), as: UTF8.self)
+            .split(separator: "\n").map(String.init)
+        #expect(Set(names).isSuperset(of: ["Archive/a.txt", "Archive/b.txt", "Archive/a 2.txt"]))
 
-        // Image PNG 4×4 générée, convertie en JPEG.
-        let png = folder.appendingPathComponent("carre.png")
-        let context = try #require(CGContext(data: nil, width: 4, height: 4, bitsPerComponent: 8, bytesPerRow: 0,
-                                             space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue))
-        context.setFillColor(CGColor(red: 1, green: 0.6, blue: 0.1, alpha: 1))
-        context.fill(CGRect(x: 0, y: 0, width: 4, height: 4))
-        let destination = try #require(CGImageDestinationCreateWithURL(png as CFURL, "public.png" as CFString, 1, nil))
-        CGImageDestinationAddImage(destination, try #require(context.makeImage()), nil)
-        #expect(CGImageDestinationFinalize(destination))
-        #expect(FileActions.isImage(png))
-        let jpeg = try #require(await FileActions.convertImage(png, to: .jpeg))
-        #expect(jpeg.lastPathComponent == "carre.jpg")
+        // Un dossier seul garde son nom entier.
+        let project = folder.appendingPathComponent("Projet.v2", isDirectory: true)
+        try FileManager.default.createDirectory(at: project, withIntermediateDirectories: true)
+        try "x".write(to: project.appendingPathComponent("x.txt"), atomically: true, encoding: .utf8)
+        let single = try #require(await FileActions.zip([project]))
+        #expect(single.lastPathComponent == "Projet.v2.zip")
+    }
+
+    @Test func nomsDansLArchiveSansDoublon() {
+        let urls = ["/a/Note.txt", "/b/note.txt", "/c/Note.txt", "/d/Dossier"].map { URL(fileURLWithPath: $0) }
+        #expect(FileActions.archiveNames(for: urls) == ["Note.txt", "note 2.txt", "Note 3.txt", "Dossier"])
+    }
+}
+
+/// Dépôt sur l'étagère : nouveaux fichiers en tête, fichier redéposé remis en tête pour 5 minutes.
+struct ShelfDropTests {
+    @Test func fichierRedeposeRepartPourCinqMinutes() throws {
+        let folder = FileManager.default.temporaryDirectory.appendingPathComponent("notchkit-shelf-\(UUID().uuidString)")
+        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: folder) }
+        let files = try ["a.txt", "b.txt", "c.txt"].map { name -> URL in
+            let url = folder.appendingPathComponent(name)
+            try Data(name.utf8).write(to: url)
+            return url
+        }
+        let start = Date(timeIntervalSince1970: 1_000_000)
+        let a = try #require(ShelfItem(url: files[0], date: start))
+        let b = try #require(ShelfItem(url: files[1], date: start.addingTimeInterval(10)))
+        let later = start.addingTimeInterval(200)
+
+        // b est déjà là ; c est nouveau ; c déposé deux fois ne compte qu'une fois.
+        let drop = ShelfModule.dropped([files[2], files[1], files[2]], onto: [b, a], at: later) { $0.resolvedURL() }
+        #expect(drop.items.map(\.name) == ["c.txt", "b.txt", "a.txt"])
+        #expect(drop.again == [b.id])
+        #expect(drop.count == 2)
+        #expect(drop.items[1].id == b.id)
+        #expect(drop.items[1].addedAt == later)
+        #expect(drop.items[2].addedAt == start)
+
+        // Rien de neuf : rien ne change.
+        #expect(ShelfModule.dropped([], onto: [a], at: later) { $0.resolvedURL() }.count == 0)
     }
 }
 

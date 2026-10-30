@@ -91,10 +91,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                     if added > 0 { self.viewModel.present(ShelfAlerts.added(added)) }
                 }
             case .convert:
-                if let converter = self.moduleManager.module(for: ConverterModule.descriptor.id) as? ConverterModule,
-                   converter.add(urls) > 0 {
+                guard let converter = self.moduleManager.module(for: ConverterModule.descriptor.id) as? ConverterModule else { break }
+                if converter.add(urls) > 0 {
                     // L'encoche se replie après le dépôt : on la rouvre sur le convertisseur pour choisir le format.
                     DispatchQueue.main.async { self.viewModel.expand(showing: ConverterModule.descriptor.id) }
+                } else if !converter.isConverting {
+                    // Aucun format possible (archive, dossier…) : on le dit au lieu de ne rien faire.
+                    self.viewModel.present(ConverterAlerts.unsupported())
                 }
             case .airDrop:
                 AirDrop.send(urls)

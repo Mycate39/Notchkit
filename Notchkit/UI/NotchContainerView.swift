@@ -396,9 +396,8 @@ private struct ExpandedNotchView: View {
             // Bulle cliquée : on ouvre la page de son widget (ex. Claude Code → page Agents).
             if let requested = viewModel.requestedModuleID {
                 viewModel.requestedModuleID = nil
-                let target = viewModel.manager.module(for: requested)?.widgetModuleID ?? requested
-                if let page = pages.first(where: { $0.modules.contains { $0.id == target } }) {
-                    viewModel.selectedPage = page.id
+                if let page = viewModel.pageIndex(showing: requested) {
+                    viewModel.selectedPage = page
                     return
                 }
             }

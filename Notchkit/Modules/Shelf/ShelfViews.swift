@@ -32,6 +32,8 @@ struct ShelfExpandedView: View {
                 .scrollIndicators(.never)
             }
         }
+        // En-tête en haut, aligné sur celui d'un widget voisin (convertisseur sur la même page).
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .padding(10)
     }
 
@@ -118,7 +120,7 @@ private struct ShelfItemView: View {
         .onDrag {
             guard let url else { return NSItemProvider() }
             module.markTaken(item)
-            return NSItemProvider(contentsOf: url) ?? NSItemProvider()
+            return NSItemProvider.file(at: url)
         }
         .contextMenu {
             Button("Ouvrir") { module.open(item) }.disabled(url == nil)
@@ -127,15 +129,13 @@ private struct ShelfItemView: View {
             Button("Copier") { module.copy([item]) }.disabled(url == nil)
             Divider()
             Button("Compresser (ZIP)") { module.zip([item]) }.disabled(url == nil)
-            if let url, FileActions.isImage(url) {
+            // Mêmes formats que le convertisseur (images, sons, vidéos, documents, PDF).
+            if let url, case let formats = FileConverter.formats(for: url), !formats.isEmpty {
                 Menu("Convertir en") {
-                    ForEach(FileActions.ImageFormat.allCases, id: \.self) { format in
-                        Button(format.rawValue.uppercased()) { module.convertImage(item, to: format) }
+                    ForEach(formats) { format in
+                        Button(format.title) { module.convert(item, to: format) }
                     }
                 }
-            }
-            if let url, FileActions.isVideo(url) {
-                Button("Convertir en MP4") { module.convertVideo(item) }
             }
             if module.isICloudAvailable {
                 Button("Copier vers iCloud Drive") { module.copyToICloud([item]) }.disabled(url == nil)
@@ -183,7 +183,7 @@ struct ShelfBubbleFiles: View {
                 .onDrag {
                     guard let url else { return NSItemProvider() }
                     module.markTaken(item)
-                    return NSItemProvider(contentsOf: url) ?? NSItemProvider()
+                    return NSItemProvider.file(at: url)
                 }
                 .contextMenu {
                     Button("Ouvrir") { module.open(item) }.disabled(url == nil)

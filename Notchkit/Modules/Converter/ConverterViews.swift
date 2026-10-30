@@ -65,10 +65,17 @@ struct ConverterExpandedView: View {
 
     private var header: some View {
         HStack(spacing: 8) {
-            Text("Convertisseur")
-                .font(.system(size: 12, weight: .semibold))
-                .lineLimit(1)
-            Spacer()
+            // Carte étroite (taille Petit, à côté de l'étagère) : l'icône du module au lieu d'un titre coupé.
+            ViewThatFits(in: .horizontal) {
+                Text("Convertisseur")
+                    .lineLimit(1)
+                    .fixedSize()
+                Image(systemName: "arrow.triangle.2.circlepath")
+                    .foregroundStyle(.tint)
+                    .accessibilityLabel(Text("Convertisseur"))
+            }
+            .font(.system(size: 12, weight: .semibold))
+            Spacer(minLength: 0)
             if !module.files.isEmpty || !module.results.isEmpty, !module.isConverting {
                 Button(action: module.clear) { Image(systemName: "xmark") }
                     .help("Effacer")
@@ -157,7 +164,8 @@ struct ConverterExpandedView: View {
         VStack(alignment: .leading, spacing: 8) {
             fileSummary
             HStack(spacing: 8) {
-                StandByBar(value: Double(module.completed) / Double(max(1, module.files.count)), height: 6)
+                StandByBar(value: module.progress, height: 6)
+                    .animation(.linear(duration: 0.2), value: module.progress)
                 Text(verbatim: "\(module.completed)/\(module.files.count)")
                     .font(.system(size: 10, weight: .semibold).monospacedDigit())
                     .foregroundStyle(.white.opacity(0.7))
@@ -173,9 +181,7 @@ struct ConverterExpandedView: View {
     private var results: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 8) {
-                Image(systemName: "checkmark.circle.fill")
-                    .font(.system(size: 18))
-                    .foregroundStyle(.green)
+                resultIcon
                 VStack(alignment: .leading, spacing: 1) {
                     if module.results.count == 1, let result = module.results.first {
                         Text(result.lastPathComponent)
@@ -193,6 +199,7 @@ struct ConverterExpandedView: View {
                     }
                 }
             }
+            .modifier(ResultDrag(url: module.results.count == 1 ? module.results.first : nil))
             HStack(spacing: 6) {
                 if module.results.count == 1, let result = module.results.first {
                     Button("Ouvrir") { module.open(result) }
@@ -203,6 +210,46 @@ struct ConverterExpandedView: View {
                     .lineLimit(1)
             }
             .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+}
+
+extension ConverterExpandedView {
+    /// Aperçu du fichier converti (une image, la première page d'un PDF…), sinon la coche verte.
+    @ViewBuilder fileprivate var resultIcon: some View {
+        if module.results.count == 1, let result = module.results.first,
+           (try? result.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory != true {
+            Image(nsImage: NSWorkspace.shared.icon(forFile: result.path))
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 26, height: 26)
+                .overlay(alignment: .bottomTrailing) {
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.system(size: 11))
+                        .foregroundStyle(.white, .green)
+                        .offset(x: 3, y: 3)
+                }
+        } else {
+            Image(systemName: "checkmark.circle.fill")
+                .font(.system(size: 18))
+                .foregroundStyle(.green)
+        }
+    }
+}
+
+/// Le fichier converti se glisse vers le Finder ou une autre app, comme un fichier de l'étagère
+/// (un seul résultat : un glisser SwiftUI ne porte qu'un élément).
+private struct ResultDrag: ViewModifier {
+    let url: URL?
+
+    func body(content: Content) -> some View {
+        if let url {
+            content
+                .contentShape(Rectangle())
+                .onDrag { NSItemProvider.file(at: url) }
+                .help("Glissez pour récupérer le fichier")
+        } else {
+            content
         }
     }
 }

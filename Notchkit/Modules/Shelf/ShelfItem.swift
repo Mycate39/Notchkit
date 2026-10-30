@@ -8,7 +8,7 @@ struct ShelfItem: Identifiable, Codable, Equatable, Sendable {
     let bookmark: Data
     /// Nom au moment du dépôt (affiché si le fichier a disparu).
     let name: String
-    let addedAt: Date
+    private(set) var addedAt: Date
 
     init?(url: URL, date: Date = Date()) {
         guard let bookmark = try? url.bookmarkData(options: [], includingResourceValuesForKeys: nil, relativeTo: nil) else {
@@ -18,6 +18,13 @@ struct ShelfItem: Identifiable, Codable, Equatable, Sendable {
         self.bookmark = bookmark
         name = url.lastPathComponent
         addedAt = date
+    }
+
+    /// Le même fichier, déposé de nouveau à `date`.
+    func added(at date: Date) -> ShelfItem {
+        var copy = self
+        copy.addedAt = date
+        return copy
     }
 
     /// Emplacement actuel du fichier, ou `nil` s'il n'existe plus.

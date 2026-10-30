@@ -1,6 +1,22 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "Glissez pour récupérer le fichier" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag to get the file"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Glissez pour récupérer le fichier"
+          }
+        }
+      }
+    },
     "Le lecteur ouvre toujours l'encoche en première page, même quand rien ne joue ; il ne se place pas dans la disposition." : {
       "localizations" : {
         "en" : {

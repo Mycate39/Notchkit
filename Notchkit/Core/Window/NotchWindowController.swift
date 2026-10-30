@@ -43,8 +43,11 @@ final class NotchWindowController {
         // On ignore la zone de sécurité (barre des menus, encoche) : la forme doit coller au bord.
         hostingView.safeAreaRegions = []
         // Entrée : décidée par la position (grande encoche ou bulles). Sortie : toujours transmise.
-        hostingView.onHoverChange = { [weak viewModel] isInside in
-            if !isInside { viewModel?.pointerExited() }
+        hostingView.onHoverChange = { [weak viewModel, weak panel] isInside in
+            // Sortie annoncée alors que le pointeur est encore sur la fenêtre (fin d'un glisser-déposer) :
+            // ignorée, sinon l'encoche rouverte sur le convertisseur après un dépôt se refermait seule.
+            guard !isInside, panel.map({ !$0.frame.contains(NSEvent.mouseLocation) }) ?? true else { return }
+            viewModel?.pointerExited()
         }
         hostingView.onPointerMove = { [weak viewModel] dx, fromTop in
             viewModel?.pointerMoved(dx: dx, fromTop: fromTop)

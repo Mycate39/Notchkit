@@ -42,3 +42,14 @@ enum AirDrop {
         return true
     }
 }
+
+extension NSItemProvider {
+    /// Fichier glissé hors de l'encoche (étagère, convertisseur, captures) : on passe son lien, pour
+    /// que le Finder le copie sous son vrai nom. Avec `NSItemProvider(contentsOf:)`, il recevait les
+    /// données seules et créait « Image PNG.png ».
+    static func file(at url: URL) -> NSItemProvider {
+        let provider = NSItemProvider(object: url as NSURL)
+        provider.suggestedName = url.lastPathComponent
+        return provider
+    }
+}

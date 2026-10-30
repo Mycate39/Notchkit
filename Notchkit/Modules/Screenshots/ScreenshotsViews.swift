@@ -93,7 +93,7 @@ private struct ScreenshotItemView: View {
         .help("Glissez pour récupérer le fichier · double-clic pour l'ouvrir")
         .onTapGesture(count: 2) { module.open(item) }
         // Glisser vers le Finder, un message ou un document : le fichier y est copié.
-        .onDrag { NSItemProvider(contentsOf: item.url) ?? NSItemProvider() }
+        .onDrag { NSItemProvider.file(at: item.url) }
         .contextMenu {
             Button("Ouvrir") { module.open(item) }
             Button("Afficher dans le Finder") { module.reveal([item]) }

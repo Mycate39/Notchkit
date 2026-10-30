@@ -279,7 +279,19 @@ final class NotchViewModel {
         // Mode jeu : pas d'ouverture surprise en pleine partie.
         guard !isQuiet else { return }
         requestedModuleID = moduleID
+        // La vue dépliée lit cette demande à son apparition. Repliée puis rouverte dans la même image
+        // (dépôt sur « Convertir »), elle ne réapparaît pas : la page est donc aussi choisie ici.
+        if let page = pageIndex(showing: moduleID) {
+            skipNextPageHaptic = true
+            selectedPage = page
+        }
         expand()
+    }
+
+    /// Page qui montre le widget d'un module (ex. Claude Code → page Agents), s'il en a une.
+    func pageIndex(showing moduleID: String) -> Int? {
+        let target = manager.module(for: moduleID)?.widgetModuleID ?? moduleID
+        return ModulePage.pages(from: manager).first { $0.modules.contains { $0.id == target } }?.id
     }
 
     /// Écran verrouillé : module dont l'activité devient un lecteur cliquable (`lockScreenLeading`).
@@ -425,6 +437,9 @@ final class NotchViewModel {
     func collapse() {
         guard state != .collapsed else { return }
         lastCollapse = Date()
+        // Demande de page non lue (la vue dépliée n'a pas réapparu) : elle ne vaut pas pour la prochaine
+        // ouverture.
+        requestedModuleID = nil
         withAnimation(NotchLayout.spring) {
             isSettlingAfterCollapse = true
             state = .collapsed

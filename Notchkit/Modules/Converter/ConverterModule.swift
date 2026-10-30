@@ -26,6 +26,10 @@ final class ConverterModule: NotchModule {
     private(set) var results: [URL] = []
     private(set) var isConverting = false
     private(set) var completed = 0
+    /// Avancement du fichier en cours (0 à 1), pour les conversions longues (vidéo, GIF, PDF).
+    private(set) var currentProgress: Double = 0
+    /// Avancement de toute la conversion (0 à 1).
+    var progress: Double { Self.progress(completed: completed, current: currentProgress, total: files.count) }
     private(set) var failures = 0
     private(set) var lastError: String?
     /// Un fichier est glissé au-dessus du widget ouvert : il y sera déposé directement.
@@ -50,21 +54,43 @@ final class ConverterModule: NotchModule {
     /// Famille des fichiers (celle du premier, les autres partagent au moins un format).
     var kind: ConversionKind? { files.first.flatMap(ConversionKind.of) }
 
-    /// Remplace les fichiers en attente ; renvoie le nombre de fichiers pris en charge.
+    /// Avancement global (fonction pure, testée).
+    nonisolated static func progress(completed: Int, current: Double, total: Int) -> Double {
+        guard total > 0 else { return 0 }
+        return min(1, (Double(completed) + min(max(current, 0), 1)) / Double(total))
+    }
+
+    /// Ajoute des fichiers à ceux en attente s'ils sont de la même famille, sinon les remplace ;
+    /// renvoie le nombre de fichiers pris en charge.
     @discardableResult
     func add(_ urls: [URL]) -> Int {
         guard !isConverting else { return 0 }
-        let supported = Self.supported(urls)
-        guard !supported.isEmpty else {
+        let merged = Self.merged(pending: files, dropped: urls)
+        guard !merged.isEmpty else {
             lastError = String(localized: "Aucun de ces fichiers ne peut être converti.")
             return 0
         }
-        files = supported
+        files = merged
         results = []
         failures = 0
         completed = 0
         lastError = nil
-        return supported.count
+        // Fichiers déposés désormais en attente (un fichier déjà là compte aussi).
+        return urls.filter(merged.contains).count
+    }
+
+    /// Fichiers en attente après un dépôt : les nouveaux s'ajoutent (sans doublon) s'ils sont de la même
+    /// famille que ceux déjà là, sinon ils les remplacent (fonction pure, testée).
+    nonisolated static func merged(pending: [URL], dropped: [URL]) -> [URL] {
+        let dropped = supported(dropped)
+        guard !pending.isEmpty, !dropped.isEmpty else { return dropped }
+        let new = dropped.filter { !pending.contains($0) }
+        guard !new.isEmpty else { return pending }
+        // Une autre famille (des images après un document) : les fichiers déposés remplacent ceux en
+        // attente, même si un format reste commun (PDF).
+        let kind = ConversionKind.of(pending[0])
+        guard new.allSatisfy({ ConversionKind.of($0) == kind }) else { return dropped }
+        return Array((pending + new).prefix(maxFiles))
     }
 
     /// Fichiers convertibles, dans la limite de `maxFiles`, en gardant ceux qui ont un format commun
@@ -93,6 +119,7 @@ final class ConverterModule: NotchModule {
         guard !isConverting, !files.isEmpty else { return }
         isConverting = true
         completed = 0
+        currentProgress = 0
         failures = 0
         results = []
         lastError = nil
@@ -105,12 +132,15 @@ final class ConverterModule: NotchModule {
                     continue
                 }
                 do {
-                    let output = try await FileConverter.convert(url, to: format)
+                    let output = try await FileConverter.convert(url, to: format) { [weak self] value in
+                        self?.currentProgress = value
+                    }
                     self.results.append(output)
                 } catch {
                     self.failures += 1
                     self.lastError = error.localizedDescription
                 }
+                self.currentProgress = 0
                 self.completed += 1
             }
             self?.finish()
@@ -169,6 +199,9 @@ final class ConverterModule: NotchModule {
             .foregroundStyle(.white))
     }
 
+    /// Assez large pour son titre et ses boutons de formats.
+    var expandedWidthWeight: CGFloat { 1.5 }
+
     // MARK: Vues
 
     func expandedView() -> AnyView {
@@ -181,6 +214,16 @@ final class ConverterModule: NotchModule {
 }
 
 enum ConverterAlerts {
+    /// Fichiers déposés sur « Convertir » qu'aucun format ne prend en charge.
+    @MainActor
+    static func unsupported() -> NotchAlert {
+        NotchAlert(
+            leading: AnyView(Image(systemName: "arrow.triangle.2.circlepath").foregroundStyle(.red)),
+            trailing: AnyView(Image(systemName: "xmark").foregroundStyle(.red)),
+            duration: .seconds(2)
+        )
+    }
+
     @MainActor
     static func finished(count: Int, succeeded: Bool) -> NotchAlert {
         var alert = NotchAlert(

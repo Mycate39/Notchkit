@@ -145,7 +145,7 @@ struct DayProgressSettingsView: View {
     @Bindable var module: DayProgressModule
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        Group {
             Stepper(value: $module.startMinute, in: 0...(module.endMinute - 30), step: 30) {
                 LabeledContent("Début de la journée", value: DayProgress.label(module.startMinute))
             }

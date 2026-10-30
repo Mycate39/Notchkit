@@ -136,7 +136,7 @@ struct CalendarSettingsView: View {
     @Bindable var module: CalendarModule
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        Group {
             Toggle("Rappel dans l'encoche 10 minutes avant un événement", isOn: $module.showReminder)
             Toggle("Afficher les événements « journée entière »", isOn: $module.showAllDay)
             if module.authorization != .fullAccess {

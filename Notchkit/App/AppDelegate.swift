@@ -247,7 +247,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func showSettings(tab: SettingsTab? = nil) {
         if let tab { settingsRouter.tab = tab }
-        settingsWindow.show()
+        settingsWindow.show(title: settingsRouter.tab.title(in: moduleManager))
     }
 
     /// Affiche une alerte factice pour vérifier le système d'alertes.

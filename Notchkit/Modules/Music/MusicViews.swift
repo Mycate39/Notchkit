@@ -562,7 +562,7 @@ struct MusicSettingsView: View {
     @Bindable var module: MusicModule
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        Group {
             Toggle("Afficher le morceau quand l'encoche est repliée", isOn: $module.showInCompact)
             Toggle("Afficher l'icône de l'app sur la pochette", isOn: $module.showAppBadge)
             MusicPlayerStyleSetting()

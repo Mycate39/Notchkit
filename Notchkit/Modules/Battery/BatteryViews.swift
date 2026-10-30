@@ -242,7 +242,7 @@ struct BatterySettingsView: View {
     @Bindable var module: BatteryModule
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        Group {
             Toggle("Toujours afficher le niveau quand l'encoche est repliée", isOn: $module.showInCompact)
             Toggle("Animation au branchement et au débranchement", isOn: $module.alertOnPowerChange)
             Toggle("Alerte de batterie faible (20 % et 10 %)", isOn: $module.lowBatteryAlert)

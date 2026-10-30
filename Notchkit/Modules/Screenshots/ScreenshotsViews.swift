@@ -134,7 +134,7 @@ struct ScreenshotsSettingsView: View {
     @Bindable var module: ScreenshotsModule
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        Group {
             Toggle("Afficher une alerte à chaque nouvelle capture", isOn: $module.alertOnCapture)
             Text("Notchkit liste les captures et enregistrements d'écran faits depuis le démarrage du Mac ou l'ouverture de votre session, où qu'ils soient enregistrés. S'ils sont sur le Bureau, macOS demandera une fois l'accès à ce dossier pour afficher les aperçus.")
                 .font(.caption)

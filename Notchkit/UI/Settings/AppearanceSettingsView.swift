@@ -1,17 +1,10 @@
 import SwiftUI
 
-/// Onglet « Apparence » : taille de l'encoche, animations et couleurs, avec un aperçu en direct.
+/// Onglet « Apparence » : animations, mascotte et couleurs, avec un aperçu en direct.
 struct AppearanceSettingsView: View {
     @Bindable var settings: SettingsStore
 
     private var appearance: Binding<NotchAppearance> { $settings.settings.appearance }
-
-    /// Apparence de l'aperçu : fond noir en mode encoche, comme dans la réalité.
-    private var previewAppearance: NotchAppearance {
-        var appearance = settings.settings.appearance
-        if isNotchMode { appearance.background = .black }
-        return appearance
-    }
 
     /// Mode encoche (encoche simulée, ou écran avec encoche) : le fond y reste toujours noir.
     private var isNotchMode: Bool {
@@ -21,7 +14,7 @@ struct AppearanceSettingsView: View {
     var body: some View {
         Form {
             Section {
-                AppearancePreview(appearance: previewAppearance)
+                AppearancePreview(appearance: settings.settings.appearance, style: isNotchMode ? .notch : .pill)
                     .frame(maxWidth: .infinity)
                     .listRowBackground(Color.clear)
             }
@@ -79,7 +72,7 @@ struct AppearanceSettingsView: View {
                         .foregroundStyle(.secondary)
                 }
 
-                Toggle("Couleur personnalisée (onglets, barres de progression)", isOn: Binding(
+                Toggle("Couleur personnalisée (boutons, barres de progression)", isOn: Binding(
                     get: { settings.settings.appearance.accent != nil },
                     set: { settings.settings.appearance.accent = $0 ? StandBy.defaultAccent : nil }
                 ))
@@ -111,33 +104,41 @@ struct AppearanceSettingsView: View {
                 Button("Rétablir l'apparence par défaut") {
                     settings.settings.appearance = NotchAppearance()
                 }
+                .disabled(settings.settings.appearance == NotchAppearance())
             }
         }
         .formStyle(.grouped)
     }
 }
 
-/// Aperçu de l'encoche dépliée avec l'apparence choisie (rejoue l'animation à chaque changement).
+/// Aperçu de l'encoche dépliée avec l'apparence choisie, sur un fond d'écran coloré pour que le verre
+/// se voie : même forme (oreilles et grands coins) et même fond que l'encoche réelle ; rejoue
+/// l'animation choisie à chaque changement.
 private struct AppearancePreview: View {
     let appearance: NotchAppearance
+    let style: NotchStyle
     @State private var expanded = true
 
-    var body: some View {
-        let size = NotchLayout.defaultExpandedSize
-        let scale: CGFloat = 0.62
-        let style = appearance.animation.spring
+    private static let scale: CGFloat = 0.62
 
-        VStack(spacing: 6) {
-            HStack(spacing: 10) {
-                Capsule().fill(appearance.accentColor).frame(width: 46, height: 16)
-                Capsule().fill(.white.opacity(0.15)).frame(width: 34, height: 16)
+    var body: some View {
+        let scale = Self.scale
+        let size = NotchLayout.defaultExpandedSize
+        let spring = appearance.animation.spring
+        let radii = NotchLayout.cornerRadii(for: style, isExpanded: true, height: size.height)
+        let ear = style == .notch ? NotchLayout.glassEarRadius * scale : 0
+        let shape = NotchShape(earRadius: ear, topCornerRadius: radii.top * scale, bottomCornerRadius: radii.bottom * scale)
+
+        VStack(spacing: 8) {
+            HStack {
                 Spacer()
                 Image(systemName: "gearshape.fill").foregroundStyle(.white.opacity(0.7))
             }
             HStack(spacing: 10) {
                 ForEach(0..<3) { index in
+                    // Fond « Verre » : widgets posés sur le verre, sans carte.
                     RoundedRectangle(cornerRadius: 12, style: .continuous)
-                        .fill(.white.opacity(0.08))
+                        .fill(appearance.usesGlassWidgets ? Color.clear : .white.opacity(0.08))
                         .overlay(alignment: .bottomLeading) {
                             Capsule().fill(index == 0 ? appearance.accentColor : .white.opacity(0.3))
                                 .frame(width: 40, height: 5)
@@ -145,19 +146,33 @@ private struct AppearancePreview: View {
                         }
                 }
             }
+            .opacity(expanded ? 1 : 0)
         }
-        .padding(16)
+        .padding(.horizontal, ear + 16)
+        .padding(.top, 10)
+        .padding(.bottom, 18)
         .frame(width: size.width * scale, height: (expanded ? size.height : 40) * scale)
-        .background(NotchBackground(appearance: appearance))
-        .clipShape(UnevenRoundedRectangle(bottomLeadingRadius: 18, bottomTrailingRadius: 18, style: .continuous))
+        .notchBackground(appearance, style: style, shape: shape,
+                         notchHeight: NotchLayout.previewNotchHeight * scale, glassRevealed: expanded)
+        .clipShape(shape)
         .environment(\.colorScheme, .dark)
-        .frame(height: size.height * scale, alignment: .top)
+        .padding(.top, style == .pill ? 8 : 0)
+        .frame(height: size.height * scale + 22, alignment: .top)
+        .frame(maxWidth: .infinity)
+        .background(Self.wallpaper, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
         .onChange(of: appearance) {
             // Petite démonstration de l'animation choisie.
             expanded = false
-            withAnimation(.spring(duration: max(0.15, style.duration), bounce: style.bounce)) { expanded = true }
+            withAnimation(.spring(duration: max(0.15, spring.duration), bounce: spring.bounce)) { expanded = true }
         }
     }
+
+    /// Fond d'écran de l'aperçu, coloré comme ceux de macOS.
+    private static let wallpaper = LinearGradient(
+        colors: [Color(red: 0.12, green: 0.16, blue: 0.42), Color(red: 0.5, green: 0.27, blue: 0.62),
+                 Color(red: 0.96, green: 0.58, blue: 0.38)],
+        startPoint: .topLeading, endPoint: .bottomTrailing
+    )
 }
 
 /// Choix de la mascotte : aperçu de ses humeurs, puis grille de tous les personnages.

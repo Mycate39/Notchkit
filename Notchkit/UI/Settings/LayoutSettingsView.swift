@@ -32,7 +32,7 @@ struct LayoutEditorContent: View {
             VStack(alignment: .leading, spacing: 18) {
                 PresetGallery(manager: manager)
 
-                Text("Glissez les widgets pour les réordonner ou les changer de page, et une page par sa poignée pour la déplacer avec ses widgets. Cliquez sur un widget pour changer sa taille. Astuce : un clic droit sur un widget dans l'encoche offre les mêmes options.")
+                Text("Glissez les widgets pour les réordonner ou les changer de page, et une page par sa poignée pour la déplacer avec ses widgets. Cliquez sur un widget pour changer sa taille. Astuce : un clic droit sur un widget dans l'encoche offre les mêmes options. Le lecteur de musique reste toujours la première page de l'encoche, avant celles-ci.")
                     .font(.callout)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -410,7 +410,7 @@ private struct PresetGallery: View {
                 }
             }
             ScrollView(.horizontal) {
-                HStack(spacing: 10) {
+                HStack(alignment: .top, spacing: 10) {
                     ForEach(LayoutPreset.all) { preset in
                         Button { pending = preset } label: {
                             PresetCard(preset: preset)
@@ -461,11 +461,13 @@ struct PresetCard: View {
 
             Label(String(localized: preset.name), systemImage: preset.symbol)
                 .font(.system(size: 12, weight: .semibold))
+            // Toujours deux lignes réservées : les cartes gardent la même hauteur.
             Text(preset.summary)
                 .font(.system(size: 10))
                 .foregroundStyle(.secondary)
-                .lineLimit(2)
-                .frame(width: 150, alignment: .leading)
+                .lineLimit(2, reservesSpace: true)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(width: 150, alignment: .topLeading)
         }
         .padding(8)
         .background(.quaternary.opacity(0.5), in: RoundedRectangle(cornerRadius: 12, style: .continuous))

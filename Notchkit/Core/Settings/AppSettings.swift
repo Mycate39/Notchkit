@@ -62,29 +62,29 @@ struct AppSettings: Codable, Equatable, Sendable {
 
     init() {}
 
-    // Décodage tolérant : une clé manquante (ex. réglage ajouté dans une nouvelle version)
-    // reprend sa valeur par défaut au lieu de faire perdre tous les réglages.
+    // Décodage tolérant : une clé manquante (ex. réglage ajouté dans une nouvelle version) ou une
+    // valeur illisible reprend sa valeur par défaut au lieu de faire perdre tous les réglages.
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
         let d = AppSettings()
-        moduleEnabled = try c.decodeIfPresent([String: Bool].self, forKey: .moduleEnabled) ?? d.moduleEnabled
-        moduleOrder = try c.decodeIfPresent([String].self, forKey: .moduleOrder) ?? d.moduleOrder
-        screenSelection = try c.decodeIfPresent(ScreenSelection.self, forKey: .screenSelection) ?? d.screenSelection
-        simulateNotch = try c.decodeIfPresent(Bool.self, forKey: .simulateNotch) ?? d.simulateNotch
-        hoverOpenDelay = try c.decodeIfPresent(Double.self, forKey: .hoverOpenDelay) ?? d.hoverOpenDelay
-        hoverCloseDelay = try c.decodeIfPresent(Double.self, forKey: .hoverCloseDelay) ?? d.hoverCloseDelay
+        moduleEnabled = (try? c.decodeIfPresent([String: Bool].self, forKey: .moduleEnabled)) ?? d.moduleEnabled
+        moduleOrder = (try? c.decodeIfPresent([String].self, forKey: .moduleOrder)) ?? d.moduleOrder
+        screenSelection = (try? c.decodeIfPresent(ScreenSelection.self, forKey: .screenSelection)) ?? d.screenSelection
+        simulateNotch = (try? c.decodeIfPresent(Bool.self, forKey: .simulateNotch)) ?? d.simulateNotch
+        hoverOpenDelay = (try? c.decodeIfPresent(Double.self, forKey: .hoverOpenDelay)) ?? d.hoverOpenDelay
+        hoverCloseDelay = (try? c.decodeIfPresent(Double.self, forKey: .hoverCloseDelay)) ?? d.hoverCloseDelay
         widgetLayout = try? c.decodeIfPresent(WidgetLayout.self, forKey: .widgetLayout)
         appearance = (try? c.decodeIfPresent(NotchAppearance.self, forKey: .appearance)) ?? d.appearance
-        hapticsEnabled = try c.decodeIfPresent(Bool.self, forKey: .hapticsEnabled) ?? d.hapticsEnabled
-        avoidAppMenus = try c.decodeIfPresent(Bool.self, forKey: .avoidAppMenus) ?? d.avoidAppMenus
+        hapticsEnabled = (try? c.decodeIfPresent(Bool.self, forKey: .hapticsEnabled)) ?? d.hapticsEnabled
+        avoidAppMenus = (try? c.decodeIfPresent(Bool.self, forKey: .avoidAppMenus)) ?? d.avoidAppMenus
         // Réglages enregistrés par une version sans tutoriel : l'app est déjà installée et
         // utilisée, on ne montre pas le tutoriel (il reste accessible depuis le menu).
-        onboardingCompleted = try c.decodeIfPresent(Bool.self, forKey: .onboardingCompleted) ?? true
+        onboardingCompleted = (try? c.decodeIfPresent(Bool.self, forKey: .onboardingCompleted)) ?? true
         // Mascotte inconnue (retirée dans une version suivante) : on reprend celle par défaut.
         mascot = (try? c.decodeIfPresent(MascotDesign.self, forKey: .mascot)) ?? d.mascot
-        mascotSounds = try c.decodeIfPresent(Bool.self, forKey: .mascotSounds) ?? d.mascotSounds
-        mascotSoundVolume = try c.decodeIfPresent(Double.self, forKey: .mascotSoundVolume) ?? d.mascotSoundVolume
-        showsMenuBarIcon = try c.decodeIfPresent(Bool.self, forKey: .showsMenuBarIcon) ?? d.showsMenuBarIcon
-        hidesInFullScreen = try c.decodeIfPresent(Bool.self, forKey: .hidesInFullScreen) ?? d.hidesInFullScreen
+        mascotSounds = (try? c.decodeIfPresent(Bool.self, forKey: .mascotSounds)) ?? d.mascotSounds
+        mascotSoundVolume = (try? c.decodeIfPresent(Double.self, forKey: .mascotSoundVolume)) ?? d.mascotSoundVolume
+        showsMenuBarIcon = (try? c.decodeIfPresent(Bool.self, forKey: .showsMenuBarIcon)) ?? d.showsMenuBarIcon
+        hidesInFullScreen = (try? c.decodeIfPresent(Bool.self, forKey: .hidesInFullScreen)) ?? d.hidesInFullScreen
     }
 }

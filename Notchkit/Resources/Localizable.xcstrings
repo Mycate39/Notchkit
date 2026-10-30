@@ -1,98 +1,130 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
-    "Glissez pour récupérer le fichier" : {
+    "Autorisation Accessibilité manquante" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Drag to get the file"
+            "value" : "Accessibility permission missing"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Glissez pour récupérer le fichier"
+            "value" : "Autorisation Accessibilité manquante"
           }
         }
       }
     },
-    "Le lecteur ouvre toujours l'encoche en première page, même quand rien ne joue ; il ne se place pas dans la disposition." : {
+    "Ouvrir les réglages d'ouverture…" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The player always opens the notch on the first page, even when nothing is playing; it isn't part of the layout."
+            "value" : "Open Login Items Settings…"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Le lecteur ouvre toujours l'encoche en première page, même quand rien ne joue ; il ne se place pas dans la disposition."
+            "value" : "Ouvrir les réglages d'ouverture…"
           }
         }
       }
     },
-    "Taille du lecteur" : {
+    "macOS attend votre accord dans Réglages Système > Général > Ouverture." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Player Size"
+            "value" : "macOS is waiting for your approval in System Settings > General > Login Items."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Taille du lecteur"
+            "value" : "macOS attend votre accord dans Réglages Système > Général > Ouverture."
           }
         }
       }
     },
-    "Compact" : {
+    "Site du projet" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Compact"
+            "value" : "Project Website"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Compact"
+            "value" : "Site du projet"
           }
         }
       }
     },
-    "Lecture aléatoire" : {
+    "Signaler un problème" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Shuffle"
+            "value" : "Report a Problem"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lecture aléatoire"
+            "value" : "Signaler un problème"
           }
         }
       }
     },
-    "Répéter" : {
+    "Animations de déverrouillage adaptées de « Apple Face ID » (Mau Ali) et « Fingerprint Touch ID » (Himanshu Patel), sous Lottie Simple License." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Repeat"
+            "value" : "Unlock animations adapted from “Apple Face ID” (Mau Ali) and “Fingerprint Touch ID” (Himanshu Patel), under the Lottie Simple License."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Répéter"
+            "value" : "Animations de déverrouillage adaptées de « Apple Face ID » (Mau Ali) et « Fingerprint Touch ID » (Himanshu Patel), sous Lottie Simple License."
+          }
+        }
+      }
+    },
+    "Couleur personnalisée (boutons, barres de progression)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Custom color (buttons, progress bars)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couleur personnalisée (boutons, barres de progression)"
+          }
+        }
+      }
+    },
+    "Glissez les widgets pour les réordonner ou les changer de page, et une page par sa poignée pour la déplacer avec ses widgets. Cliquez sur un widget pour changer sa taille. Astuce : un clic droit sur un widget dans l'encoche offre les mêmes options. Le lecteur de musique reste toujours la première page de l'encoche, avant celles-ci." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag widgets to reorder them or move them to another page, and drag a page by its handle to move it with its widgets. Click a widget to change its size. Tip: right-clicking a widget in the notch offers the same options. The music player always stays the notch's first page, before these."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Glissez les widgets pour les réordonner ou les changer de page, et une page par sa poignée pour la déplacer avec ses widgets. Cliquez sur un widget pour changer sa taille. Astuce : un clic droit sur un widget dans l'encoche offre les mêmes options. Le lecteur de musique reste toujours la première page de l'encoche, avant celles-ci."
           }
         }
       }
@@ -4495,6 +4527,22 @@
         }
       }
     },
+    "Compact" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compact"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compact"
+          }
+        }
+      }
+    },
     "Compacte" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -7311,6 +7359,22 @@
         }
       }
     },
+    "Glissez pour récupérer le fichier" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag to get the file"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Glissez pour récupérer le fichier"
+          }
+        }
+      }
+    },
     "Glissez pour récupérer le fichier · double-clic pour l'ouvrir" : {
       "localizations" : {
         "en" : {
@@ -8562,6 +8626,22 @@
         }
       }
     },
+    "Le lecteur ouvre toujours l'encoche en première page, même quand rien ne joue ; il ne se place pas dans la disposition." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The player always opens the notch on the first page, even when nothing is playing; it isn't part of the layout."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le lecteur ouvre toujours l'encoche en première page, même quand rien ne joue ; il ne se place pas dans la disposition."
+          }
+        }
+      }
+    },
     "Le modèle a refusé de répondre à cette demande." : {
       "localizations" : {
         "en" : {
@@ -8753,6 +8833,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lecture"
+          }
+        }
+      }
+    },
+    "Lecture aléatoire" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shuffle"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lecture aléatoire"
           }
         }
       }
@@ -12147,6 +12243,22 @@
         }
       }
     },
+    "Répéter" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Repeat"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Répéter"
+          }
+        }
+      }
+    },
     "Répondez dans le terminal de Claude Code." : {
       "localizations" : {
         "en" : {
@@ -13244,6 +13356,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Taille de l'encoche dépliée"
+          }
+        }
+      }
+    },
+    "Taille du lecteur" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Player Size"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taille du lecteur"
           }
         }
       }

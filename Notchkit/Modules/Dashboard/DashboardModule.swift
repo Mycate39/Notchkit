@@ -145,7 +145,7 @@ struct DashboardSettingsView: View {
     @Bindable var module: DashboardModule
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        Group {
             ForEach(module.apps, id: \.id) { app in
                 HStack {
                     Image(nsImage: NSWorkspace.shared.icon(forFile: app.url.path))

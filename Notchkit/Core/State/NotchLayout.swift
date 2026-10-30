@@ -274,6 +274,8 @@ enum NotchLayout {
     /// grands coins en bas, comme le lecteur de l'iPhone. Le fond noir garde son contour.
     static let glassEarRadius: CGFloat = 20
     static let glassCornerRadius: CGFloat = 36
+    /// Hauteur de l'encoche matérielle dans l'aperçu des réglages (Apparence) : celle d'un MacBook Pro.
+    static let previewNotchHeight: CGFloat = 32
     /// Page qui ne contient que la musique : l'encoche s'ouvre en petit lecteur serré autour de la caméra
     /// (pochette, titre, barre et commandes sur trois lignes), avec les deux fonds ; elle s'agrandit en
     /// passant à une autre page.

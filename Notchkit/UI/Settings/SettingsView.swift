@@ -106,7 +106,7 @@ struct SettingsView: View {
     @ViewBuilder
     private var detail: some View {
         switch router.tab {
-        case .general: GeneralSettingsView(settings: settings).navigationTitle("Général").settingsHistory(router)
+        case .general: GeneralSettingsView(settings: settings, permissions: permissions).navigationTitle("Général").settingsHistory(router)
         case .appearance: AppearanceSettingsView(settings: settings).navigationTitle("Apparence").settingsHistory(router)
         case .layout: LayoutSettingsView(manager: manager).navigationTitle("Disposition").settingsHistory(router)
         // La liste des widgets a sa propre pile de navigation, qui remplace la barre d'outils :
@@ -231,6 +231,21 @@ struct SidebarIcon: View {
 }
 
 extension SettingsTab {
+    /// Titre de la page, comme dans la barre de titre (nom du module pour sa page).
+    @MainActor
+    func title(in manager: ModuleManager) -> String {
+        switch self {
+        case .general: String(localized: "Général")
+        case .appearance: String(localized: "Apparence")
+        case .layout: String(localized: "Disposition")
+        case .widgets: String(localized: "Widgets")
+        case let .module(id):
+            manager.orderedDescriptors.first { $0.id == id }.map { String(localized: $0.name) } ?? String(localized: "Widgets")
+        case .permissions: String(localized: "Autorisations")
+        case .about: String(localized: "À propos")
+        }
+    }
+
     /// Entrée de la barre latérale sélectionnée : la page d'un module reste sous « Widgets ».
     var sidebarTab: SettingsTab {
         if case .module = self { return .widgets }
@@ -369,6 +384,8 @@ private struct ModuleDetailView: View {
 
             if let module = manager.module(for: descriptor.id) {
                 if let options = module.settingsView() {
+                    // Les réglages d'un module sont des éléments séparés (dans un `Group`, pas un `VStack`) :
+                    // le formulaire en fait une ligne chacun, comme dans les Réglages Système.
                     Section("Réglages") {
                         options
                     }
@@ -425,9 +442,11 @@ private struct ModuleDetailView: View {
 
 private struct GeneralSettingsView: View {
     @Bindable var settings: SettingsStore
+    let permissions: PermissionCenter
 
     @State private var screens: [ScreenOption] = ScreenOption.connected()
-    @State private var launchAtLogin = LaunchAtLogin.isEnabled
+    @State private var launchAtLogin = LaunchAtLogin.isEnabled || LaunchAtLogin.needsApproval
+    @State private var needsLoginApproval = LaunchAtLogin.needsApproval
     @State private var launchError: String?
     @State private var autoUpdate = Updater.shared.automaticallyChecks
     @State private var receivesBetas = Updater.shared.receivesBetas
@@ -452,6 +471,14 @@ private struct GeneralSettingsView: View {
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
                 Toggle("Ne pas cacher les menus de l'app active", isOn: $settings.settings.avoidAppMenus)
+                if settings.settings.avoidAppMenus, permissions.state(of: .accessibility) != .granted {
+                    LabeledContent {
+                        Button("Demander l'accès…") { permissions.request(.accessibility) }
+                    } label: {
+                        Label("Autorisation Accessibilité manquante", systemImage: "exclamationmark.triangle.fill")
+                            .foregroundStyle(.orange)
+                    }
+                }
                 Text("Sur un écran sans encoche, l'encoche se décale vers la droite si elle couvre les menus de l'app au premier plan. Sur une vraie encoche, l'activité compacte se rétrécit, ou se masque, pour laisser les menus visibles. Nécessite l'autorisation Accessibilité (Réglages Système > Confidentialité et sécurité > Accessibilité).")
                     .font(.caption)
                     .foregroundStyle(.secondary)
@@ -505,11 +532,24 @@ private struct GeneralSettingsView: View {
                         .foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
-                Toggle("Lancer Notchkit à l'ouverture de session", isOn: $launchAtLogin)
-                    .onChange(of: launchAtLogin) { _, newValue in
+                // Liaison directe (pas de `onChange`) : remettre l'état lu chez macOS ne relance pas la demande.
+                Toggle("Lancer Notchkit à l'ouverture de session", isOn: Binding(
+                    get: { launchAtLogin },
+                    set: { newValue in
                         launchError = LaunchAtLogin.setEnabled(newValue)
-                        launchAtLogin = LaunchAtLogin.isEnabled
+                        refreshLaunchAtLogin()
                     }
+                ))
+                if needsLoginApproval {
+                    LabeledContent {
+                        Button("Ouvrir les réglages d'ouverture…", action: LaunchAtLogin.openSystemSettings)
+                    } label: {
+                        Text("macOS attend votre accord dans Réglages Système > Général > Ouverture.")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
                 if let launchError {
                     Text(launchError)
                         .font(.caption)
@@ -546,6 +586,17 @@ private struct GeneralSettingsView: View {
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didChangeScreenParametersNotification)) { _ in
             screens = ScreenOption.connected()
         }
+        // Retour des Réglages Système : ouverture de session et autorisation relues.
+        .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
+            refreshLaunchAtLogin()
+            permissions.refresh()
+        }
+        .onAppear { permissions.refresh() }
+    }
+
+    private func refreshLaunchAtLogin() {
+        needsLoginApproval = LaunchAtLogin.needsApproval
+        launchAtLogin = LaunchAtLogin.isEnabled || needsLoginApproval
     }
 }
 
@@ -570,6 +621,8 @@ private struct ScreenOption: Identifiable {
 // MARK: - À propos
 
 private struct AboutSettingsView: View {
+    @State private var showsLicenses = false
+
     private var version: String {
         let info = Bundle.main.infoDictionary
         let short = info?["CFBundleShortVersionString"] as? String ?? "?"
@@ -579,38 +632,43 @@ private struct AboutSettingsView: View {
 
     var body: some View {
         VStack(spacing: 10) {
-            Image(systemName: "rectangle.topthird.inset.filled")
-                .font(.system(size: 44))
-                .foregroundStyle(.tint)
+            Image(nsImage: NSApp.applicationIconImage)
+                .resizable()
+                .frame(width: 96, height: 96)
+                .accessibilityHidden(true)
             Text("Notchkit")
                 .font(.title.bold())
             Text("Version \(version)")
                 .foregroundStyle(.secondary)
+                .textSelection(.enabled)
             Text("Transformez l'encoche de votre Mac en une zone interactive et modulaire.")
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.secondary)
                 .frame(maxWidth: 360)
 
+            HStack(spacing: 10) {
+                Link("Site du projet", destination: URL(string: "https://github.com/Mycate39/Notchkit")!)
+                Link("Signaler un problème", destination: URL(string: "https://github.com/Mycate39/Notchkit/issues")!)
+            }
+            .padding(.top, 8)
             Button("Licences des composants tiers") {
                 showsLicenses = true
             }
-            .padding(.top, 8)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .sheet(isPresented: $showsLicenses) {
             ThirdPartyLicensesView()
         }
     }
-
-    @State private var showsLicenses = false
 }
 
 /// Mentions de licence exigées par les composants tiers intégrés à l'app.
 private struct ThirdPartyLicensesView: View {
     @Environment(\.dismiss) private var dismiss
 
-    private var mediaRemoteLicense: String {
-        guard let url = Bundle.main.url(forResource: "LICENSE", withExtension: "txt"),
+    /// Texte d'une licence copiée dans les ressources de l'app (voir `project.yml`).
+    private func license(_ name: String) -> String {
+        guard let url = Bundle.main.url(forResource: name, withExtension: "txt"),
               let text = try? String(contentsOf: url, encoding: .utf8)
         else { return "" }
         return text
@@ -622,23 +680,24 @@ private struct ThirdPartyLicensesView: View {
                 .font(.headline)
             ScrollView {
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("MediaRemoteAdapter")
-                        .font(.subheadline.bold())
-                    Text("https://github.com/ungive/mediaremote-adapter")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                    Text(mediaRemoteLicense)
-                        .font(.system(size: 11, design: .monospaced))
-                        .textSelection(.enabled)
+                    component("MediaRemoteAdapter", link: "https://github.com/ungive/mediaremote-adapter")
+                    licenseText(license("LICENSE"))
 
                     Divider().padding(.vertical, 6)
 
-                    Text("Open-Meteo")
-                        .font(.subheadline.bold())
-                    Text("https://open-meteo.com")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                    component("Sparkle", link: "https://sparkle-project.org")
+                    licenseText(license("Sparkle-LICENSE"))
+
+                    Divider().padding(.vertical, 6)
+
+                    component("Open-Meteo", link: "https://open-meteo.com")
                     Text("Données météo fournies par Open-Meteo.com, sous licence Creative Commons Attribution 4.0 (CC BY 4.0).")
+                        .font(.system(size: 11))
+
+                    Divider().padding(.vertical, 6)
+
+                    component("LottieFiles", link: "https://lottiefiles.com/page/license")
+                    Text("Animations de déverrouillage adaptées de « Apple Face ID » (Mau Ali) et « Fingerprint Touch ID » (Himanshu Patel), sous Lottie Simple License.")
                         .font(.system(size: 11))
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -650,6 +709,24 @@ private struct ThirdPartyLicensesView: View {
             }
         }
         .padding(20)
-        .frame(width: 520, height: 380)
+        // Assez large pour les lignes de 80 caractères des licences.
+        .frame(width: 640, height: 460)
+    }
+
+    private func component(_ name: String, link: String) -> some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(verbatim: name)
+                .font(.subheadline.bold())
+            Text(verbatim: link)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .textSelection(.enabled)
+        }
+    }
+
+    private func licenseText(_ text: String) -> some View {
+        Text(verbatim: text)
+            .font(.system(size: 11, design: .monospaced))
+            .textSelection(.enabled)
     }
 }

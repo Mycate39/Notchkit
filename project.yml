@@ -42,6 +42,9 @@ targets:
         buildPhase: resources
       - path: ThirdParty/MediaRemoteAdapter/LICENSE.txt
         buildPhase: resources
+      # Licence de Sparkle (MIT), affichée dans Réglages > À propos.
+      - path: ThirdParty/Sparkle/Sparkle-LICENSE.txt
+        buildPhase: resources
     dependencies:
       - package: Sparkle
       # Le framework est intégré à l'app mais PAS lié : seul le script Perl le charge.

@@ -66,6 +66,7 @@
 		45047861D7DEFEE2EE7D1D94 /* CameraModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4322CAFCD667E5F799BC79 /* CameraModule.swift */; };
 		462973951D8FA880BC007AB9 /* TogglesModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D369EEE4621CABF42CF1F /* TogglesModule.swift */; };
 		470A42B4488C58ECA73F9216 /* DownloadsMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873CE6E9E837CC7493E679DD /* DownloadsMonitor.swift */; };
+		470BEE2802BC4A6E2F55879F /* Sparkle-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 96A1C8AA9E35ED61B4E24E47 /* Sparkle-LICENSE.txt */; };
 		474F1521AEEB244A5D70EA5E /* MusicViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F33792FD3837BD07B60F6A /* MusicViews.swift */; };
 		47D04EE53E7EB27F24B5C255 /* send.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4865DD8D0267CAE95D06A9 /* send.m */; };
 		48B09963CD8A874CEC291C6F /* speed.m in Sources */ = {isa = PBXBuildFile; fileRef = 578508F6730303155DAAC666 /* speed.m */; };
@@ -186,6 +187,7 @@
 		C4FE1995D4A34E59EE65174D /* DropZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01102B35009A7B86C3E3F66 /* DropZone.swift */; };
 		C550D3C753805E70B75EF80D /* NotchModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7C1CB75F1F1F6747AF33C3 /* NotchModule.swift */; };
 		C6CA29E3B81F258BF6263FE4 /* NotchLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140868E51134AF3924DFBEF3 /* NotchLayout.swift */; };
+		C8BED21697B5CC4BFDC38284 /* SettingsWindowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CBB2D5CB1401EAE83D6E169 /* SettingsWindowTests.swift */; };
 		CD24093DAC5A14CB6FEBA8DB /* AppVolumeTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAF727765EB9848F95CF1F /* AppVolumeTap.swift */; };
 		CD413F4300279B66E2D57F26 /* MascotSounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09029F2B0FD9C04994B0813 /* MascotSounds.swift */; };
 		CF7166A65434F3E4E1E01E77 /* PowerSourceMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C50F8106E1C8E43432EE06 /* PowerSourceMonitor.swift */; };
@@ -390,11 +392,13 @@
 		8E52C7E24AFAF3440B483068 /* EntitlementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitlementManager.swift; sourceTree = "<group>"; };
 		938B1E14A3EA48C00556D332 /* WeatherModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModule.swift; sourceTree = "<group>"; };
 		93B0FE375C12A1424391655D /* CalendarModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarModule.swift; sourceTree = "<group>"; };
+		96A1C8AA9E35ED61B4E24E47 /* Sparkle-LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Sparkle-LICENSE.txt"; sourceTree = "<group>"; };
 		980E81038BC99D26608D1A6B /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		989E4B90FFB50F9F50B284A7 /* HealthModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthModule.swift; sourceTree = "<group>"; };
 		98A6844ED04375186B9067D3 /* NotchkitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchkitApp.swift; sourceTree = "<group>"; };
 		98D0737A1B9F568EC19F2160 /* MarkdownText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownText.swift; sourceTree = "<group>"; };
 		98FB71F04AAECE1E8BD0926A /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		9CBB2D5CB1401EAE83D6E169 /* SettingsWindowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowTests.swift; sourceTree = "<group>"; };
 		9E6A11EA97C90A4B6372215A /* Debounce.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Debounce.m; sourceTree = "<group>"; };
 		9F21C814CD3DE60B75B2C723 /* now_playing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = now_playing.h; sourceTree = "<group>"; };
 		A097E4F52274645DD920E62C /* ShelfTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelfTests.swift; sourceTree = "<group>"; };
@@ -575,6 +579,7 @@
 				FC306A7DAC40B0ECC5A20A71 /* ModuleManagerTests.swift */,
 				DE6111A0CC43713D888AAAB4 /* MusicTests.swift */,
 				EAE86DB6076C7D573D4DDA25 /* PermissionTests.swift */,
+				9CBB2D5CB1401EAE83D6E169 /* SettingsWindowTests.swift */,
 				A097E4F52274645DD920E62C /* ShelfTests.swift */,
 				82E32A0CD723246EBCF3F295 /* SpectrumTests.swift */,
 				1540EC4F1FC0F674F96EB7CE /* SystemHUDTests.swift */,
@@ -755,6 +760,14 @@
 				C12CD8AFBB2574643418518B /* ClockModule.swift */,
 			);
 			path = Clock;
+			sourceTree = "<group>";
+		};
+		65140F51A441EC3AB58D7987 /* Sparkle */ = {
+			isa = PBXGroup;
+			children = (
+				96A1C8AA9E35ED61B4E24E47 /* Sparkle-LICENSE.txt */,
+			);
+			path = Sparkle;
 			sourceTree = "<group>";
 		};
 		65F0372AD1F51D62A5147EAF /* utility */ = {
@@ -960,6 +973,7 @@
 			isa = PBXGroup;
 			children = (
 				CC147AEC8AC4A42D8D44CB27 /* MediaRemoteAdapter */,
+				65140F51A441EC3AB58D7987 /* Sparkle */,
 			);
 			path = ThirdParty;
 			sourceTree = "<group>";
@@ -1359,6 +1373,7 @@
 				193A99D444FE4A6B2A2FCBB7 /* InfoPlist.xcstrings in Resources */,
 				89645F2C235F1A1C71CD6FAE /* LICENSE.txt in Resources */,
 				A332BE0B606743A7032D6F14 /* Localizable.xcstrings in Resources */,
+				470BEE2802BC4A6E2F55879F /* Sparkle-LICENSE.txt in Resources */,
 				39BEC2EFFC4542547FEC120B /* TouchIDPrompt.mov in Resources */,
 				9534909608C6D366FB3BCE9F /* mediaremote-adapter.pl in Resources */,
 			);
@@ -1573,6 +1588,7 @@
 				601D9B8C8D44ED81CC990946 /* ModuleManagerTests.swift in Sources */,
 				E954032D743568B2082B51F8 /* MusicTests.swift in Sources */,
 				A6F605C9057DE7C49215268B /* PermissionTests.swift in Sources */,
+				C8BED21697B5CC4BFDC38284 /* SettingsWindowTests.swift in Sources */,
 				AC7269EC36E5FC05D7BD7336 /* ShelfTests.swift in Sources */,
 				0CE35712354CA83AF734444A /* SpectrumTests.swift in Sources */,
 				5745C9E89B5256A77822D3EF /* SystemHUDTests.swift in Sources */,

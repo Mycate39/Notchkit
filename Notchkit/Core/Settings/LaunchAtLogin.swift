@@ -8,6 +8,16 @@ enum LaunchAtLogin {
         SMAppService.mainApp.status == .enabled
     }
 
+    /// Lancement demandé, mais macOS attend l'accord de la personne (Réglages Système > Général >
+    /// Ouverture) : l'interrupteur reste activé, avec une explication.
+    static var needsApproval: Bool {
+        SMAppService.mainApp.status == .requiresApproval
+    }
+
+    static func openSystemSettings() {
+        SMAppService.openSystemSettingsLoginItems()
+    }
+
     /// Active ou désactive le lancement automatique. Renvoie un message d'erreur en cas d'échec.
     @discardableResult
     static func setEnabled(_ enabled: Bool) -> String? {

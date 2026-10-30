@@ -226,7 +226,7 @@ struct SystemHUDSettingsView: View {
     @Bindable var module: SystemHUDModule
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        Group {
             Toggle("Remplacer l'indicateur de volume et de luminosité de macOS", isOn: $module.replaceSystemHUD)
 
             if module.replaceSystemHUD {

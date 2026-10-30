@@ -135,7 +135,7 @@ struct AirPodsSettingsView: View {
     @Bindable var module: AirPodsModule
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        Group {
             Toggle("Animation à la connexion", isOn: $module.alertOnConnect)
             Toggle("Animation à la déconnexion", isOn: $module.alertOnDisconnect)
         }

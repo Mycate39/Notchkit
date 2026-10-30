@@ -356,7 +356,7 @@ struct UnlockSettingsView: View {
     @Bindable var module: UnlockModule
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        Group {
             Toggle("Animation Face ID au déverrouillage du Mac", isOn: $module.animateUnlock)
             Toggle("Animation pendant une demande Touch ID", isOn: $module.animateTouchID)
             Toggle("Animation pendant une demande de mot de passe", isOn: $module.animatePassword)

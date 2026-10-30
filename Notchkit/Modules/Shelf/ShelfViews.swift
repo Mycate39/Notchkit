@@ -275,7 +275,7 @@ struct ShelfSettingsView: View {
     @Bindable var module: ShelfModule
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        Group {
             Toggle("Retirer les fichiers après 5 minutes", isOn: $module.autoClear)
             Text("Le temps de récupérer un fichier : l'étagère s'affiche alors comme une activité en cours, et ses fichiers apparaissent au survol de sa bulle. Retirer un fichier de l'étagère ne le supprime pas.")
                 .font(.caption)

@@ -481,7 +481,7 @@ struct LiveActivitiesSettingsView: View {
     @Bindable var module: LiveActivitiesModule
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        Group {
             Toggle("Son à la fin d'un minuteur", isOn: $module.playSound)
             Toggle("Suivre les téléchargements", isOn: $module.trackDownloads)
             Text("Affiche la progression des téléchargements de Brave, Chrome, Safari et Firefox. macOS demande l'accès au dossier Téléchargements la première fois.")

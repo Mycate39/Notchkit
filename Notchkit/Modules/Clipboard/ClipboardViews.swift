@@ -132,7 +132,7 @@ struct ClipboardSettingsView: View {
     @Bindable var module: ClipboardModule
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        Group {
             Toggle("Conserver l'historique après le redémarrage de l'app", isOn: $module.keepHistory)
             if let status = module.accessStatus {
                 Text(status)

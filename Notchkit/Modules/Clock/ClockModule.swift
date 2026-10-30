@@ -146,7 +146,7 @@ private struct ClockSettingsView: View {
     @Bindable var module: ClockModule
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        Group {
             Toggle("Afficher l'heure quand l'encoche est repliée", isOn: $module.showInCompact)
             Picker("Second fuseau horaire", selection: $module.secondaryTimeZoneID) {
                 Text("Aucun").tag(String?.none)

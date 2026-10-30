@@ -51,6 +51,14 @@ struct CalendarScheduleTests {
     }
 }
 
+struct ProcessNameTests {
+    @Test func nomSansPrecisionEntreParentheses() {
+        #expect(SystemFormat.shortProcessName("Claude Helper (Renderer)") == "Claude Helper")
+        #expect(SystemFormat.shortProcessName("Notchkit") == "Notchkit")
+        #expect(SystemFormat.shortProcessName("(launchd)") == "(launchd)")
+    }
+}
+
 /// Ligne de détail de la météo : raccourcie plutôt que coupée sur une carte étroite.
 struct WeatherDetailLineTests {
     @Test @MainActor func versionsDeLaPlusCompleteALaPlusCourte() {

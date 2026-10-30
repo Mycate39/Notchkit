@@ -108,32 +108,45 @@ struct DashboardExpandedView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
+    /// Jauges avec leur nom, ou toutes en icônes seules si un nom ne tient pas : jamais « Proce… », et
+    /// jamais un mélange de noms et d'icônes.
     private func gauges(count: Int) -> some View {
+        ViewThatFits(in: .horizontal) {
+            gaugeColumn(count: count, showsNames: true)
+            gaugeColumn(count: count, showsNames: false)
+        }
+    }
+
+    private func gaugeColumn(count: Int, showsNames: Bool) -> some View {
         let s = sampler.snapshot
         return VStack(alignment: .leading, spacing: 6) {
-            gauge("cpu", String(localized: "Processeur"), s.cpuTotal)
+            gauge("cpu", String(localized: "Processeur"), s.cpuTotal, showsName: showsNames)
             gauge("memorychip", String(localized: "Mémoire"),
-                  s.memoryTotal > 0 ? Double(s.memoryUsed) / Double(s.memoryTotal) : 0)
+                  s.memoryTotal > 0 ? Double(s.memoryUsed) / Double(s.memoryTotal) : 0, showsName: showsNames)
             if count >= 3 {
                 gauge("internaldrive", String(localized: "Disque"),
-                      s.diskTotal > 0 ? 1 - Double(s.diskFree) / Double(s.diskTotal) : 0)
+                      s.diskTotal > 0 ? 1 - Double(s.diskFree) / Double(s.diskTotal) : 0, showsName: showsNames)
             }
             if count >= 4 {
                 Label(SystemMath.formattedRate(s.networkIn), systemImage: "arrow.down")
                     .font(.system(size: 10, weight: .medium).monospacedDigit())
                     .foregroundStyle(.white.opacity(0.7))
+                    .fixedSize()
             }
         }
     }
 
-    private func gauge(_ symbol: String, _ title: String, _ value: Double) -> some View {
+    private func gauge(_ symbol: String, _ title: String, _ value: Double, showsName: Bool) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             HStack {
-                // Nom de la jauge, ou son icône seule si la place manque (« Proce… »).
-                ViewThatFits(in: .horizontal) {
-                    Label(title, systemImage: symbol).fixedSize()
-                    Image(systemName: symbol).accessibilityLabel(Text(title))
+                Group {
+                    if showsName {
+                        Label(title, systemImage: symbol)
+                    } else {
+                        Image(systemName: symbol).accessibilityLabel(Text(title))
+                    }
                 }
+                .fixedSize()
                 .help(title)
                 Spacer(minLength: 4)
                 Text(SystemFormat.percent(value)).monospacedDigit().fixedSize()

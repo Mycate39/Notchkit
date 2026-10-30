@@ -40,6 +40,14 @@ extension View {
 }
 
 enum SystemFormat {
+    /// Nom de processus sans sa précision entre parenthèses : « Claude Helper (Renderer) » → « Claude Helper »
+    /// (fonction pure, testée).
+    static func shortProcessName(_ name: String) -> String {
+        guard name.hasSuffix(")"), let open = name.lastIndex(of: "(") else { return name }
+        let short = name[..<open].trimmingCharacters(in: .whitespaces)
+        return short.isEmpty ? name : short
+    }
+
     static func percent(_ value: Double) -> String {
         value.formatted(.percent.precision(.fractionLength(0)))
     }
@@ -94,9 +102,12 @@ struct SystemMonitorExpandedView: View {
                     Divider().overlay(.white.opacity(0.15))
                     ForEach(s.topProcesses.prefix(3)) { process in
                         HStack(spacing: 4) {
-                            Text(process.name)
-                                .lineLimit(1)
-                                .truncationMode(.middle)
+                            // Nom entier, puis sans sa précision entre parenthèses, plutôt que « Claude…enderer) ».
+                            ViewThatFits(in: .horizontal) {
+                                Text(process.name).fixedSize()
+                                Text(SystemFormat.shortProcessName(process.name)).fixedSize()
+                                Text(SystemFormat.shortProcessName(process.name)).lineLimit(1)
+                            }
                             Spacer(minLength: 4)
                             Text(SystemFormat.percent(process.cpu))
                                 .monospacedDigit()

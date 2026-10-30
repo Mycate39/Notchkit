@@ -1,134 +1,6 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
-    "Autorisation Accessibilité manquante" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Accessibility permission missing"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Autorisation Accessibilité manquante"
-          }
-        }
-      }
-    },
-    "Ouvrir les réglages d'ouverture…" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Login Items Settings…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ouvrir les réglages d'ouverture…"
-          }
-        }
-      }
-    },
-    "macOS attend votre accord dans Réglages Système > Général > Ouverture." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "macOS is waiting for your approval in System Settings > General > Login Items."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "macOS attend votre accord dans Réglages Système > Général > Ouverture."
-          }
-        }
-      }
-    },
-    "Site du projet" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Project Website"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Site du projet"
-          }
-        }
-      }
-    },
-    "Signaler un problème" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Report a Problem"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Signaler un problème"
-          }
-        }
-      }
-    },
-    "Animations de déverrouillage adaptées de « Apple Face ID » (Mau Ali) et « Fingerprint Touch ID » (Himanshu Patel), sous Lottie Simple License." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unlock animations adapted from “Apple Face ID” (Mau Ali) and “Fingerprint Touch ID” (Himanshu Patel), under the Lottie Simple License."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Animations de déverrouillage adaptées de « Apple Face ID » (Mau Ali) et « Fingerprint Touch ID » (Himanshu Patel), sous Lottie Simple License."
-          }
-        }
-      }
-    },
-    "Couleur personnalisée (boutons, barres de progression)" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Custom color (buttons, progress bars)"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Couleur personnalisée (boutons, barres de progression)"
-          }
-        }
-      }
-    },
-    "Glissez les widgets pour les réordonner ou les changer de page, et une page par sa poignée pour la déplacer avec ses widgets. Cliquez sur un widget pour changer sa taille. Astuce : un clic droit sur un widget dans l'encoche offre les mêmes options. Le lecteur de musique reste toujours la première page de l'encoche, avant celles-ci." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Drag widgets to reorder them or move them to another page, and drag a page by its handle to move it with its widgets. Click a widget to change its size. Tip: right-clicking a widget in the notch offers the same options. The music player always stays the notch's first page, before these."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Glissez les widgets pour les réordonner ou les changer de page, et une page par sa poignée pour la déplacer avec ses widgets. Cliquez sur un widget pour changer sa taille. Astuce : un clic droit sur un widget dans l'encoche offre les mêmes options. Le lecteur de musique reste toujours la première page de l'encoche, avant celles-ci."
-          }
-        }
-      }
-    },
     "" : {
 
     },
@@ -2024,6 +1896,22 @@
         }
       }
     },
+    "Animations de déverrouillage adaptées de « Apple Face ID » (Mau Ali) et « Fingerprint Touch ID » (Himanshu Patel), sous Lottie Simple License." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlock animations adapted from “Apple Face ID” (Mau Ali) and “Fingerprint Touch ID” (Himanshu Patel), under the Lottie Simple License."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animations de déverrouillage adaptées de « Apple Face ID » (Mau Ali) et « Fingerprint Touch ID » (Himanshu Patel), sous Lottie Simple License."
+          }
+        }
+      }
+    },
     "Animations façon Face ID au déverrouillage, pendant Touch ID et pendant la saisie d'un mot de passe." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -3035,6 +2923,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Automatisation"
+          }
+        }
+      }
+    },
+    "Autorisation Accessibilité manquante" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accessibility permission missing"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorisation Accessibilité manquante"
           }
         }
       }
@@ -4462,7 +4366,24 @@
         }
       }
     },
+    "Commencez avec une disposition prête à l'emploi : l'encoche prend la taille des widgets de chaque page. Vous pourrez ensuite ajouter, retirer et redimensionner chaque widget dans les réglages, et choisir dans Apparence un fond noir ou en verre." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start with a ready-made layout: the notch takes the size of each page's widgets. You can then add, remove and resize each widget in Settings, and pick a black or glass background in Appearance."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commencez avec une disposition prête à l'emploi : l'encoche prend la taille des widgets de chaque page. Vous pourrez ensuite ajouter, retirer et redimensionner chaque widget dans les réglages, et choisir dans Apparence un fond noir ou en verre."
+          }
+        }
+      }
+    },
     "Commencez avec une disposition prête à l'emploi. Vous pourrez ensuite ajouter, retirer et redimensionner chaque widget dans les réglages : l'encoche prend la taille de ses widgets. Dans Apparence, choisissez aussi son fond, noir ou en verre." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -4817,6 +4738,7 @@
       }
     },
     "Convertir en MP4" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -5025,7 +4947,24 @@
         }
       }
     },
+    "Couleur personnalisée (boutons, barres de progression)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Custom color (buttons, progress bars)"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couleur personnalisée (boutons, barres de progression)"
+          }
+        }
+      }
+    },
     "Couleur personnalisée (onglets, barres de progression)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6823,7 +6762,24 @@
         }
       }
     },
+    "Faites glisser ce fichier sur l'encoche, puis sur « Garder dans l'étagère »." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag this file onto the notch, then onto “Keep on the Shelf”."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faites glisser ce fichier sur l'encoche, puis sur « Garder dans l'étagère »."
+          }
+        }
+      }
+    },
     "Faites glisser ce fichier sur l'encoche, puis sur Étagère." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6856,6 +6812,7 @@
       }
     },
     "Faites glisser des fichiers sur l'encoche. L'étagère les garde 5 minutes, le temps de les déposer ailleurs ; Convertir change leur format ; AirDrop les envoie à un appareil proche." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -6867,6 +6824,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Faites glisser des fichiers sur l'encoche. L'étagère les garde 5 minutes, le temps de les déposer ailleurs ; Convertir change leur format ; AirDrop les envoie à un appareil proche."
+          }
+        }
+      }
+    },
+    "Faites glisser des fichiers sur l'encoche. L'étagère les garde 5 minutes, le temps de les déposer ailleurs ; Convertir change leur format (image, son, vidéo, document) ; AirDrop les envoie à un appareil proche." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag files onto the notch. The shelf keeps them for 5 minutes, long enough to drop them somewhere else; Convert changes their format (image, sound, video, document); AirDrop sends them to a nearby device."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faites glisser des fichiers sur l'encoche. L'étagère les garde 5 minutes, le temps de les déposer ailleurs ; Convertir change leur format (image, son, vidéo, document) ; AirDrop les envoie à un appareil proche."
           }
         }
       }
@@ -7311,6 +7284,7 @@
       }
     },
     "Glissez les widgets pour les réordonner ou les changer de page, et une page par sa poignée pour la déplacer avec ses widgets. Cliquez sur un widget pour changer sa taille. Astuce : un clic droit sur un widget dans l'encoche offre les mêmes options." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7322,6 +7296,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Glissez les widgets pour les réordonner ou les changer de page, et une page par sa poignée pour la déplacer avec ses widgets. Cliquez sur un widget pour changer sa taille. Astuce : un clic droit sur un widget dans l'encoche offre les mêmes options."
+          }
+        }
+      }
+    },
+    "Glissez les widgets pour les réordonner ou les changer de page, et une page par sa poignée pour la déplacer avec ses widgets. Cliquez sur un widget pour changer sa taille. Astuce : un clic droit sur un widget dans l'encoche offre les mêmes options. Le lecteur de musique reste toujours la première page de l'encoche, avant celles-ci." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag widgets to reorder them or move them to another page, and drag a page by its handle to move it with its widgets. Click a widget to change its size. Tip: right-clicking a widget in the notch offers the same options. The music player always stays the notch's first page, before these."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Glissez les widgets pour les réordonner ou les changer de page, et une page par sa poignée pour la déplacer avec ses widgets. Cliquez sur un widget pour changer sa taille. Astuce : un clic droit sur un widget dans l'encoche offre les mêmes options. Le lecteur de musique reste toujours la première page de l'encoche, avant celles-ci."
           }
         }
       }
@@ -7620,6 +7610,7 @@
       }
     },
     "https://github.com/ungive/mediaremote-adapter" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -7636,6 +7627,7 @@
       }
     },
     "https://open-meteo.com" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8170,6 +8162,22 @@
         }
       }
     },
+    "L'activité en cours s'affiche autour de l'encoche, entourée de sa couleur ; la musique passe devant les autres, qui deviennent des bulles. Survolez une bulle pour la commander sans ouvrir l'encoche : temps restant et pause du minuteur, réponse à Claude Code. La musique reste aussi sur l'écran verrouillé." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The current activity appears around the notch, outlined in its color; music comes first, and the others become bubbles. Hover a bubble to control it without opening the notch: a timer's time left and pause, or an answer to Claude Code. Music also stays on the lock screen."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'activité en cours s'affiche autour de l'encoche, entourée de sa couleur ; la musique passe devant les autres, qui deviennent des bulles. Survolez une bulle pour la commander sans ouvrir l'encoche : temps restant et pause du minuteur, réponse à Claude Code. La musique reste aussi sur l'écran verrouillé."
+          }
+        }
+      }
+    },
     "L'analyse du son n'a pas pu démarrer : %@" : {
       "localizations" : {
         "en" : {
@@ -8401,6 +8409,7 @@
       }
     },
     "La page Agents montre le travail de Claude Code : ses étapes, le fichier modifié, le terminal. Quand il demande une autorisation ou pose une question, répondez dans l'encoche. Une mascotte, à choisir parmi 33, l'accompagne." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -8412,6 +8421,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "La page Agents montre le travail de Claude Code : ses étapes, le fichier modifié, le terminal. Quand il demande une autorisation ou pose une question, répondez dans l'encoche. Une mascotte, à choisir parmi 33, l'accompagne."
+          }
+        }
+      }
+    },
+    "La page Agents suit le travail de Claude Code : ses étapes, le fichier modifié, le terminal. Quand il demande une autorisation, sa bulle s'entoure d'ambre : survolez-la pour autoriser ou refuser, ou cliquez pour répondre dans la page. Une mascotte, à choisir parmi 33, l'accompagne." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Agents page follows Claude Code's work: its steps, the file being edited, the terminal. When it asks for permission, its bubble gets an amber ring: hover it to allow or deny, or click to answer on the page. A mascot, chosen from 33, keeps it company."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La page Agents suit le travail de Claude Code : ses étapes, le fichier modifié, le terminal. Quand il demande une autorisation, sa bulle s'entoure d'ambre : survolez-la pour autoriser ou refuser, ou cliquez pour répondre dans la page. Une mascotte, à choisir parmi 33, l'accompagne."
           }
         }
       }
@@ -9159,6 +9184,22 @@
         }
       }
     },
+    "macOS attend votre accord dans Réglages Système > Général > Ouverture." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS is waiting for your approval in System Settings > General > Login Items."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS attend votre accord dans Réglages Système > Général > Ouverture."
+          }
+        }
+      }
+    },
     "macOS demandera l'autorisation lors de la prochaine copie." : {
       "localizations" : {
         "en" : {
@@ -9256,6 +9297,7 @@
       }
     },
     "MediaRemoteAdapter" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10015,6 +10057,7 @@
       }
     },
     "Musique, minuteur, téléchargement : l'activité en cours s'affiche autour de l'encoche, entourée de sa couleur. Les autres deviennent des bulles. Survolez une bulle pour la commander sans ouvrir l'encoche : pause, morceau suivant, arrêt du minuteur." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10222,7 +10265,24 @@
         }
       }
     },
+    "Notchkit est prêt. Vous retrouverez les réglages et ce tutoriel dans le menu Notchkit de la barre des menus ; les réglages aussi sous la roue dentée de l'encoche ouverte." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit is ready. You'll find Settings and this tutorial in the Notchkit menu in the menu bar; Settings are also under the gear of the open notch."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit est prêt. Vous retrouverez les réglages et ce tutoriel dans le menu Notchkit de la barre des menus ; les réglages aussi sous la roue dentée de l'encoche ouverte."
+          }
+        }
+      }
+    },
     "Notchkit est prêt. Vous retrouverez les réglages et ce tutoriel dans le menu Notchkit de la barre des menus." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10271,6 +10331,7 @@
       }
     },
     "Notchkit transforme l'encoche de votre Mac en un espace vivant : musique, minuteurs, batterie, météo, calendrier et bien plus. Sur un Mac sans encoche, une pastille flottante prend sa place." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10282,6 +10343,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notchkit transforme l'encoche de votre Mac en un espace vivant : musique, minuteurs, batterie, météo, calendrier et bien plus. Sur un Mac sans encoche, une pastille flottante prend sa place."
+          }
+        }
+      }
+    },
+    "Notchkit transforme l'encoche de votre Mac en un espace vivant : musique, minuteurs, Claude Code, fichiers, widgets et bien plus. Sur un Mac sans encoche, une pastille flottante prend sa place." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit turns your Mac's notch into a living space: music, timers, Claude Code, files, widgets and much more. On a Mac without a notch, a floating pill takes its place."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit transforme l'encoche de votre Mac en un espace vivant : musique, minuteurs, Claude Code, fichiers, widgets et bien plus. Sur un Mac sans encoche, une pastille flottante prend sa place."
           }
         }
       }
@@ -10501,6 +10578,7 @@
       }
     },
     "Open-Meteo" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10694,6 +10772,22 @@
         }
       }
     },
+    "Ouvrir les réglages d'ouverture…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Login Items Settings…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir les réglages d'ouverture…"
+          }
+        }
+      }
+    },
     "Ouvrir les réglages de confidentialité" : {
       "localizations" : {
         "en" : {
@@ -10771,6 +10865,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ouvrir sur GitHub"
+          }
+        }
+      }
+    },
+    "Ouvrir…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir…"
           }
         }
       }
@@ -11180,7 +11290,24 @@
         }
       }
     },
+    "Placez le pointeur sur l'encoche : elle s'ouvre sur le lecteur de musique, et vos widgets suivent sur les pages d'après. Balayez avec deux doigts sur le trackpad pour changer de page. Éloignez le pointeur pour la refermer." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Move the pointer over the notch: it opens on the music player, with your widgets on the following pages. Swipe with two fingers on the trackpad to change pages. Move the pointer away to close it."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Placez le pointeur sur l'encoche : elle s'ouvre sur le lecteur de musique, et vos widgets suivent sur les pages d'après. Balayez avec deux doigts sur le trackpad pour changer de page. Éloignez le pointeur pour la refermer."
+          }
+        }
+      }
+    },
     "Placez le pointeur sur l'encoche : elle se déplie et affiche vos widgets. Balayez avec deux doigts sur le trackpad pour changer de page. Éloignez le pointeur pour la refermer." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -12100,6 +12227,7 @@
       }
     },
     "Réglages de Notchkit" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -13021,6 +13149,22 @@
         }
       }
     },
+    "Signaler un problème" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Report a Problem"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signaler un problème"
+          }
+        }
+      }
+    },
     "Simuler une encoche" : {
       "localizations" : {
         "en" : {
@@ -13049,6 +13193,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Singapour"
+          }
+        }
+      }
+    },
+    "Site du projet" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Project Website"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Site du projet"
           }
         }
       }

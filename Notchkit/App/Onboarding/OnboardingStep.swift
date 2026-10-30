@@ -39,23 +39,23 @@ enum OnboardingStep: Int, CaseIterable, Identifiable, Sendable {
     var message: LocalizedStringResource {
         switch self {
         case .welcome:
-            "Notchkit transforme l'encoche de votre Mac en un espace vivant : musique, minuteurs, batterie, météo, calendrier et bien plus. Sur un Mac sans encoche, une pastille flottante prend sa place."
+            "Notchkit transforme l'encoche de votre Mac en un espace vivant : musique, minuteurs, Claude Code, fichiers, widgets et bien plus. Sur un Mac sans encoche, une pastille flottante prend sa place."
         case .hover:
-            "Placez le pointeur sur l'encoche : elle se déplie et affiche vos widgets. Balayez avec deux doigts sur le trackpad pour changer de page. Éloignez le pointeur pour la refermer."
+            "Placez le pointeur sur l'encoche : elle s'ouvre sur le lecteur de musique, et vos widgets suivent sur les pages d'après. Balayez avec deux doigts sur le trackpad pour changer de page. Éloignez le pointeur pour la refermer."
         case .activities:
-            "Musique, minuteur, téléchargement : l'activité en cours s'affiche autour de l'encoche, entourée de sa couleur. Les autres deviennent des bulles. Survolez une bulle pour la commander sans ouvrir l'encoche : pause, morceau suivant, arrêt du minuteur."
+            "L'activité en cours s'affiche autour de l'encoche, entourée de sa couleur ; la musique passe devant les autres, qui deviennent des bulles. Survolez une bulle pour la commander sans ouvrir l'encoche : temps restant et pause du minuteur, réponse à Claude Code. La musique reste aussi sur l'écran verrouillé."
         case .files:
-            "Faites glisser des fichiers sur l'encoche. L'étagère les garde 5 minutes, le temps de les déposer ailleurs ; Convertir change leur format ; AirDrop les envoie à un appareil proche."
+            "Faites glisser des fichiers sur l'encoche. L'étagère les garde 5 minutes, le temps de les déposer ailleurs ; Convertir change leur format (image, son, vidéo, document) ; AirDrop les envoie à un appareil proche."
         case .agents:
-            "La page Agents montre le travail de Claude Code : ses étapes, le fichier modifié, le terminal. Quand il demande une autorisation ou pose une question, répondez dans l'encoche. Une mascotte, à choisir parmi 33, l'accompagne."
+            "La page Agents suit le travail de Claude Code : ses étapes, le fichier modifié, le terminal. Quand il demande une autorisation, sa bulle s'entoure d'ambre : survolez-la pour autoriser ou refuser, ou cliquez pour répondre dans la page. Une mascotte, à choisir parmi 33, l'accompagne."
         case .widgets:
-            "Commencez avec une disposition prête à l'emploi. Vous pourrez ensuite ajouter, retirer et redimensionner chaque widget dans les réglages : l'encoche prend la taille de ses widgets. Dans Apparence, choisissez aussi son fond, noir ou en verre."
+            "Commencez avec une disposition prête à l'emploi : l'encoche prend la taille des widgets de chaque page. Vous pourrez ensuite ajouter, retirer et redimensionner chaque widget dans les réglages, et choisir dans Apparence un fond noir ou en verre."
         case .permissions:
             "Notchkit ne demande une autorisation que lorsqu'une fonction en a besoin, et toutes sont facultatives. L'Accessibilité est la plus utile : donnez-la dès maintenant."
         case .tryIt:
             "Faites ces gestes sur la vraie encoche, en haut de l'écran. Chacun se coche tout seul."
         case .done:
-            "Notchkit est prêt. Vous retrouverez les réglages et ce tutoriel dans le menu Notchkit de la barre des menus."
+            "Notchkit est prêt. Vous retrouverez les réglages et ce tutoriel dans le menu Notchkit de la barre des menus ; les réglages aussi sous la roue dentée de l'encoche ouverte."
         }
     }
 }
@@ -82,9 +82,18 @@ enum OnboardingTrialTask: String, CaseIterable, Identifiable, Sendable {
         switch self {
         case .open: "Placez le pointeur dessus."
         case .swipe: "Encoche ouverte, balayez avec deux doigts."
-        case .drop: "Faites glisser ce fichier sur l'encoche, puis sur Étagère."
+        case .drop: "Faites glisser ce fichier sur l'encoche, puis sur « Garder dans l'étagère »."
         case .pause: "Lancez-en un, puis survolez-le ou ouvrez l'encoche."
         }
+    }
+
+    /// Délai après l'ouverture de l'encoche pendant lequel un changement de page vient de l'ouverture
+    /// (page de l'activité en cours), pas d'un balayage.
+    static let openingPageChangeWindow: TimeInterval = 0.5
+
+    /// Changement de page fait par la personne (fonction pure, testée).
+    static func isSwipe(openedAt: Date, now: Date) -> Bool {
+        now.timeIntervalSince(openedAt) > openingPageChangeWindow
     }
 
     /// Gestes possibles avec la configuration actuelle (fonction pure, testée) : changer de page

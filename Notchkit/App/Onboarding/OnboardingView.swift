@@ -26,6 +26,7 @@ final class OnboardingWindowController: NSObject, NSWindowDelegate {
                 manager: manager,
                 viewModel: viewModel,
                 mascot: settings.settings.mascot,
+                appearance: settings.settings.appearance,
                 openSettings: { [weak self] tab in self?.openSettings(tab) },
                 finish: { [weak self] in self?.window?.close() }
             )
@@ -56,6 +57,8 @@ struct OnboardingView: View {
     let manager: ModuleManager
     let viewModel: NotchViewModel
     let mascot: MascotDesign
+    /// Apparence de l'encoche réelle : les démonstrations reprennent son fond (noir ou verre).
+    let appearance: NotchAppearance
     let openSettings: (SettingsTab) -> Void
     let finish: () -> Void
 
@@ -64,12 +67,13 @@ struct OnboardingView: View {
     /// Avance (vers la droite) ou recule : sens de la transition entre étapes.
     @State private var isForward = true
 
-    init(manager: ModuleManager, viewModel: NotchViewModel, mascot: MascotDesign,
+    init(manager: ModuleManager, viewModel: NotchViewModel, mascot: MascotDesign, appearance: NotchAppearance,
          openSettings: @escaping (SettingsTab) -> Void, finish: @escaping () -> Void,
          startAt step: OnboardingStep = .welcome) {
         self.manager = manager
         self.viewModel = viewModel
         self.mascot = mascot
+        self.appearance = appearance
         self.openSettings = openSettings
         self.finish = finish
         _step = State(initialValue: step)
@@ -78,7 +82,7 @@ struct OnboardingView: View {
     var body: some View {
         VStack(spacing: 0) {
             demo
-                .padding(.top, 36)
+                .padding(.top, 30)
                 .id(step)
                 .transition(.asymmetric(insertion: .move(edge: isForward ? .trailing : .leading).combined(with: .opacity),
                                         removal: .move(edge: isForward ? .leading : .trailing).combined(with: .opacity)))
@@ -103,8 +107,10 @@ struct OnboardingView: View {
             Spacer(minLength: 16)
             navigation
         }
-        .frame(width: 560, height: 560)
+        // Assez haut pour l'essai guidé à quatre gestes et son message de fin.
+        .frame(width: 560, height: 600)
         .background(Color(white: 0.08))
+        .environment(\.onboardingAppearance, appearance)
         .tint(StandBy.defaultAccent.color)
     }
 
@@ -115,13 +121,13 @@ struct OnboardingView: View {
         switch step {
         case .welcome: WelcomeDemo()
         case .hover: HoverDemo()
-        case .activities: ActivitiesDemo()
+        case .activities: ActivitiesDemo(mascot: mascot)
         case .files: FilesDemo()
         case .agents: AgentsDemo(mascot: mascot)
-        case .widgets: SymbolDemo(symbol: "square.grid.2x2.fill", tint: StandBy.defaultAccent.color)
+        case .widgets: WidgetsDemo()
         case .permissions: PermissionsDemo(center: permissions)
         case .tryIt: TryItDemo()
-        case .done: SymbolDemo(symbol: "checkmark.circle.fill", tint: .green)
+        case .done: DoneDemo(mascot: mascot)
         }
     }
 
@@ -191,43 +197,78 @@ struct OnboardingView: View {
 // MARK: - Dispositions
 
 /// Choix d'une disposition prête à l'emploi, appliquée tout de suite (annulable dans les réglages).
+/// Tuiles compactes en grille (trois puis deux) : toutes visibles, sans défilement ni carte coupée.
 private struct OnboardingPresets: View {
     let manager: ModuleManager
     let openLayoutSettings: () -> Void
     @State private var applied: String?
 
+    private static let columns = 3
+
     var body: some View {
+        let presets = LayoutPreset.all
         VStack(spacing: 8) {
-            ScrollView(.horizontal) {
+            ForEach(Array(stride(from: 0, to: presets.count, by: Self.columns)), id: \.self) { start in
                 HStack(spacing: 8) {
-                    ForEach(LayoutPreset.all) { preset in
-                        Button {
-                            withAnimation(.snappy) {
-                                manager.apply(preset)
-                                applied = preset.id
-                            }
-                        } label: {
-                            PresetCard(preset: preset)
-                                .overlay(alignment: .topTrailing) {
-                                    if applied == preset.id {
-                                        Image(systemName: "checkmark.circle.fill")
-                                            .font(.system(size: 16))
-                                            .foregroundStyle(.green)
-                                            .padding(6)
-                                    }
-                                }
-                        }
-                        .buttonStyle(.plain)
+                    ForEach(presets[start..<min(start + Self.columns, presets.count)]) { preset in
+                        tile(preset)
                     }
                 }
             }
-            .scrollIndicators(.never)
-            .frame(maxWidth: 500)
-
             Button("Personnaliser dans les réglages…", action: openLayoutSettings)
                 .buttonStyle(.link)
                 .font(.system(size: 12))
+                .padding(.top, 2)
         }
+    }
+
+    private func tile(_ preset: LayoutPreset) -> some View {
+        let isApplied = applied == preset.id
+        return Button {
+            withAnimation(.snappy) {
+                manager.apply(preset)
+                applied = preset.id
+            }
+        } label: {
+            VStack(alignment: .leading, spacing: 6) {
+                // Pages de la disposition, en miniature.
+                VStack(alignment: .leading, spacing: 2) {
+                    ForEach(Array(preset.pages.prefix(3).enumerated()), id: \.offset) { _, page in
+                        HStack(spacing: 2) {
+                            ForEach(page, id: \.self) { id in
+                                RoundedRectangle(cornerRadius: 1.5)
+                                    .fill(.white.opacity(0.35))
+                                    .frame(width: 13 * (preset.sizes[id] ?? .small).weight, height: 6)
+                            }
+                        }
+                    }
+                }
+                .padding(5)
+                .frame(maxWidth: .infinity, minHeight: 34, maxHeight: 34, alignment: .topLeading)
+                .background(.black, in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+                Label(String(localized: preset.name), systemImage: preset.symbol)
+                    .font(.system(size: 11, weight: .semibold))
+                    .lineLimit(1)
+            }
+            .padding(7)
+            .frame(width: 150)
+            .background(.white.opacity(isApplied ? 0.12 : 0.06), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .overlay {
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    .strokeBorder(isApplied ? Color.green : .clear, lineWidth: 1.5)
+            }
+            .overlay(alignment: .topTrailing) {
+                if isApplied {
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.system(size: 14))
+                        .foregroundStyle(.white, .green)
+                        .padding(5)
+                }
+            }
+            .contentShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        }
+        .buttonStyle(.plain)
+        .help(Text(preset.summary))
     }
 }
 
@@ -237,7 +278,8 @@ private struct OnboardingPresets: View {
 private struct OnboardingPermissions: View {
     let center: PermissionCenter
     let openDetails: () -> Void
-    @State private var launchAtLogin = LaunchAtLogin.isEnabled
+    @State private var launchAtLogin = LaunchAtLogin.isEnabled || LaunchAtLogin.needsApproval
+    @State private var needsLoginApproval = LaunchAtLogin.needsApproval
     @State private var launchError: String?
 
     private var isTrusted: Bool { center.state(of: .accessibility) == .granted }
@@ -280,6 +322,17 @@ private struct OnboardingPermissions: View {
             }
             .padding(.horizontal, 10)
 
+            if needsLoginApproval {
+                // macOS attend l'accord de la personne avant de lancer Notchkit à l'ouverture de session.
+                HStack(spacing: 6) {
+                    Text("macOS attend votre accord dans Réglages Système > Général > Ouverture.")
+                        .font(.system(size: 11))
+                        .foregroundStyle(.secondary)
+                    Button("Ouvrir…", action: LaunchAtLogin.openSystemSettings)
+                        .buttonStyle(.link)
+                        .font(.system(size: 11))
+                }
+            }
             if let launchError {
                 Text(launchError)
                     .font(.system(size: 11))
@@ -291,6 +344,7 @@ private struct OnboardingPermissions: View {
         .task {
             while !Task.isCancelled {
                 center.refresh()
+                refreshLaunchAtLogin()
                 try? await Task.sleep(for: .seconds(1))
             }
         }
@@ -298,7 +352,12 @@ private struct OnboardingPermissions: View {
 
     private func setLaunchAtLogin(_ enabled: Bool) {
         launchError = LaunchAtLogin.setEnabled(enabled)
-        launchAtLogin = LaunchAtLogin.isEnabled
+        refreshLaunchAtLogin()
+    }
+
+    private func refreshLaunchAtLogin() {
+        needsLoginApproval = LaunchAtLogin.needsApproval
+        launchAtLogin = LaunchAtLogin.isEnabled || needsLoginApproval
     }
 }
 
@@ -335,6 +394,9 @@ private struct OnboardingTrial: View {
     /// Minuteur d'essai lancé depuis le tutoriel (retiré en quittant l'étape).
     @State private var timerID: String?
     @State private var sampleFile: URL?
+    /// Ouverture de l'encoche : un changement de page dans l'instant qui suit vient de l'ouverture
+    /// elle-même (page de l'activité en cours), pas d'un balayage.
+    @State private var openedAt: Date?
 
     private var shelf: ShelfModule? { manager.module(for: ShelfModule.descriptor.id) as? ShelfModule }
     private var timers: LiveActivitiesModule? { manager.module(for: LiveActivitiesModule.descriptor.id) as? LiveActivitiesModule }
@@ -357,9 +419,17 @@ private struct OnboardingTrial: View {
             }
         }
         .frame(maxWidth: 440)
-        .onChange(of: viewModel.isExpanded) { _, open in if open { mark(.open) } }
-        .onChange(of: viewModel.selectedPage) { _, _ in if viewModel.isExpanded { mark(.swipe) } }
-        .onChange(of: shelf?.items.count ?? 0) { old, new in if new > old { mark(.drop) } }
+        .onChange(of: viewModel.isExpanded) { _, open in
+            openedAt = open ? Date() : nil
+            if open { mark(.open) }
+        }
+        .onChange(of: viewModel.selectedPage) { _, _ in
+            if let openedAt, OnboardingTrialTask.isSwipe(openedAt: openedAt, now: Date()) { mark(.swipe) }
+        }
+        // Un fichier déjà sur l'étagère, redéposé, repasse en tête avec une nouvelle date : compté aussi.
+        .onChange(of: shelf?.items.first?.addedAt) { old, new in
+            if let new, new > (old ?? .distantPast) { mark(.drop) }
+        }
         .onChange(of: trialTimer?.isPaused ?? false) { _, paused in if paused { mark(.pause) } }
         .onChange(of: trialTimer == nil) { _, gone in if gone { timerID = nil } }
         .onDisappear {

@@ -451,6 +451,13 @@ struct OnboardingTests {
         #expect(OnboardingTrialTask.available(pageCount: 1, hasShelf: false, hasTimers: true) == [.open, .pause])
         #expect(OnboardingTrialTask.available(pageCount: 2, hasShelf: true, hasTimers: false) == [.open, .swipe, .drop])
     }
+
+    @Test func pageChoisieALOuvertureNEstPasUnBalayage() {
+        // L'encoche s'ouvre sur la page de l'activité en cours : ce changement de page ne coche rien.
+        let opened = Date(timeIntervalSince1970: 1_000)
+        #expect(!OnboardingTrialTask.isSwipe(openedAt: opened, now: opened.addingTimeInterval(0.1)))
+        #expect(OnboardingTrialTask.isSwipe(openedAt: opened, now: opened.addingTimeInterval(1.5)))
+    }
 }
 
 struct BetaUpdatesTests {

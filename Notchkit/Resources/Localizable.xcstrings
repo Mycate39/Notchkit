@@ -219,6 +219,7 @@
       }
     },
     "%@ → %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2862,6 +2863,22 @@
         }
       }
     },
+    "Auto · %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto · %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto · %@"
+          }
+        }
+      }
+    },
     "Automatique" : {
       "localizations" : {
         "en" : {
@@ -5495,6 +5512,22 @@
         }
       }
     },
+    "Détecter la langue" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detect Language"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Détecter la langue"
+          }
+        }
+      }
+    },
     "Détecter toutes les apps (expérimental)" : {
       "localizations" : {
         "en" : {
@@ -7727,6 +7760,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Intégré (clé API)"
+          }
+        }
+      }
+    },
+    "Inverser les langues" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Swap Languages"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inverser les langues"
           }
         }
       }
@@ -12439,6 +12488,22 @@
         }
       }
     },
+    "Saisissez ou collez un texte…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Type or paste some text…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saisissez ou collez un texte…"
+          }
+        }
+      }
+    },
     "Sans pause depuis %@" : {
       "localizations" : {
         "en" : {
@@ -12585,6 +12650,7 @@
       }
     },
     "Sélectionnez du texte dans une app, puis touchez « Traduire la sélection »." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -13569,6 +13635,7 @@
       }
     },
     "Traduit le texte sélectionné, du français vers l'anglais et inversement, sur le Mac." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -13644,6 +13711,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Un miroir rapide pour vérifier votre allure avant une réunion."
+          }
+        }
+      }
+    },
+    "Un traducteur dans l'encoche : écrivez un texte, ou traduisez la sélection, dans la langue de votre choix." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A translator in the notch: type some text, or translate the selection, into the language of your choice."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un traducteur dans l'encoche : écrivez un texte, ou traduisez la sélection, dans la langue de votre choix."
           }
         }
       }

@@ -118,9 +118,16 @@ struct TodoOrderingTests {
 }
 
 struct TranslationDirectionTests {
-    @Test func francaisVersAnglaisEtInversement() {
-        #expect(TranslationDirection.languages(for: "Bonjour, comment allez-vous aujourd'hui ?") == ("fr", "en"))
-        #expect(TranslationDirection.languages(for: "Hello, how are you doing today?") == ("en", "fr"))
+    @Test func langueDetecteeVersLaLangueChoisie() {
+        #expect(TranslationDirection.languages(for: "Bonjour, comment allez-vous aujourd'hui ?", source: nil, target: "en") == ("fr", "en"))
+        #expect(TranslationDirection.languages(for: "Hola, ¿cómo estás hoy?", source: nil, target: "fr") == ("es", "fr"))
+        // Texte déjà dans la langue d'arrivée : traduit vers l'anglais (ou le français depuis l'anglais).
+        #expect(TranslationDirection.languages(for: "Hello, how are you doing today?", source: nil, target: "en") == ("en", "fr"))
+    }
+
+    @Test func langueDeDepartChoisie() {
+        #expect(TranslationDirection.languages(for: "Bonjour", source: "de", target: "ja") == ("de", "ja"))
+        #expect(TranslationLanguages.codes.contains(TranslationLanguages.defaultTarget))
     }
 }
 

@@ -56,6 +56,8 @@ struct DemoScenario: Decodable {
         var accent: String?
         var background: String?
         var mascot: String?
+        /// Fond d'écran filmé derrière l'encoche (verre au rendu réel, image opaque)
+        var backdrop: Bool?
         /// Style d'animation (`fluid`, `quick`, `bouncy`, `none`)
         var animation: String?
     }

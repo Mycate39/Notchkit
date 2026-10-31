@@ -49,7 +49,7 @@ final class DemoDirector {
         try? FileManager.default.createDirectory(at: outputURL, withIntermediateDirectories: true)
         do {
             try await recorder.start(window: panel, region: region, scale: screen.backingScaleFactor,
-                                     fps: scenario.fps, to: outputURL.appendingPathComponent("notch.mov"))
+                                     fps: scenario.fps, backdrop: scenario.setup?.backdrop ?? false, to: outputURL.appendingPathComponent("notch.mov"))
         } catch {
             return report("DEMO-ERREUR enregistrement impossible (autorisation « Enregistrement de l'écran » ?) : \(error)")
         }
@@ -65,6 +65,14 @@ final class DemoDirector {
             let duration = ContinuousClock.now - start
             return Double(duration.components.seconds) + Double(duration.components.attoseconds) / 1e18
         }
+        // Fenêtre clé et app active, toutes les 0,25 s : le Liquid Glass n'est net que dans la fenêtre clé.
+        var keySamples: [[String: Any]] = []
+        let keyWatch = Task { @MainActor in
+            while !Task.isCancelled {
+                keySamples.append(["at": elapsed(), "key": panel.isKeyWindow, "active": NSApp.isActive])
+                try? await Task.sleep(for: .milliseconds(250))
+            }
+        }
         for step in scenario.steps {
             let wait = step.at - elapsed()
             if wait > 0 { try? await Task.sleep(for: .seconds(wait)) }
@@ -73,6 +81,7 @@ final class DemoDirector {
         }
         let rest = scenario.duration - elapsed()
         if rest > 0 { try? await Task.sleep(for: .seconds(rest)) }
+        keyWatch.cancel()
         await recorder.stop()
         cleanUp()
 
@@ -85,6 +94,7 @@ final class DemoDirector {
             "region": ["width": region.width, "height": region.height],
             "screen": ["width": screen.frame.width, "height": screen.frame.height],
             "steps": log,
+            "key": keySamples,
         ]
         if let data = try? JSONSerialization.data(withJSONObject: timeline, options: [.prettyPrinted, .sortedKeys]) {
             try? data.write(to: outputURL.appendingPathComponent("timeline.json"))
@@ -195,8 +205,12 @@ final class DemoDirector {
         case "monitor.sample":
             SystemSampler.shared.debugSampleNow()
         case "translation.set":
+            // `title` / `value` : texte et traduction imposés, sinon la paire par défaut
             let pair = DemoData.translation
-            translation?.debugSetResult(source: pair.source, result: pair.result)
+            // `items` : langue d'arrivée (ex. ["fr"]) ; la vraie traduction d'Apple remplace ensuite le texte imposé
+            if let target = step.items?.first { translation?.targetLanguage = target }
+            translation?.debugSetResult(source: step.title ?? pair.source, result: step.value ?? pair.result)
+            translation?.translate()
         case "screenshot":
             screenshots?.debugAdd(DemoData.files([step.value ?? DemoData.text("Screenshot.png", "Capture.png")])[0])
         case "shelf.add":
@@ -207,6 +221,20 @@ final class DemoDirector {
             viewModel.fileDragEnded()
         case "drop":
             viewModel.dropFiles(DemoData.files(step.items ?? ["Mockup.pdf"]), normalizedX: step.level ?? 0.2)
+        case "defaults.set":
+            // Réglage d'un module (`module.<id>.<nom>`), remis à la fin du tournage avec le reste du domaine
+            if let key = step.title { UserDefaults.standard.set(step.value, forKey: key) }
+        case "converter.add":
+            // `value` : fichier réel à copier sous le nom du premier élément (une vidéo pour la conversion en GIF)
+            let names = step.items ?? ["Photo.png"]
+            if let source = step.value, let first = names.first {
+                let target = DemoData.folder.appendingPathComponent(first)
+                try? FileManager.default.removeItem(at: target)
+                try? FileManager.default.copyItem(at: URL(fileURLWithPath: source), to: target)
+            }
+            converter?.add(DemoData.files(names))
+        case "converter.convert":
+            if let format = step.value.flatMap(ConversionFormat.init(rawValue:)) { converter?.convert(to: format) }
         case "converter.done":
             let names = step.items ?? ["Photo.jpg"]
             converter?.debugSetResults(DemoData.files(names))

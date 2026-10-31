@@ -3,9 +3,11 @@ import AVFoundation
 import AppKit
 import ScreenCaptureKit
 
-/// Enregistre la fenêtre de l'encoche seule, sur fond transparent, en ProRes 4444 (avec couche alpha).
-/// La zone filmée est fixe (haut de l'écran, centrée sur l'encoche) : la fenêtre peut changer de
-/// taille sans que l'image bouge. Demande l'autorisation « Enregistrement de l'écran ».
+/// Enregistre les fenêtres de Notchkit seules (encoche, grand lecteur de l'écran verrouillé), sur fond
+/// transparent, en ProRes 4444 (avec couche alpha). Avec `backdrop`, le fond d'écran du bureau est filmé
+/// derrière (image opaque) : le verre de macOS a alors exactement le rendu réel. La zone filmée est fixe
+/// (haut de l'écran, centrée sur l'encoche) : la fenêtre peut changer de taille sans que l'image bouge.
+/// Demande l'autorisation « Enregistrement de l'écran ».
 @MainActor
 final class DemoRecorder {
     enum RecorderError: Error { case windowNotFound, writerFailed(String) }
@@ -14,20 +16,31 @@ final class DemoRecorder {
     private var output: DemoStreamOutput?
 
     /// Démarre l'enregistrement de `window` dans `region` (points, origine en haut à gauche de l'écran).
-    func start(window: NSWindow, region: CGRect, scale: CGFloat, fps: Int, to url: URL) async throws {
+    func start(window: NSWindow, region: CGRect, scale: CGFloat, fps: Int, backdrop: Bool = false, to url: URL) async throws {
         let content = try await SCShareableContent.excludingDesktopWindows(false, onScreenWindowsOnly: true)
-        guard let scWindow = content.windows.first(where: { $0.windowID == CGWindowID(window.windowNumber) }),
+        let pid = ProcessInfo.processInfo.processIdentifier
+        guard let app = content.applications.first(where: { $0.processID == pid }),
               let screenID = window.screen?.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID,
               let display = content.displays.first(where: { $0.displayID == screenID })
         else { throw RecorderError.windowNotFound }
 
-        let filter = SCContentFilter(display: display, including: [scWindow])
+        // Toutes les fenêtres de l'app, même celles qui s'ouvrent pendant la prise. Avec le fond d'écran :
+        // tout l'écran, moins les fenêtres des autres apps posées au-dessus de lui (icônes du bureau,
+        // barre des menus, fenêtres ordinaires) ; le fond d'écran n'appartient pas au Dock sur macOS 27.
+        let filter: SCContentFilter
+        if backdrop {
+            let desktop = Int(CGWindowLevelForKey(.desktopWindow))
+            let above = content.windows.filter { $0.owningApplication?.processID != pid && $0.windowLayer > desktop }
+            filter = SCContentFilter(display: display, excludingWindows: above)
+        } else {
+            filter = SCContentFilter(display: display, including: [app], exceptingWindows: [])
+        }
         let config = SCStreamConfiguration()
         config.sourceRect = region
         config.width = Int(region.width * scale)
         config.height = Int(region.height * scale)
         config.pixelFormat = kCVPixelFormatType_32BGRA
-        config.shouldBeOpaque = false
+        config.shouldBeOpaque = backdrop
         config.showsCursor = false
         config.minimumFrameInterval = CMTime(value: 1, timescale: CMTimeScale(fps))
         config.queueDepth = 8

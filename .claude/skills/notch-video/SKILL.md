@@ -51,6 +51,9 @@ pour un autre module = un cas dans `DemoDirector.perform` (+ le module dans `Dem
 
 ## 2. Tourner
 
+**Encoche en verre (style par défaut de la 3.0) : lire d'abord `verre.md`** (fond filmé `backdrop`,
+build à jour, sinon le verre ressort flou).
+
 1. Demander au propriétaire de **quitter Notchkit** (l'app de /Applications et l'instance Xcode), de
    garder la souris loin du haut de l'écran, et d'accepter « Enregistrement de l'écran » si macOS le
    demande. Ne jamais tuer son instance.

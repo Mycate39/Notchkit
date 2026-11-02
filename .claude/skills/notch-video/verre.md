@@ -26,7 +26,12 @@ de macOS, et la règle de la skill (encoche jamais redessinée) s'applique.
 2. **Fond filmé** : dans le scénario, `"setup": { "background": "glass", "backdrop": true, … }`.
    Le fond d'écran de macOS est alors filmé derrière l'encoche et la vidéo est opaque
    (`DemoRecorder`, `config.shouldBeOpaque`). Exemples : `tournages/verre/` et `tournages/nouveautes/`.
-3. **Choisir le décor avant de tourner** : avec `backdrop`, le décor visible derrière l'encoche est le
+3. **Décor des vidéos (depuis le 01/11/2026)** : le fond est toujours le fond d'écran à rayures du
+   propriétaire (`~/Pictures/488958.jpg`, 2048 × 1349, copié dans `Notchkit-video/assets/wallpaper-stripes.jpg`).
+   C'est aussi son fond d'écran macOS : la prise `backdrop` et le décor du montage sont donc la même
+   image. Au montage, poser ce fond en plein écran (`center / cover`, comme macOS) à la place du décor
+   du thème, sans coins arrondis ni ombre autour de la prise, pour qu'aucun bord ne se voie.
+   Si un jour le décor doit changer : avec `backdrop`, le décor visible derrière l'encoche est le
    fond d'écran du Mac, pas celui de HyperFrames. Demander au propriétaire de mettre en fond d'écran
    l'image voulue (celle du décor du film). Ce décor ne peut plus être changé au montage. Le reste de
    l'écran filmé (icônes, barre des menus, fenêtres des autres apps) est exclu de la prise.

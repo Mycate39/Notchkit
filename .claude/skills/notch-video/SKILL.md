@@ -110,6 +110,10 @@ et sous-titre par langue, `big` pour un grand chiffre, `accent` pour le mot en a
 - Jamais d'encoche redessinée quand une prise existe ; si une prise ne convient pas, on change le
   scénario et on refait la prise.
 - Mise en scène (textes, cartes, flou de mouvement, cascades) libre ; l'encoche reste telle quelle.
+- Chaque vidéo existe aussi en vertical 9:16 (1080 × 1920), depuis le 02/11/2026. L'encoche y est cadrée
+  au centre de l'image (y ≈ 760–960), jamais en haut, et tout le contenu tient dans la zone sûre des
+  réseaux : environ 250 px libres en haut, 450 px en bas et 130 px à droite. Les sous-titres se posent
+  sous l'encoche, pas en bas.
 - Vidéos en 16:9 1920 × 1080, anglais et français, rendus dans `Notchkit-video/renders/`, puis copiés
   dans le dossier Google Drive « NotchKit » (voir la mémoire du projet).
 - Le code du mode démo est dans `Notchkit/App/Debug/Demo/` (Debug seulement). Toute modification de

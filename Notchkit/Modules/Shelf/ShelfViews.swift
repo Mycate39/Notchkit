@@ -87,6 +87,7 @@ private struct ShelfItemView: View {
 
     var body: some View {
         let url = item.resolvedURL()
+        let side: CGFloat = compact ? 34 : 44
 
         VStack(spacing: 3) {
             Group {
@@ -94,13 +95,15 @@ private struct ShelfItemView: View {
                     Image(nsImage: module.thumbnails.image(for: url))
                         .resizable()
                         .aspectRatio(contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerRadius: NotchLayout.thumbnailCornerRadius(for: CGSize(width: side, height: side)),
+                                                    style: .continuous))
                 } else {
                     Image(systemName: "questionmark.folder")
                         .font(.system(size: 22))
                         .foregroundStyle(.white.opacity(0.4))
                 }
             }
-            .frame(width: compact ? 34 : 44, height: compact ? 34 : 44)
+            .frame(width: side, height: side)
 
             // Une ligne, coupée au milieu (« Moc…pdf ») : sur deux lignes, un nom sans espace se
             // cassait en plein mot (« Mockup.p / df »).
@@ -173,6 +176,8 @@ struct ShelfBubbleFiles: View {
                         Image(nsImage: module.thumbnails.image(for: url))
                             .resizable()
                             .aspectRatio(contentMode: .fit)
+                            .clipShape(RoundedRectangle(cornerRadius: NotchLayout.thumbnailCornerRadius(
+                                for: CGSize(width: Self.fileSide, height: Self.fileSide)), style: .continuous))
                     } else {
                         Image(systemName: "questionmark.folder").foregroundStyle(.white.opacity(0.4))
                     }

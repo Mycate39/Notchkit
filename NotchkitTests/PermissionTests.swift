@@ -45,6 +45,13 @@ struct SliderLayoutTests {
         for step in 1...16 { #expect(abs((widths[step] - widths[step - 1]) - width / 16) < 0.001) }
     }
 
+    @Test func vignettesArrondiesALeurEchelle() {
+        // Tuile de l'étagère, fichier de la bulle, capture d'écran : coins proportionnels au plus petit côté.
+        #expect(NotchLayout.thumbnailCornerRadius(for: CGSize(width: 44, height: 44)) == 8.8)
+        #expect(NotchLayout.thumbnailCornerRadius(for: CGSize(width: 72, height: 46)) == 46 * 0.2)
+        #expect(NotchLayout.thumbnailCornerRadius(for: CGSize(width: 22, height: 22)) < NotchLayout.thumbnailCornerRadius(for: CGSize(width: 44, height: 44)))
+    }
+
     @Test func pastilleResteDansLeRail() {
         #expect(NotchLayout.sliderKnobCenter(fraction: 0, trackWidth: 200, knobWidth: 40) == 20)
         #expect(NotchLayout.sliderKnobCenter(fraction: 1, trackWidth: 200, knobWidth: 40) == 180)

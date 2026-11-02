@@ -335,6 +335,14 @@ enum NotchLayout {
     /// Ressort d'une sélection qui glisse d'un élément à l'autre (onglets, étapes), avec un léger rebond.
     static let selectionSpring = Animation.spring(duration: 0.4, bounce: 0.3)
 
+    // MARK: Vignettes
+
+    /// Coins des vignettes de fichiers et de captures (étagère, bulle, captures d'écran), à
+    /// l'échelle de la vignette comme les photos de l'iPhone : 20 % de son plus petit côté.
+    static func thumbnailCornerRadius(for size: CGSize) -> CGFloat {
+        min(size.width, size.height) * 0.2
+    }
+
     // MARK: Centre du son
 
     /// Onglets et lignes d'appareils : assez hauts pour être visés sans précision.

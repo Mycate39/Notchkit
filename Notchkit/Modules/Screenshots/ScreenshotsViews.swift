@@ -121,7 +121,7 @@ struct ScreenshotThumbnail: View {
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(width: size.width, height: size.height)
-            .clipShape(RoundedRectangle(cornerRadius: min(6, size.height / 4), style: .continuous))
+            .clipShape(RoundedRectangle(cornerRadius: NotchLayout.thumbnailCornerRadius(for: size), style: .continuous))
             .overlay {
                 if item.isVideo {
                     Image(systemName: "play.fill")

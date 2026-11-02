@@ -345,7 +345,11 @@ private struct CompactNotchView: View {
         if let alert = viewModel.currentAlert {
             // Identité propre à chaque alerte : deux alertes de suite du même module (branchement puis
             // batterie faible) ne réutilisent pas l'état animé de la précédente (niveau, éclair).
-            return (AnyView(alert.leading.id(alert.id)), AnyView(alert.trailing.id(alert.id)))
+            // Chaque alerte garde sa propre largeur, même pendant son départ : sinon le côté reprenait
+            // aussitôt la largeur de la musique et le texte sortant était coupé (« Cap » pour « Capture »).
+            let width = (alert.sideWidth ?? NotchLayout.compactSideWidth) - 12
+            return (AnyView(alert.leading.frame(width: width, alignment: .leading).id(alert.id)),
+                    AnyView(alert.trailing.frame(width: width, alignment: .trailing).id(alert.id)))
         }
         if let module = viewModel.lockScreenModule {
             return (module.lockScreenLeading(), module.lockScreenTrailing())

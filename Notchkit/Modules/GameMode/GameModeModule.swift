@@ -187,6 +187,7 @@ final class GameModeModule: NotchModule {
     // MARK: Encoche repliée
 
     var compactPriority: ModulePriority { isActive && showsFPS ? .high : .none }
+    var compactSideWidth: CGFloat { NotchLayout.frameRateSideWidth }
 
     func compactLeading() -> AnyView? {
         guard isActive, showsFPS else { return nil }
@@ -221,7 +222,7 @@ struct FPSCounter: View {
                 .foregroundStyle(fps < Self.lowThreshold ? StandBy.amber : .white)
                 .contentTransition(.numericText(value: Double(fps)))
             Text(verbatim: "FPS")
-                .font(.system(size: 7, weight: .bold))
+                .font(.system(size: 10, weight: .bold))
                 .foregroundStyle(.white.opacity(0.55))
         }
         .lineLimit(1)

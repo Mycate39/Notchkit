@@ -40,6 +40,8 @@ enum NotchLayout {
     static let compactSideWidth: CGFloat = activitySideWidth
     /// Exception : l'indicateur de volume et de luminosité, dont la barre serait illisible à la largeur de la musique.
     static let levelIndicatorSideWidth: CGFloat = 80
+    /// Mode jeu : « 120 FPS » à droite, sinon débordant sous la caméra à la largeur de la musique.
+    static let frameRateSideWidth: CGFloat = 64
     /// Autre exception : une alerte qui écrit un mot à droite (« Connectés », « Terminé », « Copié »…),
     /// qui serait sinon coupé (« Co… ») à la largeur de la musique.
     static let textAlertSideWidth: CGFloat = 90

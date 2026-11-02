@@ -1,4 +1,5 @@
 import CoreAudio
+import SwiftUI
 import Foundation
 import Testing
 @testable import Notchkit
@@ -76,6 +77,14 @@ struct GameModeTests {
         viewModel.hoverChanged(isInside: true)
         #expect(viewModel.showsHoverShadow)
         viewModel.hoverChanged(isInside: false)
+    }
+
+    @Test func compteurDImagesTientACoteDeLaCamera() {
+        // Le côté droit de l'encoche repliée laisse `sideWidth - 12` pt au contenu : au-delà, le
+        // compteur (collé à droite, jamais coupé) débordait sous la caméra.
+        let width = NSHostingView(rootView: FPSCounter(fps: 888)).fittingSize.width
+        #expect(width <= NotchLayout.frameRateSideWidth - 12)
+        #expect(width > NotchLayout.activitySideWidth - 12)
     }
 }
 

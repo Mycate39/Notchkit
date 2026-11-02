@@ -35,6 +35,16 @@ struct SliderLayoutTests {
         #expect(NotchLayout.sliderHitHeight(for: 26) == 26)
     }
 
+    @Test func chaqueCranDuVolumeAllongeLaBarre() {
+        // Indicateur de volume : 68 pt de barre, 16 crans. Chaque cran ajoute la même longueur, du
+        // premier au dernier (avant : deux fois le même cercle de 8 pt, puis un premier cran trop long).
+        let width = NotchLayout.levelIndicatorSideWidth - 12
+        let widths = (0...16).map { NotchLayout.barFillWidth(fraction: Double($0) / 16, width: width) }
+        #expect(widths[0] == 0)
+        #expect(widths[16] == width)
+        for step in 1...16 { #expect(abs((widths[step] - widths[step - 1]) - width / 16) < 0.001) }
+    }
+
     @Test func pastilleResteDansLeRail() {
         #expect(NotchLayout.sliderKnobCenter(fraction: 0, trackWidth: 200, knobWidth: 40) == 20)
         #expect(NotchLayout.sliderKnobCenter(fraction: 1, trackWidth: 200, knobWidth: 40) == 180)

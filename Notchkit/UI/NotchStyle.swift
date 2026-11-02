@@ -183,13 +183,16 @@ struct StandByBar: View {
 
     var body: some View {
         GeometryReader { proxy in
-            let fraction = min(max(value, 0), 1)
             ZStack(alignment: .leading) {
                 Capsule().fill(StandBy.surface)
+                // Capsule qui dépasse à gauche d'un diamètre : seul son bout droit, arrondi, se voit.
                 Capsule().fill(.tint)
-                    // Jamais plus étroite qu'un cercle, pour garder des bouts arrondis.
-                    .frame(width: fraction > 0 ? max(height, proxy.size.width * fraction) : 0)
+                    .frame(width: NotchLayout.barFillWidth(fraction: value, width: proxy.size.width) + height)
+                    .offset(x: -height)
             }
+            // Largeur du rail fixée : la capsule plus longue ne doit pas l'élargir près du maximum.
+            .frame(width: proxy.size.width, alignment: .leading)
+            .clipShape(Capsule())
         }
         .frame(height: height)
     }

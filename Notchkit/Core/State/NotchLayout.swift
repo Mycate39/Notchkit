@@ -343,6 +343,14 @@ enum NotchLayout {
 
     // MARK: Curseurs
 
+    /// Longueur visible du remplissage d'une barre (`StandByBar`) : proportionnelle, chaque cran
+    /// l'allonge d'autant. Le bout droit reste arrondi (capsule décalée à gauche) et le gauche suit
+    /// le rail qui découpe le remplissage, comme la barre de volume de macOS. Avec un plancher au
+    /// cercle, les deux premiers crans du volume (4 et 8 pt sur 68) donnaient le même cercle.
+    static func barFillWidth(fraction: Double, width: CGFloat) -> CGFloat {
+        width * min(max(fraction, 0), 1)
+    }
+
     /// Hauteur minimale de la zone cliquable d'un curseur, quelle que soit l'épaisseur de la barre.
     static let sliderMinimumHitHeight: CGFloat = 24
 

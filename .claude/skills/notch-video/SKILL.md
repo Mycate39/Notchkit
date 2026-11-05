@@ -13,6 +13,7 @@ mise en scène.
 Projet vidéo : `~/Documents/Projets/Notchkit-video` (hors du dépôt). Moteur commun :
 `assets/nk2-engine.js` ; page générée par `assets/make-index.py` ; films avec l'encoche réelle :
 `<film>-reel/` (ex. `decompte-reel/`, « 5 New Things in 30 Seconds »), prises dans `tournages/<film>/`.
+Films existants, musique et diffusion (Google Drive, README) : `projet.md`.
 
 ## 1. Écrire le scénario
 

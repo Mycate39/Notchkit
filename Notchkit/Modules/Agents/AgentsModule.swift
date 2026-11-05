@@ -24,6 +24,8 @@ final class AgentsModule: NotchModule {
     /// Sessions qui attendaient déjà une réponse (pour n'ouvrir l'encoche qu'aux nouvelles demandes).
     @ObservationIgnored private var knownWaiting: Set<String> = []
     @ObservationIgnored private var knownWorking: Set<String> = []
+    /// Sessions dont la question était déjà affichée (l'encoche ne s'ouvre qu'aux nouvelles questions).
+    @ObservationIgnored private var knownQuestions: Set<String> = []
     @ObservationIgnored private var isRunning = false
     /// Fin de la petite fête après une tâche terminée.
     private(set) var celebrateUntil: Date?
@@ -61,8 +63,9 @@ final class AgentsModule: NotchModule {
         isRunning = false
     }
 
-    /// Suit les sessions : nouvelle demande d'accord → son de la mascotte (l'encoche ne s'ouvre plus d'elle-même :
-    /// on répond depuis la bulle cerclée d'ambre, ou en cliquant dessus) ; tâche finie → fête.
+    /// Suit les sessions : nouvelle demande d'accord → son de la mascotte (l'encoche ne s'ouvre pas d'elle-même :
+    /// on répond depuis la bulle cerclée d'ambre, ou en cliquant dessus) ; nouvelle question → l'encoche s'ouvre
+    /// sur ses propositions, qu'une bulle ne peut pas montrer ; tâche finie → fête.
     private func observeSessions() {
         trackChanges(of: { [weak self] in
             guard let self, self.isRunning else { return }
@@ -78,6 +81,11 @@ final class AgentsModule: NotchModule {
         let sessions = sessions
         let waiting = Set(sessions.filter { $0.state == .waitingForPermission }.map(\.id))
         let working = Set(sessions.filter { $0.state == .working }.map(\.id))
+        let questions = Set(sessions.filter { $0.questionPrompt != nil }.map(\.id))
+        if Self.opensForQuestion(questions: questions, known: knownQuestions) {
+            context.showModule()
+        }
+        knownQuestions = questions
         if !waiting.subtracting(knownWaiting).isEmpty {
             MascotSounds.shared.play(.question)
         } else if !working.subtracting(knownWorking).subtracting(knownWaiting).isEmpty {
@@ -92,6 +100,11 @@ final class AgentsModule: NotchModule {
         }
         knownWaiting = waiting
         knownWorking = working
+    }
+
+    /// Une session vient de poser une question : l'encoche s'ouvre pour montrer ses propositions.
+    nonisolated static func opensForQuestion(questions: Set<String>, known: Set<String>) -> Bool {
+        !questions.subtracting(known).isEmpty
     }
 
     /// Humeur de la mascotte pour une session (ou sans session).

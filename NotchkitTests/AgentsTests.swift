@@ -21,6 +21,14 @@ struct AgentsTests {
         #expect(pages.flatMap { $0 }.sorted() == ["agents", "clock", "music"])
     }
 
+    @Test func uneNouvelleQuestionOuvreLEncoche() {
+        #expect(AgentsModule.opensForQuestion(questions: ["a"], known: []))
+        #expect(AgentsModule.opensForQuestion(questions: ["a", "b"], known: ["a"]))
+        // Question déjà affichée, ou répondue : l'encoche ne se rouvre pas.
+        #expect(!AgentsModule.opensForQuestion(questions: ["a"], known: ["a"]))
+        #expect(!AgentsModule.opensForQuestion(questions: [], known: ["a"]))
+    }
+
     @Test func humeurDeLaMascotteSelonLaSession() {
         var session = ClaudeSession(id: "a", state: .working, lastEventAt: Date())
         #expect(AgentsModule.mood(for: session, celebrating: false) == .working)

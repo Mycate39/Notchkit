@@ -3,6 +3,19 @@
   <channel>
     <title>Notchkit</title>
     <item>
+      <title>Notchkit 3.0.3</title>
+      <pubDate>Thu, 05 Nov 2026 18:43:05 GMT</pubDate>
+      <sparkle:version>35</sparkle:version>
+      <sparkle:shortVersionString>3.0.3</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <link>https://github.com/Mycate39/Notchkit/releases/tag/v3.0.3</link>
+      <sparkle:informationalUpdate>
+        <sparkle:belowVersion>12</sparkle:belowVersion>
+      </sparkle:informationalUpdate>
+      <description><![CDATA[<p>A small update to Notchkit 3.0.</p><h3>Improved</h3><ul><li><b>Questions from Claude Code open the notch</b>: when Claude Code asks you a question, the notch now opens by itself on the Agents page, so you see its options right away and can answer from there. Permission requests still wait in the amber bubble.</li></ul><h3>Install</h3><p>Download the DMG, drag Notchkit to Applications, then open it. The app is not notarized: the first time, right-click it and choose *Open*, or go to *System Settings &gt; Privacy &amp; Security* and click *Open Anyway*. If you already have Notchkit, it arrives through *Check for Updates…*.</p><p>Please report anything odd in the *Issues* tab.</p>]]></description>
+      <enclosure url="https://github.com/Mycate39/Notchkit/releases/download/v3.0.3/Notchkit-3.0.3.dmg" sparkle:edSignature="RnTaE1xfBgdlFHdl5WI/cJ7m/KIJZBDwl1KU31kx3OisGlAnMGM6cf+GElFJHkh9FsZLZsKMz7J4eoc3p/e7Cg==" length="11618887" type="application/octet-stream"/>
+    </item>
+    <item>
       <title>Notchkit 3.0.2</title>
       <pubDate>Tue, 03 Nov 2026 12:09:00 GMT</pubDate>
       <sparkle:version>34</sparkle:version>

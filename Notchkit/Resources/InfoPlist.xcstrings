@@ -5,9 +5,39 @@
       "comment" : "Bundle display name",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
+            "value" : "Notchkit"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
             "value" : "Notchkit"
           }
         }
@@ -17,9 +47,39 @@
       "comment" : "Bundle name",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
+            "value" : "Notchkit"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
             "value" : "Notchkit"
           }
         }
@@ -29,16 +89,46 @@
       "comment" : "Message d'autorisation affiché par macOS",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit steuert die Wiedergabe in Musik und Spotify und schaltet den Dunkelmodus mit System Events um."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notchkit controls playback in Music and Spotify and switches Dark Mode with System Events."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit controla la reproducción en Música y Spotify y cambia el modo oscuro con System Events."
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notchkit pilote la lecture de Musique et Spotify et bascule le mode sombre avec System Events."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkitは、ミュージックとSpotifyの再生を操作し、System Eventsでダークモードを切り替えます。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O Notchkit controla a reprodução no Música e no Spotify e alterna o modo escuro com o System Events."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit 会控制音乐和 Spotify 的播放，并通过 System Events 切换深色模式。"
           }
         }
       }
@@ -47,16 +137,46 @@
       "comment" : "Message d'autorisation affiché par macOS",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit analysiert den Klang, der auf deinem Mac läuft, um die Equalizer-Balken in Echtzeit zu animieren. Der Ton wird nie aufgenommen oder gesendet."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notchkit analyzes the sound playing on your Mac to animate the equalizer bars in real time. Audio is never recorded or sent anywhere."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit analiza el sonido que suena en tu Mac para animar las barras del ecualizador en tiempo real. El audio nunca se graba ni se envía a ningún sitio."
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notchkit analyse le son joué par votre Mac pour animer les barres de l'égaliseur en temps réel. Le son n'est ni enregistré ni envoyé."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkitは、Macで再生中のサウンドを解析してイコライザバーをリアルタイムに動かします。オーディオが録音・送信されることはありません。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O Notchkit analisa o som tocando no seu Mac para animar as barras do equalizador em tempo real. O áudio nunca é gravado nem enviado para lugar nenhum."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit 会分析 Mac 上正在播放的声音，实时驱动均衡器柱状动画。声音绝不会被录制或发送到任何地方。"
           }
         }
       }
@@ -65,16 +185,46 @@
       "comment" : "Message d'autorisation affiché par macOS",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit zeigt deine nächsten Ereignisse in der Notch und erinnert dich einige Minuten vor Beginn daran."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notchkit shows your upcoming events in the notch and reminds you a few minutes before they start."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit muestra tus próximos eventos en el notch y te avisa unos minutos antes de que empiecen."
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notchkit affiche vos prochains événements dans l'encoche et vous les rappelle quelques minutes avant."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkitは、次のイベントをノッチに表示し、始まる数分前にお知らせします。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O Notchkit mostra seus próximos eventos no notch e avisa alguns minutos antes de começarem."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit 会在刘海中显示你即将到来的事件，并在开始前几分钟提醒你。"
           }
         }
       }
@@ -83,10 +233,22 @@
       "comment" : "Message d'autorisation affiché par macOS",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit zeigt deine nächsten Ereignisse in der Notch und erinnert dich einige Minuten vor Beginn daran."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notchkit shows your upcoming events in the notch and reminds you a few minutes before they start."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit muestra tus próximos eventos en el notch y te avisa unos minutos antes de que empiecen."
           }
         },
         "fr" : {
@@ -94,22 +256,70 @@
             "state" : "translated",
             "value" : "Notchkit affiche vos prochains événements dans l'encoche et vous les rappelle quelques minutes avant."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkitは、次のイベントをノッチに表示し、始まる数分前にお知らせします。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O Notchkit mostra seus próximos eventos no notch e avisa alguns minutos antes de começarem."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit 会在刘海中显示你即将到来的事件，并在开始前几分钟提醒你。"
+          }
         }
       }
     },
     "NSCameraUsageDescription" : {
       "comment" : "Privacy - Camera Usage Description",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit zeigt in der Notch ein Spiegelbild deiner Kamera, nur solange das Webcam-Widget geöffnet ist. Es wird nichts aufgenommen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notchkit shows a mirror view of your camera in the notch, only while the Webcam widget is open. Nothing is recorded."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit muestra un espejo de tu cámara en el notch, solo mientras el widget Cámara web está abierto. No se graba nada."
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notchkit affiche un miroir de votre caméra dans l'encoche, uniquement pendant que le widget Webcam est ouvert. Rien n'est enregistré."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkitは、ウェブカメラウィジェットを開いている間だけ、ノッチにカメラのミラー表示を出します。何も録画されません。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O Notchkit mostra um espelho da sua câmera no notch, só enquanto o widget Webcam está aberto. Nada é gravado."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "仅在网络摄像头小组件打开时，Notchkit 会在刘海中显示相机的镜像画面。不会录制任何内容。"
           }
         }
       }
@@ -118,9 +328,39 @@
       "comment" : "Copyright (human-readable)",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2026 Notchkit"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
+            "value" : "© 2026 Notchkit"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2026 Notchkit"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2026 Notchkit"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2026 Notchkit"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
             "value" : "© 2026 Notchkit"
           }
         }
@@ -130,16 +370,46 @@
       "comment" : "Message d'autorisation affiché par macOS",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit nutzt deinen ungefähren Standort, um das lokale Wetter zu zeigen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notchkit uses your approximate location to show the local weather."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit usa tu ubicación aproximada para mostrar el tiempo local."
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notchkit utilise votre position approximative pour afficher la météo locale."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkitは、おおよその位置情報を使って現地の天気を表示します。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O Notchkit usa sua localização aproximada para mostrar o tempo local."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit 会使用你的大致位置来显示本地天气。"
           }
         }
       }
@@ -148,10 +418,22 @@
       "comment" : "Message d'autorisation affiché par macOS",
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit nutzt deinen ungefähren Standort, um das lokale Wetter zu zeigen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notchkit uses your approximate location to show the local weather."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit usa tu ubicación aproximada para mostrar el tiempo local."
           }
         },
         "fr" : {
@@ -159,22 +441,70 @@
             "state" : "translated",
             "value" : "Notchkit utilise votre position approximative pour afficher la météo locale."
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkitは、おおよその位置情報を使って現地の天気を表示します。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O Notchkit usa sua localização aproximada para mostrar o tempo local."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit 会使用你的大致位置来显示本地天气。"
+          }
         }
       }
     },
     "NSRemindersFullAccessUsageDescription" : {
       "comment" : "Privacy - Reminders Full Access Usage Description",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit zeigt deine Erinnerungen in der Notch und lässt dich sie abhaken oder neue hinzufügen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notchkit shows your reminders in the notch and lets you check them off or add new ones."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit muestra tus recordatorios en el notch y te permite marcarlos como hechos o añadir otros."
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notchkit affiche vos rappels dans l'encoche et vous permet de les cocher ou d'en ajouter."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkitは、リマインダーをノッチに表示し、チェックを付けたり新しく追加したりできるようにします。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O Notchkit mostra seus lembretes no notch e permite marcá-los como concluídos ou adicionar novos."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit 会在刘海中显示你的提醒事项，并让你勾选完成或添加新的提醒事项。"
           }
         }
       }
@@ -182,16 +512,46 @@
     "NSRemindersUsageDescription" : {
       "comment" : "Privacy - Reminders Usage Description",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit zeigt deine Erinnerungen in der Notch und lässt dich sie abhaken oder neue hinzufügen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notchkit shows your reminders in the notch and lets you check them off or add new ones."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit muestra tus recordatorios en el notch y te permite marcarlos como hechos o añadir otros."
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notchkit affiche vos rappels dans l'encoche et vous permet de les cocher ou d'en ajouter."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkitは、リマインダーをノッチに表示し、チェックを付けたり新しく追加したりできるようにします。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O Notchkit mostra seus lembretes no notch e permite marcá-los como concluídos ou adicionar novos."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit 会在刘海中显示你的提醒事项，并让你勾选完成或添加新的提醒事项。"
           }
         }
       }

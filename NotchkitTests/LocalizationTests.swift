@@ -21,4 +21,14 @@ struct LocalizationTests {
         #expect(french["Aucune lecture en cours"] == "Aucune lecture en cours")
         #expect(english["Aucune lecture en cours"] == "Nothing playing")
     }
+
+    /// Espagnol, allemand, japonais, chinois simplifié et portugais du Brésil : chaque clé est traduite
+    /// (une clé oubliée s'afficherait en anglais au milieu de la langue choisie).
+    @Test(arguments: ["es", "de", "ja", "zh-Hans", "pt-BR"])
+    func autresLanguesCompletes(_ language: String) throws {
+        let english = try #require(table("en"))
+        let other = try #require(table(language))
+        #expect(Set(other.keys) == Set(english.keys))
+        #expect(other["Aucune lecture en cours"] != english["Aucune lecture en cours"])
+    }
 }

@@ -13,6 +13,19 @@ struct MenuBarContent: View {
             Toggle("Mode jeu", isOn: Binding(get: { gameMode.isActive }, set: { gameMode.setManual($0) }))
         }
 
+        // Petite vidéo de l'encoche à partager (Vidéos › Notchkit).
+        switch appDelegate.clipRecorder.state {
+        case .idle:
+            Button("Filmer l'encoche") { appDelegate.toggleClipRecording() }
+        case .recording:
+            Button("Arrêter le film de l'encoche") { appDelegate.toggleClipRecording() }
+        case .saving:
+            Text("Enregistrement du film…")
+        }
+        if let error = appDelegate.clipRecorder.lastError {
+            Text(error)
+        }
+
         Divider()
 
         Button("Réglages…") {

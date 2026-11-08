@@ -8,6 +8,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     let entitlements = EntitlementManager()
     lazy var moduleManager = ModuleManager(settings: settings, entitlements: entitlements)
     lazy var viewModel = NotchViewModel(manager: moduleManager, settings: settings)
+    /// « Filmer l'encoche » (menu de la barre des menus).
+    let clipRecorder = NotchClipRecorder()
 
     private var notchWindow: NotchWindowController?
     private var sigtermSource: DispatchSourceSignal?
@@ -153,9 +155,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             Task { @MainActor in
                 // Laisse l'encoche se placer et les modules démarrer.
                 try? await Task.sleep(for: .seconds(2))
-                await DemoDirector(scenarioURL: URL(fileURLWithPath: scenario), outputURL: URL(fileURLWithPath: output),
-                                   viewModel: viewModel, manager: moduleManager, window: controller,
-                                   settings: settings).run()
+                let director = DemoDirector(scenarioURL: URL(fileURLWithPath: scenario), outputURL: URL(fileURLWithPath: output),
+                                            viewModel: viewModel, manager: moduleManager, window: controller,
+                                            settings: settings)
+                director.clipRecorder = clipRecorder
+                await director.run()
                 DemoSettings.discard()
                 NSApp.terminate(nil)
             }
@@ -206,8 +210,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
     #endif
 
+    func toggleClipRecording() {
+        clipRecorder.toggle(screen: ScreenLocator.screen(for: settings.settings.screenSelection), geometry: viewModel.geometry)
+    }
+
     /// Liens `notchkit://…` (activités live : progression de tâches, minuteurs).
     func application(_ application: NSApplication, open urls: [URL]) {
+        // Configuration partagée (fichier .notchkit ouvert depuis le Finder).
+        for url in urls where url.isFileURL && url.pathExtension == NotchkitProfile.fileExtension {
+            ProfileSharing.importProfile(at: url, into: moduleManager)
+        }
         guard let activities = moduleManager.module(for: LiveActivitiesModule.descriptor.id) as? LiveActivitiesModule else { return }
         for url in urls {
             if let command = LiveActivityCommand(url: url) { activities.handle(command) }

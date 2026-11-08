@@ -135,6 +135,11 @@ final class ClaudeHookServer {
     var handler: (@MainActor ([String: Any], HookReply) -> Void)?
     /// Reçoit les données de la barre d'état et renvoie le texte qu'elle doit afficher.
     var statusHandler: (@MainActor ([String: Any]) -> String)?
+    /// Autres chemins servis, avec le même jeton (ex. hooks des autres agents, commande `notchkit`).
+    var routes: [String: @MainActor ([String: Any], HookReply) -> Void] = [:]
+    /// En-tête qui nomme l'agent d'un hook (Codex, Gemini CLI, Cursor), et clé ajoutée au JSON reçu.
+    nonisolated static let agentHeader = "x-notchkit-agent"
+    nonisolated static let agentKey = "_notchkit_agent"
 
     private let token: String
     private var listener: NWListener?
@@ -227,17 +232,19 @@ final class ClaudeHookServer {
     }
 
     private func respond(to request: HTTPRequest, on connection: NWConnection) {
-        guard request.method == "POST", request.path == Self.path || request.path == Self.statusPath else {
+        let route = routes[request.path]
+        guard request.method == "POST", request.path == Self.path || request.path == Self.statusPath || route != nil else {
             return reply(on: connection, HTTPParser.response(status: 404))
         }
         guard request.headers[Self.tokenHeader] == token else {
             return reply(on: connection, HTTPParser.response(status: 401))
         }
-        guard var json = try? JSONSerialization.jsonObject(with: request.body) as? [String: Any] else {
+        guard var json = Self.body(of: request) else {
             return reply(on: connection, HTTPParser.response(status: 400))
         }
         // Hook installé avec un long délai : Notchkit peut attendre la réponse de l'utilisateur.
         if request.headers[Self.waitHeader] == "1" { json[Self.waitKey] = true }
+        if let agent = request.headers[Self.agentHeader] { json[Self.agentKey] = agent }
 
         if request.path == Self.statusPath {
             let text = statusHandler?(json) ?? ""
@@ -247,11 +254,33 @@ final class ClaudeHookServer {
         let hookReply = HookReply { [weak self] response in
             self?.reply(on: connection, HTTPParser.response(status: 200, json: response))
         }
-        guard let handler else { return hookReply.send(nil) }
+        guard let handler = route ?? handler else { return hookReply.send(nil) }
         handler(json, hookReply)
 
         // Réponse différée : on surveille la connexion pour savoir si Claude Code abandonne.
         if !hookReply.isSent { watchForClose(connection, reply: hookReply) }
+    }
+
+    /// Corps reçu : JSON, ou formulaire (`curl --data-urlencode`, utilisé par la commande `notchkit`).
+    nonisolated static func body(of request: HTTPRequest) -> [String: Any]? {
+        if request.headers["content-type"]?.hasPrefix("application/x-www-form-urlencoded") == true {
+            return formFields(String(decoding: request.body, as: UTF8.self))
+        }
+        return try? JSONSerialization.jsonObject(with: request.body) as? [String: Any]
+    }
+
+    /// Lit `a=1&b=deux%20mots` (les « + » valent des espaces).
+    nonisolated static func formFields(_ text: String) -> [String: Any] {
+        var fields: [String: Any] = [:]
+        for pair in text.split(separator: "&") {
+            let parts = pair.split(separator: "=", maxSplits: 1, omittingEmptySubsequences: false)
+            let decode: (Substring) -> String = {
+                $0.replacingOccurrences(of: "+", with: " ").removingPercentEncoding ?? String($0)
+            }
+            guard let key = parts.first.map(decode), !key.isEmpty else { continue }
+            fields[key] = parts.count > 1 ? decode(parts[1]) : ""
+        }
+        return fields
     }
 
     private func watchForClose(_ connection: NWConnection, reply: HookReply) {

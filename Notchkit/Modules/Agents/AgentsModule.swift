@@ -9,7 +9,7 @@ final class AgentsModule: NotchModule {
     static let descriptor = ModuleDescriptor(
         id: "agents",
         name: "Agents",
-        summary: "Claude Code sur une page entière : la mascotte suit son travail, son activité s'affiche dans l'encoche repliée et l'encoche s'ouvre quand il attend votre réponse.",
+        summary: "Claude Code, Codex, Gemini CLI et Cursor sur une page entière : la mascotte suit leur travail, leur activité s'affiche dans l'encoche repliée et vous leur répondez depuis l'encoche.",
         systemImage: "sparkles.rectangle.stack",
         category: .productivity,
         tier: .free,

@@ -18,6 +18,8 @@ final class DemoDirector {
     private let window: NotchWindowController
     private let settings: SettingsStore
     private let recorder = DemoRecorder()
+    /// « Filmer l'encoche », déclenché par l'action `clip.toggle`.
+    var clipRecorder: NotchClipRecorder?
     /// Préférences des modules (domaine standard) d'avant le tournage, remises à la fin.
     private var savedDefaults: [String: Any]?
     private var log: [[String: Any]] = []
@@ -253,6 +255,16 @@ final class DemoDirector {
             gameMode?.debugSet(active: !(step.hidden ?? false), fps: Int(step.level ?? 120))
         case "antisleep":
             toggles?.toggleAntiSleep()
+        case "clip.toggle":
+            clipRecorder?.toggle(screen: ScreenLocator.screen(for: settings.settings.screenSelection), geometry: viewModel.geometry)
+        case "script.notify", "script.start", "script.progress", "script.end":
+            // Comme la commande `notchkit` : `file` = identifiant, `prompt` = message, `value` = symbole ou issue.
+            var fields: [String: Any] = ["action": String(step.action.dropFirst("script.".count)), "id": step.file ?? "demo"]
+            fields["title"] = step.title
+            fields["message"] = step.prompt
+            if step.action == "script.end" { fields["status"] = step.value } else { fields["symbol"] = step.value }
+            fields["progress"] = step.level.map { String($0) }
+            (manager.module(for: ScriptsModule.descriptor.id) as? ScriptsModule)?.debugReceive(fields)
         case "claude.question":
             let options = (step.items ?? ["A", "B"]).map { ["label": $0] }
             claudeEvent(step, ["hook_event_name": "PreToolUse", "tool_name": "AskUserQuestion",

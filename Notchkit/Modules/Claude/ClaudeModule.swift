@@ -31,6 +31,9 @@ final class ClaudeModule: NotchModule {
     private(set) var tracker = ClaudeActivityTracker()
     private(set) var serverState: ClaudeHookServer.State = .stopped
     private(set) var installStatus: ClaudeHooksInstaller.Status = .notInstalled
+    /// Intégration des autres agents (Codex, Gemini CLI, Cursor).
+    private(set) var agentStatus: [CodingAgent: AgentHooksInstaller.Status] = [:]
+    private(set) var agentMessages: [CodingAgent: String] = [:]
     var hooksInstalled: Bool { installStatus == .installed }
     private(set) var installerMessage: String?
     private(set) var usage: ClaudeUsageSummary?
@@ -106,12 +109,17 @@ final class ClaudeModule: NotchModule {
             self.handle(json, reply: reply)
         }
         server.statusHandler = { [weak self] json in self?.handleStatus(json) ?? "" }
+        server.routes[AgentHookTranslator.path] = { [weak self] json, reply in
+            guard let self else { return reply.send([:]) }
+            self.handleAgentHook(json, reply: reply)
+        }
         server.start(port: port)
         refreshInstallState()
         // Hooks installés par l'utilisateur mais d'une version précédente : mis à jour d'eux-mêmes
         // (nouveaux événements, comme les demandes de permission). Une sauvegarde est faite au passage.
-        if installStatus == .outdated, !AutomatedRun.isActive {
-            installHooks()
+        if !AutomatedRun.isActive {
+            if installStatus == .outdated { installHooks() }
+            for agent in CodingAgent.bridged where agentStatus[agent] == .outdated { installAgent(agent) }
         }
 
         // Toutes les minutes : sessions interrompues sans hook Stop, et toutes les 10 minutes : utilisation.
@@ -168,6 +176,33 @@ final class ClaudeModule: NotchModule {
             return reply.send(response)
         }
         reply.send(nil)
+    }
+
+    /// Hook de Codex, Gemini CLI ou Cursor : traduit en événements de Claude Code, traités comme eux,
+    /// puis réponse traduite pour l'agent (celle du dernier événement, qui peut attendre une décision).
+    private func handleAgentHook(_ json: [String: Any], reply: HookReply) {
+        guard let agent = (json[ClaudeHookServer.agentKey] as? String).flatMap(CodingAgent.init(rawValue:)),
+              agent != .claude else { return reply.send([:]) }
+        let events = AgentHookTranslator.events(from: json, agent: agent)
+        guard !events.isEmpty else { return reply.send(AgentHookTranslator.response(nil, to: json, agent: agent)) }
+        let collected = ResponseBox()
+        for (index, original) in events.enumerated() {
+            var event = original
+            event[ClaudeHookServer.waitKey] = json[ClaudeHookServer.waitKey]
+            let isLast = index == events.count - 1
+            let eventReply = HookReply { response in
+                if let response { collected.value = response }
+                if isLast { reply.send(AgentHookTranslator.response(collected.value, to: json, agent: agent)) }
+            }
+            // L'agent abandonne (réponse donnée dans son terminal) : la décision en attente est libérée.
+            if isLast { reply.onClientClose = { eventReply.clientClosed() } }
+            handle(event, reply: eventReply)
+        }
+    }
+
+    /// Dernière réponse non vide des événements d'un même hook.
+    private final class ResponseBox {
+        var value: [String: Any]?
     }
 
     // MARK: Décisions depuis l'encoche
@@ -322,6 +357,14 @@ final class ClaudeModule: NotchModule {
     /// Remet le message en attente à Claude au moment opportun.
     private func deliverPendingMessage(for event: ClaudeHookEvent) -> [String: Any]? {
         guard let queue = pendingMessages[event.sessionID], !queue.isEmpty else { return nil }
+        // Gemini CLI et Cursor ne reçoivent un message qu'à certains moments : il attend le suivant.
+        let name = switch event.kind {
+        case .stop: "Stop"
+        case .postToolUse: "PostToolUse"
+        case .userPromptSubmit: "UserPromptSubmit"
+        default: ""
+        }
+        guard AgentHookTranslator.acceptsMessages(CodingAgent.of(sessionID: event.sessionID), claudeEvent: name) else { return nil }
         let message = Self.formatted(queue)
 
         let response: [String: Any]
@@ -368,6 +411,30 @@ final class ClaudeModule: NotchModule {
     func refreshInstallState() {
         installStatus = ClaudeHooksInstaller.status(port: port, token: token)
         hasCustomStatusLine = ClaudeHooksInstaller.hasCustomStatusLine()
+        agentStatus = Dictionary(uniqueKeysWithValues: CodingAgent.bridged.map {
+            ($0, AgentHooksInstaller.status($0, port: port, token: token))
+        })
+    }
+
+    func installAgent(_ agent: CodingAgent) {
+        do {
+            let backup = try AgentHooksInstaller.install(agent, port: port, token: token)
+            agentMessages[agent] = backup.map { String(localized: "Intégration installée. Sauvegarde de vos réglages : \($0.lastPathComponent)") }
+                ?? String(localized: "Intégration installée.")
+        } catch {
+            agentMessages[agent] = error.localizedDescription
+        }
+        refreshInstallState()
+    }
+
+    func uninstallAgent(_ agent: CodingAgent) {
+        do {
+            try AgentHooksInstaller.uninstall(agent)
+            agentMessages[agent] = String(localized: "Intégration retirée.")
+        } catch {
+            agentMessages[agent] = error.localizedDescription
+        }
+        refreshInstallState()
     }
 
     func installHooks() {

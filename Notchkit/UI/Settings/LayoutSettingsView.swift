@@ -46,6 +46,10 @@ struct LayoutEditorContent: View {
                 HiddenWidgetsSection(manager: manager, hidden: hidden)
 
                 HStack {
+                    // Configuration partageable : un fichier .notchkit qu'un double clic ouvre dans Notchkit.
+                    Button("Partager ma configuration…") { ProfileSharing.export(manager) }
+                        .help("Widgets, disposition, apparence et mascotte, dans un fichier à envoyer.")
+                    Button("Importer une configuration…") { ProfileSharing.chooseAndImport(manager) }
                     Spacer()
                     Button("Réinitialiser la disposition") {
                         manager.resetLayout()

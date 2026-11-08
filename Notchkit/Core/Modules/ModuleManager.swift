@@ -199,6 +199,24 @@ final class ModuleManager {
         reload()
     }
 
+    /// Identifiants des modules qui ont une carte (widgets de la disposition).
+    var widgetIDs: Set<String> {
+        Set(availableModules.filter { $0.descriptor.providesWidget }.map { $0.descriptor.id })
+    }
+
+    /// Configuration partageable : widgets affichés, disposition, apparence et mascotte.
+    func profile() -> NotchkitProfile {
+        NotchkitProfile(settings: settings.settings,
+                        widgets: Dictionary(uniqueKeysWithValues: widgetIDs.map { ($0, isEnabled($0)) }))
+    }
+
+    /// Applique une configuration reçue (annulable comme une disposition prête à l'emploi).
+    func apply(_ profile: NotchkitProfile) {
+        settingsBeforePreset = settings.settings
+        settings.settings = profile.applied(to: settings.settings, widgetIDs: widgetIDs)
+        reload()
+    }
+
     /// Revient aux réglages d'avant la dernière disposition appliquée.
     func undoPreset() {
         guard let previous = settingsBeforePreset else { return }

@@ -262,7 +262,7 @@ struct AgentPermissionPanel: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Label("Claude attend votre accord", systemImage: "hand.raised.fill")
+            Label("\(session.agent.displayName) attend votre accord", systemImage: "hand.raised.fill")
                 .font(.system(size: 13, weight: .bold))
                 .foregroundStyle(StandBy.amber)
             if let message = session.attentionMessage {
@@ -277,7 +277,7 @@ struct AgentPermissionPanel: View {
                     .foregroundStyle(.white.opacity(0.55))
                     .lineLimit(1)
             }
-            Text("Répondez dans le terminal de Claude Code.")
+            Text(session.agent == .cursor ? "Répondez dans Cursor." : "Répondez dans le terminal de \(session.agent.displayName).")
                 .font(.system(size: 11))
                 .foregroundStyle(.white.opacity(0.55))
             Spacer(minLength: 0)
@@ -309,7 +309,7 @@ struct AgentDecisionPanel: View {
                     .buttonStyle(.notch)
                     .font(.system(size: 11, weight: .medium))
                     .foregroundStyle(.white.opacity(0.5))
-                    .help("Répondre dans le terminal de Claude Code")
+                    .help("Répondre dans le terminal")
             }
             // Action et détail en entier (passage à la ligne, défilement si besoin).
             ScrollView(.vertical) {
@@ -376,7 +376,7 @@ struct AgentQuestionPanel: View {
                     .buttonStyle(.notch)
                     .font(.system(size: 11, weight: .medium))
                     .foregroundStyle(.white.opacity(0.5))
-                    .help("Répondre dans le terminal de Claude Code")
+                    .help("Répondre dans le terminal")
             }
             // Question et choix en entier : le texte passe à la ligne, les choix aussi ;
             // si le tout dépasse la hauteur de l'encoche, le panneau défile verticalement.

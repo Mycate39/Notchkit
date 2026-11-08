@@ -335,6 +335,24 @@ enum NotchLayout {
     /// Ressort d'une sélection qui glisse d'un élément à l'autre (onglets, étapes), avec un léger rebond.
     static let selectionSpring = Animation.spring(duration: 0.4, bounce: 0.3)
 
+    // MARK: Film de l'encoche
+
+    /// Zone filmée par « Filmer l'encoche » : assez large pour l'encoche ouverte et ses bulles.
+    static let clipSize = CGSize(width: 900, height: 320)
+
+    /// Zone filmée (points, origine en haut à gauche de l'écran) : centrée sur l'encoche, collée en haut,
+    /// sans dépasser de l'écran.
+    static func clipRegion(screenWidth: CGFloat, centerX: CGFloat) -> CGRect {
+        let width = min(clipSize.width, screenWidth)
+        let x = min(max(centerX - width / 2, 0), screenWidth - width)
+        return CGRect(x: x, y: 0, width: width, height: clipSize.height)
+    }
+
+    // MARK: Bannière des commandes
+
+    /// Notification de la commande `notchkit` : bannière sous l'encoche (hauteur de l'encoche comprise).
+    static let scriptBannerSize = CGSize(width: 340, height: 92)
+
     // MARK: Vignettes
 
     /// Coins des vignettes de fichiers et de captures (étagère, bulle, captures d'écran), à

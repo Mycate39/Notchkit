@@ -304,6 +304,9 @@ struct ClaudeSession: Identifiable, Equatable, Sendable {
     /// Permission ou questions en attente d'une réponse depuis l'encoche.
     var permissionPrompt: ClaudePermissionPrompt?
     var questionPrompt: ClaudeQuestionPrompt?
+
+    /// Agent de la session (Claude Code, Codex, Gemini CLI ou Cursor), d'après son identifiant.
+    var agent: CodingAgent { CodingAgent.of(sessionID: id) }
 }
 
 /// Ce qui vient de changer, pour déclencher une alerte.

@@ -79,6 +79,18 @@ targets:
         CFBundleURLTypes:
           - CFBundleURLName: com.andeolchenaux.notchkit
             CFBundleURLSchemes: [notchkit]
+        # Configuration partageable (.notchkit) : un double clic l'ouvre dans Notchkit.
+        UTExportedTypeDeclarations:
+          - UTTypeIdentifier: com.andeolchenaux.notchkit.profile
+            UTTypeDescription: Notchkit Configuration
+            UTTypeConformsTo: [public.json, public.data]
+            UTTypeTagSpecification:
+              public.filename-extension: [notchkit]
+        CFBundleDocumentTypes:
+          - CFBundleTypeName: Notchkit Configuration
+            CFBundleTypeRole: Viewer
+            LSHandlerRank: Owner
+            LSItemContentTypes: [com.andeolchenaux.notchkit.profile]
         NSCalendarsFullAccessUsageDescription: "Notchkit shows your upcoming events in the notch and reminds you a few minutes before they start."
         NSCalendarsUsageDescription: "Notchkit shows your upcoming events in the notch and reminds you a few minutes before they start."
         NSLocationUsageDescription: "Notchkit uses your approximate location to show the local weather."

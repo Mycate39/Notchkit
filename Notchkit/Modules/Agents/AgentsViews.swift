@@ -62,7 +62,7 @@ struct AgentsHomeView: View {
                     Text(session.projectName ?? String(localized: "Session"))
                         .font(.system(size: 14, weight: .bold))
                         .lineLimit(1)
-                    Text(verbatim: "Claude Code")
+                    Text(verbatim: session.agent.displayName)
                         .font(.system(size: 10.5, weight: .medium))
                         .foregroundStyle(.white.opacity(0.5))
                     AgentPhaseList(session: session)
@@ -71,8 +71,8 @@ struct AgentsHomeView: View {
                     Text("Aucun agent au travail")
                         .font(.system(size: 14, weight: .semibold))
                     Text(module.claude?.hooksInstalled == true
-                         ? "Lancez une demande dans Claude Code : la mascotte suivra son travail ici."
-                         : "Activez Claude Code dans les réglages pour suivre ses sessions ici.")
+                         ? "Lancez une demande dans Claude Code, Codex, Gemini CLI ou Cursor : la mascotte suivra son travail ici."
+                         : "Activez l'intégration d'un agent dans les réglages pour suivre ses sessions ici.")
                         .font(.system(size: 11))
                         .foregroundStyle(.white.opacity(0.55))
                         .fixedSize(horizontal: false, vertical: true)
@@ -230,6 +230,71 @@ struct AgentsSettingsView: View {
     var body: some View {
         if let claude {
             ClaudeIntegrationView(module: claude)
+            ForEach(CodingAgent.bridged) { agent in
+                AgentIntegrationRow(module: claude, agent: agent)
+            }
+        }
+    }
+}
+
+/// Intégration d'un autre agent (Codex, Gemini CLI, Cursor) : état, installation et ce qu'elle permet.
+struct AgentIntegrationRow: View {
+    let module: ClaudeModule
+    let agent: CodingAgent
+
+    private var status: AgentHooksInstaller.Status { module.agentStatus[agent] ?? .unavailable }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            LabeledContent {
+                switch status {
+                case .unavailable:
+                    EmptyView()
+                case .installed:
+                    Button("Désinstaller") { module.uninstallAgent(agent) }
+                case .outdated:
+                    Button("Mettre à jour l'intégration") { module.installAgent(agent) }
+                case .notInstalled:
+                    Button("Installer l'intégration") { module.installAgent(agent) }
+                        .buttonStyle(.borderedProminent)
+                }
+            } label: {
+                Text(verbatim: agent.displayName)
+                Text(statusText)
+            }
+            if status != .unavailable {
+                Text(note)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            if let message = module.agentMessages[agent] {
+                Text(message)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+    }
+
+    private var statusText: String {
+        switch status {
+        case .unavailable: String(localized: "Pas trouvé sur ce Mac")
+        case .notInstalled: String(localized: "Intégration non installée")
+        case .outdated: String(localized: "Mise à jour de l'intégration nécessaire")
+        case .installed: String(localized: "Intégration installée")
+        }
+    }
+
+    private var note: String {
+        switch agent {
+        case .codex:
+            String(localized: "Étapes, modifications et commandes de Codex dans l'encoche, et ses demandes d'autorisation à accepter ou refuser depuis l'encoche. Codex ne lance un nouveau hook qu'après votre accord : tapez /hooks dans Codex et approuvez ceux de Notchkit.")
+        case .gemini:
+            String(localized: "Étapes, modifications et commandes de Gemini CLI dans l'encoche. Ses demandes d'autorisation se signalent par la bulle ambre, mais se donnent dans son terminal.")
+        case .cursor:
+            String(localized: "Étapes, modifications et commandes de l'agent de Cursor dans l'encoche. Ses demandes d'autorisation restent dans Cursor.")
+        case .claude:
+            ""
         }
     }
 }

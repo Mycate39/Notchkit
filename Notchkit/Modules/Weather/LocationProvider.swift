@@ -10,13 +10,20 @@ final class LocationProvider: NSObject, CLLocationManagerDelegate {
     /// Appelé quand l'utilisateur accorde ou retire l'autorisation.
     var onAuthorizationChange: (@MainActor () -> Void)?
 
-    private let manager = CLLocationManager()
+    // Utilisé seulement sur le fil principal ; `nonisolated(unsafe)` pour pouvoir le détacher dans `deinit`.
+    nonisolated(unsafe) private let manager = CLLocationManager()
     private var pending: [CheckedContinuation<CLLocation?, Never>] = []
 
     override init() {
         super.init()
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+    }
+
+    // Le délégué de CLLocationManager n'est pas retenu : sans cela, une position demandée juste avant la
+    // libération du fournisseur (module Météo arrêté) arrivait sur un objet détruit et faisait planter l'app.
+    deinit {
+        manager.delegate = nil
     }
 
     var status: CLAuthorizationStatus { manager.authorizationStatus }

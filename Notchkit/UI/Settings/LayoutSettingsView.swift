@@ -46,17 +46,41 @@ struct LayoutEditorContent: View {
                 HiddenWidgetsSection(manager: manager, hidden: hidden)
 
                 HStack {
-                    // Configuration partageable : un fichier .notchkit qu'un double clic ouvre dans Notchkit.
-                    Button("Partager ma configuration…") { ProfileSharing.export(manager) }
-                        .help("Widgets, disposition, apparence et mascotte, dans un fichier à envoyer.")
-                    Button("Importer une configuration…") { ProfileSharing.chooseAndImport(manager) }
                     Spacer()
                     Button("Réinitialiser la disposition") {
                         manager.resetLayout()
                     }
                 }
+
+                Divider()
+
+                ProfileSharingSection(manager: manager)
             }
             .padding(20)
+    }
+}
+
+// MARK: - Partage
+
+/// Configuration partageable : un fichier .notchkit (widgets, disposition, apparence, mascotte)
+/// qu'un double clic ouvre dans Notchkit.
+private struct ProfileSharingSection: View {
+    let manager: ModuleManager
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Partager ma configuration")
+                .font(.headline)
+            Text("Widgets, disposition, apparence et mascotte. Partagez ce fichier : un double clic l'ouvre dans Notchkit.")
+                .font(.callout)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+            HStack {
+                Button("Exporter…") { ProfileSharing.export(manager) }
+                Button("Importer…") { ProfileSharing.chooseAndImport(manager) }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 

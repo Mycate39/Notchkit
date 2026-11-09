@@ -1,2076 +1,6 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
-    "Ma configuration Notchkit" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Meine Notchkit-Konfiguration"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "My Notchkit Setup"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mi configuración de Notchkit"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ma configuration Notchkit"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "マイNotchkit設定"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Minha configuração do Notchkit"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "我的 Notchkit 配置"
-          }
-        }
-      }
-    },
-    "Widgets, disposition, apparence et mascotte. Partagez ce fichier : un double clic l'ouvre dans Notchkit." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Widgets, Anordnung, Aussehen und Maskottchen. Teile diese Datei: Ein Doppelklick öffnet sie in Notchkit."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Widgets, layout, appearance and mascot. Share this file: a double-click opens it in Notchkit."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Widgets, disposición, apariencia y mascota. Comparte este archivo: con un doble clic se abre en Notchkit."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Widgets, disposition, apparence et mascotte. Partagez ce fichier : un double clic l'ouvre dans Notchkit."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ウィジェット、配置、外観、マスコット。このファイルを共有すると、ダブルクリックでNotchkitで開けます。"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Widgets, layout, aparência e mascote. Compartilhe este arquivo: um clique duplo o abre no Notchkit."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "小组件、布局、外观和吉祥物。分享此文件：双击即可在 Notchkit 中打开。"
-          }
-        }
-      }
-    },
-    "Appliquer « %@ » ?" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "„%@“ anwenden?"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apply “%@”?"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "¿Aplicar «%@»?"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Appliquer « %@ » ?"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "“%@”を適用しますか？"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aplicar “%@”?"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "要应用“%@”吗？"
-          }
-        }
-      }
-    },
-    "Vos widgets, leur disposition, l'apparence de l'encoche et la mascotte seront remplacés. Vous pourrez rétablir vos widgets depuis Réglages > Disposition." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Deine Widgets, ihre Anordnung, das Aussehen der Notch und das Maskottchen werden ersetzt. Du kannst deine Widgets unter Einstellungen > Anordnung wiederherstellen."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your widgets, their layout, the notch appearance and the mascot will be replaced. You can restore your widgets from Settings > Layout."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tus widgets, su disposición, la apariencia del notch y la mascota se reemplazarán. Podrás restaurar tus widgets desde Ajustes > Disposición."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vos widgets, leur disposition, l'apparence de l'encoche et la mascotte seront remplacés. Vous pourrez rétablir vos widgets depuis Réglages > Disposition."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ウィジェット、その配置、ノッチの外観、マスコットが置き換えられます。ウィジェットは“設定”>“配置”から元に戻せます。"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Seus widgets, o layout deles, a aparência do notch e o mascote serão substituídos. Você pode restaurar seus widgets em Ajustes > Layout."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "你的小组件、布局、刘海外观和吉祥物将被替换。你可以在“设置”>“布局”中恢复小组件。"
-          }
-        }
-      }
-    },
-    "Ce fichier n'est pas une configuration Notchkit lisible." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diese Datei ist keine lesbare Notchkit-Konfiguration."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This file isn't a readable Notchkit setup."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Este archivo no es una configuración de Notchkit legible."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ce fichier n'est pas une configuration Notchkit lisible."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "このファイルは読み込めるNotchkit設定ではありません。"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Este arquivo não é uma configuração do Notchkit legível."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "此文件不是可读取的 Notchkit 配置。"
-          }
-        }
-      }
-    },
-    "Commandes" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Befehle"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Commands"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Comandos"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Commandes"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "コマンド"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Comandos"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "命令"
-          }
-        }
-      }
-    },
-    "La commande notchkit affiche dans l'encoche ce que font vos scripts : une notification, ou une activité en cours (build, tests, export) jusqu'à sa fin." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Der Befehl notchkit zeigt in der Notch, was deine Skripte tun: eine Mitteilung oder eine laufende Aktivität (Build, Tests, Export) bis zu ihrem Ende."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The notchkit command shows what your scripts are doing in the notch: a notification, or an ongoing activity (build, tests, export) until it ends."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "El comando notchkit muestra en el notch lo que hacen tus scripts: una notificación o una actividad en curso (compilación, pruebas, exportación) hasta que termine."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La commande notchkit affiche dans l'encoche ce que font vos scripts : une notification, ou une activité en cours (build, tests, export) jusqu'à sa fin."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "notchkitコマンドは、スクリプトの動作をノッチに表示します：通知、または終了するまで進行中のアクティビティ（ビルド、テスト、書き出し）。"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O comando notchkit mostra no notch o que seus scripts estão fazendo: uma notificação ou uma atividade em andamento (build, testes, exportação) até terminar."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "notchkit 命令会在刘海中显示脚本正在做什么：一条通知，或一个进行中的活动（构建、测试、导出），直到完成。"
-          }
-        }
-      }
-    },
-    "Commande installée : %@" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Befehl installiert: %@"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Command installed: %@"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Comando instalado: %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Commande installée : %@"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "コマンドをインストールしました：%@"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Comando instalado: %@"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "命令已安装：%@"
-          }
-        }
-      }
-    },
-    "La commande n'a pas pu être installée : %@" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Der Befehl konnte nicht installiert werden: %@"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The command couldn't be installed: %@"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No se pudo instalar el comando: %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "La commande n'a pas pu être installée : %@"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "コマンドをインストールできませんでした：%@"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Não foi possível instalar o comando: %@"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "无法安装命令：%@"
-          }
-        }
-      }
-    },
-    "Commande retirée." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Befehl entfernt."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Command removed."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Comando eliminado."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Commande retirée."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "コマンドを削除しました。"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Comando removido."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "命令已移除。"
-          }
-        }
-      }
-    },
-    "Autorisez Notchkit dans Réglages Système > Confidentialité et sécurité > Enregistrement de l'écran, puis réessayez." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erlaube Notchkit unter Systemeinstellungen > Datenschutz & Sicherheit > Bildschirmaufnahme und versuche es erneut."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow Notchkit in System Settings > Privacy & Security > Screen Recording, then try again."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permite Notchkit en Ajustes del Sistema > Privacidad y seguridad > Grabación de pantalla y vuelve a intentarlo."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Autorisez Notchkit dans Réglages Système > Confidentialité et sécurité > Enregistrement de l'écran, puis réessayez."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "“システム設定”>“プライバシーとセキュリティ”>“画面収録”でNotchkitを許可してから、もう一度お試しください。"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permita o Notchkit em Ajustes do Sistema > Privacidade e Segurança > Gravação de Tela e tente novamente."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请在“系统设置”>“隐私与安全性”>“录屏与系统录音”中允许 Notchkit，然后重试。"
-          }
-        }
-      }
-    },
-    "Lancez une demande dans Claude Code, Codex, Gemini CLI ou Cursor : la mascotte suivra son travail ici." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Starte eine Anfrage in Claude Code, Codex, Gemini CLI oder Cursor: Das Maskottchen verfolgt die Arbeit hier."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Start a request in Claude Code, Codex, Gemini CLI or Cursor: the mascot will follow its work here."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Inicia una petición en Claude Code, Codex, Gemini CLI o Cursor: la mascota seguirá su trabajo aquí."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lancez une demande dans Claude Code, Codex, Gemini CLI ou Cursor : la mascotte suivra son travail ici."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Claude Code、Codex、Gemini CLI、Cursorでリクエストを始めると、マスコットがここで作業を見守ります。"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Inicie um pedido no Claude Code, Codex, Gemini CLI ou Cursor: o mascote vai acompanhar o trabalho aqui."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在 Claude Code、Codex、Gemini CLI 或 Cursor 中发起请求：吉祥物会在这里跟进它的工作。"
-          }
-        }
-      }
-    },
-    "Activez l'intégration d'un agent dans les réglages pour suivre ses sessions ici." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktiviere die Integration eines Agenten in den Einstellungen, um seine Sitzungen hier zu verfolgen."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Turn on an agent integration in Settings to follow its sessions here."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activa la integración de un agente en Ajustes para seguir sus sesiones aquí."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activez l'intégration d'un agent dans les réglages pour suivre ses sessions ici."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "エージェントのセッションをここで追うには、設定でエージェントの連携をオンにしてください。"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ative a integração de um agente em Ajustes para acompanhar as sessões dele aqui."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在设置中开启某个智能体的集成，即可在这里跟进它的会话。"
-          }
-        }
-      }
-    },
-    "Installer l'intégration" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Integration installieren"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Integration"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Instalar integración"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installer l'intégration"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "連携をインストール"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Instalar integração"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "安装集成"
-          }
-        }
-      }
-    },
-    "Pas trouvé sur ce Mac" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auf diesem Mac nicht gefunden"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not found on this Mac"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No encontrado en este Mac"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pas trouvé sur ce Mac"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "このMacに見つかりません"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Não encontrado neste Mac"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在这台 Mac 上未找到"
-          }
-        }
-      }
-    },
-    "Intégration non installée" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Integration nicht installiert"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Integration not installed"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Integración no instalada"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Intégration non installée"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "連携は未インストール"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Integração não instalada"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "集成未安装"
-          }
-        }
-      }
-    },
-    "Intégration installée" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Integration installiert"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Integration installed"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Integración instalada"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Intégration installée"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "連携はインストール済み"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Integração instalada"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "集成已安装"
-          }
-        }
-      }
-    },
-    "Étapes, modifications et commandes de Codex dans l'encoche, et ses demandes d'autorisation à accepter ou refuser depuis l'encoche. Codex ne lance un nouveau hook qu'après votre accord : tapez /hooks dans Codex et approuvez ceux de Notchkit." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Schritte, Änderungen und Befehle von Codex in der Notch, und seine Berechtigungsanfragen zum Erlauben oder Ablehnen direkt in der Notch. Codex führt einen neuen Hook erst nach deiner Zustimmung aus: Gib in Codex /hooks ein und bestätige die Hooks von Notchkit."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Codex's steps, edits and commands in the notch, and its permission requests to allow or deny from the notch. Codex only runs a new hook once you approve it: type /hooks in Codex and approve Notchkit's."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Los pasos, cambios y comandos de Codex en el notch, y sus solicitudes de permiso para aceptar o rechazar desde el notch. Codex solo ejecuta un hook nuevo tras tu aprobación: escribe /hooks en Codex y aprueba los de Notchkit."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Étapes, modifications et commandes de Codex dans l'encoche, et ses demandes d'autorisation à accepter ou refuser depuis l'encoche. Codex ne lance un nouveau hook qu'après votre accord : tapez /hooks dans Codex et approuvez ceux de Notchkit."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Codexの手順、変更、コマンドをノッチに表示し、許可のリクエストもノッチから許可・拒否できます。Codexは新しいフックを承認後にのみ実行します：Codexで/hooksと入力し、Notchkitのフックを承認してください。"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Os passos, alterações e comandos do Codex no notch, e os pedidos de permissão dele para permitir ou negar pelo notch. O Codex só executa um hook novo depois da sua aprovação: digite /hooks no Codex e aprove os do Notchkit."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在刘海中显示 Codex 的步骤、修改和命令，并可在刘海中允许或拒绝它的权限请求。Codex 只会在你批准后运行新的 hook：在 Codex 中输入 /hooks 并批准 Notchkit 的 hook。"
-          }
-        }
-      }
-    },
-    "Étapes, modifications et commandes de Gemini CLI dans l'encoche. Ses demandes d'autorisation se signalent par la bulle ambre, mais se donnent dans son terminal." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Schritte, Änderungen und Befehle von Gemini CLI in der Notch. Seine Berechtigungsanfragen erscheinen als bernsteinfarbene Blase, werden aber in seinem Terminal beantwortet."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gemini CLI's steps, edits and commands in the notch. Its permission requests show up as the amber bubble, but you answer them in its terminal."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Los pasos, cambios y comandos de Gemini CLI en el notch. Sus solicitudes de permiso aparecen como la burbuja ámbar, pero se responden en su terminal."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Étapes, modifications et commandes de Gemini CLI dans l'encoche. Ses demandes d'autorisation se signalent par la bulle ambre, mais se donnent dans son terminal."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gemini CLIの手順、変更、コマンドをノッチに表示します。許可のリクエストは琥珀色のバブルで知らせますが、応答はターミナルで行います。"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Os passos, alterações e comandos do Gemini CLI no notch. Os pedidos de permissão dele aparecem como a bolha âmbar, mas são respondidos no terminal dele."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在刘海中显示 Gemini CLI 的步骤、修改和命令。它的权限请求会以琥珀色气泡提示，但需要在它的终端中回答。"
-          }
-        }
-      }
-    },
-    "Étapes, modifications et commandes de l'agent de Cursor dans l'encoche. Ses demandes d'autorisation restent dans Cursor." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Schritte, Änderungen und Befehle des Cursor-Agenten in der Notch. Seine Berechtigungsanfragen bleiben in Cursor."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The Cursor agent's steps, edits and commands in the notch. Its permission requests stay in Cursor."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Los pasos, cambios y comandos del agente de Cursor en el notch. Sus solicitudes de permiso se quedan en Cursor."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Étapes, modifications et commandes de l'agent de Cursor dans l'encoche. Ses demandes d'autorisation restent dans Cursor."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cursorエージェントの手順、変更、コマンドをノッチに表示します。許可のリクエストはCursor内に残ります。"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Os passos, alterações e comandos do agente do Cursor no notch. Os pedidos de permissão dele ficam no Cursor."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在刘海中显示 Cursor 智能体的步骤、修改和命令。它的权限请求仍在 Cursor 中处理。"
-          }
-        }
-      }
-    },
-    "Enregistrement du film…" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Video wird gesichert …"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Saving the video…"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Guardando el vídeo…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enregistrement du film…"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ビデオを保存中…"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Salvando o vídeo…"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "正在存储视频…"
-          }
-        }
-      }
-    },
-    "Filmer l'encoche" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notch aufnehmen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Record the Notch"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Grabar el notch"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filmer l'encoche"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ノッチを収録"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gravar o notch"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "录制刘海"
-          }
-        }
-      }
-    },
-    "Arrêter le film de l'encoche" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aufnahme der Notch beenden"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop Recording the Notch"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Detener la grabación del notch"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Arrêter le film de l'encoche"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ノッチの収録を停止"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Parar de gravar o notch"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "停止录制刘海"
-          }
-        }
-      }
-    },
-    "Le fichier %@ n'est pas un JSON valide. Corrigez-le, puis réessayez." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Die Datei %@ ist kein gültiges JSON. Korrigiere sie und versuche es erneut."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The file %@ isn't valid JSON. Fix it, then try again."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "El archivo %@ no es un JSON válido. Corrígelo y vuelve a intentarlo."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le fichier %@ n'est pas un JSON valide. Corrigez-le, puis réessayez."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ファイル%@は有効なJSONではありません。修正してから、もう一度お試しください。"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O arquivo %@ não é um JSON válido. Corrija-o e tente novamente."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "文件 %@ 不是有效的 JSON。请修正后重试。"
-          }
-        }
-      }
-    },
-    "%@ attend votre accord" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ wartet auf deine Zustimmung"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ needs your approval"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ espera tu aprobación"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ attend votre accord"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@があなたの承認を待っています"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ aguarda sua aprovação"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ 正在等待你的批准"
-          }
-        }
-      }
-    },
-    "Répondez dans Cursor." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Antworte in Cursor."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Answer in Cursor."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Responde en Cursor."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Répondez dans Cursor."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cursorで応答してください。"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Responda no Cursor."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请在 Cursor 中回答。"
-          }
-        }
-      }
-    },
-    "Répondez dans le terminal de %@." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Antworte im Terminal von %@."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Answer in the %@ terminal."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Responde en el terminal de %@."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Répondez dans le terminal de %@."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@のターミナルで応答してください。"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Responda no terminal do %@."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请在 %@ 的终端中回答。"
-          }
-        }
-      }
-    },
-    "Répondre dans le terminal" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Im Terminal antworten"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Answer in the terminal"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Responder en el terminal"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Répondre dans le terminal"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ターミナルで応答"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Responder no terminal"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在终端中回答"
-          }
-        }
-      }
-    },
-    "Notification" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mitteilung"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notification"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notificación"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notification"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "通知"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notificação"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "通知"
-          }
-        }
-      }
-    },
-    "%lld s" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld s"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld s"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld s"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld s"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld s"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld s"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld s"
-          }
-        }
-      }
-    },
-    "%lld min %@" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld Min. %@"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld min %@"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld min %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld min %@"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld分%@"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld min %@"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld 分 %@"
-          }
-        }
-      }
-    },
-    "%lld h %@" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld h %@"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld h %@"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld h %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld h %@"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld h %@"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld h %@"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld h %@"
-          }
-        }
-      }
-    },
-    "Claude Code, Codex, Gemini CLI et Cursor sur une page entière : la mascotte suit leur travail, leur activité s'affiche dans l'encoche repliée et vous leur répondez depuis l'encoche." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Claude Code, Codex, Gemini CLI und Cursor auf einer ganzen Seite: Das Maskottchen verfolgt ihre Arbeit, ihre Aktivität erscheint in der geschlossenen Notch und du antwortest ihnen direkt in der Notch."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Claude Code, Codex, Gemini CLI and Cursor on a full page: the mascot follows their work, their activity shows in the closed notch and you answer them from the notch."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Claude Code, Codex, Gemini CLI y Cursor en una página completa: la mascota sigue su trabajo, su actividad aparece en el notch cerrado y les respondes desde el notch."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Claude Code, Codex, Gemini CLI et Cursor sur une page entière : la mascotte suit leur travail, leur activité s'affiche dans l'encoche repliée et vous leur répondez depuis l'encoche."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Claude Code、Codex、Gemini CLI、Cursorを1ページに：マスコットが作業を見守り、アクティビティは閉じたノッチに表示され、ノッチから応答できます。"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Claude Code, Codex, Gemini CLI e Cursor numa página inteira: o mascote acompanha o trabalho deles, a atividade aparece no notch fechado e você responde a eles pelo notch."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Claude Code、Codex、Gemini CLI 和 Cursor 整页呈现：吉祥物跟进它们的工作，活动显示在收起的刘海中，你可以直接在刘海中回复它们。"
-          }
-        }
-      }
-    },
-    "Partager ma configuration…" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Meine Konfiguration teilen …"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Share My Setup…"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compartir mi configuración…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Partager ma configuration…"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "自分の設定を共有…"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compartilhar minha configuração…"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "分享我的配置…"
-          }
-        }
-      }
-    },
-    "Widgets, disposition, apparence et mascotte, dans un fichier à envoyer." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Widgets, Anordnung, Aussehen und Maskottchen in einer Datei zum Versenden."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Widgets, layout, appearance and mascot, in a file to send."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Widgets, disposición, apariencia y mascota, en un archivo para enviar."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Widgets, disposition, apparence et mascotte, dans un fichier à envoyer."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ウィジェット、配置、外観、マスコットを送信用のファイルに。"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Widgets, layout, aparência e mascote, num arquivo para enviar."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "小组件、布局、外观和吉祥物，存成一个可发送的文件。"
-          }
-        }
-      }
-    },
-    "Importer une configuration…" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Konfiguration importieren …"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Import a Setup…"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Importar una configuración…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Importer une configuration…"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "設定を読み込む…"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Importar uma configuração…"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "导入配置…"
-          }
-        }
-      }
-    },
-    "Aucune commande en cours." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kein Befehl aktiv."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No command running."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ningún comando en curso."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucune commande en cours."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "実行中のコマンドはありません。"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nenhum comando em execução."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "没有正在运行的命令。"
-          }
-        }
-      }
-    },
-    "Mettre à jour la commande" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Befehl aktualisieren"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Update the Command"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Actualizar el comando"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mettre à jour la commande"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "コマンドをアップデート"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Atualizar o comando"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "更新命令"
-          }
-        }
-      }
-    },
-    "Installer la commande" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Befehl installieren"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install the Command"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Instalar el comando"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installer la commande"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "コマンドをインストール"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Instalar o comando"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "安装命令"
-          }
-        }
-      }
-    },
-    "Commande notchkit" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Befehl notchkit"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "notchkit command"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Comando notchkit"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Commande notchkit"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "notchkitコマンド"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Comando notchkit"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "notchkit 命令"
-          }
-        }
-      }
-    },
-    "Installée dans %@" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installiert in %@"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installed in %@"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Instalado en %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installée dans %@"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@にインストール済み"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Instalado em %@"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "已安装在 %@"
-          }
-        }
-      }
-    },
-    "Mise à jour nécessaire" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktualisierung nötig"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Update needed"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Actualización necesaria"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mise à jour nécessaire"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アップデートが必要"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Atualização necessária"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "需要更新"
-          }
-        }
-      }
-    },
-    "Non installée" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nicht installiert"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not installed"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No instalado"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Non installée"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "未インストール"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Não instalado"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "未安装"
-          }
-        }
-      }
-    },
-    "Exemples" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Beispiele"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Examples"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ejemplos"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Exemples"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "例"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Exemplos"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "示例"
-          }
-        }
-      }
-    },
-    "« run » affiche la commande pendant qu'elle tourne, puis une coche verte ou une croix rouge avec sa durée. Lancez notchkit --help pour toutes les options." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "„run“ zeigt den Befehl, solange er läuft, dann ein grünes Häkchen oder ein rotes Kreuz mit seiner Dauer. Mit notchkit --help siehst du alle Optionen."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "“run” shows the command while it runs, then a green check or a red cross with how long it took. Run notchkit --help for every option."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "«run» muestra el comando mientras se ejecuta y luego una marca verde o una cruz roja con su duración. Ejecuta notchkit --help para ver todas las opciones."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "« run » affiche la commande pendant qu'elle tourne, puis une coche verte ou une croix rouge avec sa durée. Lancez notchkit --help pour toutes les options."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "“run”は実行中のコマンドを表示し、終了すると所要時間とともに緑のチェックか赤いバツを表示します。すべてのオプションはnotchkit --helpで確認できます。"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "“run” mostra o comando enquanto ele roda e, depois, um visto verde ou um X vermelho com a duração. Rode notchkit --help para ver todas as opções."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "“run”会在命令运行时显示它，结束后显示绿色对勾或红色叉号及用时。运行 notchkit --help 查看所有选项。"
-          }
-        }
-      }
-    },
     "" : {},
     " · %lld cycles" : {
       "extractionState" : "stale",
@@ -2348,6 +278,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "macOS 已开启“减弱动态效果”：动画已关闭。"
+          }
+        }
+      }
+    },
+    "« run » affiche la commande pendant qu'elle tourne, puis une coche verte ou une croix rouge avec sa durée. Lancez notchkit --help pour toutes les options." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "„run“ zeigt den Befehl, solange er läuft, dann ein grünes Häkchen oder ein rotes Kreuz mit seiner Dauer. Mit notchkit --help siehst du alle Optionen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“run” shows the command while it runs, then a green check or a red cross with how long it took. Run notchkit --help for every option."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "«run» muestra el comando mientras se ejecuta y luego una marca verde o una cruz roja con su duración. Ejecuta notchkit --help para ver todas las opciones."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "« run » affiche la commande pendant qu'elle tourne, puis une coche verte ou une croix rouge avec sa durée. Lancez notchkit --help pour toutes les options."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“run”は実行中のコマンドを表示し、終了すると所要時間とともに緑のチェックか赤いバツを表示します。すべてのオプションはnotchkit --helpで確認できます。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“run” mostra o comando enquanto ele roda e, depois, um visto verde ou um X vermelho com a duração. Rode notchkit --help para ver todas as opções."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“run”会在命令运行时显示它，结束后显示绿色对勾或红色叉号及用时。运行 notchkit --help 查看所有选项。"
           }
         }
       }
@@ -2719,6 +695,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ → %@"
+          }
+        }
+      }
+    },
+    "%@ attend votre accord" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ wartet auf deine Zustimmung"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ needs your approval"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ espera tu aprobación"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ attend votre accord"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@があなたの承認を待っています"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ aguarda sua aprovação"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 正在等待你的批准"
           }
         }
       }
@@ -3418,6 +1440,52 @@
         }
       }
     },
+    "%lld h %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld h %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld h %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld h %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld h %@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld h %@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld h %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld h %@"
+          }
+        }
+      }
+    },
     "%lld min" : {
       "localizations" : {
         "de" : {
@@ -3460,6 +1528,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld 分钟"
+          }
+        }
+      }
+    },
+    "%lld min %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld Min. %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min %@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld分%@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld 分 %@"
           }
         }
       }
@@ -3600,6 +1714,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld pt"
+          }
+        }
+      }
+    },
+    "%lld s" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld s"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld s"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld s"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld s"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld s"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld s"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld s"
           }
         }
       }
@@ -4671,6 +2831,7 @@
       }
     },
     "Activez Claude Code dans les réglages pour suivre ses sessions ici." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -4758,6 +2919,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "请在设置中开启模块。"
+          }
+        }
+      }
+    },
+    "Activez l'intégration d'un agent dans les réglages pour suivre ses sessions ici." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktiviere die Integration eines Agenten in den Einstellungen, um seine Sitzungen hier zu verfolgen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn on an agent integration in Settings to follow its sessions here."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activa la integración de un agente en Ajustes para seguir sus sesiones aquí."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activez l'intégration d'un agent dans les réglages pour suivre ses sessions ici."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "エージェントのセッションをここで追うには、設定でエージェントの連携をオンにしてください。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ative a integração de um agente em Ajustes para acompanhar as sessões dele aqui."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在设置中开启某个智能体的集成，即可在这里跟进它的会话。"
           }
         }
       }
@@ -8328,6 +6535,52 @@
         }
       }
     },
+    "Appliquer « %@ » ?" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "„%@“ anwenden?"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apply “%@”?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Aplicar «%@»?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appliquer « %@ » ?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“%@”を適用しますか？"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aplicar “%@”?"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "要应用“%@”吗？"
+          }
+        }
+      }
+    },
     "Appliquer la disposition « %@ » ?" : {
       "localizations" : {
         "de" : {
@@ -8555,6 +6808,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "停止"
+          }
+        }
+      }
+    },
+    "Arrêter le film de l'encoche" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aufnahme der Notch beenden"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stop Recording the Notch"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detener la grabación del notch"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrêter le film de l'encoche"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ノッチの収録を停止"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parar de gravar o notch"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "停止录制刘海"
           }
         }
       }
@@ -9717,6 +8016,52 @@
         }
       }
     },
+    "Aucune commande en cours." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kein Befehl aktiv."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No command running."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ningún comando en curso."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune commande en cours."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "実行中のコマンドはありません。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nenhum comando em execução."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "没有正在运行的命令。"
+          }
+        }
+      }
+    },
     "Aucune lecture" : {
       "localizations" : {
         "de" : {
@@ -10821,6 +9166,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "允许访问相机以查看你的镜子。"
+          }
+        }
+      }
+    },
+    "Autorisez Notchkit dans Réglages Système > Confidentialité et sécurité > Enregistrement de l'écran, puis réessayez." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erlaube Notchkit unter Systemeinstellungen > Datenschutz & Sicherheit > Bildschirmaufnahme und versuche es erneut."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow Notchkit in System Settings > Privacy & Security > Screen Recording, then try again."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permite Notchkit en Ajustes del Sistema > Privacidad y seguridad > Grabación de pantalla y vuelve a intentarlo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorisez Notchkit dans Réglages Système > Confidentialité et sécurité > Enregistrement de l'écran, puis réessayez."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“システム設定”>“プライバシーとセキュリティ”>“画面収録”でNotchkitを許可してから、もう一度お試しください。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permita o Notchkit em Ajustes do Sistema > Privacidade e Segurança > Gravação de Tela e tente novamente."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请在“系统设置”>“隐私与安全性”>“录屏与系统录音”中允许 Notchkit，然后重试。"
           }
         }
       }
@@ -12212,6 +10603,52 @@
         }
       }
     },
+    "Ce fichier n'est pas une configuration Notchkit lisible." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diese Datei ist keine lesbare Notchkit-Konfiguration."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This file isn't a readable Notchkit setup."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este archivo no es una configuración de Notchkit legible."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce fichier n'est pas une configuration Notchkit lisible."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このファイルは読み込めるNotchkit設定ではありません。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este arquivo não é uma configuração do Notchkit legível."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此文件不是可读取的 Notchkit 配置。"
+          }
+        }
+      }
+    },
     "Ce fichier vient du tutoriel de Notchkit. Vous pouvez le supprimer." : {
       "localizations" : {
         "de" : {
@@ -13503,6 +11940,7 @@
       }
     },
     "Claude Code sur une page entière : la mascotte suit son travail, son activité s'affiche dans l'encoche repliée et l'encoche s'ouvre quand il attend votre réponse." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -13591,6 +12029,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Claude Code、活动、剪贴板和置物架。"
+          }
+        }
+      }
+    },
+    "Claude Code, Codex, Gemini CLI et Cursor sur une page entière : la mascotte suit leur travail, leur activité s'affiche dans l'encoche repliée et vous leur répondez depuis l'encoche." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code, Codex, Gemini CLI und Cursor auf einer ganzen Seite: Das Maskottchen verfolgt ihre Arbeit, ihre Aktivität erscheint in der geschlossenen Notch und du antwortest ihnen direkt in der Notch."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code, Codex, Gemini CLI and Cursor on a full page: the mascot follows their work, their activity shows in the closed notch and you answer them from the notch."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code, Codex, Gemini CLI y Cursor en una página completa: la mascota sigue su trabajo, su actividad aparece en el notch cerrado y les respondes desde el notch."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code, Codex, Gemini CLI et Cursor sur une page entière : la mascotte suit leur travail, leur activité s'affiche dans l'encoche repliée et vous leur répondez depuis l'encoche."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code、Codex、Gemini CLI、Cursorを1ページに：マスコットが作業を見守り、アクティビティは閉じたノッチに表示され、ノッチから応答できます。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code, Codex, Gemini CLI e Cursor numa página inteira: o mascote acompanha o trabalho deles, a atividade aparece no notch fechado e você responde a eles pelo notch."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code、Codex、Gemini CLI 和 Cursor 整页呈现：吉祥物跟进它们的工作，活动显示在收起的刘海中，你可以直接在刘海中回复它们。"
           }
         }
       }
@@ -14326,6 +12810,190 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Comando"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "命令"
+          }
+        }
+      }
+    },
+    "Commande installée : %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Befehl installiert: %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Command installed: %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comando instalado: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commande installée : %@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "コマンドをインストールしました：%@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comando instalado: %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "命令已安装：%@"
+          }
+        }
+      }
+    },
+    "Commande notchkit" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Befehl notchkit"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "notchkit command"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comando notchkit"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commande notchkit"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "notchkitコマンド"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comando notchkit"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "notchkit 命令"
+          }
+        }
+      }
+    },
+    "Commande retirée." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Befehl entfernt."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Command removed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comando eliminado."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commande retirée."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "コマンドを削除しました。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comando removido."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "命令已移除。"
+          }
+        }
+      }
+    },
+    "Commandes" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Befehle"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commands"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comandos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commandes"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "コマンド"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comandos"
           }
         },
         "zh-Hans" : {
@@ -20340,6 +19008,52 @@
         }
       }
     },
+    "Enregistrement du film…" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video wird gesichert …"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saving the video…"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardando el vídeo…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrement du film…"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ビデオを保存中…"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salvando o vídeo…"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "正在存储视频…"
+          }
+        }
+      }
+    },
     "Enregistrer" : {
       "localizations" : {
         "de" : {
@@ -20986,6 +19700,144 @@
         }
       }
     },
+    "Étapes, modifications et commandes de Codex dans l'encoche, et ses demandes d'autorisation à accepter ou refuser depuis l'encoche. Codex ne lance un nouveau hook qu'après votre accord : tapez /hooks dans Codex et approuvez ceux de Notchkit." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schritte, Änderungen und Befehle von Codex in der Notch, und seine Berechtigungsanfragen zum Erlauben oder Ablehnen direkt in der Notch. Codex führt einen neuen Hook erst nach deiner Zustimmung aus: Gib in Codex /hooks ein und bestätige die Hooks von Notchkit."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Codex's steps, edits and commands in the notch, and its permission requests to allow or deny from the notch. Codex only runs a new hook once you approve it: type /hooks in Codex and approve Notchkit's."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los pasos, cambios y comandos de Codex en el notch, y sus solicitudes de permiso para aceptar o rechazar desde el notch. Codex solo ejecuta un hook nuevo tras tu aprobación: escribe /hooks en Codex y aprueba los de Notchkit."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Étapes, modifications et commandes de Codex dans l'encoche, et ses demandes d'autorisation à accepter ou refuser depuis l'encoche. Codex ne lance un nouveau hook qu'après votre accord : tapez /hooks dans Codex et approuvez ceux de Notchkit."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Codexの手順、変更、コマンドをノッチに表示し、許可のリクエストもノッチから許可・拒否できます。Codexは新しいフックを承認後にのみ実行します：Codexで/hooksと入力し、Notchkitのフックを承認してください。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Os passos, alterações e comandos do Codex no notch, e os pedidos de permissão dele para permitir ou negar pelo notch. O Codex só executa um hook novo depois da sua aprovação: digite /hooks no Codex e aprove os do Notchkit."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在刘海中显示 Codex 的步骤、修改和命令，并可在刘海中允许或拒绝它的权限请求。Codex 只会在你批准后运行新的 hook：在 Codex 中输入 /hooks 并批准 Notchkit 的 hook。"
+          }
+        }
+      }
+    },
+    "Étapes, modifications et commandes de Gemini CLI dans l'encoche. Ses demandes d'autorisation se signalent par la bulle ambre, mais se donnent dans son terminal." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schritte, Änderungen und Befehle von Gemini CLI in der Notch. Seine Berechtigungsanfragen erscheinen als bernsteinfarbene Blase, werden aber in seinem Terminal beantwortet."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gemini CLI's steps, edits and commands in the notch. Its permission requests show up as the amber bubble, but you answer them in its terminal."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los pasos, cambios y comandos de Gemini CLI en el notch. Sus solicitudes de permiso aparecen como la burbuja ámbar, pero se responden en su terminal."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Étapes, modifications et commandes de Gemini CLI dans l'encoche. Ses demandes d'autorisation se signalent par la bulle ambre, mais se donnent dans son terminal."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gemini CLIの手順、変更、コマンドをノッチに表示します。許可のリクエストは琥珀色のバブルで知らせますが、応答はターミナルで行います。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Os passos, alterações e comandos do Gemini CLI no notch. Os pedidos de permissão dele aparecem como a bolha âmbar, mas são respondidos no terminal dele."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在刘海中显示 Gemini CLI 的步骤、修改和命令。它的权限请求会以琥珀色气泡提示，但需要在它的终端中回答。"
+          }
+        }
+      }
+    },
+    "Étapes, modifications et commandes de l'agent de Cursor dans l'encoche. Ses demandes d'autorisation restent dans Cursor." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schritte, Änderungen und Befehle des Cursor-Agenten in der Notch. Seine Berechtigungsanfragen bleiben in Cursor."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Cursor agent's steps, edits and commands in the notch. Its permission requests stay in Cursor."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los pasos, cambios y comandos del agente de Cursor en el notch. Sus solicitudes de permiso se quedan en Cursor."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Étapes, modifications et commandes de l'agent de Cursor dans l'encoche. Ses demandes d'autorisation restent dans Cursor."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cursorエージェントの手順、変更、コマンドをノッチに表示します。許可のリクエストはCursor内に残ります。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Os passos, alterações e comandos do agente do Cursor no notch. Os pedidos de permissão dele ficam no Cursor."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在刘海中显示 Cursor 智能体的步骤、修改和命令。它的权限请求仍在 Cursor 中处理。"
+          }
+        }
+      }
+    },
     "Exécute : %@" : {
       "localizations" : {
         "de" : {
@@ -21028,6 +19880,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "运行：%@"
+          }
+        }
+      }
+    },
+    "Exemples" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beispiele"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Examples"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ejemplos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exemples"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "例"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exemplos"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "示例"
           }
         }
       }
@@ -22001,6 +20899,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "找不到文件（已移动或删除）"
+          }
+        }
+      }
+    },
+    "Filmer l'encoche" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notch aufnehmen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Record the Notch"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grabar el notch"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filmer l'encoche"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ノッチを収録"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gravar o notch"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "录制刘海"
           }
         }
       }
@@ -23996,6 +22940,52 @@
         }
       }
     },
+    "Installée dans %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Installiert in %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Installed in %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instalado en %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Installée dans %@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@にインストール済み"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instalado em %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已安装在 %@"
+          }
+        }
+      }
+    },
     "Installer" : {
       "localizations" : {
         "de" : {
@@ -24038,6 +23028,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "安装"
+          }
+        }
+      }
+    },
+    "Installer l'intégration" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Integration installieren"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Install Integration"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instalar integración"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Installer l'intégration"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "連携をインストール"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instalar integração"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "安装集成"
           }
         }
       }
@@ -24130,6 +23166,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "安装集成…"
+          }
+        }
+      }
+    },
+    "Installer la commande" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Befehl installieren"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Install the Command"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instalar el comando"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Installer la commande"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "コマンドをインストール"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instalar o comando"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "安装命令"
           }
         }
       }
@@ -24410,6 +23492,52 @@
         }
       }
     },
+    "Intégration installée" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Integration installiert"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Integration installed"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Integración instalada"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intégration installée"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "連携はインストール済み"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Integração instalada"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "集成已安装"
+          }
+        }
+      }
+    },
     "Intégration installée." : {
       "localizations" : {
         "de" : {
@@ -24498,6 +23626,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "集成已安装。你的设置备份：%@"
+          }
+        }
+      }
+    },
+    "Intégration non installée" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Integration nicht installiert"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Integration not installed"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Integración no instalada"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intégration non installée"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "連携は未インストール"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Integração não instalada"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "集成未安装"
           }
         }
       }
@@ -25660,6 +24834,98 @@
         }
       }
     },
+    "La commande n'a pas pu être installée : %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Befehl konnte nicht installiert werden: %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The command couldn't be installed: %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo instalar el comando: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La commande n'a pas pu être installée : %@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "コマンドをインストールできませんでした：%@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível instalar o comando: %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法安装命令：%@"
+          }
+        }
+      }
+    },
+    "La commande notchkit affiche dans l'encoche ce que font vos scripts : une notification, ou une activité en cours (build, tests, export) jusqu'à sa fin." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Befehl notchkit zeigt in der Notch, was deine Skripte tun: eine Mitteilung oder eine laufende Aktivität (Build, Tests, Export) bis zu ihrem Ende."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The notchkit command shows what your scripts are doing in the notch: a notification, or an ongoing activity (build, tests, export) until it ends."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El comando notchkit muestra en el notch lo que hacen tus scripts: una notificación o una actividad en curso (compilación, pruebas, exportación) hasta que termine."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La commande notchkit affiche dans l'encoche ce que font vos scripts : une notification, ou une activité en cours (build, tests, export) jusqu'à sa fin."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "notchkitコマンドは、スクリプトの動作をノッチに表示します：通知、または終了するまで進行中のアクティビティ（ビルド、テスト、書き出し）。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O comando notchkit mostra no notch o que seus scripts estão fazendo: uma notificação ou uma atividade em andamento (build, testes, exportação) até terminar."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "notchkit 命令会在刘海中显示脚本正在做什么：一条通知，或一个进行中的活动（构建、测试、导出），直到完成。"
+          }
+        }
+      }
+    },
     "La conversion a échoué." : {
       "localizations" : {
         "de" : {
@@ -26403,6 +25669,7 @@
       }
     },
     "Lancez une demande dans Claude Code : la mascotte suivra son travail ici." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -26444,6 +25711,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "在 Claude Code 中发起请求：吉祥物会在这里跟进它的工作。"
+          }
+        }
+      }
+    },
+    "Lancez une demande dans Claude Code, Codex, Gemini CLI ou Cursor : la mascotte suivra son travail ici." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Starte eine Anfrage in Claude Code, Codex, Gemini CLI oder Cursor: Das Maskottchen verfolgt die Arbeit hier."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start a request in Claude Code, Codex, Gemini CLI or Cursor: the mascot will follow its work here."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inicia una petición en Claude Code, Codex, Gemini CLI o Cursor: la mascota seguirá su trabajo aquí."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lancez une demande dans Claude Code, Codex, Gemini CLI ou Cursor : la mascotte suivra son travail ici."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Claude Code、Codex、Gemini CLI、Cursorでリクエストを始めると、マスコットがここで作業を見守ります。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inicie um pedido no Claude Code, Codex, Gemini CLI ou Cursor: o mascote vai acompanhar o trabalho aqui."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 Claude Code、Codex、Gemini CLI 或 Cursor 中发起请求：吉祥物会在这里跟进它的工作。"
           }
         }
       }
@@ -26583,6 +25896,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "计数器需要录屏权限。你的屏幕绝不会被录制：Notchkit 只统计显示的帧数。"
+          }
+        }
+      }
+    },
+    "Le fichier %@ n'est pas un JSON valide. Corrigez-le, puis réessayez." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Datei %@ ist kein gültiges JSON. Korrigiere sie und versuche es erneut."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The file %@ isn't valid JSON. Fix it, then try again."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El archivo %@ no es un JSON válido. Corrígelo y vuelve a intentarlo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le fichier %@ n'est pas un JSON valide. Corrigez-le, puis réessayez."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ファイル%@は有効なJSONではありません。修正してから、もう一度お試しください。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O arquivo %@ não é um JSON válido. Corrija-o e tente novamente."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "文件 %@ 不是有效的 JSON。请修正后重试。"
           }
         }
       }
@@ -28202,6 +27561,52 @@
         }
       }
     },
+    "Ma configuration Notchkit" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meine Notchkit-Konfiguration"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My Notchkit Setup"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mi configuración de Notchkit"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ma configuration Notchkit"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "マイNotchkit設定"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minha configuração do Notchkit"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "我的 Notchkit 配置"
+          }
+        }
+      }
+    },
     "macOS attend votre accord dans Réglages Système > Général > Ouverture." : {
       "localizations" : {
         "de" : {
@@ -29171,6 +28576,52 @@
         }
       }
     },
+    "Mettre à jour la commande" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Befehl aktualisieren"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update the Command"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualizar el comando"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mettre à jour la commande"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "コマンドをアップデート"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atualizar o comando"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "更新命令"
+          }
+        }
+      }
+    },
     "Micro" : {
       "localizations" : {
         "de" : {
@@ -29537,6 +28988,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "需要更新集成"
+          }
+        }
+      }
+    },
+    "Mise à jour nécessaire" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktualisierung nötig"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update needed"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualización necesaria"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mise à jour nécessaire"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アップデートが必要"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atualização necessária"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "需要更新"
           }
         }
       }
@@ -31201,6 +30698,52 @@
         }
       }
     },
+    "Non installée" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nicht installiert"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not installed"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No instalado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non installée"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未インストール"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não instalado"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未安装"
+          }
+        }
+      }
+    },
     "Notchkit" : {
       "localizations" : {
         "de" : {
@@ -31798,6 +31341,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "备忘录"
+          }
+        }
+      }
+    },
+    "Notification" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mitteilung"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notification"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notificación"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notification"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notificação"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知"
           }
         }
       }
@@ -33649,6 +33238,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "尚未请求"
+          }
+        }
+      }
+    },
+    "Pas trouvé sur ce Mac" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auf diesem Mac nicht gefunden"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not found on this Mac"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No encontrado en este Mac"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas trouvé sur ce Mac"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このMacに見つかりません"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não encontrado neste Mac"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在这台 Mac 上未找到"
           }
         }
       }
@@ -37345,7 +36980,100 @@
         }
       }
     },
+    "Répondez dans Cursor." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Antworte in Cursor."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Answer in Cursor."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Responde en Cursor."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Répondez dans Cursor."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cursorで応答してください。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Responda no Cursor."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请在 Cursor 中回答。"
+          }
+        }
+      }
+    },
+    "Répondez dans le terminal de %@." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Antworte im Terminal von %@."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Answer in the %@ terminal."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Responde en el terminal de %@."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Répondez dans le terminal de %@."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@のターミナルで応答してください。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Responda no terminal do %@."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请在 %@ 的终端中回答。"
+          }
+        }
+      }
+    },
     "Répondez dans le terminal de Claude Code." : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -37438,7 +37166,54 @@
         }
       }
     },
+    "Répondre dans le terminal" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Im Terminal antworten"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Answer in the terminal"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Responder en el terminal"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Répondre dans le terminal"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ターミナルで応答"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Responder no terminal"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在终端中回答"
+          }
+        }
+      }
+    },
     "Répondre dans le terminal de Claude Code" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -43713,6 +43488,52 @@
         }
       }
     },
+    "Vos widgets, leur disposition, l'apparence de l'encoche et la mascotte seront remplacés. Vous pourrez rétablir vos widgets depuis Réglages > Disposition." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deine Widgets, ihre Anordnung, das Aussehen der Notch und das Maskottchen werden ersetzt. Du kannst deine Widgets unter Einstellungen > Anordnung wiederherstellen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your widgets, their layout, the notch appearance and the mascot will be replaced. You can restore your widgets from Settings > Layout."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tus widgets, su disposición, la apariencia del notch y la mascota se reemplazarán. Podrás restaurar tus widgets desde Ajustes > Disposición."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vos widgets, leur disposition, l'apparence de l'encoche et la mascotte seront remplacés. Vous pourrez rétablir vos widgets depuis Réglages > Disposition."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ウィジェット、その配置、ノッチの外観、マスコットが置き換えられます。ウィジェットは“設定”>“配置”から元に戻せます。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seus widgets, o layout deles, a aparência do notch e o mascote serão substituídos. Você pode restaurar seus widgets em Ajustes > Layout."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你的小组件、布局、刘海外观和吉祥物将被替换。你可以在“设置”>“布局”中恢复小组件。"
+          }
+        }
+      }
+    },
     "Votre accord" : {
       "localizations" : {
         "de" : {
@@ -43990,6 +43811,52 @@
         }
       }
     },
+    "Widgets, disposition, apparence et mascotte. Partagez ce fichier : un double clic l'ouvre dans Notchkit." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widgets, Anordnung, Aussehen und Maskottchen. Teile diese Datei: Ein Doppelklick öffnet sie in Notchkit."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widgets, layout, appearance and mascot. Share this file: a double-click opens it in Notchkit."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widgets, disposición, apariencia y mascota. Comparte este archivo: con un doble clic se abre en Notchkit."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widgets, disposition, apparence et mascotte. Partagez ce fichier : un double clic l'ouvre dans Notchkit."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ウィジェット、配置、外観、マスコット。このファイルを共有すると、ダブルクリックでNotchkitで開けます。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widgets, layout, aparência e mascote. Compartilhe este arquivo: um clique duplo o abre no Notchkit."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "小组件、布局、外观和吉祥物。分享此文件：双击即可在 Notchkit 中打开。"
+          }
+        }
+      }
+    },
     "yt-dlp est installé." : {
       "localizations" : {
         "de" : {
@@ -44170,6 +44037,144 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "未安装 yt-dlp"
+          }
+        }
+      }
+    },
+    "Partager ma configuration" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meine Konfiguration teilen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share My Setup"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartir mi configuración"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Partager ma configuration"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自分の設定を共有"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartilhar minha configuração"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "分享我的配置"
+          }
+        }
+      }
+    },
+    "Exporter…" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportieren …"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Export…"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportar…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exporter…"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "書き出す…"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportar…"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "导出…"
+          }
+        }
+      }
+    },
+    "Importer…" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importieren …"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import…"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importar…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importer…"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "読み込む…"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importar…"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "导入…"
           }
         }
       }

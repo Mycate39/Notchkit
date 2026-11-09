@@ -27,6 +27,12 @@ App de barre des menus (`LSUIElement`), distribuée hors Mac App Store, non sand
 - **API publiques uniquement**, sauf les API privées déjà acceptées : MediaRemote (via MediaRemoteAdapter), DisplayServices (luminosité) et SkyLight (`LockScreenSpace` : espace de niveau 400 qui garde l'encoche au-dessus des bureaux, du plein écran et de l'écran verrouillé). Demander avant d'en ajouter une autre.
 - **Pas de HomeKit** (indisponible sur macOS natif) ; la domotique passerait par `shortcuts run`.
 - **Ne jamais lancer l'app dans Xcode à la place du propriétaire** (pas d'AppleScript sur Xcode) : il lance lui-même avec ⌘R. Pour un changement visible en usage réel (survol, bureaux, écran verrouillé), lui demander de tester avant de committer.
+- **Vérifier soi-même avant de demander un essai au propriétaire.** Pour chaque point à vérifier, se demander d'abord si on peut le faire seul, et le faire :
+  - captures (`NOTCHKIT_SNAPSHOT`, une langue avec `-AppleLanguages "(es)"`) ;
+  - mode démo filmé (`NOTCHKIT_DEMO`, Notchkit quitté), images extraites en planches ;
+  - tests, stress test, et vraies commandes ou vrais hooks envoyés à une instance de test.
+
+  Ne demander au propriétaire que ce qui exige vraiment lui ou son Mac : survol et gestes réels sur l'encoche, vibrations, Touch ID, écran verrouillé, ses comptes et ses apps, autorisations système à accorder. Lui dire ce qui a déjà été vérifié, et comment.
 - **Ne jamais tuer tous les processus Notchkit** (`pkill -x Notchkit`) : n'arrêter que les instances de test sous `build.noindex/`.
 - Les instances de test partagent le vrai domaine `UserDefaults` (`com.andeolchenaux.notchkit`) : sauvegarder (`defaults export`) puis restaurer (`defaults import`), ou nettoyer toute clé écrite.
 - Ne committer qu'après réussite du build, des tests **et** du stress test. Messages de commit en anglais ; le propriétaire est le seul auteur (pas de ligne co-auteur).

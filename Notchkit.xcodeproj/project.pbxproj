@@ -1797,6 +1797,7 @@
 		3665AF969BF0C92AB8AB19BB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1817,6 +1818,7 @@
 		4732CAC8240652657C8AF200 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
 				CURRENT_PROJECT_VERSION = 1;

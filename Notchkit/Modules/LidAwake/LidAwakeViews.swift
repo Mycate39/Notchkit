@@ -17,19 +17,6 @@ struct LidAwakeCompactValue: View {
 
 enum LidAwakeAlerts {
     @MainActor
-    static func needsApproval() -> NotchAlert {
-        NotchAlert(
-            leading: AnyView(Image(systemName: "laptopcomputer").font(.system(size: 13, weight: .semibold)).foregroundStyle(.mint)),
-            duration: .seconds(6),
-            expandedContent: AnyView(ScriptBanner(
-                title: String(localized: "Une autorisation est nécessaire"),
-                message: String(localized: "Activez Notchkit dans Réglages Système > Général > Ouverture."),
-                symbol: "lock.shield", color: .mint)),
-            expandedSize: NotchLayout.scriptBannerSize
-        )
-    }
-
-    @MainActor
     static func stopped(_ stop: LidAwakeStop) -> NotchAlert {
         let (symbol, color): (String, Color) = switch stop {
         case .battery: ("battery.25percent", .red)
@@ -107,29 +94,33 @@ struct LidAwakeSettingsView: View {
 
     @ViewBuilder
     private var helperRow: some View {
-        switch module.helperState {
-        case .ready:
-            LabeledContent {
+        LabeledContent {
+            switch module.helperState {
+            case .ready:
                 Button("Désinstaller", action: module.uninstallHelper)
-            } label: {
-                Text("Assistant système")
-                Text("Installé")
-            }
-        case .needsApproval:
-            LabeledContent {
-                Button("Ouvrir les réglages…", action: module.openApprovalSettings)
+            case .outdated:
+                Button("Mettre à jour…", action: module.prepareHelper)
                     .buttonStyle(.borderedProminent)
-            } label: {
-                Text("Assistant système")
-                Text("Activez Notchkit dans Réglages Système > Général > Ouverture.")
-            }
-        case .notInstalled, .failed:
-            LabeledContent {
+            case .notInstalled, .failed:
                 Button("Installer…", action: module.prepareHelper)
-            } label: {
-                Text("Assistant système")
-                Text("Nécessaire pour couper la veille capot fermé. macOS demandera votre accord une fois.")
             }
+        } label: {
+            Text("Assistant système")
+            Text(helperText)
+        }
+        if let error = module.helperError {
+            Text(error)
+                .font(.caption)
+                .foregroundStyle(.red)
+        }
+    }
+
+    private var helperText: String {
+        switch module.helperState {
+        case .ready: String(localized: "Installé")
+        case .outdated: String(localized: "Une nouvelle version de l'assistant est à installer.")
+        case .notInstalled, .failed:
+            String(localized: "Nécessaire pour couper la veille capot fermé. macOS demandera une fois votre mot de passe administrateur.")
         }
     }
 

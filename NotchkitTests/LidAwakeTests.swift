@@ -69,3 +69,25 @@ struct LidAwakeTests {
         #expect(script.contains("post action=awake"))
     }
 }
+
+struct AwakeHelperInstallTests {
+    @Test @MainActor func scriptDInstallationProtegeLesChemins() {
+        let script = AwakeHelperClient.installScript(bundledHelper: "/Applications/Note's Kit.app/Contents/MacOS/NotchkitAwakeHelper",
+                                                     plist: "/tmp/x.plist")
+        // L'apostrophe d'un chemin est échappée, et le démon est bien déclaré au système.
+        #expect(script.contains("'/Applications/Note'\\''s Kit.app/Contents/MacOS/NotchkitAwakeHelper'"))
+        #expect(script.contains("/bin/launchctl bootstrap system '/Library/LaunchDaemons/\(AwakeHelper.plistName)'"))
+        #expect(script.contains("/usr/sbin/chown root:wheel '/Library/PrivilegedHelperTools/\(AwakeHelper.label)'"))
+    }
+
+    @Test @MainActor func desinstallationRetablitLaVeille() {
+        #expect(AwakeHelperClient.uninstallScript.contains("/usr/bin/pmset -a disablesleep 0"))
+    }
+
+    @Test @MainActor func declarationLaunchdLanceLAssistantALaDemande() throws {
+        let plist = AwakeHelperClient.launchdPlist
+        #expect(plist["Label"] as? String == AwakeHelper.label)
+        let machServices = try #require(plist["MachServices"] as? [String: Bool])
+        #expect(machServices[AwakeHelper.label] == true)
+    }
+}

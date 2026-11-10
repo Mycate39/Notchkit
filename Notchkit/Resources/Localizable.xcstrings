@@ -1,6 +1,236 @@
 {
   "sourceLanguage" : "fr",
   "strings" : {
+    "Mettre à jour…" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktualisieren …"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update…"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualizar…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mettre à jour…"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アップデート…"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atualizar…"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "更新…"
+          }
+        }
+      }
+    },
+    "Une nouvelle version de l'assistant est à installer." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eine neue Version der Systemhilfe muss installiert werden."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A new version of the helper needs to be installed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hay que instalar una nueva versión del asistente."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une nouvelle version de l'assistant est à installer."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ヘルパーの新しいバージョンをインストールする必要があります。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "É preciso instalar uma nova versão do assistente."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "需要安装新版本的助手。"
+          }
+        }
+      }
+    },
+    "Nécessaire pour couper la veille capot fermé. macOS demandera une fois votre mot de passe administrateur." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nötig, um den Mac bei geschlossenem Deckel wach zu halten. macOS fragt einmal nach deinem Administratorpasswort."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Needed to keep your Mac awake with the lid closed. macOS will ask for your administrator password once."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Necesario para mantener el Mac activo con la tapa cerrada. macOS pedirá una vez tu contraseña de administrador."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nécessaire pour couper la veille capot fermé. macOS demandera une fois votre mot de passe administrateur."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "蓋を閉じたままMacをスリープさせないために必要です。macOSが一度だけ管理者パスワードを求めます。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Necessário para manter o Mac acordado com a tampa fechada. O macOS pedirá sua senha de administrador uma vez."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "合盖后保持 Mac 唤醒需要此助手。macOS 会请求一次你的管理员密码。"
+          }
+        }
+      }
+    },
+    "Notchkit installe son assistant pour garder le Mac éveillé capot fermé." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit installiert seine Systemhilfe, um den Mac bei geschlossenem Deckel wach zu halten."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit is installing its helper to keep your Mac awake with the lid closed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit instala su asistente para mantener el Mac activo con la tapa cerrada."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit installe son assistant pour garder le Mac éveillé capot fermé."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkitは、蓋を閉じたままMacをスリープさせないためのヘルパーをインストールします。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O Notchkit está instalando seu assistente para manter o Mac acordado com a tampa fechada."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notchkit 正在安装助手，以便合盖后保持 Mac 唤醒。"
+          }
+        }
+      }
+    },
+    "Installation annulée." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Installation abgebrochen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Installation canceled."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instalación cancelada."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Installation annulée."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "インストールをキャンセルしました。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instalação cancelada."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已取消安装。"
+          }
+        }
+      }
+    },
     "Capot fermé" : {
       "localizations" : {
         "de" : {
@@ -135,98 +365,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mac 合盖后保持唤醒"
-          }
-        }
-      }
-    },
-    "Une autorisation est nécessaire" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Berechtigung erforderlich"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permission needed"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Se necesita un permiso"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Une autorisation est nécessaire"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "許可が必要です"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "É necessária uma permissão"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "需要授权"
-          }
-        }
-      }
-    },
-    "Activez Notchkit dans Réglages Système > Général > Ouverture." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktiviere Notchkit in Systemeinstellungen > Allgemein > Anmeldeobjekte."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Turn on Notchkit in System Settings > General > Login Items."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activa Notchkit en Ajustes del Sistema > General > Ítems de inicio."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activez Notchkit dans Réglages Système > Général > Ouverture."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "「システム設定」>「一般」>「ログイン項目」でNotchkitをオンにしてください。"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ative o Notchkit em Ajustes do Sistema > Geral > Itens de Início."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "请在“系统设置”>“通用”>“登录项”中开启 Notchkit。"
           }
         }
       }
@@ -1101,52 +1239,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "已安装"
-          }
-        }
-      }
-    },
-    "Nécessaire pour couper la veille capot fermé. macOS demandera votre accord une fois." : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nötig, um den Mac bei geschlossenem Deckel wach zu halten. macOS fragt einmal nach deiner Zustimmung."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Needed to keep your Mac awake with the lid closed. macOS will ask for your approval once."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Necesario para mantener el Mac activo con la tapa cerrada. macOS pedirá tu aprobación una vez."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nécessaire pour couper la veille capot fermé. macOS demandera votre accord une fois."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "蓋を閉じたままMacをスリープさせないために必要です。macOSが一度だけ承認を求めます。"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Necessário para manter o Mac acordado com a tampa fechada. O macOS pedirá sua aprovação uma vez."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "合盖后保持 Mac 唤醒需要此助手。macOS 会请求一次你的批准。"
           }
         }
       }

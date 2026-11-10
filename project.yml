@@ -171,6 +171,9 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.andeolchenaux.notchkit.awake
         PRODUCT_NAME: NotchkitAwakeHelper
+        # Toujours signé ad hoc, même en Release : les contraintes de lancement de macOS refusent un démon
+        # signé par un certificat qu'il ne connaît pas (« Notchkit Self-Signed »), mais acceptent l'ad hoc.
+        CODE_SIGN_IDENTITY: "-"
         ENABLE_HARDENED_RUNTIME: YES
         SKIP_INSTALL: YES
         GENERATE_INFOPLIST_FILE: YES

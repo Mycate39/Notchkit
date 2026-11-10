@@ -131,23 +131,20 @@ final class LidAwakeModule: NotchModule {
         Task { await update() }
     }
 
-    /// Installe l'assistant s'il ne l'est pas ; macOS demande alors l'accord dans Réglages Système.
+    /// Installe (ou met à jour) l'assistant s'il le faut ; macOS demande le mot de passe administrateur.
     func prepareHelper() {
         guard helper.state != .ready else { return }
         helperState = helper.install()
-        if helperState == .needsApproval {
-            context.presentAlert(LidAwakeAlerts.needsApproval())
-            helper.openApprovalSettings()
-        }
     }
 
-    func openApprovalSettings() { helper.openApprovalSettings() }
+    /// Dernière erreur d'installation (mot de passe refusé, installation annulée…).
+    var helperError: String? { helper.lastError }
 
     func uninstallHelper() {
         reasons.removeAll()
         Task {
             await update()
-            await helper.uninstall()
+            helper.uninstall()
             helperState = helper.state
         }
     }

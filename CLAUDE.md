@@ -157,6 +157,7 @@ python3 scripts/visual-matrix.py <commande>       # voir l'en-tête du script
 - Dernière version : **3.1.0** (`v3.1.0`, build 36, 10/11/2026), gratuite ; l'abonnement viendra plus tard. L'historique détaillé est dans les releases GitHub et `git log`.
 - 3.0 : design Verre, encoche à la taille de ses widgets, lecteur de musique en première page, grand lecteur de l'écran verrouillé, traducteur, canal bêta. 3.0.1 : barre du volume proportionnelle. 3.0.2 : vignettes arrondies, alertes qui partent entières. 3.0.3 : l'encoche s'ouvre sur une question de Claude Code.
 - 3.1.0 : agents Codex, Gemini CLI et Cursor, commande `notchkit`, partage de configuration, « Filmer l'encoche », cinq nouvelles langues (espagnol, allemand, japonais, chinois simplifié, portugais du Brésil).
+- 4.0.0-beta.1 (`v4.0.0-beta.1`, build 37, 10/11/2026, préversion, canal « beta » de l'appcast) : mode capot fermé. Vérifié en vrai (assistant installé, `awake`, agents, `run --awake`, plantage) sauf la fermeture réelle du capot, la mise en veille de fin (`sleepnow`) et les sécurités de chaleur et de batterie, qui demandent le propriétaire.
 - Vérifiés seulement par tests et captures, pas en usage réel : lecture AX, détection de projet Terminal.
 - Animations de déverrouillage : « Apple Face ID » (Mau Ali) et « Fingerprint Touch ID » (Himanshu Patel), Lottie Simple License (usage commercial permis), créditées dans le README.
 

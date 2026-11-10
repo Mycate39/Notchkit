@@ -4,6 +4,8 @@ import SwiftUI
 struct ScriptRequest: Equatable, Sendable {
     enum Action: String, Sendable {
         case notify, start, progress, end
+        /// Mode capot fermé : `value` vaut `on`, `off` ou une durée en minutes.
+        case awake
     }
 
     let action: Action
@@ -16,6 +18,10 @@ struct ScriptRequest: Equatable, Sendable {
     let progress: Double?
     /// Fin d'une activité : réussie (vrai) ou en échec (faux).
     let succeeded: Bool
+    /// `notchkit run --awake` : le Mac reste éveillé capot fermé tant que la commande tourne.
+    let keepsAwake: Bool
+    /// `notchkit awake` : `on`, `off` ou une durée en minutes.
+    let value: String?
 
     /// Lit les champs envoyés. `nil` si l'action est inconnue.
     init?(fields: [String: Any]) {
@@ -34,6 +40,8 @@ struct ScriptRequest: Equatable, Sendable {
         progress = text("progress").flatMap { Double($0.replacingOccurrences(of: ",", with: ".")) }
             .map { min(max($0 / 100, 0), 1) }
         succeeded = !["failure", "failed", "error", "fail", "echec", "échec"].contains(text("status")?.lowercased() ?? "")
+        keepsAwake = ["1", "true", "yes", "on"].contains(text("awake")?.lowercased() ?? "")
+        value = text("value")
     }
 }
 
@@ -115,6 +123,9 @@ struct ScriptActivityTracker: Equatable, Sendable {
             if activities.count > Self.maxActivities, let oldest = activities.values.min(by: { $0.updatedAt < $1.updatedAt }) {
                 activities[oldest.id] = nil
             }
+            return .none
+
+        case .awake:
             return .none
 
         case .end:

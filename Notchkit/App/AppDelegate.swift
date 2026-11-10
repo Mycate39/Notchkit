@@ -140,6 +140,30 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         if ProcessInfo.processInfo.environment["NOTCHKIT_STRESS"] != nil {
             runStressTest()
         }
+        if let step = ProcessInfo.processInfo.environment["NOTCHKIT_AWAKE_PROBE"] {
+            // Diagnostic de l'assistant système : `install`, `status`, `toggle` (coupe puis rétablit la veille).
+            Task { @MainActor in
+                let helper = AwakeHelperClient()
+                func log(_ text: String) { FileHandle.standardError.write(Data("AWAKE \(text)\n".utf8)) }
+                if step == "install" { log("install → \(helper.install())") }
+                log("state \(helper.state)")
+                if step == "toggle" {
+                    log("version \(await helper.helperVersion() ?? "nil")")
+                    log("disable \(await helper.setSleepDisabled(true))")
+                    log("pmset \(AwakeProbe.sleepDisabled())")
+                    log("enable \(await helper.setSleepDisabled(false))")
+                    log("pmset \(AwakeProbe.sleepDisabled())")
+                }
+                if step == "crash" {
+                    // Plantage simulé pendant un maintien : l'assistant doit rétablir la veille seul.
+                    log("disable \(await helper.setSleepDisabled(true))")
+                    log("pmset \(AwakeProbe.sleepDisabled())")
+                    kill(getpid(), SIGKILL)
+                }
+                log("done")
+                NSApp.terminate(nil)
+            }
+        }
         if let directory = ProcessInfo.processInfo.environment["NOTCHKIT_MASCOT_VIDEO"] {
             // Images de la vidéo de démonstration de la mascotte (celle choisie dans les réglages).
             Task { @MainActor in
@@ -192,6 +216,21 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     /// Test de charge : déplie/replie l'encoche 200 fois à intervalles aléatoires, avec des alertes
     /// des changements de page et de fenêtre active. Lancer l'app avec la variable d'environnement
+    enum AwakeProbe {
+        /// Ligne « SleepDisabled » de `pmset -g`.
+        static func sleepDisabled() -> String {
+            let process = Process()
+            let pipe = Pipe()
+            process.executableURL = URL(fileURLWithPath: "/usr/bin/pmset")
+            process.arguments = ["-g"]
+            process.standardOutput = pipe
+            try? process.run()
+            process.waitUntilExit()
+            let text = String(decoding: pipe.fileHandleForReading.readDataToEndOfFile(), as: UTF8.self)
+            return text.split(separator: "\n").first { $0.contains("SleepDisabled") }.map(String.init) ?? "SleepDisabled absent"
+        }
+    }
+
     /// `NOTCHKIT_STRESS=1` ; « STRESS-OK » s'affiche dans la console à la fin si tout s'est bien passé.
     private func runStressTest() {
         Task { @MainActor in

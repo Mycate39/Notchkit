@@ -13,6 +13,7 @@ enum ModuleRegistry {
         ClaudeModule.self,
         AgentsModule.self,
         ScriptsModule.self,
+        LidAwakeModule.self,
         GameModeModule.self,
         ShelfModule.self,
         ScreenshotsModule.self,

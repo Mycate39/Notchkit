@@ -255,6 +255,9 @@ final class DemoDirector {
             gameMode?.debugSet(active: !(step.hidden ?? false), fps: Int(step.level ?? 120))
         case "antisleep":
             toggles?.toggleAntiSleep()
+        case "lidawake":
+            // Maintien capot fermé fictif (`hidden: true` pour l'arrêter), sans solliciter l'assistant.
+            (manager.module(for: LidAwakeModule.descriptor.id) as? LidAwakeModule)?.debugSetHolding(!(step.hidden ?? false))
         case "clip.toggle":
             clipRecorder?.toggle(screen: ScreenLocator.screen(for: settings.settings.screenSelection), geometry: viewModel.geometry)
         case "script.notify", "script.start", "script.progress", "script.end":

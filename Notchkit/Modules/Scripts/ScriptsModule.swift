@@ -80,6 +80,7 @@ final class ScriptsModule: NotchModule {
 
     func receive(_ fields: [String: Any]) {
         guard let request = ScriptRequest(fields: fields) else { return }
+        forwardAwake(request)
         switch tracker.apply(request) {
         case .none:
             break
@@ -88,6 +89,25 @@ final class ScriptsModule: NotchModule {
                                                            color: ScriptPalette.color(named: colorName) ?? .cyan))
         case let .finished(title, message, succeeded, duration):
             context.presentAlert(ScriptAlerts.finished(title: title, message: message, succeeded: succeeded, duration: duration))
+        }
+    }
+
+    /// Mode capot fermé : `notchkit awake …` et `notchkit run --awake …`.
+    private func forwardAwake(_ request: ScriptRequest) {
+        guard let lidAwake = context.otherModule(LidAwakeModule.descriptor.id) as? LidAwakeModule else { return }
+        switch request.action {
+        case .awake:
+            switch request.value?.lowercased() {
+            case "off", "0", "false": lidAwake.setManual(false)
+            case let value?: lidAwake.setManual(true, minutes: Int(value))
+            case nil: lidAwake.setManual(true)
+            }
+        case .start where request.keepsAwake:
+            lidAwake.holdForCommand(request.id, true)
+        case .end:
+            lidAwake.holdForCommand(request.id, false)
+        default:
+            break
         }
     }
 

@@ -13,6 +13,10 @@ struct MenuBarContent: View {
             Toggle("Mode jeu", isOn: Binding(get: { gameMode.isActive }, set: { gameMode.setManual($0) }))
         }
 
+        if let lidAwake = appDelegate.moduleManager.module(for: LidAwakeModule.descriptor.id) as? LidAwakeModule {
+            Toggle("Éveillé capot fermé", isOn: Binding(get: { lidAwake.isManualOn }, set: { lidAwake.setManual($0) }))
+        }
+
         // Petite vidéo de l'encoche à partager (Vidéos › Notchkit).
         switch appDelegate.clipRecorder.state {
         case .idle:

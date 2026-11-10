@@ -92,7 +92,8 @@ enum ScriptCommandInstaller {
           cat <<'EOF'
         Usage:
           notchkit notify "Title" ["Message"] [--symbol name] [--color name]
-          notchkit run [--title "Title"] [--symbol name] [--] command [args...]
+          notchkit run [--awake] [--title "Title"] [--symbol name] [--] command [args...]
+          notchkit awake [on|off|MINUTES]
           notchkit start ID "Title" [--symbol name] [--color name]
           notchkit progress ID PERCENT ["Title"]
           notchkit end ID [success|failure] ["Message"]
@@ -103,6 +104,7 @@ enum ScriptCommandInstaller {
           notchkit start export "Exporting video"; notchkit progress export 40; notchkit end export
 
         --symbol takes an SF Symbol name; --color: red, orange, yellow, green, mint, teal, blue, indigo, purple, pink, gray.
+        --awake keeps the Mac awake with the lid closed while the command runs; "notchkit awake" does it until you turn it off.
         EOF
           exit "${1:-0}"
         }
@@ -120,7 +122,7 @@ enum ScriptCommandInstaller {
 
         command="$1"
         [ $# -gt 0 ] && shift
-        title='' message='' symbol='' color=''
+        title='' message='' symbol='' color='' awake=''
 
         case "$command" in
           notify)
@@ -140,6 +142,7 @@ enum ScriptCommandInstaller {
                 --title) title="$2"; shift 2 ;;
                 --symbol) symbol="$2"; shift 2 ;;
                 --color) color="$2"; shift 2 ;;
+                --awake) awake=1; shift ;;
                 --) shift; break ;;
                 *) break ;;
               esac
@@ -147,7 +150,7 @@ enum ScriptCommandInstaller {
             [ $# -gt 0 ] || usage 1
             [ -n "$title" ] || title="$*"
             id="run-$$"
-            post action=start "id=$id" "title=$title" "symbol=${symbol:-terminal}" "color=$color"
+            post action=start "id=$id" "title=$title" "symbol=${symbol:-terminal}" "color=$color" "awake=$awake"
             "$@"
             code=$?
             if [ "$code" -eq 0 ]; then
@@ -176,6 +179,9 @@ enum ScriptCommandInstaller {
           end)
             [ $# -ge 1 ] || usage 1
             post action=end "id=$1" "status=${2:-success}" "message=${3:-}"
+            ;;
+          awake)
+            post action=awake "value=${1:-on}"
             ;;
           -h|--help|help|'')
             usage 0

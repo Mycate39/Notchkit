@@ -45,8 +45,20 @@ targets:
       # Licence de Sparkle (MIT), affichée dans Réglages > À propos.
       - path: ThirdParty/Sparkle/Sparkle-LICENSE.txt
         buildPhase: resources
+      # Déclaration de l'assistant système (capot fermé), lue par SMAppService.daemon.
+      - path: Helper/com.andeolchenaux.notchkit.awake.plist
+        buildPhase:
+          copyFiles:
+            destination: wrapper
+            subpath: Contents/Library/LaunchDaemons
     dependencies:
       - package: Sparkle
+      # Assistant système (capot fermé), dans Contents/MacOS à côté de l'app.
+      - target: NotchkitAwakeHelper
+        embed: true
+        codeSign: false
+        copy:
+          destination: executables
       # Le framework est intégré à l'app mais PAS lié : seul le script Perl le charge.
       - target: MediaRemoteAdapter
         link: false
@@ -144,6 +156,27 @@ targets:
         SKIP_INSTALL: YES
         # Code tiers non modifié : on n'affiche pas ses avertissements.
         GCC_WARN_INHIBIT_ALL_WARNINGS: YES
+
+  # Assistant système : coupe ou rétablit la veille capot fermé (pmset), en administrateur.
+  # Lancé par launchd après l'accord de l'utilisateur (Réglages Système > Général > Ouverture).
+  NotchkitAwakeHelper:
+    type: tool
+    platform: macOS
+    sources:
+      - path: Helper
+        excludes:
+          - "*.plist"
+      - path: Notchkit/Core/Power/AwakeHelperProtocol.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.andeolchenaux.notchkit.awake
+        PRODUCT_NAME: NotchkitAwakeHelper
+        ENABLE_HARDENED_RUNTIME: YES
+        SKIP_INSTALL: YES
+        GENERATE_INFOPLIST_FILE: YES
+        CREATE_INFOPLIST_SECTION_IN_BINARY: YES
+        MARKETING_VERSION: "1"
+        CURRENT_PROJECT_VERSION: "1"
 
   NotchkitTests:
     type: bundle.unit-test

@@ -3,6 +3,20 @@
   <channel>
     <title>Notchkit</title>
     <item>
+      <title>Notchkit 4.0.0-beta.1</title>
+      <pubDate>Tue, 10 Nov 2026 17:41:58 GMT</pubDate>
+      <sparkle:version>37</sparkle:version>
+      <sparkle:shortVersionString>4.0.0-beta.1</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <sparkle:channel>beta</sparkle:channel>
+      <link>https://github.com/Mycate39/Notchkit/releases/tag/v4.0.0-beta.1</link>
+      <sparkle:informationalUpdate>
+        <sparkle:belowVersion>12</sparkle:belowVersion>
+      </sparkle:informationalUpdate>
+      <description><![CDATA[<p>The first beta of <b>Notchkit 4.0</b> keeps your MacBook awake with the lid closed, so Claude Code (or a build, an export…) keeps working while your Mac is shut.</p><h3>New</h3><ul><li><b>Lid Closed mode</b>: close the lid and your Mac stays awake, with no external display.</li><li><b>On demand</b>: turn it on from the menu bar icon (*Awake with Lid Closed*) or in *Settings &gt; Widgets &gt; Lid Closed*, until you turn it off or for 30 minutes to 4 hours.</li><li><b>While your agents work</b>: Notchkit already follows Claude Code, Codex, Gemini CLI and Cursor, so your Mac stays awake while one of them is working, then sleeps after a quiet delay you choose (1 to 10 minutes).</li><li><b>From your scripts</b>: <code>notchkit run --awake make</code> keeps the Mac awake until the command ends, and <code>notchkit awake on|off|MINUTES</code> does it by hand.</li><li><b>In the notch</b>: a mint activity shows that the Mac is held awake, and for how long.</li><li><b>Safeguards</b>: the hold stops, and the Mac goes to sleep, when the battery reaches the level you set (20 % by default), when the Mac runs hot with the lid closed, or (optionally) when you unplug it. When the hold ends with the lid closed, Notchkit puts your Mac to sleep. If Notchkit quits or crashes, normal sleep comes back by itself.</li></ul><h3>Setup</h3><p>The first time, Notchkit installs a small system helper, the only part that can change the Mac&#x27;s sleep setting. macOS asks for your administrator password once (and again when a Notchkit update brings a new helper). You can remove it at any time from *Settings &gt; Widgets &gt; Lid Closed*.</p><p>Please don&#x27;t put an awake Mac in a bag: it can&#x27;t cool down there.</p><h3>Install</h3><p>This is a beta: it may contain bugs. Download the DMG, drag Notchkit to Applications, then open it. The app is not notarized: the first time, right-click it and choose *Open*, or go to *System Settings &gt; Privacy &amp; Security* and click *Open Anyway*. If you receive beta versions (*Settings &gt; General*), it arrives through *Check for Updates…*.</p><p>Please report anything odd in the *Issues* tab.</p>]]></description>
+      <enclosure url="https://github.com/Mycate39/Notchkit/releases/download/v4.0.0-beta.1/Notchkit-4.0.0-beta.1.dmg" sparkle:edSignature="lbMwDae5ylJTIotDbHpNIHQPEnJqOmyBianxtRIm/rpt/Dr4aPxsmyvKff14xrG92ukE7wLhw6z790bfRTWxAQ==" length="12223145" type="application/octet-stream"/>
+    </item>
+    <item>
       <title>Notchkit 3.1.0</title>
       <pubDate>Tue, 10 Nov 2026 12:41:08 GMT</pubDate>
       <sparkle:version>36</sparkle:version>

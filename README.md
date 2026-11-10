@@ -1,7 +1,7 @@
 # Notchkit
 
 Turn your Mac's notch into a living space: music, timers, battery, weather, calendar,
-clipboard, a file shelf, and live Claude Code activity, right at your cursor. No notch?
+clipboard, a file shelf, and live activity from your AI coding agents, right at your cursor. No notch?
 Notchkit shows a floating pill instead, or simulates a notch.
 
 > Found a bug or have an idea? Please open an issue in the *Issues* tab.
@@ -63,12 +63,17 @@ https://github.com/user-attachments/assets/634db8ce-3920-4b52-8b3e-bdea16dc4f48
 - **Dashboard**: your favorite apps and your Mac at a glance.
 - **Screen Time** and **Health**: time spent per app, break and hydration reminders, and
   activity rings, all measured on your Mac only.
-- **Translation**: French ↔ English, on device (macOS 15 or later).
+- **Translation**: type some text or translate the selection into the language of your choice,
+  on device (macOS 15 or later).
 
 **For developers**
-- **Agents**: a full page that follows Claude Code live, with its steps, the file it edits
-  and the terminal. Answer its permission requests and questions right from the notch. A
-  mascot, chosen among 33, keeps it company.
+- **Agents**: a full page that follows Claude Code, Codex, Gemini CLI and Cursor live, with
+  their steps, the file they edit and the terminal. Answer Claude Code's permission requests
+  and questions, and Codex's permission requests, right from the notch. A mascot, chosen
+  among 33, keeps them company.
+- **The `notchkit` command**: show what your scripts are doing in the notch. `notchkit run npm test`
+  shows the command while it runs, then a green check or a red cross with how long it took;
+  `notchkit notify "Deploy finished"` shows a banner. Install it from Settings > Widgets > Commands.
 
 **And more**
 - **Video downloads** (with yt-dlp, installed on demand): pick any resolution the video
@@ -83,11 +88,15 @@ https://github.com/user-attachments/assets/634db8ce-3920-4b52-8b3e-bdea16dc4f48
 - **Made for the real notch**: it matches the hardware notch exactly, keeps the active app's
   menus visible around it, and stays out of the way when you move to the menu bar.
 - **Accessible**: readable text, VoiceOver labels, and calmer animations with Reduce Motion.
+- **Share your setup**: export your widgets, layout, appearance and mascot to a `.notchkit`
+  file; a double-click opens it in Notchkit (Settings > Layout).
+- **Record the Notch**: a short video of your notch to share, from the menu bar icon.
 - **A guided tutorial** on first launch, which ends with a short trial on your real notch.
 
 Everything is free and runs on your Mac: no account, no paid service.
 
-Notchkit is available in English and French, following your Mac's language.
+Notchkit is available in English, French, Spanish, German, Japanese, Simplified Chinese and
+Brazilian Portuguese, following your Mac's language.
 
 ## Installation
 

@@ -151,11 +151,11 @@ python3 scripts/visual-matrix.py <commande>       # voir l'en-tête du script
 
 **Clés à ne jamais perdre** : le certificat « Notchkit Self-Signed » (le remplacer ferait perdre aux utilisateurs leurs autorisations à la mise à jour) et la clé privée Sparkle (« Private key for signing Sparkle updates », remplacée au build 12 : les entrées sont marquées informatives pour les builds 11 et antérieurs). Sauvegarde chiffrée `Notchkit-sauvegarde.dmg` dans iCloud Drive › NotchKit et ailleurs ; mots de passe dans l'app Mots de passe. À refaire si l'un d'eux change.
 
-## État (5 novembre 2026)
+## État (10 novembre 2026)
 
-- Dernière version : **3.0.3** (`v3.0.3`, build 35), gratuite ; l'abonnement viendra plus tard. L'historique détaillé est dans les releases GitHub et `git log`.
+- Dernière version : **3.1.0** (`v3.1.0`, build 36, 10/11/2026), gratuite ; l'abonnement viendra plus tard. L'historique détaillé est dans les releases GitHub et `git log`.
 - 3.0 : design Verre, encoche à la taille de ses widgets, lecteur de musique en première page, grand lecteur de l'écran verrouillé, traducteur, canal bêta. 3.0.1 : barre du volume proportionnelle. 3.0.2 : vignettes arrondies, alertes qui partent entières. 3.0.3 : l'encoche s'ouvre sur une question de Claude Code.
-- Prévu pour la prochaine version (05/11/2026) : agents Codex, Gemini CLI et Cursor, commande `notchkit`, partage de configuration, « Filmer l'encoche », cinq nouvelles langues.
+- 3.1.0 : agents Codex, Gemini CLI et Cursor, commande `notchkit`, partage de configuration, « Filmer l'encoche », cinq nouvelles langues (espagnol, allemand, japonais, chinois simplifié, portugais du Brésil).
 - Vérifiés seulement par tests et captures, pas en usage réel : lecture AX, détection de projet Terminal.
 - Animations de déverrouillage : « Apple Face ID » (Mau Ali) et « Fingerprint Touch ID » (Himanshu Patel), Lottie Simple License (usage commercial permis), créditées dans le README.
 
